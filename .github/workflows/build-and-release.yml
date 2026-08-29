@@ -18,17 +18,17 @@ jobs:
     strategy:
       matrix:
         include:
-          - folder: courses/ALGEBRA_LINEARE
+          - folder: courses/first_year/ALGEBRA_LINEARE
             target_name: Linear_Algebra
-          - folder: courses/ANALISI1
+          - folder: courses/first_year/ANALISI1
             target_name: Calculus_1
-          - folder: courses/ANALISI2
+          - folder: courses/first_year/ANALISI2
             target_name: Calculus_2
-          - folder: courses/ECONOMIA
+          - folder: courses/first_year/ECONOMIA
             target_name: Economics
-          - folder: courses/FISICA
+          - folder: courses/first_year/FISICA
             target_name: Physics
-          - folder: courses/STATISTICA
+          - folder: courses/first_year/STATISTICA
             target_name: Probability_and_Statistics
       fail-fast: false
 
@@ -92,7 +92,7 @@ jobs:
             ### 📦 Complete Bundle:
             - [**Download All Notes (ZIP)**](https://github.com/${{ github.repository }}/releases/latest/download/All_Courses_Notes.zip)
 
-            ### 📄 Individual Courses:
+            ### 📄 First-Year Courses:
             - [Linear Algebra and Geometry](https://github.com/${{ github.repository }}/releases/latest/download/Linear_Algebra.pdf)
             - [Calculus 1](https://github.com/${{ github.repository }}/releases/latest/download/Calculus_1.pdf)
             - [Calculus 2](https://github.com/${{ github.repository }}/releases/latest/download/Calculus_2.pdf)
