@@ -6,9 +6,43 @@
 [![Build and Release](https://github.com/Beccaceci/GESTIONALE/actions/workflows/build-and-release.yml/badge.svg)](https://github.com/Beccaceci/GESTIONALE/actions/workflows/build-and-release.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A comprehensive, rigorous, and modular collection of study guides, lecture summaries, and solved exercises typeset in **LaTeX** for the **B.Sc. in Management Engineering (*Ingegneria Gestionale*)** at the **University of Pisa (*Università di Pisa*)**.
+A comprehensive, open-source collection of study guides, lecture summaries, and solved exercises typeset in **LaTeX** for the **B.Sc. in Management Engineering (*Ingegneria Gestionale*)** at the **University of Pisa (*Università di Pisa*)**.
 
-Each document is structured into distinct chapters covering in-depth theoretical foundations, step-by-step mathematical proofs, TikZ conceptual diagrams, and exam problem walkthroughs.
+---
+
+## 💡 Why This Repository Exists (Mission & Philosophy)
+
+> ### *"Knowledge should belong to everyone, not just those who can afford it."*
+
+The primary driving force behind this project is a firm belief that **education and high-quality study materials must be free, open, and accessible to everyone without barriers**. 
+
+University is a demanding journey that challenges students academically, mentally, and financially. In this environment:
+- **Selling lecture notes is unacceptable.** Nobody should ever have to pay for a fellow student's notes, summaries, or exam materials. Academic communities thrive on mutual solidarity, peer collaboration, and the open exchange of ideas — not on paywalls or commercialization.
+- **Equal opportunity in learning.** Every student, regardless of their background or personal circumstances, deserves access to clear, rigorous, and beautifully formatted resources to prepare for their exams.
+
+This repository represents my concrete commitment to this philosophy: offering meticulously transcribed, verified, and complete lecture notes that anyone can download, read, and learn from for free.
+
+---
+
+## 🤝 An Open Call: Building a Complete Academic Hub Together
+
+While this repository currently contains comprehensive notes for several core foundational subjects, **the long-term vision is much bigger**:
+
+> **The Goal:** Create a single, centralized, and freely accessible repository covering **every single course** in the Management Engineering degree curriculum at the University of Pisa.
+
+### 📢 How you can help:
+- **Share your notes:** If you have notes, lecture transcriptions, formula sheets, or solved exam exercises for other courses (or from subsequent academic years) and you share this open-access vision, please reach out or share them! I will gladly review, integrate, and format them in LaTeX so that the entire student community can benefit from them.
+- **Spread the word:** Share this repository with your classmates and fellow engineering students so that more people can freely benefit from these materials.
+
+---
+
+## 🛠️ Feedback, Improvements & Contributions
+
+Continuous refinement makes these notes better for everyone. If you notice a typo, a missing mathematical step, an unclear diagram, or an error in a proof:
+
+- 🐛 **Open an Issue:** Use [GitHub Issues](https://github.com/Beccaceci/GESTIONALE/issues) to report mistakes, suggest improvements, or request clarifications.
+- 🔀 **Submit a Pull Request:** If you want to fix a typo or expand a chapter directly in LaTeX, feel free to fork the repository and open a [Pull Request](https://github.com/Beccaceci/GESTIONALE/pulls).
+- ⭐️ **Star the Project:** If you find these notes helpful, leaving a star on GitHub helps make the repository more visible to other students!
 
 ---
 
@@ -22,7 +56,7 @@ Each document is structured into distinct chapters covering in-depth theoretical
 ### 📄 Download Individual Course PDFs
 Click any button below to download the latest compiled high-definition **PDF** directly from the repository:
 
-| Course | Key Topics | Direct 1-Click PDF Download |
+| Course | Key Topics Covered | Direct 1-Click PDF Download |
 | :--- | :--- | :---: |
 | **Linear Algebra and Geometry** (*Algebra Lineare e Geometria*) | Logic & set theory, complex numbers, vector spaces, linear transformations, matrices & linear systems, determinants, eigenvalues & eigenvectors, inner products & spectral theorem, guided exam problems. | [![Download Linear Algebra](https://img.shields.io/badge/Download-Linear__Algebra.pdf-0052cc?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/Beccaceci/GESTIONALE/raw/main/courses/ALGEBRA_LINEARE/main.pdf) |
 | **Calculus 1** (*Analisi Matematica 1*) | Number sets, trigonometry, limits & continuity, differential calculus, Taylor expansions, abstract analysis, integral calculus, ordinary differential equations (ODEs), past exam walkthroughs. | [![Download Calculus 1](https://img.shields.io/badge/Download-Calculus__1.pdf-d32f2f?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/Beccaceci/GESTIONALE/raw/main/courses/ANALISI1/main.pdf) |
@@ -31,13 +65,13 @@ Click any button below to download the latest compiled high-definition **PDF** d
 | **General Physics** (*Fisica Generale*) | Particle kinematics & dynamics, relative motion & non-inertial frames, work & energy, multi-particle systems & collisions, angular momentum & rotation, rigid body dynamics, gravitation & central forces, oscillations & waves, fluid mechanics, thermodynamics & entropy. | [![Download Physics](https://img.shields.io/badge/Download-Physics.pdf-e65100?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/Beccaceci/GESTIONALE/raw/main/courses/FISICA/main.pdf) |
 | **Probability and Statistics** (*Calcolo delle Probabilità e Statistica*) | Descriptive statistics, probability spaces, conditional probability & independence, discrete & continuous random variables, expected value & variance, sums of random variables & Central Limit Theorem (CLT), point estimation & MLE, confidence intervals, hypothesis testing. | [![Download Statistics](https://img.shields.io/badge/Download-Statistics.pdf-00838f?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/Beccaceci/GESTIONALE/raw/main/courses/STATISTICA/main.pdf) |
 
-> 📌 **Note:** All buttons stream the raw binary files directly from GitHub, triggering an instant 1-click download without intermediate pages.
+> 📌 **Note:** All download links stream the compiled binary files directly from GitHub with zero waiting time or viewer screens.
 
 ---
 
 ## 📂 Repository Structure
 
-All subjects are neatly organized inside the [`courses/`](courses/) directory:
+All subjects are neatly encapsulated inside the [`courses/`](courses/) directory:
 
 ```text
 GESTIONALE/
@@ -63,29 +97,20 @@ GESTIONALE/
 
 ## ⚙️ Local Compilation
 
-If you wish to edit the sources or compile the notes locally, run `latexmk` with a full **TeX Live** or **MacTeX** distribution:
+If you wish to compile or modify the LaTeX documents locally:
 
 ```bash
 # Example: compiling Linear Algebra and Geometry
 cd courses/ALGEBRA_LINEARE
 latexmk -pdf -interaction=nonstopmode main.tex
 
-# Clean auxiliary files after build
+# Clean auxiliary files
 latexmk -c
 ```
 
 ---
 
-## 🤖 Continuous Integration & Automated Builds
-
-The repository includes a GitHub Actions pipeline (`.github/workflows/build-and-release.yml`):
-1. Runs automatically on every `git push` to `main` across a **6-way parallel matrix**.
-2. Compiles all master documents using TeX Live.
-3. Packages an **All-in-One ZIP Bundle** and publishes all individual PDFs to GitHub Releases.
-
----
-
 ## 📄 License & Academic Attribution
 
-These study notes are released for academic study, review, and reference purposes under the [MIT License](LICENSE).
-Feel free to star ⭐️ the repository or contribute if you find these notes helpful!
+These notes are released for academic study, review, and personal learning under the [MIT License](LICENSE).
+Feel free to star ⭐️ the repository if you find it helpful!
