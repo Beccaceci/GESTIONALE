@@ -1,0 +1,278 @@
+% ==============================================================================
+% CAPITOLO 10 - OSCILLAZIONI MECCANICHE, RISONANZA E FENOMENI ONDULATORI
+% ==============================================================================
+\chapter{Oscillazioni Meccaniche, Risonanza e Fenomeni Ondulatori}
+\label{chap:oscillazioni_onde}
+
+\begin{tcolorbox}[enhanced, breakable, colback=navyblue!4!white, colframe=navyblue!80!black,
+    coltitle=white, fonttitle=\bfseries\sffamily, title={Quadro Sinottico del Capitolo 10 (Corrispondenza: Lezioni 25, 26, 27 e 28)},
+    sharp corners, rounded corners=south, boxrule=1pt]
+\textbf{Collocazione Modulare:} Parte III -- Gravitazione, Oscillazioni e Meccanica dei Fluidi\\
+\textbf{Trascrizioni di Riferimento:} \texttt{trascrizioni/Lezione\_25\_...md} fino a \texttt{Lezione\_28\_...md}\\
+\textbf{Manuale di Riferimento:} Focardi, Massa, Ugolini -- \emph{Fisica Generale: Meccanica e Termodinamica} (Capitoli 10 e 11)\\
+\textbf{Obiettivi Didattici e Competenze:}\par
+\begin{itemize}
+    \item Risolvere l'equazione differenziale dell'oscillatore armonico semplice libero ($\ddot{x} + \omega_0^2 x = 0$), calcolarne leggi orarie, bilancio energetico e valori medi.
+    \item Modellizzare il pendolo semplice, il pendolo fisico composto e il pendolo di torsione.
+    \item Risolvere le oscillazioni smorzate viscose ($\ddot{x} + 2\beta\dot{x} + \omega_0^2 x = 0$) e distinguere i tre regimi (sottosmorzato, critico, sovrasmorzato) con fattore di qualità $Q$.
+    \item Analizzare le oscillazioni forzate in regime stazionario, la curva di risonanza di ampiezza, lo sfasamento $\delta(\omega)$ e la risonanza di potenza.
+    \item Introdurre l'equazione d'onda di d'Alembert, onde progressive, numero d'onda $k$ e velocità di fase $v = \lambda f$.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5em}
+
+% ------------------------------------------------------------------------------
+\section{L'Oscillatore Armonico Semplice Libero}
+\label{sec:oscillatore_armonico_semplice}
+% ------------------------------------------------------------------------------
+
+Consideriamo una massa $m$ vincolata a muoversi senza attrito lungo l'asse $x$, collegata a una molla ideale di costante elastica $k > 0$. L'equazione del moto è:
+\begin{equation}
+    m\ddot{x} = -kx \iff \mathbf{\ddot{x}(t) + \omega_0^2 x(t) = 0}
+    \label{eq:edo_armonico}
+\end{equation}
+dove $\omega_0 \coloneqq \sqrt{\frac{k}{m}}$ è la \textbf{pulsazione naturale} (o frequenza angolare) propria del sistema ($\si{\radian\per\second}$).
+
+\subsection{Legge Oraria e Cinematica dell'Oscillazione}
+L'integrale generale della \eqref{eq:edo_armonico} si esprime nella forma armonica:
+\begin{align}
+    \text{Posizione:} \quad & x(t) = A \cos(\omega_0 t + \phi) \label{eq:x_armonico} \\
+    \text{Velocità:} \quad & v(t) = \dot{x}(t) = -A\omega_0 \sin(\omega_0 t + \phi) \label{eq:v_armonico} \\
+    \text{Accelerazione:} \quad & a(t) = \ddot{x}(t) = -A\omega_0^2 \cos(\omega_0 t + \phi) = -\omega_0^2 x(t) \label{eq:a_armonico}
+\end{align}
+dove $A \ge 0$ è l'\textbf{ampiezza} massima di oscillazione e $\phi \in [-\pi, \pi]$ è la \textbf{fase iniziale}, determinate dalle condizioni iniziali $x(0) = x_0$ e $v(0) = v_0$:
+\begin{equation}
+    A = \sqrt{x_0^2 + \left(\frac{v_0}{\omega_0}\right)^2}, \qquad \tan\phi = -\frac{v_0}{\omega_0 x_0}
+\end{equation}
+Il moto è rigorosamente periodico con **periodo** $T$ e **frequenza** $f$:
+\begin{equation}
+    T = \frac{2\pi}{\omega_0} = 2\pi\sqrt{\frac{m}{k}}, \qquad f = \frac{1}{T} = \frac{\omega_0}{2\pi} \quad (\si{\hertz})
+\end{equation}
+
+\subsection{Bilancio Energetico e Valori Medi}
+L'energia cinetica $E_k(t)$ e l'energia potenziale elastica $U(t)$ valgono:
+\begin{align}
+    E_k(t) &= \frac{1}{2}m v(t)^2 = \frac{1}{2}m A^2\omega_0^2 \sin^2(\omega_0 t + \phi) = \frac{1}{2}k A^2 \sin^2(\omega_0 t + \phi) \\
+    U(t) &= \frac{1}{2}k x(t)^2 = \frac{1}{2}k A^2 \cos^2(\omega_0 t + \phi)
+\end{align}
+L'\textbf{energia meccanica totale} è rigorosamente costante nel tempo:
+\begin{equation}
+    \mathbf{E_{\text{tot}} = E_k(t) + U(t) = \frac{1}{2}k A^2 = \frac{1}{2}m v_{\max}^2 = \text{cost}}
+    \label{eq:e_tot_armonico}
+\end{equation}
+Poiché $\langle\sin^2\rangle = \langle\cos^2\rangle = 1/2$ su un periodo completo, i valori medi temporali soddisfano il principio di equipartizione:
+\begin{equation}
+    \langle E_k \rangle = \langle U \rangle = \frac{1}{4}k A^2 = \frac{1}{2}E_{\text{tot}}
+\end{equation}
+
+% ------------------------------------------------------------------------------
+\section{Il Pendolo Semplice e il Pendolo Fisico}
+\label{sec:pendoli}
+% ------------------------------------------------------------------------------
+
+\subsection{Pendolo Semplice}
+Una massa puntiforme $m$ è appesa a un filo inestensibile di massa trascurabile e lunghezza $L$. L'equazione del moto angolare vale:
+\begin{equation}
+    m L^2 \ddot{\theta} = -mg L \sin\theta \iff \ddot{\theta} + \frac{g}{L}\sin\theta = 0
+\end{equation}
+Per **piccole oscillazioni** ($\theta \ll 1\text{ rad} \implies \sin\theta \approx \theta$):
+\begin{equation}
+    \ddot{\theta} + \omega_0^2 \theta = 0 \implies \mathbf{\omega_0 = \sqrt{\frac{g}{L}}, \quad T = 2\pi\sqrt{\frac{L}{g}}}
+    \label{eq:pendolo_semplice}
+\end{equation}
+L'isocronismo delle piccole oscillazioni garantisce che il periodo sia indipendente dall'ampiezza $A$ e dalla massa $m$.
+
+\subsection{Pendolo Fisico (Composto)}
+Un corpo rigido di massa $M$ e momento di inerzia $I_O$ oscilla attorno a un asse orizzontale fisso passante per un punto $O$ a distanza $d$ dal baricentro $CM$.
+La seconda equazione cardinale fornisce:
+\begin{equation}
+    I_O \ddot{\theta} = -M g d \sin\theta \xrightarrow{\sin\theta\approx\theta} I_O \ddot{\theta} + Mgd\,\theta = 0
+\end{equation}
+Il periodo delle piccole oscillazioni è:
+\begin{equation}
+    \mathbf{T = 2\pi\sqrt{\frac{I_O}{Mgd}} = 2\pi\sqrt{\frac{L_{\text{eq}}}{g}}}
+    \label{eq:pendolo_fisico}
+\end{equation}
+dove $L_{\text{eq}} \coloneqq \frac{I_O}{Md} = d + \frac{I_{CM}}{Md}$ è la **lunghezza del pendolo semplice equivalente**.
+
+% ------------------------------------------------------------------------------
+\section{Oscillazioni Meccaniche Smorzate}
+\label{sec:oscillazioni_smorzate}
+% ------------------------------------------------------------------------------
+
+In presenza di una forza di attrito viscoso $\vec{F}_v = -\gamma\vec{v} = -\gamma\dot{x}\ux$ ($\gamma > 0$):
+\begin{equation}
+    m\ddot{x} = -kx - \gamma\dot{x} \iff \mathbf{\ddot{x}(t) + 2\beta\dot{x}(t) + \omega_0^2 x(t) = 0}
+    \label{eq:edo_smorzato}
+\end{equation}
+dove $\beta \coloneqq \frac{\gamma}{2m}$ è il \textbf{coefficiente di smorzamento} ($\si{\per\second}$). L'equazione caratteristica associata è $\lambda^2 + 2\beta\lambda + \omega_0^2 = 0 \implies \lambda_{1,2} = -\beta \pm \sqrt{\beta^2 - \omega_0^2}$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    \draw[->, thick] (0,0) -- (6.5,0) node[right] {$t$};
+    \draw[->, thick] (0,-2.5) -- (0,2.5) node[above] {$x(t)$};
+    
+    % Inviluppo esponenziale
+    \draw[dashed, crimsonred, thick, domain=0:6, samples=50] plot (\x, {2.2*exp(-0.5*\x)});
+    \draw[dashed, crimsonred, thick, domain=0:6, samples=50] plot (\x, {-2.2*exp(-0.5*\x)});
+    \node[crimsonred] at (4.5, 0.8) {\small $\pm A_0 e^{-\beta t}$};
+    
+    % Pseudo-oscillazione sottosmorzata
+    \draw[navyblue, very thick, domain=0:6, samples=150] plot (\x, {2.2*exp(-0.5*\x)*cos(deg(4*\x))});
+\end{tikzpicture}
+\end{center}
+
+\subsection{I Tre Regimi di Smorzamento}
+
+\begin{enumerate}
+    \item \textbf{Regime Sottosmorzato (Smorzamento Debole, $\beta < \omega_0$):}\\
+    Le radici sono complesse coniugate $\lambda_{1,2} = -\beta \pm i\omega_d$. Il moto è pseudo-armonico a frequenza ridotta:
+    \begin{equation}
+        \mathbf{x(t) = A_0 e^{-\beta t} \cos(\omega_d t + \phi)}, \qquad \omega_d \coloneqq \sqrt{\omega_0^2 - \beta^2} < \omega_0
+        \label{eq:sottosmorzato}
+    \end{equation}
+    Il decadimento energetico è quantificato dal \textbf{Fattore di Qualità} $Q$:
+    \begin{equation}
+        Q \coloneqq \frac{\omega_0}{2\beta} = \frac{\pi}{\delta}
+    \end{equation}
+    dove $\delta \coloneqq \beta T_d = \ln\left(\frac{x(t)}{x(t+T_d)}\right)$ è il \textbf{decremento logaritmico}.
+
+    \item \textbf{Regime Critico ($\beta = \omega_0$):}\\
+    Le radici sono reali e coincidenti $\lambda = -\beta$. È il regime aperiodico che garantisce il **ritorno a zero più rapido possibile** senza alcuna oscillazione (impiegato negli ammortizzatori per auto e bilance):
+    \begin{equation}
+        x(t) = (c_1 + c_2 t) e^{-\beta t}
+    \end{equation}
+
+    \item \textbf{Regime Sovrasmorzato (Smorzamento Forte, $\beta > \omega_0$):}\\
+    Le radici sono reali distinte e negative $\lambda_1, \lambda_2 < 0$. Il moto è aperiodico e asintotico lento:
+    \begin{equation}
+        x(t) = c_1 e^{-\lambda_1 t} + c_2 e^{-\lambda_2 t}
+    \end{equation}
+\end{enumerate}
+
+% ------------------------------------------------------------------------------
+\section{Oscillazioni Forzate e Risonanza Meccanica}
+\label{sec:oscillazioni_forzate}
+% ------------------------------------------------------------------------------
+
+Se sull'oscillatore smorzato agisce una forza esterna periodica sinusoidale $F(t) = F_0 \cos(\omega t)$:
+\begin{equation}
+    \ddot{x}(t) + 2\beta\dot{x}(t) + \omega_0^2 x(t) = \frac{F_0}{m}\cos(\omega t)
+    \label{eq:edo_forzato}
+\end{equation}
+Dopo l'estinzione del transitorio, il sistema si assesta sulla **soluzione stazionaria a regime**:
+\begin{equation}
+    x_p(t) = A(\omega) \cos(\omega t - \delta(\omega))
+    \label{eq:stazionaria}
+\end{equation}
+dove l'\textbf{ampiezza di risposta} $A(\omega)$ e lo \textbf{sfasamento} $\delta(\omega)$ valgono:
+\begin{equation}
+    \mathbf{A(\omega) = \frac{F_0/m}{\sqrt{(\omega_0^2 - \omega^2)^2 + 4\beta^2\omega^2}}}, \qquad \mathbf{\tan\delta(\omega) = \frac{2\beta\omega}{\omega_0^2 - \omega^2}}
+    \label{eq:ampiezza_risonanza}
+\end{equation}
+
+\begin{teorema}{Risonanza di Ampiezza e di Potenza}{teo:risonanza}
+\begin{itemize}
+    \item \textbf{Risonanza di Ampiezza}: se $\beta < \omega_0/\sqrt{2}$, l'ampiezza $A(\omega)$ raggiunge il massimo alla frequenza di risonanza:
+    \begin{equation}
+        \omega_R = \sqrt{\omega_0^2 - 2\beta^2} \approx \omega_0 \quad (\text{per } \beta \ll \omega_0)
+    \end{equation}
+    con picco di ampiezza $A_{\max} \approx \frac{F_0}{k} Q$.
+    \item \textbf{Risonanza di Potenza}: la potenza media $\langle P \rangle$ trasferita dalla forzante al sistema è massima esattamente per $\omega = \omega_0$, dove lo sfasamento tra forza e velocità è nullo ($\delta = \pi/2$). La larghezza di banda a metà altezza è $\Delta\omega = 2\beta = \frac{\omega_0}{Q}$.
+\end{itemize}
+\end{teorema}
+
+% ------------------------------------------------------------------------------
+\section{Introduzione ai Fenomeni Ondulatori}
+\label{sec:introduzione_onde}
+% ------------------------------------------------------------------------------
+
+Un'\textbf{onda meccanica} è la propagazione nello spazio di una perturbazione di un mezzo continuo accompagnata da trasporto di energia e quantità di moto, senza trasporto netto di materia.
+
+\begin{definizione}{Equazione d'Onda di d'Alembert}{def:dalembert}
+La funzione d'onda $\psi(x, t)$ che descrive la propagazione unidimensionale non dispersiva soddisfa l'equazione alle derivate parziali:
+\begin{equation}
+    \pdvtwo{\psi}{x} - \frac{1}{v^2}\pdvtwo{\psi}{t} = 0
+    \label{eq:dalembert}
+\end{equation}
+dove $v$ è la \textbf{velocità di propagazione} nel mezzo (es. $v = \sqrt{\frac{T_0}{\mu}}$ per una corda tesa a densità lineare $\mu$).
+\end{definizione}
+
+\begin{definizione}{Onda Armonica Progressiva}{def:onda_armonica}
+Un'onda sinusoidale che si propaga nel verso positivo dell'asse $x$ ha equazione:
+\begin{equation}
+    \psi(x, t) = A \cos(kx - \omega t + \phi_0)
+    \label{eq:onda_armonica}
+\end{equation}
+dove $k \coloneqq \frac{2\pi}{\lambda}$ è il \textbf{numero d'onda} ($\si{\per\metre}$), $\lambda = v T$ è la \textbf{lunghezza d'onda} ($\si{\metre}$) e $v = \frac{\omega}{k} = \lambda f$ è la \textbf{velocità di fase}.
+\end{definizione}
+
+% ------------------------------------------------------------------------------
+\section{Esercizi Risolti ed Applicativi con Diagrammi di Corpo Libero}
+\label{sec:esercizi_oscillazioni}
+% ------------------------------------------------------------------------------
+
+\begin{esercizio}[Oscillatore Armonico Smorzato e Diagramma delle Forze]
+\textbf{Testo:}
+Un blocco di massa $m = \SI{0.50}{\kilogram}$ è collegato a una molla di costante elastica $k = \SI{50}{\newton\per\metre}$ e immerso in un fluido viscoso che esercita una forza frenante con coefficiente $\gamma = \SI{0.80}{\kilogram\per\second}$.
+\begin{enumerate}
+    \item Tracciare il diagramma di corpo libero e analizzare le forze agenti.
+    \item Verificare il regime di smorzamento, calcolare la pseudopulsazione $\omega_d$ e il fattore di merito $Q$.
+\end{enumerate}
+\end{esercizio}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Parete
+    \draw[thick] (-3,0) -- (-3, 2);
+    \fill[pattern=north east lines] (-3.3,0) rectangle (-3, 2);
+    \draw[thick] (-3,0) -- (4,0);
+    
+    % Molla
+    \draw[decoration={aspect=0.5, segment length=4mm, amplitude=3mm, coil}, decorate, navyblue, thick] (-3, 1.2) -- (0, 1.2);
+    \node[navyblue, above] at (-1.5, 1.5) {$k$};
+    
+    % Smorzatore a pistone
+    \draw[thick, brown!80!black] (-3, 0.4) -- (-1.0, 0.4);
+    \draw[thick, brown!80!black] (-1.0, 0.2) -- (-1.0, 0.6);
+    \draw[thick, brown!80!black] (-0.8, 0.1) -- (-1.4, 0.1) -- (-1.4, 0.7) -- (-0.8, 0.7);
+    \draw[thick, brown!80!black] (-0.8, 0.4) -- (0, 0.4);
+    \node[brown!80!black, below] at (-1.5, 0.1) {$\gamma$};
+    
+    % Blocco m
+    \filldraw[fill=blue!20, draw=navyblue, thick] (0, 0) rectangle (1.4, 1.4);
+    \coordinate (CM) at (0.7, 0.7);
+    \filldraw[black] (CM) circle (2pt) node[below=8pt] {$m$};
+    
+    % Forze
+    \draw[->, ultra thick, forestgreen] (0.7, 1.4) -- (0.7, 2.5) node[right] {$\vec{N} = mg\uy$};
+    \draw[->, ultra thick, navyblue] (0.7, 0.7) -- (0.7, -0.6) node[right] {$\vec{P} = -mg\uy$};
+    \draw[->, ultra thick, crimsonred] (0, 1.0) -- (-1.8, 1.0) node[above] {$\vec{F}_e = -kx\ux$};
+    \draw[->, ultra thick, purpleaccent] (0, 0.4) -- (-1.5, 0.4) node[below] {$\vec{F}_v = -\gamma\dot{x}\ux$};
+    \draw[->, very thick, orange!90!black] (1.4, 0.7) -- (2.5, 0.7) node[above] {$\vec{v} = \dot{x}\ux$};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[enhanced, breakable, colback=forestgreen!5!white, colframe=forestgreen!80!black,
+    title={\textbf{Analisi delle Forze in Gioco}}, fonttitle=\bfseries\sffamily]
+\begin{itemize}
+    \item \textbf{Lungo la verticale $\uy$:} la reazione normale $\vec{N}$ della guida orizzontale liscia bilancia perfettamente la forza peso ($\vec{N} + \vec{P} = \vec{0}$).
+    \item \textbf{Lungo l'orizzontale $\ux$ (con blocco spostato a $x > 0$ e in moto verso destra con $v > 0$):}
+    \begin{itemize}
+        \item \textbf{Forza Elastica di Richiamo ($\vec{F}_e = -kx\ux$):} forza conservativa proporzionale allo spostamento $x$, diretta sempre verso il centro di equilibrio $O$.
+        \item \textbf{Forza di Resistenza Viscosa ($\vec{F}_v = -\gamma v\ux$):} forza non conservativa sempre opposta al vettore velocità istantaneo $\vec{v}$.
+    \end{itemize}
+\end{itemize}
+\end{tcolorbox}
+
+\textbf{Risoluzione Analitica:}
+Pulsazione naturale e parametro di smorzamento:
+\begin{equation}
+    \omega_0 = \sqrt{\frac{k}{m}} = \sqrt{\frac{50}{0{,}50}} = \SI{10.0}{\radian\per\second}, \qquad \beta = \frac{\gamma}{2m} = \frac{0{,}80}{2 \times 0{,}50} = \SI{0.80}{\per\second}
+\end{equation}
+Poiché $\beta = 0{,}80 < \omega_0 = 10{,}0$, il sistema si trova in \textbf{regime sottosmorzato}:
+\begin{align}
+    \omega_d &= \sqrt{\omega_0^2 - \beta^2} = \sqrt{100 - 0{,}64} = \sqrt{99{,}36} \approx \mathbf{\SI{9.968}{\radian\per\second}} \\
+    Q &= \frac{\omega_0}{2\beta} = \frac{10{,}0}{2 \times 0{,}80} = \mathbf{6{,}25}
+\end{align}

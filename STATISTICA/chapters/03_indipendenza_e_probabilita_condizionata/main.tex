@@ -1,0 +1,281 @@
+% ==============================================================================
+% CAPITOLO 3: PROBABILITÀ CONDIZIONATA, FORMULA DI BAYES E INDIPENDENZA
+% ==============================================================================
+\chapter{Probabilità Condizionata, Formula di Bayes e Indipendenza}
+\label{cap:indipendenza_e_probabilita_condizionata}
+
+\begin{abstract}
+Il presente capitolo esplora il cuore dinamico della teoria delle probabilità: l'aggiornamento razionale delle credenze e delle previsioni a fronte dell'acquisizione di nuova evidenza sperimentale o informativa. Viene formalizzata la probabilità condizionata come restrizione geometrica dello spazio campionario e si derivano la regola moltiplicativa e la formula a catena. Si dimostrano analiticamente il Teorema delle Probabilità Totali e il celebre Teorema di Bayes, pilastro dell'inferenza statistica moderna e del decision making razionale. Viene approfondito il paradosso dei falsi positivi nei test diagnostici e nei controlli di qualità industriale. Infine, si analizza la nozione di indipendenza stocastica, evidenziandone la netta cesura logica rispetto all'incompatibilità insiemistica e sviscerando la distinzione tra indipendenza a due a due e mutua indipendenza globale.
+\end{abstract}
+
+% ==============================================================================
+% SEZIONE 3.1: PROBABILITÀ CONDIZIONATA E RISTRUTTURAZIONE DELLO SPAZIO
+% ==============================================================================
+\section{Il Concetto di Informazione e la Probabilità Condizionata}
+\label{sec:prob_condizionata_intro}
+
+Nel mondo reale e nei processi ingegneristici, lo stato di informazione dell'osservatore non è mai statico. Quando valutiamo l'affidabilità di un circuito elettronico, il verificarsi di un guasto a un primo componente ausiliario modifica radicalmente la probabilità che il sistema complessivo collassi. Analogamente, la conoscenza dell'esito di un sensore di allarme ricalibra la nostra stima sulla presenza di un'anomalia di funzionamento.
+
+La **probabilità condizionata** formalizza esattamente questa dinamica: come varia la probabilità dell'evento $E$ una volta acquisita la certezza empirica che un altro evento $F$ si è già verificato.
+
+\begin{definizione}{Probabilità Condizionata}{prob_condizionata}
+Siano $E, F \in \mathcal{F}$ due eventi su uno spazio di probabilità $(\Omega, \mathcal{F}, \mathbb{P})$, con $\mathbb{P}(F) > 0$. Si definisce \textbf{probabilità condizionata} di $E$ dato $F$, denotata con $\mathbb{P}(E \mid F)$, la quantità:
+\begin{equation}
+    \mathbb{P}(E \mid F) = \frac{\mathbb{P}(E \cap F)}{\mathbb{P}(F)}
+\end{equation}
+\end{definizione}
+
+\paragraph{Interpretazione Geometrica e Insiemistica: La Restrizione dell'Universo.}
+Il condizionamento ad un evento $F$ corrisponde geometricamente ad una **traslazione e riscalatura dello spazio campionario**:
+\begin{enumerate}
+    \item L'evento condizionante $F$ diventa il \emph{nuovo spazio campionario certo}. Tutti gli esiti $\omega \in \Omega \setminus F$ hanno ora probabilità rigorosamente nulla, poiché sappiamo con certezza che essi non si sono verificati.
+    \item Gli unici esiti elementari ancora compatibili con l'evento $E$ sono quelli appartenenti all'intersezione $E \cap F$.
+    \item Poiché la misura di probabilità originaria di $F$ era $\mathbb{P}(F) < 1$, per ripristinare il secondo assioma di Kolmogorov (la certezza che $\mathbb{P}(F \mid F) = 1$) è indispensabile dividere per il fattore di normalizzazione $\mathbb{P}(F)$.
+\end{enumerate}
+
+\begin{proprieta}{Validità degli Assiomi di Kolmogorov per la Misura Condizionata}{assiomi_condiz}
+Fissato un evento $F \in \mathcal{F}$ con $\mathbb{P}(F) > 0$, la funzione $Q(E) \coloneqq \mathbb{P}(E \mid F)$ definita su $\mathcal{F}$ costituisce a tutti gli effetti una genuina misura di probabilità su $(\Omega, \mathcal{F})$, e rispetta:
+\begin{enumerate}
+    \item \textbf{Non negatività:} $0 \le \mathbb{P}(E \mid F) \le 1$ per ogni $E \in \mathcal{F}$.
+    \item \textbf{Certezza:} $\mathbb{P}(\Omega \mid F) = \frac{\mathbb{P}(\Omega \cap F)}{\mathbb{P}(F)} = \frac{\mathbb{P}(F)}{\mathbb{P}(F)} = 1$, ed in particolare $\mathbb{P}(F \mid F) = 1$.
+    \item \textbf{$\bm{\sigma}$-additività:} Per ogni sequenza di eventi disgiunti a due a due $\{E_n\}_{n=1}^\infty$:
+    \begin{equation}
+        \mathbb{P}\left(\bigcup_{n=1}^\infty E_n \;\middle|\; F\right) = \sum_{n=1}^\infty \mathbb{P}(E_n \mid F)
+    \end{equation}
+\end{enumerate}
+Ne consegue che tutti i teoremi dimostrati nel Capitolo \ref{cap:elementi_di_probabilita} (probabilità del complementare, monotonia, inclusione-esclusione) continuano a valere immutati sotto il condizionamento a $F$, ad esempio:
+\begin{equation}
+    \mathbb{P}(E^c \mid F) = 1 - \mathbb{P}(E \mid F), \qquad \mathbb{P}(A \cup B \mid F) = \mathbb{P}(A \mid F) + \mathbb{P}(B \mid F) - \mathbb{P}(A \cap B \mid F)
+\end{equation}
+\end{proprieta}
+
+\subsection{Regola del Prodotto e Formula a Catena}
+
+Invertendo la definizione di probabilità condizionata, otteniamo lo strumento primario per calcolare la probabilità del verificarsi congiunto di una sequenza di eventi dipendenti nel tempo.
+
+\begin{proposizione}{Regola Moltiplicativa (Regola del Prodotto)}{regola_prodotto}
+Per qualsiasi coppia di eventi $E, F \in \mathcal{F}$:
+\begin{equation}
+    \mathbb{P}(E \cap F) = \mathbb{P}(F) \cdot \mathbb{P}(E \mid F) = \mathbb{P}(E) \cdot \mathbb{P}(F \mid E)
+\end{equation}
+\end{proposizione}
+
+\begin{teorema}{Formula a Catena (Chain Rule)}{formula_catena}
+Dati $n$ eventi $E_1, E_2, \dots, E_n \in \mathcal{F}$ con $\mathbb{P}(E_1 \cap E_2 \cap \dots \cap E_{n-1}) > 0$:
+\begin{equation}
+    \mathbb{P}(E_1 \cap E_2 \cap \dots \cap E_n) = \mathbb{P}(E_1) \cdot \mathbb{P}(E_2 \mid E_1) \cdot \mathbb{P}(E_3 \mid E_1 \cap E_2) \dots \mathbb{P}(E_n \mid E_1 \cap \dots \cap E_{n-1})
+\end{equation}
+\end{teorema}
+
+% ==============================================================================
+% SEZIONE 3.2: TEOREMA DELLE PROBABILITÀ TOTALI
+% ==============================================================================
+\section{Il Teorema delle Probabilità Totali}
+\label{sec:probabilita_totali}
+
+Spesso la valutazione diretta della probabilità di un evento complesso $E$ risulta impraticabile. Tuttavia, se il fenomeno può verificarsi sotto diverse condizioni o cause mutuamente esclusive $\{F_1, \dots, F_k\}$, possiamo decomporre il calcolo in contributi ponderati più semplici.
+
+\begin{definizione}{Partizione dello Spazio Campionario}{partizione_spazio}
+Una famiglia finita o numerabile di eventi $\{F_1, F_2, \dots, F_k\} \subset \mathcal{F}$ costituisce una \textbf{partizione} dello spazio campionario $\Omega$ se:
+\begin{enumerate}
+    \item Gli eventi sono a due a due disgiunti (mutuamente incompatibili): $F_i \cap F_j = \emptyset, \; \forall i \neq j$;
+    \item Gli eventi sono esaustivi (ricoprono l'intero universo): $\bigcup_{i=1}^k F_i = \Omega$;
+    \item Ciascun evento ha probabilità non nulla: $\mathbb{P}(F_i) > 0, \; \forall i=1,\dots,k$.
+\end{enumerate}
+\end{definizione}
+
+\begin{figure}[htbp]
+\centering
+\input{figures/fig_partizione_probabilita_totali.tex}
+\caption{Decomposizione dell'evento $E$ indotta da una partizione dello spazio campionario $\{F_1, F_2, F_3, F_4\}$. L'evento $E$ viene sezionato nei frammenti disgiunti $E \cap F_i$. L'area complessiva di $E$ è data dalla somma pesata delle probabilità condizionate $\mathbb{P}(E \mid F_i)$ moltiplicate per le probabilità delle cause $\mathbb{P}(F_i)$.}
+\label{fig:partizione_probabilita_totali}
+\end{figure}
+
+\begin{teorema}{Teorema delle Probabilità Totali (Legge delle Alternative)}{thm_probabilita_totali}
+Sia $\{F_1, F_2, \dots, F_k\}$ una partizione di $\Omega$. Allora per ogni evento $E \in \mathcal{F}$:
+\begin{equation}
+    \mathbb{P}(E) = \sum_{i=1}^k \mathbb{P}(E \cap F_i) = \sum_{i=1}^k \mathbb{P}(E \mid F_i) \cdot \mathbb{P}(F_i)
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Poiché $\bigcup_{i=1}^k F_i = \Omega$, possiamo intersecare l'evento $E$ con lo spazio campionario:
+\begin{equation}
+    E = E \cap \Omega = E \cap \left( \bigcup_{i=1}^k F_i \right) = \bigcup_{i=1}^k (E \cap F_i)
+\end{equation}
+Gli insiemi $\{E \cap F_i\}_{i=1}^k$ sono a due a due disgiunti poiché lo sono i sottoinsiemi $F_i$:
+\begin{equation}
+    (E \cap F_i) \cap (E \cap F_j) = E \cap (F_i \cap F_j) = E \cap \emptyset = \emptyset \quad (\forall i \neq j)
+\end{equation}
+Applicando il terzo assioma di Kolmogorov ($\sigma$-additività finita) e successivamente la regola moltiplicativa $\mathbb{P}(E \cap F_i) = \mathbb{P}(E \mid F_i)\mathbb{P}(F_i)$:
+\begin{equation}
+    \mathbb{P}(E) = \mathbb{P}\left( \bigcup_{i=1}^k (E \cap F_i) \right) = \sum_{i=1}^k \mathbb{P}(E \cap F_i) = \sum_{i=1}^k \mathbb{P}(E \mid F_i) \cdot \mathbb{P}(F_i) \qquad \blacksquare
+\end{equation}
+\end{dimostrazione}
+
+% ==============================================================================
+% SEZIONE 3.3: TEOREMA DI BAYES E INFERENZA SULLE CAUSE
+% ==============================================================================
+\section{Il Teorema di Bayes e l'Inversione delle Cause}
+\label{sec:teorema_bayes}
+
+Formulato originariamente dal reverendo Thomas Bayes e pubblicato postumo nel 1763, il **Teorema di Bayes** rappresenta il principio cardine dell'apprendimento e dell'inferenza statistica. Esso risponde a una domanda epistemologica inversa: *sapendo che si è verificato un certo effetto $E$, qual è la probabilità che tale effetto sia stato originato dalla specifica causa o ipotesi $F_j$?*
+
+\begin{figure}[htbp]
+\centering
+\input{figures/fig_albero_bayes.tex}
+\caption{Rappresentazione ad albero delle decisioni per il Teorema di Bayes. Al primo livello ramificano le cause a priori $F_1, \dots, F_k$ con probabilità $\mathbb{P}(F_i)$. Al secondo livello si sviluppano gli esiti condizionati $E$ ed $E^c$. Il Teorema di Bayes calcola la probabilità di percorrere a ritroso uno specifico ramo dato l'effetto osservato $E$.}
+\label{fig:albero_bayes}
+\end{figure}
+
+\begin{teorema}{Teorema di Bayes (Formula di Inversione delle Cause)}{thm_bayes}
+Sia $\{F_1, F_2, \dots, F_k\}$ una partizione di $\Omega$, e sia $E \in \mathcal{F}$ un evento osservato con $\mathbb{P}(E) > 0$. Per ogni $j \in \{1, \dots, k\}$, la \textbf{probabilità a posteriori} della causa $F_j$ dato l'effetto $E$ è:
+\begin{equation}
+    \mathbb{P}(F_j \mid E) = \frac{\mathbb{P}(E \mid F_j) \cdot \mathbb{P}(F_j)}{\mathbb{P}(E)} = \frac{\mathbb{P}(E \mid F_j) \cdot \mathbb{P}(F_j)}{\sum_{i=1}^k \mathbb{P}(E \mid F_i) \cdot \mathbb{P}(F_i)}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Dalla definizione di probabilità condizionata:
+\begin{equation}
+    \mathbb{P}(F_j \mid E) = \frac{\mathbb{P}(F_j \cap E)}{\mathbb{P}(E)}
+\end{equation}
+Applicando al numeratore la regola moltiplicativa $\mathbb{P}(F_j \cap E) = \mathbb{P}(E \mid F_j)\mathbb{P}(F_j)$ e al denominatore il Teorema delle Probabilità Totali $\mathbb{P}(E) = \sum_{i=1}^k \mathbb{P}(E \mid F_i)\mathbb{P}(F_i)$, si perviene direttamente alla tesi. $\blacksquare$
+\end{dimostrazione}
+
+\paragraph{Nomenclatura e Struttura dell'Aggiornamento Bayesiano:}
+\begin{itemize}
+    \item $\mathbb{P}(F_j)$: \textbf{Probabilità a priori} (\emph{prior probability}) della causa $F_j$, prima dell'osservazione dell'effetto $E$.
+    \item $\mathbb{P}(E \mid F_j)$: \textbf{Verosimiglianza} (\emph{likelihood}) dell'evidenza $E$ data l'ipotesi $F_j$.
+    \item $\mathbb{P}(E) = \sum \mathbb{P}(E \mid F_i)\mathbb{P}(F_i)$: \textbf{Fattore di scala o evidenza marginale} (\emph{evidence}).
+    \item $\mathbb{P}(F_j \mid E)$: \textbf{Probabilità a posteriori} (\emph{posterior probability}), che combina informazione a priori ed evidenza empirica.
+\end{itemize}
+
+\subsection{Applicazione Fondamentale: Il Paradosso dei Falsi Positivi}
+
+Un'applicazione classica che illustra la potenza del Teorema di Bayes e le trappole dell'intuizione comune riguarda i test diagnostici e il controllo di qualità industriale.
+
+\begin{esercizio}{Test Diagnostico per Malattia Rara (Il Paradosso dei Falsi Positivi)}{es_falsi_positivi}
+Si consideri una patologia rara che colpisce lo $0.1\%$ della popolazione (prevalenza a priori $\mathbb{P}(M) = 0.001$). È disponibile un test clinico con le seguenti prestazioni:
+\begin{itemize}
+    \item \textbf{Sensibilità} (probabilità che il test sia positivo se la persona è malata): $\mathbb{P}(T^+ \mid M) = 0.99$.
+    \item \textbf{Specificità} (probabilità che il test sia negativo se la persona è sana): $\mathbb{P}(T^- \mid S) = 0.98 \implies \mathbb{P}(T^+ \mid S) = 0.02$ (tasso di falsi allarmi).
+\end{itemize}
+Un individuo estratto a caso dalla popolazione risulta positivo al test ($T^+$). Qual è la reale probabilità che sia effettivamente malato ($\mathbb{P}(M \mid T^+)$)?
+\end{esercizio}
+
+\begin{dimostrazione}
+La popolazione è partizionata in $M$ (malati) ed $S = M^c$ (sani), con $\mathbb{P}(M) = 0.001$ e $\mathbb{P}(S) = 0.999$.
+Calcoliamo la probabilità totale che un test risulti positivo:
+\begin{align*}
+    \mathbb{P}(T^+) &= \mathbb{P}(T^+ \mid M)\mathbb{P}(M) + \mathbb{P}(T^+ \mid S)\mathbb{P}(S) \\
+    &= (0.99 \times 0.001) + (0.02 \times 0.999) = 0.00099 + 0.01998 = \bm{0.02097} \quad (2.097\%)
+\end{align*}
+Applicando il Teorema di Bayes per ricavare la probabilità a posteriori:
+\begin{equation*}
+    \mathbb{P}(M \mid T^+) = \frac{\mathbb{P}(T^+ \mid M)\mathbb{P}(M)}{\mathbb{P}(T^+)} = \frac{0.00099}{0.02097} \approx \bm{0.0472} \quad (\bm{4.72\%})
+\end{equation*}
+\textbf{Commento critico:} Nonostante il test abbia un'accuratezza nominale altissima ($99\%$ e $98\%$), se un paziente riceve un esito positivo la probabilità reale di essere malato è appena del $\bm{4.72\%}$! Oltre il $95\%$ dei positivi sono falsi allarmi. Ciò è dovuto al fatto che, essendo la malattia rarissima, la piccolissima percentuale di errore applicata alla stragrande maggioranza della popolazione sana ($0.02 \times 99.9\%$) produce un numero assoluto di falsi positivi nettamente superiore ai veri positivi ($0.99 \times 0.1\%$). $\blacksquare$
+\end{dimostrazione}
+
+% ==============================================================================
+% SEZIONE 3.4: INDIPENDENZA STOCASTICA E SUE PROPRIETÀ
+% ==============================================================================
+\section{Indipendenza Stocastica}
+\label{sec:indipendenza_stocastica}
+
+\begin{definizione}{Indipendenza Stocastica tra Due Eventi}{indipendenza_due_eventi}
+Due eventi $E, F \in \mathcal{F}$ si dicono \textbf{stocasticamente indipendenti} (denotato con $E \independent F$) se e solo se la probabilità della loro intersezione è uguale al prodotto delle loro probabilità marginali:
+\begin{equation}
+    \mathbb{P}(E \cap F) = \mathbb{P}(E) \cdot \mathbb{P}(F)
+\end{equation}
+Se $\mathbb{P}(F) > 0$, l'indipendenza equivale all'invarianza informativa del condizionamento:
+\begin{equation}
+    \mathbb{P}(E \mid F) = \mathbb{P}(E)
+\end{equation}
+\end{definizione}
+
+\begin{teorema}{Indipendenza dei Complementari}{thm_indipendenza_complementari}
+Se $E$ ed $F$ sono stocasticamente indipendenti, allora sono indipendenti anche:
+\begin{enumerate}
+    \item $E$ ed $F^c$;
+    \item $E^c$ ed $F$;
+    \item $E^c$ ed $F^c$.
+\end{enumerate}
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazione per $E$ ed $F^c$]
+Scomponiamo l'evento $E$ nell'unione disgiunta $E = (E \cap F) \cup (E \cap F^c)$. Per la proprietà additiva:
+\begin{equation}
+    \mathbb{P}(E) = \mathbb{P}(E \cap F) + \mathbb{P}(E \cap F^c)
+\end{equation}
+Sfruttando l'indipendenza tra $E$ ed $F$, sostituiamo $\mathbb{P}(E \cap F) = \mathbb{P}(E)\mathbb{P}(F)$:
+\begin{equation}
+    \mathbb{P}(E \cap F^c) = \mathbb{P}(E) - \mathbb{P}(E)\mathbb{P}(F) = \mathbb{P}(E)(1 - \mathbb{P}(F)) = \mathbb{P}(E)\mathbb{P}(F^c) \qquad \blacksquare
+\end{equation}
+\end{dimostrazione}
+
+\subsection{Indipendenza a Due a Due vs Mutua Indipendenza Globale}
+
+Quando si considerano tre o più eventi, la condizione di indipendenza a coppie \textbf{non è sufficiente} a garantire la mutua indipendenza globale.
+
+\begin{definizione}{Mutua Indipendenza Globale di $n$ Eventi}{mutua_indipendenza}
+Una famiglia di $n$ eventi $\{E_1, E_2, \dots, E_n\} \subset \mathcal{F}$ si dice \textbf{mutuamente indipendente} se per ogni sottoinsieme finito di indici $\{i_1, i_2, \dots, i_k\} \subseteq \{1, \dots, n\}$ con $2 \le k \le n$, si ha:
+\begin{equation}
+    \mathbb{P}\left(\bigcap_{j=1}^k E_{i_j}\right) = \prod_{j=1}^k \mathbb{P}(E_{i_j})
+\end{equation}
+Per $n = 3$ eventi ($A, B, C$), la mutua indipendenza richiede la validità simultanea di $2^3 - 3 - 1 = 4$ equazioni:
+\begin{align}
+    \mathbb{P}(A \cap B) &= \mathbb{P}(A)\mathbb{P}(B) \\
+    \mathbb{P}(A \cap C) &= \mathbb{P}(A)\mathbb{P}(C) \\
+    \mathbb{P}(B \cap C) &= \mathbb{P}(B)\mathbb{P}(C) \\
+    \mathbb{P}(A \cap B \cap C) &= \mathbb{P}(A)\mathbb{P}(B)\mathbb{P}(C)
+\end{align}
+\end{definizione}
+
+\begin{esempio}{Controesempio di Bernstein: Indipendenza a Due a Due Senza Mutua Indipendenza}{es_bernstein}
+Si consideri un tetraedro regolare con quattro facce equiprobabili (probabilità $1/4$ ciascuna), colorate nel modo seguente:
+\begin{itemize}
+    \item Faccia 1: Rossa (R)
+    \item Faccia 2: Verde (V)
+    \item Faccia 3: Bianca (B)
+    \item Faccia 4: Contiene tutti e tre i colori (R, V, B)
+\end{itemize}
+Definiamo gli eventi:
+$A = \text{La faccia contiene il Rosso}$, $B = \text{La faccia contiene il Verde}$, $C = \text{La faccia contiene il Bianco}$.
+\begin{itemize}
+    \item Ciascun colore è presente su 2 facce (la propria faccia monocromatica e la faccia 4), quindi:
+    \begin{equation*}
+        \mathbb{P}(A) = \frac{2}{4} = \frac{1}{2}, \qquad \mathbb{P}(B) = \frac{1}{2}, \qquad \mathbb{P}(C) = \frac{1}{2}
+    \end{equation*}
+    \item La compresenza di due colori (es. $A \cap B$) si verifica esclusivamente se esce la faccia 4:
+    \begin{equation*}
+        \mathbb{P}(A \cap B) = \frac{1}{4} = \frac{1}{2} \cdot \frac{1}{2} = \mathbb{P}(A)\mathbb{P}(B)
+    \end{equation*}
+    Analogamente $\mathbb{P}(A \cap C) = 1/4 = \mathbb{P}(A)\mathbb{P}(C)$ e $\mathbb{P}(B \cap C) = 1/4 = \mathbb{P}(B)\mathbb{P}(C)$. Gli eventi sono dunque \textbf{indipendenti a due a due}.
+    \item Tuttavia, la compresenza simultanea di tutti e tre i colori $A \cap B \cap C$ avviene sempre e solo sulla faccia 4:
+    \begin{equation*}
+        \mathbb{P}(A \cap B \cap C) = \frac{1}{4} \neq \mathbb{P}(A)\mathbb{P}(B)\mathbb{P}(C) = \frac{1}{2} \cdot \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{8}
+    \end{equation*}
+\end{itemize}
+Questo dimostra che la conoscenza congiunta di $A$ e $B$ determina con certezza l'evento $C$ ($\mathbb{P}(C \mid A \cap B) = 1 \neq \mathbb{P}(C)$), distruggendo l'indipendenza globale.
+\end{esempio}
+
+% ==============================================================================
+% SEZIONE 3.5: TRAPPOLE D'ESAME
+% ==============================================================================
+\section{Consigli per l'Esame e Trappole Ricorrenti}
+\label{sec:consigli_esame_cap3}
+
+\begin{esame}[Trappola: Eventi Disgiunti (Incompatibili) vs Eventi Indipendenti]
+Questa è una delle trappole concettuali più insidiose nei test d'esame:
+\begin{itemize}
+    \item Due eventi $A$ e $B$ sono **disgiunti** se non possono verificarsi insieme nel medesimo esperimento: $A \cap B = \emptyset \implies \mathbb{P}(A \cap B) = 0$. (È una proprietà insiemistica-geometrica).
+    \item Due eventi sono **indipendenti** se $\mathbb{P}(A \cap B) = \mathbb{P}(A)\mathbb{P}(B)$. (È una proprietà quantitativo-informativa).
+    \item Se $\mathbb{P}(A) > 0$ e $\mathbb{P}(B) > 0$, due eventi disgiunti \textbf{NON POSSONO MAI ESSERE INDIPENDENTI}! Infatti:
+    \begin{equation*}
+        \mathbb{P}(A \cap B) = 0 \neq \mathbb{P}(A)\mathbb{P}(B) > 0
+    \end{equation*}
+    Intuitivamente, sapere che $A$ si è verificato ci dà l'informazione certissima che $B$ \emph{non può assolutamente essersi verificato} ($\mathbb{P}(B \mid A) = 0 \neq \mathbb{P}(B)$), massima forma possibile di dipendenza informativa!
+\end{itemize}
+\end{esame}

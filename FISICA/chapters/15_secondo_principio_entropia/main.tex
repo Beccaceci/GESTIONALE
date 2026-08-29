@@ -1,0 +1,208 @@
+% ==============================================================================
+% CAPITOLO 15 - SECONDO PRINCIPIO DELLA TERMODINAMICA ED ENTROPIA
+% ==============================================================================
+\chapter{Secondo Principio della Termodinamica ed Entropia}
+\label{chap:secondo_principio_entropia}
+
+\begin{tcolorbox}[enhanced, breakable, colback=navyblue!4!white, colframe=navyblue!80!black,
+    coltitle=white, fonttitle=\bfseries\sffamily, title={Quadro Sinottico del Capitolo 15 (Corrispondenza: Lezioni 37, 38, 39 e 40)},
+    sharp corners, rounded corners=south, boxrule=1pt]
+\textbf{Collocazione Modulare:} Parte IV -- Termodinamica\\
+\textbf{Trascrizioni di Riferimento:} \texttt{trascrizioni/Lezione\_37\_...md} fino a \texttt{Lezione\_40\_...md}\\
+\textbf{Manuale di Riferimento:} Focardi, Massa, Ugolini -- \emph{Fisica Generale: Meccanica e Termodinamica} (Capitoli 17 e 18)\\
+\textbf{Obiettivi Didattici e Competenze:}\par
+\begin{itemize}
+    \item Formulare gli enunciati di Kelvin-Planck e Clausius del Secondo Principio e dimostrarne l'equivalenza logica.
+    \item Calcolare rendimenti di macchine termiche dirette ($\eta = W/Q_{\text{ass}}$) e coefficienti di prestazione frigoriferi ($\text{COP}$).
+    \item Analizzare il Ciclo di Carnot e dimostrare il Teorema di Carnot ($\eta_{\text{irr}} \le \eta_{\text{rev}} = 1 - T_1/T_2$).
+    \item Dimostrare la Disuguaglianza di Clausius ($\oint \frac{\delta Q}{T} \le 0$) e definire la funzione di stato Entropia $S$.
+    \item Calcolare le variazioni di entropia $\Delta S$ per gas perfetti, corpi finiti, sorgenti termiche e cambiamenti di fase.
+    \item Formulare il Principio di Non Diminuzione dell'Entropia dell'Universo ($\Delta S_{\text{universo}} \ge 0$) e introdurre l'interpretazione statistica di Boltzmann ($S = k_B \ln\Omega$).
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5em}
+
+% ------------------------------------------------------------------------------
+\section{Gli Enunciati Fondamentali del Secondo Principio}
+\label{sec:enunciati_secondo_principio}
+% ------------------------------------------------------------------------------
+
+Mentre il Primo Principio stabilisce la conservazione quantitativa dell'energia, il \textbf{Secondo Principio della Termodinamica} sancisce la direzione privilegiata e l'irreversibilità intrinseca dei processi naturali.
+
+\begin{legge}{Enunciato di Kelvin-Planck (Impossibilità del Moto Perpetuo di 2a Specie)}{legge:kelvin_planck}
+È impossibile realizzare una trasformazione termodinamica il cui \textbf{unico risultato} sia quello di assorbire calore da una singola sorgente termica a temperatura uniforme e trasformarlo integralmente in lavoro meccanico.
+\end{legge}
+
+\begin{legge}{Enunciato di Clausius (Direzione Naturale del Flusso Termico)}{legge:clausius}
+È impossibile realizzare una trasformazione termodinamica il cui \textbf{unico risultato} sia il trasferimento spontaneo di calore da un corpo a temperatura inferiore a un corpo a temperatura superiore, senza l'apporto di lavoro esterno.
+\end{legge}
+
+\begin{teorema}{Equivalenza Logica degli Enunciati di Kelvin e Clausius}{teo:equivalenza_enunciati}
+L'enunciato di Kelvin-Planck e l'enunciato di Clausius sono logicamente equivalenti: la violazione dell'uno implica necessariamente la violazione dell'altro.
+\end{teorema}
+
+% ------------------------------------------------------------------------------
+\section{Macchine Termiche, Ciclo e Teorema di Carnot}
+\label{sec:carnot}
+% ------------------------------------------------------------------------------
+
+Una macchina termica opera in ciclo chiuso assorbendo calore $Q_2 > 0$ da una sorgente calda a temperatura $T_2$, producendo lavoro utile $W > 0$ e cedendo calore $|Q_1| > 0$ a una sorgente fredda a temperatura $T_1 < T_2$.
+Per il primo principio su un ciclo ($\Delta U_{\text{ciclo}} = 0$):
+\begin{equation}
+    W = Q_2 - |Q_1| = Q_2 + Q_1
+\end{equation}
+
+\begin{definizione}{Rendimento Termico}{def:rendimento}
+Il \textbf{rendimento termico} $\eta$ di una macchina motrice è il rapporto adimensionale tra il lavoro utile ottenuto e il calore assorbito dalla sorgente calda:
+\begin{equation}
+    \mathbf{\eta \coloneqq \frac{W}{Q_2} = \frac{Q_2 - |Q_1|}{Q_2} = 1 - \frac{|Q_1|}{Q_2} < 1}
+    \label{eq:rendimento}
+\end{equation}
+\end{definizione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    \draw[->, thick] (0,0) -- (5.5,0) node[right] {$V$};
+    \draw[->, thick] (0,0) -- (0,4) node[above] {$p$};
+    
+    % Ciclo di Carnot
+    \coordinate (A) at (1,3.2);
+    \coordinate (B) at (2.4, 2.2);
+    \coordinate (C) at (4.5, 0.9);
+    \coordinate (D) at (2.2, 1.2);
+    
+    \draw[crimsonred, very thick] (A) to[out=-20, in=145] (B) node[midway, above right] {\small Isoterma $T_2$ ($Q_2 > 0$)};
+    \draw[navyblue, very thick] (B) to[out=-35, in=125] (C) node[midway, right] {\small Adiab.};
+    \draw[forestgreen, very thick] (C) to[out=160, in=-35] (D) node[midway, below] {\small Isoterma $T_1$ ($Q_1 < 0$)};
+    \draw[purpleaccent, very thick] (D) to[out=145, in=-55] (A) node[midway, left] {\small Adiab.};
+    
+    \filldraw[black] (A) circle (2pt) node[above left] {$A$};
+    \filldraw[black] (B) circle (2pt) node[above right] {$B$};
+    \filldraw[black] (C) circle (2pt) node[below right] {$C$};
+    \filldraw[black] (D) circle (2pt) node[below left] {$D$};
+    
+    \node at (2.5, 1.8) {\textbf{\color{navyblue}Ciclo di Carnot}};
+\end{tikzpicture}
+\end{center}
+
+\begin{teorema}{Rendimento del Ciclo di Carnot}{teo:rendimento_carnot}
+Il ciclo di Carnot reversibile tra le temperature $T_2$ (calda) e $T_1$ (fredda) ha rendimento:
+\begin{equation}
+    \mathbf{\eta_{\text{Carnot}} = 1 - \frac{T_1}{T_2}}
+    \label{eq:rendimento_carnot}
+\end{equation}
+\end{teorema}
+
+\begin{teorema}{Teorema di Carnot}{teo:teorema_carnot}
+\begin{enumerate}
+    \item Nessuna macchina termica reale operante tra due sole sorgenti alle temperature $T_1$ e $T_2$ può avere un rendimento superiore a quello del ciclo di Carnot reversibile:
+    \begin{equation}
+        \eta_{\text{reale}} \le \eta_{\text{Carnot}} = 1 - \frac{T_1}{T_2}
+    \end{equation}
+    \item Tutte le macchine reversibili che operano tra le medesime due temperature possiedono esattamente lo stesso rendimento $\eta_{\text{Carnot}}$, indipendentemente dal fluido impiegato.
+\end{enumerate}
+\end{teorema}
+
+% ------------------------------------------------------------------------------
+\section{Il Teorema di Clausius e la Definizione di Entropia}
+\label{sec:clausius_entropia}
+% ------------------------------------------------------------------------------
+
+\begin{teorema}{Disuguaglianza di Clausius}{teo:clausius}
+Per qualsiasi ciclo termodinamico chiuso che scambia calori $Q_i$ con $N$ sorgenti a temperatura $T_i$:
+\begin{equation}
+    \mathbf{\oint \frac{\delta Q}{T} \le 0}
+    \label{eq:disuguaglianza_clausius}
+\end{equation}
+dove vale il segno di uguaglianza se e solo se il ciclo è **interamente reversibile**:
+\begin{equation}
+    \oint_{\text{rev}} \frac{\delta Q}{T} = 0
+    \label{eq:clausius_rev}
+\end{equation}
+\end{teorema}
+
+\begin{definizione}{Funzione di Stato Entropia ($S$)}{def:entropia}
+Poiché l'integrale di $\frac{\delta Q}{T}$ su qualsiasi cammino chiuso reversibile è nullo, la quantità $\frac{\delta Q_{\text{rev}}}{T}$ è un \textbf{differenziale esatto}. Si definisce la funzione di stato estensiva \textbf{Entropia} $S$:
+\begin{equation}
+    \mathbf{\dd S \coloneqq \left(\frac{\delta Q}{T}\right)_{\text{rev}} \implies \Delta S = S(B) - S(A) = \int_{A,\text{rev}}^B \frac{\delta Q}{T}}
+    \label{eq:entropia_def}
+\end{equation}
+L'unità di misura nel SI è il \textbf{Joule su Kelvin} ($\si{\joule\per\kelvin}$).
+\end{definizione}
+
+\begin{esame}[Calcolo di $\Delta S$ su Trasformazioni Irreversibili]
+Poiché l'entropia $S$ è una funzione di stato, $\Delta S = S(B) - S(A)$ dipende unicamente dallo stato iniziale $A$ e finale $B$. Per calcolare la variazione di entropia in una trasformazione irreversibile reale, si deve **costruire una trasformazione reversibile fittizia** che colleghi gli stessi stati $A$ e $B$ e integrare lungo di essa: $\int_A^B \frac{\delta Q_{\text{rev}}}{T}$.
+\end{esame}
+
+% ------------------------------------------------------------------------------
+\section{Calcolo delle Variazioni di Entropia per Sistemi Fisici}
+\label{sec:calcolo_entropia}
+% ------------------------------------------------------------------------------
+
+\subsection{Gas Perfetto}
+Applicando il primo principio per via reversibile: $\delta Q_{\text{rev}} = n c_v \dd T + p\,\dd V = n c_v \dd T + \frac{n R T}{V}\dd V$:
+\begin{equation}
+    \dd S = \frac{\delta Q_{\text{rev}}}{T} = n c_v \frac{\dd T}{T} + n R \frac{\dd V}{V}
+\end{equation}
+Integrando tra $(T_i, V_i)$ e $(T_f, V_f)$:
+\begin{align}
+    \mathbf{\Delta S} &= \mathbf{n c_v \ln\left(\frac{T_f}{T_i}\right) + n R \ln\left(\frac{V_f}{V_i}\right)} \label{eq:ds_tv} \\
+    &= \mathbf{n c_p \ln\left(\frac{T_f}{T_i}\right) - n R \ln\left(\frac{p_f}{p_i}\right)} \label{eq:ds_tp} \\
+    &= \mathbf{n c_v \ln\left(\frac{p_f}{p_i}\right) + n c_p \ln\left(\frac{V_f}{V_i}\right)} \label{eq:ds_pv}
+\end{align}
+
+\subsection{Sorgente Termica Ideale a Temperatura Costante}
+Una sorgente ideale scambia calore $Q_{\text{scambiato}}$ rimanendo a temperatura costante $T_0$:
+\begin{equation}
+    \mathbf{\Delta S_{\text{sorgente}} = \frac{Q_{\text{sorgente}}}{T_0} = -\frac{Q_{\text{sistema}}}{T_0}}
+\end{equation}
+
+\subsection{Cambiamento di Fase Isotermo}
+\begin{equation}
+    \mathbf{\Delta S_{\text{fase}} = \pm \frac{m L}{T_{\text{trans}}}}
+\end{equation}
+
+\subsection{Corpo Solido o Liquido a Calore Specifico Costante}
+\begin{equation}
+    \mathbf{\Delta S = \int_{T_i}^{T_f} \frac{m c\,\dd T}{T} = m c \ln\left(\frac{T_f}{T_i}\right)}
+\end{equation}
+
+% ------------------------------------------------------------------------------
+\section{Principio di Non Diminuzione dell'Entropia dell'Universo}
+\label{sec:entropia_universo}
+% ------------------------------------------------------------------------------
+
+\begin{teorema}{Principio dell'Entropia dell'Universo}{teo:entropia_universo}
+In qualsiasi trasformazione termodinamica reale, la variazione di entropia totale dell'\textbf{universo} (sistema + ambiente circostante) è sempre non negativa:
+\begin{equation}
+    \mathbf{\Delta S_{\text{universo}} \coloneqq \Delta S_{\text{sistema}} + \Delta S_{\text{ambiente}} \ge 0}
+    \label{eq:ds_universo}
+\end{equation}
+\begin{itemize}
+    \item $\Delta S_{\text{universo}} = 0 \iff$ processo idealmente \textbf{reversibile}.
+    \item $\Delta S_{\text{universo}} > 0 \iff$ processo reale \textbf{irreversibile}.
+\end{itemize}
+L'entropia dell'universo cresce costantemente nel tempo, definendo la freccia termodinamica del tempo.
+\end{teorema}
+
+% ------------------------------------------------------------------------------
+\section{Interpretazione Statistica di Boltzmann e Terzo Principio}
+\label{sec:boltzmann_terzo_principio}
+% ------------------------------------------------------------------------------
+
+\begin{definizione}{Formula di Boltzmann per l'Entropia}{def:boltzmann_entropia}
+A livello microscopico, l'entropia misura il grado di disordine o, più rigorosamente, la \textbf{probabilità termodinamica} $\Omega$ di un macrostato (numero di microstati quantistici microscopici accessibili):
+\begin{equation}
+    \mathbf{S = k_B \ln\Omega}
+    \label{eq:boltzmann_entropia}
+\end{equation}
+\end{definizione}
+
+\begin{legge}{Terzo Principio della Termodinamica (Teorema di Nernst)}{legge:terzo_principio}
+Allo zero assoluto di temperatura ($T \to \SI{0}{\kelvin}$), l'entropia di un cristallo perfetto puro e omogeneo tende a zero:
+\begin{equation}
+    \lim_{T \to 0\,\si{\kelvin}} S(T) = 0 \quad (\Omega = 1 \implies S = k_B \ln 1 = 0)
+\end{equation}
+È fisicamente impossibile raggiungere lo zero assoluto $T = \SI{0}{\kelvin}$ mediante un numero finito di processi termodinamici.
+\end{legge}

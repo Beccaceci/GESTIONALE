@@ -1,0 +1,354 @@
+% ==============================================================================
+% CAPITOLO 8: SUPERFICI PARAMETRICHE E INTEGRALI DI SUPERFICIE
+% ==============================================================================
+
+\chapter{Superfici Parametriche e Integrali di Superficie}
+\label{chap:superfici_e_integrali_di_superficie}
+
+\section{Introduzione Geometrica: dalle Curve alle Superfici}
+
+Nello studio del calcolo differenziale e integrale multivariabile, le curve nello spazio euclideo $\Rtre$ rappresentano oggetti geometrici unidimensionali, ovvero varietà differenziabili $1$-dimensionali descritte localmente dalla variazione di un singolo parametro temporale o scalare $t \in [a,b]$.
+
+In modo del tutto naturale, l'estensione a oggetti geometrici \textbf{bidimensionali} immersi nello spazio tridimensionale $\Rtre$ conduce al concetto di \textbf{superficie}. Una superficie può essere concettualizzata come un "foglio flessibile deformato nello spazio", dove ogni punto è individuato univocamente da una coppia ordinata di coordinate curvilinee o parametri locali $(u,v)$ appartenenti a un dominio piano $D \subset \Rdue$.
+
+La teoria delle superfici costituisce l'impalcatura geometrica indispensabile per la fisica dei continui, l'elettromagnetismo e la termofluidodinamica, permettendo di quantificare grandezze fisiche quali la massa di lamine curve sottili (tramite gli \textit{integrali di superficie di prima specie}) e il passaggio o scambio di campi vettoriali attraverso membrane e barriere spaziali (tramite gli \textit{integrali di superficie di seconda specie o di flusso}).
+
+\section{Superfici Parametriche, Spazio Tangente e Regolarità}
+
+\subsection{Definizione e Curve Coordinate}
+
+\begin{definizione}{Superficie Parametrica in $\mathbb{R}^3$}{def_superficie_param}
+Sia $D \subset \Rdue$ un dominio compatto, connesso e misurabile secondo Peano-Jordan. Una \textbf{superficie parametrica} (o \textbf{foglio semplice di superficie}) è un'applicazione continua:
+\[
+\sigma: D \subset \Rdue \to \Rtre, \quad (u,v) \mapsto \sigma(u,v) = \begin{pmatrix} x(u,v) \\ y(u,v) \\ z(u,v) \end{pmatrix}
+\]
+L'insieme immagine $\Sigma = \sigma(D) = \graffe{\sigma(u,v) \in \Rtre : (u,v) \in D}$ è detto \textbf{sostegno} della superficie.
+\end{definizione}
+
+Fissando uno dei due parametri e lasciando variare l'altro, si ottengono sulla superficie le cosiddette \textbf{linee coordinate} (o curve parametriche coordinate):
+\begin{itemize}
+    \item Fissando $v = v_0 \in \Int(D)$, la funzione vettoriale $u \mapsto \sigma(u, v_0)$ descrive una curva sulla superficie detta \textbf{$u$-curva}. Il suo vettore tangente è la derivata parziale:
+    \[
+    \sigma_u(u_0, v_0) = \pder{\sigma}{u}(u_0, v_0) = \begin{pmatrix} \pder{x}{u}(u_0, v_0) \\ \pder{y}{u}(u_0, v_0) \\ \pder{z}{u}(u_0, v_0) \end{pmatrix}
+    \]
+    \item Fissando $u = u_0 \in \Int(D)$, la funzione vettoriale $v \mapsto \sigma(u_0, v)$ descrive una curva sulla superficie detta \textbf{$v$-curva}. Il suo vettore tangente è la derivata parziale:
+    \[
+    \sigma_v(u_0, v_0) = \pder{\sigma}{v}(u_0, v_0) = \begin{pmatrix} \pder{x}{v}(u_0, v_0) \\ \pder{y}{v}(u_0, v_0) \\ \pder{z}{v}(u_0, v_0) \end{pmatrix}
+    \]
+\end{itemize}
+
+\subsection{Prodotto Vettoriale Fondamentale e Piano Tangente}
+
+I due vettori derivata $\sigma_u$ e $\sigma_v$ generano, punto per punto, lo spazio lineare tangente alla superficie. Per determinare l'orientazione e l'elemento d'area locale, si costruisce il loro prodotto vettoriale nello spazio tridimensionale.
+
+\begin{definizione}{Prodotto Vettoriale Fondamentale e Vettore Normale}{def_vettore_normale_fondamentale}
+Sia $\sigma: D \to \Rtre$ una superficie di classe $C^1(D)$. Si definisce \textbf{prodotto vettoriale fondamentale} (o \textbf{vettore normale non normalizzato}) il vettore:
+\[
+\mathbf{N}(u,v) = \sigma_u(u,v) \times \sigma_v(u,v) = \det \begin{pmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ x_u & y_u & z_u \\ x_v & y_v & z_v \end{pmatrix} = \begin{pmatrix} y_u z_v - z_u y_v \\ z_u x_v - x_u z_v \\ x_u y_v - y_u x_v \end{pmatrix}
+\]
+Le componenti scalari di $\mathbf{N}$ sono i determinanti minori $2 \times 2$ della matrice Jacobiana $\Jac_\sigma(u,v)$:
+\[
+\mathbf{N}(u,v) = \left( \frac{\partial(y,z)}{\partial(u,v)}, \; \frac{\partial(z,x)}{\partial(u,v)}, \; \frac{\partial(x,y)}{\partial(u,v)} \right)
+\]
+\end{definizione}
+
+\begin{definizione}{Superficie Regolare e Piano Tangente}{def_superficie_regolare}
+Una superficie parametrica $\sigma: D \to \Rtre$ si dice \textbf{regolare} se:
+\begin{enumerate}
+    \item $\sigma \in C^1(D)$;
+    \item $\sigma$ è iniettiva sulla parte interna $\Int(D)$;
+    \item I vettori tangenti $\sigma_u(u,v)$ e $\sigma_v(u,v)$ sono \textbf{linearmente indipendenti} per ogni $(u,v) \in \Int(D)$, ovvero il vettore normale fondamentale non si annulla mai:
+    \[
+    \mathbf{N}(u,v) = \sigma_u \times \sigma_v \neq \mathbf{0}, \quad \forall (u,v) \in \Int(D)
+    \]
+\end{enumerate}
+In ogni punto regolare $P_0 = \sigma(u_0, v_0)$, il \textbf{piano tangente} affine $T_{P_0}\Sigma$ ha equazione parametrica:
+\[
+\mathbf{r}(\lambda, \mu) = \sigma(u_0, v_0) + \lambda \, \sigma_u(u_0, v_0) + \mu \, \sigma_v(u_0, v_0), \quad \lambda, \mu \in \R
+\]
+ed equazione cartesiana ortogonale:
+\[
+\scal{\bx - \sigma(u_0, v_0), \; \mathbf{N}(u_0, v_0)} = 0
+\]
+Il \textbf{versore normale unitario} è:
+\[
+\hat{\bn}(u,v) = \frac{\mathbf{N}(u,v)}{\norm{\mathbf{N}(u,v)}} = \frac{\sigma_u \times \sigma_v}{\norm{\sigma_u \times \sigma_v}}
+\]
+\end{definizione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15, >=Stealth]
+    % Assi 3D cartesiani
+    \draw[->, thick, gray] (0,0) -- (4.2,0) node[right, black] {$y$};
+    \draw[->, thick, gray] (0,0) -- (-1.8,-1.2) node[below left, black] {$x$};
+    \draw[->, thick, gray] (0,0) -- (0,4.2) node[above, black] {$z$};
+
+    % Superficie curva tipo sella/cupola
+    \draw[thick, fill=navyblue!12, draw=navyblue, opacity=0.85] 
+        plot[domain=-1.6:1.6, samples=40] (\x, {2.6 - 0.4*\x*\x}) -- 
+        plot[domain=1.6:-1.6, samples=40] (\x, {0.7 - 0.2*\x*\x}) -- cycle;
+
+    % Punto P0 sulla superficie
+    \coordinate (P0) at (0, 1.8);
+    \filldraw[navyblue] (P0) circle (2.2pt) node[below left, font=\bfseries] {$P_0 = \sigma(u_0, v_0)$};
+
+    % Linee coordinate passanti per P0
+    \draw[thick, forestgreen, dashed] plot[domain=-1.2:1.2, samples=30] (\x, {1.8 + 0.3*\x - 0.1*\x*\x}) node[right, font=\footnotesize] {$u$-curva};
+    \draw[thick, coolblue, dashed] plot[domain=-0.8:0.8, samples=30] (\x, {1.8 + 0.7*\x + 0.2*\x*\x}) node[above left, font=\footnotesize] {$v$-curva};
+
+    % Vettori tangenti
+    \draw[ultra thick, forestgreen, ->] (P0) -- ++(1.4, 0.42) node[right] {$\sigma_u = \pder{\sigma}{u}$};
+    \draw[ultra thick, coolblue, ->] (P0) -- ++(-0.6, 0.95) node[left] {$\sigma_v = \pder{\sigma}{v}$};
+
+    % Parallelogramma tangente infinitesimo
+    \fill[warmamber!30, opacity=0.6, draw=warmamber, thick] 
+        (P0) -- ++(1.4, 0.42) -- ++(-0.6, 0.95) -- ++(-1.4, -0.42) -- cycle;
+    \node[warmamber!90!black, font=\scriptsize] at (0.4, 2.5) {$\diff\sigma = \norm{\mathbf{N}}\du\dv$};
+
+    % Vettore normale fondamentale N ortogonale al parallelogramma
+    \draw[line width=1.6pt, crimsonred, ->] (P0) -- ++(-0.3, 1.8) node[above] {$\mathbf{N} = \sigma_u \times \sigma_v$};
+\end{tikzpicture}
+\end{center}
+
+\section{Classi Notevoli di Superfici}
+
+\subsection{Superfici in Forma Cartesiana Esplicita (Grafici)}
+
+La classe più frequente nelle applicazioni è costituita dalle superfici espresse come grafico di una funzione scalare $z = g(x,y)$ definita su un dominio piano $D \subset \Rdue$.
+
+\begin{metodo}[Parametrizzazione e Vettore Normale per Grafici Cartesiani]
+Sia $\Sigma = \graffe{(x,y,z) \in \Rtre : (x,y) \in D, \; z = g(x,y)}$ con $g \in C^1(D)$.
+\begin{enumerate}
+    \item \textbf{Parametrizzazione Naturale (di Monge)}:
+    \[
+    \sigma(x,y) = \begin{pmatrix} x \\ y \\ g(x,y) \end{pmatrix}, \quad (x,y) \in D
+    \]
+    \item \textbf{Vettori Tangenti}:
+    \[
+    \sigma_x = \begin{pmatrix} 1 \\ 0 \\ g_x \end{pmatrix}, \quad \sigma_y = \begin{pmatrix} 0 \\ 1 \\ g_y \end{pmatrix}
+    \]
+    \item \textbf{Prodotto Vettoriale Fondamentale}:
+    \[
+    \mathbf{N}(x,y) = \sigma_x \times \sigma_y = \det \begin{pmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ 1 & 0 & g_x \\ 0 & 1 & g_y \end{pmatrix} = \begin{pmatrix} -g_x(x,y) \\ -g_y(x,y) \\ 1 \end{pmatrix}
+    \]
+    Si noti che la terza componente di $\mathbf{N}$ è sempre $+1 > 0$: ciò significa che $\mathbf{N}$ è orientato costantemente \textbf{verso l'alto} (nel verso crescente dell'asse $z$).
+    \item \textbf{Norma del Vettore Normale ed Elemento d'Area}:
+    \[
+    \norm{\mathbf{N}(x,y)} = \sqrt{(-g_x)^2 + (-g_y)^2 + 1^2} = \sqrt{1 + [g_x(x,y)]^2 + [g_y(x,y)]^2}
+    \]
+    \[
+    \diff\sigma = \sqrt{1 + \norm{\nabla g(x,y)}^2} \, \dx\dy
+    \]
+\end{enumerate}
+\end{metodo}
+
+\subsection{Superfici di Rotazione attorno agli Assi}
+
+Una superficie di rotazione si ottiene ruotando una curva piana (detta \textit{generatrice} o \textit{profilo}) attorno a un asse di simmetria (detto \textit{asse di rotazione}).
+
+\begin{metodo}[Rotazione di una Curva attorno all'Asse $z$]
+Sia data la curva piana nel piano $xz$ descritta da $z = \psi(u)$ con $u = \sqrt{x^2+y^2} \in [a,b]$ ($0 \le a < b$). Ruotando attorno all'asse $z$ di un angolo $\theta \in [0, 2\pi]$:
+\begin{enumerate}
+    \item \textbf{Parametrizzazione in Coordinate Cilindriche}:
+    \[
+    \sigma(u, \theta) = \begin{pmatrix} u \cos\theta \\ u \sen\theta \\ \psi(u) \end{pmatrix}, \quad u \in [a,b], \; \theta \in [0, 2\pi]
+    \]
+    \item \textbf{Derivate Parziali}:
+    \[
+    \sigma_u = \begin{pmatrix} \cos\theta \\ \sen\theta \\ \psi'(u) \end{pmatrix}, \quad \sigma_\theta = \begin{pmatrix} -u \sen\theta \\ u \cos\theta \\ 0 \end{pmatrix}
+    \]
+    \item \textbf{Vettore Normale Fondamentale}:
+    \begin{align*}
+    \mathbf{N}(u,\theta) &= \sigma_u \times \sigma_\theta = \det \begin{pmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ \cos\theta & \sen\theta & \psi'(u) \\ -u\sen\theta & u\cos\theta & 0 \end{pmatrix} \\
+    &= \begin{pmatrix} -u \psi'(u) \cos\theta \\ -u \psi'(u) \sen\theta \\ u (\cos^2\theta + \sen^2\theta) \end{pmatrix} = \begin{pmatrix} -u \psi'(u) \cos\theta \\ -u \psi'(u) \sen\theta \\ u \end{pmatrix}
+    \end{align*}
+    \item \textbf{Norma ed Elemento d'Area}:
+    \[
+    \norm{\mathbf{N}(u,\theta)} = \sqrt{u^2 [\psi'(u)]^2 (\cos^2\theta + \sen^2\theta) + u^2} = u \sqrt{1 + [\psi'(u)]^2}
+    \]
+    \[
+    \diff\sigma = u \sqrt{1 + [\psi'(u)]^2} \, \du\dtheta
+    \]
+    \item \textbf{Formula per l'Area della Superficie di Rotazione}:
+    \[
+    \operatorname{Area}(\Sigma) = \int_{0}^{2\pi} \dtheta \int_{a}^{b} u \sqrt{1 + [\psi'(u)]^2} \du = 2\pi \int_{a}^{b} u \sqrt{1 + [\psi'(u)]^2} \du
+    \]
+\end{enumerate}
+\end{metodo}
+
+\begin{teorema}{Teorema di Pappo-Guldino per le Superfici di Rotazione}{thm_pappo_guldino_area}
+L'area della superficie ottenuta ruotando una curva piana regolare $\gamma$ di un angolo $\alpha \in (0, 2\pi]$ attorno a un asse complanare disgiunto dall'interno della curva è pari al prodotto della lunghezza della curva $L(\gamma)$ per la distanza percorsa dal suo baricentro geometrico $y_G$:
+\[
+\operatorname{Area}(\Sigma) = \alpha \cdot d(G, \text{asse}) \cdot L(\gamma) = 2\pi \, y_G \, L(\gamma) \quad (\text{per giro completo } \alpha = 2\pi)
+\]
+\end{teorema}
+
+\subsection{Superfici Notevoli: Sfera e Toro}
+
+\begin{metodo}[Parametrizzazione della Superficie Sferica e del Toro]
+\begin{itemize}
+    \item \textbf{Sfera di Raggio $R$ Centrata nell'Origine}:
+    \[
+    \sigma(\theta, \varphi) = \begin{pmatrix} R \sen\varphi \cos\theta \\ R \sen\varphi \sen\theta \\ R \cos\varphi \end{pmatrix}, \quad \theta \in [0, 2\pi], \; \varphi \in [0, \pi]
+    \]
+    Il vettore normale orientato verso l'esterno è:
+    \[
+    \mathbf{N}(\theta, \varphi) = R^2 \sen\varphi \begin{pmatrix} \sen\varphi \cos\theta \\ \sen\varphi \sen\theta \\ \cos\varphi \end{pmatrix} = R \sen\varphi \, \sigma(\theta, \varphi) \implies \norm{\mathbf{N}} = R^2 \sen\varphi
+    \]
+    L'elemento d'area sferico è $\diff\sigma = R^2 \sen\varphi \dtheta \dphi$. L'area totale della sfera è:
+    \[
+    \operatorname{Area}(\mathbb{S}_R^2) = \int_0^{2\pi} \dtheta \int_0^\pi R^2 \sen\varphi \dphi = 2\pi R^2 [-\cos\varphi]_0^\pi = 4\pi R^2
+    \]
+
+    \item \textbf{Toro di Raggi $R > r > 0$ (Rotazione di un Cerchio di Raggio $r$ a Distanza $R$)}:
+    \[
+    \sigma(u, v) = \begin{pmatrix} (R + r \cos v) \cos u \\ (R + r \cos v) \sen u \\ r \sen v \end{pmatrix}, \quad u \in [0, 2\pi], \; v \in [0, 2\pi]
+    \]
+    Si ha $\norm{\mathbf{N}(u,v)} = r(R + r \cos v)$, da cui l'area totale del toro:
+    \[
+    \operatorname{Area}(\mathbb{T}^2) = \int_0^{2\pi} \du \int_0^{2\pi} r(R + r\cos v) \dv = (2\pi)(2\pi r R) = 4\pi^2 R r
+    \]
+    che ritrova immediatamente la formula di Guldino ($L = 2\pi r$, percorso baricentro $2\pi R$).
+\end{itemize}
+\end{metodo}
+
+\section{Area e Integrali di Superficie di I Specie}
+
+\subsection{Costruzione e Definizione Rigorosa}
+
+Sia data una superficie regolare $\Sigma = \sigma(D)$ e sia $f: \Sigma \to \R$ una funzione continua. Per definire l'integrale di $f$ su $\Sigma$, partizioniamo il dominio dei parametri $D$ in rettangolini $\Delta u_i \times \Delta v_j$. Su ciascun tassello, l'immagine curvilinea viene approssimata dal parallelogramma piano tangente di lati $\sigma_u \Delta u_i$ e $\sigma_v \Delta v_j$, avente area $\norm{\sigma_u \times \sigma_v} \Delta u_i \Delta v_j$.
+
+\begin{definizione}{Integrale di Superficie di I Specie}{def_integrale_I_specie}
+Sia $\sigma: D \to \Rtre$ una superficie regolare con sostegno $\Sigma \subset \Rtre$, e sia $f: \Sigma \to \R$ continua. L'\textbf{integrale di superficie di prima specie} di $f$ su $\Sigma$ è definito da:
+\[
+\iint_\Sigma f(x,y,z) \diff\sigma := \iint_D f(\sigma(u,v)) \, \norm{\sigma_u(u,v) \times \sigma_v(u,v)} \du\dv
+\]
+Ponendo $f \equiv 1$, si ottiene la definizione rigorosa di \textbf{Area della Superficie}:
+\[
+\operatorname{Area}(\Sigma) = \iint_\Sigma 1 \diff\sigma = \iint_D \norm{\mathbf{N}(u,v)} \du\dv
+\]
+\end{definizione}
+
+\begin{teorema}{Invarianza per Riparametrizzazioni Regolari}{thm_invarianza_I_specie}
+L'integrale di superficie di prima specie $\iint_\Sigma f \diff\sigma$ (e in particolare l'area della superficie) è \textbf{invariante} rispetto a qualsiasi cambiamento ammissibile di parametri (diffeomorfismo tra i domini dei parametri).
+\end{teorema}
+
+\begin{dimostrazione}
+Sia $\tau: D' \to D$, $(\xi, \eta) \mapsto (u(\xi, \eta), v(\xi, \eta))$ un diffeomorfismo di classe $C^1$, e sia $\tilde{\sigma}(\xi, \eta) = \sigma(\tau(\xi, \eta))$ la superficie riparametrizzata.
+Per la regola della catena matriciale:
+\[
+\Jac_{\tilde{\sigma}}(\xi, \eta) = \Jac_\sigma(u,v) \cdot \Jac_\tau(\xi, \eta)
+\]
+Applicando le proprietà dei prodotti vettoriali e delle matrici aggiunte:
+\[
+\tilde{\sigma}_\xi \times \tilde{\sigma}_\eta = (\sigma_u \times \sigma_v) \det \Jac_\tau(\xi, \eta) \implies \norm{\tilde{\sigma}_\xi \times \tilde{\sigma}_\eta} = \norm{\sigma_u \times \sigma_v} \abs{\det \Jac_\tau(\xi, \eta)}
+\]
+Sostituendo nella definizione dell'integrale e applicando il Teorema del Cambio di Variabili negli integrali doppi su $D'$:
+\begin{align*}
+\iint_{D'} f(\tilde{\sigma}(\xi,\eta)) \norm{\tilde{\sigma}_\xi \times \tilde{\sigma}_\eta} \diff\xi\diff\eta &= \iint_{D'} f(\sigma(\tau(\xi,\eta))) \norm{\sigma_u \times \sigma_v} \abs{\det \Jac_\tau(\xi,\eta)} \diff\xi\diff\eta \\
+&= \iint_D f(\sigma(u,v)) \norm{\sigma_u \times \sigma_v} \du\dv = \iint_\Sigma f \diff\sigma
+\end{align*}
+\end{dimostrazione}
+
+\begin{esempio}{Calcolo dell'Area di una Calotta Parabolica}{es_area_calotta_parabolica}
+Si calcoli l'area della porzione di paraboloide $z = 4 - x^2 - y^2$ situata al di sopra del piano $z = 0$.
+
+\medskip\noindent\textbf{Risoluzione:}
+\begin{enumerate}
+    \item Il dominio base nel piano $xy$ è il disco $D = \graffe{(x,y) \in \Rdue : x^2 + y^2 \le 4}$.
+    \item La superficie è cartesiana: $g(x,y) = 4 - x^2 - y^2 \implies g_x = -2x, \; g_y = -2y$.
+    \item L'elemento d'area è:
+    \[
+    \diff\sigma = \sqrt{1 + (-2x)^2 + (-2y)^2} \dx\dy = \sqrt{1 + 4(x^2 + y^2)} \dx\dy
+    \]
+    \item Passando in coordinate polari ($\rho \in [0, 2], \; \theta \in [0, 2\pi]$):
+    \begin{align*}
+    \operatorname{Area}(\Sigma) &= \iint_D \sqrt{1 + 4(x^2+y^2)} \dx\dy = \int_0^{2\pi} \dtheta \int_0^2 \sqrt{1 + 4\rho^2} \, \rho \drho \\
+    &= 2\pi \left[ \frac{1}{8} \cdot \frac{2}{3} (1 + 4\rho^2)^{3/2} \right]_0^2 = \frac{\pi}{6} \Big[ (1 + 16)^{3/2} - 1^{3/2} \Big] = \frac{\pi}{6} (17\sqrt{17} - 1)
+    \end{align*}
+\end{enumerate}
+\end{esempio}
+
+\section{Orientabilità e Integrali di Superficie di II Specie (Flusso)}
+
+\subsection{Il Concetto Topologico di Orientabilità}
+
+Nel piano o lungo una curva chiusa, l'orientazione corrisponde al verso di percorrenza (orario o antiorario). Nello spazio tridimensionale, l'orientazione di una superficie corrisponde alla possibilità di distinguere globalmente e con continuità le sue \textbf{due facce} (faccia interna/esterna o superiore/inferiore).
+
+\begin{definizione}{Superficie Orientabile}{def_superficie_orientabile_topologica}
+Una superficie regolare connessa $\Sigma \subset \Rtre$ si dice \textbf{orientabile} se è possibile definire su di essa un campo vettoriale continuo di versori normali unitari:
+\[
+\hat{\bn}: \Sigma \to \Rtre, \quad \bx \mapsto \hat{\bn}(\bx) \quad \text{con } \norm{\hat{\bn}(\bx)} = 1, \quad \forall \bx \in \Sigma
+\]
+Fissare una tale scelta continua $\hat{\bn}$ significa assegnare un'\textbf{orientazione} alla superficie. Esistono esattamente due orientazioni opposte: $\hat{\bn}$ e $-\hat{\bn}$.
+\end{definizione}
+
+\begin{osservazione}[Superfici non orientabili: il Nastro di Möbius]
+Non tutte le superfici ammettono due facce distinte. L'esempio archetipico di superficie non orientabile è il \textbf{nastro di Möbius} (ottenuto prendendo una striscia rettangolare di carta, ruotando un'estremità di $180^\circ$ e incollandola all'altra). Trasportando un versore normale con continuità lungo la linea mediana del nastro per un giro completo, il vettore ritorna al punto di partenza puntando nella direzione \textbf{opposta} ($-\hat{\bn}$), rendendo impossibile una scelta globale coerente del campo normale.
+\end{osservazione}
+
+\begin{definizione}{Orientazione Indotta da una Parametrizzazione}{def_orientazione_indotta}
+Data una parametrizzazione regolare $\sigma: D \to \Rtre$, l'\textbf{orientazione canonica indotta} è quella determinata dal versore normale:
+\[
+\hat{\bn}_\sigma(u,v) = \frac{\sigma_u \times \sigma_v}{\norm{\sigma_u \times \sigma_v}}
+\]
+Se $\Sigma$ è una \textbf{superficie chiusa} che racchiude un volume limitato $\Omega \subset \Rtre$, per convenzione universale si sceglie come orientazione positiva l'orientazione \textbf{uscente}, denotata con $\hat{\bn}_{\text{ext}}$.
+\end{definizione}
+
+\subsection{Definizione e Significato Fisico del Flusso}
+
+Consideriamo un fluido incomprimibile in movimento stazionario con campo di velocità $\mathbf{v}(x,y,z)$. Il volume di fluido che nell'intervallo di tempo $\Delta t$ attraversa un elemento infinitesimo di superficie $\diff\sigma$ con normale $\hat{\bn}$ è dato dal volume del cilindroide obliquo di base $\diff\sigma$ e generatrice $\mathbf{v} \Delta t$, pari a $(\mathbf{v} \cdot \hat{\bn}) \Delta t \diff\sigma$. Dividendo per $\Delta t$, la portata volumetrica infinitesima è esattamente $\mathbf{v} \cdot \hat{\bn} \diff\sigma$.
+
+\begin{definizione}{Flusso di un Campo Vettoriale (Integrale di II Specie)}{def_flusso_superficie}
+Sia $\Sigma \subset \Rtre$ una superficie regolare orientata dal campo di versori normali $\hat{\bn}$, e sia $\mathbf{F}: A \subseteq \Rtre \to \Rtre$ un campo vettoriale continuo definito su $\Sigma$.
+Il \textbf{flusso} di $\mathbf{F}$ attraverso $\Sigma$ orientata è l'integrale:
+\[
+\Phi_\Sigma(\mathbf{F}) = \iint_\Sigma \mathbf{F} \cdot \hat{\bn} \diff\sigma
+\]
+Esplicitando tramite la parametrizzazione $\sigma(u,v)$ con normale coerente:
+\[
+\Phi_\Sigma(\mathbf{F}) = \iint_D \scal{ \mathbf{F}(\sigma(u,v)), \; \frac{\sigma_u \times \sigma_v}{\norm{\sigma_u \times \sigma_v}} } \norm{\sigma_u \times \sigma_v} \du\dv = \iint_D \scal{ \mathbf{F}(\sigma(u,v)), \; \sigma_u \times \sigma_v } \du\dv
+\]
+Se $\Sigma$ è una superficie chiusa orientata verso l'esterno:
+\[
+\Phi_{\partial \Omega}(\mathbf{F}) = \oiint_{\Sigma} \mathbf{F} \cdot \hat{\bn}_{\text{ext}} \diff\sigma
+\]
+\end{definizione}
+
+\begin{osservazione}[Semplificazione cruciale del modulo di $\mathbf{N}$]
+Nel calcolo del flusso (II specie), il termine $\norm{\sigma_u \times \sigma_v}$ al denominatore del versore $\hat{\bn}$ si \textbf{cancella esattamente} con l'elemento d'area scalare $\diff\sigma = \norm{\sigma_u \times \sigma_v} \du\dv$. Pertanto, non è mai necessario calcolare la radice quadrata del modulo di $\mathbf{N}$, bensì unicamente il \textbf{prodotto scalare diretto} tra il campo $\mathbf{F}$ e il vettore fondamentale $\mathbf{N} = \sigma_u \times \sigma_v$:
+\[
+\Phi_\Sigma(\mathbf{F}) = \iint_D \scal{\mathbf{F}(\sigma(u,v)), \; \mathbf{N}(u,v)} \du\dv
+\]
+\end{osservazione}
+
+\begin{esempio}{Calcolo Diretto del Flusso attraverso una Superficie Piana}{es_flusso_diretto}
+Si calcoli il flusso del campo vettoriale $\mathbf{F}(x,y,z) = (x, y, 2z)$ attraverso la superficie triangolare $\Sigma$ situata nel piano $x + y + z = 1$ nel primo ottante ($x \ge 0, y \ge 0, z \ge 0$), orientata con normale avente terza componente positiva ($n_z > 0$).
+
+\medskip\noindent\textbf{Risoluzione:}
+\begin{enumerate}
+    \item La superficie è cartesiana: $z = g(x,y) = 1 - x - y$ con dominio proiezione nel piano $xy$:
+    \[
+    D = \graffe{(x,y) \in \Rdue : x \ge 0, \; y \ge 0, \; x + y \le 1}
+    \]
+    \item Il vettore normale con terza componente positiva è:
+    \[
+    \mathbf{N}(x,y) = \begin{pmatrix} -g_x \\ -g_y \\ 1 \end{pmatrix} = \begin{pmatrix} -(-1) \\ -(-1) \\ 1 \end{pmatrix} = \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix}
+    \]
+    \item Valutiamo il campo $\mathbf{F}$ sulla superficie:
+    \[
+    \mathbf{F}(x, y, 1-x-y) = \begin{pmatrix} x \\ y \\ 2(1 - x - y) \end{pmatrix} = \begin{pmatrix} x \\ y \\ 2 - 2x - 2y \end{pmatrix}
+    \]
+    \item Eseguiamo il prodotto scalare $\scal{\mathbf{F}, \mathbf{N}}$:
+    \[
+    \scal{\mathbf{F}, \mathbf{N}} = x(1) + y(1) + (2 - 2x - 2y)(1) = 2 - x - y
+    \]
+    \item Calcoliamo l'integrale doppio sul triangolo $D$:
+    \begin{align*}
+    \Phi_\Sigma(\mathbf{F}) &= \iint_D (2 - x - y) \dx\dy = \int_{0}^{1} \left( \int_{0}^{1-x} (2 - x - y) \dy \right) \dx \\
+    &= \int_{0}^{1} \left[ (2 - x)y - \frac{y^2}{2} \right]_{y=0}^{y=1-x} \dx = \int_{0}^{1} \left[ (2 - x)(1 - x) - \frac{(1 - x)^2}{2} \right] \dx \\
+    &= \int_{0}^{1} \left[ 2 - 3x + x^2 - \frac{1 - 2x + x^2}{2} \right] \dx = \int_{0}^{1} \left( \frac{3}{2} - 2x + \frac{x^2}{2} \right) \dx \\
+    &= \left[ \frac{3}{2}x - x^2 + \frac{x^3}{6} \right]_0^1 = \frac{3}{2} - 1 + \frac{1}{6} = \frac{2}{3}
+    \end{align*}
+\end{enumerate}
+\end{esempio}

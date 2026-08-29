@@ -1,0 +1,119 @@
+% ==============================================================================
+% DOCUMENTO PRINCIPALE - APPUNTI DI ANALISI MATEMATICA 2
+% ==============================================================================
+\documentclass[11pt,a4paper,twoside,openright]{book}
+
+% --- Importazione delle configurazioni modulari ---
+\input{config/packages.tex}
+\input{config/environments.tex}
+\input{config/macros.tex}
+
+% ==============================================================================
+% COMPILAZIONE SELETTIVA (Scommentare per compilare solo capitoli specifici)
+% ==============================================================================
+% \includeonly{
+%   chapters/01_topologia_funzioni_multivariabile/main,
+%   chapters/02_differenziale_e_derivate/main,
+%   chapters/03_funzioni_implicite/main,
+%   chapters/04_minimi_e_massimi/main,
+%   chapters/05_curve_e_integrali_curvilinei/main,
+%   chapters/06_calcolo_vettoriale_e_forme_differenziali/main,
+%   chapters/07_integrali_multipli/main,
+%   chapters/08_superfici_e_integrali_di_superficie/main,
+%   chapters/09_teoremi_integrali_calcolo_vettoriale/main,
+%   chapters/10_raccolta_esami_risolti/main
+% }
+
+% ==============================================================================
+% METADATI DEL DOCUMENTO
+% ==============================================================================
+\title{\Huge\textbf{\textsf{Analisi Matematica II}}\\[0.5em]
+\Large\textsf{Appunti Completi, Dimostrazioni, Metodi Risolutivi ed Esercizi}}
+\author{\textbf{\textsf{Nicola Beccaceci}}}
+\date{\textsf{Anno Accademico 2025/2026}}
+
+\begin{document}
+
+% --- Frontespizio / Titolo ---
+\frontmatter
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge\bfseries\color{navyblue} ANALISI MATEMATICA 2\par}
+    \vspace{1cm}
+    {\Large\scshape Corso di Laurea in Ingegneria Gestionale\par}
+    \vfill
+    \rule{0.6\textwidth}{1pt}\par
+    \vspace{1cm}
+    {\large\textbf{\underline{Nicola Beccaceci}}\par}
+    \vspace{0.5cm}
+    {\small \today\par}
+    \vspace*{2cm}
+\end{titlepage}
+
+% --- Indice generale ---
+\tableofcontents
+\cleardoublepage
+
+% --- Prefazione / Guida alla lettura ---
+\chapter*{Guida alla Consultazione}
+\addcontentsline{toc}{chapter}{Guida alla Consultazione}
+Questo volume raccoglie la trascrizione, la ricostruzione formale e l'approfondimento rigoroso degli appunti del corso di \textbf{Analisi Matematica 2} per il Corso di Laurea in Ingegneria Gestionale.
+
+Il testo è progettato per accompagnare lo studente sia nello studio teorico sia nella preparazione intensiva della prova scritta e della prova orale, fornendo non solo gli enunciati formali ma anche le motivazioni geometriche, le visualizzazioni tridimensionali, le dimostrazioni complete passo-passo e gli schemi operativi di risoluzione.
+
+\section*{Codice Visivo dei Box Tematici}
+Per facilitare la navigazione visiva, i contenuti sono categorizzati mediante appositi ambienti grafici:
+\begin{itemize}
+    \item \textbf{\textcolor{navyblue}{Definizioni}}: Enunciati precisi con formalismo quantificatorio rigoroso e spiegazione dei simboli.
+    \item \textbf{\textcolor{forestgreen}{Teoremi e Proposizioni}}: Risultati cardine con relative ipotesi minime, tesi e dimostrazioni step-by-step contrassegnate dal simbolo $\blacksquare$.
+    \item \textbf{\textcolor{purpleaccent}{Esempi ed Esercizi Guidati}}: Casi applicativi svolti con commenti metodologici e calcoli espliciti.
+    \item \textbf{\textcolor{crimsonred}{Consigli per l'Esame e Trappole Comuni}}: Analisi degli errori concettuali più frequenti nelle prove scritte e trabocchetti tipici dei quesiti d'orale.
+    \item \textbf{\textcolor{warmamber}{Metodi Risolutivi}}: Algoritmi procedurali sequenziali per affrontare gli esercizi d'esame.
+    \item \textbf{\textcolor{navyblue!80}{Osservazioni}}: Approfondimenti topologici, algebrici e note storiche.
+\end{itemize}
+
+\cleardoublepage
+
+% --- Organizzazione del Corso e Modalità d'Esame ---
+\chapter*{Organizzazione del Corso e Modalità d'Esame}
+\addcontentsline{toc}{chapter}{Organizzazione del Corso e Modalità d'Esame}
+
+La presente sezione riassume le direttive didattiche, la struttura modulare e le modalità di verifica del profitto del Modulo II di Analisi Matematica.
+
+\section*{1. Inquadramento Didattico}
+L'insegnamento di \textbf{Analisi Matematica 2} ($6\text{ CFU}$, II Semestre) completa la formazione matematica di base dell'Ingegnere Gestionale, estendendo i concetti di calcolo infinitesimale e differenziale al contesto pluridimensionale ($\Rn$), con particolare attenzione alla modellizzazione geometrica e fisica (campi vettoriali, flussi, circuitazioni, ottimizzazione libera e vincolata).
+
+\section*{2. Articolazione del Programma (Macro-Aree)}
+Il programma si articola nei seguenti blocchi tematici sequenziali:
+\begin{enumerate}
+    \item \textbf{Topologia di $\Rn$ e Funzioni di Più Variabili}: nozioni topologiche, domini, insiemi di livello, limiti multivariabili e tecniche di non-esistenza, continuità e Teorema di Weierstrass.
+    \item \textbf{Calcolo Differenziale Multivariabile}: derivate parziali, gradiente, derivate direzionali, differenziale totale, piano tangente, Teorema di Schwarz, matrice Hessiana e formula di Taylor.
+    \item \textbf{Teorema delle Funzioni Implicite}: Teorema del Dini per curve e superfici di livello, calcolo delle derivate implicite e retta/piano tangente a luoghi di zeri.
+    \item \textbf{Ottimizzazione Libera e Vincolata}: classificazione dei punti critici con l'Hessiana, Teorema di Weierstrass, metodo dei Moltiplicatori di Lagrange e studio del bordo.
+    \item \textbf{Curve Parametriche e Integrali Curvilinei}: curve regolari in $\Rdue$ e $\Rtre$, lunghezza d'arco, integrali di I specie (massa/baricentro) e di II specie (lavoro/circolazione).
+    \item \textbf{Calcolo Vettoriale e Forme Differenziali}: gradiente, divergenza, rotore, laplaciano; campi conservativi, forme esatte e chiuse, insiemi semplicemente connessi e Teorema di Poincaré.
+    \item \textbf{Integrali Multipli}: integrali doppi e tripli su domini normali, formule di riduzione di Fubini-Tonelli, cambio di variabili (coordinate polari, cilindriche, sferiche).
+    \item \textbf{Superfici e Integrali di Superficie}: superfici parametriche, vettore normale fondamentale, area di superfici, integrali di I specie e flusso di campi vettoriali (II specie).
+    \item \textbf{I Grandi Teoremi Integrali}: Teorema di Gauss-Green nel piano, Teorema della Divergenza (Gauss) e Teorema del Rotore (Stokes) nello spazio.
+\end{enumerate}
+
+\cleardoublepage
+
+\mainmatter
+
+% ==============================================================================
+% INCLUSIONE DEI CAPITOLI MODULARI
+% ==============================================================================
+\include{chapters/01_topologia_funzioni_multivariabile/main}
+\include{chapters/02_differenziale_e_derivate/main}
+\include{chapters/03_funzioni_implicite/main}
+\include{chapters/04_minimi_e_massimi/main}
+\include{chapters/05_curve_e_integrali_curvilinei/main}
+\include{chapters/06_calcolo_vettoriale_e_forme_differenziali/main}
+\include{chapters/07_integrali_multipli/main}
+\include{chapters/08_superfici_e_integrali_di_superficie/main}
+\include{chapters/09_teoremi_integrali_calcolo_vettoriale/main}
+\include{chapters/10_raccolta_esami_risolti/main}
+
+\end{document}

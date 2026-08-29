@@ -1,0 +1,397 @@
+% ==============================================================================
+% CAPITOLO 4: L'ELASTICITÀ DELLA DOMANDA E DELL'OFFERTA
+% ==============================================================================
+\chapter{L'Elasticità della Domanda e dell'Offerta}
+\label{chap:elasticita_domanda_offerta}
+
+\begin{tcolorbox}[colback=navyblue!5!white, colframe=navyblue, title=\textbf{Quadro Concettuale e Obiettivi Didattici}]
+Il presente capitolo approfondisce la misurazione quantitativa della sensibilità delle quantità scambiate rispetto a variazioni di prezzo, reddito e prezzi di beni correlati: la derivazione dell'elasticità puntuale e d'arco; la dinamica dell'elasticità lungo curve lineari e non lineari; la connessione analitica tra elasticità della domanda, spesa complessiva e ricavo totale d'impresa; la formulazione e dimostrazione rigorosa della relazione di Amoroso-Robinson; l'elasticità al reddito e la classificazione dei beni secondo le curve di Engel; l'elasticità incrociata e la definizione antitrust dei mercati; l'elasticità dell'offerta e l'orizzonte temporale; infine, l'analisi dell'incidenza economica della tassazione (cuneo fiscale, gettito e perdita secca di tassazione).
+\end{tcolorbox}
+
+\section{Concetto Fondamentale e Definizione di Elasticità}
+
+\subsection{Perché la Sola Pendenza è Insufficiente}
+Nell'analisi microeconomica, valutare la reattività della quantità domandata rispetto al prezzo tramite la sola derivata prima $\dv{Q}{P}$ (pendenza della curva di domanda diretta) presenta due gravi limiti strutturali:
+\begin{enumerate}
+    \item \textbf{Dipendenza dalle Unità di Misura}: la pendenza varia arbitrariamente cambiando le unità monetarie (euro, centesimi, dollari) o fisiche (chilogrammi, tonnellate, litri);
+    \item \textbf{Impossibilità di Confronti Intersettoriali}: non è possibile confrontare la sensibilità della domanda di automobili con quella del grano o dell'energia elettrica basandosi unicamente su $\dv{Q}{P}$.
+\end{enumerate}
+
+Per superare tale limite, si ricorre a un numero puro adimensionale: l'\textbf{elasticità}.
+
+\begin{definizione}{Elasticità Generale di una Funzione}{elasticita_generale}
+Data una relazione funzionale $Y = f(X)$, l'\textbf{elasticità} di $Y$ rispetto a $X$ misura la variazione percentuale di $Y$ indotta da una variazione percentuale infinitesima di $X$:
+\begin{equation}
+    \eps_{Y,X} = \lim_{\Delta X \to 0} \frac{\Delta Y / Y}{\Delta X / X} = \dv{Y}{X} \cdot \frac{X}{Y} = \dv{\ln Y}{\ln X}
+\end{equation}
+\end{definizione}
+
+\section{L'Elasticità della Domanda al Prezzo ($\epsp$)}
+
+\subsection{Elasticità Puntuale ed Elasticità d'Arco}
+
+\begin{definizione}{Elasticità Puntuale della Domanda al Prezzo}{elasticita_puntuale}
+L'\textbf{elasticità puntuale della domanda al proprio prezzo} $\epsp$ è definita come:
+\begin{equation}
+    \epsp = \dv{\Qd}{P} \cdot \frac{P}{\Qd}
+\end{equation}
+Poiché per la legge fondamentale della domanda $\dv{\Qd}{P} < 0$, il valore di $\epsp$ è intrinsecamente negativo ($\epsp < 0$). Nella prassi economica si fa spesso riferimento al suo \textbf{valore assoluto} $|\epsp|$:
+\begin{equation}
+    |\epsp| = - \dv{\Qd}{P} \cdot \frac{P}{\Qd}
+\end{equation}
+\end{definizione}
+
+Quando si analizzano variazioni discrete e finite tra due punti $A(P_1, Q_1)$ e $B(P_2, Q_2)$, l'applicazione della formula convenzionale produce risultati asimmetrici a seconda che si consideri come base il punto iniziale $A$ o quello finale $B$. Per garantire l'invarianza del risultato si adotta la formula del punto medio di Allen-Lerner:
+
+\begin{metodo}[Formula dell'Elasticità d'Arco (Metodo del Punto Medio)]
+L'\textbf{elasticità d'arco} della domanda calcolata tra due coordinate $(P_1, Q_1)$ e $(P_2, Q_2)$ è definita come:
+\begin{equation}
+    \epsp^{\text{arco}} = \frac{\Delta Q}{\bar{Q}} \bigg/ \frac{\Delta P}{\bar{P}} = \frac{Q_2 - Q_1}{(Q_1 + Q_2)/2} \bigg/ \frac{P_2 - P_1}{(P_1 + P_2)/2} = \frac{Q_2 - Q_1}{P_2 - P_1} \cdot \frac{P_1 + P_2}{Q_1 + Q_2}
+\end{equation}
+\end{metodo}
+
+\subsection{Tassonomia dell'Elasticità della Domanda}
+In base al valore assoluto $|\epsp|$, la domanda di un bene viene classificata in cinque categorie:
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{l c X X}
+\toprule
+\textbf{Categoria} & \textbf{Valore di $|\epsp|$} & \textbf{Significato Economico} & \textbf{Esempi Tipici} \\
+\midrule
+1. \textbf{Perfettamente Anelastica} & $|\epsp| = 0$ & La quantità domandata è totalmente insensibile al prezzo (curva verticale). & Farmaci salvavita essenziali, insulina. \\
+2. \textbf{Anelastica (Rigida)} & $0 < |\epsp| < 1$ & La quantità varia in percentuale minore rispetto alla variazione del prezzo. & Carburanti, pane, utenze domestiche, tabacco. \\
+3. \textbf{A Elasticità Unitaria} & $|\epsp| = 1$ & La quantità varia esattamente nella stessa percentuale del prezzo. & Modelli teorici isoelastici, spesa costante. \\
+4. \textbf{Elastica} & $|\epsp| > 1$ & La quantità varia in percentuale maggiore rispetto alla variazione del prezzo. & Ristorazione, abbigliamento di marca, viaggi aerei. \\
+5. \textbf{Perfettamente Elastica} & $|\epsp| \to \infty$ & Piccolissime variazioni di prezzo azzerano la domanda (curva orizzontale). & Singola impresa in concorrenza perfetta, beni omogenei. \\
+\bottomrule
+\end{tabularx}
+\caption{Classificazione tassonomica dell'elasticità della domanda al prezzo.}
+\label{tab:classificazione_elasticita}
+\end{table}
+
+\subsection{Variazione dell'Elasticità lungo una Domanda Lineare}
+Un comune errore concettuale consiste nel confondere la pendenza costante di una retta con la costanza dell'elasticità:
+
+\begin{teorema}{Dinamica dell'Elasticità lungo una Curva Lineare}{elasticita_lineare_dinamica}
+Sia data la funzione di domanda lineare $\Qd = a - bP$ con $a > 0, b > 0$.
+L'elasticità in valore assoluto in funzione del prezzo è:
+\begin{equation}
+    |\epsp(P)| = b \cdot \frac{P}{a - bP}
+\end{equation}
+L'elasticità varia con continuità da $0$ a $+\infty$ lungo la retta:
+\begin{enumerate}
+    \item All'intercetta orizzontale ($P = 0, Q = a$): $|\epsp| = 0$ (\textbf{perfettamente anelastica});
+    \item Nel tratto inferiore ($0 < P < \frac{a}{2b}$): $|\epsp| < 1$ (\textbf{tratto anelastico});
+    \item Nel \textbf{punto medio} ($P_M = \frac{a}{2b}, \, Q_M = \frac{a}{2}$): $|\epsp| = 1$ (\textbf{elasticità unitaria});
+    \item Nel tratto superiore ($\frac{a}{2b} < P < \frac{a}{b}$): $|\epsp| > 1$ (\textbf{tratto elastico});
+    \item All'intercetta verticale ($P = \frac{a}{b}, Q = 0$): $|\epsp| \to +\infty$ (\textbf{perfettamente elastica}).
+\end{enumerate}
+\end{teorema}
+
+\section{Elasticità, Spesa Totale e Ricavo Totale ($\RT$)}
+
+\subsection{La Relazione tra Variazione di Prezzo e Ricavo Totale}
+Il \textbf{Ricavo Totale} delle imprese (che coincide con la Spesa Totale dei consumatori) è dato dal prodotto:
+\begin{equation}
+    \RT(P) = P \cdot \Qd(P)
+\end{equation}
+Differenziando $\RT$ rispetto al prezzo $P$:
+\begin{equation}
+    \dv{\RT}{P} = \dv{}{P}[P \cdot Q(P)] = Q + P \dv{Q}{P} = Q \left[ 1 + \frac{P}{Q} \dv{Q}{P} \right] = Q(1 - |\epsp|)
+\end{equation}
+
+Da questa fondamentale relazione differenziale discende la strategia ottimale di determinazione del prezzo:
+\begin{itemize}
+    \item \textbf{Se la Domanda è Elastica ($|\epsp| > 1$)}: $(1 - |\epsp|) < 0 \implies \dv{\RT}{P} < 0$.
+    Un aumento di prezzo riduce il ricavo totale; una riduzione di prezzo accresce il ricavo totale.
+    \item \textbf{Se la Domanda è Anelastica ($|\epsp| < 1$)}: $(1 - |\epsp|) > 0 \implies \dv{\RT}{P} > 0$.
+    Un aumento di prezzo accresce il ricavo totale; una riduzione di prezzo deprime il ricavo totale.
+    \item \textbf{Se l'Elasticità è Unitaria ($|\epsp| = 1$)}: $\dv{\RT}{P} = 0$.
+    Il ricavo totale raggiunge il suo punto di \textbf{massimo globale}.
+\end{itemize}
+
+\subsection{La Relazione di Amoroso-Robinson e il Ricavo Marginale ($\RMg$)}
+
+\begin{teorema}{Formula di Amoroso-Robinson}{amoroso_robinson}
+Il \textbf{Ricavo Marginale} $\RMg = \dv{\RT}{Q}$ è legato al prezzo di mercato e all'elasticità della domanda dalla relazione:
+\begin{equation}
+    \RMg = P \left( 1 - \frac{1}{|\epsp|} \right)
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}[Della Formula di Amoroso-Robinson]
+Esprimiamo il ricavo totale in funzione della quantità impiegando la curva di domanda inversa $P = P(Q)$:
+\begin{equation}
+    \RT(Q) = P(Q) \cdot Q
+\end{equation}
+Calcoliamo la derivata prima rispetto a $Q$ tramite la regola del prodotto:
+\begin{equation}
+    \RMg = \dv{\RT}{Q} = \dv{P}{Q} \cdot Q + P(Q) \cdot 1 = P \left[ 1 + \frac{Q}{P} \dv{P}{Q} \right]
+\end{equation}
+Ricordando che l'elasticità della domanda al prezzo è definita come $\epsp = \dv{Q}{P} \frac{P}{Q} = \frac{1}{\dv{P}{Q} \frac{Q}{P}}$, si ha $\frac{Q}{P} \dv{P}{Q} = \frac{1}{\epsp} = - \frac{1}{|\epsp|}$. Sostituendo:
+\begin{equation}
+    \RMg = P \left( 1 - \frac{1}{|\epsp|} \right)
+\end{equation}
+\end{dimostrazione}
+
+\textbf{Implicazioni Economiche della Relazione di Amoroso-Robinson}:
+\begin{itemize}
+    \item Se $|\epsp| > 1 \implies \left(1 - \frac{1}{|\epsp|}\right) > 0 \implies \RMg > 0$ (produrre una unità aggiuntiva incrementa i ricavi);
+    \item Se $|\epsp| = 1 \implies \left(1 - \frac{1}{1}\right) = 0 \implies \RMg = 0$ (il ricavo totale è massimo);
+    \item Se $|\epsp| < 1 \implies \left(1 - \frac{1}{|\epsp|}\right) < 0 \implies \RMg < 0$ (produrre di più distrugge ricavo complessivo).
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1, >=Latex]
+    % --- GRAFICO SUPERIORE: Domanda e Ricavo Marginale ---
+    \begin{scope}[yshift=4.5cm]
+        \draw[->, thick] (0,0) -- (7.5,0) node[below right] {\textbf{Quantità $Q$}};
+        \draw[->, thick] (0,0) -- (0,4.5) node[above left] {\textbf{Prezzo, $\RMg$}};
+        
+        % Curve
+        \draw[very thick, navyblue] (0,4.0) node[left] {$a/b$} -- (6.0,0) node[below] {$a$};
+        \draw[very thick, crimsonred] (0,4.0) -- (3.0,0) node[below left] {$a/2$} -- (4.5,-1.2) node[right] {$\RMg$};
+        
+        % Punto Medio
+        \coordinate (M) at (3.0, 2.0);
+        \filldraw[purpleaccent] (M) circle (2.5pt) node[above right] {$M(|\epsp|=1)$};
+        \draw[dotted, thick] (3.0,0) -- (M) -- (0,2.0) node[left] {$a/2b$};
+        
+        % Zone
+        \node[navyblue, font=\bfseries\footnotesize] at (1.5, 3.2) {Tratto Elastico ($|\epsp| > 1, \RMg > 0$)};
+        \node[navyblue, font=\bfseries\footnotesize] at (4.8, 1.5) {Tratto Anelastico ($|\epsp| < 1, \RMg < 0$)};
+        \node[right, navyblue, font=\bfseries\small] at (5.5, 0.8) {$D: P(Q)$};
+    \end{scope}
+    
+    % --- GRAFICO INFERIORE: Parabola del Ricavo Totale ---
+    \begin{scope}[yshift=0cm]
+        \draw[->, thick] (0,0) -- (7.5,0) node[below right] {\textbf{Quantità $Q$}};
+        \draw[->, thick] (0,0) -- (0,3.5) node[above left] {\textbf{Ricavo Totale $\RT$}};
+        
+        % Parabola RT = a/b Q - 1/b Q^2
+        \draw[ultra thick, forestgreen, domain=0:6.0, samples=100] plot (\x, {2.8 * (\x * (6 - \x) / 9)});
+        
+        % Massimo RT
+        \coordinate (RTmax) at (3.0, 2.8);
+        \filldraw[forestgreen!80!black] (RTmax) circle (2.5pt) node[above=2pt] {$\RT_{\max}$};
+        \draw[dotted, thick] (3.0,0) node[below] {$Q_M = a/2$} -- (RTmax) -- (0, 2.8) node[left] {$\frac{a^2}{4b}$};
+        \draw[dotted, thick] (6.0,0) node[below] {$a$} -- (6.0, 0);
+        
+        % Allineamento verticale con grafico superiore
+        \draw[dashed, gray!60] (3.0, -0.4) -- (3.0, 4.2);
+    \end{scope}
+\end{tikzpicture}
+\caption{Allineamento geometrico tra la curva di domanda $P(Q)$, la retta del Ricavo Marginale $\RMg(Q)$ e la parabola del Ricavo Totale $\RT(Q)$: in corrispondenza del punto medio $M$ ($|\epsp|=1$), il ricavo marginale si annulla ($\RMg=0$) e il ricavo totale raggiunge il massimo assoluto.}
+\label{fig:elasticita_ricavo_totale}
+\end{figure}
+
+\section{L'Elasticità della Domanda al Reddito ($\epsr$) e le Curve di Engel}
+
+\subsection{Definizione e Classificazione dei Beni}
+
+\begin{definizione}{Elasticità della Domanda al Reddito}{elasticita_reddito}
+L'\textbf{elasticità della domanda al reddito} $\epsr$ misura la sensibilità della quantità domandata rispetto a variazioni del reddito monetario $R$ dei consumatori:
+\begin{equation}
+    \epsr = \dv{\Qd}{R} \cdot \frac{R}{\Qd} = \dv{\ln \Qd}{\ln R}
+\end{equation}
+\end{definizione}
+
+Il segno e la grandezza di $\epsr$ consentono una rigorosa catalogazione microeconomica dei beni:
+
+\begin{enumerate}
+    \item \textbf{Beni Inferiori ($\epsr < 0$)}: la domanda diminuisce all'aumentare del reddito ($\dv{Q}{R} < 0$). La curva di Engel ha pendenza negativa. Esempi: legumi secchi, trasporto pubblico su gomma, auto usate ad alto chilometraggio.
+    \item \textbf{Beni Normali di Prima Necessità ($0 \le \epsr \le 1$)}: la domanda cresce all'aumentare del reddito, ma in misura meno che proporzionale. La quota di spesa sul reddito complessivo $\frac{P \cdot Q}{R}$ decresce al crescere di $R$ (\textbf{Legge di Engel}). Esempi: generi alimentari di base, utenze domestiche.
+    \item \textbf{Beni Superiori o di Lusso ($\epsr > 1$)}: la domanda aumenta in misura più che proporzionale rispetto al reddito. La quota di spesa $\frac{P \cdot Q}{R}$ cresce al crescere di $R$. Esempi: gioielleria, automobili sportive, vacanze esclusive, istruzione universitaria d'eccellenza.
+\end{enumerate}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.15, >=Latex]
+    % Assi
+    \draw[->, thick] (0,0) -- (7.5,0) node[below right] {\textbf{Reddito $R$}};
+    \draw[->, thick] (0,0) -- (0,5.5) node[above left] {\textbf{Quantità Domandata $Q$}};
+    
+    % Curve di Engel
+    % 1. Bene di Lusso (Convesso verso l'alto, cresce più che proporzionalmente)
+    \draw[very thick, purpleaccent, domain=0:5.2, samples=60] plot (\x, {0.18 * \x * \x}) node[right] {Bene di Lusso ($\epsr > 1$)};
+    
+    % 2. Bene Necessario (Concavo, cresce meno che proporzionalmente)
+    \draw[very thick, navyblue, domain=0:6.5, samples=60] plot (\x, {1.8 * sqrt(\x)}) node[right] {Bene Necessario ($0 < \epsr < 1$)};
+    
+    % 3. Bene Inferiore (Pendenza negativa dopo un certo reddito)
+    \draw[very thick, crimsonred] (0, 1.0) to[out=40, in=140] (3.0, 3.2) to[out=-40, in=170] (6.5, 1.2) node[right] {Bene Inferiore ($\epsr < 0$)};
+    
+    % Retta proporzionalità unitaria (riferimento)
+    \draw[dashed, gray!70] (0,0) -- (5.0, 5.0) node[above, font=\scriptsize] {$\epsr = 1$};
+\end{tikzpicture}
+\caption{Morfologia delle Curve di Engel per diverse tipologie di beni in funzione del reddito $R$.}
+\label{fig:curve_engel}
+\end{figure}
+
+\section{L'Elasticità Incrociata della Domanda ($\epsxy$)}
+
+\begin{definizione}{Elasticità Incrociata della Domanda}{elasticita_incrociata}
+L'\textbf{elasticità incrociata} $\epsxy$ misura la sensibilità della quantità domandata del bene $X$ rispetto al prezzo di un altro bene $Y$:
+\begin{equation}
+    \epsxy = \dv{Q_X}{P_Y} \cdot \frac{P_Y}{Q_X}
+\end{equation}
+\end{definizione}
+
+In base al valore e al segno di $\epsxy$:
+\begin{itemize}
+    \item \textbf{Beni Sostituti (Succedanei) ($\epsxy > 0$)}: un rincaro del bene $Y$ induce i consumatori a sostituirlo con $X$, accrescendo la domanda di $X$ (es. burro e margarina, voli Ryanair ed EasyJet). Più elevato è $\epsxy$, più elevato è il grado di sostituibilità.
+    \item \textbf{Beni Complementari ($\epsxy < 0$)}: un rincaro del bene $Y$ contrae la domanda congiunta di entrambi i beni, riducendo la quantità acquistata di $X$ (es. stampanti e cartucce d'inchiostro, benzina e automobili).
+    \item \textbf{Beni Indipendenti ($\epsxy = 0$)}: non sussiste alcuna relazione economica tra i due mercati (es. prezzo del pane e domanda di scarpe da ginnastica).
+\end{itemize}
+
+\begin{osservazione}[Applicazione Antitrust: Definizione del Mercato Rilevante]
+Le autorità per la concorrenza (AGCM in Italia, DG COMP nell'Unione Europea) utilizzano l'elasticità incrociata e il cosiddetto test SSNIP (\textit{Small but Significant and Non-transitory Increase in Price}) per verificare se due prodotti appartengono allo stesso mercato rilevante: un valore elevato di $\epsxy$ indica che i consumatori considerano i beni stretti sostituti, limitando il potere di mercato dell'impresa.
+\end{osservazione}
+
+\section{L'Elasticità dell'Offerta al Prezzo ($\eps_s$)}
+
+\begin{definizione}{Elasticità dell'Offerta al Prezzo}{elasticita_offerta}
+L'\textbf{elasticità dell'offerta al prezzo} $\eps_s$ misura la sensibilità della quantità offerta dai produttori rispetto a variazioni del prezzo di vendita:
+\begin{equation}
+    \eps_s = \dv{\Qs}{P} \cdot \frac{P}{\Qs} > 0
+\end{equation}
+\end{definizione}
+
+\subsection{Determinanti e Ruolo dell'Orizzonte Temporale}
+L'elasticità dell'offerta dipende primariamente dalla flessibilità dei processi produttivi e dal tempo concesso alle imprese per reagire:
+\begin{enumerate}
+    \item \textbf{Brevissimo Periodo (Periodo di Mercato)}: lo stock di beni è interamente fisso (es. pescato del giorno al porto). L'offerta è \textbf{perfettamente anelastica} ($\eps_s = 0$).
+    \item \textbf{Breve Periodo}: gli impianti fisici e la tecnologia sono dati; le imprese possono variare la produzione solo modificando i fattori variabili (lavoro e ore straordinarie). L'offerta è moderatamente anelastica ($0 < \eps_s < 1$).
+    \item \textbf{Lungo Periodo}: tutti i fattori produttivi sono variabili; le imprese possono ampliare la scala degli impianti e nuove imprese possono entrare nel mercato. L'offerta è \textbf{altamente elastica} ($\eps_s \gg 1$).
+\end{enumerate}
+
+\section{Applicazione: Incidenza Fiscale e Perdita Secca di Tassazione}
+
+Si consideri l'introduzione di un'imposta specifica (accisa) di ammontare fisso $t$ per ogni unità scambiata:
+
+\begin{teorema}{Ripartizione dell'Onere Fiscale (Incidenza Economica)}{incidenza_tassa}
+L'onere economico dell'imposta $t$ si ripartisce tra compratori e venditori indipendentemente dal soggetto formalmente designato dalla legge per il versamento del tributo.
+La variazione del prezzo pagato dai compratori ($\Delta P_d$) e del prezzo incassato dai venditori ($\Delta P_s$) soddisfa la proporzione:
+\begin{equation}
+    \frac{\Delta P_d}{|\Delta P_s|} = \frac{\eps_s}{|\epsp|}
+\end{equation}
+In formule esplicite:
+\begin{equation}
+    \Delta P_d = t \cdot \frac{\eps_s}{\eps_s + |\epsp|}, \qquad |\Delta P_s| = t \cdot \frac{|\epsp|}{\eps_s + |\epsp|}
+\end{equation}
+\end{teorema}
+
+\begin{legge}{Principio della Rigidità Relativa}{rigidita_tassa}
+L'imposta grava maggiormente sul lato del mercato che presenta la \textbf{minore elasticità} (maggiore rigidità):
+\begin{itemize}
+    \item Se $|\epsp| \to 0$ (domanda perfettamente anelastica): $\Delta P_d = t$ (l'imposta è traslata interamente sui consumatori);
+    \item Se $\eps_s \to 0$ (offerta perfettamente anelastica): $|\Delta P_s| = t$ (l'imposta grava interamente sui produttori).
+\end{itemize}
+\end{legge}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2, >=Latex]
+    % Assi
+    \draw[->, thick] (0,0) -- (7.5,0) node[below right] {\textbf{Quantità $Q$}};
+    \draw[->, thick] (0,0) -- (0,5.8) node[above left] {\textbf{Prezzo $P$}};
+    
+    % Curve
+    \draw[very thick, navyblue] (0.8, 5.0) -- (6.5, 0.8) node[right] {$D$};
+    \draw[thick, forestgreen] (0.8, 0.6) -- (6.5, 4.5) node[right] {$S_0$};
+    \draw[very thick, forestgreen!70!black] (0.8, 2.0) -- (6.5, 5.9) node[right] {$S_t (S + t)$};
+    
+    % Punti Chiave
+    \coordinate (E0) at (3.8, 2.8);
+    \coordinate (Pd) at (2.4, 3.8);
+    \coordinate (Ps) at (2.4, 1.7);
+    
+    % Rettangolo Gettito Fiscale (Diviso tra Compratori e Venditori)
+    \fill[navyblue!20] (0, 2.8) rectangle (2.4, 3.8);
+    \fill[forestgreen!20] (0, 1.7) rectangle (2.4, 2.8);
+    
+    % Triangolo Perdita Secca
+    \fill[crimsonred!35] (Pd) -- (Ps) -- (E0) -- cycle;
+    
+    % Linee tratteggiate
+    \draw[dotted, thick] (E0) -- (3.8, 0) node[below] {$\Qeq$};
+    \draw[dotted, thick] (E0) -- (0, 2.8) node[left] {$\Peq$};
+    
+    \draw[dashed, thick, crimsonred] (Pd) -- (2.4, 0) node[below] {$Q_t$};
+    \draw[dashed, thick, crimsonred] (Pd) -- (0, 3.8) node[left] {$P_d = \Peq + \Delta P_d$};
+    \draw[dashed, thick, crimsonred] (Ps) -- (0, 1.7) node[left] {$P_s = \Peq - |\Delta P_s|$};
+    
+    % Cuneo Fiscale
+    \draw[<->, ultra thick, crimsonred] (2.4, 1.7) -- (2.4, 3.8) node[midway, left=2pt, font=\small\bfseries] {Cuneo $t$};
+    
+    % Etichette
+    \node[navyblue!90!black, font=\bfseries\scriptsize] at (1.2, 3.3) {Quota Gettito Compratori};
+    \node[forestgreen!90!black, font=\bfseries\scriptsize] at (1.2, 2.2) {Quota Gettito Venditori};
+    \node[crimsonred!90!black, font=\bfseries\small] at (3.2, 2.8) {$\lossDW$};
+\end{tikzpicture}
+\caption{Incidenza economica di un'accisa $t$: il cuneo fiscale $t = P_d - P_s$ genera un gettito erariale $T = t \cdot Q_t$ (area rettangolare) e una perdita secca di benessere $\lossDW$ (triangolo di Harberger).}
+\label{fig:tassazione_incidenza}
+\end{figure}
+
+\begin{definizione}{Gettito Erariale e Perdita Secca di Tassazione}{gettito_perdita_secca}
+\begin{itemize}
+    \item \textbf{Gettito Erariale ($T$)}: entrate fiscali riscosse dallo Stato:
+    \begin{equation}
+        T = t \cdot Q_t
+    \end{equation}
+    \item \textbf{Perdita Secca di Tassazione ($\lossDW$)}: distruzione di surplus sociale generata dalla contrazione degli scambi da $\Qeq$ a $Q_t$:
+    \begin{equation}
+        \lossDW = \frac{1}{2} \cdot t \cdot (\Qeq - Q_t)
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\section{Metodi ed Esercizi Svolti}
+
+\begin{esercizio}[Calcolo dell'Elasticità, Massimizzazione del Ricavo e Tassazione]
+Un monopolista fronteggia una curva di domanda lineare $Q = 100 - 2P$.
+\begin{enumerate}
+    \item Calcolare l'elasticità puntuale al prezzo $P = 20\,\text{\euro}$ e al prezzo $P = 35\,\text{\euro}$.
+    \item Determinare il livello di prezzo e quantità che massimizza il Ricavo Totale $\RT$.
+    \item Verificare la formula di Amoroso-Robinson in corrispondenza del prezzo di massimo ricavo.
+\end{enumerate}
+
+\textbf{Svolgimento}:
+\begin{enumerate}
+    \item \textbf{Elasticità Puntuale}:
+    La derivata della domanda è $\dv{Q}{P} = -2$.
+    \begin{itemize}
+        \item A $P = 20$: $Q(20) = 100 - 2(20) = 60 \implies \epsp = -2 \cdot \frac{20}{60} = -\frac{40}{60} = -0{,}67 \implies |\epsp| = 0{,}67$ (\textbf{anelastica}).
+        \item A $P = 35$: $Q(35) = 100 - 2(35) = 30 \implies \epsp = -2 \cdot \frac{35}{30} = -\frac{70}{30} = -2{,}33 \implies |\epsp| = 2{,}33$ (\textbf{elastica}).
+    \end{itemize}
+    
+    \item \textbf{Massimizzazione del Ricavo Totale}:
+    Esprimiamo il ricavo totale: $\RT(P) = P(100 - 2P) = 100P - 2P^2$.
+    Poniamo la derivata prima uguale a zero (condizione di primo ordine):
+    \begin{equation}
+        \dv{\RT}{P} = 100 - 4P = 0 \implies 4P = 100 \implies P^* = 25\,\text{\euro{}}
+    \end{equation}
+    La quantità corrispondente è $Q^* = 100 - 2(25) = 50\,\text{unità}$.
+    Il ricavo totale massimo ammonta a $\RT_{\max} = 25 \times 50 = 1.250\,\text{\euro}$.
+    
+    \item \textbf{Verifica di Amoroso-Robinson}:
+    A $P = 25$ e $Q = 50$, l'elasticità è $|\epsp| = 2 \cdot \frac{25}{50} = 1{,}0$.
+    Applicando Amoroso-Robinson:
+    \begin{equation}
+        \RMg = 25 \left( 1 - \frac{1}{1} \right) = 25(0) = 0\,\text{\euro{}}
+    \end{equation}
+    Il ricavo marginale è nullo, a conferma che il ricavo totale è al suo punto di massimo stazionario.
+\end{enumerate}
+\end{esercizio}
+
+\begin{esame}[Checklist anti-errore per il Capitolo 4]
+\begin{itemize}
+    \item Ricordare che $|\epsp|$ non è costante lungo una retta di domanda, mentre lo è solo per curve isoelastiche del tipo $Q = k P^{-\alpha}$.
+    \item Quando si chiede la quota di imposta a carico del consumatore, applicare la formula $\frac{\eps_s}{\eps_s + |\epsp|}$ (e non $|\epsp|$ a numeratore).
+    \item Verificare sempre che l'elasticità incrociata positiva ($\epsxy > 0$) corrisponde a beni \textbf{sostituti}, mentre quella negativa ($\epsxy < 0$) a beni \textbf{complementari}.
+\end{itemize}
+\end{esame}

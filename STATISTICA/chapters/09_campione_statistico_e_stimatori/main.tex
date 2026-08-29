@@ -1,0 +1,202 @@
+% ==============================================================================
+% CAPITOLO 9: CAMPIONE STATISTICO, TEORIA DELLA STIMA PUNTUALE E MASSIMA VEROSIMIGLIANZA
+% ==============================================================================
+\chapter{Campione Statistico, Teoria della Stima Puntuale e Massima Verosimiglianza}
+\label{cap:campione_statistico_e_stimatori}
+
+\begin{abstract}
+Il presente capitolo segna il passaggio concettuale dall'analisi probabilistica diretta (deduttiva: dal modello teorico ai dati attesi) all'inferenza statistica (induttiva: dai dati empirici osservati alla stima dei parametri incogniti del modello). Viene formalizzata la nozione di campione casuale i.i.d. e stabilita la netta distinzione tra statistica, stimatore (variabile aleatoria) e stima (valore numerico realizzato). Si definiscono e si dimostrano i criteri di ottimalità degli stimatori: non distorsione (correttezza), scomposizione dell'Errore Quadratico Medio (MSE) nel trade-off tra distorsione e varianza, consistenza asintotica ed efficienza UMVUE mediante il Limite di Cramér-Rao (CRLB) e l'Informazione di Fisher. Si sviluppa in dettaglio il Metodo della Massima Verosimiglianza (MLE), dimostrandone le proprietà di invarianza e normalità asintotica. Infine, si espone il metodo Monte Carlo per l'integrazione stocastica con relativo codice R.
+\end{abstract}
+
+% ==============================================================================
+% SEZIONE 9.1: IL PARADIGMA DELL'INFERENZA STATISTICA
+% ==============================================================================
+\section{Il Paradigma dell'Inferenza: Campione Casuale e Stimatori}
+\label{sec:paradigma_inferenza}
+
+In tutte le scienze sperimentali e nell'ingegneria, il processo generativo che governa un fenomeno reale (il tempo di vita di una turbina, il tasso di difettosità di una linea di montaggio, il rendimento energetico di un impianto) è descrivibile mediante una legge di probabilità $f(x; \theta)$ la cui forma funzionale è nota a meno di uno o più parametri incogniti $\theta \in \Theta \subseteq \mathbb{R}^k$.
+
+\begin{definizione}{Campione Casuale I.I.D.}{def_campione_casuale}
+Sia $X$ una variabile aleatoria con densità o massa $f(x; \theta)$ dipendente dal parametro $\theta \in \Theta$.
+Un \textbf{campione casuale di dimensione $n$} è una $n$-upla di variabili aleatorie indipendenti e identicamente distribuite:
+\begin{equation}
+    (X_1, X_2, \dots, X_n) \stackrel{\text{i.i.d.}}{\sim} f(x; \theta)
+\end{equation}
+La realizzazione numerica osservata a posteriori sui dati empirici è denotata con $(x_1, x_2, \dots, x_n) \in \mathbb{R}^n$.
+\end{definizione}
+
+\begin{definizione}{Statistica, Stimatore e Stima}{def_stimatore}
+\begin{itemize}
+    \item Una \textbf{statistica} $T = g(X_1, \dots, X_n)$ è una qualsiasi funzione a valori reali del campione che non contiene parametri incogniti.
+    \item Uno \textbf{stimatore puntuale} $\widehat{\theta} = T(X_1, \dots, X_n)$ è una statistica concepita per approssimare il vero valore del parametro $\theta$. Prima dell'estrazione del campione, $\widehat{\theta}$ è una \textbf{variabile aleatoria} dotata di una propria distribuzione campionaria (detta \emph{sampling distribution}).
+    \item Una \textbf{stima puntuale} $\widehat{\theta}_{\text{oss}} = T(x_1, \dots, x_n)$ è il singolo numero reale ottenuto sostituendo i dati numerici realizzati nello stimatore.
+\end{itemize}
+\end{definizione}
+
+% ==============================================================================
+% SEZIONE 9.2: CRITERI DI OTTIMALITÀ DEGLI STIMATORI
+% ==============================================================================
+\section{Criteri di Ottimalità: Correttezza, MSE e Consistenza}
+\label{sec:ottimalita_stimatori}
+
+Dato che per uno stesso parametro $\theta$ è possibile costruire molteplici stimatori concorrenti, è fondamentale stabilire criteri oggettivi di qualità.
+
+\subsection{Correttezza (Non Distorsione / Unbiasedness)}
+
+\begin{definizione}{Distorsione e Stimatore Corretto}{def_correttezza}
+La \textbf{distorsione} (\emph{Bias}) di uno stimatore $\widehat{\theta}$ è la deviazione sistematica del suo valore atteso dal valore vero del parametro:
+\begin{equation}
+    \operatorname{Bias}(\widehat{\theta}) \coloneqq \mathbb{E}[\widehat{\theta}] - \theta
+\end{equation}
+Uno stimatore si dice \textbf{corretto (non distorto)} se il suo valore atteso coincide esattamente con il parametro cercato per ogni possibile $\theta \in \Theta$:
+\begin{equation}
+    \mathbb{E}[\widehat{\theta}] = \theta \iff \operatorname{Bias}(\widehat{\theta}) = 0
+\end{equation}
+Si dice \textbf{asintoticamente corretto} se $\lim_{n \to \infty} \mathbb{E}[\widehat{\theta}_n] = \theta$.
+\end{definizione}
+
+\subsection{Errore Quadratico Medio e Scomposizione Bias-Varianza}
+
+Non sempre uno stimatore non distorto è preferibile: se esso possiede una varianza enorme, le sue singole stime oscilleranno violentemente lontano dal bersaglio. La misura globale di accuratezza è l'\textbf{Errore Quadratico Medio}.
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_bias_variance_tradeoff.tex}
+    \caption{Analogia del tiro al bersaglio per il trade-off Distorsione-Varianza (Bias-Variance Tradeoff): (a) Basso Bias e Bassa Varianza (ottimo); (b) Alto Bias e Bassa Varianza (errore sistematico preciso); (c) Basso Bias e Alta Varianza (centrato in media ma disperso); (d) Alto Bias e Alta Varianza (pessimo).}
+    \label{fig:bias_variance_tradeoff}
+\end{figure}
+
+\begin{teorema}{Decomposizione dell'Errore Quadratico Medio (MSE)}{mse_tradeoff}
+L'\textbf{Errore Quadratico Medio} (Mean Squared Error, MSE) di uno stimatore $\widehat{\theta}$ misura la deviazione quadratica totale attesa dal parametro vero $\theta$:
+\begin{equation}
+    \operatorname{MSE}(\widehat{\theta}) \coloneqq \mathbb{E}\left[(\widehat{\theta} - \theta)^2\right] = \operatorname{Var}(\widehat{\theta}) + \left[\operatorname{Bias}(\widehat{\theta})\right]^2
+\end{equation}
+Se lo stimatore è corretto ($\operatorname{Bias}=0$), l'MSE coincide con la varianza: $\operatorname{MSE}(\widehat{\theta}) = \operatorname{Var}(\widehat{\theta})$.
+\end{teorema}
+
+\begin{dimostrazione}
+Aggiungendo e sottraendo il valore atteso $\mathbb{E}[\widehat{\theta}]$ all'interno dell'operatore:
+\begin{align}
+    \operatorname{MSE}(\widehat{\theta}) &= \mathbb{E}\left[\left( (\widehat{\theta} - \mathbb{E}[\widehat{\theta}]) + (\mathbb{E}[\widehat{\theta}] - \theta) \right)^2\right] \\
+    &= \mathbb{E}\left[(\widehat{\theta} - \mathbb{E}[\widehat{\theta}])^2\right] + 2(\mathbb{E}[\widehat{\theta}] - \theta)\underbrace{\mathbb{E}\left[\widehat{\theta} - \mathbb{E}[\widehat{\theta}]\right]}_{=0} + (\mathbb{E}[\widehat{\theta}] - \theta)^2 \\
+    &= \operatorname{Var}(\widehat{\theta}) + \left[\operatorname{Bias}(\widehat{\theta})\right]^2 \qquad \blacksquare
+\end{align}
+\end{dimostrazione}
+
+\subsection{Consistenza Asintotica}
+
+\begin{definizione}{Stimatore Consistente}{def_consistenza}
+Una successione di stimatori $\{\widehat{\theta}_n\}_{n \ge 1}$ si dice \textbf{consistente in probabilità} (o debolmente consistente) per $\theta$ se all'aumentare della numerosità campionaria $n \to \infty$ converge in probabilità al parametro vero:
+\begin{equation}
+    \forall \varepsilon > 0, \quad \lim_{n \to \infty} \mathbb{P}\left(|\widehat{\theta}_n - \theta| \ge \varepsilon\right) = 0 \iff \widehat{\theta}_n \xrightarrow{\mathbb{P}} \theta
+\end{equation}
+\textbf{Condizione Sufficiente di Consistenza (tramite Chebyshev):} Se lo stimatore è asintoticamente non distorto e la sua varianza tende a zero per $n \to \infty$, allora è consistente:
+\begin{equation}
+    \lim_{n \to \infty} \operatorname{Bias}(\widehat{\theta}_n) = 0 \quad \text{e} \quad \lim_{n \to \infty} \operatorname{Var}(\widehat{\theta}_n) = 0 \implies \lim_{n \to \infty} \operatorname{MSE}(\widehat{\theta}_n) = 0 \implies \widehat{\theta}_n \xrightarrow{\mathbb{P}} \theta
+\end{equation}
+\end{definizione}
+
+% ==============================================================================
+% SEZIONE 9.3: LIMITE DI CRAMÉR-RAO E INFORMAZIONE DI FISHER
+% ==============================================================================
+\section{Informazione di Fisher e Limite di Cramér-Rao (CRLB)}
+\label{sec:fisher_cramer_rao}
+
+Esiste un limite fisico insormontabile alla precisione con cui è possibile stimare un parametro da un campione di taglia $n$? La risposta è fornita dalla teoria dell'Informazione di Fisher.
+
+\begin{definizione}{Informazione di Fisher}{def_informazione_fisher}
+Sia $f(x; \theta)$ la densità della popolazione. Sotto condizioni di regolarità analitica, l'\textbf{Informazione di Fisher} contenuta in una singola osservazione è definita da:
+\begin{equation}
+    I(\theta) \coloneqq \mathbb{E}\left[ \left( \frac{\partial}{\partial \theta} \ln f(X; \theta) \right)^2 \right] = -\mathbb{E}\left[ \frac{\partial^2}{\partial \theta^2} \ln f(X; \theta) \right]
+\end{equation}
+Per un campione i.i.d. di dimensione $n$, l'informazione totale è additiva: $I_n(\theta) = n I(\theta)$.
+\end{definizione}
+
+\paragraph{Significato Geometrico dell'Informazione di Fisher:}
+La derivata seconda $-\frac{\partial^2}{\partial \theta^2} \ln f(x; \theta)$ misura la **curvatura (o concavità)** della log-verosimiglianza. Se la curva è molto piccata e incurvata verso il basso attorno al massimo ($I(\theta)$ grande), piccole variazioni di $\theta$ alterano drasticamente la densità, consentendo una stima estremamente precisa; se la curva è piatta ($I(\theta)$ piccolo), vi è alta incertezza.
+
+\begin{teorema}{Disuguaglianza e Limite Inferiore di Cramér-Rao (CRLB)}{crlb}
+Sia $\widehat{\theta}$ uno stimatore corretto ($\mathbb{E}[\widehat{\theta}] = \theta$) per il parametro scalare $\theta$. Sotto condizioni di regolarità, la varianza dello stimatore è limitata inferiormente dal reciproco dell'informazione di Fisher totale:
+\begin{equation}
+    \operatorname{Var}(\widehat{\theta}) \ge \frac{1}{I_n(\theta)} = \frac{1}{n I(\theta)} = \text{CRLB}
+\end{equation}
+Uno stimatore corretto che raggiunge esattamente l'uguaglianza $\operatorname{Var}(\widehat{\theta}) = \text{CRLB}$ si dice \textbf{efficiente} o a varianza minima uniformemente (UMVUE).
+\end{teorema}
+
+% ==============================================================================
+% SEZIONE 9.4: METODO DELLA MASSIMA VEROSIMIGLIANZA (MLE)
+% ==============================================================================
+\section{Il Metodo della Massima Verosimiglianza (MLE)}
+\label{sec:mle_metodo}
+
+Il Metodo della Massima Verosimiglianza (\emph{Maximum Likelihood Estimation - MLE}), introdotto da Ronald Fisher nel 1922, è la tecnica di stima parametrica più autorevole ed elegante dell'inferenza statistica.
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_mle_curva_verosimiglianza.tex}
+    \caption{Curva della log-verosimiglianza $\ell(\theta)$ in funzione del parametro $\theta$. Lo stimatore MLE $\widehat{\theta}_{\text{MLE}}$ individua il punto stazionario di massimo assoluto in cui la funzione score si annulla: $S(\theta) = \ell'(\theta) = 0$, con derivata seconda strettamente negativa $\ell''(\theta) < 0$.}
+    \label{fig:mle_curva}
+    \end{figure}
+
+\begin{definizione}{Funzione di Verosimiglianza e Log-Verosimiglianza}{def_verosimiglianza}
+Dato il campione osservato $\mathbf{x} = (x_1, \dots, x_n)$, la \textbf{funzione di verosimiglianza} $L(\theta)$ è la densità congiunta interpretata come funzione del parametro $\theta$:
+\begin{equation}
+    L(\theta) \coloneqq f(x_1, \dots, x_n; \theta) = \prod_{i=1}^n f(x_i; \theta)
+\end{equation}
+Poiché il logaritmo naturale è una trasformazione strettamente monotona crescente, la massimizzazione di $L(\theta)$ è matematicamente equivalente alla massimizzazione della \textbf{log-verosimiglianza}:
+\begin{equation}
+    \ell(\theta) \coloneqq \ln L(\theta) = \sum_{i=1}^n \ln f(x_i; \theta)
+\end{equation}
+\end{definizione}
+
+\begin{metodo}[Procedura Operativa in 4 Fasi per il Calcolo dello Stimatore MLE]
+\begin{enumerate}
+    \item \textbf{Scrittura della Verosimiglianza:} $L(\theta) = \prod_{i=1}^n f(x_i; \theta)$.
+    \item \textbf{Passaggio al Logaritmo:} $\ell(\theta) = \sum_{i=1}^n \ln f(x_i; \theta)$.
+    \item \textbf{Calcolo della Score Function ed Uguaglianza a Zero:}
+    \begin{equation}
+        S(\theta) = \frac{d\ell(\theta)}{d\theta} = 0 \implies \text{si risolve l'equazione per ricavare } \widehat{\theta}
+    \end{equation}
+    \item \textbf{Verifica della Concavità (Test dell'Hessiano):}
+    \begin{equation}
+        \frac{d^2\ell(\theta)}{d\theta^2} \Bigg|_{\theta = \widehat{\theta}} < 0 \implies \text{garantisce che il punto stazionario sia un massimo relativo e globale.}
+    \end{equation}
+\end{enumerate}
+\end{metodo}
+
+\begin{teorema}{Proprietà Notevoli dello Stimatore MLE}{prop_mle}
+\begin{enumerate}
+    \item \textbf{Proprietà di Invarianza Funzionale (Teorema di Zehna):} Se $\widehat{\theta}_{\text{MLE}}$ è lo stimatore di massima verosimiglianza per $\theta$, allora per qualsiasi funzione $g(\theta)$, lo stimatore MLE di $g(\theta)$ è semplicemente $g(\widehat{\theta}_{\text{MLE}})$.
+    \item \textbf{Normalità Asintotica ed Efficienza:} All'aumentare di $n \to \infty$, lo stimatore MLE converge in legge ad una normale con varianza pari al limite di Cramér-Rao:
+    \begin{equation}
+        \sqrt{n}(\widehat{\theta}_{\text{MLE}} - \theta) \xrightarrow{d} \mathcal{N}\left(0, \; \frac{1}{I(\theta)}\right)
+    \end{equation}
+\end{enumerate}
+\end{teorema}
+
+% ==============================================================================
+% SEZIONE 9.5: METODO MONTE CARLO IN R
+% ==============================================================================
+\section{Il Metodo Monte Carlo per la Stima e l'Integrazione Numerica}
+\label{sec:monte_carlo_teoria}
+
+Quando un integrale multivariato o il valore atteso di una grandezza complessa $I = \mathbb{E}[g(X)] = \int g(x) f(x) dx$ non ammette una primitiva in forma chiusa, il metodo Monte Carlo sfrutta la Legge dei Grandi Numeri per stimare $I$ mediante campionamento pseudo-casuale al calcolatore.
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_monte_carlo_cerchio.tex}
+    \caption{Principio del metodo Monte Carlo: stima geometrica di $\pi$ tramite campionamento uniforme di punti $(X_i, Y_i) \sim \operatorname{Unif}([-1,1]^2)$. La frazione di punti che cade all'interno del cerchio unitario $X^2 + Y^2 \le 1$ converge a $\frac{\text{Area Cerchio}}{\text{Area Quadrato}} = \frac{\pi}{4}$.}
+    \label{fig:monte_carlo_cerchio}
+\end{figure}
+
+\begin{metodo}[Integrazione Monte Carlo in R]
+Per approssimare l'integrale $I = \int_a^b h(x) dx$:
+\begin{enumerate}
+    \item Si riscrive l'integrale come $I = (b - a) \int_a^b h(x) \frac{1}{b-a} dx = (b - a) \mathbb{E}[h(X)]$ con $X \sim \operatorname{Unif}(a, b)$.
+    \item Si generano $N$ numeri pseudo-casuali $x_1, \dots, x_N \sim \operatorname{Unif}(a, b)$ e si calcola la media:
+    \begin{equation}
+        \widehat{I}_N = (b - a) \cdot \frac{1}{N}\sum_{i=1}^N h(x_i)
+    \end{equation}
+\end{enumerate}
+L'errore standard della stima decade come $\mathcal{O}(1/\sqrt{N})$, indipendentemente dalla dimensione dello spazio di integrazione.
+\end{metodo}

@@ -1,0 +1,352 @@
+% ==============================================================================
+% CAPITOLO 9: L'ECONOMIA DELL'INFORMAZIONE, INCERTEZZA E RISCHIO
+% ==============================================================================
+\chapter{Informazione, Rischio e Asimmetrie Informative}
+\label{chap:informazione_rischio}
+
+\begin{tcolorbox}[colback=navyblue!5!white, colframe=navyblue, title=\textbf{Quadro Concettuale del Capitolo}]
+Il presente capitolo abbandona l'ipotesi neoclassica di informazione perfetta e contratti completi, introducendo l'analisi economica delle decisioni in condizioni di incertezza e in presenza di asimmetrie informative. Nella prima parte si formalizza la Teoria dell'Utilità Attesa di Von Neumann-Morgenstern, quantificando l'avversione al rischio, l'Equivalente Certo ($CE$), il Premio per il Rischio ($RP$) e il funzionamento dei mercati assicurativi. Nella seconda parte si sviluppa la teoria del rapporto Principale-Agente, analizzando i due fondamentali fallimenti del mercato: la Selezione Avversa (asimmetria pre-contrattuale, modello dei Lemons di Akerlof, Signaling e Screening) e l'Azzardo Morale (asimmetria post-contrattuale e contratti di incentivazione ottimale).
+\end{tcolorbox}
+
+\section{Dall'Informazione Perfetta all'Incertezza e ai Contratti Incompleti}
+
+I modelli economici esaminati nei capitoli precedenti presupponevano che consumatori e imprese disponessero di un quadro informativo perfetto e privo di costi circa i prezzi, la qualità dei beni, le tecnologie di produzione e gli stati futuri del mondo.
+
+\subsection{Contratti Completi vs Contratti Incompleti}
+Nelle transazioni economiche complesse e dilazionate nel tempo, gli agenti regolano i reciproci impegni mediante \textbf{contratti giuridici}.
+\begin{definizione}{Contratto Completo}{contratto_completo}
+Un contratto si definisce \textbf{completo} se soddisfa tre requisiti:
+\begin{enumerate}
+    \item Prevede e specifica ex-ante ogni possibile evento contingente presente e futuro che possa influire sul rapporto economico;
+    \item Definisce univocamente e senza ambiguità le prestazioni e i diritti di ciascuna parte per ogni stato del mondo;
+    \item È perfettamente osservabile e applicabile da un'autorità giudiziaria esterna (\textit{court enforcement}) a costo nullo e tempestivamente.
+\end{enumerate}
+\end{definizione}
+
+Nella realtà empirica, i contratti sono inevitabilmente \textbf{incompleti} a causa di:
+\begin{itemize}
+    \item \textbf{Razionalità Limitata}: impossibilità cognitiva di prevedere tutte le contingenze future e formulare clausole esaustive;
+    \item \textbf{Costi di Transazione e di Negoziazione}: oneri eccessivi di stesura legale e monitoraggio continuo;
+    \item \textbf{Inosservabilità o Non-Verificabilità in Giudizio}: determinate variabili (es. l'impegno profuso da un dipendente o la perizia tecnica di un chirurgo) sono osservabili dalle parti ma non dimostrabili a terzi in sede processuale;
+    \item \textbf{Asimmetrie Informative ed Incertezza}.
+\end{itemize}
+
+\subsection{Rischio vs Incertezza Knightiana}
+Secondo la classica distinzione formulata da Frank Knight (1921):
+\begin{itemize}
+    \item \textbf{Rischio}: situazione decisionale in cui il decisore non conosce con certezza quale esito si verificherà, ma è in grado di associare a ciascun possibile evento una \textbf{distribuzione di probabilità oggettiva} (frequentista, basata sulla Legge dei Grandi Numeri) o \textbf{soggettiva} (bayesiana);
+    \item \textbf{Incertezza Pura (Knightiana)}: situazione in cui gli eventi futuri sono inediti o imprevedibili e non è possibile assegnare alcuna distribuzione probabilistica affidabile.
+\end{itemize}
+
+\section{La Teoria dell'Utilità Attesa (Von Neumann - Morgenstern)}
+
+La modellizzazione formale delle scelte in condizioni di rischio è fondata sul paradigma dell'Utilità Attesa formulato da John von Neumann e Oskar Morgenstern (1944).
+
+\begin{definizione}{Lotteria Rischiata, Valore Atteso e Utilità Attesa}{utilita_attesa}
+Una \textbf{lotteria rischiosa} $L$ è descritta da una distribuzione di $n$ esiti monetari alternativi $w_1, w_2, \dots, w_n$ associati alle rispettive probabilità $p_1, p_2, \dots, p_n$, con $p_i \ge 0$ e $\sum_{i=1}^n p_i = 1$:
+\begin{equation}
+    L = (p_1, w_1; p_2, w_2; \dots; p_n, w_n)
+\end{equation}
+\begin{itemize}
+    \item \textbf{Valore Monetario Atteso ($\mathbb{E}[w]$ o $EV$)}: la media ponderata degli esiti monetari per le rispettive probabilità di accadimento:
+    \begin{equation}
+        \mathbb{E}[w] = \sum_{i=1}^n p_i w_i
+    \end{equation}
+    Una scommessa si definisce \textbf{attuarialmente equa} se il suo valore monetario netto atteso è identicamente nullo ($\mathbb{E}[\Delta w] = 0$).
+    \item \textbf{Utilità Attesa ($\mathbb{E}[U(w)]$ o $EU$)}: il valore atteso dell'utilità cardinale $U(w)$ associata ai diversi esiti monetari:
+    \begin{equation}
+        \mathbb{E}[U(w)] = \sum_{i=1}^n p_i U(w_i)
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\begin{teorema}{Attitudini Individuali verso il Rischio e Disuguaglianza di Jensen}{attitudini_rischio}
+Il comportamento decisionale di un individuo di fronte a una lotteria rischiosa $L$ dipende dalla curvatura della sua funzione di utilità cardinale $U(w)$:
+\begin{enumerate}
+    \item \textbf{Individuo Avverso al Rischio (\textit{Risk-Averse})}:
+    \begin{equation}
+        U''(w) < 0 \quad (\text{Funzione di Utilità Concava})
+    \end{equation}
+    Per la disuguaglianza di Jensen, l'utilità del valore monetario atteso certo è strettamente maggiore dell'utilità attesa della lotteria:
+    \begin{equation}
+        U(\mathbb{E}[w]) > \mathbb{E}[U(w)]
+    \end{equation}
+    L'individuo rifiuta sistematicamente qualsiasi scommessa equa e preferisce un importo certo pari al valore atteso rispetto alla partecipazione al gioco.
+    
+    \item \textbf{Individuo Neutrale al Rischio (\textit{Risk-Neutral})}:
+    \begin{equation}
+        U''(w) = 0 \quad (\text{Funzione di Utilità Lineare}: U(w) = a + bw)
+    \end{equation}
+    \begin{equation}
+        U(\mathbb{E}[w]) = \mathbb{E}[U(w)]
+    \end{equation}
+    L'individuo è perfettamente indifferente tra la lotteria e l'ammontare certo del suo valore atteso; la scelta è guidata unicamente dal valore monetario atteso.
+    
+    \item \textbf{Individuo Propenso / Amante del Rischio (\textit{Risk-Loving})}:
+    \begin{equation}
+        U''(w) > 0 \quad (\text{Funzione di Utilità Convessa})
+    \end{equation}
+    \begin{equation}
+        U(\mathbb{E}[w]) < \mathbb{E}[U(w)]
+    \end{equation}
+    L'individuo accetta scommesse eque e preferisce l'incertezza della lotteria rispetto al valore atteso certo.
+\end{enumerate}
+\end{teorema}
+
+\begin{osservazione}[Fondamento dell'Avversione al Rischio: Utilità Marginale Decrescente]
+L'avversione al rischio rappresenta il comportamento dominante della maggior parte degli agenti economici. Essa è la diretta conseguenza dell'utilità marginale decrescente della ricchezza ($U'(w) > 0, U''(w) < 0$): la perdita di un ammontare monetario pari a $1000\text{ \euro{}}$ priva l'individuo di beni essenziali e genera un decremento di utilità maggiore rispetto all'incremento di benessere apportato dalla vincita della medesima somma di $1000\text{ \euro{}}$ (destinata a beni voluttuari marginali).
+\end{osservazione}
+
+\subsection{Equivalente Certo, Premio per il Rischio e Misura di Arrow-Pratt}
+\begin{definizione}{Equivalente Certo e Premio per il Rischio}{ce_rp}
+Data una lotteria rischiosa $L$:
+\begin{itemize}
+    \item \textbf{Equivalente Certo ($CE$, \textit{Certainty Equivalent})}: la somma di denaro certa che fornisce all'individuo esattamente la medesima utilità attesa garantita dalla lotteria:
+    \begin{equation}
+        U(CE) = \mathbb{E}[U(w)] \iff CE = U^{-1}(\mathbb{E}[U(w)])
+    \end{equation}
+    \item \textbf{Premio per il Rischio ($RP$, \textit{Risk Premium})}: la differenza tra il valore monetario atteso della lotteria e l'equivalente certo:
+    \begin{equation}
+        RP = \mathbb{E}[w] - CE
+    \end{equation}
+    Rappresenta l'ammontare massimo a cui l'individuo è disposto a rinunciare pur di eliminare l'incertezza e convertire la lotteria rischiosa in un importo monetario certo.
+\end{itemize}
+\end{definizione}
+
+\begin{teorema}{Coefficiente di Avversione Assoluta al Rischio di Arrow-Pratt}{arrow_pratt}
+Il grado di concavità locale della funzione di utilità è misurato dal \textbf{coefficiente di avversione assoluta al rischio di Arrow-Pratt}:
+\begin{equation}
+    A(w) = -\frac{U''(w)}{U'(w)}
+\end{equation}
+Per una scommessa a somma zero con varianza $\sigma^2$, lo sviluppo in serie di Taylor attorno alla ricchezza iniziale $\bar{w}$ fornisce l'approssimazione analitica del premio per il rischio:
+\begin{equation}
+    RP \approx \frac{1}{2} \sigma^2 A(\bar{w}) = \frac{1}{2} \sigma^2 \left( -\frac{U''(\bar{w})}{U'(\bar{w})} \right)
+\end{equation}
+\end{teorema}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        width=13.5cm,
+        height=8cm,
+        axis lines=left,
+        xlabel={Ricchezza Monetaria ($w$)},
+        ylabel={Utilità ($U(w)$)},
+        xmin=0, xmax=110,
+        ymin=0, ymax=11.5,
+        xtick={36, 64, 81, 84, 100},
+        xticklabels={$w_1 = 36$, , $CE = 81$, $\mathbb{E}[w] = 84$, $w_2 = 100$},
+        ytick={6, 9, 9.16, 10},
+        yticklabels={$U(w_1)=6$, $\mathbb{E}[U(w)]=9$, $U(\mathbb{E}[w])$, $U(w_2)=10$},
+        grid=both,
+        grid style={dotted, gray!30}
+    ]
+        % Funzione di Utilità Concava U(w) = sqrt(w)
+        \addplot[domain=0:105, samples=100, ultra thick, navyblue] {sqrt(x)};
+        \node[font=\footnotesize, navyblue] at (axis cs:98, 10.6) {$U(w) = \sqrt{w}$};
+        
+        % Corda secante tra (36, 6) e (100, 10)
+        % Pendenza m = (10 - 6)/(100 - 36) = 4/64 = 1/16 = 0.0625
+        % Retta: y = 6 + 0.0625*(x - 36)
+        \addplot[domain=36:100, samples=10, thick, crimsonred, dashed] {6 + 0.0625*(x - 36)};
+        \node[font=\footnotesize, crimsonred] at (axis cs:55, 6.7) {Corda Secante};
+        
+        % Valore Atteso E[w] = 0.25*36 + 0.75*100 = 9 + 75 = 84
+        % Utilità Attesa E[U] = 0.25*6 + 0.75*10 = 1.5 + 7.5 = 9
+        % CE = 9^2 = 81
+        % U(E[w]) = sqrt(84) = 9.165
+        
+        % Punti notevoli
+        \node[circle, fill=navyblue, inner sep=2pt, label={above left:\footnotesize $A(36, 6)$}] at (axis cs:36, 6) {};
+        \node[circle, fill=navyblue, inner sep=2pt, label={above right:\footnotesize $B(100, 10)$}] at (axis cs:100, 10) {};
+        \node[circle, fill=crimsonred, inner sep=2pt, label={below right:\footnotesize $(\mathbb{E}[w], \mathbb{E}[U])$}] at (axis cs:84, 9) {};
+        \node[circle, fill=forestgreen, inner sep=2pt, label={above left:\footnotesize $(CE, \mathbb{E}[U])$}] at (axis cs:81, 9) {};
+        \node[circle, fill=navyblue, inner sep=1.8pt] at (axis cs:84, 9.165) {};
+        
+        % Linee tratteggiate verso gli assi
+        \draw[dotted, thick, black] (axis cs:36, 0) -- (axis cs:36, 6) -- (axis cs:0, 6);
+        \draw[dotted, thick, black] (axis cs:100, 0) -- (axis cs:100, 10) -- (axis cs:0, 10);
+        \draw[dotted, thick, black] (axis cs:84, 0) -- (axis cs:84, 9.165);
+        \draw[dotted, thick, forestgreen] (axis cs:81, 0) -- (axis cs:81, 9) -- (axis cs:0, 9);
+        
+        % Segmento Premio per il Rischio RP = E[w] - CE = 84 - 81 = 3
+        \draw[<->, ultra thick, forestgreen] (axis cs:81, 4.5) -- (axis cs:84, 4.5) node[midway, above=1mm, font=\scriptsize] {\textbf{$RP = 3$}};
+        \draw[dotted, thick, forestgreen] (axis cs:81, 0) -- (axis cs:81, 4.5);
+        \draw[dotted, thick, forestgreen] (axis cs:84, 0) -- (axis cs:84, 4.5);
+    \end{axis}
+\end{tikzpicture}
+\caption{Rappresentazione geometrica della Teoria dell'Utilità Attesa per individuo avverso al rischio ($U(w) = \sqrt{w}$): la concavità della funzione determina $U(\mathbb{E}[w]) > \mathbb{E}[U(w)]$, identificando graficamente l'Equivalente Certo ($CE = 81$) e il Premio per il Rischio ($RP = \mathbb{E}[w] - CE = 3$).}
+\label{fig:utilita_attesa_avversione_rischio}
+\end{figure}
+
+\section{Il Mercato delle Assicurazioni e la Ripartizione del Rischio}
+
+Il mercato assicurativo consente il trasferimento e la diversificazione del rischio da individui avversi a una compagnia assicuratrice neutrale al rischio in grado di aggregare una pluralità di eventi indipendenti.
+
+\begin{definizione}{Contratto Assicurativo ed Equità Attuariale}{contratto_assicurativo}
+Consideriamo un individuo con ricchezza iniziale $w_0$ esposto alla probabilità $p$ di subire un danno economico pari a $D$ (ricchezza finale $w_0 - D$). L'individuo può stipulare una polizza pagando un premio monetario $\gamma$ a fronte di un risarcimento concordato $q \le D$:
+\begin{itemize}
+    \item \textbf{Premio Attuarialmente Equo}: quando il premio corrisponde esattamente al valore atteso del risarcimento erogato dalla compagnia (profitto atteso nullo per l'assicuratore):
+    \begin{equation}
+        \gamma_{\text{equo}} = p \cdot q
+    \end{equation}
+    \item \textbf{Teorema della Copertura Assicurativa Completa}: un individuo avverso al rischio che abbia accesso a un contratto attuarialmente equo sceglierà sempre una \textbf{copertura totale del danno} ($q^* = D$), eliminando completamente la varianza della propria ricchezza finale.
+\end{itemize}
+\end{definizione}
+
+\begin{osservazione}[Fondamento dell'Assicurazione: La Legge dei Grandi Numeri]
+La compagnia assicuratrice può operare come soggetto neutrale al rischio poiché, assicurando un numero $N$ elevato di individui con rischi indipendenti e identicamente distribuiti (i.i.d.), la quota effettiva di sinistri converge alla probabilità teorica $p$ con varianza che si azzera asintoticamente ($\sigma^2/N \to 0$), trasformando il rischio individuale in certezza statistica aggregata.
+\end{osservazione}
+
+\section{Asimmetrie Informative: Il Rapporto Principale-Agente}
+
+Quando le informazioni rilevanti non sono distribuite in modo simmetrico tra le controparti di una transazione, il funzionamento del meccanismo di mercato si altera profondamente.
+
+\begin{definizione}{Il Rapporto di Agenzia (Principale-Agente)}{rapporto_agenzia}
+Una relazione di agenzia sorge ogni qualvolta una parte (\textbf{Principale}) delega a un'altra parte (\textbf{Agente}) lo svolgimento di una mansione o la gestione di un bene nel proprio interesse:
+\begin{itemize}
+    \item \textbf{Principale} (parte meno informata): propone i termini contrattuali ma non osserva direttamente le caratteristiche intrinseche dell'agente o le sue azioni post-contrattuali.
+    \item \textbf{Agente} (parte informata): possiede informazioni private e può adottare comportamenti opportunistici a proprio esclusivo vantaggio.
+\end{itemize}
+\end{definizione}
+
+La letteratura economica distingue due tipologie fondamentali di asimmetria informativa in base alla collocazione temporale rispetto alla stipula del contratto:
+\begin{enumerate}
+    \item \textbf{Selezione Avversa} (Asimmetria \textbf{Ex-Ante} / Informazione Nascosta - \textit{Hidden Information});
+    \item \textbf{Azzardo Morale} (Asimmetria \textbf{Ex-Post} / Azione Nascosta - \textit{Hidden Action}).
+\end{enumerate}
+
+\section{Selezione Avversa (Adverse Selection - Informazione Nascosta)}
+
+La selezione avversa si manifesta prima della conclusione del contratto, quando una delle parti possiede informazioni riservate sulla \textbf{qualità intrinseca} del bene o servizio scambiato che l'altra parte non può verificare.
+
+\subsection{Il Modello dei Lemons di George Akerlof (1970)}
+Nel celebre articolo \textit{The Market for ``Lemons'': Quality Uncertainty and the Market Mechanism}, George Akerlof dimostrò formalmente come l'informazione asimmetrica possa condurre al collasso totale del mercato.
+
+\begin{modello}{Modello dei Lemons (Bidoni) di Akerlof}{modello_akerlof}
+Consideriamo il mercato delle automobili usate in cui la qualità $q$ di ciascun veicolo è compresa tra due categorie: auto buone ($q = q_H$) e auto scadenti (i ``bidoni'' o \textit{lemons}, $q = q_L$).
+\begin{itemize}
+    \item I venditori (agenti) conoscono con esattezza la qualità della propria automobile;
+    \item Gli acquirenti (principale) conoscono solo la frazione di auto buone $\lambda$ e di auto scadenti $(1 - \lambda)$ presenti complessivamente nel parco auto;
+    \item \textbf{Prezzi di riserva}:
+    \begin{center}
+    \begin{tabular}{lcc}
+    \toprule
+    \textbf{Categoria} & \textbf{Disponibilità a Vendere ($P_S$)} & \textbf{Disponibilità a Pagare ($P_D$)} \\
+    \midrule
+    Auto Buona ($q_H$) & $2\,000\text{ \euro{}}$ & $2\,400\text{ \euro{}}$ \\
+    Auto Scadente / Lemon ($q_L$) & $1\,000\text{ \euro{}}$ & $1\,200\text{ \euro{}}$ \\
+    \bottomrule
+    \end{tabular}
+    \end{center}
+\end{itemize}
+\end{modello}
+
+\begin{teorema}{Collasso del Mercato per Selezione Avversa}{collasso_mercato_akerlof}
+In presenza di asimmetria informativa, gli acquirenti non potendo distinguere la qualità del singolo veicolo offrono un prezzo basato sulla qualità media attesa:
+\begin{equation}
+    P_D^{\text{atteso}} = \lambda P_D(q_H) + (1 - \lambda) P_D(q_L) = \frac{1}{2}(2400) + \frac{1}{2}(1200) = 1800\text{ \euro{}}
+\end{equation}
+\begin{itemize}
+    \item Al prezzo di $1800\text{ \euro{}}$, i proprietari di auto buone (che richiedono almeno $2000\text{ \euro{}}$) \textbf{si ritirano dal mercato};
+    \item Sul mercato rimangono in vendita unicamente i bidoni ($q_L$);
+    \item Gli acquirenti, anticipando razionalmente tale reazione, riducono la propria disponibilità a pagare al prezzo dei bidoni ($1200\text{ \euro{}}$).
+\end{itemize}
+Il mercato delle auto di buona qualità scompare interamente: i beni di cattiva qualità scacciano dal mercato i beni di buona qualità (\textit{Gresham's Law applicata ai mercati}).
+\end{teorema}
+
+\subsection{Meccanismi Correttivi della Selezione Avversa: Signaling e Screening}
+\begin{enumerate}
+    \item \textbf{Segnalazione di Mercato (Signaling di Michael Spence, 1973)}: la parte informata emette un segnale osservabile e costoso per certificare la propria qualità. Affinché il segnale sia credibile e conduca a un \textbf{equilibrio separante}, il costo del segnale per gli agenti di bassa qualità deve essere strettamente superiore al beneficio ottenibile mentendo (es. conseguire una laurea magistrale impegnativa con voti eccellenti segnala un'elevata produttività lavorativa innata; concedere garanzie contrattuali pluriennali estese da parte di costruttori di qualità superiore).
+    \item \textbf{Vaglio e Selezione (Screening di Rothschild e Stiglitz, 1976)}: la parte non informata propone un \textbf{menu di contratti alternativi} strutturati in modo che gli agenti si auto-selezionino rivelando la propria tipologia privata. Nelle assicurazioni sanitarie o auto, la compagnia propone due polizze:
+    \begin{itemize}
+        \item Polizza con premio elevato e franchigia nulla (scelta dai soggetti ad alto rischio);
+        \item Polizza con premio basso ed elevata franchigia a carico dell'assicurato (scelta dai soggetti a basso rischio).
+    \end{itemize}
+\end{enumerate}
+
+\section{Azzardo Morale (Moral Hazard - Azione Nascosta)}
+
+L'azzardo morale sorge \textbf{dopo} la stipula del contratto, quando l'agente può compiere azioni non osservabili o non verificabili dal principale che influenzano la probabilità o l'entità del risultato economico.
+
+\begin{definizione}{Azzardo Morale}{azzardo_morale}
+Situazione di opportunismo post-contrattuale in cui l'agente, protetto dalle clausole contrattuali (es. copertura assicurativa totale o stipendio fisso non parametrato alle prestazioni), riduce il proprio livello di diligenza, prudenza o impegno lavorativo, incrementando la probabilità di un sinistro o riducendo la produttività aziendale.
+\end{definizione}
+
+\begin{esempio}[Casi Reali di Azzardo Morale]
+\begin{itemize}
+    \item \textbf{Assicurazioni Danni / Furto}: un automobilista con polizza kasko integrale è disincentivato dall'adottare precauzioni costose (parcheggiare in garage custodito, installare antifurto satellitare, guidare con prudenza);
+    \item \textbf{Rapporto di Lavoro Subordinato}: un dipendente o un atleta professionista con contratto pluriennale fisso garantito ha incentivo a ridurre l'impegno (\textit{shirking}) se il monitoraggio aziendale è costoso o imperfetto;
+    \item \textbf{Banche e Sistema Finanziario (Too Big to Fail)}: gli istituti di credito sistemici possono assumere rischi speculativi eccessivi confidando nel salvataggio pubblico (\textit{bailout}) da parte dello Stato o della Banca Centrale.
+\end{itemize}
+\end{esempio}
+
+\subsection{Strumenti Contrattuali di Mitigazione dell'Azzardo Morale}
+\begin{enumerate}
+    \item \textbf{Contratti con Incentivi di Performance}: legare la retribuzione dell'agente a indicatori oggettivi di risultato (provvigioni sulle vendite, bonus di produzione, quote di utili o \textit{stock option});
+    \item \textbf{Franchigie, Scoperti e Co-Assicurazione}: obbligare l'assicurato a sostenere una quota prefissata del danno monetario in caso di sinistro, mantenendo vivo l'interesse alla prevenzione;
+    \item \textbf{Sistemi di Bonus-Malus}: clausole dinamiche che incrementano il premio assicurativo negli anni successivi a un sinistro;
+    \item \textbf{Monitoraggio e Audit Casuali}: sistemi di controllo e ispezione a campione con sanzioni contrattuali severe in caso di inadempimento.
+\end{enumerate}
+
+\begin{esame}[Trabocchetti Frequenti su Rischio e Asimmetrie Informative]
+Nelle prove d'esame prestare massima attenzione a tre distinzioni concettuali cruciali:
+\begin{enumerate}
+    \item \textbf{Utilità Attesa vs Utilità del Valore Atteso}: non confondere mai $\mathbb{E}[U(w)] = \sum p_i U(w_i)$ (la media pesata delle utilità dei singoli esiti, calcolata applicando la funzione $U$ prima della sommatoria) con $U(\mathbb{E}[w]) = U(\sum p_i w_i)$ (l'utilità dell'importo monetario atteso certo). Per un individuo avverso al rischio vale sempre $U(\mathbb{E}[w]) > \mathbb{E}[U(w)]$.
+    \item \textbf{Selezione Avversa vs Azzardo Morale}: la discriminante fondamentale è la \textbf{collocazione temporale}:
+    \begin{itemize}
+        \item \textbf{Selezione Avversa} $\implies$ \textbf{Ex-Ante} (prima della firma del contratto, informazione nascosta sulle caratteristiche intrinseche dell'agente o del bene);
+        \item \textbf{Azzardo Morale} $\implies$ \textbf{Ex-Post} (dopo la firma del contratto, azione nascosta o livello di impegno/diligenza non osservabile).
+    \end{itemize}
+    \item \textbf{Massimo Premio Assicurativo vs Premio Equo}: il premio massimo che l'individuo accetta di pagare è $\gamma_{\max} = W_0 - CE = \gamma_{\text{equo}} + RP$. Se all'esame si chiede il premio massimo, non limitarsi al premio attuarialmente equo ma includere sempre il Premio per il Rischio ($RP$).
+\end{enumerate}
+\end{esame}
+
+\section{Metodo Operativo ed Esercizi Guidati}
+
+\begin{metodo}[Calcolo dell'Utilità Attesa, Equivalente Certo e Premio per il Rischio]
+Data una funzione di utilità cardinale $U(w)$ e una lotteria rischiosa $L = (p_1, w_1; p_2, w_2)$:
+\begin{enumerate}
+    \item Calcolare il Valore Monetario Atteso: $\mathbb{E}[w] = p_1 w_1 + p_2 w_2$.
+    \item Calcolare l'Utilità Attesa: $\mathbb{E}[U(w)] = p_1 U(w_1) + p_2 U(w_2)$.
+    \item Determinare l'Equivalente Certo: risolvere l'equazione $U(CE) = \mathbb{E}[U(w)] \implies CE = U^{-1}(\mathbb{E}[U(w)])$.
+    \item Calcolare il Premio per il Rischio: $RP = \mathbb{E}[w] - CE$.
+    \item Calcolare il Massimo Premio Assicurativo: $\gamma_{\max} = w_0 - CE$ (dove $w_0$ è la ricchezza iniziale non danneggiata).
+\end{enumerate}
+\end{metodo}
+
+\begin{esercizio}[Valutazione di Rischio e Contratto Assicurativo con Utilità Radice]
+Un imprenditore possiede una ricchezza patrimoniale iniziale pari a $W_0 = 100\text{ \euro{}}$. Con probabilità $p = 0{,}25$, l'impresa subisce un danno accidentale pari a $D = 64\text{ \euro{}}$ (ricchezza residua $w_1 = 36\text{ \euro{}}$), mentre con probabilità $(1 - p) = 0{,}75$ non subisce alcun danno ($w_2 = 100\text{ \euro{}}$). La funzione di utilità dell'imprenditore è $U(w) = \sqrt{w}$.
+\textbf{Quesiti}:
+\begin{enumerate}
+    \item Calcolare il valore atteso della ricchezza $\mathbb{E}[w]$ e l'utilità attesa $\mathbb{E}[U(w)]$.
+    \item Calcolare l'Equivalente Certo ($CE$) e il Premio per il Rischio ($RP$).
+    \item Determinare il premio attuarialmente equo della polizza e il premio massimo che l'imprenditore è disposto a pagare per assicurarsi completamente contro il danno.
+\end{enumerate}
+
+\tcbline
+\textbf{Svolgimento Dettagliato}:
+\begin{enumerate}
+    \item \textit{Valore atteso ed utilità attesa}:
+    \begin{align*}
+        \mathbb{E}[w] &= p \cdot w_1 + (1 - p) \cdot w_2 = 0{,}25(36) + 0{,}75(100) = 9 + 75 = 84\text{ \euro{}} \\
+        \mathbb{E}[U(w)] &= p \cdot U(w_1) + (1 - p) \cdot U(w_2) = 0{,}25\sqrt{36} + 0{,}75\sqrt{100} \\
+        &= 0{,}25(6) + 0{,}75(10) = 1{,}5 + 7{,}5 = 9
+    \end{align*}
+    
+    \item \textit{Equivalente Certo e Premio per il Rischio}:
+    \begin{align*}
+        U(CE) &= \sqrt{CE} = 9 \implies CE = 9^2 = 81\text{ \euro{}} \\
+        RP &= \mathbb{E}[w] - CE = 84 - 81 = 3\text{ \euro{}}
+    \end{align*}
+    L'imprenditore è disposto a rinunciare a $3\text{ \euro{}}$ di valore atteso pur di eliminare totalmente la componente aleatoria.
+    
+    \item \textit{Premi assicurativi}:
+    \begin{align*}
+        \gamma_{\text{equo}} &= p \cdot D = 0{,}25 \times 64 = 16\text{ \euro{}} \\
+        \gamma_{\max} &= W_0 - CE = 100 - 81 = 19\text{ \euro{}}
+    \end{align*}
+    Si noti che $\gamma_{\max} = \gamma_{\text{equo}} + RP = 16 + 3 = 19\text{ \euro{}}$: la compagnia assicurativa può applicare un caricamento di profitto fino a $3\text{ \euro{}}$ oltre il premio equo senza che l'imprenditore rinunci alla copertura.
+\end{enumerate}
+\end{esercizio}

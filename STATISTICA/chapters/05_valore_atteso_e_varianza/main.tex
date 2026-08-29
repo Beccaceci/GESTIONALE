@@ -1,0 +1,225 @@
+% ==============================================================================
+% CAPITOLO 5: VALORE ATTESO, VARIANZA, COVARIANZA E DISUGUAGLIANZE
+% ==============================================================================
+\chapter{Valore Atteso, Varianza, Covarianza e Disuguaglianze}
+\label{cap:valore_atteso_e_varianza}
+
+\begin{abstract}
+Il presente capitolo sviluppa la teoria dei momenti e dei parametri sintetici che governano il comportamento probabilistico delle variabili aleatorie. Viene definito rigorosamente l'operatore lineare di speranza matematica $\mathbb{E}[\cdot]$, fornendo la giustificazione analitica della formula del trasferimento (LOTUS) e dimostrando la proprietà fondamentale dell'additività universale. Si analizzano la varianza teorica (con dimostrazione del Teorema di König-Huygens), la deviazione standard, la covarianza e la correlazione teorica $\rho$ intesa come coseno geometrico nello spazio $L^2$. Il capitolo culmina con le dimostrazioni analitiche complete delle disuguaglianze di concentrazione di Markov e di Chebyshev, pietre miliari per la convergenza stocastica e la Legge dei Grandi Numeri.
+\end{abstract}
+
+% ==============================================================================
+% SEZIONE 5.1: VALORE ATTESO (SPERANZA MATEMATICA)
+% ==============================================================================
+\section{Valore Atteso (Speranza Matematica) e Principio del Baricentro}
+\label{sec:valore_atteso_teoria}
+
+Se la funzione di probabilità (PMF o PDF) racchiude l'intera descrizione analitica di una variabile aleatoria, per scopi ingegneristici e decisionali è primario sintetizzare tale distribuzione attraverso parametri numerici scalari detti \textbf{momenti}.
+
+Il momento del primo ordine più importante è il **valore atteso** (o speranza matematica / media teorica), che rappresenta la media probabilistica a lungo termine dei valori assunti dalla variabile.
+
+\begin{definizione}{Valore Atteso (Speranza Matematica)}{def_valore_atteso}
+Sia $(\Omega, \mathcal{F}, \mathbb{P})$ uno spazio di probabilità e sia $X$ una variabile aleatoria. Il \textbf{valore atteso} di $X$, denotato con $\mathbb{E}[X]$ o $\mu_X$, è definito come:
+\begin{itemize}
+    \item \textbf{Nel caso Discreto:}
+    \begin{equation}
+        \mathbb{E}[X] \coloneqq \sum_{x \in \operatorname{Im}(X)} x \cdot p_X(x) = \sum_{x} x \cdot \mathbb{P}(X = x)
+    \end{equation}
+    a condizione che la serie converga assolutamente: $\sum_{x} |x| p_X(x) < +\infty$.
+    \item \textbf{Nel caso Continuo:}
+    \begin{equation}
+        \mathbb{E}[X] \coloneqq \int_{-\infty}^{+\infty} x \cdot f_X(x) \, dx
+    \end{equation}
+    a condizione che l'integrale improprio converga assolutamente: $\int_{-\infty}^{+\infty} |x| f_X(x) \, dx < +\infty$.
+\end{itemize}
+\end{definizione}
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_baricentro_valore_atteso.tex}
+    \caption{Interpretazione fisica e meccanica del valore atteso come baricentro (centro di massa) della distribuzione di probabilità. Il punto $\mu = \mathbb{E}[X]$ rappresenta il fulcro su cui l'asse delle ascisse è in perfetto equilibrio statico rotazionale: $\sum (x_i - \mu)p(x_i) = 0$ oppure $\int (x - \mu)f(x)dx = 0$.}
+    \label{fig:baricentro_valore_atteso}
+\end{figure}
+
+\subsection{La Formula del Trasferimento (LOTUS)}
+
+Spesso non siamo interessati al valore atteso di $X$, bensì a quello di una sua trasformazione non lineare $Y = g(X)$ (ad esempio, il costo di gestione $C = a X^2 + b$). In linea di principio, occorrerebbe prima determinare la complessa densità $f_Y(y)$ e poi calcolare $\int y f_Y(y) dy$. 
+
+Il celebre Teorema del Trasferimento dimostra che questo passaggio intermedio è superfluo.
+
+\begin{teorema}{Formula del Trasferimento (LOTUS - Law of the Unconscious Statistician)}{lotus}
+Sia $X$ una v.a. e sia $g: \mathbb{R} \to \mathbb{R}$ una funzione misurabile. Allora $\mathbb{E}[g(X)]$ può essere calcolato direttamente integrando $g(x)$ rispetto alla misura originaria di $X$:
+\begin{align}
+    \text{Nel discreto:} \quad & \mathbb{E}[g(X)] = \sum_{x \in \operatorname{Im}(X)} g(x) \cdot p_X(x) \\
+    \text{Nel continuo:} \quad & \mathbb{E}[g(X)] = \int_{-\infty}^{+\infty} g(x) \cdot f_X(x) \, dx
+\end{align}
+Nel caso bivariato per una funzione $h(X, Y)$:
+\begin{equation}
+    \mathbb{E}[h(X, Y)] = \iint_{\mathbb{R}^2} h(x, y) f_{X,Y}(x, y) \, dx \, dy
+\end{equation}
+\end{teorema}
+
+\subsection{Linearità Universale del Valore Atteso}
+
+\begin{teorema}{Linearità dell'Operatore Valore Atteso}{linearita_valore_atteso}
+Siano $X$ e $Y$ due variabili aleatorie con valore atteso finito e siano $a, b \in \mathbb{R}$. Allora:
+\begin{enumerate}
+    \item \textbf{Omogeneità e Traslazione:} $\mathbb{E}[aX + b] = a\mathbb{E}[X] + b$.
+    \item \textbf{Additività Universale:}
+    \begin{equation}
+        \mathbb{E}[X + Y] = \mathbb{E}[X] + \mathbb{E}[Y]
+    \end{equation}
+    \textbf{Attenzione fondamentale:} L'additività del valore atteso è una proprietà algebrica universale dell'integrale e \textbf{vale sempre, sia che $X$ e $Y$ siano indipendenti sia che siano fortemente dipendenti!}
+\end{enumerate}
+\end{teorema}
+
+\begin{proposizione}{Valore Atteso del Prodotto di Variabili Indipendenti}{prodotto_indipendenti}
+Se $X$ e $Y$ sono variabili aleatorie \textbf{stocasticamente indipendenti}, allora:
+\begin{equation}
+    \mathbb{E}[X \cdot Y] = \mathbb{E}[X] \cdot \mathbb{E}[Y]
+\end{equation}
+\end{proposizione}
+
+% ==============================================================================
+% SEZIONE 5.2: VARIANZA E MOMENTI CENTRATI
+% ==============================================================================
+\section{Varianza Teorica e Deviazione Standard}
+\label{sec:varianza_teorica}
+
+La varianza misura l'entità media della dispersione quadratica della variabile aleatoria attorno al suo valore atteso $\mu$.
+
+\begin{definizione}{Varianza e Deviazione Standard}{def_varianza_teorica}
+Sia $X$ una variabile aleatoria con media $\mu = \mathbb{E}[X]$. Si definisce \textbf{varianza} di $X$:
+\begin{equation}
+    \operatorname{Var}(X) = \sigma^2 \coloneqq \mathbb{E}\left[(X - \mu)^2\right] = \mathbb{E}\left[(X - \mathbb{E}[X])^2\right]
+\end{equation}
+La \textbf{deviazione standard} (o scarto quadratico medio) è $\operatorname{SD}(X) = \sigma = \sqrt{\operatorname{Var}(X)}$.
+\end{definizione}
+
+\begin{teorema}{Formula di Calcolo di König-Huygens per la Varianza}{thm_konig_huygens_teorico}
+La varianza ammette la forma computazionale fondamentale:
+\begin{equation}
+    \operatorname{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 = \mathbb{E}[X^2] - \mu^2
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Sviluppando il quadrato all'interno del valore atteso e applicando la linearità:
+\begin{align}
+    \operatorname{Var}(X) &= \mathbb{E}\left[X^2 - 2\mu X + \mu^2\right] \\
+    &= \mathbb{E}[X^2] - 2\mu \mathbb{E}[X] + \mathbb{E}[\mu^2] \\
+    &= \mathbb{E}[X^2] - 2\mu(\mu) + \mu^2 = \mathbb{E}[X^2] - 2\mu^2 + \mu^2 = \mathbb{E}[X^2] - \mu^2 \qquad \blacksquare
+\end{align}
+\end{dimostrazione}
+
+\begin{proprieta}{Proprietà della Varianza}{prop_varianza}
+Per ogni costante $a, b \in \mathbb{R}$:
+\begin{enumerate}
+    \item $\operatorname{Var}(X) \ge 0$, con $\operatorname{Var}(X) = 0 \iff X = c$ quasi certamente (costante deterministica).
+    \item $\operatorname{Var}(aX + b) = a^2 \operatorname{Var}(X)$ (la varianza è insensibile a traslazioni costanti).
+    \item $\operatorname{SD}(aX + b) = |a| \operatorname{SD}(X)$.
+\end{enumerate}
+\end{proprieta}
+
+% ==============================================================================
+% SEZIONE 5.3: COVARIANZA E IDENTITÀ DI BIENAYMÉ
+% ==============================================================================
+\section{Covarianza, Correlazione e Varianza della Somma}
+\label{sec:covarianza_teorica}
+
+\begin{definizione}{Covarianza e Correlazione Teorica}{def_covarianza_teorica}
+Dati due v.a. $X$ e $Y$ con medie $\mu_X, \mu_Y$:
+\begin{enumerate}
+    \item La \textbf{covarianza teorica} è definita da:
+    \begin{equation}
+        \operatorname{Cov}(X, Y) \coloneqq \mathbb{E}[(X - \mu_X)(Y - \mu_Y)] = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y]
+    \end{equation}
+    \item Il \textbf{coefficiente di correlazione di Pearson} è:
+    \begin{equation}
+        \rho(X, Y) = \frac{\operatorname{Cov}(X, Y)}{\sqrt{\operatorname{Var}(X)\operatorname{Var}(Y)}} = \frac{\operatorname{Cov}(X, Y)}{\sigma_X \sigma_Y} \in [-1, 1]
+    \end{equation}
+\end{enumerate}
+\end{definizione}
+
+\begin{teorema}{Varianza della Somma e Identità di Bienaymé}{thm_varianza_somma}
+Per qualsiasi coppia di variabili aleatorie $X, Y$:
+\begin{equation}
+    \operatorname{Var}(X + Y) = \operatorname{Var}(X) + \operatorname{Var}(Y) + 2\operatorname{Cov}(X, Y)
+\end{equation}
+Più in generale, per una combinazione lineare di $n$ variabili:
+\begin{equation}
+    \operatorname{Var}\left(\sum_{i=1}^n a_i X_i\right) = \sum_{i=1}^n a_i^2 \operatorname{Var}(X_i) + 2 \sum_{1 \le i < j \le n} a_i a_j \operatorname{Cov}(X_i, X_j)
+\end{equation}
+\textbf{Identità di Bienaymé:} Se le variabili $\{X_i\}_{i=1}^n$ sono \textbf{a due a due incorrelate} (ed in particolare se sono stocasticamente indipendenti, per cui $\operatorname{Cov}(X_i, X_j) = 0$), allora la varianza della somma è esattamente la somma delle varianze:
+\begin{equation}
+    \operatorname{Var}\left(\sum_{i=1}^n X_i\right) = \sum_{i=1}^n \operatorname{Var}(X_i)
+\end{equation}
+\end{teorema}
+
+% ==============================================================================
+% SEZIONE 5.4: DISUGUAGLIANZE DI CONCENTRAZIONE (MARKOV E CHEBYSHEV)
+% ==============================================================================
+\section{Disuguaglianze Fondamentali di Concentrazione: Markov e Chebyshev}
+\label{sec:disuguaglianze_concentrazione}
+
+In ingegneria è frequente dover stimare una probabilità di guasto o di deviazione estrema conoscendo unicamente la media $\mu$ e la deviazione standard $\sigma$ del sistema, senza conoscerne la densità esatta. Le disuguaglianze di concentrazione forniscono limiti superiori universali rigorosi validi per qualunque distribuzione.
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_disuguaglianza_chebyshev.tex}
+    \caption{Visualizzazione geometrica della Disuguaglianza di Chebyshev. La probabilità che la variabile $X$ si discosti dalla media $\mu$ per più di $k$ deviazioni standard ($|X - \mu| \ge k\sigma$) è limitata superiormente dall'area delle code esterne pari a $1/k^2$, a prescindere dalla forma specifica della distribuzione.}
+    \label{fig:disuguaglianza_chebyshev}
+\end{figure}
+
+\begin{teorema}{Disuguaglianza di Markov}{thm_markov}
+Sia $Y$ una variabile aleatoria \textbf{non negativa} ($Y \ge 0$ q.c.) con valore atteso finito $\mathbb{E}[Y]$. Allora per ogni costante $a > 0$:
+\begin{equation}
+    \mathbb{P}(Y \ge a) \le \frac{\mathbb{E}[Y]}{a}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Consideriamo la funzione indicatrice $\IndGraffe{Y \ge a}$ (pari a $1$ se $Y \ge a$, $0$ se $Y < a$). Poiché $Y \ge 0$, vale la disuguaglianza puntuale:
+\begin{equation}
+    a \cdot \IndGraffe{Y \ge a} \le Y \qquad (\forall \omega \in \Omega)
+\end{equation}
+Infatti:
+\begin{itemize}
+    \item Se $Y(\omega) < a$, il membro sinistro vale $a \cdot 0 = 0 \le Y(\omega)$;
+    \item Se $Y(\omega) \ge a$, il membro sinistro vale $a \cdot 1 = a \le Y(\omega)$.
+\end{itemize}
+Applicando la monotonia del valore atteso ad ambo i membri:
+\begin{equation}
+    \mathbb{E}\left[a \cdot \IndGraffe{Y \ge a}\right] \le \mathbb{E}[Y] \iff a \cdot \mathbb{E}\left[\IndGraffe{Y \ge a}\right] \le \mathbb{E}[Y]
+\end{equation}
+Poiché per definizione $\mathbb{E}\left[\IndGraffe{Y \ge a}\right] = 1 \cdot \mathbb{P}(Y \ge a) + 0 \cdot \mathbb{P}(Y < a) = \mathbb{P}(Y \ge a)$, dividendo per $a > 0$ otteniamo:
+\begin{equation}
+    \mathbb{P}(Y \ge a) \le \frac{\mathbb{E}[Y]}{a} \qquad \blacksquare
+\end{equation}
+\end{dimostrazione}
+
+\begin{teorema}{Disuguaglianza di Chebyshev (Bienaymé-Chebyshev)}{thm_chebyshev}
+Sia $X$ una variabile aleatoria con media $\mu = \mathbb{E}[X]$ e varianza $\sigma^2 = \operatorname{Var}(X) < +\infty$. Allora per ogni soglia $\varepsilon > 0$:
+\begin{equation}
+    \mathbb{P}(|X - \mu| \ge \varepsilon) \le \frac{\operatorname{Var}(X)}{\varepsilon^2} = \frac{\sigma^2}{\varepsilon^2}
+\end{equation}
+Esprimendo la soglia come multiplo $k > 0$ della deviazione standard ($\varepsilon = k\sigma$):
+\begin{equation}
+    \mathbb{P}(|X - \mu| \ge k\sigma) \le \frac{1}{k^2}, \qquad \text{o equivalentemente} \qquad \mathbb{P}(|X - \mu| < k\sigma) \ge 1 - \frac{1}{k^2}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Definiamo la variabile non negativa $Y = (X - \mu)^2 \ge 0$. Notiamo che la condizione $|X - \mu| \ge \varepsilon$ equivale a $(X - \mu)^2 \ge \varepsilon^2$.
+Applicando la Disuguaglianza di Markov a $Y$ con soglia $a = \varepsilon^2$:
+\begin{equation}
+    \mathbb{P}(|X - \mu| \ge \varepsilon) = \mathbb{P}\left((X - \mu)^2 \ge \varepsilon^2\right) \le \frac{\mathbb{E}\left[(X - \mu)^2\right]}{\varepsilon^2} = \frac{\operatorname{Var}(X)}{\varepsilon^2} = \frac{\sigma^2}{\varepsilon^2} \qquad \blacksquare
+\end{equation}
+\end{dimostrazione}
+
+\paragraph{Esempio di Utilizzo Ingegneristico:}
+Senza conoscere nulla sulla legge di probabilità di un macchinario:
+\begin{itemize}
+    \item Per $k = 2$: la probabilità di trovarsi fuori dall'intervallo $[\mu - 2\sigma, \mu + 2\sigma]$ non può superare $\frac{1}{2^2} = 25\%$;
+    \item Per $k = 3$: la probabilità di deviazione oltre $3\sigma$ non può superare $\frac{1}{3^2} = 11.11\%$.
+\end{itemize}

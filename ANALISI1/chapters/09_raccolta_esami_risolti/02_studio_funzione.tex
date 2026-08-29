@@ -1,0 +1,242 @@
+\section{Calcolo Differenziale, Punti Critici e Studio di Funzione}
+\label{sec:esami_studio_funzione}
+
+\begin{esame}[Protocollo Rigoroso per lo Studio Qualitativo e Punti Singolari]
+Nelle prove d'esame del Prof. Alberti, lo studio qualitativo di funzione richiede massima accuratezza nella gestione dei punti singolari e del calcolo differenziale:
+\begin{enumerate}
+    \item \textbf{Classificazione delle Singolarità della Derivata Prima:}
+    Sia $f$ continua in $x_0$. Calcolando i limiti destro e sinistro di $f'(x)$ per $x \to x_0^\pm$:
+    \begin{itemize}
+        \item \textbf{Punto Angoloso:} $f'(x_0^+) \neq f'(x_0^-)$ con almeno uno dei due limiti finito.
+        \item \textbf{Cuspide:} $f'(x_0^+) = \pm \infty$ e $f'(x_0^-) = \mp \infty$ (segni discordi infiniti).
+        \item \textbf{Flesso a Tangente Verticale:} $f'(x_0^+) = f'(x_0^-) = +\infty$ oppure $-\infty$ (segni concordi infiniti).
+    \end{itemize}
+    \item \textbf{Posizione del Grafico rispetto agli Asintoti:}
+    Determinata l'equazione dell'asintoto obliquo $y = mx + q$, studiare sempre il segno dello scarto asintotico $f(x) - (mx + q)$ al primo ordine non nullo per $x \to \pm \infty$.
+    \item \textbf{Ottimizzazione su Compatti:}
+    Per il Teorema di Weierstrass, il massimo e minimo assoluto su un intervallo compatto $[a, b]$ vanno ricercati confrontando: i punti critici interni ($f'(x) = 0$), i punti di non derivabilità interni e i due estremi di bordo $\{a, b\}$.
+\end{enumerate}
+\end{esame}
+
+\begin{esempio}{Studio Completo di Funzione con Radici, Asintoti e Flessi (Appello 2023/24)}{esame_studio_f1}
+Studiare qualitativamente la funzione:
+\[
+    f(x) := \sqrt[3]{x^3 - 3x^2}
+\]
+determinandone dominio naturale, limiti agli estremi, eventuali asintoti (verticali, orizzontali, obliqui), derivabilità, classificazione dei punti di non derivabilità, intervalli di monotonia, estremi locali ed assoluti, derivata seconda e concavità/convessità.
+\tcblower
+\textbf{Soluzione Dettagliata:}
+
+\paragraph{1. Dominio, Zeri e Segno:}
+L'indice della radice è $3$ (dispari), pertanto la funzione è definita e continua su tutto l'asse reale:
+\[
+    \dom(f) = \R = (-\infty, +\infty)
+\]
+Intersezioni con gli assi e segno:
+\begin{itemize}
+    \item $f(x) = 0 \iff x^3 - 3x^2 = 0 \iff x^2(x - 3) = 0 \implies x = 0$ (radice doppia) e $x = 3$ (radice semplice).
+    \item Poiché $x^2 \ge 0$, il segno coincide con quello di $x - 3$:
+    \[
+        f(x) > 0 \iff x \in (3, +\infty), \qquad f(x) < 0 \iff x \in (-\infty, 0) \cup (0, 3)
+    \]
+\end{itemize}
+
+\paragraph{2. Limiti agli Estremi e Asintoti Obliqui:}
+Per $x \to \pm \infty$:
+\[
+    \lim_{x \to \pm \infty} f(x) = \lim_{x \to \pm \infty} x \left(1 - \frac{3}{x}\right)^{1/3} = \pm \infty
+\]
+Ricerca di asintoti obliqui $y = mx + q$:
+\begin{align*}
+    m &= \lim_{x \to \pm \infty} \frac{f(x)}{x} = \lim_{x \to \pm \infty} \left(1 - \frac{3}{x}\right)^{1/3} = 1 \\
+    q &= \lim_{x \to \pm \infty} [f(x) - x] = \lim_{x \to \pm \infty} x\left[\left(1 - \frac{3}{x}\right)^{1/3} - 1\right]
+\end{align*}
+Sviluppiamo con la formula binomiale $(1 + t)^{1/3} = 1 + \frac{1}{3}t - \frac{1}{9}t^2 + \bigO(t^3)$ con $t = -3/x \to 0$:
+\[
+    \left(1 - \frac{3}{x}\right)^{1/3} = 1 + \frac{1}{3}\left(-\frac{3}{x}\right) - \frac{1}{9}\left(-\frac{3}{x}\right)^2 + \bigO(x^{-3}) = 1 - \frac{1}{x} - \frac{1}{x^2} + \bigO(x^{-3})
+\]
+Dunque:
+\[
+    q = \lim_{x \to \pm \infty} x\left(-\frac{1}{x} - \frac{1}{x^2} + \bigO(x^{-3})\right) = \lim_{x \to \pm \infty} \left(-1 - \frac{1}{x} + \bigO(x^{-2})\right) = -1
+\]
+La retta $y = x - 1$ è \textbf{asintoto obliquo completo} sia a $+\infty$ che a $-\infty$.
+Inoltre, lo scarto $f(x) - (x - 1) = -\frac{1}{x} + \bigO(x^{-2})$ indica la posizione relativa:
+\begin{itemize}
+    \item Per $x \to +\infty$: $f(x) - (x - 1) \sim -\frac{1}{x} < 0 \implies$ grafico al di \textbf{sotto} dell'asintoto.
+    \item Per $x \to -\infty$: $f(x) - (x - 1) \sim -\frac{1}{x} > 0 \implies$ grafico al di \textbf{sopra} dell'asintoto.
+\end{itemize}
+
+\paragraph{3. Derivata Prima e Punti di Non Derivabilità:}
+Scrivendo $f(x) = (x^3 - 3x^2)^{1/3}$, per $x \notin \{0, 3\}$ applichiamo la regola della catena:
+\[
+    f'(x) = \frac{1}{3}(x^3 - 3x^2)^{-2/3} (3x^2 - 6x) = \frac{3x(x - 2)}{3 (x^2(x - 3))^{2/3}} = \frac{x(x - 2)}{x^{4/3}(x - 3)^{2/3}} = \frac{x - 2}{x^{1/3}(x - 3)^{2/3}}
+\]
+Studiamo i limiti di $f'(x)$ nei punti di annullamento dell'argomento della radice:
+\begin{itemize}
+    \item In $x = 0$: per $x \to 0$, il fattore $(x-3)^{2/3} \to (-3)^{2/3} = 3^{2/3} > 0$ e $x - 2 \to -2 < 0$. Dunque:
+    \[
+        \lim_{x \to 0^+} f'(x) = \frac{-2}{0^+ \cdot 3^{2/3}} = -\infty, \qquad \lim_{x \to 0^-} f'(x) = \frac{-2}{0^- \cdot 3^{2/3}} = +\infty
+    \]
+    Il punto $(0, 0)$ è un punto di \textbf{cuspide} rivolta verso l'alto.
+    \item In $x = 3$: per $x \to 3$, $x - 2 \to 1 > 0$ e $x^{1/3} \to 3^{1/3} > 0$, mentre $(x-3)^{2/3} \to 0^+$ sia da destra che da sinistra:
+    \[
+        \lim_{x \to 3^+} f'(x) = \lim_{x \to 3^-} f'(x) = \frac{1}{3^{1/3} \cdot 0^+} = +\infty
+    \]
+    Il punto $(3, 0)$ è un punto di \textbf{flesso a tangente verticale ascendente}.
+\end{itemize}
+
+\paragraph{4. Monotonia ed Estremi Relativi:}
+Poiché $(x-3)^{2/3} > 0$ per ogni $x \neq 3$, il segno di $f'(x)$ coincide con il segno di $\frac{x-2}{x^{1/3}}$:
+\begin{itemize}
+    \item Su $(-\infty, 0)$: $x - 2 < 0$ e $x^{1/3} < 0 \implies f'(x) > 0$ ($f$ strettamente crescente).
+    \item Su $(0, 2)$: $x - 2 < 0$ e $x^{1/3} > 0 \implies f'(x) < 0$ ($f$ strettamente decrescente).
+    \item In $x = 2$: $f'(2) = 0$ (punto stazionario).
+    \item Su $(2, 3) \cup (3, +\infty)$: $x - 2 > 0$ e $x^{1/3} > 0 \implies f'(x) > 0$ ($f$ strettamente crescente).
+\end{itemize}
+Classificazione degli estremi:
+\begin{itemize}
+    \item $x = 0$ è punto di \textbf{massimo locale} con valore $f(0) = 0$.
+    \item $x = 2$ è punto di \textbf{minimo locale} con valore $f(2) = \sqrt[3]{8 - 12} = -\sqrt[3]{4} \approx -1.587$.
+    \item Poiché $\lim_{x \to \pm \infty} f(x) = \pm \infty$, $\Imm(f) = \R$ e non esistono massimo né minimo assoluti su $\R$.
+\end{itemize}
+
+\paragraph{5. Derivata Seconda e Concavità/Convessità:}
+Calcoliamo $f''(x)$ per $x \notin \{0, 3\}$ derivando $f'(x) = (x-2) x^{-1/3} (x-3)^{-2/3}$:
+Usando la derivata logaritmica $\frac{f''(x)}{f'(x)} = \frac{1}{x-2} - \frac{1}{3x} - \frac{2}{3(x-3)}$:
+\begin{align*}
+    \frac{f''(x)}{f'(x)} &= \frac{1}{x-2} - \frac{x-3 + 2x}{3x(x-3)} = \frac{1}{x-2} - \frac{x-1}{x(x-3)} \\
+    &= \frac{x(x-3) - (x-2)(x-1)}{x(x-2)(x-3)} = \frac{-2}{x(x-2)(x-3)}
+\end{align*}
+Moltiplicando per $f'(x) = \frac{x-2}{x^{1/3}(x-3)^{2/3}}$:
+\[
+    f''(x) = \frac{x-2}{x^{1/3}(x-3)^{2/3}} \cdot \frac{-2}{x(x-2)(x-3)} = \frac{-2}{x^{4/3}(x-3)^{5/3}}
+\]
+Analisi del segno di $f''(x)$:
+\begin{itemize}
+    \item Il termine al numeratore è la costante $-2 < 0$.
+    \item Il fattore $x^{4/3} = (x^2)^{2/3} > 0$ per ogni $x \neq 0$.
+    \item Il fattore $(x-3)^{5/3}$ ha lo stesso segno di $x-3$:
+    \begin{itemize}
+        \item Per $x < 3$ ($x \neq 0$): $x - 3 < 0 \implies (x-3)^{5/3} < 0 \implies f''(x) > 0$.
+        La funzione è \textbf{strettamente convessa} su $(-\infty, 0)$ e su $(0, 3)$.
+        \item Per $x > 3$: $x - 3 > 0 \implies (x-3)^{5/3} > 0 \implies f''(x) < 0$.
+        La funzione è \textbf{strettamente concava} su $(3, +\infty)$.
+    \end{itemize}
+\end{itemize}
+In $x = 3$ la funzione cambia concavità (da convessa a concava), confermando rigorosamente la presenza del \textbf{punto di flesso a tangente verticale} $(3, 0)$.
+\end{esempio}
+
+\begin{esempio}{Massimi e Minimi con Parametro su Insieme Compatto (Appello 2022/23)}{esame_max_min_param}
+Data la funzione $f(x) := x^2 e^{-ax}$ con parametro reale $a > 0$, determinare:
+\begin{enumerate}[label=\alph*)]
+    \item I punti di massimo e minimo assoluti di $f$ sull'intervallo compatto $[0, 2]$ al variare di $a > 0$.
+    \item Il valore massimo $M(a) = \max_{x \in [0, 2]} f(x)$ e la regolarità di $M(a)$ rispetto ad $a$.
+\end{enumerate}
+\tcblower
+\textbf{Soluzione Dettagliata:}
+La funzione $f$ è di classe $C^\infty(\R)$. Sull'intervallo compatto $[0, 2]$, per il Teorema di Weierstrass, $f$ ammette sicuramente massimo e minimo assoluti.
+
+\paragraph{1. Punti Stazionari ed Estremi di Bordo:}
+Calcoliamo la derivata prima:
+\[
+    f'(x) = 2x e^{-ax} + x^2(-a e^{-ax}) = x(2 - ax)e^{-ax}
+\]
+I punti stazionari in $\R$ sono:
+\[
+    x_1 = 0, \qquad x_2 = \frac{2}{a}
+\]
+Valori nei punti notevoli:
+\begin{itemize}
+    \item In $x = 0$: $f(0) = 0$. Poiché $f(x) = x^2 e^{-ax} \ge 0$ per ogni $x \ge 0$, il punto $x = 0$ è sempre il punto di \textbf{minimo assoluto}, con $\min_{[0, 2]} f = 0$.
+    \item In $x = 2$: $f(2) = 4 e^{-2a}$.
+    \item In $x = \frac{2}{a}$: $f\left(\frac{2}{a}\right) = \left(\frac{2}{a}\right)^2 e^{-a(2/a)} = \frac{4}{a^2 e^2}$.
+\end{itemize}
+
+\paragraph{2. Posizione del Punto Critico rispetto all'Intervallo $[0, 2]$:}
+\begin{itemize}
+    \item \textbf{Caso 1: $\frac{2}{a} \ge 2 \iff 0 < a \le 1$:}
+    Il punto stazionario interno non appartiene a $(0, 2)$. Per ogni $x \in (0, 2)$ si ha $2 - ax > 0$, dunque $f'(x) > 0$.
+    La funzione è strettamente crescente su $[0, 2]$.
+    Il punto di massimo assoluto è l'estremo destro:
+    \[
+        x_{\max} = 2, \qquad M(a) = f(2) = 4e^{-2a}
+    \]
+    \item \textbf{Caso 2: $\frac{2}{a} < 2 \iff a > 1$:}
+    Il punto $x_c = \frac{2}{a}$ cade all'interno dell'intervallo $(0, 2)$.
+    Essendo $f'(x) > 0$ per $0 < x < \frac{2}{a}$ e $f'(x) < 0$ per $\frac{2}{a} < x < 2$, il punto $x_c$ è il punto di massimo assoluto su $[0, 2]$:
+    \[
+        x_{\max} = \frac{2}{a}, \qquad M(a) = f\left(\frac{2}{a}\right) = \frac{4}{a^2 e^2}
+    \]
+\end{itemize}
+
+\paragraph{3. Studio della Funzione Valore Massimo $M(a)$:}
+La funzione massimo $M \colon (0, +\infty) \to \R$ è data da:
+\[
+    M(a) = \begin{cases}
+        4e^{-2a} & \text{se } 0 < a \le 1 \\
+        \frac{4}{e^2 a^2} & \text{se } a > 1
+    \end{cases}
+\]
+Verifichiamo la continuità e derivabilità nel punto di giunzione $a = 1$:
+\begin{itemize}
+    \item Continuità: $M(1^-) = 4e^{-2}$, $M(1^+) = \frac{4}{e^2 \cdot 1^2} = 4e^{-2} = M(1)$. La funzione è continua.
+    \item Derivabilità:
+    \[
+        M'(a) = \begin{cases}
+            -8e^{-2a} & \text{per } 0 < a < 1 \implies M'(1^-) = -8e^{-2} \\
+            -\frac{8}{e^2 a^3} & \text{per } a > 1 \implies M'(1^+) = -\frac{8}{e^2 \cdot 1^3} = -8e^{-2}
+        \end{cases}
+    \]
+    Poiché le derivate destra e sinistra coincidono, $M(a)$ è di classe $C^1((0, +\infty))$.
+\end{itemize}
+\end{esempio}
+
+\begin{esempio}{Equazioni Parametriche e Teorema dei Valori Intermedi (Appello 2024/25)}{esame_studio_soluzioni_param}
+Determinare al variare del parametro reale $\lambda \in \R$ il numero di soluzioni reali distinte dell'equazione:
+\[
+    (x^2 - 4)e^{-x} = \lambda
+\]
+\tcblower
+\textbf{Soluzione Dettagliata:}
+Poniamo $h(x) := (x^2 - 4)e^{-x}$. Risolvere l'equazione equivale a intersecare il grafico di $h(x)$ con la retta orizzontale $y = \lambda$.
+
+\paragraph{1. Limiti agli Estremi e Zeri:}
+\begin{itemize}
+    \item $\dom(h) = \R$. Intersezioni asse $x$: $h(x) = 0 \iff x = \pm 2$.
+    \item $\lim_{x \to +\infty} (x^2 - 4)e^{-x} = 0^+$ (per la gerarchia infinitesima dell'esponenziale).
+    \item $\lim_{x \to -\infty} (x^2 - 4)e^{-x} = (+\infty)(+\infty) = +\infty$.
+\end{itemize}
+La retta $y = 0$ è asintoto orizzontale destro per $x \to +\infty$.
+
+\paragraph{2. Punti Stazionari e Monotonia:}
+Calcoliamo la derivata prima:
+\[
+    h'(x) = 2x e^{-x} - (x^2 - 4)e^{-x} = -(x^2 - 2x - 4)e^{-x}
+\]
+Le radici del trinomio $x^2 - 2x - 4 = 0$ sono $x_{1,2} = 1 \pm \sqrt{5}$:
+\[
+    x_1 = 1 - \sqrt{5} \approx -1.236, \qquad x_2 = 1 + \sqrt{5} \approx 3.236
+\]
+Studio del segno di $h'(x)$ (tenendo conto del segno meno davanti al trinomio):
+\begin{itemize}
+    \item Per $x < 1 - \sqrt{5}$: $h'(x) < 0 \implies h$ è strettamente decrescente da $+\infty$ a $h(x_1)$.
+    \item Per $1 - \sqrt{5} < x < 1 + \sqrt{5}$: $h'(x) > 0 \implies h$ è strettamente crescente da $h(x_1)$ a $h(x_2)$.
+    \item Per $x > 1 + \sqrt{5}$: $h'(x) < 0 \implies h$ è strettamente decrescente da $h(x_2)$ a $0^+$.
+\end{itemize}
+I valori estremi locali sono:
+\begin{align*}
+    h(x_1) &= \left((1-\sqrt{5})^2 - 4\right)e^{-(1-\sqrt{5})} = (2 - 2\sqrt{5})e^{\sqrt{5}-1} < 0 \quad (\text{minimo assoluto}) \\
+    h(x_2) &= \left((1+\sqrt{5})^2 - 4\right)e^{-(1+\sqrt{5})} = (2 + 2\sqrt{5})e^{-(\sqrt{5}+1)} > 0 \quad (\text{massimo locale})
+\end{align*}
+
+\paragraph{3. Discussione del Numero di Soluzioni al variare di $\lambda$:}
+Applicando il Teorema dei Valori Intermedi e la stretta monotonia su ciascuno dei tre intervalli $(-\infty, x_1]$, $[x_1, x_2]$ e $[x_2, +\infty)$:
+\begin{itemize}
+    \item Per $\lambda < h(x_1)$: \textbf{0 soluzioni} reali.
+    \item Per $\lambda = h(x_1)$: \textbf{1 soluzione} reale ($x = x_1$).
+    \item Per $h(x_1) < \lambda \le 0$: \textbf{2 soluzioni} reali distinte (una in $(-\infty, x_1)$ e una in $(x_1, 2]$).
+    \item Per $0 < \lambda < h(x_2)$: \textbf{3 soluzioni} reali distinte (una in $(-\infty, x_1)$, una in $(2, x_2)$ e una in $(x_2, +\infty)$).
+    \item Per $\lambda = h(x_2)$: \textbf{2 soluzioni} reali distinte (una in $(-\infty, x_1)$ e una doppia stazionaria in $x = x_2$).
+    \item Per $\lambda > h(x_2)$: \textbf{1 soluzione} reale (in $(-\infty, x_1)$).
+\end{itemize}
+\end{esempio}

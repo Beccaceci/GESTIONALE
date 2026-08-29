@@ -1,0 +1,28 @@
+\begin{tikzpicture}[scale=0.85, >=Stealth]
+    \draw[->, thick, navyblue] (-0.5,0) -- (7.5,0) node[right, font=\footnotesize] {$x$};
+    \draw[->, thick, navyblue] (0,-0.3) -- (0,4.0) node[above, font=\footnotesize] {$f_X(x)$ (PDF)};
+
+    % Curva PDF continua (Gaussiana-like)
+    \draw[domain=0.5:6.5, smooth, variable=\x, very thick, navyblue]
+        plot ({\x}, {3.5 * exp(-(\x-3.5)*(\x-3.5)/2.2)});
+
+    % Area sottesa tra a = 2.2 e b = 4.8
+    \fill[coolblue!30, domain=2.2:4.8, variable=\x]
+        (2.2, 0) --
+        plot ({\x}, {3.5 * exp(-(\x-3.5)*(\x-3.5)/2.2)}) --
+        (4.8, 0) -- cycle;
+
+    \draw[thick, dashed, navyblue] (2.2,0) -- (2.2, {3.5 * exp(-(2.2-3.5)*(2.2-3.5)/2.2)});
+    \draw[thick, dashed, navyblue] (4.8,0) -- (4.8, {3.5 * exp(-(4.8-3.5)*(4.8-3.5)/2.2)});
+
+    \node[below, font=\small\bfseries] at (2.2,0) {$a$};
+    \node[below, font=\small\bfseries] at (4.8,0) {$b$};
+
+    \node[font=\small\bfseries, text=navyblue, align=center] at (3.5, 1.2) {
+        $\mathbb{P}(a \le X \le b) = \displaystyle\int_a^b f_X(x) \, dx$
+    };
+
+    % Striscia infinitesima
+    \draw[fill=warmamber!60, draw=warmamber!90!black] (5.4,0) rectangle (5.55, {3.5 * exp(-(5.45-3.5)*(5.45-3.5)/2.2)});
+    \node[above right, font=\tiny, text=warmamber!90!black] at (5.5, 0.8) {$f_X(x)dx \approx \mathbb{P}(x \le X \le x+dx)$};
+\end{tikzpicture}

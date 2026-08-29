@@ -1,0 +1,398 @@
+% ==============================================================================
+% CAPITOLO 03 - DINAMICA DEL PUNTO MATERIALE E PRINCIPI DI NEWTON
+% ==============================================================================
+\chapter{Dinamica del Punto Materiale e Principi di Newton}
+\label{chap:dinamica_punto}
+
+\begin{tcolorbox}[enhanced, breakable, colback=navyblue!4!white, colframe=navyblue!80!black,
+    coltitle=white, fonttitle=\bfseries\sffamily, title={Quadro Sinottico del Capitolo 03 (Corrispondenza: Lezioni 04, 05, 06 e 07)},
+    sharp corners, rounded corners=south, boxrule=1pt]
+\textbf{Collocazione Modulare:} Parte I -- Cinematica e Dinamica del Punto Materiale\\
+\textbf{Trascrizioni di Riferimento:} \texttt{trascrizioni/Lezione\_04\_...md}, \texttt{Lezione\_05\_...md}, \texttt{Lezione\_06\_...md}, \texttt{Lezione\_07\_...md}\\
+\textbf{Manuale di Riferimento:} Focardi, Massa, Ugolini -- \emph{Fisica Generale: Meccanica e Termodinamica} (Capitolo 3)\\
+\textbf{Obiettivi Didattici e Competenze:}\par
+\begin{itemize}
+    \item Formulare i tre principi della dinamica newtoniana e comprendere il concetto di sistema di riferimento inerziale e massa inerziale.
+    \item Classificare le forze fondamentali della meccanica: forza peso, reazioni vincolari normali, forze elastiche lineari (Hooke) e tensioni delle funi ideali.
+    \item Modellizzare rigorosamente l'attrito radente statico ($f_s \le \mu_s N$) e dinamico ($f_d = \mu_d N$) con dipendenza dalla velocità relativa tra le superfici.
+    \item Proiettare il secondo principio sulle coordinate intrinseche: dinamica del moto curvilineo, origine reale della forza centripeta $\vec{F}_n = m \frac{v^2}{R}\un$.
+    \item Risolvere problemi classici di dinamica: piano inclinato, macchina di Atwood, curve sopraelevate con e senza attrito, pendolo conico e looping (giro della morte).
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5em}
+
+% ------------------------------------------------------------------------------
+\section{I Tre Principi Fondamentali della Dinamica}
+\label{sec:principi_newton}
+% ------------------------------------------------------------------------------
+
+La \textbf{dinamica} studia le relazioni quantitative tra il moto dei corpi e le cause fisiche che lo determinano, ovvero le interazioni reciproche espresse mediante il concetto vettoriale di **forza** $\vec{F}$.
+
+\subsection{Primo Principio (Principio di Inerzia)}
+
+\begin{legge}{Primo Principio della Dinamica (Galileo-Newton)}{legge:primo_principio}
+Esiste una classe privilegiata di sistemi di riferimento, detti \textbf{sistemi di riferimento inerziali}, in cui un punto materiale non soggetto a forze esterne (o soggetto a un sistema di forze a risultante nulla) permane nel suo stato di quiete o di moto rettilineo uniforme:
+\begin{equation}
+    \sum \vec{F}_i = \vec{0} \iff \vec{a} = \vec{0} \iff \vec{v} = \text{cost}
+\end{equation}
+\end{legge}
+
+\begin{osservazione}[Ruolo Fondamentale del Primo Principio]
+Il primo principio non è un mero caso particolare del secondo con $\vec{F}=\vec{0}$, ma costituisce il postulato di esistenza dei sistemi inerziali (definiti operativamente rispetto alle stelle fisse o a corpi lontani non interagenti).
+\end{osservazione}
+
+\subsection{Secondo Principio (Legge Fondamentale della Meccanica)}
+
+\begin{legge}{Secondo Principio della Dinamica}{legge:secondo_principio}
+In un sistema di riferimento inerziale, la risultante $\vec{R} = \sum \vec{F}$ delle forze applicate a un punto materiale è pari alla derivata temporale della sua \textbf{quantità di moto} $\vec{p} \coloneqq m\vec{v}$:
+\begin{equation}
+    \vec{F}_{\text{tot}} = \dv{\vec{p}}{t} = \dv{}{t}(m\vec{v})
+    \label{eq:secondo_principio_gen}
+\end{equation}
+Per un punto materiale a massa costante $m = \text{cost}$, l'equazione si riduce alla celebre forma:
+\begin{equation}
+    \vec{F}_{\text{tot}} = m\vec{a} = m\dvtwo{\vec{r}}{t}
+    \label{eq:f_ma}
+\end{equation}
+\end{legge}
+
+\begin{definizione}{Massa Inerziale}{def:massa_inerziale}
+La \textbf{massa inerziale} $m > 0$ è una grandezza scalare intrinseca del corpo che misura la sua resistenza quantitativa a variare il proprio stato di moto (ovvero l'inerzia ad accelerare sotto l'azione di una data forza). L'unità di misura nel SI è il chilogrammo ($\si{\kilogram}$).
+\end{definizione}
+
+\subsection{Terzo Principio (Principio di Azione e Reazione)}
+
+\begin{legge}{Terzo Principio della Dinamica}{legge:terzo_principio}
+Se un corpo $1$ esercita una forza $\vec{F}_{12}$ sul corpo $2$, allora il corpo $2$ esercita simultaneamente sul corpo $1$ una forza $\vec{F}_{21}$ uguale in modulo, avente la stessa direzione (retta d'azione congiungente) e verso opposto:
+\begin{equation}
+    \vec{F}_{21} = -\vec{F}_{12}
+    \label{eq:terzo_principio}
+\end{equation}
+\end{legge}
+
+\begin{esame}[Azione e Reazione su Corpi Distinti]
+Le forze di azione e reazione $\vec{F}_{12}$ e $\vec{F}_{21}$ non si elidono mai a vicenda poiché agiscono su \textbf{corpi differenti}. Nello scrivere il secondo principio $\sum\vec{F} = m\vec{a}$ per un dato corpo, si devono sommare esclusivamente le forze esterne agenti \emph{su quel singolo corpo}.
+\end{esame}
+
+% ------------------------------------------------------------------------------
+\section{Classificazione delle Forze Fondamentali della Meccanica}
+\label{sec:forze_meccanica}
+% ------------------------------------------------------------------------------
+
+\subsection{Forza Peso e Accelerazione di Gravità}
+In prossimità della superficie terrestre, un corpo di massa $m$ è soggetto all'attrazione gravitazionale espressa dalla **forza peso**:
+\begin{equation}
+    \vec{P} = m\vec{g}
+\end{equation}
+dove $\vec{g} = -g\uy$ è l'accelerazione di gravità locale ($g \approx \SI{9.81}{\metre\per\second\squared}$).
+
+\subsection{Reazioni Vincolari e Vincoli Ideali}
+Un vincolo è un corpo o una guida geometrica che limita i gradi di libertà del punto materiale nello spazio.
+\begin{itemize}
+    \item \textbf{Superficie Liscia (Priva di Attrito)}: la reazione vincolare $\vec{N}$ è sempre puramente normale (perpendicolare) alla superficie di contatto: $\vec{N} \perp \text{superficie}$.
+    \item \textbf{Superficie Scabra}: la reazione totale $\vec{\Phi}$ si scompone in una componente normale $\vec{N}$ e una componente tangente $\vec{f}_a$ (forza di attrito radente): $\vec{\Phi} = \vec{N} + \vec{f}_a$.
+\end{itemize}
+
+\subsection{Forza Elastica Lineare (Legge di Hooke)}
+Una molla ideale di lunghezza a riposo $\ell_0$ e costante elastica $k > 0$ ($\si{\newton\per\metre}$), allungata o compressa di una quantità $\Delta x = x - x_0$, esercita una forza di richiamo opposta allo spostamento:
+\begin{equation}
+    \vec{F}_e = -k (x - x_0)\ux = -k \Delta\vec{x}
+    \label{eq:hooke}
+\end{equation}
+
+\subsection{Tensione delle Funi Ideali}
+Una fune ideale ha massa trascurabile ($m_{\text{fune}} \approx 0$) ed è inestensibile. Di conseguenza:
+\begin{enumerate}
+    \item La tensione $\vec{T}$ è sempre diretta lungo l'asse della fune ed esercita esclusivamente un'azione di trazione ($T \ge 0$).
+    \item Il modulo della tensione $T$ è uniforme lungo tutta la fune, anche attraverso carrucole fisse ideali prive di attrito e di massa.
+\end{enumerate}
+
+% ------------------------------------------------------------------------------
+\section{Forze di Attrito Radente e Modello Coulomb-Amontons}
+\label{sec:attrito_radente}
+% ------------------------------------------------------------------------------
+
+L'attrito radente si manifesta ogni volta che due superfici solide a contatto premono l'una contro l'altra con una forza normale $N = |\vec{N}|$.
+
+\begin{definizione}{Attrito Radente Statico e Dinamico}{def:attrito}
+\begin{itemize}
+    \item \textbf{Attrito Statico ($\vec{v}_{\text{rel}} = \vec{0}$)}: è una forza di auto-regolazione che si oppone al moto incipiente. Il suo modulo varia da zero fino a un valore massimo di distacco:
+    \begin{equation}
+        0 \le |\vec{f}_s| \le f_{s,\max} = \mu_s N
+        \label{eq:attrito_statico}
+    \end{equation}
+    dove $\mu_s$ è il \textbf{coefficiente di attrito statico} (adimensionale).
+    \item \textbf{Attrito Dinamico ($\vec{v}_{\text{rel}} \neq \vec{0}$)}: quando il corpo è in moto relativo, la forza ha modulo costante ed è orientata in verso opposto alla velocità relativa:
+    \begin{equation}
+        \vec{f}_d = -\mu_d N \frac{\vec{v}_{\text{rel}}}{|\vec{v}_{\text{rel}}|}
+        \label{eq:attrito_dinamico}
+    \end{equation}
+    dove $\mu_d$ è il \textbf{coefficiente di attrito dinamico} ($\mu_d < \mu_s$).
+\end{itemize}
+\end{definizione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    \draw[->, thick] (0,0) -- (5,0) node[right] {Forza di trazione $F$};
+    \draw[->, thick] (0,0) -- (0,3.5) node[above] {Forza di attrito $f_a$};
+    
+    % Regime statico
+    \draw[navyblue, very thick] (0,0) -- (2.5, 2.5) node[midway, above left] {$f_s = F$};
+    \filldraw[crimsonred] (2.5, 2.5) circle (2pt) node[above] {$f_{s,\max} = \mu_s N$};
+    \draw[dashed, gray] (2.5, 2.5) -- (2.5, 0) node[below] {$F_{\text{crit}}$};
+    \draw[dashed, gray] (2.5, 2.5) -- (0, 2.5);
+    
+    % Caduta a dinamico
+    \draw[dashed, crimsonred, thick] (2.5, 2.5) -- (2.5, 1.8);
+    \filldraw[forestgreen] (2.5, 1.8) circle (2pt);
+    
+    % Regime dinamico costante
+    \draw[forestgreen, very thick] (2.5, 1.8) -- (4.8, 1.8) node[right] {$f_d = \mu_d N$};
+    \draw[dashed, gray] (2.5, 1.8) -- (0, 1.8);
+    
+    % Etichette di regime
+    \node[navyblue] at (1.2, 0.5) {\small Regime Statico};
+    \node[forestgreen] at (3.7, 0.5) {\small Regime Dinamico};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Dinamica del Piano Inclinato Scabro}
+Consideriamo un blocco di massa $m$ posto su un piano inclinato di un angolo $\theta$ rispetto all'orizzontale.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Piano inclinato
+    \coordinate (A) at (0,0);
+    \coordinate (B) at (4,0);
+    \coordinate (C) at (4,2.309);
+    \draw[thick] (A) -- (B) -- (C) -- cycle;
+    \draw[purpleaccent, thick, -{Stealth}] (1,0) arc (0:30:1) node[midway, right] {$\theta$};
+    
+    % Blocco inclinato
+    \begin{scope}[shift={(2, 1.155)}, rotate=30]
+        \filldraw[fill=blue!10, draw=navyblue, thick] (-0.6,0) rectangle (0.6,0.6);
+        \coordinate (G) at (0,0.3);
+        \filldraw[black] (G) circle (1.5pt) node[above=2pt] {$m$};
+        
+        % Forze nel sistema inclinato
+        \draw[->, ultra thick, forestgreen] (G) -- (0, 1.5) node[above] {$\vec{N}$};
+        \draw[->, ultra thick, crimsonred] (G) -- (-1.2, 0.3) node[above left] {$\vec{f}_a$};
+    \end{scope}
+    
+    % Forza peso verticale
+    \draw[->, ultra thick, navyblue] (2, 1.455) -- (2, -0.2) node[below] {$\vec{P} = m\vec{g}$};
+    
+    % Scomposizione del peso
+    \draw[dashed, gray] (2, 1.455) -- ($(2, 1.455) + (-30:0.83)$);
+    \draw[dashed, gray] (2, 1.455) -- ($(2, 1.455) + (-120:1.43)$);
+\end{tikzpicture}
+\end{center}
+
+Scegliendo l'asse $x$ parallelo al piano (verso il basso) e l'asse $y$ perpendicolare al piano (verso l'alto):
+\begin{align}
+    \text{Asse } y: \quad & N - mg\cos\theta = 0 \implies \mathbf{N = mg\cos\theta} \label{eq:piano_n} \\
+    \text{Asse } x: \quad & mg\sin\theta - f_a = m a_x \label{eq:piano_x}
+\end{align}
+
+\begin{teorema}{Angolo Limite di Scivolamento}{teo:angolo_limite}
+La condizione affinché il blocco rimanga in quiete sul piano inclinato è:
+\begin{equation}
+    mg\sin\theta \le f_{s,\max} = \mu_s (mg\cos\theta) \iff \tan\theta \le \mu_s
+\end{equation}
+L'\textbf{angolo limite di scivolamento} è:
+\begin{equation}
+    \theta_{\text{lim}} = \arctan(\mu_s)
+\end{equation}
+Se $\theta > \theta_{\text{lim}}$, il corpo scivola verso il basso con accelerazione costante:
+\begin{equation}
+    a_x = g(\sin\theta - \mu_d \cos\theta)
+\end{equation}
+\end{teorema}
+
+% ------------------------------------------------------------------------------
+\section{Dinamica del Moto Curvilineo e Forze Centripete}
+\label{sec:dinamica_curvilinea}
+% ------------------------------------------------------------------------------
+
+Applicando il secondo principio $\vec{F}_{\text{tot}} = m\vec{a}$ sulla terna intrinseca $(\ut, \un)$:
+\begin{equation}
+    \vec{F}_t + \vec{F}_n = m a_t \ut + m a_n \un = m\left(\dv{v}{t}\right)\ut + m\left(\frac{v^2}{R}\right)\un
+\end{equation}
+
+\begin{definizione}{Forza Centripeta}{def:forza_centripeta}
+La \textbf{forza centripeta} non è una nuova interazione della natura, ma la risultante vettoriale di tutte le forze fisiche reali (gravità, reazione normale, tensione, attrito) proiettate lungo il versore normale $\un$:
+\begin{equation}
+    F_n = \sum F_{\text{rad}} = m\frac{v^2}{R}
+    \label{eq:forza_centripeta}
+\end{equation}
+\end{definizione}
+
+\subsection{Curva Stradale Sopraelevata}
+Un'automobile affronta una curva circolare di raggio $R$ a velocità costante $v$ su una carreggiata inclinata di un angolo $\theta$ rispetto all'orizzontale.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Piano inclinato sopraelevato
+    \draw[thick] (0,0) -- (4,0) -- (4, 1.8) -- cycle;
+    \draw[purpleaccent, thick, -{Stealth}] (1,0) arc (0:24.2:1) node[midway, right] {$\theta$};
+    
+    % Sezione vettura
+    \begin{scope}[shift={(2, 0.9)}, rotate=24.2]
+        \filldraw[fill=red!10, draw=crimsonred, thick] (-0.6,0) rectangle (0.6,0.5);
+        \coordinate (G) at (0,0.25);
+        \filldraw[black] (G) circle (1.5pt);
+        \draw[->, ultra thick, navyblue] (G) -- (0, 2.0) node[above right] {$\vec{N}$};
+    \end{scope}
+    
+    % Forza peso
+    \draw[->, ultra thick, forestgreen] (2, 1.15) -- (2, -0.3) node[below] {$\vec{P} = m\vec{g}$};
+    
+    % Risultante centripeta
+    \draw[->, ultra thick, crimsonred, dashed] (2, 1.15) -- (0.8, 1.15) node[left] {$\vec{F}_c = m\frac{v^2}{R}\un$};
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+    \item \textbf{Caso Liscio (senza attrito, $\mu_s = 0$):}\\
+    Proiettando lungo la verticale e lungo la direzione orizzontale centripeta:
+    \begin{align}
+        \text{Verticale:} \quad & N\cos\theta - mg = 0 \implies N = \frac{mg}{\cos\theta} \\
+        \text{Centripeta:} \quad & N\sin\theta = m\frac{v^2}{R}
+    \end{align}
+    Dividendo membro a membro si ottiene la velocità ideale di progetto $v_0$:
+    \begin{equation}
+        \tan\theta = \frac{v_0^2}{g R} \implies \mathbf{v_0 = \sqrt{g R \tan\theta}}
+        \label{eq:curva_ideale}
+    \end{equation}
+    
+    \item \textbf{Caso con Attrito Statico $\mu_s$ (Range di Velocità Sicura $[v_{\min}, v_{\max}]$):}\\
+    La velocità massima ammissibile prima dello slittamento verso l'esterno è:
+    \begin{equation}
+        v_{\max} = \sqrt{g R \left(\frac{\tan\theta + \mu_s}{1 - \mu_s\tan\theta}\right)}
+    \end{equation}
+    mentre la velocità minima per evitare lo scivolamento verso l'interno (a basse andature) è:
+    \begin{equation}
+        v_{\min} = \sqrt{g R \left(\frac{\tan\theta - \mu_s}{1 + \mu_s\tan\theta}\right)} \quad (\text{se } \tan\theta > \mu_s)
+    \end{equation}
+\end{enumerate}
+
+% ------------------------------------------------------------------------------
+\section{Esercizi Risolti ed Applicativi con Diagrammi di Corpo Libero (FBD)}
+\label{sec:esercizi_dinamica}
+% ------------------------------------------------------------------------------
+
+\begin{esercizio}[Macchina di Atwood Ideale e Diagramma di Corpo Libero]
+\textbf{Testo:}
+Due masse $m_1$ ed $m_2$ ($m_2 > m_1$) sono collegate da una fune ideale inestensibile e priva di massa che scorre su una carrucola fissa ideale priva di attrito e di massa. Calcolare l'accelerazione $a$ del sistema e la tensione $T$ della fune, analizzando le forze agenti su ciascun corpo.
+\end{esercizio}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Carrucola
+    \draw[thick] (0,3) circle (0.5);
+    \filldraw[black] (0,3) circle (2pt);
+    \draw[thick] (0,3) -- (0,3.8);
+    \fill[pattern=north east lines] (-0.5,3.8) rectangle (0.5,4.0);
+    
+    % Fune e masse
+    \draw[thick] (-0.5,3) -- (-0.5, 1.5);
+    \draw[thick] (0.5,3) -- (0.5, 0.8);
+    
+    % Massa m1
+    \filldraw[fill=blue!10, draw=navyblue, thick] (-0.8, 1.0) rectangle (-0.2, 1.5);
+    \node at (-0.5, 1.25) {$m_1$};
+    
+    % Massa m2
+    \filldraw[fill=red!10, draw=crimsonred, thick] (0.2, 0.2) rectangle (0.8, 0.8);
+    \node at (0.5, 0.5) {$m_2$};
+    
+    % Forze su m1
+    \draw[->, ultra thick, forestgreen] (-0.5, 1.5) -- (-0.5, 2.5) node[left] {$\vec{T}_1$};
+    \draw[->, ultra thick, navyblue] (-0.5, 1.0) -- (-0.5, 0.2) node[left] {$\vec{P}_1 = m_1\vec{g}$};
+    
+    % Forze su m2
+    \draw[->, ultra thick, forestgreen] (0.5, 0.8) -- (0.5, 1.8) node[right] {$\vec{T}_2$};
+    \draw[->, ultra thick, crimsonred] (0.5, 0.2) -- (0.5, -1.0) node[right] {$\vec{P}_2 = m_2\vec{g}$};
+    
+    % Versi accelerazione
+    \draw[->, thick, purpleaccent] (-1.2, 1.0) -- (-1.2, 1.8) node[midway, left] {$a$};
+    \draw[->, thick, purpleaccent] (1.2, 0.8) -- (1.2, 0.0) node[midway, right] {$a$};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[enhanced, breakable, colback=forestgreen!5!white, colframe=forestgreen!80!black,
+    title={\textbf{Analisi delle Forze in Gioco per la Macchina di Atwood}}, fonttitle=\bfseries\sffamily]
+\begin{itemize}
+    \item \textbf{Forze Presenti su ciascun corpo:}
+    \begin{itemize}
+        \item \textbf{Forza Peso ($\vec{P}_i = m_i\vec{g}$):} attrazione gravitazionale diretta verso il basso lungo $-\uy$. Poiché $m_2 > m_1 \implies P_2 > P_1$.
+        \item \textbf{Tensione della Fune ($\vec{T}_i$):} forza di trazione esercitata dalla fune verso l'alto lungo $+\uy$. Poiché la fune è priva di massa e la carrucola è ideale priva di attrito ed inerzia ($I=0$), la tensione è identica su entrambi i rami: $|\vec{T}_1| = |\vec{T}_2| = T$.
+    \end{itemize}
+    \item \textbf{Forze Assenti e Motivazione Fisica:}
+    \begin{itemize}
+        \item \textbf{Nessuna forza orizzontale:} il moto è puramente monodimensionale verticale; le funi pendono verticalmente senza oscillazioni trasversali.
+        \item \textbf{Nessuna reazione normale $\vec{N}$:} i blocchi sono sospesi a mezz'aria senza contatto con pareti o guide.
+    \end{itemize}
+\end{itemize}
+\end{tcolorbox}
+
+\textbf{Risoluzione Analitica:}
+\begin{align}
+    \text{Corpo 1 (sale):} \quad & T - m_1 g = m_1 a \label{eq:atwood_1_fbd} \\
+    \text{Corpo 2 (scende):} \quad & m_2 g - T = m_2 a \label{eq:atwood_2_fbd}
+\end{align}
+Sommando membro a membro:
+\begin{equation}
+    (m_2 - m_1)g = (m_1 + m_2)a \implies \mathbf{a = \frac{m_2 - m_1}{m_1 + m_2}\,g}, \qquad \mathbf{T = \frac{2 m_1 m_2}{m_1 + m_2}\,g}
+\end{equation}
+
+\vspace{0.8em}
+
+\begin{esercizio}[Giro della Morte e Condizione di Contatto del Vincolo]
+\textbf{Testo:}
+Un carrello puntiforme scivola senza attrito lungo una guida circolare verticale di raggio $R$. Determinare la velocità minima $v_{\text{top}}$ nel punto più alto e analizzare le forze agenti nel punto sommitale e nel punto più basso.
+\end{esercizio}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Guida circolare
+    \draw[very thick, navyblue] (0,0) circle (2);
+    \draw[dashed, gray] (0,-2) -- (0,2);
+    \filldraw[black] (0,0) circle (1.5pt) node[right] {$O$};
+    
+    % Punto più alto C (Top)
+    \coordinate (C) at (0,2);
+    \filldraw[crimsonred] (C) circle (3pt) node[above=2pt] {$C$ (Top)};
+    \draw[->, ultra thick, forestgreen] (C) -- (0, 0.9) node[right] {$\vec{P} = m\vec{g}$};
+    \draw[->, ultra thick, navyblue] (C) -- (0, 0.2) node[left] {$\vec{N}_{\text{top}}$};
+    \draw[->, very thick, purpleaccent] (C) -- (-1.2, 2) node[above] {$\vec{v}_{\text{top}}$};
+    
+    % Punto più basso B (Bottom)
+    \coordinate (B) at (0,-2);
+    \filldraw[crimsonred] (B) circle (3pt) node[below=2pt] {$B$ (Bottom)};
+    \draw[->, ultra thick, forestgreen] (B) -- (0, -3.0) node[right] {$\vec{P} = m\vec{g}$};
+    \draw[->, ultra thick, navyblue] (B) -- (0, -0.4) node[right] {$\vec{N}_{\text{bottom}}$};
+    \draw[->, very thick, purpleaccent] (B) -- (1.5, -2) node[below] {$\vec{v}_{\text{bottom}}$};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[enhanced, breakable, colback=forestgreen!5!white, colframe=forestgreen!80!black,
+    title={\textbf{Analisi delle Forze nel Sistema Inerziale al Vertice e alla Base}}, fonttitle=\bfseries\sffamily]
+\begin{itemize}
+    \item \textbf{Al Vertice ($C$):}
+    \begin{itemize}
+        \item Sia la forza peso $\vec{P} = mg\un$ sia la reazione normale della guida $\vec{N}$ spingono \textbf{entrambe verso il basso} (verso il centro $O$ lungo $\un$).
+        \item Poiché il vincolo è unilaterale (la rotaia può solo spingere, non tirare), la reazione deve essere positiva: $N \ge 0$.
+        \item Nel sistema inerziale **non esiste alcuna forza centrifuga verso l'alto**: l'accelerazione centripeta $a_n = v^2/R$ è prodotta dalla somma delle sole due forze reali $\vec{P} + \vec{N}$.
+    \end{itemize}
+    \item \textbf{Alla Base ($B$):}
+    \begin{itemize}
+        \item La reazione normale $\vec{N}$ è diretta verso l'alto ($\un = +\uy$) e deve contemporaneamente bilanciare il peso e fornire la forza centripeta: $N - mg = m\frac{v_B^2}{R} \implies N = mg + m\frac{v_B^2}{R}$.
+    \end{itemize}
+\end{itemize}
+\end{tcolorbox}
+
+\textbf{Risoluzione Analitica:}
+Nel vertice: $N + mg = m\frac{v_{\text{top}}^2}{R} \implies N = m\left(\frac{v_{\text{top}}^2}{R} - g\right) \ge 0 \implies \mathbf{v_{\text{top}} \ge \sqrt{g R}}$.
+Nel punto di distacco critico imminente ($N = 0$), l'intera accelerazione centripeta è fornita esclusivamente dalla forza peso.

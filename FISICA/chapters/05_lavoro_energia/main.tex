@@ -1,0 +1,368 @@
+% ==============================================================================
+% CAPITOLO 05 - LAVORO, ENERGIA, FORZE CONSERVATIVE E CONSERVAZIONE
+% ==============================================================================
+\chapter{Lavoro, Energia, Forze Conservative e Conservazione}
+\label{chap:lavoro_energia}
+
+\begin{tcolorbox}[enhanced, breakable, colback=navyblue!4!white, colframe=navyblue!80!black,
+    coltitle=white, fonttitle=\bfseries\sffamily, title={Quadro Sinottico del Capitolo 05 (Corrispondenza: Lezioni 10, 11 e 12)},
+    sharp corners, rounded corners=south, boxrule=1pt]
+\textbf{Collocazione Modulare:} Parte II -- Leggi di Conservazione, Urti e Corpo Rigido\\
+\textbf{Trascrizioni di Riferimento:} \texttt{trascrizioni/Lezione\_10\_...md}, \texttt{Lezione\_11\_...md}, \texttt{Lezione\_12\_...md}\\
+\textbf{Manuale di Riferimento:} Focardi, Massa, Ugolini -- \emph{Fisica Generale: Meccanica e Termodinamica} (Capitolo 5)\\
+\textbf{Obiettivi Didattici e Competenze:}\par
+\begin{itemize}
+    \item Definire rigorosamente il lavoro elementare $\dd W = \vec{F}\cdot\dd\vec{r}$, il lavoro finito come integrale di linea e la potenza $P = \vec{F}\cdot\vec{v}$.
+    \item Dimostrare analiticamente il Teorema dell'Energia Cinetica (Forze Vive) per forze generiche: $W_{\text{tot}} = \Delta E_k$.
+    \item Formalizzare il concetto di campo di forze conservativo, gradiente del potenziale ($\vec{F} = -\grad U$) e calcolare le energie potenziali notevoli (peso, molla, gravitazione).
+    \item Formulare il Teorema di Conservazione dell'Energia Meccanica in presenza di sole forze conservative e il bilancio in presenza di forze dissipative ($W_{\text{nc}} = \Delta E_{\text{mec}}$).
+    \item Condurre l'analisi qualitativa del moto 1D dalle curve di potenziale $U(x)$: punti di turning, barriere energetiche, stabilità dell'equilibrio e frequenza delle piccole oscillazioni.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5em}
+
+% ------------------------------------------------------------------------------
+\section{Lavoro Meccanico e Potenza}
+\label{sec:lavoro_potenza}
+% ------------------------------------------------------------------------------
+
+\begin{definizione}{Lavoro di una Forza}{def:lavoro}
+Data una forza $\vec{F}$ agente su un punto materiale che compie uno spostamento infinitesimo $\dd\vec{r}$, il \textbf{lavoro elementare} è lo scalare:
+\begin{equation}
+    \dd W \coloneqq \vec{F}\cdot\dd\vec{r} = F_t \dd s = |\vec{F}| |\dd\vec{r}| \cos\theta
+    \label{eq:lavoro_elementare}
+\end{equation}
+dove $\theta$ è l'angolo compreso tra la forza e la tangente alla traiettoria orientata nel verso del moto.
+L'unità di misura nel SI è il \textbf{Joule} ($\si{\joule} = \si{\newton\metre} = \si{\kilogram\metre\squared\per\second\squared}$).
+
+Per uno spostamento finito lungo una traiettoria continua $\gamma$ dal punto $A$ al punto $B$, il \textbf{lavoro totale} è l'integrale di linea:
+\begin{equation}
+    W_{A\to B} \coloneqq \int_{\gamma, A}^B \vec{F}\cdot\dd\vec{r} = \int_{t_A}^{t_B} \left(F_x \dot{x} + F_y \dot{y} + F_z \dot{z}\right)\dd t
+    \label{eq:lavoro_integrale}
+\end{equation}
+\end{definizione}
+
+\begin{itemize}
+    \item Se $\theta \in [0, \pi/2) \implies \dd W > 0$: lavoro \textbf{motore} (favorisce l'aumento di velocità).
+    \item Se $\theta \in (\pi/2, \pi] \implies \dd W < 0$: lavoro \textbf{resistente} (dissipa energia o frena il moto).
+    \item Se $\theta = \pi/2 \implies \dd W = 0$: le forze ortogonali allo spostamento istantaneo (es. reazione vincolare normale $\vec{N}$ su guide fisse, forza centripeta, forza di Lorentz magnetica $\vec{F}_B = q\vec{v}\times\vec{B}$) non compiono mai lavoro.
+\end{itemize}
+
+\begin{definizione}{Potenza Meccanica}{def:potenza}
+La \textbf{potenza istantanea} $P(t)$ è la velocità temporale di erogazione del lavoro:
+\begin{equation}
+    P(t) \coloneqq \dv{W}{t} = \frac{\vec{F}\cdot\dd\vec{r}}{\dd t} = \vec{F}\cdot\vec{v}
+    \label{eq:potenza}
+\end{equation}
+L'unità di misura è il \textbf{Watt} ($\si{\watt} = \si{\joule\per\second}$).
+\end{definizione}
+
+% ------------------------------------------------------------------------------
+\section{Il Teorema dell'Energia Cinetica (Teorema delle Forze Vive)}
+\label{sec:teorema_forze_vive}
+% ------------------------------------------------------------------------------
+
+\begin{definizione}{Energia Cinetica}{def:energia_cinetica}
+L'\textbf{energia cinetica} $E_k$ di un punto materiale di massa $m$ che trasla con velocità $\vec{v}$ è la grandezza scalare sempre non negativa:
+\begin{equation}
+    E_k \coloneqq \frac{1}{2}m v^2 = \frac{1}{2}m (\vec{v}\cdot\vec{v}) = \frac{p^2}{2m}
+    \label{eq:energia_cinetica}
+\end{equation}
+\end{definizione}
+
+\begin{teorema}{Teorema dell'Energia Cinetica}{teo:energia_cinetica}
+Il lavoro totale $W_{\text{tot}}$ compiuto dalla \textbf{risultante di tutte le forze} (conservative, non conservative, interne ed esterne) agenti su un punto materiale durante il tragitto da $A$ a $B$ è pari alla variazione della sua energia cinetica:
+\begin{equation}
+    W_{\text{tot}} = \Delta E_k = E_k(B) - E_k(A) = \frac{1}{2}m v_B^2 - \frac{1}{2}m v_A^2
+    \label{eq:teorema_forze_vive}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Partiamo dalla definizione di lavoro totale ed esprimiamo la risultante delle forze tramite il secondo principio $\vec{F}_{\text{tot}} = m\dv{\vec{v}}{t}$:
+\begin{equation}
+    W_{\text{tot}} = \int_A^B \vec{F}_{\text{tot}}\cdot\dd\vec{r} = \int_{t_A}^{t_B} \left(m\dv{\vec{v}}{t}\right)\cdot(\vec{v}\,\dd t) = m \int_{t_A}^{t_B} \vec{v}\cdot\dv{\vec{v}}{t}\,\dd t
+\end{equation}
+Applicando l'identità differenziale $\dv{}{t}\left(\frac{1}{2}v^2\right) = \vec{v}\cdot\dv{\vec{v}}{t}$:
+\begin{equation}
+    W_{\text{tot}} = m \int_{t_A}^{t_B} \dv{}{t}\left(\frac{1}{2}v^2\right)\dd t = \frac{1}{2}m \int_{v_A}^{v_B} \dd(v^2) = \frac{1}{2}m v_B^2 - \frac{1}{2}m v_A^2 = \Delta E_k
+\end{equation}
+\end{dimostrazione}
+
+% ------------------------------------------------------------------------------
+\section{Campi di Forze Conservative ed Energia Potenziale}
+\label{sec:forze_conservative}
+% ------------------------------------------------------------------------------
+
+\begin{definizione}{Forza Conservativa}{def:forza_conservativa}
+Una forza $\vec{F}(\vec{r})$ è \textbf{conservativa} se soddisfa una delle seguenti quattro condizioni matematiche equivalenti:
+\begin{enumerate}
+    \item Il lavoro $W_{A\to B} = \int_{\gamma} \vec{F}\cdot\dd\vec{r}$ dipende esclusivamente dagli estremi $A$ e $B$ e non dal cammino $\gamma$ percorso.
+    \item La circuitazione lungo qualsiasi cammino chiuso orientato $\Gamma$ è identicamente nulla:
+    \begin{equation}
+        \oint_\Gamma \vec{F}\cdot\dd\vec{r} = 0
+    \end{equation}
+    \item Il campo è irrotazionale: $\rot\vec{F} = \vec{\nabla}\times\vec{F} = \vec{0}$ in un dominio semplicemente connesso.
+    \item Esiste una funzione scalare differenziabile $U(\vec{r})$, detta \textbf{energia potenziale}, tale che:
+    \begin{equation}
+        \vec{F} = -\grad U = -\vec{\nabla}U = -\left(\pdv{U}{x}\ux + \pdv{U}{y}\uy + \pdv{U}{z}\uz\right)
+        \label{eq:gradiente_potenziale}
+    \end{equation}
+\end{enumerate}
+\end{definizione}
+
+\begin{teorema}{Lavoro ed Energia Potenziale}{teo:lavoro_potenziale}
+Per una forza conservativa, il lavoro è pari all'\textbf{opposto della variazione di energia potenziale}:
+\begin{equation}
+    W_{\text{cons}} = -\Delta U = -(U_B - U_A) = U(A) - U(B)
+    \label{eq:lavoro_u}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Sostituendo $\vec{F} = -\vec{\nabla}U$ nell'integrale di linea:
+\begin{equation}
+    W_{A\to B} = \int_A^B \vec{F}\cdot\dd\vec{r} = -\int_A^B \vec{\nabla}U\cdot\dd\vec{r} = -\int_A^B \dd U = -(U(B) - U(A)) = -\Delta U
+\end{equation}
+\end{dimostrazione}
+
+\subsection{Energie Potenziali delle Forze Fondamentali}
+
+\begin{enumerate}
+    \item \textbf{Forza Peso Uniforme ($\vec{P} = -mg\uy$):}
+    \begin{equation}
+        \dd U_g = -P_y \dd y = -(-mg)\dd y = mg\,\dd y \implies \mathbf{U_g(y) = mgy + C}
+    \end{equation}
+    
+    \item \textbf{Forza Elastica di Hooke ($\vec{F}_e = -k x\ux$):}
+    \begin{equation}
+        \dd U_e = -(-k x)\dd x = k x\,\dd x \implies \mathbf{U_e(x) = \frac{1}{2}k x^2 + C}
+    \end{equation}
+    
+    \item \textbf{Forza Gravitazionale Newtoniana ($\vec{F}_g = -G\frac{Mm}{r^2}\ur$):}
+    \begin{equation}
+        \dd U = -\left(-G\frac{Mm}{r^2}\right)\dd r = G\frac{Mm}{r^2}\dd r \implies \mathbf{U(r) = -G\frac{Mm}{r} + C}
+    \end{equation}
+    fissando convenzionalmente lo zero all'infinito ($U(\infty) = 0$).
+\end{enumerate}
+
+% ------------------------------------------------------------------------------
+\section{Conservazione dell'Energia Meccanica e Bilancio Dissipativo}
+\label{sec:conservazione_energia}
+% ------------------------------------------------------------------------------
+
+\begin{definizione}{Energia Meccanica Totale}{def:energia_meccanica}
+L'\textbf{energia meccanica} $E_{\text{mec}}$ di un sistema è la somma dell'energia cinetica e dell'energia potenziale totale:
+\begin{equation}
+    E_{\text{mec}} \coloneqq E_k + U
+    \label{eq:e_mec}
+\end{equation}
+\end{definizione}
+
+\begin{teorema}{Conservazione dell'Energia Meccanica}{teo:conservazione_e_mec}
+Se su un punto materiale compiono lavoro \textbf{esclusivamente forze conservative}:
+\begin{equation}
+    \Delta E_{\text{mec}} = 0 \iff E_{\text{mec}}(A) = E_{\text{mec}}(B) \iff E_k(A) + U(A) = E_k(B) + U(B)
+    \label{eq:cons_e_mec}
+\end{equation}
+In presenza di forze non conservative (es. attrito radente $\vec{f}_d$ o forze esterne motrici $W_{\text{nc}}$):
+\begin{equation}
+    W_{\text{nc}} = \Delta E_{\text{mec}} = E_{\text{mec}}(B) - E_{\text{mec}}(A) = -E_{\text{dissipata}}
+    \label{eq:bilancio_dissipativo}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Il lavoro totale è la somma del lavoro delle forze conservative e di quelle non conservative:
+\begin{equation}
+    W_{\text{tot}} = W_{\text{cons}} + W_{\text{nc}} = -\Delta U + W_{\text{nc}}
+\end{equation}
+Uguagliando al teorema delle forze vive ($W_{\text{tot}} = \Delta E_k$):
+\begin{equation}
+    \Delta E_k = -\Delta U + W_{\text{nc}} \implies \Delta(E_k + U) = W_{\text{nc}} \implies \Delta E_{\text{mec}} = W_{\text{nc}}
+\end{equation}
+Se $W_{\text{nc}} = 0$, ne consegue immediatamente $\Delta E_{\text{mec}} = 0$.
+\end{dimostrazione}
+
+% ------------------------------------------------------------------------------
+\section{Analisi Qualitativa del Moto 1D dalle Curve di Potenziale $U(x)$}
+\label{sec:curve_potenziale}
+% ------------------------------------------------------------------------------
+
+Nel moto rettilineo conservativo 1D, la conservazione dell'energia fissa l'energia totale costante $E = E_k + U(x) = \frac{1}{2}m v^2 + U(x)$. Poiché $E_k \ge 0$, il moto è consentito unicamente negli intervalli spaziali in cui:
+\begin{equation}
+    E \ge U(x) \implies v(x) = \pm \sqrt{\frac{2}{m}\left(E - U(x)\right)}
+\end{equation}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    \draw[->, thick] (-0.5,0) -- (6,0) node[right] {$x$};
+    \draw[->, thick] (0,-0.5) -- (0,4) node[above] {$U(x), E$};
+    
+    % Curva potenziale
+    \draw[navyblue, very thick, smooth] plot coordinates {(0.5, 3.5) (1.2, 1.2) (2.5, 0.5) (4, 2.2) (5.5, 1.0)};
+    \node[navyblue] at (5.2, 1.4) {$U(x)$};
+    
+    % Linea energia totale E
+    \draw[crimsonred, thick] (0.5, 2.0) -- (5.5, 2.0) node[right] {Energia Totale $E$};
+    
+    % Punti di inversione
+    \draw[dashed, gray] (1.0, 2.0) -- (1.0, 0) node[below] {$x_1$ (Turning point)};
+    \draw[dashed, gray] (3.8, 2.0) -- (3.8, 0) node[below] {$x_2$ (Turning point)};
+    \filldraw[crimsonred] (1.0, 2.0) circle (2pt);
+    \filldraw[crimsonred] (3.8, 2.0) circle (2pt);
+    
+    % Minimo stabile
+    \filldraw[forestgreen] (2.5, 0.5) circle (2pt);
+    \draw[dashed, forestgreen] (2.5, 0.5) -- (2.5, 0) node[below] {$x_0$ (Minimo: eq. stabile)};
+    
+    % Zona permessa
+    \draw[<->, purpleaccent, thick] (1.0, 0.3) -- (3.8, 0.3) node[midway, above] {Regione permessa $E_k \ge 0$};
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}
+    \item \textbf{Punti di Inversione (Turning Points)}: punti $x_t$ in cui $U(x_t) = E \implies E_k = 0 \implies v = 0$. Il punto materiale si ferma istantaneamente e inverte il moto.
+    \item \textbf{Condizione di Equilibrio}: $F_x = -\dv{U}{x} = 0$ (punti stazionari di $U(x)$).
+    \item \textbf{Criterio di Stabilità di Lagrange-Dirichlet}:
+    \begin{itemize}
+        \item \textbf{Equilibrio Stabile}: $\left.\dvtwo{U}{x}\right|_{x_0} > 0$ (minimo locale di potenziale). Le forze richiamano il punto verso $x_0$, generando piccole oscillazioni armoniche con pulsazione:
+        \begin{equation}
+            \omega_0 = \sqrt{\frac{U''(x_0)}{m}}
+        \end{equation}
+        \item \textbf{Equilibrio Instabile}: $\left.\dvtwo{U}{x}\right|_{x_0} < 0$ (massimo locale di potenziale).
+        \item \textbf{Equilibrio Indifferente}: $\left.\dvtwo{U}{x}\right|_{x_0} = 0$ su un intorno finito.
+    \end{itemize}
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+\section{Esercizi Risolti ed Applicativi con Analisi Energetica e Forze}
+\label{sec:esercizi_energia}
+% ------------------------------------------------------------------------------
+
+\begin{esercizio}[Giro della Morte: Diagramma delle Forze e Bilancio Energetico]
+\textbf{Testo:}
+Un carrello puntiforme di massa $m$ parte da fermo da una quota $h$ lungo una guida liscia e imbocca un giro della morte di raggio $R$.
+\begin{enumerate}
+    \item Determinare la quota minima di rilascio $h_{\min}$ per completare il giro.
+    \item Analizzare il lavoro delle forze in gioco e determinare la reazione normale $N_B$ alla base ($B$).
+\end{enumerate}
+\end{esercizio}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Rampa di discesa
+    \draw[very thick, navyblue] (-4, 3.5) to[out=-60, in=180] (-1, 0) -- (0,0);
+    
+    % Guida circolare
+    \draw[very thick, navyblue] (1.5, 1.5) circle (1.5);
+    \draw[dashed, gray] (1.5,0) -- (1.5,3);
+    
+    % Punto A (Rilascio)
+    \coordinate (A) at (-4, 3.5);
+    \filldraw[crimsonred] (A) circle (3pt) node[above left] {$A(v_A=0, y=h)$};
+    \draw[->, ultra thick, forestgreen] (A) -- ($(A) + (0,-1.2)$) node[left] {$\vec{P} = m\vec{g}$};
+    \draw[->, ultra thick, navyblue] (A) -- ($(A) + (0.9, 0.6)$) node[above right] {$\vec{N}_A$};
+    
+    % Punto B (Base)
+    \coordinate (B) at (1.5, 0);
+    \filldraw[crimsonred] (B) circle (3pt) node[below=2pt] {$B$};
+    \draw[->, ultra thick, forestgreen] (B) -- (1.5, -1.2) node[right] {$\vec{P}$};
+    \draw[->, ultra thick, navyblue] (B) -- (1.5, 1.8) node[right] {$\vec{N}_B = 6mg$};
+    \draw[->, very thick, purpleaccent] (B) -- (2.8, 0) node[below] {$\vec{v}_B$};
+    
+    % Punto C (Top)
+    \coordinate (C) at (1.5, 3.0);
+    \filldraw[crimsonred] (C) circle (3pt) node[above=2pt] {$C$};
+    \draw[->, ultra thick, forestgreen] (C) -- (1.5, 2.0) node[left] {$\vec{P}$};
+    \draw[->, ultra thick, navyblue] (C) -- (1.5, 1.3) node[right] {$\vec{N}_C \ge 0$};
+    \draw[->, very thick, purpleaccent] (C) -- (0.5, 3.0) node[above] {$\vec{v}_C$};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[enhanced, breakable, colback=forestgreen!5!white, colframe=forestgreen!80!black,
+    title={\textbf{Analisi del Lavoro delle Forze in Gioco}}, fonttitle=\bfseries\sffamily]
+\begin{itemize}
+    \item \textbf{Lavoro della Reazione Normale ($W_N = 0$):} la guida è perfettamente liscia; in ogni istante la reazione vincolare $\vec{N}$ è perpendicolare allo spostamento elementare infinitesimo ($\vec{N} \perp \dd\vec{r}$). Pertanto:
+    \begin{equation}
+        \delta W_N = \vec{N}\cdot\dd\vec{r} = 0 \implies W_N = \int \vec{N}\cdot\dd\vec{r} = 0
+    \end{equation}
+    Il vincolo non compie né assorbe lavoro (vincolo ideale e liscio).
+    \item \textbf{Lavoro della Forza Peso ($W_P = -\Delta U_g = mg(y_i - y_f)$):} la forza gravitazionale è l'unica forza che compie lavoro; essendo conservativa, l'energia meccanica totale $E_{\text{mec}} = E_k + U_g$ si conserva rigorosamente lungo tutta la traiettoria.
+\end{itemize}
+\end{tcolorbox}
+
+\textbf{Risoluzione Analitica:}
+\begin{enumerate}
+    \item \textbf{Quota minima di rilascio $h_{\min}$:}
+    Al vertice $C$ ($y_C = 2R$), la condizione di contatto permanente impone $N_C \ge 0 \implies v_C \ge \sqrt{gR}$.
+    Per la conservazione dell'energia tra $A$ e $C$:
+    \begin{equation}
+        E_{\text{mec}}(A) = mgh = E_{\text{mec}}(C) = \frac{1}{2}m v_C^2 + mg(2R) \implies mgh_{\min} = \frac{1}{2}m(gR) + 2mgR = \mathbf{\frac{5}{2}mgR}
+    \end{equation}
+    da cui $\mathbf{h_{\min} = 2{,}5\,R}$.
+    
+    \item \textbf{Reazione normale alla base $B$:}
+    Alla quota minima $h = 2{,}5\,R$, alla base $y_B = 0$: $v_B^2 = 2gh = 5gR$.
+    L'equazione centripeta fornisce:
+    \begin{equation}
+        N_B - mg = m\frac{v_B^2}{R} \implies \mathbf{N_B = mg + m\frac{5gR}{R} = 6\,mg}
+    \end{equation}
+\end{enumerate}
+
+\vspace{0.8em}
+
+\begin{esercizio}[Blocco su Tratto Scabro con Molla ed Energia Dissipata]
+\textbf{Testo:}
+Un blocco di massa $m = \SI{2.0}{\kilogram}$ con velocità iniziale $v_0 = \SI{4.0}{\metre\per\second}$ percorre un tratto orizzontale scabro lungo $d = \SI{1.5}{\metre}$ con coefficiente di attrito dinamico $\mu_d = 0{,}20$ e successivamente impatta contro una molla di costante elastica $k = \SI{200}{\newton\per\metre}$. Calcolare la massima compressione $\Delta x_{\max}$ della molla.
+\end{esercizio}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Piano orizzontale con tratto scabro
+    \draw[thick] (-3,0) -- (-1,0);
+    \draw[ultra thick, brown] (-1,0) -- (1.5,0) node[midway, below=3pt] {Tratto scabro ($\mu_d$)};
+    \draw[thick] (1.5,0) -- (4.5,0);
+    
+    % Molla
+    \draw[thick] (4.5,0) -- (4.5, 1.2);
+    \fill[pattern=north east lines] (4.5,0) rectangle (4.8, 1.2);
+    \draw[decoration={aspect=0.5, segment length=5mm, amplitude=3mm, coil}, decorate, navyblue, thick] (4.5, 0.4) -- (2.8, 0.4);
+    
+    % Blocco sul tratto scabro con FBD
+    \filldraw[fill=blue!15, draw=navyblue, thick] (-0.3, 0) rectangle (0.7, 0.8);
+    \node at (0.2, 0.4) {$m$};
+    
+    % Vettori forza sul blocco
+    \draw[->, ultra thick, navyblue] (0.2, 0.4) -- (0.2, -1.0) node[right] {$\vec{P} = m\vec{g}$};
+    \draw[->, ultra thick, forestgreen] (0.2, 0.8) -- (0.2, 1.8) node[right] {$\vec{N} = mg\uy$};
+    \draw[->, ultra thick, crimsonred] (-0.3, 0.4) -- (-1.5, 0.4) node[above] {$\vec{f}_d = -\mu_d N\ux$};
+    \draw[->, very thick, purpleaccent] (0.7, 0.4) -- (1.6, 0.4) node[above] {$\vec{v}$};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[enhanced, breakable, colback=forestgreen!5!white, colframe=forestgreen!80!black,
+    title={\textbf{Analisi delle Forze e Bilancio Dissipativo}}, fonttitle=\bfseries\sffamily]
+\begin{itemize}
+    \item \textbf{Lungo la verticale $\uy$:} $\sum F_y = N - mg = 0 \implies N = mg$.
+    \item \textbf{Lungo l'orizzontale $\ux$:} l'attrito dinamico è l'unica forza orizzontale durante l'attraversamento del tratto scabro: $\vec{f}_d = -\mu_d mg\ux$. Il lavoro dissipato vale:
+    \begin{equation}
+        W_{\text{attrito}} = -f_d d = -\mu_d mg d < 0
+    \end{equation}
+    \item \textbf{Fase di compressione della molla:} la forza elastica $\vec{F}_e = -k x\ux$ è conservativa e compie lavoro $W_e = -\Delta U_e = -\frac{1}{2}k(\Delta x_{\max})^2$.
+\end{itemize}
+\end{tcolorbox}
+
+\textbf{Risoluzione Analitica:}
+Applicando il teorema lavoro-energia $W_{\text{nc}} = \Delta E_{\text{mec}}$ tra lo stato iniziale e il punto di arresto istantaneo a massima compressione ($\Delta x$):
+\begin{equation}
+    -\mu_d mg d = \left(\frac{1}{2}k(\Delta x)^2\right) - \left(\frac{1}{2}m v_0^2\right) \implies \frac{1}{2}k(\Delta x)^2 = \frac{1}{2}m v_0^2 - \mu_d mg d
+\end{equation}
+Inserendo i valori numerici:
+\begin{equation}
+    \frac{1}{2}(200)(\Delta x)^2 = \frac{1}{2}(2)(4^2) - (0{,}20)(2)(9{,}81)(1{,}5) = 16 - 5{,}886 = \SI{10.114}{\joule}
+\end{equation}
+\begin{equation}
+    100(\Delta x)^2 = 10{,}114 \implies \mathbf{\Delta x_{\max} = \sqrt{\frac{10{,}114}{100}} \approx \SI{0.318}{\metre} = \SI{31.8}{\centi\metre}}
+\end{equation}

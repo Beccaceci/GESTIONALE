@@ -1,0 +1,45 @@
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Griglia leggera di sfondo
+    \draw[step=0.5cm, gray!20, very thin] (-3.2,-2.2) grid (3.5,3.2);
+    
+    % Assi cartesiani
+    \draw[->, thick, navyblue] (-3.2,0) -- (3.5,0) node[right] {$x$};
+    \draw[->, thick, navyblue] (0,-2.2) -- (0,3.2) node[above] {$y$};
+    \node[below left, font=\small] at (0,0) {$O$};
+
+    % Coordinate del punto P
+    \def\r{2.8}
+    \def\ang{40}
+    \coordinate (O) at (0,0);
+    \coordinate (P) at ({\r*cos(\ang)}, {\r*sin(\ang)});
+    \coordinate (Px) at ({\r*cos(\ang)}, 0);
+    \coordinate (Py) at (0, {\r*sin(\ang)});
+
+    % Triangolo rettangolo riempito
+    \fill[coolblue!10] (O) -- (Px) -- (P) -- cycle;
+    
+    % Proiezioni ortogonali tratteggiate
+    \draw[dashed, coolblue, thick] (P) -- (Px) node[below, black] {$x = \rho \cos\theta$};
+    \draw[dashed, coolblue, thick] (P) -- (Py) node[left, black] {$y = \rho \sin\theta$};
+
+    % Angolo retto
+    \draw[gray!70, thin] ({\r*cos(\ang)-0.25}, 0) |- ({\r*cos(\ang)}, 0.25);
+    \fill[gray!70] ({\r*cos(\ang)-0.12}, 0.12) circle (0.8pt);
+
+    % Vettore raggio rho
+    \draw[->, very thick, crimsonred] (O) -- (P) node[midway, above left, font=\bfseries] {$\rho = \sqrt{x^2+y^2}$};
+
+    % Arco angolo theta
+    \draw[->, thick, forestgreen] (0.8,0) arc (0:\ang:0.8);
+    \node[forestgreen, font=\bfseries] at (20:1.1) {$\theta$};
+
+    % Punto P
+    \fill[navyblue] (P) circle (2.2pt);
+    \node[above right, font=\small] at (P) {$P(x,y) \equiv P(\rho, \theta)$};
+
+    % Etichette quadranti e formule di correzione
+    \node[font=\footnotesize, align=center, fill=white, inner sep=1pt, opacity=0.9, text opacity=1] at (2.2, 2.2) {\textbf{I Quadrante}\\$\theta = \arctan(y/x)$};
+    \node[font=\footnotesize, align=center, fill=white, inner sep=1pt, opacity=0.9, text opacity=1] at (-1.8, 2.2) {\textbf{II Quadrante}\\$\theta = \arctan(y/x) + \pi$};
+    \node[font=\footnotesize, align=center, fill=white, inner sep=1pt, opacity=0.9, text opacity=1] at (-1.8, -1.5) {\textbf{III Quadrante}\\$\theta = \arctan(y/x) - \pi$};
+    \node[font=\footnotesize, align=center, fill=white, inner sep=1pt, opacity=0.9, text opacity=1] at (2.2, -1.5) {\textbf{IV Quadrante}\\$\theta = \arctan(y/x)$};
+\end{tikzpicture}

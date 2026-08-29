@@ -1,0 +1,243 @@
+% ==============================================================================
+% DEFINIZIONE AMBIENTI TCOLORBOX & TEOREMI - FISICA GENERALE 1
+% ==============================================================================
+
+% --- Tavolozza Colori Istituzionali ed Eleganti ---
+\definecolor{navyblue}{RGB}{15, 43, 92}
+\definecolor{forestgreen}{RGB}{30, 92, 43}
+\definecolor{purpleaccent}{RGB}{90, 32, 112}
+\definecolor{crimsonred}{RGB}{139, 0, 0}
+\definecolor{warmamber}{RGB}{184, 107, 0}
+\definecolor{charcoalgray}{RGB}{43, 43, 43}
+\definecolor{tealblue}{RGB}{0, 102, 119}
+\definecolor{softgold}{RGB}{197, 155, 39}
+\definecolor{darkcyan}{RGB}{0, 139, 139}
+
+% Contatore globale per teoremi, definizioni, principi condiviso per capitolo
+\newcounter{physcounter}[chapter]
+\renewcommand{\thephyscounter}{\thechapter.\arabic{physcounter}}
+\crefname{physcounter}{risultato}{risultati}
+\Crefname{physcounter}{Risultato}{Risultati}
+
+% --- 1. DEFINIZIONE ---
+\newtcbtheorem[use counter=physcounter, number within=chapter]{definizione}{Definizione}{
+    enhanced,
+    breakable,
+    colback=blue!3!white,
+    colframe=navyblue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    fontupper=\itshape,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={
+        sharp corners,
+        rounded corners=north,
+        colback=navyblue,
+        boxrule=0pt
+    },
+    separator sign={:~},
+    description font=\normalfont\bfseries,
+    sharp corners,
+    rounded corners=south,
+    boxrule=1.2pt,
+    top=4mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}{def}
+
+% --- 2. TEOREMA ---
+\newtcbtheorem[use counter=physcounter, number within=chapter]{teorema}{Teorema}{
+    enhanced,
+    breakable,
+    colback=forestgreen!3!white,
+    colframe=forestgreen,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    fontupper=\itshape,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={
+        sharp corners,
+        rounded corners=north,
+        colback=forestgreen,
+        boxrule=0pt
+    },
+    separator sign={:~},
+    description font=\normalfont\bfseries,
+    sharp corners,
+    rounded corners=south,
+    boxrule=1.2pt,
+    top=4mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}{teo}
+
+% --- 3. PRINCIPIO / LEGGE FONDAMENTALE ---
+\newtcbtheorem[use counter=physcounter, number within=chapter]{legge}{Principio / Legge}{
+    enhanced,
+    breakable,
+    colback=purpleaccent!3!white,
+    colframe=purpleaccent,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    fontupper=\itshape,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={
+        sharp corners,
+        rounded corners=north,
+        colback=purpleaccent,
+        boxrule=0pt
+    },
+    separator sign={:~},
+    description font=\normalfont\bfseries,
+    sharp corners,
+    rounded corners=south,
+    boxrule=1.2pt,
+    top=4mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}{legge}
+
+% --- 4. PROPOSIZIONE / COROLLARIO ---
+\newtcbtheorem[use counter=physcounter, number within=chapter]{proposizione}{Proposizione}{
+    enhanced,
+    breakable,
+    colback=tealblue!3!white,
+    colframe=tealblue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    fontupper=\itshape,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={
+        sharp corners,
+        rounded corners=north,
+        colback=tealblue,
+        boxrule=0pt
+    },
+    separator sign={:~},
+    description font=\normalfont\bfseries,
+    sharp corners,
+    rounded corners=south,
+    boxrule=1.2pt,
+    top=4mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}{prop}
+
+% --- 5. DIMOSTRAZIONE RIGOROSA ---
+\newtcolorbox{dimostrazione}[1][]{
+    enhanced,
+    breakable,
+    blanker,
+    borderline west={2pt}{0pt}{forestgreen!80!black},
+    left=4mm,
+    top=2mm,
+    bottom=2mm,
+    before upper={\textbf{\textsf{\color{forestgreen!80!black}Dimostrazione#1:}}\par\vspace{1mm}},
+    after upper={\par\hfill\textcolor{forestgreen!80!black}{$\blacksquare$}}
+}
+
+% --- 6. ESEMPIO APPLICATIVO ---
+\newtcolorbox{esempio}[1][]{
+    enhanced,
+    breakable,
+    colback=purpleaccent!3!white,
+    colframe=purpleaccent!70!black,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={Esempio Fisico: #1},
+    sharp corners,
+    rounded corners=south,
+    boxrule=1pt,
+    top=3mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}
+
+% --- 7. ESERCIZIO GUIDATO SVOLTO ---
+\newtcolorbox{esercizio}[1][]{
+    enhanced,
+    breakable,
+    colback=warmamber!4!white,
+    colframe=warmamber,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={Esercizio Guidato: #1},
+    sharp corners,
+    rounded corners=south,
+    boxrule=1.1pt,
+    top=3mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}
+
+% --- 8. CONSIGLI ESAME, ERRORI FREQUENTI E TRAPPOLE ---
+\newtcolorbox{esame}[1][Consigli per la Prova d'Esame]{
+    enhanced,
+    breakable,
+    colback=crimsonred!4!white,
+    colframe=crimsonred,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={\textbf{Attenzione all'Esame:} #1},
+    sharp corners,
+    rounded corners=south,
+    boxrule=1.2pt,
+    top=3mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}
+
+% --- 9. METODO RISOLUTIVO / ALGORITMO OPERATIVO ---
+\newtcolorbox{metodo}[1][]{
+    enhanced,
+    breakable,
+    colback=warmamber!5!white,
+    colframe=warmamber!90!black,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={Metodo Risolutivo Step-by-Step: #1},
+    sharp corners,
+    rounded corners=south,
+    boxrule=1.2pt,
+    top=3mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}
+
+% --- 10. OSSERVAZIONE / APPROFONDIMENTO ---
+\newtcolorbox{osservazione}[1][Osservazione]{
+    enhanced,
+    breakable,
+    blanker,
+    borderline west={2.5pt}{0pt}{navyblue!70!black},
+    left=4mm,
+    top=2mm,
+    bottom=2mm,
+    before upper={\textbf{\textsf{\color{navyblue!70!black}#1:}}\par\vspace{1mm}}
+}
+
+% --- 11. ESPERIMENTO / FENOMENOLOGIA ---
+\newtcolorbox{esperimento}[1][Esperimento / Fenomeno]{
+    enhanced,
+    breakable,
+    colback=darkcyan!4!white,
+    colframe=darkcyan,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={Fenomenologia Sperimentale: #1},
+    sharp corners,
+    rounded corners=south,
+    boxrule=1pt,
+    top=3mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}

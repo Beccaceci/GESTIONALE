@@ -1,0 +1,53 @@
+\begin{tikzpicture}[scale=0.92, >=Stealth]
+    % Asse dei valori X
+    \draw[->, thick, navyblue] (-0.5,0) -- (12.5,0) node[right, font=\small\bfseries] {Valori ($X$)};
+    \foreach \x in {0,2,4,6,8,10,12} {
+        \draw[navyblue, thin] (\x,0.1) -- (\x,-0.1) node[below, font=\footnotesize] {$\x$};
+    }
+
+    \def\ybox{2.0}
+    \def\hhalf{0.75}
+    \def\xmin{1.0}
+    \def\qone{3.5}
+    \def\qtwo{5.5}
+    \def\qthree{8.0}
+    \def\xmax{10.5}
+    \def\outlier{11.8}
+
+    % Scatola centrale
+    \filldraw[fill=coolblue!25, draw=navyblue, very thick] 
+        (\qone, {\ybox - \hhalf}) rectangle (\qthree, {\ybox + \hhalf});
+
+    % Mediana
+    \draw[crimsonred, line width=2pt] (\qtwo, {\ybox - \hhalf}) -- (\qtwo, {\ybox + \hhalf});
+
+    % Baffi
+    \draw[navyblue, very thick] (\xmin, \ybox) -- (\qone, \ybox);
+    \draw[navyblue, very thick] (\xmin, {\ybox - 0.35}) -- (\xmin, {\ybox + 0.35});
+    \draw[navyblue, very thick] (\qthree, \ybox) -- (\xmax, \ybox);
+    \draw[navyblue, very thick] (\xmax, {\ybox - 0.35}) -- (\xmax, {\ybox + 0.35});
+
+    % Outlier
+    \filldraw[fill=crimsonred!20, draw=crimsonred, thick] (\outlier, \ybox) circle (3pt);
+    \node[above=4pt, crimsonred, font=\bfseries\scriptsize, align=center] at (\outlier, \ybox) {Outlier};
+
+    % Proiezioni
+    \draw[dashed, gray!60] (\xmin, {\ybox - 0.35}) -- (\xmin, 0);
+    \draw[dashed, gray!60] (\qone, {\ybox - \hhalf}) -- (\qone, 0);
+    \draw[dashed, crimsonred!70] (\qtwo, {\ybox - \hhalf}) -- (\qtwo, 0);
+    \draw[dashed, gray!60] (\qthree, {\ybox - \hhalf}) -- (\qthree, 0);
+    \draw[dashed, gray!60] (\xmax, {\ybox - 0.35}) -- (\xmax, 0);
+    \draw[dashed, crimsonred!70] (\outlier, \ybox) -- (\outlier, 0);
+
+    % Etichette
+    \node[below=10pt, font=\bfseries\footnotesize, text=navyblue, align=center] at (\xmin, 0) {Min};
+    \node[below=10pt, font=\bfseries\footnotesize, text=navyblue, align=center] at (\qone, 0) {$Q_1$ ($25\%$)};
+    \node[below=10pt, font=\bfseries\footnotesize, text=crimsonred, align=center] at (\qtwo, 0) {$Me = Q_2$};
+    \node[below=10pt, font=\bfseries\footnotesize, text=navyblue, align=center] at (\qthree, 0) {$Q_3$ ($75\%$)};
+    \node[below=10pt, font=\bfseries\footnotesize, text=navyblue, align=center] at (\xmax, 0) {Max};
+    \node[below=10pt, font=\bfseries\footnotesize, text=crimsonred, align=center] at (\outlier, 0) {$x_{\text{out}}$};
+
+    % Quotatura IQR
+    \draw[<->, thick, forestgreen] (\qone, {\ybox + \hhalf + 0.3}) -- (\qthree, {\ybox + \hhalf + 0.3})
+        node[midway, above, font=\bfseries\scriptsize] {$\mathrm{IQR} = Q_3 - Q_1$ ($50\%$ centrale)};
+\end{tikzpicture}

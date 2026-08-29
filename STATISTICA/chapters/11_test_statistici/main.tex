@@ -1,0 +1,171 @@
+% ==============================================================================
+% CAPITOLO 11: VERIFICA DELLE IPOTESI STATISTICHE (TEST DI SIGNIFICATIVITÀ)
+% ==============================================================================
+\chapter{Verifica delle Ipotesi Statistiche (Test di Significatività)}
+\label{cap:test_statistici}
+
+\begin{abstract}
+Il presente capitolo espone la teoria formale delle decisioni statistiche di Jerzy Neyman ed Egon Pearson. Si formalizza la dialettica tra ipotesi nulla ($H_0$) e ipotesi alternativa ($H_1$), chiarendo l'asimmetria ontologica tra le due posizioni mediante la celebre metafora giuridica del processo penale. Si analizza la matrice di contingenza degli errori decisionali (Errore di I tipo $\alpha$ ed Errore di II tipo $\beta$), definendo la funzione di potenza del test. Viene approfondito il concetto unificante di $p$-value e dimostrato il teorema di dualità strutturale che lega i test bilaterali agli intervalli di confidenza. Infine, si presenta la tassonomia operativa dei test parametrici $Z$ e $t$ per medie, proporzioni e confronti tra campioni indipendenti.
+\end{abstract}
+
+% ==============================================================================
+% SEZIONE 11.1: STRUTTURA LOGICA E METAFORA GIURIDICA DI NEYMAN-PEARSON
+% ==============================================================================
+\section{La Struttura Logica del Test d'Ipotesi e la Metafora Giuridica}
+\label{sec:struttura_logica_test}
+
+Nel metodo scientifico e nell'ingegneria gestionale, il decisore deve costantemente vagliare affermazioni quantitative su parametri ignoti: un nuovo trattamento riduce i consumi? Il tasso di difettosità supera la soglia di tolleranza contrattuale? 
+
+La teoria della verifica delle ipotesi di Neyman-Pearson non cerca di ``dimostrare la verità assoluta'', bensì stabilisce una procedura oggettiva per decidere se l'evidenza campionaria è sufficientemente forte da respingere una teoria di riferimento.
+
+\begin{definizione}{Ipotesi Nulla ($H_0$) e Ipotesi Alternativa ($H_1$)}{def_ipotesi_statistica}
+\begin{itemize}
+    \item \textbf{Ipotesi Nulla ($H_0$):} Rappresenta lo \emph{status quo}, l'ipotesi di neutralità, assenza di effetto o conformità nominale (ad esempio $H_0: \mu = \mu_0$). Viene assunta provvisoriamente vera fino a prova contraria (principio di conservazione).
+    \item \textbf{Ipotesi Alternativa ($H_1$ o $H_a$):} Rappresenta la congettura del ricercatore o l'effetto innovativo che si intende sostenere mediante evidenza empirica schiacciante:
+    \begin{itemize}
+        \item \textbf{Bilaterale (a due code):} $H_1: \mu \neq \mu_0$;
+        \item \textbf{Unilaterale destra (a una coda):} $H_1: \mu > \mu_0$;
+        \item \textbf{Unilaterale sinistra (a una coda):} $H_1: \mu < \mu_0$.
+    \end{itemize}
+\end{itemize}
+\end{definizione}
+
+\paragraph{La Metafora Giuridica del Processo Penale:}
+Per comprendere la profonda asimmetria tra $H_0$ e $H_1$:
+\begin{itemize}
+    \item $H_0$ equivale alla **presunzione di innocenza dell'imputato** (innocente fino a prova contraria oltre ogni ragionevole dubbio).
+    \item $H_1$ equivale alla **colpevolezza**.
+    \item Il verdetto del tribunale non è mai ``dimostrazione di innocenza'', bensì:
+    \begin{itemize}
+        \item \textbf{Rifiuto di $H_0$ (Condanna):} Le prove empiriche a carico sono talmente schiaccianti che l'ipotesi di innocenza è incompatibile con i fatti.
+        \item \textbf{Non rifiuto di $H_0$ (Assoluzione per insufficienza di prove):} Non significa aver provato che l'imputato è innocente, ma che i dati raccolti non sono sufficienti a condannarlo.
+    \end{itemize}
+\end{itemize}
+
+% ==============================================================================
+% SEZIONE 11.2: MATRICE DECISIONALE, ERRORI E FUNZIONE DI POTENZA
+% ==============================================================================
+\section{Matrice degli Errori Decisionali e Potenza del Test}
+\label{sec:matrice_errori_potenza}
+
+Poiché la decisione è assunta sulla base di un campione casuale limitato, il test è esposto a due tipologie di errore probabilistico:
+
+\begin{table}[htbp]
+    \centering
+    \caption{Matrice di contingenza e probabilità degli esiti decisionali nel test d'ipotesi.}
+    \label{tab:matrice_errori}
+    \begin{tabular}{lcc}
+        \toprule
+        \textbf{Decisione Assunta} & $\bm{H_0}$ \textbf{Vera nella Realtà} & $\bm{H_0}$ \textbf{Falsa nella Realtà ($H_1$ vera)} \\
+        \midrule
+        \textbf{Non Rifiutare $H_0$} & Decisione Corretta ($1 - \alpha$) & \textbf{Errore di II Tipo} ($\beta$) (\emph{Falso Negativo}) \\[8pt]
+        \textbf{Rifiutare $H_0$} & \textbf{Errore di I Tipo} ($\alpha$) (\emph{Falso Positivo}) & Decisione Corretta / \textbf{Potenza} ($1 - \beta$) \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{definizione}{Livello di Significatività ed Errore di I Tipo}{def_livello_significativita}
+L'\textbf{Errore di I Tipo} consiste nel condannare un innocente (rifiutare $H_0$ quando $H_0$ è vera). La massima probabilità tollerata per questo errore è fissata a priori dal ricercatore come \textbf{livello di significatività} $\alpha$:
+\begin{equation}
+    \alpha \coloneqq \mathbb{P}(\text{Rifiutare } H_0 \mid H_0 \text{ è vera}) \qquad (\text{tipicamente } 0.05 \text{ o } 0.01)
+\end{equation}
+\end{definizione}
+
+\begin{definizione}{Errore di II Tipo e Potenza del Test ($1-\beta$)}{def_potenza_test}
+L'\textbf{Errore di II Tipo} consiste nell'assolvere un colpevole (non rifiutare $H_0$ quando nella realtà $H_0$ è falsa). La sua probabilità è $\beta = \mathbb{P}(\text{Non Rifiutare } H_0 \mid H_1 \text{ vera})$.
+La \textbf{Potenza del Test} (Power) è la probabilità di rifiutare correttamente $H_0$ quando l'effetto reale esiste:
+\begin{equation}
+    \text{Potenza}(\theta) \coloneqq 1 - \beta(\theta) = \mathbb{P}(\text{Rifiutare } H_0 \mid \theta \in H_1)
+\end{equation}
+\end{definizione}
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_errori_tipo1_tipo2.tex}
+    \caption{Sovrapposizione delle distribuzioni campionarie della statistica test sotto $H_0$ (distribuzione blu a sinistra) e sotto $H_1$ per un valore alternativo $\theta_1 > \theta_0$ (distribuzione rossa a destra). Fissata la soglia critica $c_{\alpha}$, l'area rossa a destra di $c_{\alpha}$ sotto la curva $H_0$ è $\alpha$; l'area verde tratteggiata sotto la curva $H_1$ a sinistra di $c_{\alpha}$ è $\beta$; l'area a destra sotto la curva $H_1$ rappresenta la Potenza $1-\beta$.}
+    \label{fig:errori_tipo1_tipo2}
+\end{figure}
+
+% ==============================================================================
+% SEZIONE 11.3: REGIONI DI ACCETTAZIONE E RIFIUTO
+% ==============================================================================
+\section{Regioni di Accettazione, Regioni Critiche di Rifiuto e Algoritmo Operativo}
+\label{sec:regioni_rifiuto}
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_test_ipotesi_regioni_rifiuto.tex}
+    \caption{Suddivisione dello spazio della statistica test gaussiana sotto $H_0$ per un test bilaterale al livello $\alpha = 5\%$. La regione centrale di Non Rifiuto ha probabilità $1-\alpha = 95\%$, delimitata dai valori critici $\pm z_{0.025} = \pm 1.96$. Le due code estreme rosse costituiscono la Regione Critica di Rifiuto $\mathcal{R}$.}
+    \label{fig:test_regioni_rifiuto}
+\end{figure}
+
+\begin{metodo}[Procedura Operativa in 4 Fasi per l'Esecuzione di un Test d'Ipotesi]
+\begin{enumerate}
+    \item \textbf{Formulazione del Sistema di Ipotesi:} Definire esplicitamente $H_0$ e l'alternativa $H_1$ (bilaterale o unilaterale).
+    \item \textbf{Scelta della Statistica Test e Livello $\alpha$:} Individuare la statistica pivotale (es. $Z_{\text{test}}$ o $T_{\text{test}}$) e calcolarne la distribuzione esatta sotto l'assunzione che $H_0$ sia vera.
+    \item \textbf{Individuazione della Soglia Critica e Calcolo del Valore Osservato:}
+    \begin{equation}
+        Z_{\text{oss}} = \frac{\overline{x} - \mu_0}{\sigma / \sqrt{n}} \qquad \text{oppure} \qquad T_{\text{oss}} = \frac{\overline{x} - \mu_0}{s / \sqrt{n}}
+    \end{equation}
+    \item \textbf{Regola di Decisione e Conclusione Statistica:}
+    \begin{equation}
+        \begin{cases}
+            T_{\text{oss}} \in \mathcal{R} \implies \textbf{Rifiuto } H_0 \text{ al livello } \alpha \text{ a favore di } H_1 \text{ (evidenza significativa);} \\
+            T_{\text{oss}} \notin \mathcal{R} \implies \textbf{Non Rifiuto } H_0 \text{ (dati compatibili con } H_0 \text{ a livello } \alpha).
+        \end{cases}
+    \end{equation}
+\end{enumerate}
+\end{metodo}
+
+% ==============================================================================
+% SEZIONE 11.4: IL CONCETTO DI P-VALUE
+% ==============================================================================
+\section{Il Concetto di $p$-value (Livello di Significatività Osservato)}
+\label{sec:p_value_teoria}
+
+Il confronto rigido tra statistica test e soglia critica prefissata $\alpha$ comunica una decisione binaria (rifiuto / non rifiuto), ma non esprime quanto la decisione sia schiacciante o marginale. Per questa ragione l'analisi statistica contemporanea privilegia il **$p$-value**.
+
+\begin{definizione}{$p$-value (Livello di Significatività Osservato)}{def_p_value}
+Il \textbf{$p$-value} è la probabilità, calcolata assumendo rigorosamente vera l'ipotesi nulla $H_0$, di osservare un valore della statistica test uguale o ancor più sfavorevole ad $H_0$ di quello effettivamente calcolato sui dati campionari:
+\begin{equation}
+    p\text{-value} = \begin{cases}
+        2 \cdot \left(1 - \Phi(|z_{\text{oss}}|)\right), & \text{per test bilaterale } (H_1: \mu \neq \mu_0) \\
+        1 - \Phi(z_{\text{oss}}), & \text{per test unilaterale destro } (H_1: \mu > \mu_0) \\
+        \Phi(z_{\text{oss}}), & \text{per test unilaterale sinistro } (H_1: \mu < \mu_0)
+    \end{cases}
+\end{equation}
+\end{definizione}
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_p_value_interpretazione.tex}
+    \caption{Significato geometrico del $p$-value in un test bilaterale. Il $p$-value corrisponde all'area cumulata delle code estreme esterne a $\pm |z_{\text{oss}}|$. Se l'area è inferiore ad $\alpha$, il risultato è talmente anomalo sotto $H_0$ da imporne il rifiuto.}
+    \label{fig:p_value_interpretazione}
+\end{figure}
+
+\begin{teorema}{Regola di Decisione Universale basata sul $p$-value}{thm_regola_pvalue}
+La regola decisionale universale stabilisce:
+\begin{equation}
+    \begin{cases}
+        p\text{-value} \le \alpha \implies \textbf{Rifiuto } H_0 \text{ (il dato è statisticamente significativo a livello } \alpha); \\
+        p\text{-value} > \alpha \implies \textbf{Non Rifiuto } H_0 \text{ (evidenza non sufficiente a respingere } H_0).
+    \end{cases}
+\end{equation}
+\end{teorema}
+
+% ==============================================================================
+% SEZIONE 11.5: DUALITÀ TRA TEST E INTERVALLI DI CONFIDENZA
+% ==============================================================================
+\section{Teorema di Dualità tra Test Bilaterali e Intervalli di Confidenza}
+\label{sec:dualita_test_ic}
+
+Esiste un profondo legame strutturale e algebrico tra l'inferenza per intervalli e la verifica delle ipotesi.
+
+\begin{teorema}{Dualità Test-Intervalli di Confidenza}{thm_dualita}
+Sia $\operatorname{IC}_{1-\alpha}(\theta) = [L(\mathbf{X}), U(\mathbf{X})]$ l'intervallo di confidenza bilaterale al livello $(1-\alpha) \cdot 100\%$ per il parametro $\theta$.
+Allora il test d'ipotesi bilaterale $H_0: \theta = \theta_0$ contro $H_1: \theta \neq \theta_0$ al livello di significatività $\alpha$ produce la medesima decisione:
+\begin{equation}
+    \textbf{Non Rifiuto di } H_0 \text{ al livello } \alpha \iff \theta_0 \in \operatorname{IC}_{1-\alpha}(\theta)
+\end{equation}
+Equivalentemente, si rifiuta $H_0$ se e solo se il valore ipotizzato $\theta_0$ cade al di fuori dell'intervallo di confidenza: $\theta_0 \notin [L(\mathbf{x}), U(\mathbf{x})]$.
+\end{teorema}

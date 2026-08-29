@@ -1,0 +1,31 @@
+\section{Sessione d'Esame 2022: Testi e Soluzioni Svolte}
+\label{sec:sessione_2022}
+
+\subsection{Appello 1 (2022)}
+
+\begin{esercizio}{Appello 2022 -- Esercizio: Controllo Qualità e Test d'Ipotesi}{es_22_01}
+Un produttore di resistori elettronici dichiara che la resistenza media nominale è $\mu_0 = 100\,\Omega$. Su un campione di $n = 16$ componenti si misura una media $\overline{x} = 101.8\,\Omega$ e una deviazione standard campionaria $s = 3.2\,\Omega$.
+\begin{enumerate}
+    \item[(a)] Calcolare l'intervallo di confidenza al $95\%$ per la resistenza media $\mu$.
+    \item[(b)] Testare l'ipotesi di conformità $H_0: \mu = 100$ contro l'ipotesi bilaterale $H_1: \mu \neq 100$ al livello $\alpha = 0.05$.
+    \item[(c)] Qual è la decisione se il livello di significatività viene abbassato all'1\% ($\alpha = 0.01$)?
+\end{enumerate}
+\end{esercizio}
+
+\begin{dimostrazione}
+\textbf{(a) Intervallo $t$-Student al $95\%$ ($n-1 = 15$ g.d.l., $t_{0.025, 15} = 2.131$):}
+\begin{equation*}
+    d = 2.131 \cdot \frac{3.2}{\sqrt{16}} = 2.131 \cdot 0.8 = 1.7048 \implies \operatorname{IC}_{0.95}(\mu) = [101.8 \pm 1.705] = \bm{[100.095, \; 103.505]\,\Omega}
+\end{equation*}
+
+\textbf{(b) Test $t$ a livello $\alpha = 0.05$:}
+\begin{equation*}
+    T_{\text{oss}} = \frac{\overline{x} - \mu_0}{s / \sqrt{n}} = \frac{101.8 - 100}{3.2 / 4} = \frac{1.8}{0.8} = \bm{2.250}
+\end{equation*}
+Poiché $|T_{\text{oss}}| = 2.250 > t_{0.025, 15} = 2.131$, \textbf{si rifiuta $H_0$ al 5\%}.
+Nota: per la dualità Test-IC, il valore nominale $100 \notin [100.095, 103.505]$, confermando il rifiuto.
+
+\textbf{(c) Test $t$ a livello $\alpha = 0.01$:}
+Dalla tavola di Student a 15 g.d.l.: $t_{0.005, 15} = 2.947$.
+Poiché $|T_{\text{oss}}| = 2.250 < 2.947$, \textbf{non si rifiuta $H_0$ all'1\%}. $\blacksquare$
+\end{dimostrazione}

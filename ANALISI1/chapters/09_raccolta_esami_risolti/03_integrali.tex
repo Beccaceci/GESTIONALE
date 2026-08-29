@@ -1,0 +1,189 @@
+\section{Calcolo Integrale, Primitive, Aree, Volumi e Integrali Impropri}
+\label{sec:esami_integrali}
+
+\begin{esame}[Strategie d'Esame per Integrali Impropri, Aree e Volumi]
+Nelle prove scritte del Prof. Alberti sul calcolo integrale:
+\begin{enumerate}
+    \item \textbf{Criteri per Integrali Impropri Parametrici:}
+    Separare sempre le singolarità isolate (es. $x \to 0^+$, $x \to +\infty$, punti interni di discontinuità) e studiare separatamente ciascun integrale parziale.
+    Ricordare gli integrali campione:
+    \[
+        \int_0^1 \frac{1}{x^p |\ln x|^q} \dx < \infty \iff (p < 1) \lor (p = 1 \land q > 1)
+    \]
+    \[
+        \int_1^{+\infty} \frac{1}{x^p (\ln x)^q} \dx < \infty \iff (p > 1) \lor (p = 1 \land q > 1)
+    \]
+    \item \textbf{Teorema di Pappo-Guldino e Condizioni di Applicabilità:}
+    Il volume generato dalla rotazione completa di $2\pi$ di una figura piana misurabile $A$ attorno a un asse $r$ complanare è dato da $\operatorname{Vol} = 2\pi d \operatorname{Area}(A)$ (con $d = \operatorname{dist}(G, r)$) \textbf{a patto che l'asse $r$ non intersechi l'interno di $A$}. Se l'asse è secante, la formula non si applica globalmente a causa della sovrapposizione dei volumi e occorre spezzare l'integrale.
+\end{enumerate}
+\end{esame}
+
+\begin{esempio}{Aree Piane e Volumi di Solidi di Rotazione (Compitino 2024/25, II Parte)}{esame_area_volumi}
+Sia $A$ la regione piana limitata definita dall'insieme dei punti $(x, y) \in \R^2$ tali che:
+\[
+    1 \le y \le \frac{4}{1 + x^2}
+\]
+\begin{enumerate}[label=\alph*)]
+    \item Calcolare l'area della regione $A$.
+    \item Calcolare il volume del solido $V_x$ ottenuto ruotando la regione $A$ di un giro completo attorno all'asse delle ascisse ($y = 0$).
+    \item Calcolare il volume del solido $V_2$ ottenuto ruotando la regione $A$ di un giro completo attorno alla retta verticale esterna $x = 2$.
+\end{enumerate}
+\tcblower
+\textbf{Soluzione Dettagliata:}
+
+\paragraph{Analisi Geometrica e Dominio di Integrazione:}
+La funzione $f(x) := \frac{4}{1 + x^2}$ è continua, pari, strettamente positiva e limitata superiormente da $f(0) = 4$.
+I punti di intersezione con la retta $y = 1$ si ottengono risolvendo:
+\[
+    \frac{4}{1 + x^2} = 1 \iff 1 + x^2 = 4 \iff x^2 = 3 \iff x = \pm\sqrt{3}
+\]
+La regione $A$ è compresa tra $y = 1$ (bordo inferiore) e $y = f(x)$ (bordo superiore) per $x \in [-\sqrt{3}, \sqrt{3}]$.
+
+\paragraph{Quesito (a): Calcolo dell'Area di $A$}
+Sfruttando la simmetria (parità) del dominio e dell'integrando:
+\begin{align*}
+    \operatorname{Area}(A) &= \int_{-\sqrt{3}}^{\sqrt{3}} \left(\frac{4}{1 + x^2} - 1\right) \dx = 2 \int_0^{\sqrt{3}} \left(\frac{4}{1 + x^2} - 1\right) \dx \\
+    &= 2 \Big[ 4 \arctg(x) - x \Big]_0^{\sqrt{3}} = 2 \left( 4 \arctg(\sqrt{3}) - \sqrt{3} \right) \\
+    &= 2 \left( 4 \cdot \frac{\pi}{3} - \sqrt{3} \right) = \frac{8\pi}{3} - 2\sqrt{3}
+\end{align*}
+
+\paragraph{Quesito (b): Volume del Solido di Rotazione attorno all'Asse $x$}
+Applicando il metodo delle sezioni circolari con fette perpendicolari all'asse $x$:
+\begin{align*}
+    \operatorname{Vol}(V_x) &= \pi \int_{-\sqrt{3}}^{\sqrt{3}} \left( [f(x)]^2 - 1^2 \right) \dx = 2\pi \int_0^{\sqrt{3}} \left( \frac{16}{(1 + x^2)^2} - 1 \right) \dx \\
+    &= 32\pi \int_0^{\sqrt{3}} \frac{1}{(1 + x^2)^2} \dx - 2\pi\sqrt{3}
+\end{align*}
+Calcoliamo la primitiva $\int \frac{1}{(1 + x^2)^2}\dx$ integrando per parti:
+\begin{align*}
+    \int \frac{1}{1 + x^2}\dx &= \frac{x}{1 + x^2} - \int x \left(-\frac{2x}{(1 + x^2)^2}\right)\dx = \frac{x}{1 + x^2} + 2\int \frac{(x^2 + 1) - 1}{(1 + x^2)^2}\dx \\
+    &= \frac{x}{1 + x^2} + 2\int \frac{1}{1 + x^2}\dx - 2\int \frac{1}{(1 + x^2)^2}\dx
+\end{align*}
+Risolvendo rispetto all'integrale incognito:
+\[
+    \int \frac{1}{(1 + x^2)^2}\dx = \frac{1}{2}\left( \frac{x}{1 + x^2} + \arctg(x) \right)
+\]
+Valutando tra $0$ e $\sqrt{3}$:
+\[
+    \int_0^{\sqrt{3}} \frac{1}{(1 + x^2)^2}\dx = \frac{1}{2}\left( \frac{\sqrt{3}}{1 + 3} + \arctg(\sqrt{3}) \right) = \frac{1}{2}\left( \frac{\sqrt{3}}{4} + \frac{\pi}{3} \right) = \frac{\sqrt{3}}{8} + \frac{\pi}{6}
+\]
+Sostituendo nell'espressione del volume:
+\[
+    \operatorname{Vol}(V_x) = 32\pi \left(\frac{\pi}{6} + \frac{\sqrt{3}}{8}\right) - 2\pi\sqrt{3} = \frac{16\pi^2}{3} + 4\pi\sqrt{3} - 2\pi\sqrt{3} = \frac{16\pi^2}{3} + 2\pi\sqrt{3}
+\]
+
+\paragraph{Quesito (c): Volume del Solido di Rotazione attorno alla Retta $x = 2$}
+Poiché la regione $A$ è contenuta nell'intervallo $[-\sqrt{3}, \sqrt{3}]$ e $\sqrt{3} \approx 1.732 < 2$, l'asse di rotazione $x = 2$ è \textbf{strettamente esterno} alla regione $A$.
+Possiamo quindi applicare direttamente il \textbf{Primo Teorema di Pappo-Guldino}:
+\begin{itemize}
+    \item Essendo $A$ simmetrica rispetto all'asse delle ordinate ($x = 0$), l'ascissa del baricentro è $x_G = 0$.
+    \item La distanza del baricentro dall'asse di rotazione $x = 2$ è $d = |x_G - 2| = 2$.
+\end{itemize}
+Il volume del solido generato da una rotazione di $2\pi$ è:
+\[
+    \operatorname{Vol}(V_2) = 2\pi \cdot d \cdot \operatorname{Area}(A) = 2\pi \cdot 2 \cdot \left(\frac{8\pi}{3} - 2\sqrt{3}\right) = \frac{32\pi^2}{3} - 8\pi\sqrt{3}
+\]
+\textit{Verifica analitica mediante gusci cilindrici:}
+\begin{align*}
+    \operatorname{Vol}(V_2) &= 2\pi \int_{-\sqrt{3}}^{\sqrt{3}} (2 - x)(f(x) - 1)\dx \\
+    &= 4\pi \int_{-\sqrt{3}}^{\sqrt{3}} (f(x) - 1)\dx - 2\pi \int_{-\sqrt{3}}^{\sqrt{3}} x(f(x) - 1)\dx \\
+    &= 4\pi \cdot \operatorname{Area}(A) - 0 = \frac{32\pi^2}{3} - 8\pi\sqrt{3}
+\end{align*}
+\end{esempio}
+
+\begin{esempio}{Integrale Improprio con Parametro Reale (Appello 2023/24)}{esame_integrale_improprio_param}
+Discutere al variare del parametro reale $\alpha \in \R$ la convergenza dell'integrale improprio:
+\[
+    I(\alpha) := \int_0^{+\infty} \frac{\ln(1 + x^\alpha)}{x^2 \sqrt{1 + x}} \dx
+\]
+\tcblower
+\textbf{Soluzione Dettagliata:}
+L'integrando $f_\alpha(x) = \frac{\ln(1 + x^\alpha)}{x^2 \sqrt{1 + x}}$ è continuo e a valori strettamente positivi su $(0, +\infty)$.
+Le singolarità sono isolate in $x = 0^+$ e per $x \to +\infty$. Spezziamo l'integrale nel punto neutro $x = 1$:
+\[
+    I(\alpha) = \int_0^1 f_\alpha(x)\dx + \int_1^{+\infty} f_\alpha(x)\dx = I_1(\alpha) + I_2(\alpha)
+\]
+
+\paragraph{1. Studio della Singolarità a $x \to 0^+$ ($I_1(\alpha)$):}
+Per $x \to 0^+$, si ha $\sqrt{1 + x} \to 1$.
+\begin{itemize}
+    \item \textbf{Se $\alpha > 0$:} $x^\alpha \to 0$, quindi $\ln(1 + x^\alpha) \sim x^\alpha$.
+    Dunque:
+    \[
+        f_\alpha(x) \sim \frac{x^\alpha}{x^2 \cdot 1} = \frac{1}{x^{2 - \alpha}}
+    \]
+    Per il criterio del confronto asintotico, $I_1(\alpha)$ converge se e solo se:
+    \[
+        2 - \alpha < 1 \iff \alpha > 1
+    \]
+    \item \textbf{Se $\alpha = 0$:} $\ln(1 + x^0) = \ln 2 \implies f_0(x) \sim \frac{\ln 2}{x^2}$, che diverge in $0$ ($2 \ge 1$).
+    \item \textbf{Se $\alpha < 0$:} poniamo $\beta = -\alpha > 0$. Per $x \to 0^+$, $x^\alpha = x^{-\beta} \to +\infty$, dunque:
+    \[
+        \ln(1 + x^{-\beta}) = \ln(x^{-\beta}(1 + x^\beta)) = \beta\ln(1/x) + \bigO(x^\beta) \sim |\alpha|\ln(1/x)
+    \]
+    L'integrando soddisfa $f_\alpha(x) \sim \frac{|\alpha|\ln(1/x)}{x^2}$. Poiché $\frac{\ln(1/x)}{x^2} \gg \frac{1}{x^{3/2}}$ per $x \to 0^+$, l'integrale diverge.
+\end{itemize}
+Dunque $I_1(\alpha)$ converge se e solo se $\alpha > 1$.
+
+\paragraph{2. Studio del Comportamento a $x \to +\infty$ ($I_2(\alpha)$):}
+Per $x \to +\infty$, $\sqrt{1 + x} \sim x^{1/2}$.
+\begin{itemize}
+    \item \textbf{Se $\alpha > 0$:} $x^\alpha \to +\infty \implies \ln(1 + x^\alpha) = \ln(x^\alpha(1 + x^{-\alpha})) \sim \alpha\ln x$.
+    Dunque:
+    \[
+        f_\alpha(x) \sim \frac{\alpha\ln x}{x^2 \cdot x^{1/2}} = \frac{\alpha\ln x}{x^{5/2}}
+    \]
+    Poiché l'esponente $5/2 > 1$, per la scala degli integrali impropri di Bertrand l'integrale $I_2(\alpha)$ converge per ogni $\alpha > 0$.
+    \item \textbf{Se $\alpha = 0$:} $f_0(x) \sim \frac{\ln 2}{x^{5/2}}$, convergente a $+\infty$.
+    \item \textbf{Se $\alpha < 0$:} $x^\alpha \to 0 \implies \ln(1 + x^\alpha) \sim x^\alpha = \frac{1}{x^{|\alpha|}}$.
+    Dunque $f_\alpha(x) \sim \frac{1}{x^{5/2 + |\alpha|}}$, convergente a $+\infty$ poiché $5/2 + |\alpha| > 5/2 > 1$.
+\end{itemize}
+Pertanto $I_2(\alpha)$ converge per \textbf{ogni} $\alpha \in \R$.
+
+\paragraph{Conclusione Globale:}
+L'integrale $I(\alpha)$ converge se e solo se convergono simultaneamente sia $I_1(\alpha)$ che $I_2(\alpha)$:
+\[
+    \text{Convergenza di } I(\alpha) \iff \alpha > 1
+\]
+\end{esempio}
+
+\begin{esempio}{Decomposizione in Fratti Semplici e Integrazione Razionale (Appello 2023/24)}{esame_fratti_semplici}
+Calcolare il valore esatto dell'integrale definito:
+\[
+    J := \int_0^1 \frac{x^2 + 2x + 3}{(x+1)(x^2 + 1)} \dx
+\]
+\tcblower
+\textbf{Soluzione Dettagliata:}
+
+\paragraph{1. Decomposizione in Fratti Semplici:}
+Il grado del numeratore (2) è strettamente minore del grado del denominatore (3).
+Il polinomio al denominatore possiede la radice reale semplice $x = -1$ e il fattore quadratico irriducibile $x^2 + 1$.
+Impostiamo la decomposizione:
+\[
+    \frac{x^2 + 2x + 3}{(x+1)(x^2 + 1)} = \frac{A}{x+1} + \frac{Bx + C}{x^2 + 1}
+\]
+Moltiplicando per il denominatore comune:
+\[
+    x^2 + 2x + 3 = A(x^2 + 1) + (Bx + C)(x + 1) = (A + B)x^2 + (B + C)x + (A + C)
+\]
+Uguagliando i coefficienti dei polinomi (o calcolando nei punti notevoli):
+\begin{itemize}
+    \item In $x = -1$: $(-1)^2 + 2(-1) + 3 = A(1 + 1) + 0 \implies 2 = 2A \implies A = 1$.
+    \item In $x = 0$: $3 = A + C \implies 3 = 1 + C \implies C = 2$.
+    \item Coefficiente di $x^2$: $A + B = 1 \implies 1 + B = 1 \implies B = 0$.
+\end{itemize}
+La decomposizione esatta è quindi:
+\[
+    \frac{x^2 + 2x + 3}{(x+1)(x^2 + 1)} = \frac{1}{x+1} + \frac{2}{x^2 + 1}
+\]
+
+\paragraph{2. Calcolo della Primitiva e Integrazione:}
+Integrando termine a termine:
+\[
+    \int \left( \frac{1}{x+1} + \frac{2}{x^2+1} \right) \dx = \ln|x+1| + 2\arctg(x) + C
+\]
+Applicando il Teorema Fondamentale del Calcolo Integrale su $[0, 1]$:
+\begin{align*}
+    J &= \Big[ \ln(x+1) + 2\arctg(x) \Big]_0^1 = \left(\ln(2) + 2\arctg(1)\right) - \left(\ln(1) + 2\arctg(0)\right) \\
+    &= \ln 2 + 2\left(\frac{\pi}{4}\right) - 0 = \ln 2 + \frac{\pi}{2}
+\end{align*}
+\end{esempio}

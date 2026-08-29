@@ -1,0 +1,29 @@
+\begin{tikzpicture}[scale=0.85, >=Stealth]
+    \draw[->, thick, navyblue] (-4.5,0) -- (6.5,0) node[right, font=\footnotesize] {$z$};
+
+    % Curva sotto H0 (centrata in 0)
+    \draw[domain=-4.0:4.0, smooth, variable=\x, very thick, coolblue]
+        plot ({\x}, {3.2*exp(-\x*\x/2)});
+    \node[above, font=\small\bfseries, text=coolblue] at (0,3.2) {Sotto $H_0$ ($\mu = \mu_0$)};
+
+    % Curva sotto H1 (centrata in 2.8)
+    \draw[domain=-1.0:6.5, smooth, variable=\x, very thick, crimsonred]
+        plot ({\x}, {3.2*exp(-(\x-2.8)*(\x-2.8)/2)});
+    \node[above, font=\small\bfseries, text=crimsonred] at (2.8,3.2) {Sotto $H_1$ ($\mu = \mu_1$)};
+
+    % Soglia critica z_crit = 1.64
+    \draw[ultra thick, dashed, black] (1.64,0) -- (1.64,3.5) node[above, font=\scriptsize\bfseries] {Soglia Critica $z_\alpha$};
+
+    % Errore Tipo I (alpha) sotto H0 a destra di 1.64
+    \fill[coolblue!50, domain=1.64:4.0, variable=\x]
+        (1.64,0) -- plot ({\x}, {3.2*exp(-\x*\x/2)}) -- (4.0,0) -- cycle;
+    \node[font=\tiny\bfseries, text=coolblue!90!black] at (2.3,0.3) {$\alpha$ (Tipo I)};
+
+    % Errore Tipo II (beta) sotto H1 a sinistra di 1.64
+    \fill[crimsonred!35, domain=-0.5:1.64, variable=\x]
+        (-0.5,0) -- plot ({\x}, {3.2*exp(-(\x-2.8)*(\x-2.8)/2)}) -- (1.64,0) -- cycle;
+    \node[font=\tiny\bfseries, text=crimsonred!90!black] at (1.0,0.5) {$\beta$ (Tipo II)};
+
+    % Potenza (1 - beta)
+    \node[font=\scriptsize\bfseries, text=forestgreen!80!black] at (3.8,1.2) {Potenza $= 1 - \beta$};
+\end{tikzpicture}

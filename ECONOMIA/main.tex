@@ -1,0 +1,164 @@
+% ==============================================================================
+% DOCUMENTO PRINCIPALE - APPUNTI DI ECONOMIA (MICRO & MACRO)
+% ==============================================================================
+\documentclass[11pt,a4paper,twoside,openright]{book}
+
+% --- Importazione delle configurazioni modulari ---
+\input{config/packages.tex}
+\input{config/environments.tex}
+\input{config/macros.tex}
+
+% ==============================================================================
+% COMPILAZIONE SELETTIVA (Scommentare per compilare solo capitoli specifici)
+% ==============================================================================
+% \includeonly{
+%   chapters/01_scienza_economica/main,
+%   chapters/02_strumenti_analisi_economica/main,
+%   chapters/03_domanda_offerta_mercato/main,
+%   chapters/04_elasticita_domanda_offerta/main,
+%   chapters/05_scelta_consumatore_domanda/main,
+%   chapters/06_introduzione_teoria_offerta/main,
+%   chapters/07_tecnologia_costi/main,
+%   chapters/08_strutture_mercato/main,
+%   chapters/09_informazione_rischio/main,
+%   chapters/10_introduzione_macroeconomia/main,
+%   chapters/11_prodotto_nazionale_spesa_aggregata/main,
+%   chapters/12_politica_fiscale_commercio_estero/main,
+%   chapters/13_moneta_politica_monetaria/main,
+%   chapters/14_mercato_monetario_reale_is_lm/main,
+%   chapters/15_equilibrio_domanda_offerta_aggregata/main,
+%   chapters/16_inflazione_disoccupazione/main,
+%   chapters/17_tassi_cambio_bilancia_pagamenti/main,
+%   chapters/18_macroeconomia_sistemi_aperti/main
+% }
+
+% ==============================================================================
+% METADATI DEL DOCUMENTO
+% ==============================================================================
+\title{\Huge\textbf{\textsf{Istituzioni di Economia}}\\[0.5em]
+\Large\textsf{Microeconomia, Macroeconomia, Modelli Analitici ed Esercizi Risolti}}
+\author{\textbf{\textsf{Nicola Beccaceci}}}
+\date{\textsf{Anno Accademico 2025/2026}}
+
+\begin{document}
+
+% --- Frontespizio / Titolo ---
+\frontmatter
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge\bfseries\color{navyblue} ISTITUZIONI DI ECONOMIA\par}
+    \vspace{0.8cm}
+    {\Large\scshape Microeconomia e Macroeconomia\par}
+    \vspace{0.5cm}
+    {\large\textsf{Corso di Laurea in Ingegneria Gestionale}\par}
+    \vfill
+    \rule{0.6\textwidth}{1.2pt}\par
+    \vspace{1cm}
+    {\large\textbf{\underline{Nicola Beccaceci}}\par}
+    \vspace{0.5cm}
+    {\small \today\par}
+    \vspace*{2cm}
+\end{titlepage}
+
+% --- Indice generale ---
+\tableofcontents
+\cleardoublepage
+
+% --- Prefazione / Guida alla lettura ---
+\chapter*{Guida alla Consultazione}
+\addcontentsline{toc}{chapter}{Guida alla Consultazione}
+Questo volume raccoglie la ricostruzione formale, l'integrazione teorica, la derivazione matematica e l'approfondimento didattico degli appunti del corso di \textbf{Istituzioni di Economia (Microeconomia e Macroeconomia)} per il Corso di Laurea in Ingegneria Gestionale.
+
+Il testo è concepito secondo i principi di massima completezza, rigore analitico e chiarezza espositiva:
+\begin{enumerate}
+    \item \textbf{Modellizzazione Economica Rigorosa}: formalizzazione analitica delle scelte degli agenti (consumatori, imprese, governi, banche centrali) e condizioni di equilibrio.
+    \item \textbf{Derivazioni Matematiche Passo-Passo}: dimostrazioni integrali delle condizioni di ottimo marginale, moltiplicatori del reddito, pendenze delle curve e meccanismi di trasmissione.
+    \item \textbf{Rappresentazione Grafica Vettoriale}: grafici cartesiani vettoriali in TikZ e pgfplots per ogni equilibrio di mercato, vincolo di bilancio, curve dei costi, schemi IS-LM e AD-AS.
+    \item \textbf{Approccio Risolutivo d'Esame}: algoritmi operativi passo-passo per gli esercizi numerici e checklist concettuali contro gli errori e i tranelli ricorrenti.
+\end{enumerate}
+
+\section*{Codice Visivo dei Box Tematici}
+\begin{itemize}
+    \item \textbf{\textcolor{navyblue}{Definizioni}}: Concetti economici, formule istituzionali e coordinate d'analisi.
+    \item \textbf{\textcolor{purpleaccent}{Modelli e Teorie Economiche}}: Formalizzazione di modelli teorici e strutture d'equilibrio.
+    \item \textbf{\textcolor{tealblue}{Leggi e Principi Economici}}: Assiomi del comportamento umano e leggi del mercato.
+    \item \textbf{\textcolor{forestgreen}{Teoremi e Risultati Fondamentali}}: Proposizioni dimostrate formalmente.
+    \item \textbf{\textcolor{warmamber}{Metodi Risolutivi Operativi}}: Procedure algoritmiche step-by-step per problemi d'esame.
+    \item \textbf{\textcolor{crimsonred}{Attenzione all'Esame e Tranelli}}: Errori concettuali frequenti, sviste di segno e trabocchetti d'esame.
+    \item \textbf{\textcolor{purpleaccent}{Esempi Applicativi ed Esercizi}}: Casi di studio ed esercizi numerici completamente commentati.
+    \item \textbf{\textcolor{darkcyan}{Dati ed Evidenze Empiriche}}: Riscontri nella realtà economica contemporanea.
+    \item \textbf{\textcolor{navyblue!80}{Intuizione Economica}}: Spiegazioni intuitive della logica sottostante ai modelli.
+\end{itemize}
+
+\cleardoublepage
+
+% --- Organizzazione del Corso e Macro-Aree ---
+\chapter*{Architettura Didattica del Corso}
+\addcontentsline{toc}{chapter}{Architettura Didattica del Corso}
+
+Il programma di Economia è strutturato in \textbf{5 Parti Tematiche Fondamentali} articolate in 18 capitoli:
+
+\begin{enumerate}[label=\textbf{Parte \Roman*.}]
+    \item \textbf{Introduzione e Fondamenti Metodologici} (Capitoli 1--2):
+    Natura della scienza economica, scarsità, costo opportunità, frontiera delle possibilità produttive (FPP), economia positiva e normativa, sistemi economici, variabili nominali e reali, numeri indice e pendenze.
+    
+    \item \textbf{Microeconomia: Mercati, Consumatore e Impresa} (Capitoli 3--7):
+    Curva di domanda e offerta, equilibrio di mercato, movimenti lungo e della curva, surplus; elasticità puntuale, d'arco, al reddito e incrociata; teoria del consumatore, preferenze, curve di indifferenza, vincolo di bilancio, ottimo, effetto reddito ed effetto sostituzione (Hicks/Slutsky); teoria dell'impresa e dell'offerta, massimizzazione del profitto, ricavo marginale e costo marginale; tecnologia, funzioni di produzione, legge dei rendimenti decrescenti, costi di breve e lungo periodo, economie di scala.
+    
+    \item \textbf{Strutture di Mercato, Informazione e Rischio} (Capitoli 8--9):
+    Concorrenza perfetta, monopolio, concorrenza monopolistica, oligopolio (Cournot, Bertrand, Stackelberg, giochi collusivi); informazione e rischio, utilità attesa, avversione al rischio e assicurazioni, asimmetrie informative (selezione avversa, moral hazard, signaling e screening).
+    
+    \item \textbf{Macroeconomia: Reddito, Politica Fiscale e Moneta} (Capitoli 10--13):
+    Introduzione alla macroeconomia, PIL e contabilità nazionale (metodi spesa, valore aggiunto, reddito), flusso circolare del reddito, modello reddito-spesa, croce keynesiana, scorte, moltiplicatore del reddito; politica fiscale, bilancio dello Stato, debito pubblico, stabilizzatori automatici, commercio estero e moltiplicatore in economia aperta; moneta, aggregati M1-M2-M3, domanda transattiva/speculativa, base monetaria e moltiplicatore della moneta, equilibrio del mercato monetario.
+    
+    \item \textbf{Macroeconomia dei Mercati Reali, Monetari e Sistemi Aperti} (Capitoli 14--18):
+    Modello IS-LM (mercato reale e monetario), politiche congiunte, crowding out, trappola della liquidità e regola di Taylor; modello Domanda Aggregata - Offerta Aggregata (AD-AS), shock di domanda e offerta, stagflazione; inflazione e disoccupazione (frizionale, strutturale, ciclica), curva di Phillips con aspettative e NAIRU; tassi di cambio nominali e reali, parità PPP e UIP, struttura della Bilancia dei Pagamenti; modello Mundell-Fleming (IS-LM-BP), efficacia delle politiche fiscali e monetarie con cambi fissi e flessibili, trilemma macroeconomico di Mundell.
+\end{enumerate}
+
+\cleardoublepage
+
+% ==============================================================================
+% CORPO DEL TESTO - CAPITOLI
+% ==============================================================================
+\mainmatter
+
+% --- PARTE I: INTRODUZIONE E FONDAMENTI METODOLOGICI ---
+\part{Introduzione e Fondamenti Metodologici}
+\include{chapters/01_scienza_economica/main}
+\include{chapters/02_strumenti_analisi_economica/main}
+
+% --- PARTE II: MICROECONOMIA: MERCATI, CONSUMATORE E IMPRESA ---
+\part{Microeconomia: Mercati, Consumatore e Impresa}
+\include{chapters/03_domanda_offerta_mercato/main}
+\include{chapters/04_elasticita_domanda_offerta/main}
+\include{chapters/05_scelta_consumatore_domanda/main}
+\include{chapters/06_introduzione_teoria_offerta/main}
+\include{chapters/07_tecnologia_costi/main}
+
+% --- PARTE III: STRUTTURE DI MERCATO, INFORMAZIONE E RISCHIO ---
+\part{Strutture di Mercato, Informazione e Rischio}
+\include{chapters/08_strutture_mercato/main}
+\include{chapters/09_informazione_rischio/main}
+
+% --- PARTE IV: MACROECONOMIA: REDDITO, POLITICA FISCALE E MONETA ---
+\part{Macroeconomia: Reddito, Politica Fiscale e Moneta}
+\include{chapters/10_introduzione_macroeconomia/main}
+\include{chapters/11_prodotto_nazionale_spesa_aggregata/main}
+\include{chapters/12_politica_fiscale_commercio_estero/main}
+\include{chapters/13_moneta_politica_monetaria/main}
+
+% --- PARTE V: MACROECONOMIA DEI MERCATI REALI, MONETARI E SISTEMI APERTI ---
+\part{Macroeconomia dei Mercati Reali, Monetari e Sistemi Aperti}
+\include{chapters/14_mercato_monetario_reale_is_lm/main}
+\include{chapters/15_equilibrio_domanda_offerta_aggregata/main}
+\include{chapters/16_inflazione_disoccupazione/main}
+\include{chapters/17_tassi_cambio_bilancia_pagamenti/main}
+\include{chapters/18_macroeconomia_sistemi_aperti/main}
+
+% ==============================================================================
+% PARTE CONCLUSIVA (APPENDICI E INDICI)
+% ==============================================================================
+\backmatter
+
+\end{document}

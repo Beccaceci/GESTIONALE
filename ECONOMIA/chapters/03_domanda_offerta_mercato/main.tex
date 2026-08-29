@@ -1,0 +1,621 @@
+% ==============================================================================
+% CAPITOLO 3: LA DOMANDA, L'OFFERTA E IL MERCATO
+% ==============================================================================
+\chapter{La Domanda, l'Offerta e il Mercato}
+\label{chap:domanda_offerta_mercato}
+
+\begin{tcolorbox}[colback=navyblue!5!white, colframe=navyblue, title=\textbf{Quadro Concettuale e Obiettivi Didattici}]
+Il presente capitolo sviluppa il modello microeconomico cardine del mercato concorrenziale: l'architettura istituzionale dello scambio e il ruolo del sistema dei prezzi; la derivazione della scheda di domanda (diretta e inversa) e le determinanti degli spostamenti esogeni; la scheda di offerta e la tecnologia di produzione; la determinazione analitica dell'equilibrio marshalliano e la dinamica di convergenza walrasiana; la statica comparata a seguito di shock di domanda e offerta; l'impatto economico e le distorsioni dei controlli diretti sui prezzi (prezzo massimo e prezzo minimo vincolante); la teoria del benessere in equilibrio parziale, la quantificazione integrale del surplus del consumatore e del produttore e la perdita secca di efficienza ($\lossDW$).
+\end{tcolorbox}
+
+\section{La Struttura del Mercato e il Ruolo dei Prezzi}
+
+\subsection{Il Mercato come Meccanismo di Allocazione Decentralizzata}
+Nel pensiero economico moderno, il \textbf{mercato} non è necessariamente un luogo fisico circoscritto (come un mercato rionale o una fiera campionaria), bensì un'istituzione sociale o una struttura organizzativa astratta in cui interagiscono compratori e venditori, determinando congiuntamente le quantità scambiate e il prezzo di equilibrio:
+\begin{itemize}
+    \item \textbf{Lato della Domanda}: insieme di tutti gli agenti economici (famiglie, imprese, enti pubblici) che desiderano acquistare un determinato bene o servizio per soddisfare i propri bisogni o come fattore produttivo.
+    \item \textbf{Lato dell'Offerta}: insieme di tutti i produttori e venditori che immettono beni e servizi sul mercato allo scopo di ottenere ricavi e remunerare i fattori impiegati.
+\end{itemize}
+
+\begin{definizione}{Il Ruolo Informativo e Allocativo del Prezzo}{ruolo_prezzo}
+Il \textbf{prezzo di mercato} $P$ è una grandezza monetaria per unità di bene che riassume in modo sintetico e privo di costi di coordinamento centralizzato tutta l'informazione dispersa tra milioni di agenti:
+\begin{enumerate}
+    \item \textbf{Segnale di Scarsità}: un prezzo elevato segnala che il bene è scarso rispetto ai desideri dei consumatori, incentivando i produttori ad aumentarne l'offerta;
+    \item \textbf{Meccanismo di Razionamento}: seleziona i consumatori con la più alta disponibilità a pagare, escludendo coloro che attribuiscono al bene un beneficio marginale inferiore al prezzo;
+    \item \textbf{Incentivo alla Produzione}: garantisce la remunerazione dei costi opportunità delle risorse impiegate dalle imprese efficienti.
+\end{enumerate}
+\end{definizione}
+
+\begin{esempio}[La Logica dei Prezzi: Il Caso del Caffè al Bar]
+Si consideri il prezzo di una tazzina di caffè al banco, fissato a $1{,}20\,\text{\euro}$:
+\begin{itemize}
+    \item \textbf{Prospettiva del Consumatore}: l'acquisto avviene se e solo se il beneficio marginale soggettivo del caffè è pari o superiore al sacrificio monetario di $1{,}20\,\text{\euro}$;
+    \item \textbf{Prospettiva del Barista}: la vendita a $1{,}20\,\text{\euro}$ copre il costo delle materie prime (miscela, latte, zucchero), l'energia elettrica, l'ammortamento della macchina da caffè, il costo del lavoro e fornisce un normale margine di profitto per il capitale investito.
+\end{itemize}
+Se il prezzo salisse arbitrariamente a $10\,\text{\euro}$, la stragrande maggioranza dei clienti rinuncerebbe all'acquisto optando per beni sostituti (caffè a casa, tè), generando un eccesso di offerta che costringerebbe il barista ad abbassare il prezzo. Se viceversa il prezzo scendesse a $0{,}10\,\text{\euro}$, la domanda esploderebbe ma il barista lavorerebbe in perdita sistematica, venendo espulso dal mercato.
+\end{esempio}
+
+\subsection{La Mano Invisibile e il Modello di Concorrenza Perfetta}
+La straordinaria capacità dei mercati concorrenziali di coordinare decisioni individuali egoistiche conducendo a un ordine sociale efficiente fu teorizzata da \textbf{Adam Smith} nell'opera \textit{La Ricchezza delle Nazioni} (1776) con la celebre metafora della \textbf{"mano invisibile"}.
+
+Per formalizzare questo meccanismo, la microeconomia definisce un modello ideale di riferimento:
+
+\begin{modello}{Struttura di Mercato di Concorrenza Perfetta}{concorrenza_perfetta_ipotesi}
+Un mercato opera in regime di \textbf{concorrenza perfetta} quando sono rigorosamente soddisfatti quattro postulati strutturali:
+\begin{enumerate}
+    \item \textbf{Omogeneità Perfetta del Prodotto}: tutti i venditori offrono beni identici per caratteristiche qualitative, fisiche e prestazionali. Per il compratore i prodotti sono perfetti sostituti.
+    \item \textbf{Atomicità e Numerosità degli Agenti (Price-Taking)}: esiste una moltitudine infinita di compratori e venditori, ciascuno dei quali detiene una quota infinitesima del volume totale scambiato. Nessun singolo agente ha il potere di influenzare il prezzo di mercato: tutti gli agenti sono \textit{price-taker}.
+    \item \textbf{Assenza di Barriere all'Entrata e all'Uscita}: vi è assoluta libertà di ingresso per nuove imprese attratte da opportunità di extraprofitto e totale libertà di chiusura per imprese in perdita, senza costi irrecuperabili (\textit{sunk costs}).
+    \item \textbf{Trasparenza Informativa e Informazione Perfetta}: tutti i partecipanti dispongono istantaneamente e gratuitamente di tutte le informazioni rilevanti relative a prezzi, tecnologie e qualità dei beni.
+\end{enumerate}
+\end{modello}
+
+\section{La Teoria della Domanda}
+
+\subsection{Funzione di Domanda Diretta e Inversa}
+
+\begin{definizione}{Scheda e Curva di Domanda}{curva_domanda}
+La \textbf{curva di domanda diretta} esprime la quantità complessiva $\Qd$ che i consumatori desiderano e sono in grado di acquistare in funzione del prezzo unitario $P$, a parità di tutte le altre determinanti esogene:
+\begin{equation}
+    \Qd = D(P) \quad \text{con } \dv{\Qd}{P} < 0
+\end{equation}
+La \textbf{curva di domanda inversa} esprime il prezzo massimo unitario $P(\Qd)$ che i consumatori sono disposti a pagare per assorbire una determinata quantità $\Qd$ sul mercato (\textbf{prezzo di riserva marginale}):
+\begin{equation}
+    P = P_d(Q) = D^{-1}(Q) \quad \text{con } \dv{P_d}{Q} < 0
+\end{equation}
+\end{definizione}
+
+\begin{legge}{Legge Fondamentale della Domanda}{legge_domanda}
+A parità di altre condizioni (\textit{ceteris paribus}), la quantità domandata di un bene varia in senso \textbf{inverso} rispetto al suo prezzo: all'aumentare del prezzo $P$, la quantità domandata $\Qd$ diminuisce; al diminuire del prezzo $P$, la quantità domandata $\Qd$ aumenta.
+\end{legge}
+
+La pendenza negativa della curva di domanda discende congiuntamente da due fenomeni microeconomici:
+\begin{itemize}
+    \item \textbf{Effetto Sostituzione}: all'aumentare del prezzo di un bene, esso diviene relativamente più costoso rispetto ai beni alternativi, inducendo il consumatore razionale a sostituirlo;
+    \item \textbf{Effetto Reddito}: l'incremento di prezzo riduce il potere d'acquisto reale del reddito monetario del consumatore, costringendolo a comprimere i livelli di acquisto complessivi.
+\end{itemize}
+
+\subsection{Aggregazione Orizzontale della Domanda di Mercato}
+La curva di domanda di mercato si ottiene sommando orizzontalmente le curve di domanda dei singoli individui residenti nel sistema:
+
+\begin{teorema}{Aggregazione Orizzontale delle Domande Individuali}{aggregazione_domanda}
+Siano $q_{d,i}(P)$ le funzioni di domanda diretta degli $N$ individui che compongono il mercato ($i = 1, \dots, N$). La domanda aggregata di mercato $\Qd(P)$ per ogni livello di prezzo $P$ è pari a:
+\begin{equation}
+    \Qd(P) = \sum_{i=1}^N q_{d,i}(P)
+\end{equation}
+\end{teorema}
+
+\begin{esempio}[Aggregazione Analitica di Due Domande Individuali]
+Siano date le funzioni di domanda individuali di due consumatori $A$ e $B$:
+\begin{equation}
+    q_{d,A}(P) = 20 - 2P \quad (\text{per } P \le 10), \qquad q_{d,B}(P) = 30 - P \quad (\text{per } P \le 30)
+\end{equation}
+La domanda di mercato aggregata $\Qd(P)$ è definita a tratti:
+\begin{equation}
+    \Qd(P) = \begin{cases}
+        (30 - P) + (20 - 2P) = 50 - 3P & \text{se } 0 \le P \le 10 \\
+        30 - P & \text{se } 10 < P \le 30 \\
+        0 & \text{se } P > 30
+    \end{cases}
+\end{equation}
+\end{esempio}
+
+\subsection{Determinanti Esogene e Spostamenti della Curva di Domanda}
+Quando muta una variabile diversa dal prezzo del bene, l'intera curva di domanda si sposta nel piano cartesiano:
+
+\begin{enumerate}
+    \item \textbf{Reddito Nazionale e Disponibile ($R$)}:
+    \begin{itemize}
+        \item \textbf{Beni Normali}: un incremento del reddito accresce la disponibilità a spendere, traslando la curva di domanda verso destra ($\pdv{\Qd}{R} > 0$). Esempi: viaggi, abbigliamento, ristorazione.
+        \item \textbf{Beni Inferiori}: beni di qualità modesta la cui domanda si riduce al crescere del reddito, poiché i consumatori migrano verso beni superiori ($\pdv{\Qd}{R} < 0$). Esempi: alimenti a basso costo (patate, carne in scatola), trasporti pubblici locali rispetto all'auto privata.
+    \end{itemize}
+    
+    \item \textbf{Prezzo dei Beni Correlati ($P_{\text{altri}}$)}:
+    \begin{itemize}
+        \item \textbf{Beni Sostituti (Succedanei)}: due beni che soddisfano bisogni analoghi (es. tè e caffè, burro e margarina). Un rincaro del bene $Y$ induce i consumatori a sostituirlo con il bene $X$, traslando la domanda di $X$ verso destra:
+        \begin{equation}
+            \pdv{Q_{d,X}}{P_Y} > 0
+        \end{equation}
+        \item \textbf{Beni Complementari}: due beni che devono essere utilizzati congiuntamente per soddisfare un bisogno (es. caffè e zucchero, benzina e automobili). Un rincaro del bene $Y$ deprime il consumo congiunto, traslando la domanda di $X$ verso sinistra:
+        \begin{equation}
+            \pdv{Q_{d,X}}{P_Y} < 0
+        \end{equation}
+    \end{itemize}
+    
+    \item \textbf{Preferenze, Mode e Gusti dei Consumatori}: campagne pubblicitarie o mutamenti culturali che aumentano l'apprezzamento del bene spostano la curva verso destra.
+    \item \textbf{Aspettative sui Prezzi Futuri}: la previsione di rincari futuri spinge ad anticipare gli acquisti odierni (spostamento a destra).
+    \item \textbf{Numero di Acquirenti nel Mercato}: l'incremento demografico o l'apertura a mercati internazionali trasla la domanda aggregata verso l'esterno.
+\end{enumerate}
+
+\section{La Teoria dell'Offerta}
+
+\subsection{Funzione di Offerta Diretta e Inversa}
+
+\begin{definizione}{Scheda e Curva di Offerta}{curva_offerta}
+La \textbf{curva di offerta diretta} esprime la quantità complessiva $\Qs$ che i produttori desiderano e possono vendere per ogni livello di prezzo $P$, \textit{ceteris paribus}:
+\begin{equation}
+    \Qs = S(P) \quad \text{con } \dv{\Qs}{P} > 0
+\end{equation}
+La \textbf{curva di offerta inversa} esprime il prezzo minimo $P_s(Q)$ necessario per indurre i produttori a immettere sul mercato una determinata quantità $Q$ (\textbf{costo marginale di produzione}):
+\begin{equation}
+    P = P_s(Q) = S^{-1}(Q) \quad \text{con } \dv{P_s}{Q} > 0
+\end{equation}
+\end{definizione}
+
+\begin{legge}{Legge Fondamentale dell'Offerta}{legge_offerta}
+A parità di altre condizioni, la quantità offerta di un bene varia in senso \textbf{diretto} rispetto al suo prezzo: all'aumentare del prezzo di mercato $P$, la quantità offerta $\Qs$ cresce; al diminuire del prezzo $P$, la quantità offerta $\Qs$ si riduce.
+\end{legge}
+
+La pendenza positiva dell'offerta riflette la \textbf{legge dei rendimenti marginali decrescenti}: nel breve periodo, espandere la produzione impiegando impianti a capacità data comporta costi marginali di produzione via via crescenti ($\CMg \uparrow$). L'impresa incrementerà la produzione se e solo se il prezzo di mercato copre il costo marginale dell'ultima unità prodotta ($P \ge \CMg$).
+
+\subsection{Aggregazione Orizzontale dell'Offerta di Mercato}
+L'offerta aggregata è la somma orizzontale delle quantità offerte dalle singole $M$ imprese presenti nell'industria:
+\begin{equation}
+    \Qs(P) = \sum_{j=1}^M q_{s,j}(P)
+\end{equation}
+
+\subsection{Determinanti Esogene e Spostamenti della Curva di Offerta}
+I fattori che determinano traslazioni della curva di offerta comprendono:
+\begin{enumerate}
+    \item \textbf{Prezzi dei Fattori di Produzione (Input)}: un aumento dei salari nominali $w$, del costo dell'energia o del prezzo delle materie prime accresce i costi di produzione per ogni livello di output, traslando la curva di offerta verso l'alto/sinistra (riduzione dell'offerta).
+    \item \textbf{Progresso Tecnologico}: innovazioni di processo che aumentano la produttività consentono di produrre lo stesso output a costi unitari inferiori, traslando l'offerta verso il basso/destra (espansione dell'offerta).
+    \item \textbf{Politica Pubblica e Regolamentazione}: l'introduzione di imposte sulla produzione trasla l'offerta verso l'alto dell'ammontare esatto dell'imposta unitaria $t$, mentre i sussidi la traslano verso il basso.
+    \item \textbf{Aspettative dei Produttori}: l'attesa di una crescita futura dei prezzi può indurre le imprese a trattenere scorte oggi, riducendo l'offerta corrente.
+    \item \textbf{Numero di Imprese nel Settore}: l'ingresso di nuovi concorrenti sposta la curva di offerta aggregata verso destra.
+\end{enumerate}
+
+\section{Equilibrio di Mercato e Meccanismo di Aggiustamento}
+
+\subsection{Determinazione Analitica dell'Equilibrio di Mercato}
+
+\begin{teorema}{Esistenza e Unicità dell'Equilibrio Concorrenziale}{equilibrio_mercato_teorema}
+In un mercato con domanda inclinata negativamente ($D'(P) < 0$) e offerta inclinata positivamente ($S'(P) > 0$), esiste un'unica coppia prezzo-quantità $(\Peq, \Qeq)$, detta \textbf{equilibrio di mercato marshalliano}, tale per cui la quantità domandata coincide esattamente con la quantità offerta:
+\begin{equation}
+    \Qd(\Peq) = \Qs(\Peq) = \Qeq
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}[Risoluzione di un Modello Lineare Generale]
+Si consideri il sistema lineare standard:
+\begin{equation}
+    \begin{cases}
+        \Qd = a - bP & (a > 0, \, b > 0) \\
+        \Qs = -c + dP & (c \ge 0, \, d > 0)
+    \end{cases}
+\end{equation}
+dove $a$ è la domanda potenziale a prezzo zero, $b$ è la reattività della domanda al prezzo, $-c$ è l'intercetta dell'offerta e $d$ è la reattività dell'offerta.
+
+Imponendo la condizione di equilibrio di mercato $\Qd = \Qs$:
+\begin{equation}
+    a - bP = -c + dP \implies (b + d)P = a + c \implies \Peq = \frac{a + c}{b + d}
+\end{equation}
+Sostituendo il prezzo di equilibrio $\Peq$ nell'equazione di domanda:
+\begin{equation}
+    \Qeq = a - b \left( \frac{a + c}{b + d} \right) = \frac{a(b + d) - b(a + c)}{b + d} = \frac{ab + ad - ab - bc}{b + d} = \frac{ad - bc}{b + d}
+\end{equation}
+Affinché la quantità di equilibrio sia strettamente positiva ($\Qeq > 0$), deve valere la condizione di consistenza economica: $ad > bc \iff \frac{a}{b} > \frac{c}{d}$ (il prezzo massimo di riserva della domanda supera il prezzo minimo di innesco dell'offerta).
+\end{dimostrazione}
+
+\subsection{Dinamica del Disequilibrio e Aggiustamento Walrasiano}
+Cosa accade se il prezzo vigente sul mercato differisce da $\Peq$?
+
+\begin{itemize}
+    \item \textbf{Eccesso di Offerta (Surplus o Eccedenza)} ($P > \Peq$): a prezzi superiori a quello di equilibrio, $\Qs(P) > \Qd(P)$. I venditori accumulano scorte invendute e, per attrarre acquirenti, innescano una concorrenza al ribasso riducendo i prezzi ($\dot{P} < 0$).
+    \item \textbf{Eccesso di Domanda (Penuria o Shortage)} ($P < \Peq$): a prezzi inferiori a quello di equilibrio, $\Qd(P) > \Qs(P)$. I consumatori insoddisfatti competono per accaparrarsi le scarse quantità disponibili, offrendo prezzi più alti e spingendo le quotazioni verso l'alto ($\dot{P} > 0$).
+\end{itemize}
+
+\begin{modello}{Processo di Aggiustamento Walrasiano (Tâtonnement)}{aggiustamento_walras}
+La dinamica di convergenza temporale del prezzo verso l'equilibrio è descritta dall'equazione differenziale walrasiana:
+\begin{equation}
+    \dv{P(t)}{t} = \alpha [ \Qd(P(t)) - \Qs(P(t)) ] = \alpha \cdot \text{ED}(P(t))
+\end{equation}
+dove $\alpha > 0$ è la velocità di reazione del mercato ed $\text{ED}(P)$ è la funzione di eccesso di domanda. Poiché $\dv{\text{ED}}{P} = D'(P) - S'(P) = -b - d < 0$, l'equilibrio $\Peq$ è \textbf{asintoticamente e globalmente stabile}.
+\end{modello}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.15, >=Latex]
+    % Assi
+    \draw[->, thick] (0,0) -- (8.5,0) node[below right] {\textbf{Quantità $Q$}};
+    \draw[->, thick] (0,0) -- (0,6.5) node[above left] {\textbf{Prezzo $P$}};
+    
+    % Curve di Domanda e Offerta
+    \draw[very thick, navyblue] (0.8, 5.8) -- (7.5, 0.8) node[right] {$D: P = P_d(Q)$};
+    \draw[very thick, forestgreen] (0.8, 0.6) -- (7.5, 5.6) node[right] {$S: P = P_s(Q)$};
+    
+    % Equilibrio
+    \coordinate (E) at (4.15, 3.2);
+    \filldraw[purpleaccent] (E) circle (2.5pt) node[above=2pt] {$E(\Qeq, \Peq)$};
+    \draw[dotted, thick] (4.15,0) node[below] {$\Qeq$} -- (E) -- (0,3.2) node[left] {$\Peq$};
+    
+    % Prezzo Alto P2 (Eccesso di Offerta)
+    \coordinate (D2) at (2.2, 4.75);
+    \coordinate (S2) at (6.35, 4.75);
+    \draw[dashed, crimsonred] (0, 4.75) node[left] {$P_{\text{alto}}$} -- (S2);
+    \draw[dotted, thick] (D2) -- (2.2, 0) node[below] {$\Qd(P_{\text{alto}})$};
+    \draw[dotted, thick] (S2) -- (6.35, 0) node[below] {$\Qs(P_{\text{alto}})$};
+    \filldraw[navyblue] (D2) circle (2pt);
+    \filldraw[forestgreen] (S2) circle (2pt);
+    
+    % Fascia Eccesso di Offerta con Frecce
+    \draw[<->, ultra thick, crimsonred] (2.2, 4.75) -- (6.35, 4.75) node[midway, above, font=\small\bfseries] {Eccesso di Offerta (Eccedenza)};
+    \draw[->, line width=1.5pt, crimsonred] (0.4, 4.5) -- (0.4, 3.5) node[midway, left, font=\footnotesize\bfseries] {Pressione al Ribasso};
+    
+    % Prezzo Basso P1 (Eccesso di Domanda)
+    \coordinate (S1) at (2.3, 1.7);
+    \coordinate (D1) at (6.25, 1.7);
+    \draw[dashed, warmamber] (0, 1.7) node[left] {$P_{\text{basso}}$} -- (D1);
+    \draw[dotted, thick] (S1) -- (2.3, 0) node[below] {$\Qs(P_{\text{basso}})$};
+    \draw[dotted, thick] (D1) -- (6.25, 0) node[below] {$\Qd(P_{\text{basso}})$};
+    \filldraw[forestgreen] (S1) circle (2pt);
+    \filldraw[navyblue] (D1) circle (2pt);
+    
+    % Fascia Eccesso di Domanda con Frecce
+    \draw[<->, ultra thick, warmamber] (2.3, 1.7) -- (6.25, 1.7) node[midway, below, font=\small\bfseries] {Eccesso di Domanda (Penuria)};
+    \draw[->, line width=1.5pt, warmamber] (0.4, 1.9) -- (0.4, 2.9) node[midway, left, font=\footnotesize\bfseries] {Pressione al Rialzo};
+\end{tikzpicture}
+\caption{Equilibrio di mercato marshalliano $E(\Qeq, \Peq)$ e meccanismo dinamico di convergenza walrasiana: eccesso di offerta per $P > \Peq$ con pressione ribassista ed eccesso di domanda per $P < \Peq$ con spinta rialzista.}
+\label{fig:equilibrio_mercato_dinamico}
+\end{figure}
+
+\section{Statica Comparata: Shock di Domanda e di Offerta}
+
+La statica comparata analizza il passaggio dal vecchio equilibrio $E_0(\Peq_0, \Qeq_0)$ al nuovo equilibrio $E_1(\Peq_1, \Qeq_1)$ a seguito della variazione di una determinante esogena:
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{l X c c}
+\toprule
+\textbf{Tipologia di Shock Esogeno} & \textbf{Causa Economica Esemplificativa} & \textbf{Effetto su $\Peq$} & \textbf{Effetto su $\Qeq$} \\
+\midrule
+1. \textbf{Aumento della Domanda} ($D \to D'$) & Incremento reddito famiglie, moda favorevole, rincaro bene sostituto & $\mathbf{\uparrow \text{Aumenta}}$ & $\mathbf{\uparrow \text{Aumenta}}$ \\
+2. \textbf{Riduzione della Domanda} ($D \to D''$) & Calo del reddito, diffusione timori sanitari, rincaro bene complementare & $\mathbf{\downarrow \text{Diminuisce}}$ & $\mathbf{\downarrow \text{Diminuisce}}$ \\
+3. \textbf{Aumento dell'Offerta} ($S \to S'$) & Progresso tecnologico, calo del prezzo delle materie prime, sussidi & $\mathbf{\downarrow \text{Diminuisce}}$ & $\mathbf{\uparrow \text{Aumenta}}$ \\
+4. \textbf{Riduzione dell'Offerta} ($S \to S''$) & Shock petrolifero, incremento imposte di produzione, disastro naturale & $\mathbf{\uparrow \text{Aumenta}}$ & $\mathbf{\downarrow \text{Diminuisce}}$ \\
+\bottomrule
+\end{tabularx}
+\caption{Quadro sinottico degli effetti di statica comparata per i quattro shock elementari di mercato.}
+\label{tab:statica_comparata}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}[b]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.75, >=Stealth]
+    \draw[->, thick] (0,0) -- (6,0) node[below] {$Q$};
+    \draw[->, thick] (0,0) -- (0,5) node[left] {$P$};
+    \draw[thick, navyblue] (0.5,4.2) -- (4.5,0.5) node[right, font=\scriptsize] {$D_0$};
+    \draw[very thick, navyblue!60!black] (1.8,4.8) -- (5.8,1.1) node[right, font=\scriptsize] {$D_1$};
+    \draw[thick, forestgreen] (0.5,0.8) -- (5.2,4.5) node[right, font=\scriptsize] {$S$};
+    \filldraw[purpleaccent] (2.4,2.3) circle (2pt) node[below=2pt, font=\scriptsize] {$E_0$};
+    \filldraw[crimsonred] (3.4,3.1) circle (2pt) node[above=2pt, font=\scriptsize] {$E_1$};
+    \draw[->, ultra thick, crimsonred] (2.5,2.4) -- (3.3,3.0);
+    \draw[->, thick, navyblue] (2.2,2.8) -- (3.2,3.6) node[midway, above, font=\tiny] {$\Delta D > 0$};
+    \node[font=\footnotesize\bfseries, align=center] at (3,-0.8) {(a) Espansione Domanda:\\$\Peq \uparrow, \, \Qeq \uparrow$};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.75, >=Stealth]
+    \draw[->, thick] (0,0) -- (6,0) node[below] {$Q$};
+    \draw[->, thick] (0,0) -- (0,5) node[left] {$P$};
+    \draw[very thick, navyblue!60!black] (0.5,4.2) -- (4.5,0.5) node[right, font=\scriptsize] {$D_1$};
+    \draw[thick, navyblue] (1.8,4.8) -- (5.8,1.1) node[right, font=\scriptsize] {$D_0$};
+    \draw[thick, forestgreen] (0.5,0.8) -- (5.2,4.5) node[right, font=\scriptsize] {$S$};
+    \filldraw[purpleaccent] (3.4,3.1) circle (2pt) node[above=2pt, font=\scriptsize] {$E_0$};
+    \filldraw[crimsonred] (2.4,2.3) circle (2pt) node[below=2pt, font=\scriptsize] {$E_1$};
+    \draw[->, ultra thick, crimsonred] (3.3,3.0) -- (2.5,2.4);
+    \draw[->, thick, navyblue] (3.2,3.6) -- (2.2,2.8) node[midway, above, font=\tiny] {$\Delta D < 0$};
+    \node[font=\footnotesize\bfseries, align=center] at (3,-0.8) {(b) Contrazione Domanda:\\$\Peq \downarrow, \, \Qeq \downarrow$};
+\end{tikzpicture}
+\end{minipage}
+
+\vspace{0.8cm}
+
+\begin{minipage}[b]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.75, >=Stealth]
+    \draw[->, thick] (0,0) -- (6,0) node[below] {$Q$};
+    \draw[->, thick] (0,0) -- (0,5) node[left] {$P$};
+    \draw[thick, navyblue] (0.5,4.5) -- (5.2,0.8) node[right, font=\scriptsize] {$D$};
+    \draw[thick, forestgreen] (0.5,1.5) -- (4.5,4.8) node[right, font=\scriptsize] {$S_0$};
+    \draw[very thick, forestgreen!60!black] (1.5,0.6) -- (5.5,3.9) node[right, font=\scriptsize] {$S_1$};
+    \filldraw[purpleaccent] (2.2,3.0) circle (2pt) node[above=2pt, font=\scriptsize] {$E_0$};
+    \filldraw[crimsonred] (3.2,2.2) circle (2pt) node[below=2pt, font=\scriptsize] {$E_1$};
+    \draw[->, ultra thick, crimsonred] (2.3,2.9) -- (3.1,2.3);
+    \draw[->, thick, forestgreen] (1.8,2.2) -- (2.8,1.4) node[midway, below left, font=\tiny] {$\Delta S > 0$};
+    \node[font=\footnotesize\bfseries, align=center] at (3,-0.8) {(c) Espansione Offerta:\\$\Peq \downarrow, \, \Qeq \uparrow$};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.75, >=Stealth]
+    \draw[->, thick] (0,0) -- (6,0) node[below] {$Q$};
+    \draw[->, thick] (0,0) -- (0,5) node[left] {$P$};
+    \draw[thick, navyblue] (0.5,4.5) -- (5.2,0.8) node[right, font=\scriptsize] {$D$};
+    \draw[very thick, forestgreen!60!black] (0.5,1.5) -- (4.5,4.8) node[right, font=\scriptsize] {$S_1$};
+    \draw[thick, forestgreen] (1.5,0.6) -- (5.5,3.9) node[right, font=\scriptsize] {$S_0$};
+    \filldraw[purpleaccent] (3.2,2.2) circle (2pt) node[below=2pt, font=\scriptsize] {$E_0$};
+    \filldraw[crimsonred] (2.2,3.0) circle (2pt) node[above=2pt, font=\scriptsize] {$E_1$};
+    \draw[->, ultra thick, crimsonred] (3.1,2.3) -- (2.3,2.9);
+    \draw[->, thick, forestgreen] (2.8,1.4) -- (1.8,2.2) node[midway, below left, font=\tiny] {$\Delta S < 0$};
+    \node[font=\footnotesize\bfseries, align=center] at (3,-0.8) {(d) Contrazione Offerta:\\$\Peq \uparrow, \, \Qeq \downarrow$};
+\end{tikzpicture}
+\end{minipage}
+\caption{I quattro scenari fondamentali di statica comparata nel modello di domanda e offerta.}
+\label{fig:statica_comparata_4scenari}
+\end{figure}
+
+\begin{osservazione}[Shock Simultanei e Indeterminatezza Parziale]
+Se si verificano simultaneamente uno shock di domanda e uno shock di offerta, uno dei due parametri di equilibrio muta in direzione certa, mentre l'altro risulta \textbf{indeterminato} a priori, dipendendo dall'intensità relativa delle due traslazioni:
+\begin{itemize}
+    \item \textbf{Aumento simultaneo di Domanda e Offerta} ($\Delta D > 0, \Delta S > 0$): la quantità di equilibrio aumenta sicuramente ($\Qeq \uparrow$), ma l'effetto sul prezzo $\Peq$ è ambiguo (dipende se prevale la spinta rialzista della domanda o ribassista dell'offerta).
+    \item \textbf{Aumento di Domanda e Riduzione di Offerta} ($\Delta D > 0, \Delta S < 0$): il prezzo di equilibrio sale sicuramente ($\Peq \uparrow$), ma la variazione della quantità $\Qeq$ è indeterminata.
+\end{itemize}
+\end{osservazione}
+
+\section{Politiche di Controllo dei Prezzi e Distorsioni di Mercato}
+
+Talvolta le autorità governative intervengono fissando per legge limiti al livello dei prezzi:
+
+\subsection{Livello Massimo di Prezzo (Price Ceiling)}
+
+\begin{definizione}{Livello Massimo di Prezzo (Tetto al Prezzo)}{prezzo_massimo}
+Un \textbf{prezzo massimo} $P_{\max}$ è una regolamentazione pubblica che stabilisce per legge che il prezzo di vendita non possa superare una data soglia legale.
+\begin{itemize}
+    \item Se $P_{\max} \ge \Peq$: il vincolo è \textbf{non vincolante}, il mercato rimane nel punto $E(\Peq, \Qeq)$.
+    \item Se $P_{\max} < \Peq$: il vincolo è \textbf{vincolante}. Al prezzo calmierato la quantità domandata eccede la quantità offerta ($\Qd(P_{\max}) > \Qs(P_{\max})$), determinando una \textbf{penuria persistente (shortage)}.
+\end{itemize}
+\end{definizione}
+
+\textbf{Effetti Distorsivi di un Price Ceiling Vincolante}:
+\begin{enumerate}
+    \item \textbf{Razionamento Non da Prezzo}: la quantità effettivamente scambiata è vincolata dal lato corto del mercato ($Q_{\text{scambiata}} = \Qs(P_{\max}) < \Qeq$). La selezione degli acquirenti non avviene più tramite i prezzi, ma attraverso code, favoritismi o tessere di razionamento.
+    \item \textbf{Nascita del Mercato Nero}: compratori disposti a pagare prezzi fino a $P_d(\Qs(P_{\max})) \gg P_{\max}$ alimentano transazioni illegali a prezzi speculativi.
+    \item \textbf{Degrado Qualitativo}: i venditori riducono i costi eliminando manutenzioni e servizi accessori (es. equo canone negli affitti che porta all'incuria degli immobili).
+\end{enumerate}
+
+\subsection{Livello Minimo di Prezzo (Price Floor)}
+
+\begin{definizione}{Livello Minimo di Prezzo (Pavimento al Prezzo)}{prezzo_minimo}
+Un \textbf{prezzo minimo} $P_{\min}$ è una norma che vieta la vendita del bene a un prezzo inferiore alla soglia stabilita.
+\begin{itemize}
+    \item Se $P_{\min} \le \Peq$: il vincolo è \textbf{non vincolante}.
+    \item Se $P_{\min} > \Peq$: il vincolo è \textbf{vincolante}. L'offerta eccede la domanda ($\Qs(P_{\min}) > \Qd(P_{\min})$), generando un'\textbf{eccedenza invenduta persistente (surplus)}.
+\end{itemize}
+\end{definizione}
+
+\begin{esempio}[Salario Minimo e Mercato del Lavoro]
+Se il governo impone un salario minimo legale $w_{\min}$ superiore al salario di equilibrio concorrenziale $w^*$:
+\begin{itemize}
+    \item L'offerta di lavoro da parte dei lavoratori cresce a $L_s(w_{\min})$;
+    \item La domanda di lavoro da parte delle imprese si riduce a $L_d(w_{\min})$;
+    \item L'eccesso di offerta $L_s - L_d$ costituisce \textbf{disoccupazione involontaria}. I lavoratori occupati beneficiano del salario più alto, mentre i lavoratori marginali perdono l'impiego.
+\end{itemize}
+\end{esempio}
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}[b]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.8, >=Latex]
+    \draw[->, thick] (0,0) -- (6.5,0) node[below] {$Q$};
+    \draw[->, thick] (0,0) -- (0,5.5) node[left] {$P$};
+    \draw[thick, navyblue] (0.6,4.8) -- (5.8,0.6) node[right] {$D$};
+    \draw[thick, forestgreen] (0.6,0.6) -- (5.8,4.8) node[right] {$S$};
+    
+    \coordinate (E) at (3.2, 2.7);
+    \filldraw[purpleaccent] (E) circle (2pt) node[above=2pt, font=\scriptsize] {$E(\Qeq, \Peq)$};
+    \draw[dotted] (E) -- (3.2,0) node[below, font=\scriptsize] {$\Qeq$};
+    \draw[dotted] (E) -- (0,2.7) node[left, font=\scriptsize] {$\Peq$};
+    
+    % Prezzo Massimo
+    \draw[thick, crimsonred, dashed] (0,1.5) node[left, font=\small\bfseries] {$P_{\max}$} -- (6.0,1.5);
+    \filldraw[forestgreen] (1.7, 1.5) circle (2pt);
+    \filldraw[navyblue] (4.7, 1.5) circle (2pt);
+    \draw[dotted, thick] (1.7, 1.5) -- (1.7, 0) node[below, font=\scriptsize] {$\Qs$};
+    \draw[dotted, thick] (4.7, 1.5) -- (4.7, 0) node[below, font=\scriptsize] {$\Qd$};
+    \draw[<->, ultra thick, crimsonred] (1.7, 1.5) -- (4.7, 1.5) node[midway, above, font=\scriptsize\bfseries] {Penuria (Shortage)};
+    \node[font=\footnotesize\bfseries, align=center] at (3.2, -1.0) {(a) Tetto al Prezzo Vincolante\\($P_{\max} < \Peq \implies \text{Penuria}$)};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.8, >=Latex]
+    \draw[->, thick] (0,0) -- (6.5,0) node[below] {$Q$};
+    \draw[->, thick] (0,0) -- (0,5.5) node[left] {$P$};
+    \draw[thick, navyblue] (0.6,4.8) -- (5.8,0.6) node[right] {$D$};
+    \draw[thick, forestgreen] (0.6,0.6) -- (5.8,4.8) node[right] {$S$};
+    
+    \coordinate (E) at (3.2, 2.7);
+    \filldraw[purpleaccent] (E) circle (2pt) node[below=2pt, font=\scriptsize] {$E(\Qeq, \Peq)$};
+    \draw[dotted] (E) -- (3.2,0) node[below, font=\scriptsize] {$\Qeq$};
+    \draw[dotted] (E) -- (0,2.7) node[left, font=\scriptsize] {$\Peq$};
+    
+    % Prezzo Minimo
+    \draw[thick, warmamber, dashed] (0,3.9) node[left, font=\small\bfseries] {$P_{\min}$} -- (6.0,3.9);
+    \filldraw[navyblue] (1.7, 3.9) circle (2pt);
+    \filldraw[forestgreen] (4.7, 3.9) circle (2pt);
+    \draw[dotted, thick] (1.7, 3.9) -- (1.7, 0) node[below, font=\scriptsize] {$\Qd$};
+    \draw[dotted, thick] (4.7, 3.9) -- (4.7, 0) node[below, font=\scriptsize] {$\Qs$};
+    \draw[<->, ultra thick, warmamber] (1.7, 3.9) -- (4.7, 3.9) node[midway, above, font=\scriptsize\bfseries] {Eccedenza (Surplus)};
+    \node[font=\footnotesize\bfseries, align=center] at (3.2, -1.0) {(b) Pavimento al Prezzo Vincolante\\($P_{\min} > \Peq \implies \text{Eccedenza}$)};
+\end{tikzpicture}
+\end{minipage}
+\caption{Effetti economici della regolamentazione dei prezzi: (a) Prezzo massimo vincolante e conseguente penuria; (b) Prezzo minimo vincolante ed eccedenza invenduta.}
+\label{fig:price_controls}
+\end{figure}
+
+\section{Economia del Benessere in Equilibrio Parziale: Surplus e Perdita Secca}
+
+\subsection{Surplus del Consumatore e Surplus del Produttore}
+L'efficienza allocativa di un mercato si misura quantificando i guadagni netti generati dallo scambio volontario:
+
+\begin{definizione}{Surplus del Consumatore e del Produttore}{surplus_definizioni}
+\begin{itemize}
+    \item \textbf{Surplus del Consumatore ($\surplusC$)}: beneficio monetario netto percepito dai consumatori, pari alla differenza tra la disponibilità complessiva a pagare (integrale della domanda inversa) e la spesa effettivamente sostenuta ($\Peq \cdot \Qeq$):
+    \begin{equation}
+        \surplusC = \int_0^{\Qeq} [ P_d(Q) - \Peq ] \, \dd Q
+    \end{equation}
+    Per una funzione di domanda lineare con intercetta $P_{\max}$, coincide con l'area del triangolo superiore:
+    \begin{equation}
+        \surplusC = \frac{1}{2} (P_{\max} - \Peq) \Qeq
+    \end{equation}
+    
+    \item \textbf{Surplus del Produttore ($\surplusP$)}: beneficio monetario netto percepito dai venditori, pari alla differenza tra il ricavo totale incassato ($\Peq \cdot \Qeq$) e il costo marginale complessivo di produzione (integrale dell'offerta inversa):
+    \begin{equation}
+        \surplusP = \int_0^{\Qeq} [ \Peq - P_s(Q) ] \, \dd Q
+    \end{equation}
+    Per una funzione di offerta lineare con intercetta $P_{\min}$, coincide con l'area del triangolo inferiore:
+    \begin{equation}
+        \surplusP = \frac{1}{2} (\Peq - P_{\min}) \Qeq
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\begin{teorema}{Primo Teorema dell'Economia del Benessere in Equilibrio Parziale}{primo_teorema_benessere}
+L'equilibrio concorrenziale $(\Peq, \Qeq)$ è \textbf{Pareto-efficiente}: esso massimizza il \textbf{Surplus Sociale Totale} ($\surplusT = \surplusC + \surplusP$).
+Qualsiasi deviazione dalla quantità di equilibrio ($Q \neq \Qeq$) riduce il benessere sociale complessivo, generando una \textbf{Perdita Secca di Efficienza ($\lossDW$)}.
+\end{teorema}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2, >=Latex]
+    % Assi
+    \draw[->, thick] (0,0) -- (7.5,0) node[below right] {\textbf{Quantità $Q$}};
+    \draw[->, thick] (0,0) -- (0,5.8) node[above left] {\textbf{Prezzo $P$}};
+    
+    % Coordinate
+    \coordinate (Pmax) at (0, 5.0);
+    \coordinate (Pmin) at (0, 0.8);
+    \coordinate (E) at (3.8, 2.7);
+    \coordinate (Q0) at (2.0, 0);
+    \coordinate (A) at (2.0, 3.8); % punto su D a Q_cap
+    \coordinate (B) at (2.0, 1.6); % punto su S a Q_cap
+    
+    % Riempimento Surplus Consumatore (Blu)
+    \fill[navyblue!20] (0, 2.7) -- (Pmax) -- (E) -- cycle;
+    
+    % Riempimento Surplus Produttore (Verde)
+    \fill[forestgreen!20] (0, 2.7) -- (Pmin) -- (E) -- cycle;
+    
+    % Triangolo Perdita Secca (Rosso)
+    \fill[crimsonred!35] (A) -- (B) -- (E) -- cycle;
+    
+    % Curve
+    \draw[very thick, navyblue] (Pmax) node[left] {$P_{\max}$} -- (6.5, 0.5) node[right] {$D$};
+    \draw[very thick, forestgreen] (Pmin) node[left] {$P_{\min}$} -- (6.5, 4.8) node[right] {$S$};
+    
+    % Linee di equilibrio
+    \draw[dotted, thick] (E) -- (3.8, 0) node[below] {$\Qeq$};
+    \draw[dotted, thick] (E) -- (0, 2.7) node[left] {$\Peq$};
+    \filldraw[purpleaccent] (E) circle (2pt) node[right=3pt] {$E(\Qeq, \Peq)$};
+    
+    % Linea quantità ridotta (es. Price Ceiling o Tassa)
+    \draw[dashed, thick, crimsonred] (2.0, 0) node[below] {$Q_{\text{scambiata}}$} -- (A);
+    \draw[dashed, thick, crimsonred] (A) -- (0, 3.8) node[left, font=\footnotesize] {$P_d$};
+    \draw[dashed, thick, crimsonred] (B) -- (0, 1.6) node[left, font=\footnotesize] {$P_s$};
+    
+    % Etichette Aree
+    \node[navyblue!90!black, font=\bfseries\small] at (1.2, 3.4) {$\surplusC$};
+    \node[forestgreen!90!black, font=\bfseries\small] at (1.2, 2.0) {$\surplusP$};
+    \node[crimsonred!90!black, font=\bfseries\small] at (2.6, 2.7) {$\lossDW$};
+\end{tikzpicture}
+\caption{Rappresentazione geometrica del Surplus del Consumatore ($\surplusC$, area blu), del Surplus del Produttore ($\surplusP$, area verde) e del Triangolo di Perdita Secca di Benessere ($\lossDW$, area rossa) generato da una contrazione della quantità scambiata a $Q_{\text{scambiata}} < \Qeq$.}
+\label{fig:surplus_perdita_secca}
+\end{figure}
+
+\begin{dimostrazione}[Della Perdita Secca da Tetto al Prezzo]
+Sia $P_{\text{cap}} < \Peq$ un tetto al prezzo. La quantità scambiata si contrae al livello offerto $Q_1 = \Qs(P_{\text{cap}}) < \Qeq$.
+Il surplus sociale post-intervento è:
+\begin{equation}
+    \surplusT(Q_1) = \int_0^{Q_1} [ P_d(Q) - P_s(Q) ] \, \dd Q
+\end{equation}
+La variazione netta di benessere sociale è negativa e pari al triangolo di Harberger:
+\begin{equation}
+    \Delta \surplusT = \surplusT(Q_1) - \surplusT(\Qeq) = - \int_{Q_1}^{\Qeq} [ P_d(Q) - P_s(Q) ] \, \dd Q = - \lossDW < 0
+\end{equation}
+Poiché per ogni $Q \in (Q_1, \Qeq)$ la disponibilità marginale a pagare supera il costo marginale di produzione ($P_d(Q) > P_s(Q)$), la mancata produzione di quelle unità distrugge valore economico netto che non viene recuperato da alcun agente.
+\end{dimostrazione}
+
+\section{Metodi Risolutivi ed Esercizi Svolti}
+
+\begin{metodo}[Algoritmo Operativo per l'Analisi di Mercato e Benessere]
+Per risolvere un problema di equilibrio di mercato con eventuale regolamentazione dei prezzi:
+\begin{enumerate}
+    \item \textbf{Equilibrio Naturale}: uguagliare $\Qd(P) = \Qs(P)$, ricavare $\Peq$ e sostituire per ottenere $\Qeq$.
+    \item \textbf{Calcolo dei Prezzi di Riserva}: porre $\Qd = 0 \implies P_{\max}$ (intercetta domanda) e $\Qs = 0 \implies P_{\min}$ (intercetta offerta).
+    \item \textbf{Calcolo dei Surplus Iniziali}:
+    \begin{equation}
+        \surplusC_0 = \frac{1}{2} (P_{\max} - \Peq) \Qeq, \qquad \surplusP_0 = \frac{1}{2} (\Peq - P_{\min}) \Qeq, \qquad \surplusT_0 = \surplusC_0 + \surplusP_0
+    \end{equation}
+    \item \textbf{Analisi del Prezzo Calmierato $P_{\text{cap}}$}:
+    \begin{itemize}
+        \item Calcolare la quantità offerta $Q_1 = \Qs(P_{\text{cap}})$ e la quantità domandata $Q_d(P_{\text{cap}})$;
+        \item Calcolare la penuria: $\text{Penuria} = Q_d(P_{\text{cap}}) - Q_1$;
+        \item Calcolare il prezzo di riserva della domanda per $Q_1$: $P_1 = P_d(Q_1)$;
+        \item Calcolare la perdita secca ($\lossDW$):
+        \begin{equation}
+            \lossDW = \frac{1}{2} (P_1 - P_{\text{cap}}) (\Qeq - Q_1)
+        \end{equation}
+    \end{itemize}
+\end{enumerate}
+\end{metodo}
+
+\begin{esercizio}[Calcolo Completo di Equilibrio, Surplus e Prezzo Massimo]
+Un mercato è descritto dalle seguenti funzioni di domanda e offerta dirette:
+\begin{equation}
+    \Qd = 120 - 2P, \qquad \Qs = -20 + 3P
+\end{equation}
+\begin{enumerate}
+    \item Determinare il prezzo $\Peq$ e la quantità di equilibrio $\Qeq$.
+    \item Calcolare $\surplusC$, $\surplusP$ e $\surplusT$.
+    \item Il governo introduce un prezzo massimo legale pari a $P_{\max} = 20\,\text{\euro}$. Valutare se il vincolo è vincolante, quantificare la penuria e calcolare la perdita secca di benessere.
+\end{enumerate}
+
+\textbf{Svolgimento}:
+\begin{enumerate}
+    \item \textbf{Equilibrio di Mercato}:
+    \begin{equation}
+        120 - 2P = -20 + 3P \implies 5P = 140 \implies \Peq = 28\,\text{\euro{}}
+    \end{equation}
+    Sostituendo in $\Qd$: $\Qeq = 120 - 2(28) = 120 - 56 = 64\,\text{unità}$.
+    
+    \item \textbf{Surplus in Equilibrio}:
+    \begin{itemize}
+        \item Intercetta domanda: $120 - 2P = 0 \implies P_{\max} = 60\,\text{\euro}$.
+        \item Intercetta offerta: $-20 + 3P = 0 \implies P_{\min} = \frac{20}{3} \approx 6{,}67\,\text{\euro}$.
+        \item $\surplusC = \frac{1}{2} (60 - 28) \times 64 = \frac{1}{2} (32) \times 64 = 1.024\,\text{\euro}$.
+        \item $\surplusP = \frac{1}{2} \left( 28 - \frac{20}{3} \right) \times 64 = \frac{1}{2} \left( \frac{64}{3} \right) \times 64 = \frac{2048}{3} \approx 682{,}67\,\text{\euro}$.
+        \item $\surplusT = 1.024 + 682{,}67 = 1.706{,}67\,\text{\euro}$.
+    \end{itemize}
+    
+    \item \textbf{Prezzo Massimo $P_{\max} = 20\,\text{\euro}$}:
+    Poiché $P_{\max} = 20 < \Peq = 28$, il vincolo è \textbf{vincolante}.
+    \begin{itemize}
+        \item Quantità offerta: $Q_s(20) = -20 + 3(20) = 40\,\text{unità}$.
+        \item Quantità domandata: $Q_d(20) = 120 - 2(20) = 80\,\text{unità}$.
+        \item $\text{Penuria} = 80 - 40 = 40\,\text{unità}$.
+        \item Quantità scambiata effettiva: $Q_1 = 40\,\text{unità}$.
+        \item Prezzo di riserva della domanda su $Q=40$: $40 = 120 - 2P \implies 2P = 80 \implies P_d = 40\,\text{\euro}$.
+        \item Perdita Secca ($\lossDW$):
+        \begin{equation}
+            \lossDW = \frac{1}{2} [P_d(40) - P_{\max}] (\Qeq - Q_1) = \frac{1}{2} (40 - 20) (64 - 40) = \frac{1}{2} (20) (24) = 240\,\text{\euro{}}
+        \end{equation}
+    \end{itemize}
+\end{enumerate}
+\end{esercizio}
+
+\begin{esame}[Checklist anti-errore per il Capitolo 3]
+\begin{itemize}
+    \item Non confondere mai la pendenza della domanda diretta $\dv{Q}{P} = -b$ con la pendenza della domanda inversa $\dv{P}{Q} = -\frac{1}{b}$.
+    \item Ricordare che in caso di prezzo massimo vincolante ($P_{\max} < \Peq$), la quantità scambiata è sempre la quantità \textbf{offerta} $\Qs(P_{\max})$; in caso di prezzo minimo vincolante ($P_{\min} > \Peq$), la quantità scambiata è sempre la quantità \textbf{domandata} $\Qd(P_{\min})$ (principio del lato corto del mercato).
+    \item Nel calcolo della perdita secca, l'altezza del triangolo è data dalla differenza tra il prezzo di riserva della domanda e il costo marginale dell'offerta ($P_d - P_s$), mentre la base è la contrazione di quantità $(\Qeq - Q_{\text{scambiata}})$.
+\end{itemize}
+\end{esame}

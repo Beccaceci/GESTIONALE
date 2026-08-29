@@ -1,0 +1,126 @@
+% ==============================================================================
+% MACRO E SCORCIATOIE MATEMATICHE - ANALISI MATEMATICA 2
+% ==============================================================================
+
+% Insiemi numerici standard
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\Rn}{\mathbb{R}^n}
+\newcommand{\Rm}{\mathbb{R}^m}
+\newcommand{\Rdue}{\mathbb{R}^2}
+\newcommand{\Rtre}{\mathbb{R}^3}
+
+% Notazioni per intervalli e insiemi
+\newcommand{\Rext}{\overline{\mathbb{R}}} % Retta reale estesa [-inf, +inf]
+\newcommand{\eps}{\varepsilon}
+\newcommand{\de}{\delta}
+\newcommand{\dom}{\operatorname{dom}}
+\newcommand{\codom}{\operatorname{codom}}
+\newcommand{\Imm}{\operatorname{Im}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\sgn}{\operatorname{sgn}}
+
+% Topologia di R^n ed elementi astratti
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\Cl}{\operatorname{Cl}}
+\newcommand{\Fr}{\operatorname{Fr}}
+\newcommand{\Der}{\operatorname{Der}}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\Borel}{\mathscr{B}}
+\newcommand{\B}{\mathcal{B}} % Palla aperta
+
+% Operatori di estremo e limite
+\newcommand{\infinito}{\infty}
+\newcommand{\limn}{\lim_{n \to \infty}}
+\newcommand{\limx}[1]{\lim_{x \to #1}}
+\newcommand{\limbx}[1]{\lim_{\bx \to #1}}
+\newcommand{\limsupn}{\limsup_{n \to \infty}}
+\newcommand{\liminfn}{\liminf_{n \to \infty}}
+\newcommand{\supremum}{\sup}
+\newcommand{\infimum}{\inf}
+
+% Simboli asintotici e stime
+\newcommand{\bigO}{\mathcal{O}}
+\newcommand{\smallo}{o}
+\newcommand{\asympSim}{\sim}
+
+% Vettori e matrici
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bn}{\mathbf{n}}
+\newcommand{\bt}{\mathbf{t}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bzero}{\mathbf{0}}
+
+% Operatori di calcolo differenziale multivariabile e vettoriale
+\newcommand{\grad}{\operatorname{grad}}
+\newcommand{\dive}{\operatorname{div}}
+\newcommand{\rot}{\operatorname{rot}}
+\newcommand{\curl}{\operatorname{curl}}
+\newcommand{\Jac}{\mathbf{J}} % Matrice Jacobiana
+\newcommand{\Hess}{\mathbf{H}} % Matrice Hessiana
+\newcommand{\laplacian}{\Delta}
+
+% Differenziali e misure
+\newcommand{\diff}{\mathop{}\!\mathrm{d}}
+\newcommand{\dx}{\diff x}
+\newcommand{\dy}{\diff y}
+\newcommand{\dz}{\diff z}
+\newcommand{\dt}{\diff t}
+\newcommand{\ds}{\diff s}
+\newcommand{\du}{\diff u}
+\newcommand{\dv}{\diff v}
+\newcommand{\dr}{\diff r}
+\newcommand{\dtheta}{\diff \theta}
+\newcommand{\dphi}{\diff \varphi}
+\newcommand{\drho}{\diff \rho}
+\newcommand{\dsigma}{\diff \sigma}
+\newcommand{\dS}{\diff S}
+\newcommand{\dV}{\diff V}
+\newcommand{\drvec}{\diff \mathbf{r}}
+\newcommand{\dsvec}{\diff \mathbf{s}}
+
+% Derivate parziali e totali
+\newcommand{\der}[2]{\frac{\diff #1}{\diff #2}}
+\newcommand{\dder}[2]{\frac{\diff^2 #1}{\diff #2^2}}
+\newcommand{\nder}[3]{\frac{\diff^{#3} #1}{\diff #2^{#3}}}
+\newcommand{\pder}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ppder}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\pmder}[3]{\frac{\partial^2 #1}{\partial #2 \, \partial #3}}
+\newcommand{\pnder}[3]{\frac{\partial^{#3} #1}{\partial #2^{#3}}}
+
+% Parentesi scalabili, norme e prodotti scalari
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\scal}{\langle}{\rangle}
+\DeclarePairedDelimiter{\tonde}{(}{)}
+\DeclarePairedDelimiter{\quadre}{[}{]}
+\DeclarePairedDelimiter{\graffe}{\{}{\}}
+
+% Funzioni trigonometriche e iperboliche in italiano
+\DeclareMathOperator{\sen}{sen}
+\DeclareMathOperator{\arcsen}{arcsen}
+\DeclareMathOperator{\tg}{tg}
+\DeclareMathOperator{\arctg}{arctg}
+\DeclareMathOperator{\cotg}{cotg}
+\DeclareMathOperator{\arccotg}{arccotg}
+\DeclareMathOperator{\settsh}{settsh}
+\DeclareMathOperator{\settch}{settch}
+\DeclareMathOperator{\setttgh}{setttgh}

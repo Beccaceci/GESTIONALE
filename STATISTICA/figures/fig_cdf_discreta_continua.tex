@@ -1,0 +1,69 @@
+\begin{tikzpicture}[scale=0.85, >=Stealth]
+    % -------------------------------------------------------------
+    % PANNELLO A: CDF DISCRETA
+    % -------------------------------------------------------------
+    \begin{scope}[shift={(0,0)}]
+        \node[above, font=\bfseries\footnotesize, text=navyblue] at (2.5,4.2) {(a) CDF Discreta $F_X(x)$ (a scalini)};
+        \draw[step=1cm, gray!15, very thin] (-0.5,-0.2) grid (5.2,4.0);
+
+        \draw[->, thick, navyblue] (-0.5,0) -- (5.3,0) node[right, font=\footnotesize] {$x$};
+        \draw[->, thick, navyblue] (0,-0.3) -- (0,4.2) node[above, font=\footnotesize] {$F_X(x)$};
+
+        % Asintoto y = 1
+        \draw[dashed, crimsonred!70] (-0.3,3.5) -- (5.0,3.5) node[right, font=\tiny] {$1$};
+        \node[left, font=\tiny] at (0,3.5) {$1$};
+        \node[left, font=\tiny] at (0,0) {$0$};
+
+        % Scalini
+        % x < 1: F(x) = 0
+        \draw[ultra thick, coolblue] (-0.5,0) -- (1,0);
+        \draw[coolblue, fill=white, thick] (1,0) circle (2pt);
+
+        % 1 <= x < 2: F(x) = 0.3
+        \fill[coolblue] (1,1.05) circle (2pt);
+        \draw[ultra thick, coolblue] (1,1.05) -- (2,1.05);
+        \draw[coolblue, fill=white, thick] (2,1.05) circle (2pt);
+        \draw[dotted, gray] (1,0) -- (1,1.05);
+
+        % 2 <= x < 3.5: F(x) = 0.7
+        \fill[coolblue] (2,2.45) circle (2pt);
+        \draw[ultra thick, coolblue] (2,2.45) -- (3.5,2.45);
+        \draw[coolblue, fill=white, thick] (3.5,2.45) circle (2pt);
+        \draw[dotted, gray] (2,0) -- (2,2.45);
+
+        % x >= 3.5: F(x) = 1.0
+        \fill[coolblue] (3.5,3.5) circle (2pt);
+        \draw[ultra thick, coolblue] (3.5,3.5) -- (5.0,3.5);
+        \draw[dotted, gray] (3.5,0) -- (3.5,3.5);
+
+        \node[below, font=\tiny] at (1,0) {$x_1$};
+        \node[below, font=\tiny] at (2,0) {$x_2$};
+        \node[below, font=\tiny] at (3.5,0) {$x_3$};
+
+        \node[font=\tiny\itshape, text=forestgreen!80!black, anchor=west] at (1.1,1.75) {Salto $= p(x_2)$};
+        \draw[->, forestgreen, thick] (1.05,1.75) -- (1.95,1.75);
+    \end{scope}
+
+    % -------------------------------------------------------------
+    % PANNELLO B: CDF CONTINUA
+    % -------------------------------------------------------------
+    \begin{scope}[shift={(6.8,0)}]
+        \node[above, font=\bfseries\footnotesize, text=navyblue] at (2.5,4.2) {(b) CDF Continua $F_X(x)$ (liscia)};
+        \draw[step=1cm, gray!15, very thin] (-0.5,-0.2) grid (5.2,4.0);
+
+        \draw[->, thick, navyblue] (-0.5,0) -- (5.3,0) node[right, font=\footnotesize] {$x$};
+        \draw[->, thick, navyblue] (0,-0.3) -- (0,4.2) node[above, font=\footnotesize] {$F_X(x)$};
+
+        \draw[dashed, crimsonred!70] (-0.3,3.5) -- (5.0,3.5) node[right, font=\tiny] {$1$};
+        \node[left, font=\tiny] at (0,3.5) {$1$};
+        \node[left, font=\tiny] at (0,0) {$0$};
+
+        \draw[ultra thick, forestgreen, smooth] plot coordinates {
+            (-0.5, 0.02) (0.5, 0.1) (1.5, 0.5) (2.5, 1.75) (3.5, 3.0) (4.5, 3.45) (5.0, 3.5)
+        };
+
+        \draw[dashed, navyblue] (2.5,0) -- (2.5,1.75) -- (0,1.75);
+        \node[below, font=\tiny] at (2.5,0) {Mediana};
+        \node[left, font=\tiny] at (0,1.75) {$0.5$};
+    \end{scope}
+\end{tikzpicture}

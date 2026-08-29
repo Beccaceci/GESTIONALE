@@ -1,0 +1,530 @@
+% ==============================================================================
+% CAPITOLO 2: GLI STRUMENTI DELL'ANALISI ECONOMICA
+% ==============================================================================
+\chapter{Gli Strumenti dell'Analisi Economica}
+\label{chap:strumenti_analisi_economica}
+
+\begin{tcolorbox}[colback=navyblue!5!white, colframe=navyblue, title=\textbf{Quadro Concettuale e Obiettivi Didattici}]
+Il presente capitolo introduce l'apparato metodologico e quantitativo indispensabile per lo studio rigoroso dell'economia: la struttura logica dei modelli teorici e l'ipotesi del \textit{ceteris paribus}; la classificazione delle variabili economiche (endogene vs esogene, stock vs flusso); l'analisi dei dati empirici (serie storiche, dati sezionali e panel); la distinzione fondamentale tra grandezze nominali e reali; la teoria dei numeri indice (Laspeyres, Paasche, Fisher) con la dimostrazione formale delle distorsioni da sostituzione; l'algebra delle variazioni percentuali differenziali; la geometria delle curve economiche, il significato marginale della derivata e la relazione analitica tra pendenza ed elasticità.
+\end{tcolorbox}
+
+\section{Metodologia Scientifica e Costruzione dei Modelli Economici}
+
+\subsection{L'Approccio Scientifico all'Economia}
+L'economia condivide con le scienze naturali e ingegneristiche l'adozione del \textbf{metodo scientifico}, fondato su una continua dialettica tra formulazione teorica astratta (fase deduttiva) e verifica empirica sui dati osservati (fase induttiva). Il processo si articola in quattro stadi sequenziali:
+\begin{enumerate}
+    \item \textbf{Osservazione della realtà}: identificazione di una regolarità empirica o di un problema allocativo (ad esempio, la fluttuazione del prezzo del petrolio o l'impatto dell'innovazione tecnologica sull'occupazione).
+    \item \textbf{Formulazione di un'ipotesi teorica}: elaborazione di una spiegazione logica fondata su principi generali di comportamento razionale degli agenti.
+    \item \textbf{Costruzione del modello analitico}: traduzione dell'ipotesi in un sistema matematico rigoroso (equazioni, disequazioni, grafici funzionali).
+    \item \textbf{Verifica empirica e falsificazione}: confronto delle previsioni del modello con i dati statistici reali. Se i dati smentiscono sistematicamente le previsioni, il modello viene modificato o respinto (principio di falsificabilità popperiana).
+\end{enumerate}
+
+\begin{modello}{Modello Economico e Principio del \textit{Ceteris Paribus}}{modello_economico}
+Un \textbf{modello economico} è una rappresentazione formale e intenzionalmente semplificata della realtà, costituita da un insieme coerente di relazioni matematiche, che mira a spiegare il comportamento degli agenti e i meccanismi di allocazione delle risorse.
+
+Ogni modello si fonda su due pilastri operativi:
+\begin{itemize}
+    \item \textbf{Ipotesi Semplificatrici}: astrazione dai dettagli non essenziali (ad esempio, trattare tutti i beni come omogenei o assumere che le imprese abbiano come unico obiettivo la massimizzazione del profitto);
+    \item \textbf{Clausola del \textit{Ceteris Paribus}} (a parità di tutte le altre condizioni): metodologia analitica che consiste nell'esaminare l'effetto della variazione di una singola variabile indipendente isolandola dall'influenza simultanea di tutte le altre determinanti esogene.
+\end{itemize}
+\end{modello}
+
+\begin{esempio}[Il Modello Semplice del Consumo Keynesiano]
+Si consideri la funzione del consumo aggregato proposta da John Maynard Keynes:
+\begin{equation}
+    C = C_0 + c Y
+\end{equation}
+dove:
+\begin{itemize}
+    \item $C$ rappresenta la spesa totale per consumi delle famiglie (variabile dipendente);
+    \item $C_0 > 0$ è il \textbf{consumo autonomo}, ossia il livello minimo di sussistenza indipendente dal reddito;
+    \item $c \in (0, 1)$ è la \textbf{propensione marginale al consumo} ($\PMgC = \dv{C}{Y}$), che misura di quanto aumenta la spesa in consumi per ogni euro aggiuntivo di reddito;
+    \item $Y$ è il reddito disponibile nazionale (variabile indipendente).
+\end{itemize}
+Questo modello consente di quantificare immediatamente l'impatto di uno shock sul reddito: se $Y$ aumenta di $\Delta Y$, il consumo varia di $\Delta C = c \Delta Y$. L'applicazione del \textit{ceteris paribus} richiede che fattori esogeni come le aspettative future, i tassi di interesse o la ricchezza finanziaria rimangano invariati durante l'analisi.
+\end{esempio}
+
+\subsection{Variabili Endogene ed Esogene}
+Nei sistemi di equazioni economiche è fondamentale distinguere le variabili in base al ruolo causale:
+
+\begin{definizione}{Variabili Endogene ed Esogene}{var_endogene_esogene}
+\begin{itemize}
+    \item \textbf{Variabile Endogena}: variabile il cui valore viene determinato e spiegato \textbf{all'interno del modello} attraverso la risoluzione del sistema di equazioni (output del modello). Esempi: il prezzo e la quantità scambiata in un equilibrio di mercato, il livello ottimo di produzione di un'impresa.
+    \item \textbf{Variabile Esogena}: variabile il cui valore è determinato \textbf{all'esterno del modello}, assunta come dato di fatto non modificabile dalle dinamiche interne (input o parametro del modello). Esempi: l'aliquota fiscale fissata dal parlamento, le condizioni meteorologiche, i prezzi delle materie prime sui mercati internazionali.
+\end{itemize}
+\end{definizione}
+
+\begin{osservazione}[Relatività della Classificazione]
+La distinzione tra variabile endogena ed esogena non è assoluta, ma dipende dai confini del modello considerato. Ad esempio, il tasso di interesse è una variabile esogena nel modello di scelta del singolo consumatore (che lo subisce passivamente), mentre diventa una variabile endogena nel modello macroeconomico IS-LM, dove è determinato dall'equilibrio congiunto del mercato reale e monetario.
+\end{osservazione}
+
+\section{Dati Empirici e Statistica Economica}
+
+I modelli economici traggono fondamento empirico e verifica dalle informazioni quantitative raccolte dagli istituti di statistica (come l'ISTAT o l'Eurostat). Le rilevazioni statistiche si strutturano in tre categorie fondamentali:
+
+\begin{definizione}{Tipologie di Strutture di Dati}{tipologie_dati}
+\begin{enumerate}
+    \item \textbf{Serie Storiche (Time Series)}: sequenza temporale ordinata dei valori assunti da una determinata variabile economica per una specifica unità territoriale o individuale, rilevata a intervalli regolari (giornalieri, mensili, trimestrali, annuali):
+    \begin{equation}
+        \{ X_t \}_{t=1}^T = \{ X_1, X_2, \dots, X_T \}
+    \end{equation}
+    \textit{Esempi}: il tasso di disoccupazione italiano dal 2000 al 2025; la serie giornaliera dell'indice FTSE MIB.
+    
+    \item \textbf{Dati Sezionali (Cross-Section)}: rilevazione dei valori assunti da una o più variabili economiche riferiti a una pluralità di individui, imprese, regioni o nazioni nello \textbf{stesso istante temporale} $t$:
+    \begin{equation}
+        \{ X_{i} \}_{i=1}^N = \{ X_{1, t}, X_{2, t}, \dots, X_{N, t} \}
+    \end{equation}
+    \textit{Esempi}: il reddito annuo dichiarato nel 2024 da un campione di $10.000$ famiglie; la spesa in R\&S sostenuta da 500 aziende nel 2023.
+    
+    \item \textbf{Dati Longitudinali o Panel}: combinazione bidimensionale di serie storiche e cross-section, in cui le medesime $N$ unità campionarie vengono osservate ripetutamente lungo $T$ periodi temporali:
+    \begin{equation}
+        \{ X_{i,t} \} \quad \text{con } i = 1, \dots, N \quad \text{e } t = 1, \dots, T
+    \end{equation}
+    \textit{Esempi}: il fatturato e gli investimenti di 100 imprese manifatturiere monitorate consecutivamente per 10 anni.
+\end{enumerate}
+\end{definizione}
+
+\begin{legge}{Definizione di Legge Economica}{legge_economica}
+Una proposizione teorica assume lo status di \textbf{legge economica} quando descrive una regolarità di comportamento o una relazione causale universale che risulta \textbf{sistematicamente confermata e non falsificata} dalle evidenze empiriche storiche e cross-section (es. la legge della domanda, la legge dei rendimenti marginali decrescenti).
+\end{legge}
+
+\section{Variabili di Stock vs Variabili di Flusso}
+
+Nell'ingegneria gestionale e nella modellizzazione dei sistemi dinamici, la corretta distinzione tra grandezze istantanee e grandezze cumulative è essenziale per evitare gravi errori di bilancio e di analisi macroeconomica:
+
+\begin{definizione}{Variabili Stock e Variabili Flusso}{stock_flusso}
+\begin{itemize}
+    \item \textbf{Variabile di Stock (Stato)}: grandezza quantitativa misurabile in uno \textbf{specifico istante di tempo} $t_0$, priva di dimensione temporale propria. Rappresenta l'accumulazione netta generata dai flussi passati.
+    \item \textbf{Variabile di Flusso (Tasso di Variazione)}: grandezza quantitativa definita e misurabile esclusivamente lungo un \textbf{intervallo di tempo} $[t_0, t_1]$ (es. per unità di tempo $\Delta t$). Rappresenta la velocità di immissione o sottrazione rispetto allo stock.
+\end{itemize}
+La relazione matematica fondamentale tra stock $S(t)$ e flusso $F(t)$ è espressa nel continuo dall'equazione differenziale:
+\begin{equation}
+    \dv{S(t)}{t} = F(t) \iff S(t_1) = S(t_0) + \int_{t_0}^{t_1} F(t) \, \dd t
+\end{equation}
+\end{definizione}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{lXlX}
+\toprule
+\textbf{Variabile di Stock} & \textbf{Unità di Misura} & \textbf{Variabile di Flusso Associata} & \textbf{Unità di Misura} \\
+\midrule
+Capitale Fisico ($K$) & Macchinari, Impianti & Investimento Lordo/Netto ($I$) & Macchinari / anno \\
+Debito Pubblico ($B$) & Euro a fine anno & Disavanzo/Deficit Pubblico ($G - T$) & Euro / anno \\
+Patrimonio / Ricchezza ($W$) & Euro al tempo $t$ & Risparmio Corrente ($S$) & Euro / mese \\
+Occupati / Disoccupati & Numero di individui & Assunzioni, Licenziamenti & Individui / mese \\
+Livello di Acqua in Serbatoio & Litri & Portata del Rubinetto & Litri / secondo \\
+\bottomrule
+\end{tabularx}
+\caption{Corrispondenza analitica tra variabili di stock e variabili di flusso.}
+\label{tab:stock_flusso}
+\end{table}
+
+\begin{esame}[Tranello Tipico: Confusione tra Debito e Deficit]
+All'esame non bisogna mai confondere il \textbf{deficit pubblico} (variabile di flusso: differenza annuale tra uscite ed entrate statali, $\text{Deficit}_t = G_t - T_t$) con il \textbf{debito pubblico} (variabile di stock: ammontare cumulato dei titoli di Stato emessi e non ancora rimborsati fino all'istante $t$, $B_t = B_{t-1} + \text{Deficit}_t$). Uno Stato può azzerare il proprio deficit pur continuando ad avere un debito pubblico elevatissimo.
+\end{esame}
+
+\section{Variabili Nominali vs Reali e Potere d'Acquisto}
+
+\subsection{La Distorsione da Inflazione}
+In un'economia monetaria le transazioni avvengono mediante moneta. Tuttavia, il livello generale dei prezzi varia nel tempo (inflazione o deflazione), alterando la capacità di acquisto della moneta:
+
+\begin{definizione}{Grandezze Nominali e Reali}{nom_reale}
+\begin{itemize}
+    \item \textbf{Grandezza Nominale (a prezzi correnti)}: valore espresso nell'unità monetaria vigente al momento della rilevazione. È influenzata sia dalle variazioni fisiche delle quantità sia dalla variazione dei prezzi:
+    \begin{equation}
+        X_{\text{nominale}, t} = P_t \cdot Q_t
+    \end{equation}
+    \item \textbf{Grandezza Reale (a prezzi costanti)}: valore espresso in termini di potere d'acquisto effettivo, calcolato mantenendo fissi i prezzi di un anno base di riferimento $t_0$. Misura l'effettiva disponibilità fisica di beni e servizi:
+    \begin{equation}
+        X_{\text{reale}, t} = P_0 \cdot Q_t = \frac{X_{\text{nominale}, t}}{P_t / P_0} = \frac{X_{\text{nominale}, t}}{\text{Indice dei Prezzi}_t} \times 100
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\begin{metodo}[Procedura di Deflazione di una Serie Storica]
+Per depurare una serie temporale monetaria $X_t$ dagli effetti distorsivi dell'inflazione:
+\begin{enumerate}
+    \item \textbf{Scelta dell'anno base}: si fissa un anno di riferimento $t_0$ in cui l'indice dei prezzi è convenzionalmente posto pari a $100$ ($I_{P, t_0} = 100$).
+    \item \textbf{Calcolo dell'indice dei prezzi}: si ottiene la serie dell'indice dei prezzi al consumo o del deflatore $\{ I_{P, t} \}$.
+    \item \textbf{Applicazione della formula di deflazione}: per ogni periodo $t$, si calcola il valore reale:
+    \begin{equation}
+        X_{\text{reale}, t} = \frac{X_{\text{nominale}, t}}{I_{P, t}} \times 100
+    \end{equation}
+    \item \textbf{Calcolo del tasso di variazione reale}: il tasso di crescita reale dell'aggregato è:
+    \begin{equation}
+        g_{\text{reale}} = \frac{X_{\text{reale}, t} - X_{\text{reale}, t-1}}{X_{\text{reale}, t-1}} \approx g_{\text{nominale}} - \pi_t
+    \end{equation}
+    dove $\pi_t = \frac{I_{P,t} - I_{P,t-1}}{I_{P,t-1}}$ è il tasso di inflazione.
+\end{enumerate}
+\end{metodo}
+
+\begin{esempio}[Evoluzione del Salario Nominale e Reale]
+Si consideri un lavoratore che nel $2020$ guadagna $1.500\,\text{\euro{}}$ al mese e nel $2025$ riceve uno stipendio di $1.800\,\text{\euro{}}$. Nel medesimo quinquennio, l'indice dei prezzi al consumo passa da $100$ a $125$ ($+25\%$ di inflazione cumulata).
+\begin{itemize}
+    \item Variazione salariale nominale: $\Delta\% W_{\text{nom}} = \frac{1800 - 1500}{1500} = +20\%$.
+    \item Salario reale nel 2025 (in euro costanti 2020):
+    \begin{equation}
+        W_{\text{reale}, 2025} = \frac{1800}{125} \times 100 = 1.440\,\text{\euro{}}
+    \end{equation}
+    \item Variazione salariale reale: $\Delta\% W_{\text{reale}} = \frac{1440 - 1500}{1500} = -4\%$.
+\end{itemize}
+Nonostante l'incremento monetario del $20\%$, il potere d'acquisto effettivo del lavoratore si è ridotto del $4\%$ a causa della crescita più rapida dei prezzi.
+\end{esempio}
+
+\section{La Teoria dei Numeri Indice}
+
+\subsection{Numeri Indice Semplici e Composti}
+Un \textbf{numero indice} è una misura statistica adimensionale che sintetizza le variazioni relative di un fenomeno rispetto a una situazione base.
+\begin{itemize}
+    \item \textbf{Indice Semplice di Prezzo} per il singolo bene $i$:
+    \begin{equation}
+        I_{i, t/0} = \frac{p_{i, t}}{p_{i, 0}} \times 100
+    \end{equation}
+    \item \textbf{Indice Composto dei Prezzi}: sintetizza l'andamento congiunto di un paniere eterogeneo composto da $n$ beni e servizi. Poiché le famiglie non consumano quantità identiche di ogni bene, l'indice richiede una ponderazione esplicita.
+\end{itemize}
+
+\subsection{Indice dei Prezzi di Laspeyres}
+L'indice dei prezzi di Laspeyres adotta come pesi di ponderazione le \textbf{quantità consumate nell'anno base} ($q_{i,0}$):
+
+\begin{definizione}{Indice dei Prezzi di Laspeyres}{laspeyres}
+L'indice di Laspeyres $I_L$ misura il costo monetario attuale di acquistare l'originario paniere dell'anno base, rapportato al costo sostenuto nell'anno base stesso:
+\begin{equation}
+    I_L = \frac{\sum_{i=1}^n p_{i,t} \, q_{i,0}}{\sum_{i=1}^n p_{i,0} \, q_{i,0}} \times 100 = \sum_{i=1}^n \left( \frac{p_{i,t}}{p_{i,0}} \right) w_{i,0} \times 100
+    \label{eq:laspeyres}
+\end{equation}
+dove $w_{i,0} = \frac{p_{i,0} q_{i,0}}{\sum_{j=1}^n p_{j,0} q_{j,0}}$ è la quota di spesa dedicata al bene $i$ nel periodo base.
+\end{definizione}
+
+\subsection{Indice dei Prezzi di Paasche}
+L'indice dei prezzi di Paasche adotta come pesi di ponderazione le \textbf{quantità effettivamente consumate nel periodo corrente} ($q_{i,t}$):
+
+\begin{definizione}{Indice dei Prezzi di Paasche}{paasche}
+L'indice di Paasche $I_P$ misura il costo monetario attuale del paniere corrente, rapportato a quanto sarebbe costato lo stesso paniere ai prezzi dell'anno base:
+\begin{equation}
+    I_P = \frac{\sum_{i=1}^n p_{i,t} \, q_{i,t}}{\sum_{i=1}^n p_{i,0} \, q_{i,t}} \times 100
+    \label{eq:paasche}
+\end{equation}
+\end{definizione}
+
+\subsection{Indice Ideale di Fisher}
+Per superare i limiti intrinseci di Laspeyres e Paasche, Irving Fisher propose la loro media geometrica:
+\begin{equation}
+    I_F = \sqrt{I_L \cdot I_P}
+\end{equation}
+L'indice di Fisher soddisfa le proprietà assiomatiche di reversibilità dei fattori e del tempo.
+
+\subsection{Dimostrazione della Distorsione da Sostituzione}
+
+\begin{teorema}{Distorsione da Sostituzione di Laspeyres e Paasche}{distorsione_indici}
+In presenza di variazioni eterogenee nei prezzi relativi dei beni:
+\begin{enumerate}
+    \item L'\textbf{Indice di Laspeyres sovrastima sistematicamente l'inflazione effettiva} ($I_L > I_{\text{vero}}$), poiché ipotizza che il consumatore mantenga rigido il paniere d'acquisto ($q_{i,0}$) senza reagire all'aumento dei prezzi relativi tramite la sostituzione verso beni meno rincarati.
+    \item L'\textbf{Indice di Paasche sottostima sistematicamente l'inflazione effettiva} ($I_P < I_{\text{vero}}$), poiché valuta l'inflazione pesando le quantità già aggiustate al ribasso a seguito dei rincari.
+\end{enumerate}
+Vale quindi la disuguaglianza tipica:
+\begin{equation}
+    I_P \le I_{\text{vero}} \le I_L
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}[Analitica della Sovrastima di Laspeyres]
+Sia $U_0 = U(q_{1,0}, q_{2,0})$ l'utilità conseguita dal consumatore nel periodo base al costo minimo $E(p_0, U_0) = \sum p_{i,0} q_{i,0}$.
+
+Il vero indice del costo della vita (Indice di Konüs, $I_K$) misura l'incremento di spesa necessario per consentire al consumatore di raggiungere lo \textbf{stesso livello di benessere} $U_0$ ai nuovi prezzi $p_t$:
+\begin{equation}
+    I_K = \frac{E(p_t, U_0)}{E(p_0, U_0)} \times 100 = \frac{\min_{\{q\}} \sum p_{i,t} q_i \quad \text{s.t. } U(q) \ge U_0}{\sum p_{i,0} q_{i,0}} \times 100
+\end{equation}
+Poiché il paniere originario $q_0 = (q_{1,0}, \dots, q_{n,0})$ garantisce per definizione l'utilità $U(q_0) = U_0$, esso è un paniere ammissibile per il problema di minimizzazione della spesa ai prezzi $p_t$. Tuttavia, se i prezzi relativi sono variati, il consumatore razionale sostituirà i beni divenuti relativamente più costosi con quelli più convenienti, individuando un nuovo paniere ottimo $q^*(p_t, U_0)$ tale che:
+\begin{equation}
+    E(p_t, U_0) = \sum_{i=1}^n p_{i,t} q_i^*(p_t, U_0) \le \sum_{i=1}^n p_{i,t} q_{i,0}
+\end{equation}
+Dividendo entrambi i membri per la spesa base $\sum p_{i,0} q_{i,0}$, si ottiene:
+\begin{equation}
+    I_K = \frac{\sum p_{i,t} q_i^*}{\sum p_{i,0} q_{i,0}} \times 100 \le \frac{\sum p_{i,t} q_{i,0}}{\sum p_{i,0} q_{i,0}} \times 100 = I_L
+\end{equation}
+L'uguaglianza stretta vale se e solo se tutti i prezzi variano nella medesima proporzione o se la funzione di utilità non ammette alcuna sostituibilità (funzione di Leontief a coefficienti fissi).
+\end{dimostrazione}
+
+\begin{esempio}[Calcolo Guidato di $I_L, I_P, I_F$]
+Si consideri un'economia a due beni (Pane e Mele) monitorata tra il $2020$ (anno base $t=0$) e il $2025$ ($t=1$):
+\begin{itemize}
+    \item Anno 2020: $p_{\text{pane},0} = 2\,\text{\euro{}/kg}, \; q_{\text{pane},0} = 10\,\text{kg}; \quad p_{\text{mele},0} = 1\,\text{\euro{}/kg}, \; q_{\text{mele},0} = 20\,\text{kg}$.
+    \item Anno 2025: $p_{\text{pane},1} = 4\,\text{\euro{}/kg}, \; q_{\text{pane},1} = 5\,\text{kg}; \quad p_{\text{mele},1} = 1.5\,\text{\euro{}/kg}, \; q_{\text{mele},1} = 30\,\text{kg}$.
+\end{itemize}
+\textbf{Calcolo della Spesa nei Quattro Casi}:
+\begin{align*}
+    \sum p_{i,0} q_{i,0} &= 2 \cdot 10 + 1 \cdot 20 = 20 + 20 = 40\,\text{\euro{}} \\
+    \sum p_{i,1} q_{i,0} &= 4 \cdot 10 + 1.5 \cdot 20 = 40 + 30 = 70\,\text{\euro{}} \\
+    \sum p_{i,1} q_{i,1} &= 4 \cdot 5 + 1.5 \cdot 30 = 20 + 45 = 65\,\text{\euro{}} \\
+    \sum p_{i,0} q_{i,1} &= 2 \cdot 5 + 1 \cdot 30 = 10 + 30 = 40\,\text{\euro{}}
+\end{align*}
+\textbf{Indici Risultanti}:
+\begin{align*}
+    I_L &= \frac{70}{40} \times 100 = 175{,}0 \implies \text{Inflazione stimata da Laspeyres: } +75\% \\
+    I_P &= \frac{65}{40} \times 100 = 162{,}5 \implies \text{Inflazione stimata da Paasche: } +62{,}5\% \\
+    I_F &= \sqrt{175{,}0 \times 162{,}5} = \sqrt{28437{,}5} \approx 168{,}63 \implies \text{Inflazione stimata da Fisher: } +68{,}63\%
+\end{align*}
+Si osserva chiaramente come $I_P < I_F < I_L$, confermando empiricamente la sovrastima di Laspeyres indotta dalla mancata considerazione dell'effetto sostituzione (il consumatore ha ridotto il consumo di pane, raddoppiato di prezzo, incrementando il consumo di mele).
+\end{esempio}
+
+\section{Calcolo delle Variazioni Percentuali e Grandezze Composte}
+
+\subsection{Variazione Assoluta, Percentuale e Punti Percentuali}
+Nelle scienze economiche è indispensabile distinguere con rigore tre concetti:
+\begin{itemize}
+    \item \textbf{Variazione Assoluta}: $\Delta X = X_1 - X_0$ (espressa nell'unità di misura fisica o monetaria di $X$).
+    \item \textbf{Variazione Relativa / Percentuale}: $\Delta\% X = \frac{X_1 - X_0}{X_0} \times 100 = \frac{\Delta X}{X_0} \times 100$ (numero puro adimensionale).
+    \item \textbf{Punti Percentuali}: differenza aritmetica tra due percentuali.
+\end{itemize}
+
+\begin{esame}[Tranello: Differenza tra Variazione Percentuale e Punti Percentuali]
+Se il tasso di disoccupazione sale dall'$8\%$ al $10\%$:
+\begin{itemize}
+    \item La variazione assoluta in punti percentuali è: $10\% - 8\% = +2 \text{ punti percentuali}$.
+    \item La variazione percentuale del numero di disoccupati è: $\frac{10 - 8}{8} \times 100 = +25\%$.
+\end{itemize}
+Affermare che la disoccupazione è aumentata del $2\%$ è un gravissimo errore concettuale.
+\end{esame}
+
+\subsection{Proprietà Differenziali delle Variazioni Percentuali}
+
+\begin{teorema}{Algebra delle Variazioni Percentuali su Grandezze Composte}{alg_var_perc}
+Siano $X(t)$ e $Y(t)$ due variabili economiche positive e differenziabili. Valgono le seguenti approssimazioni differenziali del primo ordine:
+\begin{enumerate}
+    \item \textbf{Prodotto}: Se $Z(t) = X(t) \cdot Y(t)$, allora:
+    \begin{equation}
+        \Delta\% Z \approx \Delta\% X + \Delta\% Y
+    \end{equation}
+    \item \textbf{Quoziente}: Se $W(t) = \frac{X(t)}{Y(t)}$, allora:
+    \begin{equation}
+        \Delta\% W \approx \Delta\% X - \Delta\% Y
+    \end{equation}
+    \item \textbf{Potenza}: Se $V(t) = [X(t)]^\alpha$, allora:
+    \begin{equation}
+        \Delta\% V \approx \alpha \cdot \Delta\% X
+    \end{equation}
+\end{enumerate}
+\end{teorema}
+
+\begin{dimostrazione}[Tramite Differenziale Logaritmico]
+Si consideri il prodotto $Z = X \cdot Y$. Applicando la trasformazione logaritmica naturale ad ambo i membri:
+\begin{equation}
+    \ln Z = \ln(X \cdot Y) = \ln X + \ln Y
+\end{equation}
+Differenziando totalmente rispetto al tempo $t$:
+\begin{equation}
+    \dv{\ln Z}{t} = \frac{1}{Z} \dv{Z}{t} = \frac{1}{X} \dv{X}{t} + \frac{1}{Y} \dv{Y}{t}
+\end{equation}
+Moltiplicando per il differenziale $\dd t$, si ottiene l'uguaglianza esatta tra tassi di crescita istantanei:
+\begin{equation}
+    \frac{\dd Z}{Z} = \frac{\dd X}{X} + \frac{\dd Y}{Y}
+\end{equation}
+Per variazioni finite $\Delta X, \Delta Y$ sufficientemente piccole, $\frac{\Delta Z}{Z} \approx \frac{\Delta X}{X} + \frac{\Delta Y}{Y}$, da cui, moltiplicando per 100:
+\begin{equation}
+    \Delta\% Z \approx \Delta\% X + \Delta\% Y
+\end{equation}
+Analogamente, per il quoziente $W = X / Y$:
+\begin{equation}
+    \ln W = \ln X - \ln Y \implies \frac{\dd W}{W} = \frac{\dd X}{X} - \frac{\dd Y}{Y} \implies \Delta\% W \approx \Delta\% X - \Delta\% Y
+\end{equation}
+Per la potenza $V = X^\alpha$:
+\begin{equation}
+    \ln V = \alpha \ln X \implies \frac{\dd V}{V} = \alpha \frac{\dd X}{X} \implies \Delta\% V \approx \alpha \, \Delta\% X
+\end{equation}
+\end{dimostrazione}
+
+\begin{esempio}[Applicazione al Ricavo Totale e alla Produttività]
+\begin{enumerate}
+    \item \textbf{Ricavo Totale} $\RT = P \cdot Q$: se un'impresa aumenta il prezzo del $3\%$ ($\Delta\% P = +3\%$) e le vendite calano del $2\%$ ($\Delta\% Q = -2\%$), la variazione approssimata del fatturato è:
+    \begin{equation}
+        \Delta\% \RT \approx +3\% + (-2\%) = +1\%
+    \end{equation}
+    (Il calcolo esatto fornisce: $(1 + 0{,}03)(1 - 0{,}02) - 1 = 1{,}0094 - 1 = +0{,}94\%$).
+    \item \textbf{Salario Reale} $W_{\text{reale}} = W_{\text{nom}} / P$: se i salari nominali crescono del $4\%$ e l'inflazione è pari al $5\%$, il salario reale varia di $\Delta\% W_{\text{reale}} \approx 4\% - 5\% = -1\%$.
+\end{enumerate}
+\end{esempio}
+
+\section{Geometria delle Curve Economiche, Pendenza ed Elasticità}
+
+\subsection{Movimento Lungo la Curva vs Spostamento della Curva}
+Una fondamentale distinzione grafica e logica riguarda le cause che determinano una variazione delle coordinate di un grafico bidimensionale:
+
+\begin{definizione}{Movimento Lungo la Curva vs Traslazione della Curva}{movimento_traslazione}
+Data una relazione funzionale generale $Y = f(X, Z_1, Z_2, \dots)$:
+\begin{itemize}
+    \item \textbf{Movimento Lungo la Curva}: si verifica quando varia la variabile indipendente $X$ tracciata sull'asse orizzontale, determinando una variazione della variabile dipendente $Y$ tracciata sull'asse verticale, \textbf{a parità di tutti i fattori esogeni} ($Z_i = \text{costante}$).
+    \item \textbf{Spostamento (Traslazione) della Curva}: si verifica quando interviene una variazione in uno dei \textbf{fattori esogeni} $Z_k$ non rappresentati sugli assi cartesiani. Per ogni livello fissato di $X$, il valore di $Y$ muta, comportando una traslazione rigida o una distorsione dell'intera curva nel piano.
+\end{itemize}
+\end{definizione}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1, >=Latex]
+    % Assi
+    \draw[->, thick] (0,0) -- (8,0) node[below right] {\textbf{Variabile Endogena $X$}};
+    \draw[->, thick] (0,0) -- (0,5.5) node[above left] {\textbf{Variabile Endogena $Y$}};
+    
+    % Curve
+    \draw[very thick, navyblue] (0.8,4.5) to[out=-45,in=160] (7,1.2) node[right] {$Y = f(X, Z_0)$};
+    \draw[very thick, crimsonred, dashed] (2.2,5.2) to[out=-45,in=160] (7.8,2.2) node[right] {$Y = f(X, Z_1) \quad (Z_1 > Z_0)$};
+    
+    % Punti lungo la prima curva
+    \coordinate (A) at (2.2, 3.1);
+    \coordinate (B) at (5.0, 1.8);
+    \filldraw[navyblue] (A) circle (2pt) node[above right] {$A(X_A, Y_A)$};
+    \filldraw[navyblue] (B) circle (2pt) node[below left] {$B(X_B, Y_B)$};
+    
+    % Linee tratteggiate per A e B
+    \draw[dotted, thick] (A) -- (2.2,0) node[below] {$X_A$};
+    \draw[dotted, thick] (A) -- (0,3.1) node[left] {$Y_A$};
+    \draw[dotted, thick] (B) -- (5.0,0) node[below] {$X_B$};
+    \draw[dotted, thick] (B) -- (0,1.8) node[left] {$Y_B$};
+    
+    % Freccia movimento lungo la curva
+    \draw[->, ultra thick, navyblue] (A) to[out=-35,in=150] node[midway, below left, sloped] {\footnotesize Movimento lungo la curva ($\Delta X$)} (B);
+    
+    % Punto C sulla curva traslata
+    \coordinate (C) at (4.5, 3.8);
+    \filldraw[crimsonred] (C) circle (2pt) node[above right] {$C(X_A, Y_C)$};
+    \draw[dotted, crimsonred, thick] (2.2,3.1) -- (2.2,4.4);
+    \coordinate (A_prime) at (2.2,4.4);
+    \filldraw[crimsonred] (A_prime) circle (2pt);
+    
+    % Freccia traslazione
+    \draw[->, ultra thick, crimsonred] (2.5, 3.4) -- (3.8, 4.3) node[midway, above left] {\footnotesize Spostamento per shock esogeno ($\Delta Z$)};
+    \draw[->, ultra thick, crimsonred] (5.2, 2.0) -- (6.3, 2.8);
+\end{tikzpicture}
+\caption{Distinzione fondamentale tra movimento lungo la curva (variazione endogena di $X$) e traslazione dell'intera curva nel piano cartesiano (variazione di una determinante esogena $Z$).}
+\label{fig:movimento_vs_spostamento}
+\end{figure}
+
+\subsection{Pendenza Media d'Arco vs Pendenza Marginale Puntuale}
+In analisi economica, l'inclinazione di una relazione funzionale esprime la sensibilità della variabile risposta alle variazioni dello stimolo:
+
+\begin{definizione}{Pendenza d'Arco e Pendenza Puntuale}{pendenza_arco_punto}
+Sia $y = f(x)$ una funzione continua e differenziabile:
+\begin{itemize}
+    \item \textbf{Pendenza Media d'Arco} (tra i punti $A(x_1, y_1)$ e $B(x_2, y_2)$): rappresenta il coefficiente angolare della retta secante passante per $A$ e $B$:
+    \begin{equation}
+        m_{\text{arco}} = \frac{\Delta y}{\Delta x} = \frac{f(x_2) - f(x_1)}{x_2 - x_1}
+    \end{equation}
+    \item \textbf{Pendenza Puntuale (Marginale)}: rappresenta il coefficiente angolare della retta tangente alla curva nel punto $x_1$, ottenuto spingendo la variazione $\Delta x$ a zero:
+    \begin{equation}
+        m_{\text{punto}} = f'(x_1) = \lim_{\Delta x \to 0} \frac{f(x_1 + \Delta x) - f(x_1)}{\Delta x} = \left. \dv{y}{x} \right|_{x = x_1}
+    \end{equation}
+\end{itemize}
+In economia, la pendenza puntuale coincide con il concetto di \textbf{valore marginale} (costo marginale, ricavo marginale, utilità marginale).
+\end{definizione}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1, >=Latex]
+    % Assi
+    \draw[->, thick] (0,0) -- (8,0) node[below right] {$x$};
+    \draw[->, thick] (0,0) -- (0,5.5) node[above left] {$y = f(x)$};
+    
+    % Curva f(x)
+    \draw[very thick, navyblue, domain=0.8:6.8, samples=100] plot (\x, {0.08*\x*\x + 0.2*\x + 0.7});
+    \node[navyblue, right] at (6.8, 5.2) {$y = f(x)$};
+    
+    % Coordinate A e B
+    \coordinate (A) at (2.0, 1.42);
+    \coordinate (B) at (5.5, 4.22);
+    
+    % Retta secante AB
+    \draw[thick, crimsonred, dashed] ($(A)!-0.4!(B)$) -- ($(A)!1.3!(B)$) node[right, font=\footnotesize] {Retta Secante (Pendenza d'arco $\frac{\Delta y}{\Delta x}$)};
+    
+    % Retta tangente in A (f'(2) = 0.16*2 + 0.2 = 0.52)
+    \draw[thick, forestgreen] (-0.5, 0.12) -- (5.0, 2.98) node[right, font=\footnotesize] {Retta Tangente in $A$ (Pendenza puntuale $\dv{y}{x} = f'(x_1)$)};
+    
+    % Punti
+    \filldraw[navyblue] (A) circle (2pt) node[below right] {$A(x_1, y_1)$};
+    \filldraw[navyblue] (B) circle (2pt) node[above left] {$B(x_2, y_2)$};
+    
+    % Proiezioni
+    \draw[dotted, thick] (2,0) node[below] {$x_1$} -- (A) -- (0,1.42) node[left] {$y_1$};
+    \draw[dotted, thick] (5.5,0) node[below] {$x_2$} -- (B) -- (0,4.22) node[left] {$y_2$};
+    
+    % Triangolo rettangolo secante
+    \coordinate (C) at (5.5, 1.42);
+    \draw[thick, warmamber] (A) -- (C) node[midway, below] {$\Delta x$};
+    \draw[thick, warmamber] (C) -- (B) node[midway, right] {$\Delta y$};
+\end{tikzpicture}
+\caption{Rappresentazione geometrica della pendenza media d'arco (retta secante per $A$ e $B$) e della pendenza marginale puntuale (retta tangente in $A$).}
+\label{fig:pendenza_arco_punto}
+\end{figure}
+
+\subsection{Relazione Analitica tra Pendenza ed Elasticità}
+Sebbene spesso confuse nel linguaggio comune, la \textbf{pendenza} e l'\textbf{elasticità} misurano proprietà profondamente diverse:
+
+\begin{teorema}{Legame tra Pendenza Geometrica ed Elasticità Puntuale}{pendenza_elasticita}
+Sia $Y = f(X)$ una relazione economica differenziabile. L'\textbf{elasticità puntuale} di $Y$ rispetto a $X$, indicata con $\eps_{Y,X}$, è definita come il rapporto tra la variazione percentuale di $Y$ e la variazione percentuale di $X$:
+\begin{equation}
+    \eps_{Y,X} = \lim_{\Delta X \to 0} \frac{\Delta Y / Y}{\Delta X / X} = \dv{Y}{X} \cdot \frac{X}{Y}
+\end{equation}
+Poiché la derivata prima $\dv{Y}{X}$ coincide con la pendenza geometrica della retta tangente, si ha l'identità fondamentale:
+\begin{equation}
+    \eps_{Y,X} = \text{Pendenza Geometrica} \cdot \frac{X}{Y}
+\end{equation}
+\end{teorema}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{lXX}
+\toprule
+\textbf{Caratteristica} & \textbf{Pendenza ($\dv{Y}{X}$)} & \textbf{Elasticità ($\eps_{Y,X} = \dv{Y}{X} \frac{X}{Y}$)} \\
+\midrule
+\textbf{Natura della misura} & Rapporto tra variazioni assolute & Rapporto tra variazioni percentuali relative \\
+\textbf{Unità di misura} & Dimensionale (es. kg / \euro{}, litri / ora) & \textbf{Adimensionale (numero puro)} \\
+\textbf{Confrontabilità} & Non confrontabile tra beni diversi & Perfettamente confrontabile tra mercati e valute \\
+\textbf{Comportamento su retta lineare} & \textbf{Costante} lungo tutta la retta & \textbf{Variabile punto per punto} (da $\infty$ a $0$) \\
+\bottomrule
+\end{tabularx}
+\caption{Confronto strutturale tra pendenza ed elasticità.}
+\label{tab:pendenza_vs_elasticita}
+\end{table}
+
+\begin{esame}[Inversione degli Assi nella Tradizione Economica]
+Alfred Marshall (1890) introdusse la convenzione di porre il \textbf{Prezzo} sull'asse verticale ($y$) e la \textbf{Quantità} sull'asse orizzontale ($x$), sebbene nelle decisioni individuali sia la quantità a dipendere dal prezzo ($Q = f(P)$).
+Di conseguenza:
+\begin{itemize}
+    \item La funzione di domanda diretta è $Q = D(P)$, la cui derivata analitica è $\dv{Q}{P}$;
+    \item La curva tracciata sul grafico cartesiano è la domanda inversa $P = P(Q)$, la cui pendenza visiva è $\dv{P}{Q} = \frac{1}{\dv{Q}{P}}$.
+\end{itemize}
+Nel calcolo dell'elasticità della domanda al prezzo $\epsp = \dv{Q}{P} \frac{P}{Q}$, la derivata $\dv{Q}{P}$ corrisponde al \textbf{reciproco della pendenza del grafico geometrico}:
+\begin{equation}
+    \epsp = \frac{1}{\text{Pendenza del Grafico Cartesiano } (P-Q)} \cdot \frac{P}{Q}
+\end{equation}
+\end{esame}
+
+\section{Esercizi Risolti e Guida alla Risoluzione}
+
+\begin{esercizio}[Calcolo di Pendenza ed Elasticità per una Relazione Non Lineare]
+Si consideri la funzione di domanda non lineare $Q = 1000 \cdot P^{-2}$.
+\begin{enumerate}
+    \item Calcolare la pendenza analitica della curva di domanda diretta $\dv{Q}{P}$.
+    \item Calcolare l'elasticità puntuale $\epsp$ per $P = 5$ e per $P = 10$.
+\end{enumerate}
+
+\textbf{Svolgimento}:
+\begin{enumerate}
+    \item La derivata prima rispetto al prezzo è:
+    \begin{equation}
+        \dv{Q}{P} = \dv{}{P} (1000 P^{-2}) = 1000 \cdot (-2) P^{-3} = -\frac{2000}{P^3}
+    \end{equation}
+    La pendenza è negativa per ogni $P > 0$ ed è variabile (tende a zero all'aumentare di $P$).
+    
+    \item Applichiamo la formula dell'elasticità puntuale:
+    \begin{equation}
+        \epsp = \dv{Q}{P} \cdot \frac{P}{Q} = \left( -\frac{2000}{P^3} \right) \cdot \frac{P}{1000 P^{-2}} = -\frac{2000}{1000} \cdot \frac{P \cdot P^2}{P^3} = -2
+    \end{equation}
+    L'elasticità è costante e pari a $-2$ per qualsiasi livello di prezzo ($P=5, P=10, \dots$). La funzione considerata appartiene alla classe delle funzioni a elasticità costante (\textbf{funzioni isoelastiche}).
+\end{enumerate}
+\end{esercizio}
+
+\begin{empirico}[La Misurazione dell'Inflazione Ufficiale nell'Eurozona]
+La Banca Centrale Europea (BCE) e l'Eurostat monitorano la stabilità dei prezzi tramite l'\textbf{Indice Armonizzato dei Prezzi al Consumo (IAPC/HICP)}. Lo IAPC è strutturato come un indice a catena di tipo Laspeyres, in cui i pesi di ponderazione delle $12$ categorie di spesa (COICOP) vengono aggiornati annualmente per limitare l'entità della distorsione da sostituzione e riflettere tempestivamente l'evoluzione delle abitudini di consumo (ad esempio, l'ingresso di beni tecnologici, servizi di streaming o veicoli elettrici nel paniere).
+\end{empirico}

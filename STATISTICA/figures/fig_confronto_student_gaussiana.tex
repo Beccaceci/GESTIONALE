@@ -1,0 +1,24 @@
+\begin{tikzpicture}[scale=0.9, >=Stealth]
+    \draw[->, thick, navyblue] (-4.5,0) -- (4.5,0) node[right, font=\footnotesize] {$t, z$};
+    \draw[->, thick, navyblue] (0,-0.2) -- (0,4.2) node[above, font=\footnotesize] {$f(x)$};
+
+    % Gaussiana standard N(0,1)
+    \draw[domain=-4.2:4.2, smooth, variable=\x, ultra thick, navyblue]
+        plot ({\x}, {3.8 * exp(-\x*\x/2)});
+
+    % Student nu = 1 (Cauchy)
+    \draw[domain=-4.2:4.2, smooth, variable=\x, thick, crimsonred, dashed]
+        plot ({\x}, {3.8 * (1 / (1 + \x*\x))});
+
+    % Student nu = 5
+    \draw[domain=-4.2:4.2, smooth, variable=\x, very thick, forestgreen, dashdotted]
+        plot ({\x}, {3.8 * (1 + \x*\x/5)^(-3)});
+
+    \node[right, font=\scriptsize\bfseries, navyblue] at (2.2,3.5) {$\mathcal{N}(0,1) \ (\nu = \infty)$};
+    \node[right, font=\scriptsize\bfseries, forestgreen] at (2.2,2.9) {$t$-Student ($\nu = 5$)};
+    \node[right, font=\scriptsize\bfseries, crimsonred] at (2.2,2.3) {$t$-Student ($\nu = 1$)};
+
+    \node[font=\footnotesize\itshape, text=navyblue, align=center] at (0,-0.9) {
+        La $t$ di Student presenta code più pesanti (\emph{heavy tails}) per modellare l'incertezza su $\sigma$.
+    };
+\end{tikzpicture}

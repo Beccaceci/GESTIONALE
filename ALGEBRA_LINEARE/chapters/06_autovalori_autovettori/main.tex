@@ -1,0 +1,87 @@
+% ==============================================================================
+% CAPITOLO 6: AUTOVALORI, AUTOVETTORI E DIAGONALIZZAZIONE
+% ==============================================================================
+
+\chapter{Autovalori, Autovettori e Diagonalizzazione}
+\label{chap:autovalori_autovettori}
+
+\section{Definizioni Fondamentali: Autovalori, Autovettori e Autospazi}
+
+\begin{definizione}{Autovalore e Autovettore}{autovalore_autovettore}
+Sia $V$ uno spazio vettoriale su $\K$ e sia $T: V \to V$ un endomorfismo (oppure $A \in \Mat_n(\K)$).
+Uno scalare $\lambda \in \K$ si dice \textbf{autovalore} di $T$ (o di $A$) se esiste un vettore non nullo $\vv{v} \in V \setminus \{\vzero\}$ tale che:
+\begin{equation}
+    T(\vv{v}) = \lambda \vv{v} \quad (\text{ovvero } A \vv{v} = \lambda \vv{v}).
+\end{equation}
+Tale vettore $\vv{v}$ è detto \textbf{autovettore} associato all'autovalore $\lambda$.
+L'insieme di tutti gli autovettori associati a $\lambda$, unito al vettore nullo, costituisce l'\textbf{autospazio} relativo a $\lambda$:
+\begin{equation}
+    V_\lambda = \ker(T - \lambda \id_V) = \ker(A - \lambda I_n) \le V.
+\end{equation}
+L'insieme di tutti gli autovalori di $T$ è detto \textbf{spettro} di $T$, denotato con $\Spettro(T)$.
+\end{definizione}
+
+\section{Polinomio Caratteristico}
+
+\begin{definizione}{Polinomio Caratteristico}{polinomio_caratteristico}
+Data una matrice $A \in \Mat_n(\K)$, il \textbf{polinomio caratteristico} di $A$ è il polinomio monico di grado $n$ in $\lambda$:
+\begin{equation}
+    p_A(\lambda) = \det(A - \lambda I_n) = (-1)^n \lambda^n + (-1)^{n-1} \tr(A) \lambda^{n-1} + \dots + \det(A).
+\end{equation}
+Gli autovalori di $A$ su $\K$ sono tutte e sole le \textbf{radici} in $\K$ del polinomio caratteristico:
+\begin{equation}
+    \lambda \in \Spettro(A) \iff p_A(\lambda) = 0.
+\end{equation}
+\end{definizione}
+
+\begin{proposizione}{Invarianza per Similitudine}{invarianza_similitudine}
+Matrici simili hanno lo stesso polinomio caratteristico, e pertanto gli stessi autovalori con le medesime molteplicità, la stessa traccia e lo stesso determinante:
+\begin{equation}
+    A' = P\inv A P \implies p_{A'}(\lambda) = p_A(\lambda).
+\end{equation}
+\end{proposizione}
+
+\section{Molteplicità Algebrica e Molteplicità Geometrica}
+
+\begin{definizione}{Molteplicità Algebrica e Geometrica}{molteplicita}
+Sia $\lambda_0$ un autovalore di $A$:
+\begin{itemize}
+    \item La \textbf{molteplicità algebrica} $\ma(\lambda_0)$ è la molteplicità di $\lambda_0$ come radice del polinomio caratteristico $p_A(\lambda)$.
+    \item La \textbf{molteplicità geometrica} $\mg(\lambda_0)$ è la dimensione dell'autospazio associato $V_{\lambda_0}$:
+    \begin{equation}
+        \mg(\lambda_0) = \dim(V_{\lambda_0}) = \dim(\ker(A - \lambda_0 I_n)) = n - \rk(A - \lambda_0 I_n).
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\begin{teorema}{Disuguaglianza Fondamentale delle Molteplicità}{disuguaglianza_molteplicita}
+Per ogni autovalore $\lambda_0 \in \Spettro(A)$, vale sempre:
+\begin{equation}
+    1 \le \mg(\lambda_0) \le \ma(\lambda_0) \le n.
+\end{equation}
+\end{teorema}
+
+\section{Criteri di Diagonalizzabilità}
+
+\begin{definizione}{Matrice Diagonalizzabile}{matrice_diagonalizzabile}
+Una matrice $A \in \Mat_n(\K)$ si dice \textbf{diagonalizzabile} su $\K$ se è simile a una matrice diagonale $D \in \Mat_n(\K)$, ossia se esistono una matrice invertibile $P \in \GL_n(\K)$ e una matrice diagonale $D$ tali che:
+\begin{equation}
+    P\inv A P = D = \operatorname{diag}(\lambda_1, \dots, \lambda_n).
+\end{equation}
+Le colonne di $P$ sono una base di autovettori di $A$ per $\K^n$.
+\end{definizione}
+
+\begin{teorema}{Criterio Generale di Diagonalizzabilità}{criterio_diagonalizzabilita}
+Una matrice $A \in \Mat_n(\K)$ è diagonalizzabile su $\K$ se e solo se:
+\begin{enumerate}
+    \item Il polinomio caratteristico $p_A(\lambda)$ è \textbf{completamente fattorizzabile} in fattori lineari su $\K$ (ossia la somma delle molteplicità algebriche è $n$: $\sum \ma(\lambda_i) = n$);
+    \item Per ogni autovalore $\lambda_i$, la molteplicità geometrica coincide con la molteplicità algebrica:
+    \begin{equation}
+        \mg(\lambda_i) = \ma(\lambda_i), \quad \forall\, i.
+    \end{equation}
+\end{enumerate}
+\end{teorema}
+
+\begin{corollario}{Condizione Sufficiente di Diagonalizzabilità}{autovalori_distinti}
+Se una matrice $A \in \Mat_n(\K)$ ammette $n$ autovalori distinti in $\K$, allora $A$ è sicuramente diagonalizzabile su $\K$.
+\end{corollario}

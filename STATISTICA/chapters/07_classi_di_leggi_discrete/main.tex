@@ -1,0 +1,214 @@
+% ==============================================================================
+% CAPITOLO 7: CLASSI DI LEGGI DI PROBABILITÀ DISCRETE
+% ==============================================================================
+\chapter{Classi di Leggi di Probabilità Discrete}
+\label{cap:classi_di_leggi_discrete}
+
+\begin{abstract}
+Il presente capitolo presenta una rassegna sistematica ed enciclopedica delle principali famiglie di variabili aleatorie discrete impiegate nella modellazione ingegneristica, gestionale e fisica. Per ciascuna distribuzione viene illustrato il processo generativo microscopico sottostante, la funzione di massa di probabilità (PMF), la funzione di ripartizione (CDF) e la derivazione analitica dei momenti teorici (valore atteso e varianza). Si approfondiscono la proprietà fondamentale di assenza di memoria della legge Geometrica, il Teorema di Poisson per eventi rari (con dimostrazione rigorosa del passaggio al limite dalla Binomiale), il campionamento ipergeometrico da popolazioni finite senza reinserimento con fattore di correzione FPCF e la Binomiale Negativa. Il capitolo si conclude con una tabella comparativa sinottica ad alta consultabilità.
+\end{abstract}
+
+% ==============================================================================
+% SEZIONE 7.1: BERNOULLI E BINOMIALE
+% ==============================================================================
+\section{Distribuzione di Bernoulli e Distribuzione Binomiale}
+\label{sec:bernoulli_binomiale}
+
+L'atomo elementare della probabilità discreta è l'esperimento dicotomico, formalizzato dalla variabile di Bernoulli.
+
+\begin{definizione}{Variabile Aleatoria di Bernoulli $\operatorname{Bern}(p)$}{def_bernoulli}
+Modella un singolo esperimento aleatorio che ammette due soli esiti mutuamente esclusivi ed esaustivi: \textbf{Successo} ($X=1$) con probabilità $p \in [0, 1]$, e \textbf{Fallimento} ($X=0$) con probabilità $q = 1-p$.
+\begin{itemize}
+    \item \textbf{Supporto:} $\operatorname{Im}(X) = \{0, 1\}$.
+    \item \textbf{PMF:}
+    \begin{equation}
+        p_X(k) = \mathbb{P}(X = k) = p^k (1-p)^{1-k}, \qquad k \in \{0, 1\}
+    \end{equation}
+    \item \textbf{Momenti Teorici:}
+    \begin{equation}
+        \mathbb{E}[X] = 1 \cdot p + 0 \cdot (1-p) = p, \qquad \operatorname{Var}(X) = \mathbb{E}[X^2] - p^2 = p - p^2 = p(1-p)
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+Ripetendo $n$ prove di Bernoulli indipendenti nelle medesime condizioni, il numero complessivo di successi segue la legge Binomiale.
+
+\begin{definizione}{Distribuzione Binomiale $\operatorname{Bin}(n, p)$}{def_binomiale}
+Modella il numero complessivo $X$ di successi ottenuti in una sequenza di $n \in \mathbb{N}_{\ge 1}$ prove di Bernoulli indipendenti con probabilità costante di successo $p \in [0, 1]$.
+\begin{itemize}
+    \item \textbf{Supporto:} $\operatorname{Im}(X) = \{0, 1, 2, \dots, n\}$.
+    \item \textbf{PMF:}
+    \begin{equation}
+        p_X(k) = \mathbb{P}(X = k) = \binom{n}{k} p^k (1-p)^{n-k}, \qquad k = 0, 1, \dots, n
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\begin{teorema}{Rappresentazione come Somma e Momenti della Binomiale}{momenti_binomiale}
+Ogni variabile $X \sim \operatorname{Bin}(n, p)$ ammette la scomposizione canonica in somma di $n$ indicatori bernoulliani indipendenti:
+\begin{equation}
+    X = \sum_{i=1}^n I_i, \qquad \text{con } I_1, \dots, I_n \stackrel{\text{i.i.d.}}{\sim} \operatorname{Bern}(p)
+\end{equation}
+Per la linearità del valore atteso e l'identità di Bienaymé per la varianza:
+\begin{align}
+    \mathbb{E}[X] &= \sum_{i=1}^n \mathbb{E}[I_i] = \sum_{i=1}^n p = \bm{n p} \\
+    \operatorname{Var}(X) &= \sum_{i=1}^n \operatorname{Var}(I_i) = \sum_{i=1}^n p(1-p) = \bm{n p (1-p)}, \qquad \operatorname{SD}(X) = \sqrt{n p (1-p)}
+\end{align}
+\end{teorema}
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_pmf_discrete_confronto.tex}
+    \caption{Confronto delle funzioni di massa di probabilità (PMF) per le distribuzioni discrete notevoli: (a) Binomiale $\operatorname{Bin}(10, 0.5)$ a profilo campanulare simmetrico; (b) Poisson $\operatorname{Pois}(3)$ per eventi rari con asimmetria positiva; (c) Geometrica $\operatorname{Geom}(0.3)$ caratterizzata da un decadimento esponenziale strettamente monotono decrescente.}
+    \label{fig:pmf_discrete_confronto}
+\end{figure}
+
+% ==============================================================================
+% SEZIONE 7.2: DISTRIBUZIONE GEOMETRICA E ASSENZA DI MEMORIA
+% ==============================================================================
+\section{Distribuzione Geometrica e la Proprietà di Assenza di Memoria}
+\label{sec:geometrica}
+
+Mentre la Binomiale fissa il numero di prove $n$ e conta i successi $k$, la **legge Geometrica** risponde alla domanda duale di affidabilità: *quante prove indipendenti occorre eseguire prima di osservare il primo successo?*
+
+\begin{definizione}{Distribuzione Geometrica $\operatorname{Geom}(p)$}{def_geometrica}
+Sia $p \in (0, 1]$ la probabilità di successo. La variabile aleatoria $X$ che conta il numero della prova in cui si verifica il primo successo ha:
+\begin{itemize}
+    \item \textbf{Supporto:} $\operatorname{Im}(X) = \{1, 2, 3, \dots\} = \mathbb{N}_{\ge 1}$.
+    \item \textbf{PMF:} Affinché il primo successo avvenga esattamente alla prova $k$, le prime $k-1$ prove devono essere fallimenti seguite dal successo:
+    \begin{equation}
+        p_X(k) = \mathbb{P}(X = k) = (1-p)^{k-1} p, \qquad k = 1, 2, \dots
+    \end{equation}
+    \item \textbf{Funzione di Sopravvivenza e CDF:}
+    \begin{equation}
+        \mathbb{P}(X > k) = (1-p)^k \implies F_X(k) = \mathbb{P}(X \le k) = 1 - (1-p)^k
+    \end{equation}
+    \item \textbf{Momenti Teorici:}
+    \begin{equation}
+        \mathbb{E}[X] = \frac{1}{p}, \qquad \operatorname{Var}(X) = \frac{1-p}{p^2}
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\begin{teorema}{Proprietà di Assenza di Memoria (Memorylessness)}{thm_assenza_memoria_geom}
+La distribuzione Geometrica è l'\textbf{unica distribuzione discreta} che gode della proprietà di assenza di memoria:
+\begin{equation}
+    \mathbb{P}(X > m + k \mid X > m) = \mathbb{P}(X > k) \qquad (\forall m, k \in \mathbb{N}_{\ge 1})
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Dalla definizione di probabilità condizionata:
+\begin{align}
+    \mathbb{P}(X > m + k \mid X > m) &= \frac{\mathbb{P}(\{X > m + k\} \cap \{X > m\})}{\mathbb{P}(X > m)} = \frac{\mathbb{P}(X > m + k)}{\mathbb{P}(X > m)} \\
+    &= \frac{(1-p)^{m+k}}{(1-p)^m} = (1-p)^k = \mathbb{P}(X > k) \qquad \blacksquare
+\end{align}
+\end{dimostrazione}
+
+\paragraph{Significato Fisico:}
+Se un componente si guasta secondo una legge geometrica, il fatto di aver funzionato per $m$ cicli senza guastarsi non ne aumenta né ne diminuisce la probabilità di guastarsi nei successivi $k$ cicli: il componente ``non invecchia''.
+
+% ==============================================================================
+% SEZIONE 7.3: DISTRIBUZIONE DI POISSON
+% ==============================================================================
+\section{Distribuzione di Poisson e la Legge degli Eventi Rari}
+\label{sec:poisson}
+
+La distribuzione di Poisson modella il numero di occorrenze di un evento casuale in un intervallo continuo di tempo o di spazio (chiamate a un centralino per ora, accessi a un web server per secondo, difetti per metro quadro di tessuto).
+
+\begin{definizione}{Distribuzione di Poisson $\operatorname{Pois}(\lambda)$}{def_poisson}
+Sia $\lambda > 0$ il tasso medio di arrivo (numero atteso di eventi nell'intervallo considerato).
+\begin{itemize}
+    \item \textbf{Supporto:} $\operatorname{Im}(X) = \{0, 1, 2, \dots\} = \mathbb{N}_0$.
+    \item \textbf{PMF:}
+    \begin{equation}
+        p_X(k) = \mathbb{P}(X = k) = \frac{\lambda^k}{k!} e^{-\lambda}, \qquad k = 0, 1, 2, \dots
+    \end{equation}
+    \item \textbf{Momenti Teorici (Eguaglianza Media-Varianza):}
+    \begin{equation}
+        \mathbb{E}[X] = \lambda, \qquad \operatorname{Var}(X) = \lambda \implies \operatorname{SD}(X) = \sqrt{\lambda}
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\begin{teorema}{Teorema del Limite di Poisson per Eventi Rari}{thm_limite_poisson}
+Sia $X_n \sim \operatorname{Bin}(n, p_n)$ una successione di variabili binomiali in cui il numero di prove tende all'infinito ($n \to \infty$) e la probabilità di successo decade a zero ($p_n \to 0$) in modo tale che il valore atteso rimanga costante: $n p_n = \lambda > 0$.
+Allora per ogni $k \in \mathbb{N}_0$ fissato:
+\begin{equation}
+    \lim_{n \to \infty} \mathbb{P}(X_n = k) = \frac{\lambda^k}{k!} e^{-\lambda}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazione Analitica Rigorosa del Passaggio al Limite]
+Sostituendo $p_n = \frac{\lambda}{n}$ nella formula della Binomiale:
+\begin{align}
+    \mathbb{P}(X_n = k) &= \binom{n}{k} \left(\frac{\lambda}{n}\right)^k \left(1 - \frac{\lambda}{n}\right)^{n-k} \\
+    &= \frac{n(n-1)(n-2)\dots(n-k+1)}{k!} \frac{\lambda^k}{n^k} \left(1 - \frac{\lambda}{n}\right)^n \left(1 - \frac{\lambda}{n}\right)^{-k} \\
+    &= \frac{\lambda^k}{k!} \cdot \underbrace{\left[ \frac{n}{n} \cdot \frac{n-1}{n} \dots \frac{n-k+1}{n} \right]}_{\to 1 \text{ per } n \to \infty} \cdot \underbrace{\left(1 - \frac{\lambda}{n}\right)^n}_{\to e^{-\lambda}} \cdot \underbrace{\left(1 - \frac{\lambda}{n}\right)^{-k}}_{\to 1}
+\end{align}
+Passando al limite per $n \to \infty$:
+\begin{equation}
+    \lim_{n \to \infty} \mathbb{P}(X_n = k) = \frac{\lambda^k}{k!} \cdot 1 \cdot e^{-\lambda} \cdot 1 = \frac{\lambda^k}{k!} e^{-\lambda} \qquad \blacksquare
+\end{equation}
+\end{dimostrazione}
+
+% ==============================================================================
+% SEZIONE 7.4: IPERGEOMETRICA E BINOMIALE NEGATIVA
+% ==============================================================================
+\section{Distribuzione Ipergeometrica e Binomiale Negativa}
+\label{sec:ipergeometrica_binneg}
+
+\begin{definizione}{Distribuzione Ipergeometrica $\operatorname{Hyp}(N, K, n)$}{def_ipergeometrica}
+Modella il numero $X$ di elementi conformi (successi) estratti in un campione di dimensione $n$ pescato \textbf{senza reinserimento} da un lotto finito di $N$ elementi totali contenente $K$ elementi conformi.
+\begin{itemize}
+    \item \textbf{PMF:}
+    \begin{equation}
+        p_X(k) = \mathbb{P}(X = k) = \frac{\dbinom{K}{k}\dbinom{N-K}{n-k}}{\dbinom{N}{n}}
+    \end{equation}
+    \item \textbf{Momenti Teorici e Fattore FPCF:} Posto $p = K/N$:
+    \begin{equation}
+        \mathbb{E}[X] = n p, \qquad \operatorname{Var}(X) = n p (1-p) \cdot \underbrace{\left(\frac{N - n}{N - 1}\right)}_{\text{Fattore di Correzione Popolazione Finita (FPCF)}}
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\begin{osservazione}[Confronto Ipergeometrica vs Binomiale]
+Se $N \to \infty$ con $p = K/N$ costante, il fattore FPCF $\frac{N-n}{N-1} \to 1$. L'estrazione senza reinserimento diventa asintoticamente indistinguibile dall'estrazione con reinserimento ($\operatorname{Bin}(n, p)$).
+\end{osservazione}
+
+\begin{definizione}{Distribuzione Binomiale Negativa (o di Pascal) $\operatorname{NB}(r, p)$}{def_binomiale_negativa}
+Modella il numero totale $X$ di prove indipendenti di Bernoulli per ottenere $r \ge 1$ successi:
+\begin{itemize}
+    \item \textbf{PMF:}
+    \begin{equation}
+        p_X(k) = \mathbb{P}(X = k) = \binom{k-1}{r-1} p^r (1-p)^{k-r}, \qquad k = r, r+1, \dots
+    \end{equation}
+    \item \textbf{Momenti:} $\mathbb{E}[X] = \frac{r}{p}, \quad \operatorname{Var}(X) = \frac{r(1-p)}{p^2}$.
+\end{itemize}
+\end{definizione}
+
+% ==============================================================================
+% SEZIONE 7.5: QUADRO SINOTTICO DELLE DISTRIBUZIONI DISCRETE
+% ==============================================================================
+\section{Tabella Sinottica delle Classi di Leggi Discrete}
+\label{sec:tabella_discrete}
+
+\begin{table}[htbp]
+\centering
+\caption{Quadro comparativo completo delle principali famiglie di variabili aleatorie discrete.}
+\label{tab:leggi_discrete_sinottica}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Distribuzione} & \textbf{Supporto} & \textbf{PMF} $p_X(k)$ & $\mathbb{E}[X]$ & $\operatorname{Var}(X)$ & \textbf{Chiusura Somma} \\
+\midrule
+$\operatorname{Bern}(p)$ & $\{0, 1\}$ & $p^k(1-p)^{1-k}$ & $p$ & $p(1-p)$ & Somma $\to \operatorname{Bin}(n,p)$ \\[8pt]
+$\operatorname{Bin}(n, p)$ & $\{0, \dots, n\}$ & $\dbinom{n}{k} p^k (1-p)^{n-k}$ & $np$ & $np(1-p)$ & $\operatorname{Bin}(n_1+n_2, p)$ \\[8pt]
+$\operatorname{Geom}(p)$ & $\{1, 2, \dots\}$ & $(1-p)^{k-1}p$ & $\dfrac{1}{p}$ & $\dfrac{1-p}{p^2}$ & Somma $\to \operatorname{NB}(r,p)$ \\[8pt]
+$\operatorname{Pois}(\lambda)$ & $\{0, 1, 2, \dots\}$ & $\dfrac{\lambda^k}{k!} e^{-\lambda}$ & $\lambda$ & $\lambda$ & $\operatorname{Pois}(\lambda_1+\lambda_2)$ \\[8pt]
+$\operatorname{Hyp}(N, K, n)$ & $\{\max(0, n-(N-K)), \dots\}$ & $\dfrac{\binom{K}{k}\binom{N-K}{n-k}}{\binom{N}{n}}$ & $n\frac{K}{N}$ & $n\frac{K}{N}(1-\frac{K}{N})\frac{N-n}{N-1}$ & No \\[8pt]
+$\operatorname{NB}(r, p)$ & $\{r, r+1, \dots\}$ & $\dbinom{k-1}{r-1} p^r (1-p)^{k-r}$ & $\dfrac{r}{p}$ & $\dfrac{r(1-p)}{p^2}$ & $\operatorname{NB}(r_1+r_2, p)$ \\
+\bottomrule
+\end{tabular}
+}
+\end{table}

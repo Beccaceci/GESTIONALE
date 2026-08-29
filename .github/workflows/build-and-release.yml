@@ -1,0 +1,100 @@
+name: Build and Release Notes
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-course:
+    name: Build ${{ matrix.target_name }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - folder: ALGEBRA_LINEARE
+            target_name: Algebra_Lineare
+          - folder: ANALISI1
+            target_name: Analisi_1
+          - folder: ANALISI2
+            target_name: Analisi_2
+          - folder: ECONOMIA
+            target_name: Economia
+          - folder: FISICA
+            target_name: Fisica
+          - folder: STATISTICA
+            target_name: Statistica
+      fail-fast: false
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX Document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          working_directory: ${{ matrix.folder }}
+          args: -pdf -file-line-error -interaction=nonstopmode -synctex=1
+
+      - name: Stage Compiled PDF
+        run: |
+          mkdir -p build_output
+          cp "${{ matrix.folder }}/main.pdf" "build_output/${{ matrix.target_name }}.pdf"
+
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.target_name }}-pdf
+          path: build_output/${{ matrix.target_name }}.pdf
+          retention-days: 7
+
+  release:
+    name: Publish PDFs to GitHub Release
+    needs: build-course
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release_pdfs
+          merge-multiple: true
+
+      - name: List Release Files
+        run: |
+          ls -la release_pdfs/
+
+      - name: Create or Update GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: "Dispense di Studio (PDF Aggiornati)"
+          body: |
+            ## 📚 Ultima Versione Compilata delle Dispense
+
+            Tutti i file PDF sono stati compilati automaticamente tramite GitHub Actions.
+            
+            ### 📥 Download Rapido:
+            - [Algebra Lineare e Geometria](https://github.com/${{ github.repository }}/releases/latest/download/Algebra_Lineare.pdf)
+            - [Analisi Matematica 1](https://github.com/${{ github.repository }}/releases/latest/download/Analisi_1.pdf)
+            - [Analisi Matematica 2](https://github.com/${{ github.repository }}/releases/latest/download/Analisi_2.pdf)
+            - [Economia](https://github.com/${{ github.repository }}/releases/latest/download/Economia.pdf)
+            - [Fisica Generale](https://github.com/${{ github.repository }}/releases/latest/download/Fisica.pdf)
+            - [Calcolo delle Probabilità e Statistica](https://github.com/${{ github.repository }}/releases/latest/download/Statistica.pdf)
+            
+            _Aggiornato al commit:_ ${{ github.sha }}
+          draft: false
+          prerelease: false
+          make_latest: true
+          files: release_pdfs/*.pdf
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,56 @@
+\begin{tikzpicture}[scale=0.92, >=Stealth]
+    % Griglia
+    \draw[step=1cm, gray!15, very thin] (-0.5,-0.5) grid (10.5,6.5);
+
+    % Assi
+    \draw[->, thick, navyblue] (-0.5,0) -- (10.5,0) node[right, font=\small\bfseries] {$X$};
+    \draw[->, thick, navyblue] (0,-0.5) -- (0,6.5) node[above, font=\small\bfseries] {$Y$};
+    \node[below left, font=\footnotesize] at (0,0) {$0$};
+
+    % Retta OLS
+    \draw[very thick, crimsonred] (0.5, {1.0 + 0.52*0.5}) -- (9.5, {1.0 + 0.52*9.5})
+        node[above right, font=\small\bfseries] {$\widehat{y} = \widehat{\beta}_0 + \widehat{\beta}_1 x$};
+
+    \fill[crimsonred] (0, 1.0) circle (2pt);
+    \node[left, font=\footnotesize\bfseries, crimsonred] at (0, 1.0) {$\widehat{\beta}_0$};
+
+    % Baricentro
+    \coordinate (BAR) at (5.0, 3.6);
+    \draw[dashed, warmamber!90!black, thick] (5.0, 0) -- (5.0, 3.6) -- (0, 3.6);
+    \fill[warmamber] (BAR) circle (3pt);
+    \draw[navyblue, thick] (BAR) circle (3pt);
+    \node[below, font=\footnotesize\bfseries, warmamber!90!black] at (5.0, 0) {$\overline{x}$};
+    \node[left, font=\footnotesize\bfseries, warmamber!90!black] at (0, 3.6) {$\overline{y}$};
+    \node[above left=2pt, font=\scriptsize\bfseries, text=navyblue, fill=white, inner sep=1pt] at (BAR) {$(\overline{x}, \overline{y})$};
+
+    % Punti e residui
+    \def\xone{1.5} \def\yone{2.7} \def\yhatone{1.78} \def\eone{0.92}
+    \fill[coolblue!25, draw=coolblue, thin, opacity=0.7] (\xone, \yhatone) rectangle ({\xone + \eone}, \yone);
+    \draw[forestgreen, line width=1.3pt] (\xone, \yhatone) -- (\xone, \yone);
+    \fill[navyblue] (\xone, \yone) circle (2.2pt);
+
+    \def\xtwo{3.2} \def\ytwo{1.8} \def\yhattwo{2.66} \def\etwo{0.86}
+    \fill[coolblue!25, draw=coolblue, thin, opacity=0.7] ({\xtwo - \etwo}, \ytwo) rectangle (\xtwo, \yhattwo);
+    \draw[forestgreen, line width=1.3pt] (\xtwo, \yhattwo) -- (\xtwo, \ytwo);
+    \fill[navyblue] (\xtwo, \ytwo) circle (2.2pt);
+
+    \def\xthree{6.8} \def\ythree{5.4} \def\yhatthree{4.54} \def\ethree{0.86}
+    \fill[coolblue!25, draw=coolblue, thin, opacity=0.7] (\xthree, \yhatthree) rectangle ({\xthree + \ethree}, \ythree);
+    \draw[forestgreen, line width=1.3pt] (\xthree, \yhatthree) -- (\xthree, \ythree);
+    \fill[navyblue] (\xthree, \ythree) circle (2.2pt);
+
+    \def\xfour{8.5} \def\yfour{4.5} \def\yhatfour{5.42} \def\efour{0.92}
+    \fill[coolblue!25, draw=coolblue, thin, opacity=0.7] ({\xfour - \efour}, \yfour) rectangle (\xfour, \yhatfour);
+    \draw[forestgreen, line width=1.3pt] (\xfour, \yhatfour) -- (\xfour, \yfour);
+    \fill[navyblue] (\xfour, \yfour) circle (2.2pt);
+
+    % Riquadro proprietà
+    \node[draw=navyblue, fill=white, rounded corners=3pt, inner sep=4pt, font=\scriptsize, anchor=north west] at (0.2, 6.3) {
+        \begin{tabular}{l}
+            \textbf{Proprietà OLS:} \\[1pt]
+            \textbullet\ $\min \sum e_i^2 = \min \sum (y_i - \widehat{y}_i)^2$ \\[1pt]
+            \textbullet\ $\widehat{\beta}_1 = \dfrac{s_{xy}}{S_x^2} = r \dfrac{S_y}{S_x}, \quad \widehat{\beta}_0 = \overline{y} - \widehat{\beta}_1 \overline{x}$ \\[2pt]
+            \textbullet\ $(\overline{x}, \overline{y}) \in \text{Retta}, \quad \sum e_i = 0$
+        \end{tabular}
+    };
+\end{tikzpicture}

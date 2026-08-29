@@ -1,0 +1,363 @@
+% ==============================================================================
+% CAPITOLO 16: INFLAZIONE E DISOCCUPAZIONE: LA CURVA DI PHILLIPS
+% ==============================================================================
+\chapter{Inflazione e Disoccupazione: La Curva di Phillips}
+\label{chap:inflazione_disoccupazione}
+
+\begin{tcolorbox}[colback=navyblue!5!white, colframe=navyblue, title=\textbf{Quadro Concettuale del Capitolo}]
+Questo capitolo approfondisce le due principali patologie macroeconomiche: l'\textbf{inflazione} e la \textbf{disoccupazione}. Vengono definiti gli indicatori statistici ufficiali del mercato del lavoro, analizzate le tre tipologie fondamentali di disoccupazione (frizionale, strutturale e ciclica) e formalizzata la \textbf{Legge di Okun} che quantifica il legame tra output gap e tasso di disoccupazione. Si esamina quindi l'evoluzione teorica ed empirica della \textbf{Curva di Phillips}: dalla formulazione originaria a trade-off fisso di A.W. Phillips (1958) alla rivoluzione monetarista di Milton Friedman ed Edmund Phelps con l'introduzione delle aspettative di inflazione e la determinazione del \textbf{NAIRU} (tasso naturale di disoccupazione). Si dimostra la \textbf{verticalità della curva di Phillips nel lungo periodo} e si quantificano i costi della disinflazione e il ruolo della credibilità della Banca Centrale.
+\end{tcolorbox}
+
+\section{Il Mercato del Lavoro: Concetti e Misurazione}
+
+\subsection{Indicatori Ufficiali del Mercato del Lavoro}
+La popolazione totale di un Paese viene suddivisa secondo standard statistici internazionali (ILO / Eurostat / ISTAT) in tre aggregati fondamentali:
+\begin{enumerate}
+    \item \textbf{Popolazione in Età Lavorativa ($POP_{15-64}$)}: individui residenti tra i 15 e i 64 anni di età.
+    \item \textbf{Forze di Lavoro ($FL$)}: popolazione attiva che partecipa al mercato del lavoro, data dalla somma degli \textbf{Occupati ($L$)} e dei \textbf{Disoccupati ($U$)} in cerca attiva di lavoro:
+    \begin{equation}
+        FL = L + U
+    \end{equation}
+    \item \textbf{Inattivi / Non Forze di Lavoro ($I$)}: individui in età lavorativa che non lavorano e non cercano attivamente un'occupazione (studenti a tempo pieno, casalinghe/i, pensionati precoci, e \textbf{lavoratori scoraggiati} che hanno smesso di cercare lavoro per sfiducia nelle opportunità).
+\end{enumerate}
+
+\begin{definizione}{Tassi Istituzionali del Mercato del Lavoro}{tassi_mercato_lavoro}
+\begin{itemize}
+    \item \textbf{Tasso di Disoccupazione ($\unemp$)}: quota percentuale dei disoccupati rispetto alle forze di lavoro complessive:
+    \begin{equation}
+        \unemp = \frac{U}{FL} = \frac{U}{L + U}
+    \end{equation}
+    \item \textbf{Tasso di Attività / Partecipazione ($a$)}: quota delle forze di lavoro rispetto alla popolazione in età lavorativa:
+    \begin{equation}
+        a = \frac{FL}{POP_{15-64}}
+    \end{equation}
+    \item \textbf{Tasso di Occupazione ($e$)}: quota degli occupati rispetto alla popolazione in età lavorativa:
+    \begin{equation}
+        e = \frac{L}{POP_{15-64}} = a \cdot (1 - \unemp)
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\subsection{Tipologie di Disoccupazione e Tasso Naturale}
+
+\begin{definizione}{Tipologie di Disoccupazione}{def_tipi_disoccupazione}
+\begin{enumerate}
+    \item \textbf{Disoccupazione Frizionale}: disoccupazione fisiologica, temporanea e di breve durata, legata al tempo necessario ai lavoratori per cercare un impiego adeguato alle proprie competenze e alle imprese per selezionare i candidati idonei (\textit{job search and matching process}).
+    \item \textbf{Disoccupazione Strutturale}: disoccupazione involontaria permanente e persistente nel tempo, originata da un \textbf{disallineamento qualitativo o geografico} tra le competenze offerte dai lavoratori e quelle richieste dalle imprese (\textit{skills mismatch}), oppure da \textbf{rigidità istituzionali del mercato del lavoro} (salari minimi vincolanti superiori all'equilibrio, potere contrattuale dei sindacati, modelli \textit{insider-outsider} e salari di efficienza volti a incentivare la produttività).
+    \item \textbf{Disoccupazione Ciclica / Keynesiana}: disoccupazione transitoria determinata da una \textbf{carenza di domanda aggregata} durante le fasi di recessione o rallentamento del ciclo economico, quando il PIL effettivo scende al di sotto del livello potenziale ($Y < Y_{PO}$).
+\end{enumerate}
+\end{definizione}
+
+\begin{definizione}{Tasso Naturale di Disoccupazione ($\unempnat$)}{def_tasso_naturale}
+Il \textbf{Tasso Naturale di Disoccupazione ($\unempnat$)} è il livello di disoccupazione di equilibrio di lungo periodo verso cui il sistema economico converge quando tutti i mercati sono in equilibrio e i salari e prezzi sono pienamente flessibili.
+Esso è costituito esclusivamente dalla somma della \textbf{componente frizionale} e della \textbf{componente strutturale}:
+\begin{equation}
+    \unempnat = \unemp_{\text{frizionale}} + \unemp_{\text{strutturale}}
+\end{equation}
+In corrispondenza del tasso naturale, la disoccupazione ciclica è esattamente nulla ($\unemp - \unempnat = 0$) e il PIL reale è pari al Prodotto Potenziale ($Y = Y_{PO}$).
+\end{definizione}
+
+\section{La Legge di Okun}
+
+\begin{legge}{Legge di Okun (Relazione Produzione-Disoccupazione)}{legge_okun}
+Formulata dall'economista Arthur Okun nel 1962, la \textbf{Legge di Okun} quantifica la relazione empirica inversa e sistematica tra la crescita del PIL reale e la variazione del tasso di disoccupazione.
+\begin{enumerate}
+    \item \textbf{Forma alle Differenze}:
+    \begin{equation}
+        \Delta \unemp_t = \unemp_t - \unemp_{t-1} = -\beta \Big( g_{Y, t} - \bar{g}_Y \Big) \label{eq:okun_diff}
+    \end{equation}
+    dove $g_{Y, t} = \frac{Y_t - Y_{t-1}}{Y_{t-1}}$ è il tasso di crescita effettivo del PIL, $\bar{g}_Y$ è il tasso di crescita tendenziale del PIL potenziale necessario a mantenere stabile la disoccupazione (solitamente attorno al $2$\%--$2{,}5$\% per effetto della crescita della popolazione e della produttività del lavoro) e $\beta \approx 0{,}4$ è il coefficiente di reattività di Okun.
+    \item \textbf{Forma in Termini di Output Gap}:
+    \begin{equation}
+        \frac{Y_t - Y_{PO}}{Y_{PO}} = -\omega \Big( \unemp_t - \unempnat \Big) \label{eq:okun_gap}
+    \end{equation}
+    dove $\omega \approx 2{,}0$ indica che per ridurre la disoccupazione di $1$ punto percentuale al di sotto del tasso naturale è necessario generare un output gap positivo pari al $+2$\% di PIL potenziale.
+\end{enumerate}
+\end{legge}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05, >=Stealth]
+    % Assi cartesiani
+    \draw[->, line width=1.1pt] (-1.0, 0) -- (8.0, 0) node[right, font=\small\bfseries] {Crescita PIL Reale ($g_Y$)};
+    \draw[->, line width=1.1pt] (0, -3.0) -- (0, 3.5) node[above, font=\small\bfseries] {Variazione Disoccupazione ($\Delta u$)};
+
+    % Retta di regressione di Okun
+    \draw[line width=1.8pt, color=navyblue, domain=0.0:7.0] plot (\x, {1.2 - 0.5*\x}) node[below right, font=\small\bfseries] {$\Delta u = -\beta(g_Y - \bar{g}_Y)$};
+
+    % Intercetta orizzontale bar{g}_Y
+    \coordinate (Gbar) at (2.4, 0);
+    \fill[forestgreen] (Gbar) circle (2.8pt) node[above right, font=\footnotesize\bfseries] {$\bar{g}_Y = 2{,}4$\%};
+
+    % Punti campione
+    \coordinate (P1) at (1.0, 0.7);
+    \coordinate (P2) at (4.5, -1.05);
+
+    \fill[crimsonred] (P1) circle (2.5pt) node[above right, font=\scriptsize\bfseries] {Recessione: $g_Y < \bar{g}_Y \implies \Delta u > 0$};
+    \fill[forestgreen] (P2) circle (2.5pt) node[below right, font=\scriptsize\bfseries] {Espansione: $g_Y > \bar{g}_Y \implies \Delta u < 0$};
+
+    % Proiezioni tratteggiate
+    \draw[dashed, line width=0.8pt, color=crimsonred] (1.0, 0) node[below, font=\scriptsize\bfseries] {$1{,}0$\%} -- (P1) -- (0, 0.7) node[left, font=\scriptsize\bfseries] {$+0{,}7$\%};
+    \draw[dashed, line width=0.8pt, color=forestgreen] (4.5, 0) node[above, font=\scriptsize\bfseries] {$4{,}5$\%} -- (P2) -- (0, -1.05) node[left, font=\scriptsize\bfseries] {$-1{,}05$\%};
+
+\end{tikzpicture}
+\caption{Rappresentazione empirica della Legge di Okun. Se la crescita del PIL reale supera il tasso tendenziale $\bar{g}_Y = 2{,}4$\%, il tasso di disoccupazione si riduce ($\Delta u < 0$); viceversa in caso di crescita anemica o recessione.}
+\label{fig:legge_okun}
+\end{figure}
+
+\section{Natura, Misurazione e Costi dell'Inflazione}
+
+\subsection{Definizione e Cause}
+L'\textbf{inflazione ($\infl$)} è l'aumento continuo, prolungato e generalizzato del livello dei prezzi di beni e servizi in un sistema economico, misurato come variazione percentuale dell'indice dei prezzi:
+\begin{equation}
+    \infl_t = \frac{P_t - P_{t-1}}{P_{t-1}}
+\end{equation}
+Le determinanti teoriche dell'inflazione si articolano in tre filoni:
+\begin{itemize}
+    \item \textbf{Inflazione da Domanda}: generata da un eccesso persistente della domanda aggregata rispetto alla capacità produttiva di pieno impiego ($Y > Y_{PO}$).
+    \item \textbf{Inflazione da Costi / Shock di Offerta}: provocata da improvvisi aumenti esogeni dei costi di produzione dei fattori (materie prime, energia, salari indipendenti dalla produttività).
+    \item \textbf{Inflazione Monetaria}: originata da una crescita dell'offerta di moneta superiore alla crescita reale del PIL, in ossequio alla Teoria Quantitativa ($M V = P Y \implies \infl \approx g_M - g_Y$).
+\end{itemize}
+
+\subsection{I Costi Economici e Sociali dell'Inflazione}
+È essenziale distinguere tra inflazione perfettamente prevista e inflazione inattesa:
+\begin{enumerate}
+    \item \textbf{Costi dell'Inflazione Attesa}:
+    \begin{itemize}
+        \item \textbf{Costi da Consumo delle Suole delle Scarpe (\textit{Shoe-leather costs})}: l'inflazione funge da tassa sul possesso di moneta liquida infruttifera, spingendo gli individui a recarsi più frequentemente in banca per minimizzare le scorte di cassa.
+        \item \textbf{Costi di Listino (\textit{Menu costs})}: oneri vivi sostenuti dalle imprese per aggiornare continuamente cataloghi, listini, etichette e software di pagamento.
+        \item \textbf{Drenaggio Fiscale (\textit{Fiscal drag})}: incremento automatico dell'onere tributario reale quando le aliquote progressive sui redditi colpiscono guadagni nominali che riflettono solo l'adeguamento inflazionistico senza alcun reale aumento del potere d'acquisto.
+    \end{itemize}
+    \item \textbf{Costi dell'Inflazione Inattesa}:
+    \begin{itemize}
+        \item \textbf{Redistribuzione Arbitraria della Ricchezza}: l'inflazione non prevista favorisce sistematicamente i debitori (il cui debito reale si svaluta) a discapito dei creditori (i cui crediti reali vengono erosi), e danneggia i lavoratori a reddito fisso non indicizzato a vantaggio dei titolari di profitti d'impresa.
+        \item \textbf{Incertezza e Distorsione Allocativa}: l'alta inflazione rende i prezzi relativi opachi e volatili, disincentivando gli investimenti produttivi a lungo termine.
+    \end{itemize}
+\end{enumerate}
+
+\section{La Curva di Phillips: Origini ed Evoluzione Teorica}
+
+\subsection{La Curva di Phillips Originaria (1958)}
+Nel 1958 l'economista neozelandese Alban William Phillips pubblicò uno studio empirico pionieristico sulle serie storiche del Regno Unito (1861--1957), dimostrando una relazione empirica inversa stabile e non lineare tra il tasso di variazione dei salari nominali ($g_W$) e il tasso di disoccupazione ($\unemp$).
+
+\begin{modello}{Curva di Phillips Originaria}{phillips_originaria}
+Ipotizzando che i prezzi siano fissati con un ricarico fisso sui salari ($P = (1+\mu)\frac{W}{A}$), l'inflazione dei prezzi coincide con la crescita salariale al netto dei guadagni di produttività ($\infl = g_W - g_A$). La curva di Phillips originaria assume la forma lineare:
+\begin{equation}
+    \infl_t = -\beta \Big( \unemp_t - \unempnat \Big) \quad \text{con } \beta > 0 \label{eq:phillips_orig}
+\end{equation}
+\end{modello}
+
+Negli anni '60 la professione economica interpretò questa curva come un \textbf{menu stabile di politica economica}: i governi ritenevano di poter scegliere liberamente una combinazione permanente tra disoccupazione e inflazione (es. accettare un'inflazione del $5$\% per ridurre permanentemente la disoccupazione al $3$\%).
+
+\subsection{La Critica di Friedman-Phelps e le Aspettative di Inflazione}
+Nel 1968 Milton Friedman ed Edmund Phelps distrussero l'illusione del trade-off permanente dimostrando che i lavoratori non soffrono di \textbf{illusione monetaria}: nelle contrattazioni salariali la manodopera è interessata al \textbf{salario reale} $\frac{W}{P}$ e non al salario nominale.
+
+\begin{modello}{Curva di Phillips Aumentata delle Aspettative}{phillips_aspettative}
+Formalizziamo il modello di determinazione congiunta dei salari (Wage Setting) e dei prezzi (Price Setting):
+\begin{align}
+    \text{Wage Setting (WS)}: &\quad W = P^{\mathrm{e}} \cdot F(\unemp, z) = P^{\mathrm{e}} \big( 1 - \alpha \unemp + z \big) \\
+    \text{Price Setting (PS)}: &\quad P = (1 + \mu) \frac{W}{A} = (1 + \mu) W \quad (\text{normalizzando } A=1)
+\end{align}
+Sostituendo il salario nominale dell'equazione WS all'interno dell'equazione PS:
+\begin{equation}
+    P = (1 + \mu) P^{\mathrm{e}} \big( 1 - \alpha \unemp + z \big)
+\end{equation}
+Passando ai logaritmi o ai tassi di variazione percentuale:
+\begin{equation}
+    \infl_t = \inflexp_t + (\mu + z) - \alpha \unemp_t
+\end{equation}
+Definendo il tasso naturale di disoccupazione (o NAIRU) come il valore che azzera la spinta inflazionistica inattesa ($\unempnat = \frac{\mu + z}{\alpha}$), otteniamo la \textbf{Curva di Phillips aumentata delle aspettative}:
+\begin{equation}
+    \infl_t = \inflexp_t - \alpha \Big( \unemp_t - \unempnat \Big) + \nu_t \label{eq:phillips_friedman}
+\end{equation}
+dove $\nu_t$ rappresenta eventuali shock esogeni di offerta.
+\end{modello}
+
+\subsection{Aspettative Adattive e Spirale Inflazionistica: Il NAIRU}
+
+\begin{definizione}{NAIRU}{def_nairu}
+Il \textbf{NAIRU} (\textit{Non-Accelerating Inflation Rate of Unemployment}) è il tasso di disoccupazione in corrispondenza del quale l'inflazione rimane costante nel tempo ($\Delta \infl_t = \infl_t - \infl_{t-1} = 0$).
+\end{definizione}
+
+\begin{dimostrazione}[ della Spirale di Accelerazione dell'Inflazione]
+Ipotizziamo che le aspettative di inflazione siano \textbf{adattive} di tipo inerziale, in cui gli agenti proiettano per il periodo corrente l'inflazione osservata nel periodo precedente:
+\begin{equation}
+    \inflexp_t = \infl_{t-1}
+\end{equation}
+Sostituendo nella curva di Phillips aumentata (assumendo $\nu_t = 0$):
+\begin{equation}
+    \infl_t = \infl_{t-1} - \alpha \Big( \unemp_t - \unempnat \Big)
+\end{equation}
+Sottraendo $\infl_{t-1}$ da ambo i membri otteniamo la variazione dell'inflazione:
+\begin{equation}
+    \Delta \infl_t = \infl_t - \infl_{t-1} = -\alpha \Big( \unemp_t - \unempnat \Big) \label{eq:nairu_accel}
+\end{equation}
+Da questa fondamentale equazione discendono tre conclusioni:
+\begin{enumerate}
+    \item Se il governo tenta di mantenere permanentemente la disoccupazione al di sotto del tasso naturale ($\unemp_t < \unempnat$):
+    \begin{equation}
+        \unemp_t < \unempnat \implies \Delta \infl_t > 0 \implies \infl_t > \infl_{t-1}
+    \end{equation}
+    L'inflazione \textbf{non rimane costante a un livello più alto, ma accelera indefinitamente periodo dopo periodo} generando una spirale esplosiva prezzi-salari.
+    \item Se la disoccupazione è superiore al tasso naturale ($\unemp_t > \unempnat$):
+    \begin{equation}
+        \unemp_t > \unempnat \implies \Delta \infl_t < 0 \implies \infl_t < \infl_{t-1} \quad (\text{Disinflazione})
+    \end{equation}
+    \item L'inflazione è stabile ($\Delta \infl_t = 0$) se e solo se la disoccupazione coincide con il NAIRU: $\unemp_t = \unempnat$.
+\end{enumerate}
+\end{dimostrazione}
+
+\subsection{Curva di Phillips di Breve e Lungo Periodo}
+
+\begin{teorema}{Verticalità della Curva di Phillips di Lungo Periodo}{teorema_lrpc}
+Nel lungo periodo le aspettative si adeguano pienamente alla realtà ($\inflexp = \infl$).
+Di conseguenza, la \textbf{Curva di Phillips di Lungo Periodo (LRPC - Long-Run Phillips Curve)} è una retta \textbf{perfettamente verticale} in corrispondenza del NAIRU ($\unemp = \unempnat$).
+Non esiste alcun trade-off permanente sfruttabile dai decisori di politica economica tra inflazione e disoccupazione.
+\end{teorema}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.08, >=Stealth]
+    % Assi cartesiani
+    \draw[->, line width=1.2pt] (0,0) -- (9.0,0) node[right, font=\small\bfseries] {Tasso Disoccupazione ($u$)};
+    \draw[->, line width=1.2pt] (0,0) -- (0,6.5) node[above, font=\small\bfseries] {Tasso Inflazione ($\pi$)};
+
+    % LRPC Verticale
+    \draw[line width=2.2pt, color=forestgreen] (4.5, 0) -- (4.5, 6.0) node[above, font=\small\bfseries] {$\mathrm{LRPC} \; (u = u_n)$};
+    \node[below, font=\small\bfseries, color=forestgreen] at (4.5, 0) {$u_n = 5$\%};
+
+    % Curve SRPC per vari livelli di aspettative
+    \draw[line width=1.6pt, color=navyblue] (1.5, 3.5) -- (7.5, 0.5) node[right, font=\footnotesize\bfseries] {$\mathrm{SRPC}_0 \; (\pi^{\mathrm{e}} = 2$\%)};
+    \draw[line width=1.6pt, color=purpleaccent] (1.5, 5.0) -- (7.5, 2.0) node[right, font=\footnotesize\bfseries] {$\mathrm{SRPC}_1 \; (\pi^{\mathrm{e}} = 3{,}5$\%)};
+    \draw[line width=1.6pt, color=crimsonred] (1.5, 6.2) -- (7.5, 3.2) node[right, font=\footnotesize\bfseries] {$\mathrm{SRPC}_2 \; (\pi^{\mathrm{e}} = 5$\%)};
+
+    % Punti sulla traiettoria di spirale
+    \coordinate (A) at (4.5, 2.0);
+    \coordinate (B) at (3.0, 2.75);
+    \coordinate (C) at (4.5, 3.5);
+    \coordinate (D) at (3.0, 4.25);
+
+    \fill[forestgreen] (A) circle (2.8pt) node[below left, font=\scriptsize\bfseries] {$A(u_n, 2$\%)};
+    \fill[purpleaccent] (B) circle (2.8pt) node[left=2pt, font=\scriptsize\bfseries] {$B(u_1, 2{,}75$\%)};
+    \fill[warmamber] (C) circle (2.8pt) node[above right=1pt, font=\scriptsize\bfseries] {$C(u_n, 3{,}5$\%)};
+    \fill[crimsonred] (D) circle (2.8pt) node[left=2pt, font=\scriptsize\bfseries] {$D(u_1, 4{,}25$\%)};
+
+    % Frecce di transizione a spirale
+    \draw[->, line width=1.2pt, color=purpleaccent] (A) -- node[below left, font=\tiny\bfseries] {$\text{Boom BP}$} (B);
+    \draw[->, line width=1.2pt, color=warmamber] (B) -- node[above right, font=\tiny\bfseries] {$\pi^{\mathrm{e}} \uparrow$} (C);
+    \draw[->, line width=1.2pt, color=crimsonred] (C) -- node[below left, font=\tiny\bfseries] {$\text{Nuovo stimolo}$} (D);
+
+    % Proiezioni tratteggiate
+    \draw[dashed, line width=0.8pt, color=gray] (3.0, 0) node[below, font=\footnotesize\bfseries] {$u_1 = 3{,}5$\%} -- (D);
+
+\end{tikzpicture}
+\caption{Dinamica della Curva di Phillips di Breve Periodo ($\mathrm{SRPC}$) e di Lungo Periodo ($\mathrm{LRPC}$). Il tentativo di mantenere permanentemente la disoccupazione $u_1 < u_n$ sposta verso l'alto le curve di breve periodo ($A \to B \to C \to D$), generando un'accelerazione continua dell'inflazione.}
+\label{fig:phillips_breve_lungo_periodo}
+\end{figure}
+
+\section{Disinflazione, Tasso di Sacrificio e Credibilità della Banca Centrale}
+
+Quando l'inflazione è radicata a livelli inaccettabili, la Banca Centrale deve attuare una politica monetaria restrittiva (\textbf{disinflazione}).
+
+\begin{definizione}{Tasso di Sacrificio (Sacrifice Ratio)}{def_sacrifice_ratio}
+Il \textbf{Tasso di Sacrificio} è il costo cumulato in termini di perdita percentuale di PIL reale (o di eccesso cumulato di disoccupazione rispetto al tasso naturale) necessario per ridurre il tasso di inflazione di un punto percentuale:
+\begin{equation}
+    \text{Tasso di Sacrificio} = \frac{\sum_{t=1}^T \Big( \frac{Y_{PO} - Y_t}{Y_{PO}} \Big)}{\Delta \infl_{\text{totale}}} = \frac{\omega \sum_{t=1}^T (\unemp_t - \unempnat)}{\Delta \infl_{\text{totale}}}
+\end{equation}
+Nelle economie avanzate con aspettative adattive, le stime empiriche standard indicano un tasso di sacrificio compreso tra $2$ e $4$ punti di PIL per ogni punto percentuale di disinflazione permanente.
+\end{definizione}
+
+\subsection{Aspettative Razionali e la Proposizione di Lucas}
+Secondo la scuola della \textbf{Nuova Macroeconomia Classica} (Robert Lucas e Thomas Sargent), se gli agenti formano le proprie aspettative in modo \textbf{razionale} (utilizzando in modo ottimale tutte le informazioni disponibili sulla struttura dell'economia e sulle politiche future della Banca Centrale):
+\begin{itemize}
+    \item Se la manovra di disinflazione della Banca Centrale è pienamente \textbf{credibile, trasparente e annunciata in anticipo}, gli operatori rivedono istantaneamente al ribasso le proprie aspettative di inflazione da $\inflexp = \infl_0$ a $\inflexp = \infl_{\text{target}}$.
+    \item La curva di Phillips di breve periodo trasla istantaneamente verso il basso: l'inflazione crolla al nuovo target \textbf{senza provocare alcuna recessione né aumento della disoccupazione} (\textbf{Tasso di sacrificio nullo / Disinflazione senza lacrime}).
+\end{itemize}
+
+Ciò evidenzia come l'\textbf{indipendenza statutaria} e la \textbf{reputazione anti-inflazionistica} della Banca Centrale costituiscano beni pubblici di primaria importanza per minimizzare i costi sociali della stabilizzazione macroeconomica.
+
+\section{Metodi Risolutivi ed Eserciziario d'Esame}
+
+\begin{metodo}[Algoritmo di Analisi della Curva di Phillips e NAIRU]
+Per analizzare quantitativamente problemi di inflazione e disoccupazione:
+\begin{enumerate}
+    \item \textbf{Calcolo del NAIRU}:
+    \begin{itemize}
+        \item Identificare i parametri strutturali nell'equazione di Phillips: $\infl_t = \inflexp_t - \alpha(u_t - u_n)$;
+        \item Se data in forma $\infl_t = \inflexp_t + a - b u_t$, calcolare $u_n = a/b$.
+    \end{itemize}
+    \item \textbf{Dinamica Temporale}:
+    \begin{itemize}
+        \item Inserire l'ipotesi di formazione delle aspettative (es. $\inflexp_t = \infl_{t-1}$);
+        \item Calcolare ricorsivamente $\infl_1, \infl_2, \dots, \infl_T$ dato il sentiero prefissato della disoccupazione $u_t$.
+    \end{itemize}
+    \item \textbf{Costo di Disinflazione e Output Gap (Legge di Okun)}:
+    \begin{itemize}
+        \item Calcolare l'eccesso cumulato di disoccupazione: $\sum (u_t - u_n)$;
+        \item Applicare il coefficiente di Okun $\omega$ per determinare la perdita cumulativa di PIL potenziale: $\text{Perdita PIL} = \omega \sum (u_t - u_n)$.
+    \end{itemize}
+\end{enumerate}
+\end{metodo}
+
+\begin{esercizio}[Calcolo del NAIRU, Spirale Inflazionistica e Costo di Disinflazione]
+La curva di Phillips aumentata delle aspettative di un'economia è data da:
+\begin{equation*}
+    \infl_t = \infl_{t-1} - 0{,}5 \Big( \unemp_t - 0{,}06 \Big)
+\end{equation*}
+con tasso naturale di disoccupazione $\unempnat = 6$\%, inflazione iniziale al tempo $t=0$ pari a $\infl_0 = 2$\% e coefficiente di Okun $\omega = 2{,}0$.
+\textbf{Richieste}:
+\begin{enumerate}
+    \item Il governo decide di attuare uno stimolo espansivo permanente per mantenere la disoccupazione al $4$\% ($\unemp_t = 0{,}04$) per tre anni consecutivi ($t=1, 2, 3$). Calcolare l'inflazione risultante in ciascun anno.
+    \item Al tempo $t=4$ la Banca Centrale decide di stabilizzare l'inflazione al livello raggiunto al tempo $t=3$. A quale livello deve essere riportata la disoccupazione?
+    \item Successivamente, la Banca Centrale decide di riportare l'inflazione dal valore raggiunto al tempo $3$ fino al $2$\% iniziale in $2$ anni ($t=5, 6$) mantenendo la disoccupazione a un livello costante $\bar{\unemp}$. Calcolare il valore di $\bar{\unemp}$ necessario e la perdita cumulativa di PIL potenziale tramite la Legge di Okun.
+\end{enumerate}
+
+\textbf{Svolgimento}:
+\begin{enumerate}
+    \item \textbf{Spirale Inflazionistica con $\unemp = 0{,}04$}:
+    Il divario di disoccupazione è $\unemp_t - \unempnat = 0{,}04 - 0{,}06 = -0{,}02$.
+    L'accelerazione dell'inflazione annuale è:
+    \begin{equation*}
+        \Delta \infl = -0{,}5(-0{,}02) = +0{,}01 = +1\%
+    \end{equation*}
+    Calcolo ricorsivo:
+    \begin{align*}
+        \text{Anno 1}: &\quad \infl_1 = \infl_0 + 0{,}01 = 0{,}02 + 0{,}01 = 0{,}03 \implies \infl_1 = 3\% \\
+        \text{Anno 2}: &\quad \infl_2 = \infl_1 + 0{,}01 = 0{,}03 + 0{,}01 = 0{,}04 \implies \infl_2 = 4\% \\
+        \text{Anno 3}: &\quad \infl_3 = \infl_2 + 0{,}01 = 0{,}04 + 0{,}01 = 0{,}05 \implies \infl_3 = 5\%
+    \end{align*}
+    L'inflazione è salita progressivamente dal $2$\% al $5$\%.
+
+    \item \textbf{Stabilizzazione dell'Inflazione al Tempo $t=4$}:
+    Per mantenere costante l'inflazione al $5$\% ($\Delta \infl_4 = 0$):
+    \begin{equation*}
+        \Delta \infl_4 = 0 \iff \unemp_4 = \unempnat = 6\%
+    \end{equation*}
+    La disoccupazione deve necessariamente ritornare al tasso naturale $u_n = 6$\%.
+
+    \item \textbf{Disinflazione dal $5$\% al $2$\% in $2$ anni}:
+    La riduzione totale di inflazione richiesta è $\Delta \infl_{\text{tot}} = 0{,}02 - 0{,}05 = -0{,}03 = -3$\%.
+    La riduzione annua richiesta in ciascuno dei 2 anni è $\Delta \infl = \frac{-0{,}03}{2} = -0{,}015 = -1{,}5$\%.
+    Dall'equazione della curva di Phillips:
+    \begin{equation*}
+        -0{,}015 = -0{,}5 (\bar{\unemp} - 0{,}06) \implies \bar{\unemp} - 0{,}06 = \frac{-0{,}015}{-0{,}5} = +0{,}03 \implies \bar{\unemp} = 0{,}09 = 9\%
+    \end{equation*}
+    La disoccupazione deve essere portata al $9$\% per 2 anni (un eccesso di disoccupazione di $3$ punti percentuali all'anno rispetto al tasso naturale).
+    
+    \textbf{Calcolo della Perdita di PIL (Legge di Okun)}:
+    L'eccesso cumulativo di disoccupazione è $\sum_{t=5}^6 (\bar{\unemp} - \unempnat) = (0{,}09 - 0{,}06) \times 2 = 0{,}06 = 6\text{ punti-anno}$.
+    Applicando la Legge di Okun con $\omega = 2{,}0$:
+    \begin{equation*}
+        \text{Perdita Cumulativa PIL} = \omega \times 6\text{ punti-anno} = 2{,}0 \times 6 = 12\text{ per cento del PIL potenziale annuo}
+    \end{equation*}
+    Il tasso di sacrificio è pari al rapporto tra la perdita cumulativa di PIL e i $3$ punti di disinflazione: $\frac{12}{3} = 4{,}0$ punti di PIL per ogni punto di inflazione abbattuta.
+\end{enumerate}
+\end{esercizio}
+
+\begin{esame}[Tranelli Frequenti su Inflazione e Phillips]
+\begin{enumerate}
+    \item \textbf{Trade-off Breve vs Lungo Periodo}: all'esame orale viene frequentemente chiesto se una politica monetaria espansiva possa ridurre permanentemente la disoccupazione. La risposta corretta è \textbf{no}: nel breve periodo la disoccupazione scende ($u < u_n$), ma nel lungo periodo le aspettative si adeguano, la curva SRPC trasla verso l'alto e la disoccupazione torna al NAIRU con inflazione permanentemente più alta.
+    \item \textbf{Disoccupazione Naturale e Salari Minimi}: un aumento del salario minimo o della generosità dei sussidi di disoccupazione ($z \uparrow$) aumenta il tasso naturale $u_n$, traslando la retta LRPC verso destra.
+    \item \textbf{Confusione tra Inflazione e Livello dei Prezzi}: ricordare che se l'inflazione scende (es. dal $6$\% al $3$\%), i prezzi \textbf{stanno ancora crescendo}, ma a un ritmo più lento (\textit{disinflazione}); si parla di \textit{deflazione} solo quando l'inflazione diventa negativa ($\pi < 0$), ossia quando i prezzi calano in valore assoluto.
+\end{enumerate}
+\end{esame}

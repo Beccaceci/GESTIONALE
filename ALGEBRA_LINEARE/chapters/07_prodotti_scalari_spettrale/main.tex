@@ -1,0 +1,86 @@
+% ==============================================================================
+% CAPITOLO 7: PRODOTTI SCALARI E MATRICI SIMMETRICHE
+% ==============================================================================
+
+\chapter{Prodotti Scalari e Matrici Simmetriche}
+\label{chap:prodotti_scalari_spettrale}
+
+\section{Forme Bilineari e Prodotti Scalari Reali}
+
+\begin{definizione}{Prodotto Scalare Reale}{prodotto_scalare}
+Sia $V$ uno spazio vettoriale reale su $\R$. Un \textbf{prodotto scalare} su $V$ è un'applicazione $\scal{\cdot, \cdot}: V \times V \to \R$ che soddisfa:
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Bilinearità}: lineare rispetto a ciascuno dei due argomenti;
+    \item \textbf{Simmetria}: $\scal{\vv{u}, \vv{v}} = \scal{\vv{v}, \vv{u}}$ per ogni $\vv{u}, \vv{v} \in V$;
+    \item \textbf{Definita positività}: $\scal{\vv{v}, \vv{v}} \ge 0$ per ogni $\vv{v} \in V$, e $\scal{\vv{v}, \vv{v}} = 0 \iff \vv{v} = \vzero$.
+\end{enumerate}
+Uno spazio vettoriale reale dotato di un prodotto scalare definito positivo è detto \textbf{spazio euclideo}.
+\end{definizione}
+
+\section[Norma Euclidea, Angoli e Disuguaglianza di Cauchy-Schwarz]{Norma Euclidea, Angoli e\\Disuguaglianza di Cauchy--Schwarz}
+
+\begin{definizione}{Norma e Distanza Indotta}{norma_indotta}
+Dato un prodotto scalare $\scal{\cdot, \cdot}$ su $V$, la \textbf{norma euclidea} di un vettore $\vv{v} \in V$ è:
+\begin{equation}
+    \norm{\vv{v}} = \sqrt{\scal{\vv{v}, \vv{v}}}.
+\end{equation}
+La \textbf{distanza} tra due vettori $\vv{u}, \vv{v} \in V$ è $d(\vv{u}, \vv{v}) = \norm{\vv{u} - \vv{v}}$.
+\end{definizione}
+
+\begin{teorema}{Disuguaglianza di Cauchy-Schwarz}{cauchy_schwarz}
+Per ogni coppia di vettori $\vv{u}, \vv{v} \in V$, vale la disuguaglianza:
+\begin{equation}
+    \abs{\scal{\vv{u}, \vv{v}}} \le \norm{\vv{u}} \cdot \norm{\vv{v}},
+\end{equation}
+dove l'uguaglianza sussiste se e solo se $\vv{u}$ e $\vv{v}$ sono linearmente dipendenti.
+Di conseguenza, l'\textbf{angolo} $\theta \in [0, \pi]$ tra due vettori non nulli è ben definito da:
+\begin{equation}
+    \cos\theta = \frac{\scal{\vv{u}, \vv{v}}}{\norm{\vv{u}} \norm{\vv{v}}}.
+\end{equation}
+\end{teorema}
+
+\section{Ortogonalità, Basi Ortonormali e Algoritmo di Gram-Schmidt}
+
+\begin{definizione}{Vettori Ortogonali e Basi Ortonormali}{ortogonalita}
+Due vettori $\vv{u}, \vv{v}$ sono \textbf{ortogonali} ($\vv{u} \perp \vv{v}$) se $\scal{\vv{u}, \vv{v}} = 0$.
+Una base $\mathcal{B} = (\vv{e}_1, \dots, \vv{e}_n)$ è detta \textbf{ortonormale} se:
+\begin{equation}
+    \scal{\vv{e}_i, \vv{e}_j} = \delta_{ij} = \begin{cases} 1 & \text{se } i = j \\ 0 & \text{se } i \neq j \end{cases}
+\end{equation}
+\end{definizione}
+
+\begin{teorema}{Algoritmo di Ortogonalizzazione di Gram-Schmidt}{gram_schmidt}
+Sia $(\vv{v}_1, \dots, \vv{k})$ una base di un sottospazio $W \le V$. I vettori ortogonali $(\vv{u}_1, \dots, \vv{u}_k)$ definiti iterativamente da:
+\begin{align}
+    \vv{u}_1 &= \vv{v}_1 \\
+    \vv{u}_2 &= \vv{v}_2 - \frac{\scal{\vv{v}_2, \vv{u}_1}}{\norm{\vv{u}_1}^2} \vv{u}_1 \\
+    \vv{u}_3 &= \vv{v}_3 - \frac{\scal{\vv{v}_3, \vv{u}_1}}{\norm{\vv{u}_1}^2} \vv{u}_1 - \frac{\scal{\vv{v}_3, \vv{u}_2}}{\norm{\vv{u}_2}^2} \vv{u}_2 \\
+    &\;\;\vdots \nonumber \\
+    \vv{u}_k &= \vv{v}_k - \sum_{j=1}^{k-1} \frac{\scal{\vv{v}_k, \vv{u}_j}}{\norm{\vv{u}_j}^2} \vv{u}_j
+\end{align}
+costituiscono una base ortogonale di $W$. Normalizzando ciascun vettore $\vv{e}_i = \frac{\vv{u}_i}{\norm{\vv{u}_i}}$, si ottiene una base ortonormale $(\vv{e}_1, \dots, \vv{e}_k)$.
+\end{teorema}
+
+\section{Matrici Ortogonali e Matrici Simmetriche}
+
+\begin{definizione}{Matrice Ortogonale}{matrice_ortogonale}
+Una matrice quadrata $Q \in \Mat_n(\R)$ si dice \textbf{ortogonale} se le sue colonne formano una base ortonormale di $\R^n$, che equivale a:
+\begin{equation}
+    Q\T Q = Q Q\T = I_n \iff Q\inv = Q\T.
+\end{equation}
+Inoltre, $\det(Q) = \pm 1$.
+\end{definizione}
+
+\section{Il Teorema Spettrale Reale}
+
+\begin{teorema}{Teorema Spettrale per Matrici Simmetriche Reali}{teorema_spettrale}
+Sia $A \in \Mat_n(\R)$ una matrice simmetrica reale ($A = A\T$). Allora:
+\begin{enumerate}
+    \item Tutti gli autovalori di $A$ sono \textbf{reali}: $\Spettro(A) \subset \R$.
+    \item Autovettori associati ad autovalori distinti sono mutuamente \textbf{ortogonali}.
+    \item $A$ è \textbf{ortogonalmente diagonalizzabile}: esiste una matrice ortonormale $Q \in \Ort(n)$ e una matrice diagonale reale $D$ tali che:
+    \begin{equation}
+        Q\T A Q = D \iff A = Q D Q\T.
+    \end{equation}
+\end{enumerate}
+\end{teorema}

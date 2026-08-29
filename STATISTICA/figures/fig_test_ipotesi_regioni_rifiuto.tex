@@ -1,0 +1,27 @@
+\begin{tikzpicture}[scale=0.85, >=Stealth]
+    \draw[->, thick, navyblue] (-4.5,0) -- (4.5,0) node[right, font=\footnotesize] {$z$};
+    \draw[->, thick, navyblue] (0,-0.2) -- (0,3.8) node[above, font=\footnotesize] {$f(z \mid H_0)$};
+
+    % Regione Accettazione
+    \fill[forestgreen!20, domain=-1.96:1.96, variable=\x]
+        (-1.96,0) -- plot ({\x}, {3.5*exp(-\x*\x/2)}) -- (1.96,0) -- cycle;
+
+    % Regioni Rifiuto
+    \fill[crimsonred!40, domain=-4.0:-1.96, variable=\x]
+        (-4.0,0) -- plot ({\x}, {3.5*exp(-\x*\x/2)}) -- (-1.96,0) -- cycle;
+    \fill[crimsonred!40, domain=1.96:4.0, variable=\x]
+        (1.96,0) -- plot ({\x}, {3.5*exp(-\x*\x/2)}) -- (4.0,0) -- cycle;
+
+    \draw[domain=-4.0:4.0, smooth, variable=\x, very thick, navyblue]
+        plot ({\x}, {3.5*exp(-\x*\x/2)});
+
+    \draw[thick, dashed, crimsonred] (-1.96,0) -- (-1.96, {3.5*exp(-1.96*1.96/2)});
+    \draw[thick, dashed, crimsonred] (1.96,0) -- (1.96, {3.5*exp(-1.96*1.96/2)});
+
+    \node[below, font=\scriptsize\bfseries, text=crimsonred] at (-1.96,0) {$-z_{\alpha/2}$};
+    \node[below, font=\scriptsize\bfseries, text=crimsonred] at (1.96,0) {$+z_{\alpha/2}$};
+
+    \node[font=\bfseries\small, text=forestgreen!80!black] at (0,1.2) {Regione di Accettazione ($1-\alpha$)};
+    \node[font=\tiny\bfseries, text=crimsonred, align=center] at (-2.8,0.8) {Rifiuto $H_0$\\($\alpha/2$)};
+    \node[font=\tiny\bfseries, text=crimsonred, align=center] at (2.8,0.8) {Rifiuto $H_0$\\($\alpha/2$)};
+\end{tikzpicture}

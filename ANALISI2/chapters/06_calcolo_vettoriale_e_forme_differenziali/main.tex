@@ -1,0 +1,571 @@
+% ==============================================================================
+% CAPITOLO 6: CALCOLO VETTORIALE, CAMPI CONSERVATIVI E FORME DIFFERENZIALI
+% ==============================================================================
+
+\chapter{Calcolo Vettoriale, Campi Conservativi e Forme Differenziali}
+\label{chap:calcolo_vettoriale_e_forme_differenziali}
+
+Nello studio dei sistemi fisici e dei modelli ingegneristici, le grandezze di interesse non si presentano soltanto come valori scalari distribuiti nello spazio (come la temperatura $T(x,y,z)$, la densità $\rho(x,y,z)$ o la pressione $p(x,y,z)$), ma frequentemente come \textbf{campi vettoriali}, in cui a ciascun punto dello spazio è associato un vettore dotato di modulo, direzione e verso. Esempi emblematici sono il campo delle velocità $\bv(x,y,z,t)$ di un fluido in movimento, il campo gravitazionale $\mathbf{g}(x,y,z)$, il campo elettrostatico $\bE(x,y,z)$ e il campo di induzione magnetica $\bB(x,y,z)$.
+
+Il calcolo vettoriale e la teoria delle forme differenziali costituiscono il linguaggio matematico fondamentale per descrivere l'interazione tra operatori differenziali locali (gradiente, divergenza, rotore) e le proprietà integrali globali lungo curve e superfici. In questo capitolo esploreremo in modo sistematico gli operatori differenziali del calcolo vettoriale, la nozione di campo conservativo e potenziale, il ruolo determinante della topologia del dominio (insiemi semplicemente connessi) e la teoria delle 1-forme differenziali lineari.
+
+% ==============================================================================
+\section{Operatori Differenziali del Calcolo Vettoriale in \texorpdfstring{$\mathbb{R}^3$}{R\textasciicircum 3}}
+% ==============================================================================
+
+Sia $A \subseteq \Rtre$ un insieme aperto. Consideriamo campi scalari $\varphi: A \to \R$ e campi vettoriali $\bF: A \to \Rtre$, con $\bF = (F_1, F_2, F_3)$. Gli operatori differenziali del primo ordine fondamentali sono costruiti mediante l'operatore simbolico nabla:
+\[
+\nabla = \begin{pmatrix} \pder{}{x} \\ \pder{}{y} \\ \pder{}{z} \end{pmatrix}
+\]
+
+\begin{definizione}{Operatori Differenziali Fondamentali}{def_operatori_vettoriali_estesa}
+Siano $\varphi \in C^1(A)$ un campo scalare e $\bF = (F_1, F_2, F_3) \in C^1(A, \Rtre)$ un campo vettoriale. Si definiscono:
+\begin{enumerate}
+    \item \textbf{Gradiente} di $\varphi$: il campo vettoriale ottenuto applicando formalmente l'operatore nabla allo scalare $\varphi$:
+    \[
+    \grad \varphi = \nabla \varphi = \begin{pmatrix} \pder{\varphi}{x} \\ \pder{\varphi}{y} \\ \pder{\varphi}{z} \end{pmatrix}
+    \]
+    \item \textbf{Divergenza} di $\bF$: il campo scalare ottenuto dal prodotto scalare formale tra nabla e $\bF$:
+    \[
+    \dive \mathbf{F} = \nabla \cdot \mathbf{F} = \pder{F_1}{x} + \pder{F_2}{y} + \pder{F_3}{z}
+    \]
+    \item \textbf{Rotore} di $\bF$: il campo vettoriale ottenuto dal prodotto vettoriale formale tra nabla e $\bF$:
+    \[
+    \rot \mathbf{F} = \curl \mathbf{F} = \nabla \times \mathbf{F} = \det \begin{pmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ \pder{}{x} & \pder{}{y} & \pder{}{z} \\ F_1 & F_2 & F_3 \end{pmatrix} = \begin{pmatrix} \pder{F_3}{y} - \pder{F_2}{z} \\ \pder{F_1}{z} - \pder{F_3}{x} \\ \pder{F_2}{x} - \pder{F_1}{y} \end{pmatrix}
+    \]
+    \item \textbf{Laplaciano} di $\varphi$: l'operatore differenziale del secondo ordine definito come la divergenza del gradiente:
+    \[
+    \Delta \varphi = \dive(\nabla \varphi) = \nabla \cdot \nabla \varphi = \ppder{\varphi}{x} + \ppder{\varphi}{y} + \ppder{\varphi}{z}
+    \]
+\end{enumerate}
+\end{definizione}
+
+\subsection{Interpretazione Geometrica e Idrodinamica degli Operatori}
+
+Per comprendere il significato qualitativo e quantitativo di questi operatori, è illuminante ricorrere all'analogia con la meccanica dei fluidi continui:
+
+\begin{itemize}
+    \item \textbf{Gradiente $\nabla \varphi$}: Indica la direzione e il verso lungo cui il campo scalare cresce con la massima rapidità; la sua norma rappresenta la pendenza massima locale, ed è ortogonale alle superfici di livello $\varphi(x,y,z) = c$.
+    \item \textbf{Divergenza $\dive \bF$}: Rappresenta il \textbf{tasso volumetrico netto di espansione o contrazione} del fluido per unità di volume attorno a un punto.
+    \begin{itemize}
+        \item Se $\dive \bF(P) > 0$, il punto $P$ è una \textbf{sorgente} (la materia viene generata o fluisce verso l'esterno).
+        \item Se $\dive \bF(P) < 0$, il punto $P$ è un \textbf{pozzo} (la materia scompare o converge verso l'interno).
+        \item Se $\dive \bF \equiv 0$ in $A$, il campo si dice \textbf{solenoidale} o \textbf{incomprimibile} (il volume di fluido uscente da qualsiasi volumetto infinitesimo eguaglia esattamente quello entrante).
+    \end{itemize}
+    \item \textbf{Rotore $\rot \bF$}: Misura la \textbf{vorticità locale infinitesima} o la tendenza microscopica del fluido a ruotare attorno a un asse. Se immergiamo una minuscola ruota a pale ideale con centro in $P$, l'asse di rotazione tenderà ad allinearsi con la direzione di $\rot \bF(P)$, e la velocità angolare di rotazione sarà proporzionale alla norma $\norm{\rot \bF(P)}$. In un moto rigido di rotazione pura con velocità angolare costante $\bm{\omega}$, il campo di velocità vale $\bv = \bm{\omega} \times \br$, da cui si ricava $\rot \bv = 2\bm{\omega}$.
+    \begin{itemize}
+        \item Se $\rot \bF \equiv \bzero$, il campo si dice \textbf{irrotazionale}.
+    \end{itemize}
+    \item \textbf{Laplaciano $\Delta \varphi$}: Misura lo scostamento locale tra il valore di $\varphi$ nel punto e la media dei suoi valori sui punti circostanti. L'equazione di Laplace $\Delta \varphi = 0$ governa gli stati di equilibrio stazionario (potenziale elettrostatico nel vuoto, temperatura stazionaria, moto potenziale di fluidi).
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, >=Stealth]
+    % Sottografico 1: Sorgente (Divergenza > 0)
+    \begin{scope}[shift={(0,0)}]
+        \draw[thick, fill=blue!5, rounded corners] (-2.2,-2.2) rectangle (2.2,2.2);
+        \node[above, font=\bfseries\color{navyblue}] at (0,2.2) {Sorgente: $\dive\bF > 0$};
+        \filldraw[crimsonred] (0,0) circle (2.5pt);
+        \foreach \ang in {0, 45, 90, 135, 180, 225, 270, 315} {
+            \draw[thick, crimsonred, ->] (\ang:0.3) -- (\ang:1.6);
+        }
+        \node[below] at (0,-2.3) {\small Flusso netto uscente};
+    \end{scope}
+
+    % Sottografico 2: Pozzo (Divergenza < 0)
+    \begin{scope}[shift={(5.2,0)}]
+        \draw[thick, fill=blue!5, rounded corners] (-2.2,-2.2) rectangle (2.2,2.2);
+        \node[above, font=\bfseries\color{navyblue}] at (0,2.2) {Pozzo: $\dive\bF < 0$};
+        \filldraw[coolblue] (0,0) circle (2.5pt);
+        \foreach \ang in {0, 45, 90, 135, 180, 225, 270, 315} {
+            \draw[thick, coolblue, <-] (\ang:0.3) -- (\ang:1.6);
+        }
+        \node[below] at (0,-2.3) {\small Flusso netto convergente};
+    \end{scope}
+
+    % Sottografico 3: Vortice (Rotore != 0)
+    \begin{scope}[shift={(10.4,0)}]
+        \draw[thick, fill=blue!5, rounded corners] (-2.2,-2.2) rectangle (2.2,2.2);
+        \node[above, font=\bfseries\color{navyblue}] at (0,2.2) {Vortice: $\rot\bF \neq \bzero$};
+        \filldraw[forestgreen] (0,0) circle (2.5pt);
+        \draw[thick, forestgreen, ->] (0.8,0) arc (0:80:0.8);
+        \draw[thick, forestgreen, ->] (0,0.8) arc (90:170:0.8);
+        \draw[thick, forestgreen, ->] (-0.8,0) arc (180:260:0.8);
+        \draw[thick, forestgreen, ->] (0,-0.8) arc (270:350:0.8);
+
+        \draw[thick, forestgreen, ->] (1.5,0) arc (0:80:1.5);
+        \draw[thick, forestgreen, ->] (0,1.5) arc (90:170:1.5);
+        \draw[thick, forestgreen, ->] (-1.5,0) arc (180:260:1.5);
+        \draw[thick, forestgreen, ->] (0,-1.5) arc (270:350:1.5);
+        \node[below] at (0,-2.3) {\small Circolazione locale};
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Identit\`a Differenziali Nulle Fondamentali}
+
+Nel calcolo vettoriale sussistono due identità algebrico-differenziali universali, che discendono direttamente dal \textbf{Teorema di Schwarz} sull'uguaglianza delle derivate parziali miste.
+
+\begin{teorema}{Identità Differenziali Nulle del Calcolo Vettoriale}{thm_identita_nulle_complete}
+Siano $\varphi \in C^2(A)$ un campo scalare e $\bF \in C^2(A, \Rtre)$ un campo vettoriale. Valgono le seguenti identità identicamente nulle:
+\begin{enumerate}
+    \item \textbf{Il rotore di un gradiente è identicamente nullo}:
+    \[
+    \rot(\nabla \varphi) = \bzero \quad \Longleftrightarrow \quad \nabla \times (\nabla \varphi) = \bzero
+    \]
+    \item \textbf{La divergenza di un rotore è identicamente nulla}:
+    \[
+    \dive(\rot \mathbf{F}) = 0 \quad \Longleftrightarrow \quad \nabla \cdot (\nabla \times \mathbf{F}) = 0
+    \]
+\end{enumerate}
+Inoltre, combinando gli operatori si ottiene l'identità del \textbf{doppio rotore}:
+\[
+\rot(\rot \bF) = \nabla(\dive \bF) - \Delta \bF
+\]
+dove $\Delta \bF = (\Delta F_1, \Delta F_2, \Delta F_3)$ è il Laplaciano vettoriale operato componente per componente.
+\end{teorema}
+
+\begin{dimostrazione}
+\begin{enumerate}
+    \item Calcoliamo esplicitamente il gradiente di $\varphi$: $\nabla \varphi = (\varphi_x, \varphi_y, \varphi_z)$.
+    Applichiamo la definizione di rotore:
+    \[
+    \rot(\nabla \varphi) = \det \begin{pmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ \pder{}{x} & \pder{}{y} & \pder{}{z} \\ \pder{\varphi}{x} & \pder{\varphi}{y} & \pder{\varphi}{z} \end{pmatrix} = \begin{pmatrix} \pder{}{y}\left(\pder{\varphi}{z}\right) - \pder{}{z}\left(\pder{\varphi}{y}\right) \\ \pder{}{z}\left(\pder{\varphi}{x}\right) - \pder{}{x}\left(\pder{\varphi}{z}\right) \\ \pder{}{x}\left(\pder{\varphi}{y}\right) - \pder{}{y}\left(\pder{\varphi}{x}\right) \end{pmatrix} = \begin{pmatrix} \frac{\partial^2 \varphi}{\partial y \partial z} - \frac{\partial^2 \varphi}{\partial z \partial y} \\ \frac{\partial^2 \varphi}{\partial z \partial x} - \frac{\partial^2 \varphi}{\partial x \partial z} \\ \frac{\partial^2 \varphi}{\partial x \partial y} - \frac{\partial^2 \varphi}{\partial y \partial x} \end{pmatrix}
+    \]
+    Poiché $\varphi \in C^2(A)$, per il Teorema di Schwarz le derivate parziali miste sono simmetriche:
+    \[
+    \frac{\partial^2 \varphi}{\partial y \partial z} = \frac{\partial^2 \varphi}{\partial z \partial y}, \quad \frac{\partial^2 \varphi}{\partial z \partial x} = \frac{\partial^2 \varphi}{\partial x \partial z}, \quad \frac{\partial^2 \varphi}{\partial x \partial y} = \frac{\partial^2 \varphi}{\partial y \partial x}
+    \]
+    Tutte e tre le componenti si annullano identicamente, provando che $\rot(\nabla \varphi) = \bzero$.
+
+    \item Calcoliamo ora la divergenza del rotore di $\bF = (F_1, F_2, F_3)$:
+    \begin{align*}
+    \dive(\rot \bF) &= \pder{}{x}\left( \pder{F_3}{y} - \pder{F_2}{z} \right) + \pder{}{y}\left( \pder{F_1}{z} - \pder{F_3}{x} \right) + \pder{}{z}\left( \pder{F_2}{x} - \pder{F_1}{y} \right) \\
+    &= \frac{\partial^2 F_3}{\partial x \partial y} - \frac{\partial^2 F_2}{\partial x \partial z} + \frac{\partial^2 F_1}{\partial y \partial z} - \frac{\partial^2 F_3}{\partial y \partial x} + \frac{\partial^2 F_2}{\partial z \partial x} - \frac{\partial^2 F_1}{\partial z \partial y}
+    \end{align*}
+    Raggruppando i termini a due a due per ciascuna componente $F_i$:
+    \[
+    \dive(\rot \bF) = \left( \frac{\partial^2 F_3}{\partial x \partial y} - \frac{\partial^2 F_3}{\partial y \partial x} \right) + \left( \frac{\partial^2 F_2}{\partial z \partial x} - \frac{\partial^2 F_2}{\partial x \partial z} \right) + \left( \frac{\partial^2 F_1}{\partial y \partial z} - \frac{\partial^2 F_1}{\partial z \partial y} \right)
+    \]
+    Applicando nuovamente il Teorema di Schwarz su ciascuna componente di classe $C^2$, ogni parentesi vale esattamente $0$. Ne consegue che $\dive(\rot \bF) = 0$.
+\end{enumerate}
+\end{dimostrazione}
+
+% ==============================================================================
+\section{Campi Conservativi e Potenziali Scalari}
+% ==============================================================================
+
+Una delle classi più rilevanti di campi vettoriali nella fisica matematica è rappresentata dai \textbf{campi conservativi}.
+
+\begin{definizione}{Campo Conservativo e Potenziale}{def_campo_conservativo_rigorosa}
+Sia $A \subseteq \Rn$ un aperto. Un campo vettoriale continuo $\bF: A \to \Rn$ si dice \textbf{conservativo} in $A$ se ammette una funzione scalare $U: A \to \R$ di classe $C^1(A)$, detta \textbf{potenziale scalare} (o primitiva) di $\bF$, tale che:
+\[
+\bF(\bx) = \nabla U(\bx), \quad \forall \bx \in A
+\]
+In fisica teorica e meccanica classica si preferisce spesso la convenzione di segno opposto $\bF = -\nabla V$, dove $V(\bx) = -U(\bx)$ prende il nome di \textbf{energia potenziale}.
+\end{definizione}
+
+\begin{teorema}{Caratterizzazione Equivalente dei Campi Conservativi}{thm_caratterizzazione_conservativi}
+Sia $\bF: A \subseteq \Rn \to \Rn$ un campo vettoriale continuo su un aperto $A$ \textbf{connesso per archi}. Le seguenti tre affermazioni sono tra loro \textbf{logicamente equivalenti}:
+\begin{enumerate}[label=(\Roman*)]
+    \item $\bF$ è \textbf{conservativo} in $A$, ossia esiste $U \in C^1(A)$ tale che $\bF = \nabla U$.
+    \item L'integrale curvilineo di seconda specie di $\bF$ lungo qualsiasi curva regolare a tratti $\gamma$ contenuta in $A$ \textbf{dipende esclusivamente dai punti estremi} (indipendenza dal cammino):
+    \[
+    \int_\gamma \bF \cdot \diff\mathbf{r} = U(P_2) - U(P_1), \quad \text{con } P_1 = \gamma(a), \; P_2 = \gamma(b)
+    \]
+    \item Per ogni curva chiusa $\gamma$ regolare a tratti contenuta in $A$, la \textbf{circuitazione} di $\bF$ è nulla:
+    \[
+    \oint_\gamma \bF \cdot \diff\mathbf{r} = 0
+    \]
+\end{enumerate}
+\end{teorema}
+
+\begin{dimostrazione}
+Dimostriamo la catena di implicazioni logiche: $\text{(I)} \implies \text{(II)} \implies \text{(III)} \implies \text{(II)} \implies \text{(I)}$.
+
+\begin{itemize}
+    \item \textbf{(I) $\implies$ (II)}: Supponiamo che esista $U \in C^1(A)$ con $\bF = \nabla U$. Sia $\gamma: [a,b] \to A$ una curva regolare a tratti con estremi $P_1 = \gamma(a)$ e $P_2 = \gamma(b)$. Per la regola di derivazione delle funzioni composte (Chain Rule):
+    \[
+    \der{}{t}\left[ U(\gamma(t)) \right] = \sum_{i=1}^n \pder{U}{x_i}(\gamma(t)) \, x_i'(t) = \scal{\nabla U(\gamma(t)), \gamma'(t)} = \scal{\bF(\gamma(t)), \gamma'(t)}
+    \]
+    Integrando rispetto a $t \in [a,b]$ e applicando il Teorema Fondamentale del Calcolo:
+    \begin{align*}
+    \int_\gamma \bF \cdot \diff\mathbf{r} &= \int_{a}^{b} \scal{\bF(\gamma(t)), \gamma'(t)} \dt \\
+    &= \int_{a}^{b} \der{}{t}\left[ U(\gamma(t)) \right] \dt = U(\gamma(b)) - U(\gamma(a)) = U(P_2) - U(P_1)
+    \end{align*}
+    L'integrale dipende unicamente dai valori assunti da $U$ nei due punti estremi.
+
+    \item \textbf{(II) $\implies$ (III)}: Se la curva $\gamma$ è chiusa, il punto finale coincide con quello iniziale: $\gamma(b) = \gamma(a) = P_1$. Applicando la proprietà (II):
+    \[
+    \oint_\gamma \bF \cdot \diff\mathbf{r} = U(\gamma(b)) - U(\gamma(a)) = U(P_1) - U(P_1) = 0
+    \]
+
+    \item \textbf{(III) $\implies$ (II)}: Siano $\gamma_1, \gamma_2: [0,1] \to A$ due curve arbitrarie che congiungono gli stessi punti $P_1$ e $P_2$ ($\gamma_1(0) = \gamma_2(0) = P_1$, $\gamma_1(1) = \gamma_2(1) = P_2$).\\
+    Definiamo la curva chiusa concatenata $\Gamma = \gamma_1 \cup (-\gamma_2)$, ottenuta percorrendo prima $\gamma_1$ da $P_1$ a $P_2$ e poi $\gamma_2$ a ritroso da $P_2$ a $P_1$. Poiché $\Gamma$ è un cammino chiuso, per l'ipotesi (III) la sua circolazione si annulla:
+    \[
+    0 = \oint_\Gamma \bF \cdot \diff\mathbf{r} = \int_{\gamma_1} \bF \cdot \diff\mathbf{r} + \int_{-\gamma_2} \bF \cdot \diff\mathbf{r} = \int_{\gamma_1} \bF \cdot \diff\mathbf{r} - \int_{\gamma_2} \bF \cdot \diff\mathbf{r}
+    \]
+    da cui segue immediatamente l'indipendenza dal cammino:
+    \[
+    \int_{\gamma_1} \bF \cdot \diff\mathbf{r} = \int_{\gamma_2} \bF \cdot \diff\mathbf{r}
+    \]
+
+    \item \textbf{(II) $\implies$ (I)}: Poiché il lavoro non dipende dal cammino, possiamo costruire esplicitamente la funzione potenziale. Fissiamo un arbitrario punto base $P_0 \in A$. Per ogni punto $\bx \in A$, definiamo:
+    \[
+    U(\bx) = \int_{\gamma_{P_0 \to \bx}} \bF \cdot \diff\mathbf{r}
+    \]
+    dove $\gamma_{P_0 \to \bx}$ è un qualsiasi cammino regolare a tratti in $A$ che unisce $P_0$ a $\bx$. La funzione $U(\bx)$ è ben definita grazie all'ipotesi (II).
+
+    Dobbiamo provare che $\pder{U}{x_j}(\bx) = F_j(\bx)$ per ogni indice $j \in \{1, \dots, n\}$.\\
+    Sia $\mathbf{e}_j$ il $j$-esimo versore canonico. Poiché $A$ è aperto, esiste un raggio $r > 0$ tale che il segmento $\sigma_h(t) = \bx + t \mathbf{e}_j$ (con $t \in [0, h]$) sia interamente contenuto in $A$ per ogni $\abs{h} < r$.
+    Il valore del potenziale nel punto incrementato $\bx + h\mathbf{e}_j$ può essere calcolato concatenando il cammino da $P_0$ a $\bx$ con il segmento $\sigma_h$:
+    \begin{align*}
+    U(\bx + h\mathbf{e}_j) &= \int_{\gamma_{P_0 \to \bx}} \bF \cdot \diff\mathbf{r} + \int_{\sigma_h} \bF \cdot \diff\mathbf{r} \\
+    &= U(\bx) + \int_{0}^{h} \scal{\bF(\bx + t\mathbf{e}_j), \mathbf{e}_j} \dt = U(\bx) + \int_{0}^{h} F_j(\bx + t\mathbf{e}_j) \dt
+    \end{align*}
+    Formiamo il rapporto incrementale parziale rispetto a $x_j$:
+    \[
+    \frac{U(\bx + h\mathbf{e}_j) - U(\bx)}{h} = \frac{1}{h} \int_{0}^{h} F_j(\bx + t\mathbf{e}_j) \dt
+    \]
+    Poiché $F_j$ è una funzione continua, per il \textbf{Teorema della Media Integrale} esiste un valore $\theta \in (0, 1)$ tale che la media coincide con $F_j(\bx + \theta h \mathbf{e}_j)$. Passando al limite per $h \to 0$:
+    \[
+    \pder{U}{x_j}(\bx) = \lim_{h \to 0} \frac{U(\bx + h\mathbf{e}_j) - U(\bx)}{h} = \lim_{h \to 0} F_j(\bx + \theta h \mathbf{e}_j) = F_j(\bx)
+    \]
+    Poiché tutte le derivate parziali esistono e coincidono con le componenti continue $F_j$, la funzione $U$ è di classe $C^1(A)$ e $\nabla U = \bF$.
+\end{itemize}
+\end{dimostrazione}
+
+\begin{osservazione}[Conservazione dell'Energia Meccanica]
+Il termine "conservativo" deriva dalla fisica: se un punto materiale di massa $m$ si muove sotto l'azione esclusiva di una forza $\bF = -\nabla V$, per la seconda legge di Newton $m \gamma''(t) = \bF(\gamma(t))$. Moltiplicando scalarmente per la velocità $\gamma'(t)$:
+\[
+m \scal{\gamma''(t), \gamma'(t)} = -\scal{\nabla V(\gamma(t)), \gamma'(t)} \iff \der{}{t}\left[ \frac{1}{2} m \norm{\gamma'(t)}^2 \right] = -\der{}{t}\left[ V(\gamma(t)) \right]
+\]
+Portando tutti i termini a primo membro:
+\[
+\der{}{t}\left( \frac{1}{2} m \norm{\gamma'(t)}^2 + V(\gamma(t)) \right) = 0 \implies E_{\text{tot}} = E_k(t) + V(t) = \text{costante}
+\]
+L'energia meccanica totale si conserva inalterata lungo qualsiasi traiettoria.
+\end{osservazione}
+
+% ==============================================================================
+\section{Campi Irrotazionali, Topologia dei Domini e Teorema di \texorpdfstring{Poincaré}{Poincare}}
+\label{sec:poincare_campi}
+% ==============================================================================
+
+Una condizione necessaria fondamentale per la conservatività di un campo deriva dall'identità $\rot(\nabla U) = \bzero$.
+
+\begin{definizione}{Campo Irrotazionale}{def_campo_irrotazionale_precisa}
+Sia $\bF = (F_1, \dots, F_n) \in C^1(A, \Rn)$ un campo vettoriale. $\bF$ si dice \textbf{irrotazionale} in $A$ se la sua matrice Jacobiana è simmetrica in ogni punto:
+\[
+\pder{F_i}{x_j}(\bx) = \pder{F_j}{x_i}(\bx), \quad \forall i, j \in \{1, \dots, n\}, \; \forall \bx \in A
+\]
+In particolare:
+\begin{itemize}
+    \item In $\Rdue$: $\pder{F_2}{x} = \pder{F_1}{y}$;
+    \item In $\Rtre$: $\rot \bF = \nabla \times \bF = \bzero$.
+\end{itemize}
+\end{definizione}
+
+Se un campo $\bF \in C^1(A)$ è conservativo ($\bF = \nabla U$), per il Teorema di Schwarz sulle derivate parziali seconde di $U \in C^2(A)$ si ha immediatamente:
+\[
+\pder{F_i}{x_j} = \pmder{U}{x_j}{x_i} = \pmder{U}{x_i}{x_j} = \pder{F_j}{x_i}
+\]
+Dunque: \textbf{ogni campo conservativo $C^1$ è necessariamente irrotazionale}.
+
+Sorge spontaneo il problema fondamentale inverso: \emph{quando un campo irrotazionale è anche conservativo?} La risposta dipende in modo cruciale dalla \textbf{topologia del dominio $A$}.
+
+\subsection{Topologia dei Domini: Insiemi Semplicemente Connessi}
+
+\begin{definizione}{Dominio Semplicemente Connesso}{def_semplicemente_connesso}
+Un aperto connesso $A \subseteq \Rn$ si dice \textbf{semplicemente connesso} se ogni curva continua chiusa $\gamma$ contenuta in $A$ può essere deformata con continuità (ossia mediante un'\emph{omotopia}) fino a ridursi a un singolo punto, senza mai uscire da $A$.
+\end{definizione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Dominio Semplicemente Connesso (a sinistra)
+    \begin{scope}[shift={(0,0)}]
+        \draw[thick, fill=forestgreen!10, draw=forestgreen] 
+            plot [smooth cycle, tension=0.7] coordinates {(0,0) (2.8,0.4) (3.2,2.2) (1.2,2.8) (-0.4,1.4)};
+        
+        % Curva chiusa che si contrae
+        \draw[thick, navyblue, dashed] plot [smooth cycle, tension=0.8] coordinates {(1.0,0.8) (2.2,1.0) (2.0,2.0) (0.8,1.8)};
+        \draw[thick, navyblue, dashed] plot [smooth cycle, tension=0.8] coordinates {(1.2,1.1) (1.8,1.2) (1.6,1.7) (1.0,1.5)};
+        \filldraw[navyblue] (1.4,1.35) circle (2pt) node[below=2pt] {\small $P$};
+        \draw[->, navyblue, thin] (2.1,1.9) -- (1.6,1.5);
+
+        \node[forestgreen, font=\bfseries] at (1.4,-0.4) {Semplicemente Connesso};
+        \node[black] at (1.4,-0.8) {\small (Ogni laccio si contrae a un punto)};
+    \end{scope}
+
+    % Dominio NON Semplicemente Connesso (a destra)
+    \begin{scope}[shift={(6.2,0)}]
+        \draw[thick, fill=crimsonred!10, draw=crimsonred] 
+            plot [smooth cycle, tension=0.7] coordinates {(0,0) (3.0,0.3) (3.4,2.3) (1.4,2.9) (-0.4,1.3)};
+        
+        % Foro nel dominio
+        \draw[thick, fill=white, draw=crimsonred] (1.5,1.4) circle (0.45);
+        \filldraw[crimsonred] (1.5,1.4) circle (2.5pt) node[right=4pt] {\textbf{Buco}};
+
+        % Curva chiusa che abbraccia il buco e non puo contrarsi
+        \draw[thick, navyblue, ->] (1.5,0.6) arc (-90:260:0.9);
+        \node[navyblue, below right] at (2.4,1.2) {$\gamma$};
+
+        \node[crimsonred, font=\bfseries] at (1.5,-0.4) {NON Semplicemente Connesso};
+        \node[black] at (1.5,-0.8) {\small ($\gamma$ intrappola il buco e non si contrae)};
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{esame}[Differenza Topologica Fondamentale tra $\Rdue$ e $\Rtre$]
+La natura dei "buchi" che distruggono la semplice connessione dipende fortemente dalla dimensione dello spazio:
+\begin{itemize}
+    \item \textbf{In $\Rdue$ (Piano)}: Un dominio è semplicemente connesso se e solo se è "senza buchi". Rimuovere anche solo un singolo punto (ad esempio l'origine) crea un foro che intrappola i circuiti chiusi:
+    \[
+    \Rdue \setminus \graffe{(0,0)} \quad \textbf{NON è semplicemente connesso!}
+    \]
+    \item \textbf{In $\Rtre$ (Spazio Tridimensionale)}: Togliere un singolo punto (o un numero finito di punti) \textbf{NON} distrugge la semplice connessione! Infatti, nello spazio 3D un laccio chiuso può sempre "scivolare" attorno a un punto isolato uscendo dal piano del laccio:
+    \[
+    \Rtre \setminus \graffe{(0,0,0)} \quad \textbf{È semplicemente connesso!}
+    \]
+    Nello spazio $\Rtre$, per distruggere la semplice connessione occorre rimuovere un'intera \textbf{linea infinita} (un asse, una retta) o una curva chiusa (un nodo):
+    \[
+    \Rtre \setminus \graffe{\text{asse } z} \quad \textbf{NON è semplicemente connesso!}
+    \]
+\end{itemize}
+\end{esame}
+
+\begin{teorema}{Teorema di Poincar\'e per i Campi Vettoriali}{thm_poincare_vettoriale}
+Sia $A \subseteq \Rn$ un aperto \textbf{semplicemente connesso} (ad esempio un insieme convesso, una palla aperta, un semipiano o tutto $\Rn$), e sia $\bF: A \to \Rn$ un campo vettoriale di classe $C^1(A)$.
+Allora:
+\[
+\bF \text{ è conservativo in } A \quad \Longleftrightarrow \quad \bF \text{ è irrotazionale in } A
+\]
+\end{teorema}
+
+% ==============================================================================
+\subsection{Studio Monografico: Il Campo del Vortice}
+% ==============================================================================
+
+L'esempio più celebre e didatticamente illuminante nell'analisi multivariabile è il \textbf{campo del vortice} (o campo magnetico generato da un filo rettilineo percorso da corrente, legge di Biot-Savart).
+
+\begin{esame}[Il Campo del Vortice: Irrotazionale ma Non Conservativo]
+Si consideri il campo vettoriale piano definito sull'aperto forato $A = \Rdue \setminus \graffe{(0,0)}$:
+\[
+\bF(x,y) = \begin{pmatrix} F_1(x,y) \\ F_2(x,y) \end{pmatrix} = \begin{pmatrix} -\frac{y}{x^2+y^2} \\ \frac{x}{x^2+y^2} \end{pmatrix}
+\]
+
+\textbf{1. Verifica analitica dell'irrotazionalità}:\\
+Calcoliamo le derivate parziali incrociate applicando la regola del quoziente:
+\begin{align*}
+\pder{F_1}{y} &= \pder{}{y}\left( \frac{-y}{x^2+y^2} \right) = \frac{(-1)(x^2+y^2) - (-y)(2y)}{(x^2+y^2)^2} = \frac{-x^2 - y^2 + 2y^2}{(x^2+y^2)^2} = \frac{y^2 - x^2}{(x^2+y^2)^2} \\
+\pder{F_2}{x} &= \pder{}{x}\left( \frac{x}{x^2+y^2} \right) = \frac{(1)(x^2+y^2) - (x)(2x)}{(x^2+y^2)^2} = \frac{x^2 + y^2 - 2x^2}{(x^2+y^2)^2} = \frac{y^2 - x^2}{(x^2+y^2)^2}
+\end{align*}
+Poiché $\pder{F_2}{x} = \pder{F_1}{y}$ in ogni punto $(x,y) \in \Rdue \setminus \graffe{(0,0)}$, il campo $\bF$ è \textbf{irrotazionale} su tutto il suo dominio.
+
+\textbf{2. Calcolo della circolazione sulla circonferenza unitaria}:\\
+Sia $\gamma(t) = (\cos t, \sen t)$ con $t \in [0, 2\pi]$ la circonferenza centrata nell'origine percorsa in senso antiorario. Il vettore velocità è $\gamma'(t) = (-\sen t, \cos t)$.\\
+Valutando il campo sulla curva ($x^2+y^2 = \cos^2 t + \sen^2 t = 1$):
+\[
+\bF(\gamma(t)) = \begin{pmatrix} -\sen t \\ \cos t \end{pmatrix}
+\]
+Calcoliamo la circuitazione:
+\[
+\oint_\gamma \bF \cdot \diff\mathbf{r} = \int_{0}^{2\pi} \scal{\begin{pmatrix} -\sen t \\ \cos t \end{pmatrix}, \begin{pmatrix} -\sen t \\ \cos t \end{pmatrix}} \dt = \int_{0}^{2\pi} (\sen^2 t + \cos^2 t) \dt = \int_{0}^{2\pi} 1 \dt = 2\pi \neq 0
+\]
+
+\textbf{Conclusioni Teoriche}:
+\begin{itemize}
+    \item Poiché la circuitazione è non nulla ($2\pi \neq 0$), per il Teorema di Caratterizzazione il campo $\bF$ \textbf{NON è conservativo} su $\Rdue \setminus \graffe{(0,0)}$.
+    \item Questo fatto non viola il Teorema di Poincaré, poiché il dominio $A = \Rdue \setminus \graffe{(0,0)}$ \textbf{non è semplicemente connesso} a causa del buco nell'origine.
+    \item La funzione candidata a fare da potenziale è l'angolo polare $\theta(x,y) = \operatorname{atan2}(y,x)$, che soddisfa $\nabla \theta = \bF$. Tuttavia, compiendo un giro completo attorno all'origine, $\theta$ aumenta di $2\pi$, risultando una funzione \emph{polidroma} (a più valori) non definibile globalmente con continuità su tutto $\Rdue \setminus \graffe{(0,0)}$.
+\end{itemize}
+\end{esame}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15, >=Stealth]
+    % Assi cartesiani
+    \draw[->, thick, gray] (-3.2,0) -- (3.5,0) node[right, black] {$x$};
+    \draw[->, thick, gray] (0,-3.2) -- (0,3.5) node[above, black] {$y$};
+
+    % Frecce del campo vettoriale del vortice
+    \foreach \r in {0.9, 1.6, 2.4} {
+        \foreach \ang in {0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330} {
+            \coordinate (P) at (\ang:\r);
+            \draw[thick, coolblue!80!black, ->] (P) -- ++({\ang+90}:{1.0/\r});
+        }
+    }
+
+    % Curva chiusa gamma (circonferenza)
+    \draw[ultra thick, crimsonred, ->] (1.6,0) arc (0:360:1.6);
+    \node[crimsonred, above right] at (1.1,1.1) {$\gamma(t)$};
+
+    % Buco nell'origine
+    \filldraw[white] (0,0) circle (3pt);
+    \draw[crimsonred, ultra thick] (0,0) circle (3pt);
+    \node[below right=2pt, crimsonred] at (0,0) {$(0,0)$ (Singolarità)};
+
+    \node[draw=navyblue, fill=white, rounded corners, align=center] at (0,-3.7) 
+        {\small Campo del vortice: $\bF = \left(-\frac{y}{r^2}, \frac{x}{r^2}\right) \implies \oint_\gamma \bF\cdot\diff\br = 2\pi$};
+\end{tikzpicture}
+\end{center}
+
+\begin{osservazione}[Tecnica del Taglio del Dominio (Branch Cut)]
+Se escludiamo dal dominio una semiretta uscente dall'origine (ad esempio il semiasse reale non positivo $S = \graffe{(x,0) \in \Rdue : x \le 0}$), il nuovo dominio "tagliato":
+\[
+A^* = \Rdue \setminus \graffe{(x,0) : x \le 0}
+\]
+diventa \textbf{semplicemente connesso}. Sul dominio $A^*$, il campo del vortice $\bF$ ammette il potenziale scalare globale a valore singolo:
+\[
+U(x,y) = \begin{cases} \arctg(y/x) & \text{se } x > 0 \\ \frac{\pi}{2} - \arctg(x/y) & \text{se } y > 0 \\ -\frac{\pi}{2} - \arctg(x/y) & \text{se } y < 0 \end{cases}
+\]
+avente immagine nell'intervallo $(-\pi, \pi)$.
+\end{osservazione}
+
+% ==============================================================================
+\section{Forme Differenziali Lineari e Calcolo del Potenziale}
+% ==============================================================================
+
+Il formalismo delle forme differenziali offre una prospettiva geometrica unificante per l'integrazione curvilinea e i campi vettoriali.
+
+\begin{definizione}{1-Forma Differenziale, Esattezza e Chiusura}{def_forme_differenziali}
+Sia $A \subseteq \Rn$ un aperto. Una \textbf{forma differenziale lineare} (o \textbf{1-forma}) di classe $C^k$ su $A$ è un'espressione formale del tipo:
+\[
+\omega = \sum_{i=1}^n F_i(\bx) \dx_i = F_1(\bx) \dx_1 + F_2(\bx) \dx_2 + \dots + F_n(\bx) \dx_n
+\]
+dove i coefficienti $F_i: A \to \R$ sono funzioni scalari di classe $C^k(A)$.
+\begin{itemize}
+    \item L'\textbf{integrale della 1-forma $\omega$} lungo una curva orientata $\gamma: [a,b] \to A$ è definito come:
+    \[
+    \int_\gamma \omega = \int_{a}^{b} \left( \sum_{i=1}^n F_i(\gamma(t)) \, x_i'(t) \right) \dt = \int_\gamma \bF \cdot \diff\mathbf{r}
+    \]
+    \item La forma $\omega$ si dice \textbf{esatta} in $A$ se esiste un campo scalare $U \in C^1(A)$ (detto \emph{primitiva}) tale che il differenziale totale di $U$ coincida con $\omega$:
+    \[
+    \diff U = \sum_{i=1}^n \pder{U}{x_i} \dx_i = \omega \quad \Longleftrightarrow \quad \pder{U}{x_i}(\bx) = F_i(\bx), \quad \forall i=1,\dots,n
+    \]
+    \item La forma $\omega$ (di classe $C^1$) si dice \textbf{chiusa} in $A$ se:
+    \[
+    \pder{F_i}{x_j}(\bx) = \pder{F_j}{x_i}(\bx), \quad \forall i \neq j, \; \forall \bx \in A
+    \]
+\end{itemize}
+\end{definizione}
+
+Il dizionario di equivalenza tra linguaggio vettoriale e linguaggio delle forme differenziali è perfetto:
+\begin{center}
+\begin{tabularx}{\textwidth}{lXX}
+\toprule
+\textbf{Concetto} & \textbf{Calcolo Vettoriale} & \textbf{Forme Differenziali} \\
+\midrule
+\textbf{Oggetto matematico} & Campo vettoriale $\bF = (F_1, \dots, F_n)$ & 1-forma $\omega = \sum F_i \dx_i$ \\
+\textbf{Integrale lungo $\gamma$} & Lavoro $\int_\gamma \bF \cdot \diff\br$ & Integrale di linea $\int_\gamma \omega$ \\
+\textbf{Esistenza potenziale} & $\bF$ è \textbf{conservativo} ($\bF = \nabla U$) & $\omega$ è \textbf{esatta} ($\omega = \diff U$) \\
+\textbf{Derivate incrociate} & $\bF$ è \textbf{irrotazionale} ($\rot\bF = \bzero$) & $\omega$ è \textbf{chiusa} ($\diff \omega = 0$) \\
+\textbf{Teorema di Poincaré} & $A$ sempl. conn. $\implies$ conservativo & $A$ sempl. conn. $\implies$ esatta \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Algoritmi Operativi per la Determinazione del Potenziale}
+
+Esistono due metodologie standard per determinare esplicitamente il potenziale $U(\bx)$ di un campo conservativo assegnato:
+
+\begin{metodo}[Metodo 1: Integrazioni Indefinite a Cascata]
+Sia $\bF(x,y,z) = (F_1, F_2, F_3)$ un campo conservativo su un dominio $A$.
+\begin{enumerate}
+    \item \textbf{Integrazione rispetto a $x$}: Integrando $F_1(x,y,z) = \pder{U}{x}$ rispetto alla prima variabile:
+    \[
+    U(x,y,z) = \int F_1(x,y,z) \dx = \Phi(x,y,z) + c(y,z)
+    \]
+    dove $c(y,z)$ è una costante di integrazione arbitraria rispetto a $x$, ma funzione di $y$ e $z$.
+    \item \textbf{Derivazione rispetto a $y$}: Differenziamo $U$ rispetto a $y$ e uguagliamo a $F_2$:
+    \[
+    \pder{U}{y} = \pder{\Phi}{y}(x,y,z) + \pder{c}{y}(y,z) \stackrel{!}{=} F_2(x,y,z) \implies \pder{c}{y}(y,z) = F_2(x,y,z) - \pder{\Phi}{y}(x,y,z)
+    \]
+    Poiché il campo è irrotazionale, la differenza a secondo membro dipende \emph{esclusivamente da $y$ e $z$}.
+    \item \textbf{Integrazione rispetto a $y$}: Integrando $\pder{c}{y}$ rispetto a $y$:
+    \[
+    c(y,z) = \Psi(y,z) + k(z)
+    \]
+    \item \textbf{Derivazione rispetto a $z$}: Differenziamo l'espressione aggiornata $U(x,y,z) = \Phi(x,y,z) + \Psi(y,z) + k(z)$ rispetto a $z$ e uguagliamo a $F_3$:
+    \[
+    \pder{U}{z} = \pder{\Phi}{z} + \pder{\Psi}{z} + k'(z) \stackrel{!}{=} F_3(x,y,z) \implies k'(z) = g(z) \implies k(z) = \int g(z)\dz + C
+    \]
+    Ottenendo così il potenziale generale $U(x,y,z)$ a meno di una costante additiva $C \in \R$.
+\end{enumerate}
+\end{metodo}
+
+\begin{metodo}[Metodo 2: Integrazione Lungo un Segmento Radiale (Formula di Poincaré)]
+Se il dominio $A$ è \textbf{stellato} rispetto all'origine $(0,0,0)$ (ossia per ogni $\bx \in A$ il segmento congiungente $\bzero$ a $\bx$ appartiene ad $A$), il potenziale che si annulla nell'origine è dato direttamente dall'integrale lungo il cammino rettilineo $\gamma(t) = t \bx = (tx, ty, tz)$ con $t \in [0,1]$ ($\gamma'(t) = \bx$):
+\[
+U(\bx) = \int_{0}^{1} \scal{\bF(t\bx), \bx} \dt = \int_{0}^{1} \left( x F_1(tx,ty,tz) + y F_2(tx,ty,tz) + z F_3(tx,ty,tz) \right) \dt
+\]
+\end{metodo}
+
+\begin{esempio}{Esercizio Completo d'Esame: Conservativit\`a e Potenziale in $\mathbb{R}^3$}{es_potenziale_3D}
+Si consideri la forma differenziale:
+\[
+\omega = (2x y z + \cos x) \dx + (x^2 z + 2y e^z) \dy + (x^2 y + y^2 e^z - 3z^2) \dz
+\]
+definita su tutto $\Rtre$.
+\begin{enumerate}
+    \item Verificare che $\omega$ è chiusa in $\Rtre$.
+    \item Dedurre se $\omega$ è esatta e determinare l'insieme di tutte le sue primitive $U(x,y,z)$.
+    \item Calcolare l'integrale curvilineo $\int_\gamma \omega$ lungo la curva $\gamma(t) = (\pi t, \sen(\pi t/2), t^2)$ con $t \in [0, 1]$.
+\end{enumerate}
+
+\textbf{Svolgimento dettagliato}:
+\begin{enumerate}
+    \item \textbf{Verifica della chiusura}: I coefficienti sono:
+    \[
+    F_1 = 2xyz + \cos x, \quad F_2 = x^2 z + 2y e^z, \quad F_3 = x^2 y + y^2 e^z - 3z^2
+    \]
+    Calcoliamo le 3 coppie di derivate incrociate:
+    \begin{align*}
+    \pder{F_1}{y} &= 2xz, \quad &\pder{F_2}{x} &= 2xz \implies \pder{F_1}{y} = \pder{F_2}{x} \\
+    \pder{F_1}{z} &= 2xy, \quad &\pder{F_3}{x} &= 2xy \implies \pder{F_1}{z} = \pder{F_3}{x} \\
+    \pder{F_2}{z} &= x^2 + 2ye^z, \quad &\pder{F_3}{y} &= x^2 + 2ye^z \implies \pder{F_2}{z} = \pder{F_3}{y}
+    \end{align*}
+    La forma $\omega$ è dunque \textbf{chiusa} su tutto $\Rtre$.
+
+    \item \textbf{Esattezza e Calcolo del Potenziale}: Poiché il dominio $\Rtre$ è convesso (e dunque \textbf{semplicemente connesso}), per il Teorema di Poincaré la chiusura implica che $\omega$ è \textbf{esatta}.\\
+    Determiniamo il potenziale $U(x,y,z)$ con il metodo a cascata:
+    \[
+    U(x,y,z) = \int F_1 \dx = \int (2xyz + \cos x) \dx = x^2 y z + \sen x + c(y,z)
+    \]
+    Derivando rispetto a $y$:
+    \[
+    \pder{U}{y} = x^2 z + \pder{c}{y}(y,z) \stackrel{!}{=} F_2 = x^2 z + 2y e^z \implies \pder{c}{y}(y,z) = 2y e^z
+    \]
+    Integrando rispetto a $y$:
+    \[
+    c(y,z) = \int 2y e^z \dy = y^2 e^z + k(z) \implies U(x,y,z) = x^2 y z + \sen x + y^2 e^z + k(z)
+    \]
+    Derivando rispetto a $z$:
+    \[
+    \pder{U}{z} = x^2 y + y^2 e^z + k'(z) \stackrel{!}{=} F_3 = x^2 y + y^2 e^z - 3z^2 \implies k'(z) = -3z^2
+    \]
+    Integrando rispetto a $z$: $k(z) = -z^3 + C$, con $C \in \R$.\\
+    L'insieme delle primitive è:
+    \[
+    U(x,y,z) = x^2 y z + \sen x + y^2 e^z - z^3 + C
+    \]
+
+    \item \textbf{Calcolo dell'Integrale Curvilineo}: Poiché la forma è esatta, l'integrale non dipende dalla forma complessa della curva $\gamma$, ma solo dai punti iniziale e finale:
+    \[
+    P_1 = \gamma(0) = (0, \sen 0, 0) = (0, 0, 0)
+    \]
+    \[
+    P_2 = \gamma(1) = (\pi, \sen(\pi/2), 1) = (\pi, 1, 1)
+    \]
+    Valutando il potenziale $U$ negli estremi:
+    \[
+    U(P_1) = U(0,0,0) = 0 + \sen 0 + 0 - 0 = 0
+    \]
+    \[
+    U(P_2) = U(\pi, 1, 1) = \pi^2(1)(1) + \sen\pi + (1)^2 e^1 - (1)^3 = \pi^2 + 0 + e - 1 = \pi^2 + e - 1
+    \]
+    Il valore dell'integrale curvilineo è:
+    \[
+    \int_\gamma \omega = U(P_2) - U(P_1) = \pi^2 + e - 1
+    \]
+\end{enumerate}
+\end{esempio}

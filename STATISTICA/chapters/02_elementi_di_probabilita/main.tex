@@ -1,0 +1,269 @@
+% ==============================================================================
+% CAPITOLO 2: ELEMENTI DI TEORIA DELLA PROBABILITÀ E CALCOLO COMBINATORIO
+% ==============================================================================
+\chapter{Elementi di Teoria della Probabilità e Calcolo Combinatorio}
+\label{cap:elementi_di_probabilita}
+
+\begin{abstract}
+Il presente capitolo introduce l'impianto formale e concettuale del calcolo delle probabilità moderno. Partendo dall'evoluzione epistemologica del concetto di probabilità (dalla definizione classica di Laplace, al paradigma frequentista di von Mises, fino all'approccio soggettivista di de Finetti), viene presentata l'assiomatizzazione di Kolmogorov su spazi di misura $(\Omega, \mathcal{F}, \mathbb{P})$. Vengono fornite le dimostrazioni analitiche rigorose di tutte le proprietà fondamentali (probabilità dell'evento complementare, monotonia, formule di inclusione-esclusione di Poincaré, disuguaglianze di Boole e Bonferroni). Nella seconda parte, si sviluppa organicamente l'algebra del campionamento e del calcolo combinatorio (permutazioni, disposizioni, combinazioni semplici e con ripetizione, coefficienti multinomiali), applicandola alla risoluzione analitica di problemi storici ed esami universitari classici come il paradosso del compleanno.
+\end{abstract}
+
+% ==============================================================================
+% SEZIONE 2.1: NATURA E PARADIGMI INTERPRETATIVI DELLA PROBABILITÀ
+% ==============================================================================
+\section{Genesi Storica e Paradigmi Interpretativi della Probabilità}
+\label{sec:paradigmi_probabilita}
+
+Il calcolo delle probabilità nasce storicamente a metà del Seicento dalla celebre corrispondenza tra Blaise Pascal e Pierre de Fermat in merito a problemi di scommesse e giochi d'azzardo (in particolare il \emph{problème des partis} posto dal Cavaliere di Méré). Tuttavia, la quantificazione dell'incertezza trascende il contesto ludico e costituisce oggi l'ossatura logico-matematica di tutta la fisica quantistica, dell'ingegneria industriale, dell'affidabilità dei sistemi e dell'intelligenza artificiale.
+
+Prima di approdare all'assiomatizzazione formale, è essenziale comprendere le tre grandi prospettive storiche attraverso cui è stato definito il valore $\mathbb{P}(E) \in [0, 1]$ di un evento incerto $E$:
+
+\begin{enumerate}
+    \item \textbf{Paradigma Classico (Pierre-Simon de Laplace, 1812):}
+    Se lo spazio dei possibili esiti elementari è finito e tutti gli esiti sono considerati, per ragioni di simmetria fisica, perfettamente \emph{equiprobabili} (principio di ragion non sufficiente), la probabilità di $E$ è il rapporto tra casi favorevoli e casi possibili:
+    \begin{equation}
+        \mathbb{P}(E) = \frac{\#(\text{casi favorevoli a } E)}{\#(\text{casi possibili totali})} = \frac{|E|}{|\Omega|}
+    \end{equation}
+    \emph{Critica epistemologica:} La definizione classica presuppone il concetto di eventi ``equiprobabili'' per definire la probabilità stessa, incorrendo in un'evidente circolarità logica. Inoltre, non è applicabile a spazi campionari continui o a esperimenti con esiti sbilanciati.
+
+    \item \textbf{Paradigma Frequentistico (Richard von Mises, 1928):}
+    La probabilità non è una proprietà deducibile a priori, bensì una grandezza fisica oggettiva misurabile \textbf{a posteriori}. Se un esperimento ideale è ripetibile infinite volte in condizioni identiche e mutualmente indipendenti, la probabilità dell'evento $E$ è il limite a cui tende la frequenza relativa empirica dei successi al divergere del numero di prove:
+    \begin{equation}
+        \mathbb{P}(E) = \lim_{n \to \infty} \frac{n_E}{n}
+    \end{equation}
+    \emph{Critica epistemologica:} Il concetto di limite matematico $n \to \infty$ è inattuabile sperimentalmente nel mondo reale (possiamo compiere solo un numero finito $n$ di prove). Inoltre, il paradigma non può essere applicato a eventi unici e non ripetibili (ad esempio: la probabilità di pioggia domani a Pisa o la probabilità di fallimento di una specifica missione spaziale).
+
+    \item \textbf{Paradigma Soggettivistico (Bruno de Finetti, Frank Ramsey, 1931):}
+    La probabilità è intesa come il \textbf{grado di fiducia o credenza razionale} che un individuo coerente ripone nell'avverarsi di un evento, in base all'insieme di informazioni a sua disposizione. Operativamente, è quantificata come il prezzo equo $p$ che un soggetto scommettitore accetterebbe di pagare per ricevere un guadagno unitario ($1$ euro) se l'evento $E$ si verifica, e $0$ se non si verifica. Il criterio di coerenza logica impone che non sia possibile per alcuno scommettitore costruire un \emph{Dutch Book} (un sistema di scommesse a vincita garantita contro il banco).
+\end{enumerate}
+
+Per svincolare la matematica dalle dispute filosofiche sul significato reale della probabilità, il grande matematico sovietico **Andrei Nikolaevich Kolmogorov** propose nel 1933 nel suo trattato \emph{Grundbegriffe der Wahrscheinlichkeitsrechnung} un approccio puramente assiomatico, fondato sulla moderna teoria della misura.
+
+% ==============================================================================
+% SEZIONE 2.2: SPAZI DI PROBABILITÀ E ASSIOMATIZZAZIONE DI KOLMOGOROV
+% ==============================================================================
+\section{L'Impianto Assiomatico di Kolmogorov}
+\label{sec:assiomi_kolmogorov_dettaglio}
+
+Nel modello di Kolmogorov, la probabilità non è definita da un processo empirico o soggettivo, ma è una \textbf{funzione matematica d'insieme} che soddisfa un sistema minimale di assiomi auto-consistenti.
+
+\begin{definizione}{Spazio di Probabilità $(\Omega, \mathcal{F}, \mathbb{P})$}{spazio_probabilita}
+Uno \textbf{spazio di probabilità} è una struttura matematica descritta dalla terna $(\Omega, \mathcal{F}, \mathbb{P})$:
+\begin{enumerate}
+    \item $\Omega$ (detto \textbf{spazio campionario} o \emph{sample space}) è l'insieme di tutti i possibili esiti elementari $\omega$ dell'esperimento aleatorio.
+    \item $\mathcal{F}$ è una \textbf{$\bm{\sigma}$-algebra} su $\Omega$, ossia una famiglia di sottoinsiemi di $\Omega$ (detti \textbf{eventi}) che soddisfa le tre proprietà di chiusura:
+    \begin{itemize}
+        \item $\Omega \in \mathcal{F}$ (l'evento certo appartiene alla collezione);
+        \item Se $E \in \mathcal{F}$, allora il complementare $E^c = \Omega \setminus E \in \mathcal{F}$ (chiusura rispetto alla negazione logica);
+        \item Se $\{E_n\}_{n=1}^\infty \subset \mathcal{F}$, allora $\bigcup_{n=1}^\infty E_n \in \mathcal{F}$ (chiusura rispetto a unioni numerabili).
+    \end{itemize}
+    \item $\mathbb{P}: \mathcal{F} \to [0, 1]$ è una misura a valori reali detta \textbf{misura di probabilità}.
+\end{enumerate}
+\end{definizione}
+
+\paragraph{Perché serve la $\sigma$-algebra $\mathcal{F}$ anziché l'intero insieme delle parti $\mathcal{P}(\Omega)$?}
+Negli spazi finiti o discreti numerabili possiamo tranquillamente porre $\mathcal{F} = \mathcal{P}(\Omega)$. Tuttavia, quando $\Omega$ è un continuo (come la retta reale $\mathbb{R}$ o l'intervallo $[0,1]$), la presenza di insiemi non misurabili (come gli insiemi di Vitali o il paradosso di Banach-Tarski) impedisce di definire una misura $\sigma$-additiva coerente su \emph{tutti} i possibili sottoinsiemi. La $\sigma$-algebra di Borel $\mathcal{B}(\mathbb{R})$ generata dagli intervalli aperti garantisce che ogni evento fisicamente significativo sia rigorosamente misurabile.
+
+\begin{figure}[htbp]
+\centering
+\input{figures/fig_diagramma_venn_assiomi.tex}
+\caption{Rappresentazione insiemistica dello spazio campionario $\Omega$ e degli assiomi di Kolmogorov. L'evento certo $\Omega$ ha area totale unitaria ($\mathbb{P}(\Omega) = 1$). Gli eventi disgiunti $E_1$ ed $E_2$ occupano regioni prive di sovrapposizione ($E_1 \cap E_2 = \emptyset$), per cui l'area della loro unione è la somma diretta delle singole aree.}
+\label{fig:diagramma_venn_assiomi}
+\end{figure}
+
+\begin{teorema}{Assiomi di Kolmogorov}{assiomi_kolmogorov}
+La misura di probabilità $\mathbb{P}: \mathcal{F} \to [0, 1]$ deve soddisfare inderogabilmente i tre assiomi fondamentali:
+\begin{enumerate}
+    \item \textbf{Assioma 1 (Positività e Limitatezza):} Per ogni evento $E \in \mathcal{F}$:
+    \begin{equation}
+        \mathbb{P}(E) \ge 0
+    \end{equation}
+    \item \textbf{Assioma 2 (Normalizzazione / Certezza):} La probabilità dell'intero spazio campionario è unitaria:
+    \begin{equation}
+        \mathbb{P}(\Omega) = 1
+    \end{equation}
+    \item \textbf{Assioma 3 ($\bm{\sigma}$-additività / Additività Numerabile):} Se $\{E_i\}_{i=1}^\infty$ è una successione numerabile di eventi a due a due disgiunti (mutuamente incompatibili), ossia $E_i \cap E_j = \emptyset$ per ogni $i \neq j$, allora:
+    \begin{equation}
+        \mathbb{P}\left(\bigcup_{i=1}^\infty E_i\right) = \sum_{i=1}^\infty \mathbb{P}(E_i)
+    \end{equation}
+\end{enumerate}
+\end{teorema}
+
+% ==============================================================================
+% SEZIONE 2.3: TEOREMI FONDAMENTALI DEL CALCOLO DELLE PROBABILITÀ
+% ==============================================================================
+\section{Teoremi Fondamentali e Proprietà Derivate}
+\label{sec:teoremi_probabilita_derivati}
+
+A partire dai tre soli assiomi di Kolmogorov, è possibile dedurre per via deduttiva l'intera struttura del calcolo delle probabilità.
+
+\begin{teorema}{Proprietà Derivate Fondamentali}{prop_derivate_prob}
+Sia $(\Omega, \mathcal{F}, \mathbb{P})$ uno spazio di probabilità. Per ogni $A, B \in \mathcal{F}$ valgono:
+\begin{enumerate}
+    \item \textbf{Evento Impossibile:} $\mathbb{P}(\emptyset) = 0$.
+    \item \textbf{Evento Complementare:} $\mathbb{P}(A^c) = 1 - \mathbb{P}(A)$.
+    \item \textbf{Differenza di Eventi:} $\mathbb{P}(A \setminus B) = \mathbb{P}(A \cap B^c) = \mathbb{P}(A) - \mathbb{P}(A \cap B)$.
+    \item \textbf{Monotonia della Probabilità:} Se $A \subseteq B$, allora $\mathbb{P}(A) \le \mathbb{P}(B)$ e di conseguenza $\mathbb{P}(B \setminus A) = \mathbb{P}(B) - \mathbb{P}(A)$.
+    \item \textbf{Formula di Inclusione-Esclusione (Principio di Poincaré per 2 Eventi):}
+    \begin{equation}
+        \mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B)
+    \end{equation}
+    \item \textbf{Disuguaglianza di Boole (Sub-additività Numerabile):}
+    \begin{equation}
+        \mathbb{P}\left(\bigcup_{i=1}^n A_i\right) \le \sum_{i=1}^n \mathbb{P}(A_i)
+    \end{equation}
+    \item \textbf{Disuguaglianza di Bonferroni:}
+    \begin{equation}
+        \mathbb{P}(A \cap B) \ge \mathbb{P}(A) + \mathbb{P}(B) - 1
+    \end{equation}
+\end{enumerate}
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazioni Analitiche Complete Passo-Passo]
+\hfill
+\begin{enumerate}
+    \item \textbf{Evento complementare:} Lo spazio campionario si scompone nell'unione disgiunta $\Omega = A \cup A^c$ con $A \cap A^c = \emptyset$. Per l'Assioma 3 e l'Assioma 2:
+    \begin{equation}
+        \mathbb{P}(\Omega) = \mathbb{P}(A) + \mathbb{P}(A^c) \implies 1 = \mathbb{P}(A) + \mathbb{P}(A^c) \implies \mathbb{P}(A^c) = 1 - \mathbb{P}(A)
+    \end{equation}
+    Ponendo $A = \Omega$, si ha $\mathbb{P}(\emptyset) = \mathbb{P}(\Omega^c) = 1 - \mathbb{P}(\Omega) = 1 - 1 = 0$.
+
+    \item \textbf{Differenza di eventi:} L'evento $A$ può essere partizionato in $A = (A \setminus B) \cup (A \cap B)$, dove $(A \setminus B) \cap (A \cap B) = \emptyset$. Applicando l'Assioma 3:
+    \begin{equation}
+        \mathbb{P}(A) = \mathbb{P}(A \setminus B) + \mathbb{P}(A \cap B) \implies \mathbb{P}(A \setminus B) = \mathbb{P}(A) - \mathbb{P}(A \cap B)
+    \end{equation}
+
+    \item \textbf{Monotonia:} Se $A \subseteq B$, allora $A \cap B = A$. Sostituendo nella formula della differenza:
+    \begin{equation}
+        \mathbb{P}(B \setminus A) = \mathbb{P}(B) - \mathbb{P}(A \cap B) = \mathbb{P}(B) - \mathbb{P}(A)
+    \end{equation}
+    Poiché per l'Assioma 1 $\mathbb{P}(B \setminus A) \ge 0$, ne segue immediatamente $\mathbb{P}(B) - \mathbb{P}(A) \ge 0 \implies \mathbb{P}(A) \le \mathbb{P}(B)$.
+
+    \item \textbf{Inclusione-Esclusione a 2 eventi:} L'unione $A \cup B$ si scompone nell'unione disgiunta $A \cup B = A \cup (B \setminus A)$, con $A \cap (B \setminus A) = \emptyset$.
+    \begin{equation}
+        \mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B \setminus A) = \mathbb{P}(A) + \left[\mathbb{P}(B) - \mathbb{P}(A \cap B)\right] = \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B)
+    \end{equation}
+
+    \item \textbf{Disuguaglianza di Bonferroni:} Dalla limitatezza $\mathbb{P}(A \cup B) \le 1$ e dal principio di inclusione-esclusione:
+    \begin{equation}
+        \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B) \le 1 \implies \mathbb{P}(A \cap B) \ge \mathbb{P}(A) + \mathbb{P}(B) - 1 \qquad \blacksquare
+    \end{equation}
+\end{enumerate}
+\end{dimostrazione}
+
+\begin{figure}[htbp]
+\centering
+\input{figures/fig_inclusione_esclusione.tex}
+\caption{Geometria del principio di Inclusione-Esclusione di Poincaré a tre insiemi ($A$, $B$, $C$). Sommando le singole aree $\mathbb{P}(A)+\mathbb{P}(B)+\mathbb{P}(C)$, le intersezioni a due a due vengono contate due volte e devono essere sottratte; l'intersezione a tre $A \cap B \cap C$, essendo stata aggiunta 3 volte e sottratta 3 volte, deve essere infine ri-aggiunta per bilanciare la misura totale.}
+\label{fig:inclusione_esclusione}
+\end{figure}
+
+\begin{teorema}{Formula Generale di Inclusione-Esclusione di Poincaré ($n$ Eventi)}{thm_poincare_generale}
+Dati $n$ eventi $A_1, A_2, \dots, A_n \in \mathcal{F}$:
+\begin{equation}
+\mathbb{P}\left(\bigcup_{i=1}^n A_i\right) = \sum_{i=1}^n \mathbb{P}(A_i) - \sum_{1 \le i < j \le n} \mathbb{P}(A_i \cap A_j) + \sum_{1 \le i < j < k \le n} \mathbb{P}(A_i \cap A_j \cap A_k) - \dots + (-1)^{n-1} \mathbb{P}\left(\bigcap_{i=1}^n A_i\right)
+\end{equation}
+In particolare, per $n = 3$ eventi:
+\begin{align}
+\mathbb{P}(A \cup B \cup C) &= \mathbb{P}(A) + \mathbb{P}(B) + \mathbb{P}(C) \nonumber \\
+&\quad - \left[\mathbb{P}(A \cap B) + \mathbb{P}(A \cap C) + \mathbb{P}(B \cap C)\right] + \mathbb{P}(A \cap B \cap C)
+\end{align}
+\end{teorema}
+
+% ==============================================================================
+% SEZIONE 2.4: CALCOLO COMBINATORIO COME ALGEBRA DEL CAMPIONAMENTO
+% ==============================================================================
+\section{Calcolo Combinatorio e Tecniche di Conteggio}
+\label{sec:calcolo_combinatorio}
+
+Negli spazi campionari finiti ed equiprobabili, la valutazione della probabilità classica richiede il conteggio accurato della cardinalità $|\Omega|$ e $|E|$. Il calcolo combinatorio fornisce gli strumenti sistematici per quantificare il numero di configurazioni possibili a seconda che:
+\begin{itemize}
+    \item \textbf{L'ordine degli elementi conti oppure no} (sequenze ordinate vs sottoinsiemi non ordinati);
+    \item \textbf{Sia ammessa o meno la ripetizione/reimmissione dello stesso elemento}.
+\end{itemize}
+
+\begin{table}[htbp]
+\centering
+\caption{Quadro sinottico completo delle formule di Calcolo Combinatorio per l'estrazione di $k$ elementi da un insieme di $n$ elementi distinti.}
+\label{tab:combinatoria_sinottica}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Modalità di Conteggio} & \textbf{Senza Ripetizione (Semplici)} & \textbf{Con Ripetizione (Reimmissione)} \\
+\midrule
+\textbf{Disposizioni} (L'ordine conta) & $D_{n,k} = \dfrac{n!}{(n-k)!}$ & $D'_{n,k} = n^k$ \\[10pt]
+\textbf{Permutazioni} ($k = n$, l'ordine conta) & $P_n = n!$ & $P_n^{(n_1, \dots, n_m)} = \dfrac{n!}{n_1! \, n_2! \dots n_m!}$ \\[10pt]
+\textbf{Combinazioni} (L'ordine non conta) & $C_{n,k} = \dbinom{n}{k} = \dfrac{n!}{k!(n-k)!}$ & $C'_{n,k} = \dbinom{n+k-1}{k}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Il Coefficiente Binomiale e le sue Proprietà Algebriche.}
+Il coefficiente binomiale $\binom{n}{k}$ quantifica il numero di sottoinsiemi distinti di taglia $k$ estraibili da un insieme di cardinalità $n$. Gode delle celebri proprietà:
+\begin{enumerate}
+    \item \textbf{Simmetria complementare:} $\dbinom{n}{k} = \dbinom{n}{n-k}$.
+    \item \textbf{Formula ricorsiva di Stifel (Triangolo di Tartaglia-Pascal):} $\dbinom{n}{k} = \dbinom{n-1}{k-1} + \dbinom{n-1}{k}$.
+    \item \textbf{Teorema del Binomio di Newton:} $\sum_{k=0}^n \dbinom{n}{k} a^k b^{n-k} = (a + b)^n \implies \sum_{k=0}^n \dbinom{n}{k} = 2^n$.
+\end{enumerate}
+
+% ==============================================================================
+% SEZIONE 2.5: IL PARADOSSO DEL COMPLEANNO E APPLICAZIONI CLASSICHE
+% ==============================================================================
+\section{Problemi Classici ed Esempi Notabili: Il Paradosso del Compleanno}
+\label{sec:paradosso_compleanno}
+
+Un esempio cardine che evidenzia come l'intuizione umana fallisca sistematicamente nella stima delle probabilità combinatorie è il **Paradosso del Compleanno** (\emph{Birthday Paradox}).
+
+\begin{esercizio}{Il Paradosso del Compleanno}{es_birthday_paradox}
+In un'aula universitaria sono presenti $n$ studenti. Assumendo l'anno composto da $N = 365$ giorni equiprobabili e trascurando gli anni bisestili e i parti gemellari:
+\begin{enumerate}
+    \item[(a)] Determinare la formula esatta per la probabilità $p(n)$ che almeno due persone condividano lo stesso giorno di compleanno.
+    \item[(b)] Ricavare l'approssimazione esponenziale asintotica per grandi $N$.
+    \item[(c)] Determinare il numero minimo di persone $n^*$ affinché la probabilità superi il $50\%$ ($p(n^*) \ge 0.5$).
+\end{enumerate}
+\end{esercizio}
+
+\begin{dimostrazione}
+\textbf{(a) Risoluzione tramite l'evento complementare:}
+Sia $E$ l'evento ``almeno due persone compiono gli anni lo stesso giorno''. L'evento complementare $E^c$ è ``tutti gli $n$ studenti compiono gli anni in $n$ giorni rigorosamente distinti dell'anno''.
+\begin{itemize}
+    \item Il numero di esiti possibili totali nello spazio campionario è $|\Omega| = 365^n$ (disposizioni con ripetizione).
+    \item Il numero di configurazioni favorevoli a $E^c$ corrisponde alla scelta di $n$ date distinte in sequenza ordinata:
+    \begin{equation}
+        |E^c| = D_{365, n} = 365 \cdot 364 \cdot 363 \dots (365 - n + 1) = \frac{365!}{(365-n)!}
+    \end{equation}
+\end{itemize}
+La probabilità esatta dell'evento complementare è quindi:
+\begin{equation}
+    \mathbb{P}(E^c) = \frac{D_{365, n}}{365^n} = \prod_{i=1}^{n-1} \left(1 - \frac{i}{365}\right) = 1 \cdot \left(1 - \frac{1}{365}\right)\left(1 - \frac{2}{365}\right)\dots \left(1 - \frac{n-1}{365}\right)
+\end{equation}
+La probabilità cercata è:
+\begin{equation}
+    p(n) = \mathbb{P}(E) = 1 - \mathbb{P}(E^c) = 1 - \prod_{i=1}^{n-1} \left(1 - \frac{i}{365}\right)
+\end{equation}
+
+\textbf{(b) Derivazione dell'Approssimazione Esponenziale di Taylor:}
+Sfruttando lo sviluppo in serie di Taylor $e^{-x} \approx 1 - x$ valido per $x \ll 1$, possiamo approssimare ogni singolo fattore $1 - \frac{i}{365} \approx e^{-i/365}$:
+\begin{equation}
+    \mathbb{P}(E^c) \approx \prod_{i=1}^{n-1} e^{-i/365} = \exp\left(-\sum_{i=1}^{n-1} \frac{i}{365}\right) = \exp\left(-\frac{1}{365} \frac{(n-1)n}{2}\right) = \exp\left(-\frac{n(n-1)}{730}\right)
+\end{equation}
+Pertanto, la curva di probabilità approssimata è data dalla funzione logistica:
+\begin{equation}
+    p(n) \approx 1 - \exp\left(-\frac{n^2}{2 \cdot 365}\right)
+\end{equation}
+
+\textbf{(c) Calcolo della Soglia Critica $n^*$ per $p(n) \ge 0.5$:}
+Ponendo l'approssimazione esponenziale $\ge 0.5$:
+\begin{equation}
+    1 - e^{-\frac{n^2}{730}} \ge 0.5 \iff e^{-\frac{n^2}{730}} \le 0.5 \iff -\frac{n^2}{730} \le \ln(0.5) = -\ln(2)
+\end{equation}
+Moltiplicando per $-730$ e invertendo il verso:
+\begin{equation}
+    n^2 \ge 730 \cdot \ln(2) \approx 730 \cdot 0.693147 = 505.997 \implies n \ge \sqrt{505.997} \approx 22.49
+\end{equation}
+Calcolando i valori esatti:
+\begin{itemize}
+    \item Per $n = 22$: $p(22) = 0.4757$ ($47.57\%$).
+    \item Per $n = 23$: $p(23) = 0.5073$ ($\bm{50.73\%}$).
+\end{itemize}
+Bastano quindi appena $\bm{n = 23}$ persone affinché la probabilità superi il $50\%$. Il paradosso intuitivo svanisce se si considera che con $n=23$ persone non stiamo confrontando i compleanni con una data fissa, ma stiamo generando $\binom{23}{2} = \frac{23 \cdot 22}{2} = \bm{253}$ coppie distinte di confronti simultanei. $\blacksquare$
+\end{dimostrazione}

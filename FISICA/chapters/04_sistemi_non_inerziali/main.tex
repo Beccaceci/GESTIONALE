@@ -1,0 +1,309 @@
+% ==============================================================================
+% CAPITOLO 04 - MOTI RELATIVI E SISTEMI DI RIFERIMENTO NON INERZIALI
+% ==============================================================================
+\chapter{Moti Relativi e Sistemi di Riferimento Non Inerziali}
+\label{chap:sistemi_non_inerziali}
+
+\begin{tcolorbox}[enhanced, breakable, colback=navyblue!4!white, colframe=navyblue!80!black,
+    coltitle=white, fonttitle=\bfseries\sffamily, title={Quadro Sinottico del Capitolo 04 (Corrispondenza: Lezioni 08 e 09)},
+    sharp corners, rounded corners=south, boxrule=1pt]
+\textbf{Collocazione Modulare:} Parte I -- Cinematica e Dinamica del Punto Materiale\\
+\textbf{Trascrizioni di Riferimento:} \texttt{trascrizioni/Lezione\_08\_...md} e \texttt{trascrizioni/Lezione\_09\_...md}\\
+\textbf{Manuale di Riferimento:} Focardi, Massa, Ugolini -- \emph{Fisica Generale: Meccanica e Termodinamica} (Capitolo 4)\\
+\textbf{Obiettivi Didattici e Competenze:}\par
+\begin{itemize}
+    \item Formalizzare le trasformazioni cinematiche tra un sistema fisso (inerziale) $S$ e un sistema mobile $S'$ in moto rototraslatorio generico.
+    \item Dimostrare rigorosamente il Teorema di Coriolis per la composizione delle velocità e delle accelerazioni ($\vec{a} = \vec{a}' + \vec{a}_{\text{trasc}} + \vec{a}_{\text{Cor}}$).
+    \item Formulare il secondo principio nei sistemi non inerziali mediante l'introduzione delle forze apparenti (d'inerzia): forza di traslazione, forza centrifuga, forza di Eulero e forza di Coriolis.
+    \item Analizzare il peso apparente in sistemi accelerati (ascensore e gravità artificiale).
+    \item Studiare gli effetti della rotazione terrestre: variazione latitudinale di $\vec{g}_{\text{eff}}$, deviazione verso Est dei gravi in caduta libera e rotazione del piano del Pendolo di Foucault.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5em}
+
+% ------------------------------------------------------------------------------
+\section{Cinematica Relativa: Teorema di Composizione delle Accelerazioni}
+\label{sec:cinematica_relativa}
+% ------------------------------------------------------------------------------
+
+Consideriamo due terne cartesiane ortonormali destre:
+\begin{itemize}
+    \item $S = (O, \ux, \uy, \uz)$: sistema di riferimento \textbf{fisso} (inerziale).
+    \item $S' = (O', \ux', \uy', \uz')$: sistema di riferimento \textbf{mobile} (non inerziale), la cui origine $O'$ ha posizione $\vec{r}_{O'}(t)$ rispetto a $O$ e i cui assi ruotano con velocità angolare istantanea $\vec{\omega}(t)$.
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Sistema Fisso S
+    \coordinate (O) at (0,0);
+    \draw[->, thick] (O) -- (2.5,0) node[below] {$x$};
+    \draw[->, thick] (O) -- (0,2.5) node[left] {$y$};
+    \filldraw[black] (O) circle (1.5pt) node[below left] {$O$ (Fisso $S$)};
+    
+    % Sistema Mobile S'
+    \coordinate (Op) at (4,1.5);
+    \begin{scope}[shift={(Op)}, rotate=25]
+        \draw[->, thick, navyblue] (0,0) -- (2,0) node[below] {$x'$};
+        \draw[->, thick, navyblue] (0,0) -- (0,2) node[left] {$y'$};
+        \draw[->, ultra thick, purpleaccent] (0,0) -- (0, 1.2) node[above right] {$\vec{\omega}$};
+    \end{scope}
+    \filldraw[navyblue] (Op) circle (1.5pt) node[below] {$O'$ (Mobile $S'$)};
+    
+    % Vettore congiungente origini
+    \draw[->, thick, forestgreen] (O) -- (Op) node[midway, below right] {$\vec{r}_{O'}$};
+    
+    % Punto P
+    \coordinate (P) at (4.5, 4.2);
+    \filldraw[crimsonred] (P) circle (2pt) node[above right] {$P$};
+    
+    % Vettori posizione
+    \draw[->, very thick, crimsonred] (O) -- (P) node[midway, above left] {$\vec{r}$};
+    \draw[->, very thick, navyblue] (Op) -- (P) node[midway, right] {$\vec{r}'$};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Posizione e Velocità Relativa}
+Il vettore posizione assoluto $\vec{r}(t)$ del punto $P$ si esprime come somma vettoriale:
+\begin{equation}
+    \vec{r}(t) = \vec{r}_{O'}(t) + \vec{r}'(t) = \vec{r}_{O'}(t) + x'(t)\ux' + y'(t)\uy' + z'(t)\uz'
+    \label{eq:pos_rel}
+\end{equation}
+Derivando rispetto al tempo nel sistema fisso $S$ e applicando le formule di Poisson per i versori mobili $\dv{\hat{\bm{u}}'_i}{t} = \vec{\omega} \times \hat{\bm{u}}'_i$:
+\begin{align}
+    \vec{v} &= \dv{\vec{r}}{t} = \dv{\vec{r}_{O'}}{t} + (\dot{x}'\ux' + \dot{y}'\uy' + \dot{z}'\uz') + \left(x'\dv{\ux'}{t} + y'\dv{\uy'}{t} + z'\dv{\uz'}{t}\right) \nonumber \\
+    &= \vec{v}_{O'} + \vec{v}' + \vec{\omega}\times(x'\ux' + y'\uy' + z'\uz')
+\end{align}
+
+\begin{teorema}{Composizione delle Velocità (Galileo)}{teo:comp_velocita}
+La velocità assoluta $\vec{v}$ è la somma della \textbf{velocità relativa} $\vec{v}'$ e della \textbf{velocità di trascinamento} $\vec{v}_{\text{trasc}}$:
+\begin{equation}
+    \vec{v} = \vec{v}' + \vec{v}_{\text{trasc}}
+    \label{eq:comp_vel}
+\end{equation}
+dove la velocità di trascinamento rappresenta la velocità che avrebbe il punto $P$ se fosse solidale al sistema mobile $S'$:
+\begin{equation}
+    \vec{v}_{\text{trasc}} \coloneqq \vec{v}_{O'} + \vec{\omega}\times\vec{r}'
+\end{equation}
+\end{teorema}
+
+\subsection{Teorema di Coriolis per le Accelerazioni}
+
+Derivando nuovamente la velocità assoluta \eqref{eq:comp_vel} rispetto al tempo:
+\begin{equation}
+    \vec{a} = \dv{\vec{v}}{t} = \dv{\vec{v}_{O'}}{t} + \dv{\vec{v}'}{t} + \dv{\vec{\omega}}{t}\times\vec{r}' + \vec{\omega}\times\dv{\vec{r}'}{t}
+\end{equation}
+Calcolando la derivata temporale della velocità relativa $\vec{v}'$ vista da $S$:
+\begin{equation}
+    \dv{\vec{v}'}{t} = \vec{a}' + \vec{\omega}\times\vec{v}'
+\end{equation}
+e poiché $\dv{\vec{r}'}{t} = \vec{v}' + \vec{\omega}\times\vec{r}'$, sostituendo si ottiene:
+\begin{equation}
+    \vec{a} = \vec{a}' + \left[\vec{a}_{O'} + \dot{\vec{\omega}}\times\vec{r}' + \vec{\omega}\times(\vec{\omega}\times\vec{r}')\right] + 2\vec{\omega}\times\vec{v}'
+\end{equation}
+
+\begin{teorema}{Teorema di Coriolis delle Accelerazioni}{teo:coriolis_acc}
+L'accelerazione assoluta $\vec{a}$ di un punto materiale si scompone in:
+\begin{equation}
+    \vec{a} = \vec{a}' + \vec{a}_{\text{trasc}} + \vec{a}_{\text{Cor}}
+    \label{eq:teorema_coriolis}
+\end{equation}
+dove:
+\begin{itemize}
+    \item $\vec{a}' \coloneqq \ddot{x}'\ux' + \ddot{y}'\uy' + \ddot{z}'\uz'$ è l'\textbf{accelerazione relativa} (misurata dall'osservatore in $S'$).
+    \item $\vec{a}_{\text{trasc}} \coloneqq \vec{a}_{O'} + \dot{\vec{\omega}}\times\vec{r}' + \vec{\omega}\times(\vec{\omega}\times\vec{r}')$ è l'\textbf{accelerazione di trascinamento}.
+    \item $\vec{a}_{\text{Cor}} \coloneqq 2\vec{\omega}\times\vec{v}'$ è l'\textbf{accelerazione complementare (di Coriolis)}.
+\end{itemize}
+\end{teorema}
+
+% ------------------------------------------------------------------------------
+\section{Dinamica nei Sistemi Non Inerziali e Forze Apparenti}
+\label{sec:forze_apparenti}
+% ------------------------------------------------------------------------------
+
+Nel sistema inerziale $S$, il secondo principio della dinamica stabilisce che $\vec{F}_{\text{reali}} = m\vec{a}$. Sostituendo la decomposizione di Coriolis \eqref{eq:teorema_coriolis}:
+\begin{equation}
+    \vec{F}_{\text{reali}} = m(\vec{a}' + \vec{a}_{\text{trasc}} + \vec{a}_{\text{Cor}}) \iff m\vec{a}' = \vec{F}_{\text{reali}} - m\vec{a}_{\text{trasc}} - m\vec{a}_{\text{Cor}}
+\end{equation}
+
+\begin{legge}{Equazione Fondamentale della Dinamica Relativa}{legge:dinamica_relativa}
+Per un osservatore solidale a un riferimento non inerziale $S'$, il secondo principio assume formalmente la stessa struttura newtoniana:
+\begin{equation}
+    m\vec{a}' = \vec{F}_{\text{reali}} + \vec{F}_{\text{app}}
+    \label{eq:dinamica_non_inerziale}
+\end{equation}
+a patto di aggiungere alla risultante delle interazioni fisiche reali $\vec{F}_{\text{reali}}$ le cosiddette \textbf{forze apparenti} (o fittizie/inerziali):
+\begin{equation}
+    \vec{F}_{\text{app}} \coloneqq \vec{F}_{\text{trasl}} + \vec{F}_{\text{cf}} + \vec{F}_{\text{Euler}} + \vec{F}_{\text{Cor}}
+\end{equation}
+\end{legge}
+
+\begin{table}[htbp]
+\centering
+\caption{Quadro sinottico delle forze apparenti nei riferimenti non inerziali.}
+\label{tab:forze_apparenti}
+\begin{tabularx}{\textwidth}{p{3.2cm} p{3.8cm} p{3.2cm} X}
+\toprule
+\textbf{Forza Apparente} & \textbf{Espressione Analitica} & \textbf{Condizione} & \textbf{Effetto Fisico Principale} \\
+\midrule
+\textbf{Inerzia di Traslazione} & $\vec{F}_{\text{trasl}} = -m\vec{a}_{O'}$ & $\vec{a}_{O'} \neq \vec{0}$ & Spinta all'indietro in frenata o accelerazione rettilinea. \\
+\textbf{Forza Centrifuga} & $\vec{F}_{\text{cf}} = -m\vec{\omega}\times(\vec{\omega}\times\vec{r}')$ & $\vec{\omega} \neq \vec{0}$ & Spinta radiale verso l'esterno dell'asse di rotazione. \\
+\textbf{Forza di Eulero} & $\vec{F}_{\text{Euler}} = -m\dot{\vec{\omega}}\times\vec{r}'$ & $\dot{\vec{\omega}} \neq \vec{0}$ & Forza trasversa dovuta a variazioni di velocità angolare. \\
+\textbf{Forza di Coriolis} & $\vec{F}_{\text{Cor}} = -2m\vec{\omega}\times\vec{v}'$ & $\vec{\omega} \neq \vec{0}, \, \vec{v}' \neq \vec{0}$ & Deviazione perpendicolare alla velocità relativa. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{esame}[Natura delle Forze Apparenti]
+Le forze apparenti non originano da interazioni fisiche con altri corpi (non hanno un corpo sorgente reale) e pertanto **non soddisfano il terzo principio di Newton** (non esiste alcuna forza di reazione corrispondente).
+\end{esame}
+
+% ------------------------------------------------------------------------------
+\section{Applicazioni ed Effetti della Rotazione Terrestre}
+\label{sec:applicazioni_terra}
+% ------------------------------------------------------------------------------
+
+La Terra ruota attorno al proprio asse polare con velocità angolare:
+\begin{equation}
+    \omega = \frac{2\pi}{T_{\text{siderale}}} = \frac{2\pi}{\SI{86164}{\second}} \approx \SI{7.292e-5}{\radian\per\second}
+\end{equation}
+Un laboratorio solidale alla superficie terrestre a latitudine $\lambda$ costituisce un sistema di riferimento non inerziale soggetto sia alla forza centrifuga che alla forza di Coriolis.
+
+\subsection{Variazione Latitudinale della Gravità Effettiva}
+Un corpo fermo sulla superficie ($\vec{v}' = \vec{0} \implies \vec{F}_{\text{Cor}} = \vec{0}$) è soggetto alla forza peso gravitazionale pura $\vec{P}_0 = m\vec{g}_0$ e alla forza centrifuga $\vec{F}_{\text{cf}} = m\omega^2 R_T \cos\lambda\,\hat{\bm{u}}_\perp$:
+\begin{equation}
+    \vec{g}_{\text{eff}} = \vec{g}_0 + \omega^2 R_T\cos\lambda\,\hat{\bm{u}}_\perp
+\end{equation}
+\begin{itemize}
+    \item \textbf{Ai Poli ($\lambda = \pm 90^\circ$)}: $\cos\lambda = 0 \implies g_{\text{eff}} = g_0 \approx \SI{9.832}{\metre\per\second\squared}$.
+    \item \textbf{All'Equatore ($\lambda = 0^\circ$)}: la forza centrifuga è massima e opposta a $\vec{g}_0$:
+    \begin{equation}
+        g_{\text{eff}} = g_0 - \omega^2 R_T \approx 9{,}832 - (7{,}292\times 10^{-5})^2 \times (6{,}371\times 10^6) \approx \SI{9.780}{\metre\per\second\squared}
+    \end{equation}
+    \item \textbf{Deviazione del Filo a Piombo}: a latitudini intermedie, la direzione della verticale apparente (perpendicolare alla superficie degli oceani) devia verso l'equatore rispetto alla direzione radiale verso il centro della Terra di un angolo massimo $\delta \approx 0{,}1^\circ$ a $\lambda = 45^\circ$.
+\end{itemize}
+
+\subsection{Deviazione verso Est dei Gravi in Caduta Libera}
+Un grave lasciato cadere da fermo da un'altezza $h$ cade verso il basso con velocità relativa diretta lungo la verticale $\vec{v}' \approx -g t\uz'$. La forza di Coriolis agente su di esso vale:
+\begin{equation}
+    \vec{F}_{\text{Cor}} = -2m\vec{\omega}\times(-gt\uz') = 2mg t (\vec{\omega}\times\uz')
+\end{equation}
+A latitudine $\lambda$, il prodotto vettoriale genera una spinta diretta verso **Est** (verso entrante):
+\begin{equation}
+    a_x' = 2\omega g t \cos\lambda
+\end{equation}
+Integrando due volte nel tempo da $t=0$ al tempo di caduta $t_{\text{cad}} = \sqrt{\frac{2h}{g}}$:
+\begin{equation}
+    x_{\text{Est}} = \int_0^{t_{\text{cad}}} \left(\int_0^t 2\omega g \tau \cos\lambda\,\dd\tau\right)\dd t = \frac{1}{3}\omega g \cos\lambda\,t_{\text{cad}}^3 = \mathbf{\frac{2\sqrt{2}}{3}\omega\cos\lambda \sqrt{\frac{h^3}{g}}}
+    \label{eq:deviazione_est}
+\end{equation}
+
+\subsection{Pendolo di Foucault}
+Un pendolo sferico di grande lunghezza oscilla liberamente su un piano. Per effetto della componente verticale della velocità angolare terrestre $\omega_z = \omega\sin\lambda$, la forza di Coriolis deflette la massa sempre verso destra (nell'emisfero boreale), facendo ruotare il piano di oscillazione in senso orario con periodo:
+\begin{equation}
+    T_F = \frac{24\text{ ore}}{\sin\lambda}
+\end{equation}
+Ai poli ($\lambda = 90^\circ$), $T_F = 24\text{ h}$ (la Terra ruota sotto il pendolo), mentre all'equatore ($\lambda = 0$) il piano di oscillazione non ruota ($T_F \to \infty$).
+
+% ------------------------------------------------------------------------------
+\section{Esercizi Risolti ed Applicativi con Analisi delle Forze Apparenti}
+\label{sec:esercizi_non_inerziali}
+% ------------------------------------------------------------------------------
+
+\begin{esercizio}[Pallina su Asta Rotante e Diagramma nel Riferimento Non Inerziale]
+\textbf{Testo:}
+Un anellino di massa $m$ può scorrere senza attrito lungo un'asta orizzontale rettilinea posta in rotazione attorno a un asse verticale passante per $O$ con velocità angolare costante $\omega$. All'istante $t=0$, l'anellino si trova a distanza $r_0 > 0$ dal centro con velocità radiale nulla $\dot{r}(0) = 0$. Determinare la legge oraria $r(t)$ e analizzare il diagramma delle forze nel riferimento rotante $S'$.
+\end{esercizio}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Asse di rotazione e asta
+    \draw[thick, dashed] (0,-1) -- (0,2) node[above] {Asse di rotazione $\vec{\omega} = \omega\uz$};
+    \draw[very thick, brown!80!black] (0,0) -- (5, 0) node[right] {Asta guida};
+    \filldraw[black] (0,0) circle (2pt) node[below left] {$O$};
+    
+    % Anello di massa m
+    \coordinate (M) at (3,0);
+    \draw[ultra thick, fill=blue!20, draw=navyblue] (2.7, -0.3) rectangle (3.3, 0.3);
+    \filldraw[black] (M) circle (1.5pt) node[below=12pt] {$m$};
+    
+    % Vettori forza nel piano orizzontale (riferimento S')
+    \draw[->, ultra thick, crimsonred] (M) -- (4.8, 0) node[above] {$\vec{F}_{\text{cf}} = m\omega^2 r\,\ur'$};
+    \draw[->, ultra thick, purpleaccent] (M) -- (3, -1.5) node[right] {$\vec{F}_{\text{Cor}} = -2m\omega\dot{r}\,\utheta'$};
+    \draw[->, ultra thick, forestgreen] (M) -- (3, 1.5) node[right] {$\vec{N}_\theta$ (Reazione guida)};
+    
+    % Velocità radiale
+    \draw[->, very thick, navyblue] (M) -- (4.0, 0) node[below] {$\dot{r}\,\ur'$};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[enhanced, breakable, colback=forestgreen!5!white, colframe=forestgreen!80!black,
+    title={\textbf{Analisi delle Forze nel Riferimento Rotante $S'$}}, fonttitle=\bfseries\sffamily]
+\begin{itemize}
+    \item \textbf{Lungo la direzione radiale $\ur'$:}
+    \begin{itemize}
+        \item \textbf{Forza Centrifuga ($\vec{F}_{\text{cf}} = m\omega^2 r\,\ur'$):} è una forza apparente diretta radialmente verso l'esterno; è l'unica forza agente lungo l'asta ed è responsabile dell'accelerazione radiale $\ddot{r}$.
+        \item \textbf{Nessuna forza reale radiale ($F_{r,\text{reale}} = 0$):} l'asta è perfettamente liscia, quindi non può esercitare forze di attrito tangenziali al moto radiale.
+    \end{itemize}
+    \item \textbf{Lungo la direzione trasversa $\utheta'$:}
+    \begin{itemize}
+        \item \textbf{Forza di Coriolis ($\vec{F}_{\text{Cor}} = -2m\vec{\omega}\times\vec{v}' = -2m\omega\dot{r}\utheta'$):} spinge l'anellino contro la parete laterale dell'asta (nel verso opposto alla rotazione).
+        \item \textbf{Reazione Normale Trasversa ($\vec{N}_\theta$):} la parete dell'asta bilancia esattamente la forza di Coriolis: $\vec{N}_\theta = -\vec{F}_{\text{Cor}} = +2m\omega\dot{r}\utheta'$.
+    \end{itemize}
+    \item \textbf{Lungo la verticale $\uz$:} la reazione normale verticale bilancia la forza peso ($\vec{N}_z + \vec{P} = \vec{0}$).
+\end{itemize}
+\end{tcolorbox}
+
+\textbf{Risoluzione Analitica:}
+L'equazione del moto radiale è:
+\begin{equation}
+    m\ddot{r} = m\omega^2 r \implies \ddot{r}(t) - \omega^2 r(t) = 0
+\end{equation}
+Con le condizioni iniziali $r(0) = r_0$ e $\dot{r}(0) = 0$, la soluzione è:
+\begin{equation}
+    \mathbf{r(t) = r_0 \cosh(\omega t)}
+\end{equation}
+
+\vspace{0.8em}
+
+\begin{esercizio}[Ascensore Accelerato e Peso Apparente]
+\textbf{Testo:}
+Una persona di massa $m = \SI{70}{\kilogram}$ si trova su una bilancia all'interno di un ascensore che accelera verso l'alto con modulo $a_0 = \SI{2.0}{\metre\per\second\squared}$. Determinare la lettura della bilancia (peso apparente) e confrontare l'analisi nei sistemi inerziale e non inerziale.
+\end{esercizio}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Cabina ascensore
+    \draw[very thick] (-2,-1) rectangle (2, 2.5);
+    \node[above] at (0, 2.5) {Cabina $S'$};
+    \draw[->, ultra thick, purpleaccent] (2.5, 0.5) -- (2.5, 1.8) node[right] {$\vec{a}_0 = a_0\uy$};
+    
+    % Bilancia e persona
+    \filldraw[fill=gray!40] (-1.2, -1) rectangle (1.2, -0.7);
+    \node at (0, -0.85) {\small Bilancia};
+    \filldraw[fill=blue!10, draw=navyblue, thick] (-0.6, -0.7) rectangle (0.6, 0.8);
+    \node at (0, 0.05) {$m$};
+    
+    % Forze
+    \draw[->, ultra thick, forestgreen] (0, -0.7) -- (0, 1.3) node[right] {$\vec{N}$ (Lettura bilancia)};
+    \draw[->, ultra thick, navyblue] (0, 0.05) -- (0, -1.5) node[right] {$\vec{P} = m\vec{g}$};
+    \draw[->, ultra thick, crimsonred] (-0.3, 0.05) -- (-0.3, -1.0) node[left] {$\vec{F}_{\text{in}} = -m\vec{a}_0$};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[enhanced, breakable, colback=forestgreen!5!white, colframe=forestgreen!80!black,
+    title={\textbf{Confronto tra Sistema Inerziale e Riferimento Non Inerziale}}, fonttitle=\bfseries\sffamily]
+\begin{itemize}
+    \item \textbf{Osservatore Inerziale a Terra ($S$):}
+    Vede la persona accelerare verso l'alto con $\vec{a} = \vec{a}_0$. La seconda legge di Newton stabilisce che la risultante delle forze reali fornisce l'accelerazione:
+    \begin{equation}
+        N - mg = m a_0 \implies N = m(g + a_0) = 70 \times (9{,}81 + 2{,}0) = \mathbf{\SI{826.7}{\newton}}
+    \end{equation}
+    \item \textbf{Osservatore Non Inerziale nell'Ascensore ($S'$):}
+    Vede la persona in quiete ($\vec{a}' = \vec{0}$). All'equilibrio statico agiscono il peso reale $\vec{P} = -mg\uy$, la forza apparente d'inerzia $\vec{F}_{\text{in}} = -m\vec{a}_0 = -m a_0\uy$ e la reazione normale $\vec{N}$:
+    \begin{equation}
+        \sum \vec{F}' = \vec{0} \implies N - mg - m a_0 = 0 \implies \mathbf{N = m(g + a_0)}
+    \end{equation}
+    La bilancia misura la forza normale $N$, pari al \textbf{peso apparente} $P_{\text{app}} = m g_{\text{eff}} > mg$.
+\end{itemize}
+\end{tcolorbox}

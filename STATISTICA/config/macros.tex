@@ -1,0 +1,146 @@
+% ==============================================================================
+% MACRO E SCORCIATOIE MATEMATICHE - STATISTICA E PROBABILITÀ
+% ==============================================================================
+
+% Insiemi numerici standard
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Rn}{\mathbb{R}^n}
+\newcommand{\Rdue}{\mathbb{R}^2}
+\newcommand{\Rtre}{\mathbb{R}^3}
+
+% Simboli asintotici, costanti e analisi
+\newcommand{\infinito}{\infty}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\de}{\delta}
+\newcommand{\limn}{\lim_{n \to \infty}}
+\newcommand{\limx}[1]{\lim_{x \to #1}}
+\newcommand{\bigO}{\mathcal{O}}
+\newcommand{\smallo}{o}
+
+% Spazi di probabilità ed eventi
+\newcommand{\OmegaSpace}{\Omega}
+\newcommand{\SigmaAlg}{\mathscr{F}}
+\newcommand{\Borel}{\mathscr{B}}
+\newcommand{\EventCompl}[1]{#1^{\mathrm{c}}}
+\newcommand{\InsiemeVuoto}{\emptyset}
+\newcommand{\independent}{\perp\!\!\!\perp}
+
+% Operatori di probabilità e statistica
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Corr}{\operatorname{Corr}}
+\newcommand{\sd}{\operatorname{sd}}
+\newcommand{\se}{\operatorname{se}}
+\newcommand{\Bias}{\operatorname{Bias}}
+\newcommand{\MSE}{\operatorname{MSE}}
+\newcommand{\dom}{\operatorname{dom}}
+\newcommand{\codom}{\operatorname{codom}}
+\newcommand{\Imm}{\operatorname{Im}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\med}{\operatorname{med}}
+\newcommand{\moda}{\operatorname{moda}}
+
+% Probabilità condizionata ed attesa condizionata con spaziatura automatica
+\newcommand{\ProbCond}[2]{\Prob\left(#1 \;\middle|\; #2\right)}
+\newcommand{\EECond}[2]{\EE\left[#1 \;\middle|\; #2\right]}
+\newcommand{\VarCond}[2]{\Var\left(#1 \;\middle|\; #2\right)}
+
+% Distribuzioni notevoli discrete
+\newcommand{\Bernoulli}{\operatorname{Bernoulli}}
+\newcommand{\Binomiale}{\operatorname{Bin}}
+\newcommand{\Poisson}{\operatorname{Poiss}}
+\newcommand{\Geometrica}{\operatorname{Geom}}
+\newcommand{\Ipergeometrica}{\operatorname{Hypergeom}}
+\newcommand{\Pascal}{\operatorname{Pascal}}
+\newcommand{\BinomialeNeg}{\operatorname{BinNeg}}
+\newcommand{\UniformeDiscreta}{\operatorname{UnifDisc}}
+
+% Distribuzioni notevoli continue
+\newcommand{\Uniforme}{\operatorname{Unif}}
+\newcommand{\Gaussiana}{\mathcal{N}}
+\newcommand{\StandardNormal}{\mathcal{N}(0,1)}
+\newcommand{\Esponenziale}{\operatorname{Exp}}
+\newcommand{\GammaDist}{\operatorname{Gamma}}
+\newcommand{\BetaDist}{\operatorname{Beta}}
+\newcommand{\ChiQuadro}{\chi^2}
+\newcommand{\Student}{t}
+\newcommand{\Fisher}{\mathcal{F}}
+\newcommand{\Cauchy}{\operatorname{Cauchy}}
+\newcommand{\Weibull}{\operatorname{Weibull}}
+\newcommand{\LogNormale}{\operatorname{Log-Normale}}
+
+% Funzioni caratteristiche, generatrici e di ripartizione
+\newcommand{\CDF}{F}
+\newcommand{\PDF}{f}
+\newcommand{\PMF}{p}
+\newcommand{\MGF}{M}
+\newcommand{\FGM}{M}
+\newcommand{\CharFun}{\varphi}
+\newcommand{\Quantile}{\Phi}
+
+% Vettori aleatori e campioni
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\btheta}{\bm{\theta}}
+\newcommand{\MediaCamp}{\overline{X}_n}
+\newcommand{\MediaCampSenzaIndice}{\overline{X}}
+\newcommand{\VarCamp}{S^2}
+\newcommand{\VarCampCorretta}{S^2_n}
+\newcommand{\DevCamp}{S}
+
+% Stimatori e Verosimiglianza
+\newcommand{\stimatore}[1]{\widehat{#1}}
+\newcommand{\thetaHat}{\widehat{\theta}}
+\newcommand{\muHat}{\widehat{\mu}}
+\newcommand{\sigmaHat}{\widehat{\sigma}}
+\newcommand{\sigmaDueHat}{\widehat{\sigma}^2}
+\newcommand{\pHat}{\widehat{p}}
+\newcommand{\Likelihood}{\mathcal{L}}
+\newcommand{\LogLikelihood}{\ell}
+\newcommand{\Score}{\mathcal{S}}
+\newcommand{\FisherInfo}{\mathcal{I}}
+
+% Test d'ipotesi
+\newcommand{\Hnull}{H_0}
+\newcommand{\Halt}{H_1}
+\newcommand{\RegioneCritica}{W}
+\newcommand{\pvalue}{p\text{-value}}
+\newcommand{\LivelloSignif}{\alpha}
+\newcommand{\PotenzaTest}{1-\beta}
+
+% Differenziali e misure
+\newcommand{\diff}{\mathop{}\!\mathrm{d}}
+\newcommand{\dx}{\diff x}
+\newcommand{\dy}{\diff y}
+\newcommand{\dz}{\diff z}
+\newcommand{\dt}{\diff t}
+\newcommand{\ds}{\diff s}
+\newcommand{\du}{\diff u}
+\newcommand{\dv}{\diff v}
+\newcommand{\dP}{\diff \Prob}
+\newcommand{\dF}{\diff F}
+
+% Parentesi scalabili, norme e prodotti scalari
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\scal}{\langle}{\rangle}
+\DeclarePairedDelimiter{\tonde}{(}{)}
+\DeclarePairedDelimiter{\quadre}{[}{]}
+\DeclarePairedDelimiter{\graffe}{\{}{\}}
+
+% Indicatori di insieme / Variabili Bernoulliane associate ad eventi
+\newcommand{\Ind}[1]{\mathbf{1}_{#1}}
+\newcommand{\IndGraffe}[1]{\mathbf{1}_{\{#1\}}}

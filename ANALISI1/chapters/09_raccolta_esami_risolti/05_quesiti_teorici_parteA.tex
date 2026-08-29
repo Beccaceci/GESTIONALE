@@ -1,0 +1,154 @@
+\section{Quesiti Concettuali Rapidi e Test di Parte A}
+\label{sec:esami_parteA}
+
+\begin{esame}[Strategie per il Test Preliminare di Parte A]
+Il test di Parte A (quesiti a risposta sintetica o multipla) richiede rapidità e precisione geometrico-analitica:
+\begin{enumerate}
+    \item \textbf{Dominio e Immagine:} Per calcolare $\Imm(f)$, determinare prima gli intervalli di monotonia della funzione nei vari rami del dominio e calcolare i limiti agli estremi per ciascun ramo continuo.
+    \item \textbf{Coordinate Polari:} Ricordare la determinazione dell'angolo polare $\theta \in [0, 2\pi)$:
+    \[
+        \theta = \begin{cases}
+            \arctg(y/x) & \text{nel I quadrante } (x > 0, y \ge 0) \\
+            \arctg(y/x) + \pi & \text{nel II e III quadrante } (x < 0) \\
+            \arctg(y/x) + 2\pi & \text{nel IV quadrante } (x > 0, y < 0)
+        \end{cases}
+    \]
+    \item \textbf{Estremo Superiore/Inferiore di Insiemi Discreti:} Separare sempre le sottosuccessioni a termini di indice pari e dispari per identificare gli andamenti monotoni verso gli estremi.
+\end{enumerate}
+\end{esame}
+
+\begin{esempio}{Insieme di Definizione, Immagine e Inversa (Compitino 2024/25)}{esame_parteA_inversa}
+Determinare l'insieme di definizione, l'immagine e l'inversa della funzione reale:
+\[
+    f(x) := 2 - \exp\left(\frac{1}{x+1}\right)
+\]
+\tcblower
+\textbf{Soluzione Dettagliata:}
+\begin{enumerate}
+    \item \textbf{Dominio naturale}: la funzione esponenziale è definita ovunque, mentre l'esponente richiede la non nullità del denominatore $x+1 \neq 0$. Dunque:
+    \[
+        \dom(f) = \R \setminus \{-1\} = (-\infty, -1) \cup (-1, +\infty)
+    \]
+    \item \textbf{Immagine}: studiamo il comportamento sui due intervalli connessi:
+    \begin{itemize}
+        \item Per $x \in (-1, +\infty)$: la funzione $u(x) = \frac{1}{x+1}$ è strettamente decrescente da $+\infty$ a $0^+$.
+        Di conseguenza $e^{u(x)} \in (1, +\infty)$, da cui:
+        \[
+            y = 2 - e^{u(x)} \in (-\infty, 1)
+        \]
+        \item Per $x \in (-\infty, -1)$: la funzione $u(x) = \frac{1}{x+1}$ è strettamente decrescente da $0^-$ a $-\infty$.
+        Di conseguenza $e^{u(x)} \in (0, 1)$, da cui:
+        \[
+            y = 2 - e^{u(x)} \in (1, 2)
+        \]
+    \end{itemize}
+    L'immagine complessiva è l'unione dei due intervalli:
+    \[
+        \Imm(f) = (-\infty, 1) \cup (1, 2) = \{y \in \R \mid y < 2 \text{ e } y \neq 1\}
+    \]
+    \item \textbf{Funzione Inversa}: poiché $f$ è strettamente monotona su ciascun intervallo e le due immagini sono disgiunte, $f$ è globale iniettiva su $\dom(f)$. Esplicitiamo $x$ in funzione di $y \in \Imm(f)$:
+    \[
+        y = 2 - e^{\frac{1}{x+1}} \iff e^{\frac{1}{x+1}} = 2 - y \iff \frac{1}{x+1} = \ln(2 - y) \iff x + 1 = \frac{1}{\ln(2 - y)}
+    \]
+    Dunque la funzione inversa $f^{-1} \colon (-\infty, 1) \cup (1, 2) \to \R \setminus \{-1\}$ è:
+    \[
+        f^{-1}(y) = \frac{1}{\ln(2 - y)} - 1
+    \]
+\end{enumerate}
+\end{esempio}
+
+\begin{esempio}{Coordinate Polari nel Piano Reale (Compitino 2024/25)}{esame_parteA_polari}
+Determinare le coordinate polari $(\rho, \theta)$ con raggio $\rho \ge 0$ e anomalia $\theta \in [0, 2\pi)$ dei seguenti punti del piano cartesiano:
+\[
+    P_1(-1, \sqrt{3}), \qquad P_2(0, -2), \qquad P_3(3, -3)
+\]
+\tcblower
+\textbf{Soluzione Dettagliata:}
+Ricordando che $\rho = \sqrt{x^2 + y^2}$ e $\theta$ tiene conto dell'angolo di rotazione antioraria a partire dal semiasse positivo delle ascisse:
+\begin{enumerate}
+    \item \textbf{Punto $P_1(-1, \sqrt{3})$:} appartiene al \textbf{II quadrante} ($x < 0, y > 0$).
+    \[
+        \rho_1 = \sqrt{(-1)^2 + (\sqrt{3})^2} = \sqrt{1 + 3} = 2
+    \]
+    \[
+        \theta_1 = \arctg\left(\frac{\sqrt{3}}{-1}\right) + \pi = -\frac{\pi}{3} + \pi = \frac{2\pi}{3}
+    \]
+    \item \textbf{Punto $P_2(0, -2)$:} giace sul semiasse negativo delle ordinate ($x = 0, y < 0$).
+    \[
+        \rho_2 = \sqrt{0^2 + (-2)^2} = 2, \qquad \theta_2 = \frac{3\pi}{2}
+    \]
+    \item \textbf{Punto $P_3(3, -3)$:} appartiene al \textbf{IV quadrante} ($x > 0, y < 0$).
+    \[
+        \rho_3 = \sqrt{3^2 + (-3)^2} = \sqrt{9 + 9} = 3\sqrt{2}
+    \]
+    \[
+        \theta_3 = \arctg\left(\frac{-3}{3}\right) + 2\pi = \arctg(-1) + 2\pi = -\frac{\pi}{4} + 2\pi = \frac{7\pi}{4}
+    \]
+\end{enumerate}
+\end{esempio}
+
+\begin{esempio}{Cinematica, Velocità Istantanea e Lunghezza di Curva (Compitino 2024/25)}{esame_parteA_curva}
+Sia dato un punto materiale $P$ che si muove nello spazio tridimensionale con traiettoria parametrizzata dalla legge oraria:
+\[
+    P(t) := \left( e^t + e^{-t}, \, \cos(2t), \, \sen(2t) \right) \in \R^3, \quad t \in \R
+\]
+Calcolare il modulo del vettore velocità istantanea $|\vec{v}(t)|$ e la lunghezza complessiva dell'arco di curva descritto nell'intervallo $t \in [-2, 2]$.
+\tcblower
+\textbf{Soluzione Dettagliata:}
+Il vettore velocità istantanea $\vec{v}(t) = P'(t)$ è ottenuto derivando componente per componente:
+\[
+    \vec{v}(t) = \left( e^t - e^{-t}, \, -2\sen(2t), \, 2\cos(2t) \right)
+\]
+Calcoliamo la velocità scalare istantanea (modulo del vettore velocità):
+\begin{align*}
+    |\vec{v}(t)| &= \sqrt{(e^t - e^{-t})^2 + (-2\sen(2t))^2 + (2\cos(2t))^2} \\
+    &= \sqrt{e^{2t} - 2 + e^{-2t} + 4\left(\sen^2(2t) + \cos^2(2t)\right)} \\
+    &= \sqrt{e^{2t} - 2 + e^{-2t} + 4} = \sqrt{e^{2t} + 2 + e^{-2t}} = \sqrt{(e^t + e^{-t})^2} = e^t + e^{-t}
+\end{align*}
+La lunghezza $L$ dell'arco di curva nell'intervallo $[-2, 2]$ è l'integrale del modulo della velocità:
+\[
+    L = \int_{-2}^2 |\vec{v}(t)|\dt = \int_{-2}^2 (e^t + e^{-t})\dt = \Big[ e^t - e^{-t} \Big]_{-2}^2 = (e^2 - e^{-2}) - (e^{-2} - e^2) = 2(e^2 - e^{-2})
+\]
+\end{esempio}
+
+\begin{esempio}{Estremo Superiore, Inferiore, Massimo e Minimo di Insiemi Numerici (Compitino 2023/24)}{esame_parteA_sup_inf}
+Determinare l'estremo superiore, l'estremo inferiore e l'eventuale esistenza di massimo e minimo per l'insieme numerico:
+\[
+    E := \left\{ \frac{2n (-1)^n}{n + 1} \in \R \;\middle|\; n \in \N, \, n \ge 1 \right\}
+\]
+\tcblower
+\textbf{Soluzione Dettagliata:}
+Analizziamo gli elementi $a_n = \frac{2n(-1)^n}{n+1}$ distinguendo la parità dell'indice $n$:
+\begin{enumerate}
+    \item \textbf{Indici pari ($n = 2k$ con $k \ge 1$):}
+    \[
+        a_{2k} = \frac{2(2k)(-1)^{2k}}{2k + 1} = \frac{4k}{2k + 1} = 2 - \frac{2}{2k + 1} > 0
+    \]
+    La successione dei termini pari $a_{2k}$ è strettamente crescente rispetto a $k$:
+    \begin{itemize}
+        \item Per $k = 1$ ($n = 2$): $a_2 = \frac{4}{3}$.
+        \item Per $k \to +\infty$: $\lim_{k \to \infty} a_{2k} = 2$.
+    \end{itemize}
+    Poiché $a_{2k} < 2$ per ogni $k \ge 1$, si ha:
+    \[
+        \sup E = 2, \qquad \max E \text{ non esiste (poiché } 2 \notin E\text{)}
+    \]
+    \item \textbf{Indici dispari ($n = 2k - 1$ con $k \ge 1$):}
+    \[
+        a_{2k-1} = \frac{2(2k-1)(-1)^{2k-1}}{2k} = -\frac{2k - 1}{k} = -2 + \frac{1}{k} < 0
+    \]
+    La successione dei termini dispari $a_{2k-1}$ è strettamente decrescente rispetto a $k$:
+    \begin{itemize}
+        \item Per $k = 1$ ($n = 1$): $a_1 = -2 + 1 = -1$.
+        \item Per $k \to +\infty$: $\lim_{k \to \infty} a_{2k-1} = -2$.
+    \end{itemize}
+    Poiché $a_{2k-1} > -2$ per ogni $k \ge 1$, si ha:
+    \[
+        \inf E = -2, \qquad \min E \text{ non esiste (poiché } -2 \notin E\text{)}
+    \]
+\end{enumerate}
+\paragraph{Riepilogo:}
+\[
+    \sup E = 2 \quad (\nexists \max E), \qquad \inf E = -2 \quad (\nexists \min E)
+\]
+\end{esempio}

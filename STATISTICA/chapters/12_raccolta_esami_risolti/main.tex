@@ -1,0 +1,226 @@
+\chapter{Raccolta Temi d'Esame Risolti con Guida Metodologica}
+\label{cap:raccolta_esami_risolti}
+
+\begin{abstract}
+Questo capitolo finale raccoglie una selezione ragionata e completa di problemi tipici delle prove scritte d'esame di Statistica e Calcolo delle Probabilità. Ciascun esercizio è accompagnato da un'analisi preliminare della strategia risolutiva, dallo svolgimento passo-passo matematicamente rigoroso, da box di attenzione per le trappole più ricorrenti e dal confronto con approcci alternativi.
+\end{abstract}
+
+\section{Tema d'Esame 1: Probabilità Condizionata e Formula di Bayes}
+
+\begin{esercizio}{Screening Diagnostico su Tre Macchine di Produzione}{esame_bayes_produzione}
+Un'azienda manifatturiera produce componenti elettronici utilizzando tre linee automatizzate ($M_1, M_2, M_3$):
+\begin{itemize}
+    \item La linea $M_1$ produce il $40\%$ dei pezzi totali con una percentuale di difettosità del $2\%$;
+    \item La linea $M_2$ produce il $35\%$ dei pezzi totali con una percentuale di difettosità del $3\%$;
+    \item La linea $M_3$ produce il restante $25\%$ dei pezzi totali con una percentuale di difettosità del $6\%$.
+\end{itemize}
+\begin{enumerate}
+    \item Calcolare la probabilità che un pezzo scelto a caso dalla produzione complessiva risulti \textbf{difettoso} ($D$).
+    \item Sapendo che un pezzo estratto a caso è risultato \textbf{difettoso}, determinare la probabilità che sia stato prodotto dalla linea $M_3$.
+    \item Sapendo che un pezzo estratto a caso è risultato \textbf{conforme (non difettoso)}, determinare la probabilità che provenga dalla linea $M_1$.
+\end{enumerate}
+\end{esercizio}
+
+\begin{dimostrazione}
+\textbf{1. Definizione della Partizione e delle Probabilità:}
+La terna $\{M_1, M_2, M_3\}$ costituisce una partizione esaustiva dello spazio campionario $S$:
+\begin{align*}
+    \mathbb{P}(M_1) &= 0.40, & \mathbb{P}(D \mid M_1) &= 0.02 \\
+    \mathbb{P}(M_2) &= 0.35, & \mathbb{P}(D \mid M_2) &= 0.03 \\
+    \mathbb{P}(M_3) &= 0.25, & \mathbb{P}(D \mid M_3) &= 0.06
+\end{align*}
+
+\textbf{2. Risoluzione Quesito 1 (Formula delle Probabilità Totali):}
+\begin{align*}
+    \mathbb{P}(D) &= \sum_{i=1}^3 \mathbb{P}(D \mid M_i) \mathbb{P}(M_i) \\
+    &= (0.02)(0.40) + (0.03)(0.35) + (0.06)(0.25) \\
+    &= 0.0080 + 0.0105 + 0.0150 = \bm{0.0335} \quad (\bm{3.35\%})
+\end{align*}
+
+\textbf{3. Risoluzione Quesito 2 (Teorema di Bayes per $M_3$):}
+\begin{equation*}
+    \mathbb{P}(M_3 \mid D) = \frac{\mathbb{P}(D \mid M_3) \mathbb{P}(M_3)}{\mathbb{P}(D)} = \frac{0.06 \cdot 0.25}{0.0335} = \frac{0.0150}{0.0335} = \frac{30}{67} \approx \bm{0.4478} \quad (\bm{44.78\%})
+\end{equation*}
+\emph{Osservazione:} Nonostante $M_3$ produca solo il $25\%$ del volume, a causa del suo alto tasso di difettosità genera quasi il $45\%$ di tutti i pezzi difettosi dell'impianto.
+
+\textbf{4. Risoluzione Quesito 3 (Probabilità condizionata su pezzi conformi $D^c$):}
+La probabilità totale di conformità è $\mathbb{P}(D^c) = 1 - \mathbb{P}(D) = 1 - 0.0335 = 0.9665$.
+La probabilità che un pezzo di $M_1$ sia conforme è $\mathbb{P}(D^c \mid M_1) = 1 - 0.02 = 0.98$.
+\begin{equation*}
+    \mathbb{P}(M_1 \mid D^c) = \frac{\mathbb{P}(D^c \mid M_1) \mathbb{P}(M_1)}{\mathbb{P}(D^c)} = \frac{0.98 \cdot 0.40}{0.9665} = \frac{0.3920}{0.9665} \approx \bm{0.4056} \quad (\bm{40.56\%}) \qquad \blacksquare
+\end{equation*}
+\end{dimostrazione}
+
+---
+
+\section{Tema d'Esame 2: Vettore Aleatorio Continuo Bivariato}
+
+\begin{esercizio}{Densità Congiunta su Dominio Triangolare}{esame_bivariata_triangolo}
+Sia $(X, Y)$ un vettore aleatorio continuo con funzione di densità di probabilità congiunta:
+\begin{equation*}
+    f_{X,Y}(x, y) = \begin{cases}
+        c \cdot x y, & \text{se } 0 \le y \le x \le 2 \\
+        0, & \text{altrove}
+    \end{cases}
+\end{equation*}
+\begin{enumerate}
+    \item Determinare il valore della costante di normalizzazione $c \in \mathbb{R}$.
+    \item Calcolare le funzioni di densità marginali $f_X(x)$ e $f_Y(y)$ e specificarne i rispettivi supporti.
+    \item Stabilire se $X$ e $Y$ sono stocasticamente indipendenti.
+    \item Calcolare il valore atteso congiunto $\mathbb{E}[XY]$ e la covarianza $\operatorname{Cov}(X, Y)$.
+    \item Determinare la densità condizionata $f_{Y \mid X}(y \mid x)$ e il valore atteso condizionato $\mathbb{E}[Y \mid X = x]$.
+\end{enumerate}
+\end{esercizio}
+
+\begin{dimostrazione}
+\textbf{1. Calcolo della costante $c$ (Normalizzazione):}
+L'integrale doppio sul triangolo $D = \{(x,y): 0 \le x \le 2, 0 \le y \le x\}$ deve valere 1:
+\begin{align*}
+    1 &= \iint_D c x y \, dx \, dy = c \int_0^2 x \left[ \int_0^x y \, dy \right] dx = c \int_0^2 x \left[ \frac{x^2}{2} \right] dx = \frac{c}{2} \int_0^2 x^3 \, dx \\
+    &= \frac{c}{2} \left[ \frac{x^4}{4} \right]_0^2 = \frac{c}{2} \cdot \frac{16}{4} = 2 c \implies \bm{c = \frac{1}{2}}
+\end{align*}
+Quindi la PDF congiunta è $f_{X,Y}(x, y) = \frac{1}{2} x y$ su $0 \le y \le x \le 2$.
+
+\textbf{2. Calcolo delle PDF marginali:}
+\begin{itemize}
+    \item Per $x \in [0, 2]$:
+    \begin{equation*}
+        f_X(x) = \int_0^x \frac{1}{2} x y \, dy = \frac{1}{2} x \left[ \frac{y^2}{2} \right]_0^x = \bm{\frac{x^3}{4}, \qquad x \in [0, 2]}
+    \end{equation*}
+    (Verifica: $\int_0^2 \frac{x^3}{4} dx = \frac{1}{4} [\frac{16}{4}] = 1$, corretto).
+    \item Per $y \in [0, 2]$:
+    \begin{equation*}
+        f_Y(y) = \int_y^2 \frac{1}{2} x y \, dx = \frac{1}{2} y \left[ \frac{x^2}{2} \right]_y^2 = \frac{y}{4} (4 - y^2) = \bm{y - \frac{y^3}{4}, \qquad y \in [0, 2]}
+    \end{equation*}
+\end{itemize}
+
+\textbf{3. Verifica dell'Indipendenza:}
+Il supporto $D = \{(x,y): 0 \le y \le x \le 2\}$ è un triangolo, ossia \textbf{non è un dominio rettangolare a variabili separate}. Inoltre, $f_X(x) f_Y(y) = \frac{x^3}{4}(y - \frac{y^3}{4}) \neq \frac{1}{2}xy = f_{X,Y}(x,y)$.
+Pertanto, \textbf{$X$ e $Y$ NON sono stocasticamente indipendenti}.
+
+\textbf{4. Calcolo di $\mathbb{E}[XY]$, $\mathbb{E}[X]$, $\mathbb{E}[Y]$ e $\operatorname{Cov}(X,Y)$:}
+\begin{align*}
+    \mathbb{E}[XY] &= \int_0^2 \int_0^x (x y) \left(\frac{1}{2} x y\right) dy \, dx = \frac{1}{2} \int_0^2 x^2 \left[ \frac{y^3}{3} \right]_0^x dx = \frac{1}{6} \int_0^2 x^5 \, dx = \frac{1}{6} \left[ \frac{x^6}{6} \right]_0^2 = \frac{64}{36} = \bm{\frac{16}{9}} \\
+    \mathbb{E}[X] &= \int_0^2 x \left(\frac{x^3}{4}\right) dx = \frac{1}{4} \left[ \frac{x^5}{5} \right]_0^2 = \frac{32}{20} = \bm{\frac{8}{5}} = 1.6 \\
+    \mathbb{E}[Y] &= \int_0^2 y \left(y - \frac{y^3}{4}\right) dy = \left[ \frac{y^3}{3} - \frac{y^5}{20} \right]_0^2 = \frac{8}{3} - \frac{32}{20} = \frac{8}{3} - \frac{8}{5} = \bm{\frac{16}{15}} \approx 1.067
+\end{align*}
+La covarianza è:
+\begin{equation*}
+    \operatorname{Cov}(X, Y) = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y] = \frac{16}{9} - \left(\frac{8}{5}\right)\left(\frac{16}{15}\right) = \frac{16}{9} - \frac{128}{75} = \frac{400 - 384}{225} = \bm{\frac{16}{225} \approx 0.0711 > 0}
+\end{equation*}
+
+\textbf{5. PDF condizionata e Valore Atteso Condizionato:}
+Per $x \in (0, 2]$:
+\begin{equation*}
+    f_{Y \mid X}(y \mid x) = \frac{f_{X,Y}(x, y)}{f_X(x)} = \frac{\frac{1}{2} x y}{\frac{1}{4} x^3} = \bm{\frac{2y}{x^2}, \qquad 0 \le y \le x}
+\end{equation*}
+Il valore atteso condizionato (regressione teorica) è:
+\begin{equation*}
+    \mathbb{E}[Y \mid X = x] = \int_0^x y \cdot \left(\frac{2y}{x^2}\right) dy = \frac{2}{x^2} \left[ \frac{y^3}{3} \right]_0^x = \bm{\frac{2}{3} x} \qquad \blacksquare
+\end{equation*}
+\end{dimostrazione}
+
+---
+
+\section{Tema d'Esame 3: Teorema del Limite Centrale e Dimensionamento}
+
+\begin{esercizio}{Carico su Ascensore e CLT}{esame_clt_ascensore}
+Il peso degli utenti di una torre aziendale è modellato come una variabile aleatoria $X$ con valore atteso $\mu = 75\text{ kg}$ e deviazione standard $\sigma = 12\text{ kg}$. Un ascensore di servizio ha una portata nominale di sicurezza pari a $2000\text{ kg}$.
+\begin{enumerate}
+    \item Se salgono $n = 25$ persone indipendenti, qual è la probabilità che il carico complessivo $S_{25} = \sum_{i=1}^{25} X_i$ superi la soglia di sicurezza di $2000\text{ kg}$?
+    \item Determinare il numero massimo di persone $n_{\max}$ che possono salire contemporaneamente affinché la probabilità di sovraccarico ($S_n > 2000$) rimanga inferiore allo $0.5\%$ ($\alpha = 0.005$).
+\end{enumerate}
+\end{esercizio}
+
+\begin{dimostrazione}
+\textbf{1. Calcolo della Probabilità con $n = 25$ tramite CLT:}
+Per la somma di $n=25$ variabili indipendenti:
+\begin{align*}
+    \mathbb{E}[S_{25}] &= n \mu = 25 \cdot 75 = 1875\text{ kg} \\
+    \sigma_{S_{25}} &= \sqrt{n} \sigma = \sqrt{25} \cdot 12 = 5 \cdot 12 = 60\text{ kg}
+\end{align*}
+Per il Teorema del Limite Centrale, $S_{25} \mathrel{\dot{\sim}} \mathcal{N}(1875, 60^2)$.
+Standardizzando la soglia critica $2000\text{ kg}$:
+\begin{equation*}
+    Z_{\text{oss}} = \frac{2000 - 1875}{60} = \frac{125}{60} \approx 2.083
+\end{equation*}
+La probabilità di superare la portata è:
+\begin{equation*}
+    \mathbb{P}(S_{25} > 2000) = 1 - \Phi(2.083) \approx 1 - 0.9814 = \bm{0.0186} \quad (\bm{1.86\%})
+\end{equation*}
+
+\textbf{2. Calcolo del numero massimo $n$ affinché $\mathbb{P}(S_n > 2000) \le 0.005$:}
+La condizione $\mathbb{P}\left(Z > \frac{2000 - 75n}{12\sqrt{n}}\right) \le 0.005$ equivale a richiedere:
+\begin{equation*}
+    \frac{2000 - 75n}{12\sqrt{n}} \ge z_{0.005} = 2.576
+\end{equation*}
+Riorganizzando come disequazione di secondo grado nella variabile ausiliaria $u = \sqrt{n} > 0$:
+\begin{equation*}
+    75 u^2 + 12(2.576) u - 2000 \le 0 \implies 75 u^2 + 30.912 u - 2000 \le 0
+\end{equation*}
+Risolvendo l'equazione associata:
+\begin{equation*}
+    u = \frac{-30.912 + \sqrt{30.912^2 - 4(75)(-2000)}}{2 \cdot 75} = \frac{-30.912 + \sqrt{955.55 + 600000}}{150} = \frac{-30.912 + 775.21}{150} \approx 4.962
+\end{equation*}
+Poiché $u = \sqrt{n} \le 4.962$, elevando al quadrato:
+\begin{equation*}
+    n \le (4.962)^2 \approx 24.62 \implies \bm{n_{\max} = 24 \text{ persone}} \qquad \blacksquare
+\end{equation*}
+\end{dimostrazione}
+
+---
+
+\section{Tema d'Esame 4: Stima di Massima Verosimiglianza e Informazione di Fisher}
+
+\begin{esercizio}{Stima del Parametro di una Distribuzione di Rayleigh}{esame_mle_rayleigh}
+Sia $X_1, \dots, X_n \stackrel{\text{i.i.d.}}{\sim} \operatorname{Rayleigh}(\theta)$ con PDF:
+\begin{equation*}
+    f(x; \theta) = \frac{x}{\theta} \exp\left(-\frac{x^2}{2\theta}\right), \qquad x > 0, \quad \theta > 0
+\end{equation*}
+\begin{enumerate}
+    \item Determinare lo stimatore di massima verosimiglianza $\widehat{\theta}_{\text{MLE}}$ per il parametro $\theta$.
+    \item Verificare se lo stimatore trovato è corretto (non distorto).
+    \item Calcolare l'Informazione di Fisher attesa $I_1(\theta)$ e verificare se $\widehat{\theta}_{\text{MLE}}$ raggiunge il limite inferiore di Cramér-Rao (CRLB).
+\end{enumerate}
+\end{esercizio}
+
+\begin{dimostrazione}
+\textbf{1. Derivazione dello Stimatore MLE:}
+La funzione di verosimiglianza è:
+\begin{equation*}
+    L(\theta) = \prod_{i=1}^n \left[\frac{x_i}{\theta} \exp\left(-\frac{x_i^2}{2\theta}\right)\right] = \left(\prod_{i=1}^n x_i\right) \theta^{-n} \exp\left(-\frac{1}{2\theta} \sum_{i=1}^n x_i^2\right)
+\end{equation*}
+La funzione di log-verosimiglianza è:
+\begin{equation*}
+    \ell(\theta) = \ln L(\theta) = \sum_{i=1}^n \ln(x_i) - n \ln(\theta) - \frac{1}{2\theta} \sum_{i=1}^n x_i^2
+\end{equation*}
+Derivando rispetto a $\theta$ e ponendo uguale a zero (Score function):
+\begin{equation*}
+    \frac{d\ell}{d\theta} = -\frac{n}{\theta} + \frac{1}{2\theta^2} \sum_{i=1}^n x_i^2 = 0 \implies \frac{n}{\theta} = \frac{1}{2\theta^2} \sum_{i=1}^n x_i^2 \implies \bm{\widehat{\theta}_{\text{MLE}} = \frac{1}{2n} \sum_{i=1}^n X_i^2}
+\end{equation*}
+Verifica della concavità: $\left.\frac{d^2\ell}{d\theta^2}\right|_{\widehat{\theta}} = \frac{n}{\theta^2} - \frac{\sum x_i^2}{\theta^3} = \frac{n}{\widehat{\theta}^2} - \frac{2n\widehat{\theta}}{\widehat{\theta}^3} = -\frac{n}{\widehat{\theta}^2} < 0$.
+
+\textbf{2. Verifica della Correttezza:}
+Per una v.a. di Rayleigh, $\mathbb{E}[X^2] = 2\theta$.
+Calcoliamo il valore atteso di $\widehat{\theta}_{\text{MLE}}$:
+\begin{equation*}
+    \mathbb{E}\left[\widehat{\theta}_{\text{MLE}}\right] = \mathbb{E}\left[\frac{1}{2n} \sum_{i=1}^n X_i^2\right] = \frac{1}{2n} \sum_{i=1}^n \mathbb{E}[X_i^2] = \frac{1}{2n} (n \cdot 2\theta) = \bm{\theta}
+\end{equation*}
+Pertanto, $\operatorname{Bias}(\widehat{\theta}_{\text{MLE}}) = 0$: \textbf{lo stimatore è esattamente corretto (non distorto)}.
+
+\textbf{3. Informazione di Fisher ed Efficienza di Cramér-Rao:}
+Calcoliamo la derivata seconda del logaritmo della densità per una singola osservazione:
+\begin{equation*}
+    \ln f(X; \theta) = \ln(X) - \ln(\theta) - \frac{X^2}{2\theta} \implies \frac{\partial^2 \ln f}{\partial \theta^2} = \frac{1}{\theta^2} - \frac{X^2}{\theta^3}
+\end{equation*}
+L'informazione di Fisher per singola osservazione è:
+\begin{equation*}
+    I_1(\theta) = -\mathbb{E}\left[\frac{\partial^2 \ln f}{\partial \theta^2}\right] = -\left(\frac{1}{\theta^2} - \frac{\mathbb{E}[X^2]}{\theta^3}\right) = -\left(\frac{1}{\theta^2} - \frac{2\theta}{\theta^3}\right) = \bm{\frac{1}{\theta^2}}
+\end{equation*}
+Il limite inferiore di Cramér-Rao su $n$ osservazioni è $\operatorname{CRLB} = \frac{1}{n I_1(\theta)} = \bm{\frac{\theta^2}{n}}$.
+Calcolando la varianza dello stimatore $\widehat{\theta}_{\text{MLE}}$ (essendo $X_i^2 \sim \operatorname{Exp}(1/(2\theta))$ con $\operatorname{Var}(X_i^2) = (2\theta)^2 = 4\theta^2$):
+\begin{equation*}
+    \operatorname{Var}\left(\widehat{\theta}_{\text{MLE}}\right) = \frac{1}{4n^2} \sum_{i=1}^n \operatorname{Var}(X_i^2) = \frac{1}{4n^2} (n \cdot 4\theta^2) = \bm{\frac{\theta^2}{n}}
+\end{equation*}
+La varianza coincide esattamente con il CRLB: \textbf{lo stimatore è UMVUE (Uniformemente a Varianza Minima / Efficiente)}. $\blacksquare$
+\end{dimostrazione}

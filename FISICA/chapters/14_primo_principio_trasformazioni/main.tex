@@ -1,0 +1,172 @@
+% ==============================================================================
+% CAPITOLO 14 - PRIMO PRINCIPIO E TRASFORMAZIONI TERMODINAMICHE
+% ==============================================================================
+\chapter{Lavoro Termodinamico e Primo Principio della Termodinamica}
+\label{chap:primo_principio_trasformazioni}
+
+\begin{tcolorbox}[enhanced, breakable, colback=navyblue!4!white, colframe=navyblue!80!black,
+    coltitle=white, fonttitle=\bfseries\sffamily, title={Quadro Sinottico del Capitolo 14 (Corrispondenza: Lezione 36)},
+    sharp corners, rounded corners=south, boxrule=1pt]
+\textbf{Collocazione Modulare:} Parte IV -- Termodinamica\\
+\textbf{Trascrizione di Riferimento:} \texttt{trascrizioni/Lezione\_36\_...md}\\
+\textbf{Manuale di Riferimento:} Focardi, Massa, Ugolini -- \emph{Fisica Generale: Meccanica e Termodinamica} (Capitolo 16)\\
+\textbf{Obiettivi Didattici e Competenze:}\par
+\begin{itemize}
+    \item Definire il lavoro termodinamico di volume $W = \int p\,\dd V$ e la sua rappresentazione geometrica nel piano di Clapeyron $(p, V)$.
+    \item Formulare il Primo Principio della Termodinamica ($\Delta U = Q - W$) e comprendere la natura di funzione di stato dell'Energia Interna $U$.
+    \item Dimostrare la Legge di Joule per i gas ideali ($\dd U = n c_v \dd T$) e la Relazione di Mayer ($c_p - c_v = R$).
+    \item Calcolare analiticamente calore, lavoro e variazione di energia interna per tutte le trasformazioni notevoli: isocore, isobare, isoterme e adiabatiche.
+    \item Dimostrare le Leggi di Poisson per le trasformazioni adiabatiche reversibili ($p V^\gamma = \text{cost}$, $T V^{\gamma-1} = \text{cost}$, $T^\gamma p^{1-\gamma} = \text{cost}$).
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5em}
+
+% ------------------------------------------------------------------------------
+\section{Il Lavoro Termodinamico e il Piano di Clapeyron}
+\label{sec:lavoro_termodinamico}
+% ------------------------------------------------------------------------------
+
+Consideriamo un fluido racchiuso in un cilindro di sezione $S$ dotato di un pistone mobile a tenuta.
+
+\begin{definizione}{Lavoro di Volume}{def:lavoro_volume}
+Per uno spostamento quasi-statico infinitesimo $\dd x$ del pistone, la variazione di volume è $\dd V = S\,\dd x$. Il \textbf{lavoro elementare} compiuto dal fluido sulle pareti esterne vale:
+\begin{equation}
+    \delta W \coloneqq F\,\dd x = (p S)\,\dd x = p\,\dd V
+    \label{eq:lavoro_termodinamico_elementare}
+\end{equation}
+Per una trasformazione quasi-statica finita dallo stato iniziale $A$ allo stato finale $B$, il lavoro totale è l'integrale:
+\begin{equation}
+    \mathbf{W_{A\to B} = \int_{V_A}^{V_B} p(V)\,\dd V}
+    \label{eq:lavoro_clapeyron}
+\end{equation}
+\end{definizione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    \draw[->, thick] (0,0) -- (5.5,0) node[right] {Volume $V$};
+    \draw[->, thick] (0,0) -- (0,4) node[above] {Pressione $p$};
+    
+    % Curva di trasformazione
+    \draw[navyblue, very thick] (1,3) to[out=-20, in=120] (4.5, 0.8);
+    \draw[navyblue, thick, -{Stealth}] (2.5, 1.55) -- (2.6, 1.48);
+    
+    % Area sottesa
+    \fill[navyblue!10] (1,0) -- (1,3) to[out=-20, in=120] (4.5, 0.8) -- (4.5,0) -- cycle;
+    \node at (2.5, 0.6) {\textbf{\color{navyblue}Lavoro $W = \int p\,\dd V$}};
+    
+    % Stati
+    \filldraw[black] (1,3) circle (2pt) node[above right] {$A(p_A, V_A)$};
+    \filldraw[black] (4.5,0.8) circle (2pt) node[above right] {$B(p_B, V_B)$};
+    
+    \draw[dashed, gray] (1,3) -- (1,0) node[below] {$V_A$};
+    \draw[dashed, gray] (4.5,0.8) -- (4.5,0) node[below] {$V_B$};
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}
+    \item \textbf{Espansione ($\dd V > 0$)}: $W > 0$ (il sistema compie lavoro positivo sull'ambiente).
+    \item \textbf{Compressione ($\dd V < 0$)}: $W < 0$ (il sistema subisce lavoro dall'ambiente).
+    \item \textbf{Ciclo Chiuso ($\oint$)}: $W_{\text{ciclo}} = \oint p\,\dd V$ è pari all'area interna racchiusa dal ciclo (positivo se percorso in senso orario / motore, negativo in senso antiorario / frigorifero).
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+\section{Il Primo Principio della Termodinamica}
+\label{sec:primo_principio}
+% ------------------------------------------------------------------------------
+
+Il calore $Q$ e il lavoro $W$ dipendono dalla specifica trasformazione termodinamica seguita (non sono funzioni di stato: $\delta Q$ e $\delta W$ sono forme differenziali non esatte). Tuttavia, la loro differenza è rigorosamente indipendente dal cammino.
+
+\begin{legge}{Primo Principio della Termodinamica}{legge:primo_principio_termo}
+Per qualsiasi trasformazione termodinamica tra due stati di equilibrio $A$ e $B$, la differenza tra il calore assorbito dal sistema e il lavoro compiuto è pari alla variazione di una funzione di stato estensiva, detta \textbf{Energia Interna} $U$:
+\begin{equation}
+    \mathbf{\Delta U \coloneqq U(B) - U(A) = Q - W}
+    \label{eq:primo_principio}
+\end{equation}
+In forma differenziale infinitesima:
+\begin{equation}
+    \mathbf{\dd U = \delta Q - \delta W = \delta Q - p\,\dd V}
+    \label{eq:primo_principio_diff}
+\end{equation}
+\end{legge}
+
+\begin{teorema}{Energia Interna del Gas Perfetto (Esperimento di Joule)}{teo:joule_energia_interna}
+Per un gas perfetto, l'energia interna dipende **esclusivamente dalla temperatura assoluta** $T$:
+\begin{equation}
+    U = U(T) \iff \left(\pdv{U}{V}\right)_T = 0, \quad \left(\pdv{U}{p}\right)_T = 0
+    \label{eq:u_gas_perfetto}
+\end{equation}
+Per qualsiasi trasformazione (isocora, isobara, isoterma o adiabatica):
+\begin{equation}
+    \mathbf{\dd U = n c_v \dd T \implies \Delta U = n c_v (T_f - T_i)}
+    \label{eq:delta_u_generale}
+\end{equation}
+\end{teorema}
+
+\begin{teorema}{Relazione di Mayer}{teo:mayer}
+I calori specifici molari a pressione costante $c_p$ e a volume costante $c_v$ di un gas perfetto sono legati dalla relazione:
+\begin{equation}
+    \mathbf{c_p - c_v = R}
+    \label{eq:relazione_mayer}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+In una trasformazione isobara reversibile ($p = \text{cost}$), il calore scambiato è $\delta Q_p = n c_p \dd T$ e il lavoro compiuto è $\delta W = p\,\dd V = n R \dd T$ (differenziando $p V = n R T$).
+Applicando il primo principio:
+\begin{equation}
+    \dd U = \delta Q_p - \delta W \implies n c_v \dd T = n c_p \dd T - n R \dd T
+\end{equation}
+Semplificando per $n \dd T \neq 0$ si ottiene direttamente la relazione di Mayer: $c_p = c_v + R$.
+\end{dimostrazione}
+
+% ------------------------------------------------------------------------------
+\section{Studio Completo delle Trasformazioni Notevoli dei Gas Perfetti}
+\label{sec:trasformazioni_notevoli}
+% ------------------------------------------------------------------------------
+
+\begin{table}[htbp]
+\centering
+\caption{Bilancio termodinamico per $n$ moli di gas perfetto ($c_v = \frac{f}{2}R$, $c_p = \frac{f+2}{2}R$, $\gamma = c_p/c_v$).}
+\label{tab:trasformazioni_notevoli}
+\begin{tabularx}{\textwidth}{p{2.6cm} p{2.8cm} p{3.2cm} p{3.0cm} X}
+\toprule
+\textbf{Trasformaz.} & \textbf{Lavoro $W$} & \textbf{Calore $Q$} & \textbf{Variaz. $\Delta U$} & \textbf{Relazione} \\
+\midrule
+\textbf{Isocora} ($V=\text{c}$) & $0$ & $n c_v (T_f - T_i)$ & $n c_v (T_f - T_i)$ & $\frac{p_i}{T_i} = \frac{p_f}{T_f}$ \\
+\textbf{Isobara} ($p=\text{c}$) & $p\Delta V = n R\Delta T$ & $n c_p (T_f - T_i)$ & $n c_v (T_f - T_i)$ & $\frac{V_i}{T_i} = \frac{V_f}{T_f}$ \\
+\textbf{Isoterma} ($T=\text{c}$) & $n R T \ln\left(\frac{V_f}{V_i}\right)$ & $W$ & $0$ & $p_i V_i = p_f V_f$ \\
+\textbf{Adiabatica} ($Q=0$) & $-\Delta U = \frac{p_i V_i - p_f V_f}{\gamma - 1}$ & $0$ & $n c_v (T_f - T_i)$ & $p V^\gamma = \text{cost}$ \\
+\textbf{Politropica} & $\frac{p_i V_i - p_f V_f}{k - 1}$ & $n c_k (T_f - T_i)$ & $n c_v (T_f - T_i)$ & $p V^k = \text{cost}$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Le Leggi di Poisson per le Trasformazioni Adiabatiche Reversibili}
+
+In una trasformazione adiabatica reversibile $\delta Q = 0 \implies \dd U = -\delta W$:
+\begin{equation}
+    n c_v \dd T = -p\,\dd V = -\left(\frac{n R T}{V}\right)\dd V \implies \frac{\dd T}{T} = -\frac{R}{c_v}\frac{\dd V}{V} = -(\gamma - 1)\frac{\dd V}{V}
+\end{equation}
+Integrando entrambi i membri:
+\begin{equation}
+    \ln T + (\gamma - 1)\ln V = \text{cost} \implies \mathbf{T V^{\gamma - 1} = \text{cost}}
+    \label{eq:poisson_tv}
+\end{equation}
+Sostituendo $T = \frac{p V}{n R}$:
+\begin{equation}
+    \left(\frac{p V}{n R}\right) V^{\gamma - 1} = \text{cost} \implies \mathbf{p V^\gamma = \text{cost}}
+    \label{eq:poisson_pv}
+\end{equation}
+ed esprimendo in termini di $(p, T)$:
+\begin{equation}
+    \mathbf{T^\gamma p^{1 - \gamma} = \text{cost} \iff p^{1 - \gamma} T^\gamma = \text{cost}}
+    \label{eq:poisson_tp}
+\end{equation}
+
+\begin{esame}[Confronto tra Pendenze Isoterma e Adiabatica]
+Nel piano di Clapeyron $(p, V)$, la pendenza dell'adiabatica è sempre **più ripida** di quella dell'isoterma di un fattore $\gamma > 1$:
+\begin{equation}
+    \left.\dv{p}{V}\right|_{\text{adiab}} = -\gamma \frac{p}{V} = \gamma \left.\dv{p}{V}\right|_{\text{isot}}
+\end{equation}
+\end{esame}

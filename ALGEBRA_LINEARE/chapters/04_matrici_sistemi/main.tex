@@ -1,0 +1,69 @@
+% ==============================================================================
+% CAPITOLO 4: MATRICE ASSOCIATA E SISTEMI LINEARI
+% ==============================================================================
+
+\chapter{Matrice Associata e Sistemi Lineari}
+\label{chap:matrici_sistemi}
+
+\section{Matrice Associata a un'Applicazione Lineare}
+
+\begin{definizione}{Matrice Rappresentativa}{matrice_associata}
+Siano $V$ e $W$ spazi vettoriali su $\K$ di dimensioni rispettivamente $n$ ed $m$. Siano $\mathcal{B}_V = (\vv{v}_1, \dots, \vv{n})$ una base di $V$ e $\mathcal{B}_W = (\vv{w}_1, \dots, \vv{m})$ una base di $W$.
+Data un'applicazione lineare $f: V \to W$, la \textbf{matrice associata} a $f$ rispetto alle basi $\mathcal{B}_V$ e $\mathcal{B}_W$ è la matrice $M_{\mathcal{B}_W}^{\mathcal{B}_V}(f) \in \Mat_{m \times n}(\K)$ la cui $j$-esima colonna è costituita dalle coordinate di $f(\vv{v}_j)$ rispetto alla base $\mathcal{B}_W$:
+\begin{equation}
+    M_{\mathcal{B}_W}^{\mathcal{B}_V}(f) = \begin{pmatrix}
+        \big[f(\vv{v}_1)\big]_{\mathcal{B}_W} & \big[f(\vv{v}_2)\big]_{\mathcal{B}_W} & \dots & \big[f(\vv{v}_n)\big]_{\mathcal{B}_W}
+    \end{pmatrix} \in \Mat_{m \times n}(\K).
+\end{equation}
+Vale la relazione fondamentale di calcolo delle immagini in coordinate:
+\begin{equation}
+    [f(\vv{v})]_{\mathcal{B}_W} = M_{\mathcal{B}_W}^{\mathcal{B}_V}(f) \cdot [\vv{v}]_{\mathcal{B}_V}.
+\end{equation}
+\end{definizione}
+
+\section{Cambiamento di Base e Matrici Simili}
+
+\begin{definizione}{Matrice di Passaggio / Cambiamento di Base}{matrice_passaggio}
+Siano $\mathcal{B} = (\vv{v}_1, \dots, \vv{n})$ e $\mathcal{B}' = (\vv{v}'_1, \dots, \vv{n}')$ due basi dello stesso spazio $V$. La \textbf{matrice del cambiamento di base} da $\mathcal{B}'$ a $\mathcal{B}$ è la matrice invertibile $P = M_{\mathcal{B}}^{\mathcal{B}'}(\id_V) \in \GL_n(\K)$ le cui colonne sono le coordinate dei nuovi vettori $\vv{v}'_j$ rispetto alla vecchia base $\mathcal{B}$.
+\end{definizione}
+
+\begin{teorema}{Formula di Trasformazione per Endomorfismi}{trasformazione_endomorfismi}
+Sia $f: V \to V$ un endomorfismo. Se $A = M_{\mathcal{B}}^{\mathcal{B}}(f)$ e $A' = M_{\mathcal{B}'}^{\mathcal{B}'}(f)$, allora $A$ e $A'$ sono \textbf{matrici simili}, legate dalla relazione di coniugio:
+\begin{equation}
+    A' = P\inv A P.
+\end{equation}
+\end{teorema}
+
+\section{Risoluzione di Sistemi Lineari e Teorema di Rouché-Capelli}
+Consideriamo un sistema di $m$ equazioni lineari in $n$ incognite su $\K$:
+\begin{equation}
+    A \vv{x} = \vv{b}, \quad A \in \Mat_{m \times n}(\K),\; \vv{x} \in \K^n,\; \vv{b} \in \K^m.
+\end{equation}
+Sia $(A \mid \vv{b}) \in \Mat_{m \times (n+1)}(\K)$ la matrice completa (o aumentata).
+
+\begin{teorema}{Teorema di Rouché-Capelli}{rouche_capelli}
+Il sistema lineare $A \vv{x} = \vv{b}$ è \textbf{compatibile} (ammette almeno una soluzione) se e solo se il rango della matrice incompleta coincide con il rango della matrice completa:
+\begin{equation}
+    \rk(A) = \rk(A \mid \vv{b}) = r.
+\end{equation}
+In tal caso:
+\begin{itemize}
+    \item Se $r = n$ (rango massimo rispetto alle incognite), la soluzione è \textbf{unica} ($\infty^0$).
+    \item Se $r < n$, il sistema ammette \textbf{infinite soluzioni} dipendenti da $n - r$ parametri liberi ($\infty^{n-r}$ soluzioni).
+\end{itemize}
+Lo spazio delle soluzioni del sistema completo è un sottospazio affine ottenuto traslando lo spazio delle soluzioni del sistema omogeneo associato:
+\begin{equation}
+    \operatorname{Sol}(A\vv{x}=\vv{b}) = \vv{x}_0 + \ker(A) = \big\{ \vv{x}_0 + \vv{v}_0 \;\big|\; A\vv{v}_0 = \vzero \big\}.
+\end{equation}
+\end{teorema}
+
+\section{Algoritmo di Eliminazione di Gauss-Jordan}
+\begin{metodo}[Procedura di Riduzione a Scala di Gauss]
+Per determinare il rango e risolvere il sistema $A \vv{x} = \vv{b}$:
+\begin{enumerate}
+    \item Scrivere la matrice aumentata $(A \mid \vv{b})$.
+    \item Applicare le tre operazioni elementari per riga ($R_i \leftrightarrow R_j$, $R_i \leftarrow c R_i$ con $c \neq 0$, $R_i \leftarrow R_i + c R_j$) per trasformare la matrice in una matrice a scalini (forma echelon).
+    \item Individuare i \textbf{pivot} (primi elementi non nulli di ciascuna riga): il numero di pivot corrisponde a $\rk(A)$ e a $\rk(A \mid \vv{b})$.
+    \item Procedere a ritroso per sostituzione o applicare la riduzione completa di Gauss-Jordan per esplicitare le variabili vincolate rispetto alle variabili libere.
+\end{enumerate}
+\end{metodo}

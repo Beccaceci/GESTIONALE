@@ -1,0 +1,192 @@
+\section{Equazioni Differenziali Ordinarie (ODE)}
+\label{sec:esami_ode}
+
+\begin{esame}[Guida Metodologica: Equazioni Differenziali Ordinarie]
+Nelle prove d'esame del Prof. Alberti sulle ODE:
+\begin{enumerate}
+    \item \textbf{Intervallo Massimale di Esistenza $I_{\max}$ e Fenomeno del Blow-up:}
+    Per un problema di Cauchy del I ordine $x'(t) = f(t, x)$ con $f \in C^1$, il Teorema di Cauchy-Lipschitz garantisce esistenza e unicità locale. L'intervallo massimale $I_{\max} = (T_{\min}, T_{\max})$ si interrompe prima di $\pm\infty$ ($T_{\max} < +\infty$) solo se:
+    \begin{itemize}
+        \item La soluzione diverge in modulo: $\lim_{t \to T_{\max}^-} |x(t)| = +\infty$ (\emph{blow-up} a tempo finito).
+        \item La traiettoria $(t, x(t))$ esce dall'aperto di definizione del campo vettoriale (tocca singolarità del tipo $x = 0$ o denominatori nulli).
+    \end{itemize}
+    Se il campo ha crescita sub-lineare in $x$ ($|f(t, x)| \le A(t)|x| + B(t)$), allora $I_{\max} = \R$ (esistenza globale).
+    \item \textbf{Equazioni del II Ordine con Risonanza:}
+    Se il termine forzante è $P(t)e^{\alpha t}\cos(\beta t)$ o $P(t)e^{\alpha t}\sen(\beta t)$ e $\lambda = \alpha + i\beta$ è radice del polinomio caratteristico con molteplicità $\mu \ge 1$, la soluzione particolare va cercata con l'ansatz moltiplicato per $t^\mu$.
+\end{enumerate}
+\end{esame}
+
+\begin{esempio}{Problema di Cauchy a Variabili Separabili ed Esistenza Globale (Appello 2024/25)}{esame_ode_cauchy_blowup}
+Risolvere il problema di Cauchy:
+\[
+    \begin{cases}
+        x'(t) = \dfrac{x(t)^2 + 1}{2x(t)} \cdot t \\
+        x(0) = \sqrt{3}
+    \end{cases}
+\]
+Determinare la soluzione analitica esplicita $x(t)$, l'intervallo massimale di definizione $I_{\max}$ e il comportamento asintotico per $t \to \pm\infty$.
+\tcblower
+\textbf{Soluzione Dettagliata:}
+
+\paragraph{1. Separazione delle Variabili e Integrazione:}
+L'equazione è a variabili separabili nella forma $x' = g(x)h(t)$ con $g(x) = \frac{x^2+1}{2x}$ e $h(t) = t$.
+Il secondo membro è continuo e localmente lipschitziano in $(t, x) \in \R \times (\R \setminus \{0\})$.
+Dato che la condizione iniziale è $x(0) = \sqrt{3} > 0$, la soluzione è confinata nel semipiano $x > 0$.
+Separando le variabili:
+\[
+    \frac{2x}{x^2 + 1} \dx = t \dt
+\]
+Integrando ambo i membri:
+\[
+    \int \frac{2x}{x^2 + 1} \dx = \int t \dt \implies \ln(x^2 + 1) = \frac{t^2}{2} + C \quad (C \in \R)
+\]
+Esponenziamo entrambi i membri:
+\[
+    x^2 + 1 = e^{\frac{t^2}{2} + C} = K e^{t^2/2} \quad (K = e^C > 0)
+\]
+
+\paragraph{2. Imposizione del Dato Iniziale:}
+Imponendo $x(0) = \sqrt{3}$:
+\[
+    (\sqrt{3})^2 + 1 = K e^0 \implies 3 + 1 = K \implies K = 4
+\]
+Dunque:
+\[
+    x^2(t) + 1 = 4e^{t^2/2} \implies x^2(t) = 4e^{t^2/2} - 1
+\]
+Poiché $x(0) = \sqrt{3} > 0$, selezioniamo il ramo positivo:
+\[
+    x(t) = \sqrt{4e^{t^2/2} - 1}
+\]
+
+\paragraph{3. Determinazione dell'Intervallo Massimale $I_{\max}$:}
+La soluzione è definita e differenziabile fintanto che l'argomento sotto radice è strettamente positivo:
+\[
+    4e^{t^2/2} - 1 > 0 \iff e^{t^2/2} > \frac{1}{4}
+\]
+Poiché $e^{t^2/2} \ge 1 > \frac{1}{4}$ per ogni $t \in \R$, la condizione è soddisfatta identicamente per tutti i $t \in \R$.
+Inoltre, la soluzione $x(t) \ge \sqrt{4(1) - 1} = \sqrt{3} > 0$ non si avvicina mai alla retta singolare $x = 0$.
+Pertanto:
+\[
+    I_{\max} = (-\infty, +\infty) = \R
+\]
+La soluzione è globale, è pari ($x(-t) = x(t)$) e possiede il minimo globale in $t = 0$ con $x(0) = \sqrt{3}$.
+Per $t \to \pm \infty$:
+\[
+    \lim_{t \to \pm \infty} x(t) = \lim_{t \to \pm \infty} \sqrt{4e^{t^2/2} - 1} = +\infty
+\]
+\end{esempio}
+
+\begin{esempio}{Equazione del II Ordine con Risonanza Multipla (Compitino 2024/25)}{esame_ode_2ord_risonanza}
+Determinare l'integrale generale dell'equazione differenziale del secondo ordine:
+\[
+    x''(t) - 4x'(t) + 4x(t) = 6t e^{2t}
+\]
+e trovare la soluzione che soddisfa le condizioni di Cauchy $x(0) = 1$, $x'(0) = 0$.
+\tcblower
+\textbf{Soluzione Dettagliata:}
+
+\paragraph{1. Risoluzione dell'Omogenea Associata:}
+L'equazione caratteristica associata è:
+\[
+    P(\lambda) = \lambda^2 - 4\lambda + 4 = (\lambda - 2)^2 = 0
+\]
+Si ha una radice reale doppia $\lambda_0 = 2$ con molteplicità algebrica $\mu = 2$.
+L'integrale generale dell'omogenea è:
+\[
+    x_{\text{om}}(t) = (c_1 + c_2 t)e^{2t}, \qquad c_1, c_2 \in \R
+\]
+
+\paragraph{2. Ricerca della Soluzione Particolare:}
+Il termine noto è $f(t) = (6t)e^{2t}$, con esponente $\alpha = 2$ e polinomio $P_1(t) = 6t$ di grado 1.
+Essendo $\alpha = 2$ radice caratteristica di molteplicità $\mu = 2$, l'ansatz per la soluzione particolare $\bar{x}(t)$ richiede la moltiplicazione per $t^\mu = t^2$:
+\[
+    \bar{x}(t) = t^2 (At + B) e^{2t} = (At^3 + Bt^2)e^{2t}
+\]
+\textit{Metodo rapido dell'operatore shift:}
+Notiamo che $\mathcal{L} = (D - 2)^2$. Per la regola di traslazione esponenziale $(D - 2)^2 (u(t)e^{2t}) = u''(t)e^{2t}$.
+Posto $u(t) = At^3 + Bt^2$, si ha:
+\[
+    u'(t) = 3At^2 + 2Bt, \qquad u''(t) = 6At + 2B
+\]
+Dunque:
+\[
+    \mathcal{L}(\bar{x}) = u''(t)e^{2t} = (6At + 2B)e^{2t}
+\]
+Uguagliando al termine forzante $6te^{2t}$:
+\[
+    (6At + 2B)e^{2t} = 6te^{2t} \iff \begin{cases} 6A = 6 \\ 2B = 0 \end{cases} \iff \begin{cases} A = 1 \\ B = 0 \end{cases}
+\]
+La soluzione particolare è:
+\[
+    \bar{x}(t) = t^3 e^{2t}
+\]
+
+\paragraph{3. Integrale Generale e Condizioni di Cauchy:}
+L'integrale generale è la somma $x(t) = x_{\text{om}}(t) + \bar{x}(t)$:
+\[
+    x(t) = (c_1 + c_2 t + t^3)e^{2t}
+\]
+Calcoliamo la derivata prima:
+\[
+    x'(t) = (c_2 + 3t^2)e^{2t} + 2(c_1 + c_2 t + t^3)e^{2t} = \left[ (2c_1 + c_2) + (2c_2)t + 3t^2 + 2t^3 \right]e^{2t}
+\]
+Imponendo le condizioni iniziali in $t = 0$:
+\[
+    \begin{cases}
+        x(0) = c_1 = 1 \\
+        x'(0) = 2c_1 + c_2 = 0 \implies 2(1) + c_2 = 0 \implies c_2 = -2
+    \end{cases}
+\]
+La soluzione unica del problema di Cauchy è:
+\[
+    x(t) = (1 - 2t + t^3)e^{2t}
+\]
+\end{esempio}
+
+\begin{esempio}{ODE Lineare del I Ordine con Parametro e Asintotica (Appello 2023/24)}{esame_ode_lineare_param}
+Risolvere il problema di Cauchy:
+\[
+    \begin{cases}
+        y'(t) + \dfrac{2t}{1 + t^2} y(t) = \dfrac{1}{1 + t^2} \\
+        y(0) = y_0 \in \R
+    \end{cases}
+\]
+Determinare l'intervallo massimale di esistenza $I_{\max}$ e studiare il limite $\lim_{t \to +\infty} y(t)$ al variare di $y_0$.
+\tcblower
+\textbf{Soluzione Dettagliata:}
+
+\paragraph{1. Risoluzione con Fattore Integrante:}
+L'equazione differenziale è lineare del primo ordine nella forma normale $y'(t) + a(t)y(t) = b(t)$ con $a(t) = \frac{2t}{1+t^2}$ e $b(t) = \frac{1}{1+t^2}$.
+Una primitiva del coefficiente $a(t)$ è:
+\[
+    A(t) = \int_0^t \frac{2s}{1 + s^2}\ds = \ln(1 + t^2)
+\]
+Il fattore integrante naturale è:
+\[
+    \mu(t) = e^{A(t)} = e^{\ln(1 + t^2)} = 1 + t^2
+\]
+Moltiplicando l'equazione per $\mu(t) = 1 + t^2$:
+\[
+    (1 + t^2)y'(t) + 2t y(t) = 1 \iff \der{}{t}\Big[ (1 + t^2)y(t) \Big] = 1
+\]
+Integrando tra $0$ e $t$:
+\[
+    (1 + t^2)y(t) - (1 + 0^2)y(0) = \int_0^t 1\ds = t \implies (1 + t^2)y(t) = y_0 + t
+\]
+Esplicitando la soluzione:
+\[
+    y(t) = \frac{y_0 + t}{1 + t^2}
+\]
+
+\paragraph{2. Intervallo Massimale e Comportamento Asintotico:}
+Poiché il denominatore $1 + t^2 \ge 1 > 0$ non si annulla mai in $\R$, la soluzione è di classe $C^\infty$ su tutto $\R$:
+\[
+    I_{\max} = (-\infty, +\infty) = \R
+\]
+Calcoliamo il comportamento asintotico per $t \to +\infty$:
+\[
+    \lim_{t \to +\infty} y(t) = \lim_{t \to +\infty} \frac{y_0 + t}{1 + t^2} = \lim_{t \to +\infty} \frac{t(1 + y_0/t)}{t^2(1 + 1/t^2)} = \lim_{t \to +\infty} \frac{1}{t} = 0
+\]
+Il limite vale $0$ per \textbf{qualsiasi} valore della condizione iniziale $y_0 \in \R$.
+\end{esempio}

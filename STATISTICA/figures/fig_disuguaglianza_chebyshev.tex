@@ -1,0 +1,37 @@
+\begin{tikzpicture}[scale=0.85, >=Stealth]
+    \draw[->, thick, navyblue] (-0.5,0) -- (7.5,0) node[right, font=\footnotesize] {$x$};
+    \draw[->, thick, navyblue] (0,-0.3) -- (0,3.5) node[above, font=\footnotesize] {$f_X(x)$};
+
+    % PDF
+    \draw[domain=0.5:6.5, smooth, variable=\x, thick, navyblue]
+        plot ({\x}, {3.0 * exp(-(\x-3.5)*(\x-3.5)/1.8)});
+
+    % Centro mu
+    \draw[dashed, navyblue, thick] (3.5,0) -- (3.5,3.0);
+    \node[below, font=\small\bfseries] at (3.5,0) {$\mu$};
+
+    % Bande mu - k*sigma e mu + k*sigma
+    \draw[thick, crimsonred] (1.6,0) -- (1.6,1.5);
+    \draw[thick, crimsonred] (5.4,0) -- (5.4,1.5);
+    \node[below, font=\footnotesize, text=crimsonred] at (1.6,0) {$\mu - k\sigma$};
+    \node[below, font=\footnotesize, text=crimsonred] at (5.4,0) {$\mu + k\sigma$};
+
+    % Area interna
+    \fill[forestgreen!20, domain=1.6:5.4, variable=\x]
+        (1.6, 0) --
+        plot ({\x}, {3.0 * exp(-(\x-3.5)*(\x-3.5)/1.8)}) --
+        (5.4, 0) -- cycle;
+    \node[font=\footnotesize\bfseries, text=forestgreen!80!black] at (3.5,1.0) {
+        $\mathbb{P}(|X-\mu| < k\sigma) \ge 1 - \frac{1}{k^2}$
+    };
+
+    % Code esterne
+    \fill[crimsonred!25, domain=0.5:1.6, variable=\x]
+        (0.5,0) -- plot ({\x}, {3.0 * exp(-(\x-3.5)*(\x-3.5)/1.8)}) -- (1.6,0) -- cycle;
+    \fill[crimsonred!25, domain=5.4:6.5, variable=\x]
+        (5.4,0) -- plot ({\x}, {3.0 * exp(-(\x-3.5)*(\x-3.5)/1.8)}) -- (6.5,0) -- cycle;
+
+    \node[above, font=\tiny\bfseries, text=crimsonred] at (1.0, 0.6) {Coda sx};
+    \node[above, font=\tiny\bfseries, text=crimsonred] at (6.0, 0.6) {Coda dx};
+    \node[above, font=\tiny\bfseries, text=crimsonred] at (3.5, -1.2) {Probabilità totale nelle due code $\le \frac{1}{k^2}$};
+\end{tikzpicture}

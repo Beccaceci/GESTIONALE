@@ -1,0 +1,31 @@
+\begin{tikzpicture}[scale=0.85]
+    % Spazio campionario S
+    \draw[thick, navyblue, rounded corners=6pt] (-3.8,-2.5) rectangle (4.2,2.5);
+    \node[navyblue, font=\bfseries\small, anchor=north east] at (4.0,2.3) {Spazio Campionario $S$ ($\mathbb{P}(S)=1$)};
+
+    % Insiemi A e B
+    \def\firstcircle{(-1.2,0) circle (1.7cm)}
+    \def\secondcircle{(1.2,0) circle (1.7cm)}
+
+    % Riempimenti colorati con trasparenza
+    \fill[coolblue!25] \firstcircle;
+    \fill[forestgreen!25] \secondcircle;
+    \begin{scope}
+        \clip \firstcircle;
+        \fill[warmamber!40] \secondcircle;
+    \end{scope}
+
+    % Contorni
+    \draw[thick, coolblue!80!black] \firstcircle;
+    \draw[thick, forestgreen!80!black] \secondcircle;
+
+    % Etichette
+    \node[font=\bfseries\normalsize, coolblue!90!black] at (-2.0,0.5) {$A$};
+    \node[font=\footnotesize, text=navyblue] at (-2.0,-0.2) {$A \setminus B$};
+    \node[font=\bfseries\normalsize, forestgreen!90!black] at (2.0,0.5) {$B$};
+    \node[font=\footnotesize, text=navyblue] at (2.0,-0.2) {$B \setminus A$};
+    \node[font=\bfseries\footnotesize, text=warmamber!90!black, align=center] at (0,0) {$A \cap B$};
+
+    % Area complementare
+    \node[font=\footnotesize, text=gray!70!black] at (-2.5,-1.8) {$(A \cup B)^c$};
+\end{tikzpicture}

@@ -1,0 +1,319 @@
+\chapter{Insiemi, Funzioni e Grafici}
+\label{chap:insiemi_funzioni}
+
+Lo studio dell'Analisi Matematica poggia su fondamenta concettuali precise: la struttura dei numeri reali, la formalizzazione del concetto di funzione e la traduzione geometrica delle relazioni analitiche attraverso il piano cartesiano. Prima di affrontare il calcolo infinitesimale (limiti, derivate ed integrali), è indispensabile acquisire una piena padronanza del linguaggio insiemistico, delle trasformazioni funzionali e dei sistemi di coordinate.
+
+In questo capitolo sviluppiamo una trattazione organica e lineare che parte dalla costruzione logica dei sistemi numerici, analizza il comportamento qualitativo e le simmetrie delle funzioni reali, approfondisce i sistemi di coordinate (cartesiane e polari), risolve i paradossi classici relativi a radicali e potenze, e introduce la trigonometria iperbolica con i suoi profondi legami geometrici.
+
+% ==============================================================================
+\section{Insiemi Numerici e Struttura dei Numeri Reali}
+\label{sec:insiemi_numerici}
+% ==============================================================================
+
+Il percorso logico che conduce alla costruzione dell'insieme dei numeri reali $\R$ risponde all'esigenza storica e formale di dotare la retta geometrica di una struttura algebrica priva di ``lacune'' o buchi.
+
+\subsection{La Catena delle Inclusioni Numeriche}
+Partendo dal conteggio degli elementi discreti, si definisce la successione di ampliamenti algebrici:
+\[
+    \N \subset \Z \subset \Q \subset \R \subset \C
+\]
+
+\begin{definizione}{Insiemi Numerici Fondamentali}{insiemi_numerici}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+    \item \textbf{Numeri Naturali} ($\N$): $\N = \{0, 1, 2, 3, \dots\}$. È la struttura minima dotata dell'operazione di successore e dell'assioma di induzione matematica.
+    \item \textbf{Numeri Interi Relativi} ($\Z$): $\Z = \{0, \pm 1, \pm 2, \pm 3, \dots\}$. Costituisce un anello commutativo unitario in cui ogni elemento ammette opposto rispetto all'addizione.
+    \item \textbf{Numeri Razionali} ($\Q$): $\Q = \left\{ \frac{p}{q} \;\middle|\; p \in \Z, \, q \in \N_{>0}, \, \gcd(p, q) = 1 \right\}$. Rappresenta un campo ordinato ed archimedeo nel quale ogni elemento non nullo possiede reciproco rispetto alla moltiplicazione.
+    \item \textbf{Numeri Reali} ($\R$): Campo ordinato, archimedeo e \textbf{completo}, ottenuto come completamento topologico di $\Q$.
+    \item \textbf{Numeri Complessi} ($\C$): Chiusura algebrica di $\R$, definita come $\C = \{x + iy \mid x, y \in \R, i^2 = -1\}$.
+\end{enumerate}
+\end{definizione}
+
+Sebbene l'insieme dei numeri razionali $\Q$ sia denso in sé (ossia tra due razionali distinti esiste sempre un terzo numero razionale, per esempio la media aritmetica $\frac{q_1+q_2}{2}$), esso presenta una densità discontinua. Storicamente, la scoperta dei pitagorici dell'incommensurabilità della diagonale del quadrato unitario dimostrò che non esiste alcun numero $x \in \Q$ tale che $x^2 = 2$. Da ciò scaturisce la necessità dell'assioma di completezza.
+
+\subsection{L'Assioma di Completezza di Dedekind}
+La retta reale $\R$ si distingue da $\Q$ per una proprietà topologica fondamentale: ogni sottoinsieme non vuoto e superiormente limitato ammette un estremo superiore appartenente a $\R$.
+
+\begin{definizione}{Estremo Superiore ed Inferiore}{sup_inf}
+Sia $E \subseteq \R$ un sottoinsieme non vuoto.
+\begin{itemize}
+    \item Un elemento $M \in \R$ è un \textbf{maggiorante} di $E$ se $\forall x \in E, x \le M$. Se l'insieme dei maggioranti non è vuoto, $E$ si dice superiormente limitato.
+    \item Si definisce \textbf{estremo superiore} di $E$, denotato con $\sup E$, il minimo dei maggioranti di $E$:
+    \[
+        L = \sup E \iff \begin{cases}
+            \forall x \in E, \quad x \le L & \text{(L è un maggiorante)} \\
+            \forall \eps > 0, \; \exists x_\eps \in E : x_\eps > L - \eps & \text{(L è il minimo maggiorante)}
+        \end{cases}
+    \]
+    \item Analogamente, si definisce \textbf{estremo inferiore} $\inf E$ come il massimo dei minoranti.
+\end{itemize}
+Se l'estremo superiore appartiene all'insieme $E$, esso prende il nome di \textbf{massimo assoluto} ($\max E = \sup E$).
+\end{definizione}
+
+\begin{teorema}{Assioma di Completezza (di Dedekind)}{completezza_dedekind}
+Ogni sottoinsieme non vuoto $E \subset \R$ superiormente limitato ammette estremo superiore finito in $\R$: $\sup E \in \R$.
+\end{teorema}
+
+\begin{osservazione}[Conseguenze della Completezza]
+L'assioma di completezza garantisce la validità di tutti i grandi teoremi dell'Analisi 1: il Teorema di Weierstrass sui compatti, il Teorema di esistenza degli zeri per funzioni continue, la convergenza delle successioni monotone limitate e la convergenza di tutte le successioni di Cauchy.
+\end{osservazione}
+
+% ==============================================================================
+\section{Il Concetto Moderno di Funzione e Proprietà Strutturali}
+\label{sec:funzioni_proprieta}
+% ==============================================================================
+
+Una funzione matematica non è una semplice formula algebrica, ma una terna ordinata formata da un insieme di partenza (dominio), un insieme di arrivo (codominio) e una legge univoca di associazione.
+
+\begin{definizione}{Funzione Reale di Variabile Reale}{funzione_reale}
+Dati due sottoinsiemi $A, B \subseteq \R$, una \textbf{funzione} $f \colon A \to B$ è una corrispondenza che associa a ciascun elemento $x \in A$ uno ed un solo elemento $y = f(x) \in B$.
+\begin{itemize}
+    \item $A = \dom(f)$ è l'\textbf{insieme di definizione} o \textbf{dominio naturale}.
+    \item $B = \codom(f)$ è il \textbf{codominio}.
+    \item $\Imm(f) = f(A) = \{y \in B \mid \exists x \in A : f(x) = y\}$ è l'\textbf{immagine} di $f$.
+    \item Il \textbf{grafico} di $f$ è il sottoinsieme del piano cartesiano $\R^2$:
+    \[
+        \operatorname{Graph}(f) = \big\{ (x, y) \in \R^2 \;\big|\; x \in A, \, y = f(x) \big\}
+    \]
+\end{itemize}
+\end{definizione}
+
+\subsection{Iniettività, Suriettività e Funzione Inversa}
+Le proprietà qualitative di una funzione determinano la possibilità di invertire la relazione di corrispondenza.
+
+\begin{definizione}{Classificazione delle Applicazioni}{classificazione_applicazioni}
+Sia $f \colon A \to B$:
+\begin{enumerate}
+    \item \textbf{Iniettiva}: elementi distinti del dominio hanno immagini distinte:
+    \[
+        \forall x_1, x_2 \in A, \quad x_1 \neq x_2 \implies f(x_1) \neq f(x_2) \quad \left(\text{o eq. } f(x_1) = f(x_2) \implies x_1 = x_2\right)
+    \]
+    \emph{Interpretazione geometrica}: ogni retta orizzontale $y = y_0$ interseca il grafico di $f$ in \textbf{al più un punto}.
+    \item \textbf{Suriettiva}: ogni elemento del codominio è immagine di almeno un elemento del dominio:
+    \[
+        \forall y \in B, \quad \exists x \in A : f(x) = y \quad \iff \quad \Imm(f) = B
+    \]
+    \emph{Interpretazione geometrica}: ogni retta orizzontale $y = y_0$ con $y_0 \in B$ interseca il grafico in \textbf{almeno un punto}.
+    \item \textbf{Biettiva} (o biunivoca): $f$ è contemporaneamente iniettiva e suriettiva. Ogni retta orizzontale $y = y_0$ interseca il grafico in \textbf{uno ed un solo punto}.
+\end{enumerate}
+\end{definizione}
+
+\begin{teorema}{Esistenza e Unicità della Funzione Inversa}{funzione_inversa}
+Sia $f \colon A \to B$ una funzione biettiva. Allora esiste un'unica funzione, detta \textbf{funzione inversa} e denotata con $f^{-1} \colon B \to A$, tale che:
+\[
+    f^{-1}(f(x)) = x \quad \forall x \in A, \qquad f(f^{-1}(y)) = y \quad \forall y \in B
+\]
+\end{teorema}
+
+\begin{dimostrazione}
+Poiché $f$ è suriettiva su $B$, per ogni $y \in B$ l'insieme della controimmagine $f^{-1}(\{y\}) = \{x \in A \mid f(x) = y\}$ è non vuoto. Poiché $f$ è iniettiva, tale insieme contiene esattamente un unico elemento $x \in A$. Definendo $g(y) = x$, la corrispondenza $g \colon B \to A$ è univocamente determinata ed è la funzione inversa cercata.
+\end{dimostrazione}
+
+\begin{osservazione}[Simmetria Geometrica del Grafico Inverso]
+Il punto $(x_0, y_0) \in \operatorname{Graph}(f)$ se e solo se $y_0 = f(x_0)$, il che equivale a $x_0 = f^{-1}(y_0)$, ossia $(y_0, x_0) \in \operatorname{Graph}(f^{-1})$.
+Geometricamente, il punto $(y_0, x_0)$ si ottiene da $(x_0, y_0)$ mediante una \textbf{riflessione assiale rispetto alla bisettrice del I e III quadrante} ($y = x$).
+\end{osservazione}
+
+% ==============================================================================
+\section{Algebra delle Trasformazioni Geometriche dei Grafici}
+\label{sec:trasformazioni_grafici_dettagli}
+% ==============================================================================
+
+Conoscere il grafico qualitativo delle funzioni elementari ($x^n, e^x, \ln x, \sen x, \cos x, \dots$) consente di tracciare con rapidità e precisione grafici complessi applicando una sequenza logica di trasformazioni geometriche elementari.
+
+\begin{metodo}[Catalogo delle Trasformazioni Geometriche]
+Sia noto il grafico della funzione $y = f(x)$:
+\begin{enumerate}
+    \item \textbf{Traslazione verticale}: $y = f(x) + c$. Se $c > 0$ il grafico si sposta verso l'alto di $c$ unità; se $c < 0$ si sposta verso il basso di $|c|$ unità.
+    \item \textbf{Traslazione orizzontale}: $y = f(x - c)$. Se $c > 0$ il grafico trasla verso destra di $c$; se $c < 0$ verso sinistra di $|c|$.
+    \item \textbf{Riflessione rispetto all'asse $x$}: $y = -f(x)$. Le quote positive diventano negative e viceversa.
+    \item \textbf{Riflessione rispetto all'asse $y$}: $y = f(-x)$. Il semipiano destro viene ribaltato a sinistra e viceversa. Se $f(-x) = f(x)$ la funzione è \textbf{pari} (simmetria assiale rispetto a $x = 0$); se $f(-x) = -f(x)$ la funzione è \textbf{dispari} (simmetria centrale rispetto all'origine $O$).
+    \item \textbf{Dilatazione / Contrazione}:
+    \begin{itemize}
+        \item $y = a f(x)$ ($a > 0$): riscalamento verticale di fattore $a$.
+        \item $y = f(k x)$ ($k > 0$): compressione orizzontale se $k > 1$, dilatazione orizzontale se $0 < k < 1$.
+    \end{itemize}
+    \item \textbf{Valore Assoluto Esterno}: $y = |f(x)|$. Le porzioni di grafico con $f(x) \ge 0$ rimangono inalterate, mentre le porzioni in cui $f(x) < 0$ vengono ribaltate simmetricamente verso l'alto nel semipiano $y \ge 0$.
+    \item \textbf{Valore Assoluto Interno}: $y = f(|x|)$. Si conserva il ramo per $x \ge 0$ e lo si riflette a specchio a sinistra per $x < 0$, ottenendo una funzione automaticamente pari.
+\end{enumerate}
+\end{metodo}
+
+\begin{esame}[Attenzione all'Ordine delle Trasformazioni Composte]
+L'ordine di applicazione delle trasformazioni è vincolante e non commutativo.
+Ad esempio, per tracciare $y = f(2x + 4)$:
+\begin{itemize}
+    \item \emph{Procedura corretta}: riscrivere come $y = f(2(x + 2))$. Prima si applica la compressione orizzontale di fattore 2 ($x \mapsto 2x$), e successivamente si trasla a sinistra di 2 unità ($x \mapsto x + 2$).
+    \item Se si traslasse prima di 4 e poi si comprimesse, si otterrebbe $f(2x + 4)$ solo applicando la compressione all'intera variabile traslata.
+\end{itemize}
+\end{esame}
+
+% ==============================================================================
+\section{Sistemi di Coordinate nel Piano: Cartesiane e Polari}
+\label{sec:coordinate_polari_teoria}
+% ==============================================================================
+
+Nel piano euclideo, la posizione di un punto può essere descritta specificando le distanze ortogonali rispetto a due assi di riferimento (coordinate cartesiane) oppure la distanza dal polo e l'angolo di orientamento rispetto a un asse polare (coordinate polari).
+
+\begin{definizione}{Coordinate Polari nel Piano}{coordinate_polari_def}
+Fissato un polo $O \equiv (0, 0)$ e un semiasse polare coincidente con il semiasse positivo delle ascisse $x \ge 0$:
+\begin{itemize}
+    \item $\rho \in [0, +\infty)$ è il \textbf{raggio polare} (distanza euclidea dal polo $O$).
+    \item $\theta \in (-\pi, \pi]$ (convenzione dell'argomento principale) oppure $\theta \in [0, 2\pi)$ è l'\textbf{anomalia} o angolo polare orientato.
+\end{itemize}
+\end{definizione}
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_coordinate_polari.tex}
+    \caption{Rappresentazione geometrica della conversione tra coordinate cartesiane $(x,y)$ e coordinate polari $(\rho, \theta)$, con evidenziazione del triangolo rettangolo fondamentale e tabella analitica delle correzioni per quadrante.}
+    \label{fig:coord_polari_schema}
+\end{figure}
+
+\subsection{Dimostrazione Rigorosa delle Formule di Conversione}
+\paragraph{1. Da Polari a Cartesiane:}
+Considerando il triangolo rettangolo di ipotenusa $\rho$ avente per cateti le proiezioni ortogonali lungo gli assi, le definizioni trigonometriche elementari porgono direttamente:
+\[
+    x = \rho \cos \theta, \qquad y = \rho \sen \theta
+\]
+
+\paragraph{2. Da Cartesiane a Polari:}
+Sommando i quadrati delle relazioni cartesiane:
+\[
+    x^2 + y^2 = \rho^2 \cos^2 \theta + \rho^2 \sen^2 \theta = \rho^2 (\cos^2 \theta + \sen^2 \theta) = \rho^2 \implies \rho = \sqrt{x^2 + y^2} \ge 0
+\]
+Per quanto riguarda l'angolo $\theta$, per ogni punto con $x \neq 0$ si ha $\frac{y}{x} = \frac{\rho \sen \theta}{\rho \cos \theta} = \tg \theta$.
+Tuttavia, la funzione arcotangente $\arctg \colon \R \to (-\pi/2, \pi/2)$ restituisce angoli strettamente confinati nel I e IV quadrante. Qualora il punto $(x, y)$ appartenga al II o al III quadrante ($x < 0$), l'angolo effettivo differisce di $\pi$ dall'uscita dell'arcotangente:
+\[
+    \theta = \begin{cases}
+        \arctg\left(\frac{y}{x}\right) & \text{se } x > 0, \; y \in \R \quad (\text{I e IV quadrante}) \\[1ex]
+        \arctg\left(\frac{y}{x}\right) + \pi & \text{se } x < 0, \; y \ge 0 \quad (\text{II quadrante}) \\[1ex]
+        \arctg\left(\frac{y}{x}\right) - \pi & \text{se } x < 0, \; y < 0 \quad (\text{III quadrante, conv. } (-\pi, \pi]) \\[1ex]
+        +\frac{\pi}{2} & \text{se } x = 0, \; y > 0 \\[1ex]
+        -\frac{\pi}{2} & \text{se } x = 0, \; y < 0
+    \end{cases}
+\]
+
+% ==============================================================================
+\section{Teoria Assiomatica dei Radicali e delle Potenze}
+\label{sec:potenze_radicali_teoria}
+% ==============================================================================
+
+Una delle fonti più frequenti di errore nel calcolo differenziale risiede nell'errata manipolazione dei radicali con indice pari e nella falsa estensione delle potenze ad esponente frazionario o reale su basi negative.
+
+\subsection{Radici Aritmetiche vs Algebriche e l'Identità $\sqrt{x^2} = |x|$}
+In Analisi Matematica, il simbolo $\sqrt{a}$ indica la **radice aritmetica positiva**.
+
+\begin{definizione}{Radice Aritmetica $n$-esima}{radice_aritmetica_def}
+Dato $n \in \N_{\ge 1}$ e $a \in \R_{\ge 0}$, si definisce \textbf{radice aritmetica $n$-esima} di $a$, indicata con $\sqrt[n]{a}$, l'unico numero reale $b \ge 0$ tale che $b^n = a$.
+\end{definizione}
+
+\begin{teorema}{Identità Fondamentale del Valore Assoluto}{radice_quadrata_modulo}
+Per ogni numero reale $x \in \R$:
+\[
+    \sqrt{x^2} = |x|
+\]
+\end{teorema}
+
+\begin{dimostrazione}
+Per ogni $x \in \R$, $x^2 \ge 0$, dunque $\sqrt{x^2}$ è ben definita. Per definizione di radice aritmetica, $\sqrt{x^2}$ è l'unico valore $b \ge 0$ tale che $b^2 = x^2$.
+Verifichiamo che $b = |x|$ soddisfa entrambi i requisiti:
+1. $|x| \ge 0$ per definizione di valore assoluto;
+2. $(|x|)^2 = (\pm x)^2 = x^2$.
+Per l'unicità della radice aritmetica, ne consegue che $\sqrt{x^2} = |x|$.
+\end{dimostrazione}
+
+\begin{esame}[Trabocchetto d'Esame: Estrazione nei Limiti a $-\infty$]
+Uno degli errori più penalizzati consiste nello scrivere $\sqrt{x^2} = x$ quando $x \to -\infty$.
+Infatti, poiché per $x < 0$ si ha $|x| = -x$:
+\[
+    \lim_{x \to -\infty} \frac{\sqrt{4x^2 + 1}}{x} = \lim_{x \to -\infty} \frac{\sqrt{x^2(4 + x^{-2})}}{x} = \lim_{x \to -\infty} \frac{|x|\sqrt{4 + x^{-2}}}{x} = \lim_{x \to -\infty} \frac{-x\sqrt{4 + x^{-2}}}{x} = -2 \quad (\neq +2)
+\]
+\end{esame}
+
+\subsection{Gerarchia delle Potenze e il Paradosso delle Basi Negative}
+L'elevamento a potenza si costruisce rigorosamente in quattro passaggi successivi:
+\begin{enumerate}
+    \item \textbf{Esponente naturale} ($n \in \N_{>0}$): $a^n = \underbrace{a \cdot a \cdots a}_{n \text{ volte}}$ per ogni $a \in \R$.
+    \item \textbf{Esponente intero} ($m \in \Z$): $a^0 = 1$ ($a \neq 0$), $a^{-n} = \frac{1}{a^n}$ ($a \neq 0, n \in \N_{>0}$).
+    \item \textbf{Esponente razionale} ($q = \frac{m}{n} \in \Q$ con $n > 0$): $a^{m/n} = \sqrt[n]{a^m}$, definita per **$a > 0$** (e per $a = 0$ se $m/n > 0$).
+    \item \textbf{Esponente reale irrazionale} ($x \in \R \setminus \Q$): definito per continuità mediante l'estremo superiore delle potenze razionali approssimanti, oppure tramite l'identità analitica fondamentale:
+    \[
+        a^x := e^{x \ln a} \qquad (a > 0)
+    \]
+\end{enumerate}
+
+\paragraph{Perché le potenze razionali non possono essere definite per basi negative?}
+Se ammettessimo basi negative, nascerebbe una contraddizione insanabile legata all'equivalenza delle frazioni razionali.
+Consideriamo $a = -8$ e l'esponente $1/3 = 2/6 \in \Q$:
+\begin{align*}
+    (-8)^{1/3} &= \sqrt[3]{-8} = -2 \\
+    (-8)^{2/6} &= \sqrt[6]{(-8)^2} = \sqrt[6]{64} = +2
+\end{align*}
+Poiché $-2 \neq +2$, l'operazione non sarebbe ben definita sulla classe di equivalenza dei numeri razionali. Inoltre verrebbero meno le proprietà algebriche fondamentali $(a^p)^q = a^{pq}$:
+\[
+    \left((-1)^2\right)^{1/2} = 1^{1/2} = 1 \neq (-1)^{2 \cdot (1/2)} = (-1)^1 = -1
+\]
+Pertanto, per garantire la coerenza logica e la continuità, la funzione esponenziale $x \mapsto a^x$ è rigorosamente definita solo per $a > 0$.
+
+% ==============================================================================
+\section{Trigonometria Iperbolica e Geometria dell'Iperbole Equilatera}
+\label{sec:trigonometria_iperbolica_completa}
+% ==============================================================================
+
+In perfetta analogia con le funzioni trigonometriche circolari (generate dalla circonferenza $X^2 + Y^2 = 1$), le **funzioni iperboliche** scaturiscono dalla parametrizzazione dell'iperbole equilatera $X^2 - Y^2 = 1$.
+
+\begin{definizione}{Funzioni Iperboliche}{funzioni_iperboliche_def}
+Per ogni $x \in \R$, si definiscono:
+\[
+    \cosh x = \frac{e^x + e^{-x}}{2}, \qquad \sinh x = \frac{e^x - e^{-x}}{2}, \qquad \tanh x = \frac{\sinh x}{\cosh x} = \frac{e^x - e^{-x}}{e^x + e^{-x}}
+\]
+\end{definizione}
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_funzioni_iperboliche.tex}
+    \caption{Grafici delle funzioni iperboliche $\cosh(x)$ (pari, curva catenaria), $\sinh(x)$ (dispari) e $\tanh(x)$ (dispari con asintoti orizzontali $y = \pm 1$), con il profilo asintotico esponenziale $y = \frac{1}{2}e^x$.}
+    \label{fig:funzioni_iperboliche_plot}
+\end{figure}
+
+\begin{teorema}{Identità Fondamentale della Trigonometria Iperbolica}{identita_iperbolica}
+Per ogni $x \in \R$:
+\[
+    \cosh^2 x - \sinh^2 x = 1
+\]
+\end{teorema}
+
+\begin{dimostrazione}
+Sviluppando direttamente i quadrati delle definizioni:
+\begin{align*}
+    \cosh^2 x &= \left(\frac{e^x + e^{-x}}{2}\right)^2 = \frac{e^{2x} + 2 + e^{-2x}}{4} \\
+    \sinh^2 x &= \left(\frac{e^x - e^{-x}}{2}\right)^2 = \frac{e^{2x} - 2 + e^{-2x}}{4}
+\end{align*}
+Sottraendo membro a membro:
+\[
+    \cosh^2 x - \sinh^2 x = \frac{(e^{2x} + 2 + e^{-2x}) - (e^{2x} - 2 + e^{-2x})}{4} = \frac{4}{4} = 1
+\]
+\end{dimostrazione}
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_circonferenza_iperbole.tex}
+    \caption{Dualità geometrica: il cerchio unitario $X^2+Y^2=1$ parametrizzato da $(\cos t, \sen t)$ e l'iperbole equilatera $X^2-Y^2=1$ parametrizzata da $(\cosh t, \sinh t)$. In entrambi i casi, l'area del settore evidenziato vale esattamente $A = t/2$.}
+    \label{fig:dualita_iperbole_cerchio}
+\end{figure}
+
+\subsection{Derivate e Significato Geometrico del Parametro $t$}
+Le regole di derivazione delle funzioni iperboliche evidenziano la completa simmetria priva di segni alterni per il coseno:
+\[
+    \frac{\diff}{\dx} \sinh x = \cosh x, \qquad \frac{\diff}{\dx} \cosh x = +\sinh x, \qquad \frac{\diff}{\dx} \tanh x = \frac{1}{\cosh^2 x} = 1 - \tanh^2 x
+\]
+
+Inoltre, mentre nel cerchio goniometrico il parametro $t$ corrisponde sia alla lunghezza d'arco che al doppio dell'area del settore circolare ($A = t/2$), nell'iperbole equilatera $t$ rappresenta **esattamente il doppio dell'area del settore iperbolico** compreso tra l'origine, il vertice $(1, 0)$ e il punto $(\cosh t, \sinh t)$:
+\[
+    A(t) = \frac{1}{2}\cosh t \sinh t - \int_1^{\cosh t} \sqrt{u^2 - 1}\du = \frac{t}{2} \iff t = 2 A(t)
+\]
+Da questa profonda proprietà geometrica discende la denominazione delle funzioni inverse iperboliche:
+\begin{itemize}
+    \item Settore seno iperbolico: $\operatorname{settsh} x = \ln\left(x + \sqrt{x^2 + 1}\right), \quad x \in \R$
+    \item Settore coseno iperbolico: $\operatorname{settch} x = \ln\left(x + \sqrt{x^2 - 1}\right), \quad x \ge 1$
+    \item Settore tangente iperbolica: $\operatorname{setttgh} x = \frac{1}{2}\ln\left(\frac{1+x}{1-x}\right), \quad x \in (-1, 1)$
+\end{itemize}

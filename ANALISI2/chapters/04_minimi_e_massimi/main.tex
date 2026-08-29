@@ -1,0 +1,349 @@
+% ==============================================================================
+% CAPITOLO 4: OTTIMIZZAZIONE, MINIMI E MASSIMI (LIBERI E VINCOLATI)
+% ==============================================================================
+
+\chapter{Ottimizzazione: Minimi e Massimi Liberi e Vincolati}
+\label{chap:minimi_e_massimi}
+
+\section{La Ricerca degli Estremi: Motivazioni Geometriche, Fisiche ed Economiche}
+
+L'ottimizzazione costituisce uno dei pilastri applicativi più fecondi dell'intera Analisi Matematica. Identificare la configurazione che rende massima o minima una data funzione obiettivo risponde a principi universali di conservazione, efficienza ed equilibrio:
+\begin{itemize}
+    \item In \textbf{Fisica e Meccanica}, gli stati di equilibrio stabile di un sistema dinamico corrispondono ai minimi locali dell'energia potenziale totale (Principio di Minima Azione di Hamilton, principio dei lavori virtuali);
+    \item In \textbf{Ingegneria Gestionale ed Economia}, l'ottimizzazione guida la massimizzazione del profitto d'impresa, l'allocazione ottimale di risorse scarse, la minimizzazione dei costi logistici di trasporto o il dimensionamento efficiente di scorte e catene di fornitura;
+    \item Nel \textbf{Machine Learning e Scienza dei Dati}, l'addestramento di modelli predittivi e reti neurali consiste nella minimizzazione di una funzione di costo (loss function) su spazi a milioni di parametri mediante algoritmi di discesa del gradiente.
+\end{itemize}
+
+In questo capitolo tratteremo in modo unitario ed esaustivo la teoria dei massimi e minimi per funzioni di più variabili, distinguendo tra \textbf{ottimizzazione libera} (in cui la variabile spazia liberamente su un insieme aperto) e \textbf{ottimizzazione vincolata} (in cui le variabili sono soggette a relazioni di uguaglianza o disuguaglianza).
+
+\section{Punti Stazionari e Condizioni del Primo Ordine}
+
+\begin{definizione}{Massimi e Minimi Locali, Assoluti e Punti di Sella}{def_estremi_rn_completa}
+Sia $f: D \subseteq \Rn \to \R$ e sia $\bx_0 \in D$. Il punto $\bx_0$ si definisce:
+\begin{enumerate}
+    \item \textbf{Punto di minimo locale (relativo)}: se esiste un intorno sferico $\mathcal{B}_r(\bx_0)$ tale che:
+    \[
+    f(\bx) \ge f(\bx_0), \quad \forall \bx \in \mathcal{B}_r(\bx_0) \cap D
+    \]
+    Si dice di \textbf{minimo locale stretto} se $f(\bx) > f(\bx_0)$ per ogni $\bx \in \big(\mathcal{B}_r(\bx_0) \setminus \graffe{\bx_0}\big) \cap D$.
+    
+    \item \textbf{Punto di massimo locale (relativo)}: se esiste un intorno sferico $\mathcal{B}_r(\bx_0)$ tale che:
+    \[
+    f(\bx) \le f(\bx_0), \quad \forall \bx \in \mathcal{B}_r(\bx_0) \cap D
+    \]
+    Si dice di \textbf{massimo locale stretto} se $f(\bx) < f(\bx_0)$ per ogni $\bx \in \big(\mathcal{B}_r(\bx_0) \setminus \graffe{\bx_0}\big) \cap D$.
+    
+    \item \textbf{Punto di minimo assoluto (globale)}: se $f(\bx) \ge f(\bx_0)$ per ogni $\bx \in D$.
+    \item \textbf{Punto di massimo assoluto (globale)}: se $f(\bx) \le f(\bx_0)$ per ogni $\bx \in D$.
+    
+    \item \textbf{Punto di sella}: se $\bx_0$ è un punto stazionario ($\nabla f(\bx_0) = \bzero$) ma in ogni intorno $\mathcal{B}_r(\bx_0)$ esistono sia punti in cui $f(\bx) > f(\bx_0)$ sia punti in cui $f(\bx) < f(\bx_0)$.
+\end{enumerate}
+\end{definizione}
+
+Il punto di partenza fondamentale per la localizzazione degli estremi interni è il Teorema di Fermat, che fornisce una condizione necessaria del prim'ordine.
+
+\begin{teorema}{Teorema di Fermat in $\mathbb{R}^n$ (Condizione Necessaria del I Ordine)}{thm_fermat_rn_dimostrazione}
+Sia $f: A \subseteq \Rn \to \R$ con $A$ aperto. Sia $\bx_0 \in A$ un punto di estremo locale (massimo o minimo relativo) per $f$.
+Se $f$ è differenziabile nel punto $\bx_0$, allora il suo gradiente si annulla identicamente in $\bx_0$:
+\[
+\nabla f(\bx_0) = \bzero \iff \begin{cases}
+\pder{f}{x_1}(\bx_0) = 0 \\
+\vdots \\
+\pder{f}{x_n}(\bx_0) = 0
+\end{cases}
+\]
+I punti in cui $\nabla f(\bx_0) = \bzero$ prendono il nome di \textbf{punti stazionari} (o \textbf{punti critici}).
+\end{teorema}
+
+\begin{dimostrazione}
+Sia $\bv \in \Rn$ un qualsiasi versore unitario fissato ($\norm{\bv} = 1$).
+Poiché $A$ è un insieme aperto e $\bx_0 \in A$, esiste un raggio $\delta > 0$ tale che il segmento parametrizzato $\mathbf{r}(t) = \bx_0 + t\bv$ appartiene interamente ad $A$ per ogni $t \in (-\delta, \delta)$.
+Consideriamo la funzione scalare di una sola variabile reale $g: (-\delta, \delta) \to \R$ definita da:
+\[
+g(t) = f(\bx_0 + t\bv)
+\]
+Poiché $\bx_0$ è un punto di estremo locale per $f$, l'origine $t = 0$ è un punto di estremo locale monodimensionale per la funzione $g$ sull'intervallo aperto $(-\delta, \delta)$.
+Essendo $f$ differenziabile in $\bx_0$, per la Regola della Catena (Teorema~\ref{thm:thm_chain_rule_curva}) la funzione $g$ è derivabile in $t = 0$, e la sua derivata vale:
+\[
+g'(0) = \scal{\nabla f(\bx_0), \bv} = D_\bv f(\bx_0)
+\]
+Per il classico Teorema di Fermat in una variabile reale, la derivata prima di $g$ si deve annullare nel punto di estremo $t = 0$:
+\[
+g'(0) = 0 \implies \scal{\nabla f(\bx_0), \bv} = 0
+\]
+Poiché questa ortogonalità deve sussistere per \textbf{qualsiasi} versore $\bv \in \Rn$, scegliamo in particolare i versori della base canonica $\bv = \mathbf{e}_i = (0, \dots, 1, \dots, 0)$ per ogni $i = 1, \dots, n$:
+\[
+\scal{\nabla f(\bx_0), \mathbf{e}_i} = \pder{f}{x_i}(\bx_0) = 0, \quad \forall i=1,\dots,n
+\]
+Tutte le derivate parziali prime si annullano simultaneamente, provando che $\nabla f(\bx_0) = \bzero$.
+\end{dimostrazione}
+
+\begin{osservazione}[Punti Singolari di Non Differenziabilità]
+Il Teorema di Fermat asserisce che tra i punti interni in cui la funzione è differenziabile, i soli candidati estremi sono i punti stazionari. Tuttavia, una funzione può ammettere estremi anche in \textbf{punti in cui non è differenziabile} (punti singolari, cuspidi o spigoli, come l'origine $(0,0)$ per il cono $z = \sqrt{x^2+y^2}$, che è un minimo assoluto con gradiente non definito).
+\end{osservazione}
+
+\section{Condizioni Sufficienti del Secondo Ordine e Classificazione dell'Hessiana}
+
+L'annullamento del gradiente è una condizione necessaria ma non sufficiente: un punto stazionario può essere un minimo, un massimo o una sella. Per discriminare la natura del punto stazionario occorre analizzare la concavità/convessità locale mediante la matrice Hessiana e la Formula di Taylor al secondo ordine.
+
+\begin{definizione}{Classificazione Algebrica delle Forme Quadratiche}{classif_forme_quad}
+Sia $M \in \R^{n \times n}$ una matrice reale simmetrica. La forma quadratica associata $q: \Rn \to \R$, $q(\mathbf{h}) = \scal{M\mathbf{h}, \mathbf{h}} = \mathbf{h}^T M \mathbf{h}$, si definisce:
+\begin{itemize}
+    \item \textbf{Definita positiva}: se $q(\mathbf{h}) > 0$ per ogni $\mathbf{h} \neq \bzero$ ($\iff$ tutti gli autovalori soddisfano $\lambda_i > 0$);
+    \item \textbf{Definita negativa}: se $q(\mathbf{h}) < 0$ per ogni $\mathbf{h} \neq \bzero$ ($\iff$ tutti gli autovalori soddisfano $\lambda_i < 0$);
+    \item \textbf{Semidefinita positiva}: se $q(\mathbf{h}) \ge 0$ per ogni $\mathbf{h}$ ed esiste almeno un vettore $\mathbf{h} \neq \bzero$ con $q(\mathbf{h}) = 0$ ($\iff \lambda_i \ge 0$ con almeno un $\lambda_k = 0$);
+    \item \textbf{Semidefinita negativa}: se $q(\mathbf{h}) \le 0$ per ogni $\mathbf{h}$ ed esiste almeno un vettore $\mathbf{h} \neq \bzero$ con $q(\mathbf{h}) = 0$ ($\iff \lambda_i \le 0$ con almeno un $\lambda_k = 0$);
+    \item \textbf{Indefinita}: se assume sia valori strettamente positivi sia valori strettamente negativi ($\iff$ ammette almeno un autovalore positivo $\lambda_i > 0$ ed almeno un autovalore negativo $\lambda_j < 0$).
+\end{itemize}
+\end{definizione}
+
+\begin{teorema}{Classificazione dei Punti Critici al Secondo Ordine}{thm_classificazione_hessiana_taylor}
+Sia $f: A \subseteq \Rn \to \R$ una funzione di classe $C^2(A)$ con $A$ aperto, e sia $\bx_0 \in A$ un punto stazionario ($\nabla f(\bx_0) = \bzero$).
+\begin{enumerate}
+    \item Se la matrice Hessiana $\Hess f(\bx_0)$ è \textbf{definita positiva}, allora $\bx_0$ è un punto di \textbf{minimo locale stretto}.
+    \item Se la matrice Hessiana $\Hess f(\bx_0)$ è \textbf{definita negativa}, allora $\bx_0$ è un punto di \textbf{massimo locale stretto}.
+    \item Se la matrice Hessiana $\Hess f(\bx_0)$ è \textbf{indefinita}, allora $\bx_0$ è un \textbf{punto di sella}.
+    \item Se la matrice Hessiana $\Hess f(\bx_0)$ è \textbf{semidefinita} (ad esempio $\det \Hess f(\bx_0) = 0$), il test del secondo ordine è \textbf{inconcludente} (caso dubbio degenerato).
+\end{enumerate}
+\end{teorema}
+
+\begin{dimostrazione}
+Poiché $f \in C^2(A)$ e $\bx_0$ è stazionario ($\nabla f(\bx_0) = \bzero$), applichiamo lo sviluppo di Taylor al secondo ordine con resto di Peano (Teorema~\ref{thm:taylor_secondo_ordine_peano}) per un incremento $\mathbf{h} \neq \bzero$:
+\[
+f(\bx_0 + \mathbf{h}) - f(\bx_0) = \frac{1}{2} \scal{\Hess f(\bx_0)\mathbf{h}, \mathbf{h}} + \smallo(\norm{\mathbf{h}}^2) \quad \text{per } \mathbf{h} \to \bzero
+\]
+Esprimiamo il vettore incremento in coordinate polari sferiche ponendo $\mathbf{h} = \norm{\mathbf{h}} \mathbf{u}$, dove $\mathbf{u} = \frac{\mathbf{h}}{\norm{\mathbf{h}}}$ è un versore appartenente alla sfera unitaria compatta $\mathbb{S}^{n-1} = \graffe{\mathbf{u} \in \Rn : \norm{\mathbf{u}} = 1}$.
+Sfruttando l'omogeneità quadratica della forma quadratica:
+\[
+\scal{\Hess f(\bx_0)\mathbf{h}, \mathbf{h}} = \scal{\Hess f(\bx_0)(\norm{\mathbf{h}}\mathbf{u}), \norm{\mathbf{h}}\mathbf{u}} = \norm{\mathbf{h}}^2 \scal{\Hess f(\bx_0)\mathbf{u}, \mathbf{u}}
+\]
+Raccogliendo $\norm{\mathbf{h}}^2$ nell'incremento totale:
+\[
+f(\bx_0 + \mathbf{h}) - f(\bx_0) = \norm{\mathbf{h}}^2 \left[ \frac{1}{2} \scal{\Hess f(\bx_0)\mathbf{u}, \mathbf{u}} + \frac{\smallo(\norm{\mathbf{h}}^2)}{\norm{\mathbf{h}}^2} \right]
+\]
+\paragraph{Caso 1: $\Hess f(\bx_0)$ Definita Positiva.}
+La funzione scalare $q(\mathbf{u}) = \scal{\Hess f(\bx_0)\mathbf{u}, \mathbf{u}}$ è una funzione continua definita sulla sfera unitaria $\mathbb{S}^{n-1}$, che è un insieme compatto (chiuso e limitato). Per il Teorema di Weierstrass, $q(\mathbf{u})$ ammette un valore minimo assoluto $\lambda_{\min}$ su $\mathbb{S}^{n-1}$:
+\[
+\lambda_{\min} = \min_{\mathbf{u} \in \mathbb{S}^{n-1}} \scal{\Hess f(\bx_0)\mathbf{u}, \mathbf{u}}
+\]
+Poiché la forma quadratica è definita positiva per ipotesi, $\lambda_{\min} > 0$ (che coincide con il più piccolo autovalore dell'Hessiana).
+Dunque per ogni $\mathbf{u} \in \mathbb{S}^{n-1}$:
+\[
+\scal{\Hess f(\bx_0)\mathbf{u}, \mathbf{u}} \ge \lambda_{\min} > 0
+\]
+Per definizione di $\smallo(\norm{\mathbf{h}}^2)$, esiste un raggio $\delta > 0$ tale che per ogni $\norm{\mathbf{h}} < \delta$:
+\[
+\abs{\frac{\smallo(\norm{\mathbf{h}}^2)}{\norm{\mathbf{h}}^2}} < \frac{1}{4} \lambda_{\min} \implies \frac{\smallo(\norm{\mathbf{h}}^2)}{\norm{\mathbf{h}}^2} > -\frac{1}{4} \lambda_{\min}
+\]
+Sostituendo nella parentesi quadra per ogni $\mathbf{h}$ con $0 < \norm{\mathbf{h}} < \delta$:
+\[
+f(\bx_0 + \mathbf{h}) - f(\bx_0) \ge \norm{\mathbf{h}}^2 \left[ \frac{1}{2} \lambda_{\min} - \frac{1}{4} \lambda_{\min} \right] = \frac{1}{4} \lambda_{\min} \norm{\mathbf{h}}^2 > 0
+\]
+Risulta dunque $f(\bx_0 + \mathbf{h}) > f(\bx_0)$ per ogni $\bx_0 + \mathbf{h} \in \mathcal{B}_\delta(\bx_0) \setminus \graffe{\bx_0}$, provando rigorosamente che $\bx_0$ è un punto di \textbf{minimo locale stretto}.
+
+\paragraph{Caso 2: $\Hess f(\bx_0)$ Definita Negativa.}
+Segue identicamente considerando la funzione $-f$, che ammette matrice Hessiana definita positiva, dimostrando che $\bx_0$ è punto di \textbf{massimo locale stretto}.
+
+\paragraph{Caso 3: $\Hess f(\bx_0)$ Indefinita.}
+Esistono due versori $\mathbf{u}_+, \mathbf{u}_- \in \mathbb{S}^{n-1}$ tali che $\scal{\Hess f(\bx_0)\mathbf{u}_+, \mathbf{u}_+} = \alpha > 0$ e $\scal{\Hess f(\bx_0)\mathbf{u}_-, \mathbf{u}_-} = -\beta < 0$.
+Muovendosi lungo la direzione $\mathbf{h} = t \mathbf{u}_+$, per $t \to 0$ l'incremento è asintotico a $\frac{1}{2}\alpha t^2 > 0 \implies f(\bx_0+t\mathbf{u}_+) > f(\bx_0)$.
+Muovendosi lungo la direzione $\mathbf{h} = t \mathbf{u}_-$, l'incremento è asintotico a $-\frac{1}{2}\beta t^2 < 0 \implies f(\bx_0+t\mathbf{u}_-) < f(\bx_0)$.
+Dunque in ogni intorno di $\bx_0$ la funzione assume sia valori maggiori sia valori minori di $f(\bx_0)$, provando che $\bx_0$ è un \textbf{punto di sella}.
+\end{dimostrazione}
+
+\begin{metodo}[Regola Operativa del Determinante Hessiano in $\mathbb{R}^2$]
+Sia $(x_0, y_0)$ un punto stazionario per $f \in C^2(\Rdue)$. Calcoliamo la matrice Hessiana $2 \times 2$:
+\[
+\Hess f(x_0, y_0) = \begin{pmatrix} f_{xx}(x_0, y_0) & f_{xy}(x_0, y_0) \\ f_{xy}(x_0, y_0) & f_{yy}(x_0, y_0) \end{pmatrix}
+\]
+e il suo determinante Hessiano:
+\[
+H(x_0, y_0) = \det \Hess f(x_0, y_0) = f_{xx}(x_0, y_0) f_{yy}(x_0, y_0) - \left[ f_{xy}(x_0, y_0) \right]^2 = \lambda_1 \lambda_2
+\]
+\begin{enumerate}
+    \item \textbf{Se $H > 0$}: I due autovalori sono concordi ($\lambda_1 \lambda_2 > 0$). Il segno comune è determinato dal segno dell'elemento diagonale $f_{xx}$ (o $f_{yy}$):
+    \begin{itemize}
+        \item Se $f_{xx}(x_0, y_0) > 0 \implies \lambda_1, \lambda_2 > 0 \implies$ \textbf{Punto di Minimo Locale Stretto};
+        \item Se $f_{xx}(x_0, y_0) < 0 \implies \lambda_1, \lambda_2 < 0 \implies$ \textbf{Punto di Massimo Locale Stretto}.
+    \end{itemize}
+    \item \textbf{Se $H < 0$}: I due autovalori sono discordi ($\lambda_1 \lambda_2 < 0$, uno positivo e uno negativo) $\implies$ \textbf{Punto di Sella}.
+    \item \textbf{Se $H = 0$}: Almeno un autovalore è nullo $\implies$ \textbf{Caso Dubbio / Degenere}.
+    Il test del secondo ordine non fornisce informazioni; occorre studiare direttamente il segno dell'incremento $\Delta f(x,y) = f(x,y) - f(x_0,y_0)$ in un intorno del punto, oppure valutarne le restrizioni a opportune famiglie di curve.
+\end{enumerate}
+\end{metodo}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.05, >=Stealth]
+    % Paraboloide a sella
+    \draw[->, gray!80] (0,0) -- (4,0) node[right, black] {$y$};
+    \draw[->, gray!80] (0,0) -- (-2,-1.4) node[below left, black] {$x$};
+    \draw[->, gray!80] (0,0) -- (0,3.2) node[above, black] {$z$};
+
+    % Parabola verso l'alto lungo x
+    \draw[thick, forestgreen] plot[domain=-1.4:1.4, samples=30] (\x, {0.7*\x*\x});
+    \node[forestgreen] at (1.8,1.6) {\small Lungo $x$: minimo ($f_{xx} > 0$)};
+
+    % Parabola verso il basso lungo y
+    \draw[thick, crimsonred] plot[domain=-1.3:1.3, samples=30] ({0.8*\x}, {-0.7*\x*\x});
+    \node[crimsonred] at (-1.8,-1.0) {\small Lungo $y$: massimo ($f_{yy} < 0$)};
+
+    \filldraw[navyblue] (0,0) circle (2.2pt) node[above right=2pt] {\textbf{Punto di Sella} $(0,0,0)$};
+\end{tikzpicture}
+\end{center}
+
+\section{Ottimizzazione Vincolata e Moltiplicatori di Lagrange}
+
+Nelle applicazioni ingegneristiche ed economiche, le variabili decisionali sono quasi sempre soggette a vincoli fisici o di budget:
+\[
+\text{Massimizzare/Minimizzare } f(\bx) \quad \text{sotto la condizione } g(\bx) = 0
+\]
+L'insieme $\Sigma = \graffe{\bx \in A : g(\bx) = 0}$ prende il nome di \textbf{insieme di vincolo}.
+
+\begin{teorema}{Teorema dei Moltiplicatori di Lagrange}{thm_moltiplicatori_lagrange_dim}
+Siano $f, g: A \subseteq \Rn \to \R$ funzioni di classe $C^1(A)$ con $A$ aperto. Sia $\Sigma = \graffe{\bx \in A : g(\bx) = 0}$ il vincolo.
+Sia $\bx_0 \in \Sigma$ un punto di estremo locale per la restrizione $\left.f\right|_\Sigma$.
+Se $\bx_0$ è un \textbf{punto regolare per il vincolo} (ossia il gradiente del vincolo non si annulla: $\nabla g(\bx_0) \neq \bzero$), allora esiste uno scalare reale $\lambda_0 \in \R$ (detto \textbf{moltiplicatore di Lagrange}) tale che:
+\[
+\nabla f(\bx_0) = \lambda_0 \nabla g(\bx_0)
+\]
+Equivalentemente, la tupla $(\bx_0, \lambda_0) \in \Rn \times \R$ è un punto stazionario libero per la funzione \textbf{Lagrangiana}:
+\[
+\mathcal{L}(\bx, \lambda) = f(\bx) - \lambda g(\bx)
+\]
+ossia soddisfa il sistema non lineare di $n+1$ equazioni in $n+1$ incognite:
+\[
+\begin{cases}
+\nabla_\bx \mathcal{L}(\bx, \lambda) = \nabla f(\bx) - \lambda \nabla g(\bx) = \bzero \\
+\pder{\mathcal{L}}{\lambda}(\bx, \lambda) = -g(\bx) = 0
+\end{cases}
+\]
+\end{teorema}
+
+\begin{dimostrazione}
+Poiché $\nabla g(\bx_0) \neq \bzero$, almeno una derivata parziale di $g$ non è nulla in $\bx_0$. Supponiamo, senza perdita di generalità, che $\pder{g}{x_n}(\bx_0) \neq 0$.\\
+Per il Teorema del Dini (Teorema~\ref{thm:thm_dini_ipersuperfici_rn}), in un intorno $U \subseteq \R^{n-1}$ di $\bx_0' = (x_{1,0}, \dots, x_{n-1,0})$ il vincolo $g(\bx) = 0$ definisce univocamente una funzione implicita $x_n = \varphi(x_1, \dots, x_{n-1})$ di classe $C^1(U)$, con derivate parziali:
+\[
+\pder{\varphi}{x_i}(\bx_0') = -\frac{\pder{g}{x_i}(\bx_0)}{\pder{g}{x_n}(\bx_0)}, \quad \forall i=1,\dots,n-1
+\]
+Sostituendo $x_n = \varphi(\bx')$ nella funzione obiettivo $f$, otteniamo la funzione ridotta di $n-1$ variabili libere:
+\[
+F(x_1, \dots, x_{n-1}) = f(x_1, \dots, x_{n-1}, \varphi(x_1, \dots, x_{n-1}))
+\]
+Poiché $\bx_0$ è punto di estremo per $f$ su $\Sigma$, il punto $\bx_0'$ è un punto di estremo locale libero per $F$ sull'aperto $U$.
+Per il Teorema di Fermat, tutte le derivate parziali di $F$ devono annullarsi in $\bx_0'$:
+\[
+\pder{F}{x_i}(\bx_0') = \pder{f}{x_i}(\bx_0) + \pder{f}{x_n}(\bx_0) \pder{\varphi}{x_i}(\bx_0') = 0, \quad \forall i=1,\dots,n-1
+\]
+Sostituendo l'espressione delle derivate della funzione implicita $\varphi$:
+\[
+\pder{f}{x_i}(\bx_0) - \pder{f}{x_n}(\bx_0) \frac{\pder{g}{x_i}(\bx_0)}{\pder{g}{x_n}(\bx_0)} = 0 \implies \pder{f}{x_i}(\bx_0) = \left[ \frac{\pder{f}{x_n}(\bx_0)}{\pder{g}{x_n}(\bx_0)} \right] \pder{g}{x_i}(\bx_0)
+\]
+Definendo il moltiplicatore scalare:
+\[
+\lambda_0 = \frac{\pder{f}{x_n}(\bx_0)}{\pder{g}{x_n}(\bx_0)} \in \R
+\]
+risulta immediatamente che $\pder{f}{x_i}(\bx_0) = \lambda_0 \pder{g}{x_i}(\bx_0)$ per ogni $i=1,\dots,n-1$, e per definizione di $\lambda_0$ la medesima relazione vale anche per $i=n$.
+Ne deduciamo l'identità vettoriale cercata:
+\[
+\nabla f(\bx_0) = \lambda_0 \nabla g(\bx_0)
+\]
+\end{dimostrazione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Curve di livello di f
+    \draw[thick, coolblue] (0,0) ellipse (3.0 and 1.9);
+    \draw[thick, coolblue] (0,0) ellipse (2.2 and 1.35);
+    \draw[thick, coolblue] (0,0) ellipse (1.4 and 0.8);
+    \node[coolblue] at (3.1,1.7) {$f(x,y) = c_3$};
+    \node[coolblue] at (2.3,1.15) {$f(x,y) = c_2$};
+    \node[coolblue] at (1.4,0.6) {$f(x,y) = c_1$};
+
+    % Curva di vincolo g(x,y) = 0
+    \draw[ultra thick, crimsonred] (-2.6,-1.6) to[out=40, in=215] (1.6, 1.8);
+    \node[crimsonred] at (-1.8,-1.8) {Vincolo $g(x,y) = 0$};
+
+    % Punto di tangenza P0
+    \coordinate (P0) at (0.9, 1.25);
+    \filldraw[black] (P0) circle (2.2pt) node[below right=2pt] {$P_0$ (Estremo Vincolato)};
+
+    % Vettori gradiente allineati
+    \draw[thick, navyblue, ->] (P0) -- ++(0.7, 1.0) node[above left] {$\nabla f(P_0)$};
+    \draw[thick, warmamber, ->] (P0) -- ++(1.15, 1.65) node[right] {$\lambda \nabla g(P_0)$};
+
+    % Retta tangente comune
+    \draw[dashed, forestgreen, thick] (P0) -- ++(-1.2, 0.8);
+    \draw[dashed, forestgreen, thick] (P0) -- ++(1.2, -0.8) node[below right] {Tangente comune};
+\end{tikzpicture}
+\end{center}
+
+\section{Ricerca dei Massimi e Minimi Assoluti su Insiemi Compatti}
+
+\begin{metodo}[Algoritmo Generale in 4 Fasi per Estremi Assoluti su Compatti $K$]
+Data una funzione continua $f: K \to \R$ su un insieme compatto $K \subset \Rn$ (chiuso e limitato), per il Teorema di Weierstrass esistono con certezza il massimo e il minimo assoluto. La determinazione pratica si articola in:
+\begin{enumerate}
+    \item \textbf{Fase 1: Punti Stazionari Interni ($\Int(K)$)}:
+    Si risolve il sistema gradiente nullo:
+    \[
+    \nabla f(\bx) = \bzero
+    \]
+    e si selezionano unicamente le soluzioni strettamente interne $\bx \in \Int(K)$.
+    
+    \item \textbf{Fase 2: Punti Singolari Interni}:
+    Si individuano eventuali punti interni in cui $f$ non è differenziabile (es. radici, moduli).
+    
+    \item \textbf{Fase 3: Studio della Frontiera ($\partial K$)}:
+    Si cercano i candidati estremi sul bordo del dominio mediante:
+    \begin{itemize}
+        \item \textbf{Parametrizzazione diretta}: Se un tratto di bordo è descritto da una curva $\gamma(t)$ per $t \in [a, b]$, si studia la funzione di una variabile $h(t) = f(\gamma(t))$;
+        \item \textbf{Moltiplicatori di Lagrange}: Se il bordo è espresso da $g(\bx) = 0$, si risolve il sistema $\nabla f(\bx) = \lambda \nabla g(\bx)$;
+        \item \textbf{Spigoli e Vertici}: Se $\partial K$ è poligonale o unione di curve a tratti, si includono obbligatoriamente tutti i vertici di raccordo.
+    \end{itemize}
+    
+    \item \textbf{Fase 4: Valutazione Comparativa Finale}:
+    Si valuta $f$ in tutti i punti candidati individuati nelle Fasi 1, 2 e 3.
+    Il valore numerico più grande sarà il \textbf{massimo assoluto}, il più piccolo sarà il \textbf{minimo assoluto}.
+\end{enumerate}
+\end{metodo}
+
+\begin{esempio}{Esercizio d'Esame Svolto: Ottimizzazione su un Dominio Compatto}{es_ottimizzazione_compatto_completo}
+Determinare il massimo e il minimo assoluto della funzione:
+\[
+f(x, y) = x^2 + 2y^2 - x
+\]
+sul cerchio unitario compatto $K = \graffe{(x,y) \in \Rdue : x^2 + y^2 \le 1}$.
+\begin{enumerate}
+    \item \textbf{Studio dell'interno $\Int(K) = \graffe{x^2+y^2 < 1}$}:
+    \[
+    \nabla f(x, y) = \begin{pmatrix} 2x - 1 \\ 4y \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix} \implies \begin{cases} 2x - 1 = 0 \implies x = 1/2 \\ 4y = 0 \implies y = 0 \end{cases}
+    \]
+    Il punto $P_1 = (1/2, 0)$ soddisfa $(1/2)^2 + 0^2 = 1/4 < 1 \implies P_1 \in \Int(K)$.\\
+    Valore: $f(P_1) = (1/2)^2 + 0 - 1/2 = 1/4 - 1/2 = -1/4$.
+    
+    \item \textbf{Studio della frontiera $\partial K = \graffe{x^2+y^2 = 1}$}:
+    Sul bordo $y^2 = 1 - x^2$ con $x \in [-1, 1]$. Sostituendo direttamente:
+    \[
+    h(x) = x^2 + 2(1 - x^2) - x = 2 - x - x^2, \quad x \in [-1, 1]
+    \]
+    Derivando rispetto a $x$: $h'(x) = -1 - 2x = 0 \implies x = -1/2 \in [-1, 1]$.\\
+    Per $x = -1/2$, si ha $y^2 = 1 - (-1/2)^2 = 3/4 \implies y = \pm \frac{\sqrt{3}}{2}$.\\
+    Otteniamo i punti $P_{2,3} = \left(-1/2, \pm \frac{\sqrt{3}}{2}\right)$.\\
+    Valore: $f(P_{2,3}) = 2 - (-1/2) - (-1/2)^2 = 2 + 1/2 - 1/4 = 9/4$.
+    
+    Valutiamo agli estremi dell'intervallo $x = \pm 1$ ($y = 0$):
+    \begin{itemize}
+        \item $P_4 = (1, 0) \implies f(1, 0) = 1 + 0 - 1 = 0$;
+        \item $P_5 = (-1, 0) \implies f(-1, 0) = 1 + 0 - (-1) = 2$.
+    \end{itemize}
+    
+    \item \textbf{Conclusione}:
+    Confrontando i valori:
+    \[
+    f(P_1) = -\frac{1}{4}, \quad f(P_{2,3}) = \frac{9}{4} = 2.25, \quad f(P_4) = 0, \quad f(P_5) = 2
+    \]
+    \begin{itemize}
+        \item Il \textbf{minimo assoluto} è $-\frac{1}{4}$, assunto nel punto interno $P_1 = (1/2, 0)$;
+        \item Il \textbf{massimo assoluto} è $\frac{9}{4}$, assunto nei due punti di frontiera $P_{2,3} = \left(-\frac{1}{2}, \pm \frac{\sqrt{3}}{2}\right)$.
+    \end{itemize}
+\end{enumerate}
+\end{esempio}

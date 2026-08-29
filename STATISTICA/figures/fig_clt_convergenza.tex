@@ -1,0 +1,27 @@
+\begin{tikzpicture}[scale=0.85, >=Stealth]
+    \draw[->, thick, navyblue] (-0.5,0) -- (7.5,0) node[right, font=\footnotesize] {$x$};
+    \draw[->, thick, navyblue] (0,-0.3) -- (0,4.5) node[above, font=\footnotesize] {$f_{\overline{X}_n}(x)$};
+
+    % Centro mu
+    \draw[dashed, gray!80] (3.5,0) -- (3.5,4.2);
+    \node[below, font=\small\bfseries] at (3.5,0) {$\mu$};
+
+    % Curva n = 1 (Uniforme o asimmetrica)
+    \draw[domain=0.5:6.5, smooth, variable=\x, thick, crimsonred, dashed]
+        plot ({\x}, {0.8 + 0.4*sin((\x-1)*60)});
+    \node[right, font=\tiny\bfseries, crimsonred] at (6.0,0.8) {$n=1$ (Origine)};
+
+    % Curva n = 5 (Campana più allargata)
+    \draw[domain=0.8:6.2, smooth, variable=\x, very thick, coolblue]
+        plot ({\x}, {2.2 * exp(-(\x-3.5)*(\x-3.5)/1.8)});
+    \node[right, font=\tiny\bfseries, coolblue] at (5.3,1.8) {$n=5$};
+
+    % Curva n = 30 (Gaussiana concentrata)
+    \draw[domain=1.8:5.2, smooth, variable=\x, ultra thick, forestgreen]
+        plot ({\x}, {3.9 * exp(-(\x-3.5)*(\x-3.5)/0.45)});
+    \node[right, font=\tiny\bfseries, forestgreen] at (4.4,3.5) {$n=30 \ (\sigma/\sqrt{n})$};
+
+    \node[font=\footnotesize\itshape, text=navyblue, align=center] at (3.5, -0.9) {
+        All'aumentare di $n$, la distribuzione di $\overline{X}_n$ converge a $\mathcal{N}(\mu, \sigma^2/n)$.
+    };
+\end{tikzpicture}

@@ -1,0 +1,24 @@
+\begin{tikzpicture}[scale=0.85, >=Stealth]
+    % Quadrato [0,1]^2
+    \draw[thick, navyblue] (0,0) rectangle (4,4);
+    \node[below left, font=\tiny] at (0,0) {$(0,0)$};
+    \node[below, font=\tiny] at (4,0) {$1$};
+    \node[left, font=\tiny] at (0,4) {$1$};
+
+    % Quarto di cerchio unitario
+    \draw[ultra thick, crimsonred] (4,0) arc (0:90:4);
+    \fill[coolblue!15] (0,0) -- (4,0) arc (0:90:4) -- cycle;
+
+    % Punti campionati
+    \foreach \pt in {(0.5,0.8), (1.2,1.5), (2.0,1.8), (2.5,2.2), (0.8,3.1), (1.5,2.8), (3.0,1.2), (0.3,2.0), (1.8,0.5), (2.8,0.9)} {
+        \fill[forestgreen] \pt circle (2pt);
+    }
+    \foreach \pt in {(3.2,3.1), (3.6,2.5), (2.8,3.5), (3.8,1.8), (1.8,3.8), (3.5,3.7)} {
+        \fill[crimsonred] \pt circle (2pt);
+    }
+
+    \node[font=\scriptsize\bfseries, text=navyblue, align=center] at (6.5,2.0) {
+        $\dfrac{N_{\text{dentro}}}{N_{\text{tot}}} \approx \dfrac{\text{Area}(\text{Cerchio})}{\text{Area}(\text{Quadrato})} = \dfrac{\pi}{4}$ \\[3mm]
+        $\widehat{\pi} = 4 \cdot \dfrac{N_{\text{dentro}}}{N_{\text{tot}}}$
+    };
+\end{tikzpicture}

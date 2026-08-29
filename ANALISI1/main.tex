@@ -1,0 +1,145 @@
+% ==============================================================================
+% DOCUMENTO PRINCIPALE - APPUNTI DI ANALISI MATEMATICA 1
+% ==============================================================================
+\documentclass[11pt,a4paper,twoside,openright]{book}
+
+% --- Importazione delle configurazioni modulari ---
+\input{config/packages.tex}
+\input{config/environments.tex}
+\input{config/macros.tex}
+
+% ==============================================================================
+% COMPILAZIONE SELETTIVA (Scommentare per compilare solo capitoli specifici)
+% ==============================================================================
+% \includeonly{
+%   chapters/01_insiemi_funzioni/main,
+%   chapters/02_trigonometria/main,
+%   chapters/03_limiti_continuita/main,
+%   chapters/04_calcolo_differenziale/main,
+%   chapters/05_taylor_sviluppi/main,
+%   chapters/06_analisi_astratta/main,
+%   chapters/07_calcolo_integrale/main,
+%   chapters/08_equazioni_differenziali/main
+% }
+
+% ==============================================================================
+% METADATI DEL DOCUMENTO
+% ==============================================================================
+\title{\Huge\textbf{\textsf{Analisi Matematica I}}\\[0.5em]
+\Large\textsf{Appunti Completi, Dimostrazioni, Metodi Risolutivi ed Esercizi}}
+\author{\textbf{\textsf{Nicola Beccaceci}}}
+\date{\textsf{Anno Accademico 2025/2026}}
+
+\begin{document}
+
+% --- Frontespizio / Titolo ---
+\frontmatter
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge\bfseries\color{navyblue} ANALISI MATEMATICA 1\par}
+    \vspace{1cm}
+    {\Large\scshape Corso di Laurea in Ingegneria Gestionale\par}
+    \vfill
+    \rule{0.6\textwidth}{1pt}\par
+    \vspace{1cm}
+    {\large\textbf{\underline{Nicola Beccaceci}}\par}
+    \vspace{0.5cm}
+    {\small \today\par}
+    \vspace*{2cm}
+\end{titlepage}
+
+% --- Indice generale ---
+\tableofcontents
+\cleardoublepage
+
+% --- Prefazione / Guida alla lettura ---
+\chapter*{Guida alla Consultazione}
+\addcontentsline{toc}{chapter}{Guida alla Consultazione}
+Questo volume raccoglie la trascrizione, la ricostruzione formale e l'approfondimento rigoroso degli appunti del corso di \textbf{Analisi Matematica 1} per il Corso di Laurea in Ingegneria Gestionale.
+
+Il testo è progettato per accompagnare lo studente sia nello studio teorico sia nella preparazione intensiva della prova scritta e della prova orale, fornendo non solo gli enunciati formali ma anche le motivazioni geometriche, le dimostrazioni complete passo-passo e gli schemi operativi di risoluzione.
+
+\section*{Codice Visivo dei Box Tematici}
+Per facilitare la navigazione visiva, i contenuti sono categorizzati mediante appositi ambienti grafici:
+\begin{itemize}
+    \item \textbf{\textcolor{navyblue}{Definizioni}}: Enunciati precisi con formalismo quantificatorio rigoroso e spiegazione dei simboli.
+    \item \textbf{\textcolor{forestgreen}{Teoremi e Proposizioni}}: Risultati cardine con relative ipotesi minime, tesi e dimostrazioni step-by-step contrassegnate dal simbolo $\blacksquare$.
+    \item \textbf{\textcolor{purpleaccent}{Esempi ed Esercizi Guidati}}: Casi applicativi svolti con commenti metodologici e calcoli espliciti.
+    \item \textbf{\textcolor{crimsonred}{Consigli per l'Esame e Trappole Comuni}}: Analisi degli errori concettuali più frequenti nelle prove scritte e trabocchetti tipici dei quesiti d'orale.
+    \item \textbf{\textcolor{warmamber}{Metodi Risolutivi}}: Algoritmi procedurali sequenziali per affrontare gli esercizi d'esame.
+    \item \textbf{\textcolor{navyblue!80}{Osservazioni}}: Approfondimenti topologici, algebrici e note storiche.
+\end{itemize}
+
+\cleardoublepage
+
+% --- Organizzazione del Corso e Modalità d'Esame ---
+\chapter*{Organizzazione del Corso e Modalità d'Esame}
+\addcontentsline{toc}{chapter}{Organizzazione del Corso e Modalità d'Esame}
+
+La presente sezione riassume le direttive didattiche, la struttura modulare e le modalità di verifica del profitto ricavate direttamente dalle indicazioni fornite dal docente all'inizio del corso.
+
+\section*{1. Inquadramento Didattico e Moduli}
+L'insegnamento di Analisi Matematica per il corso di studi in Ingegneria Gestionale è articolato in due moduli semestrali integrati:
+\begin{itemize}
+    \item \textbf{Modulo I -- Analisi Matematica 1}: $9\text{ CFU}$ (I Semestre). Dedicato alle basi insiemistiche, al calcolo infinitesimale e differenziale per funzioni di una variabile reale, al calcolo integrale di Riemann e alle equazioni differenziali ordinarie.
+    \item \textbf{Modulo II -- Analisi Matematica 2}: $6\text{ CFU}$ (II Semestre). Focalizzato su funzioni di più variabili reali, calcolo differenziale e integrale multivariabile, curve, superfici e forme differenziali.
+\end{itemize}
+
+\section*{2. Articolazione del Programma (5 Macro-Aree)}
+Il programma di Analisi Matematica 1 si sviluppa lungo 5 blocchi tematici sequenziali:
+\begin{enumerate}
+    \item \textbf{Insiemi Numerici, Coordinate e Funzioni Elementari}: assiomatica di $\R$, completezza di Dedekind, coordinate cartesiane e polari nel piano, teoria assiomatica delle potenze e logaritmi, funzioni trigonometriche e iperboliche con geometria comparata.
+    \item \textbf{Limiti, Continuità e Topologia di $\R$}: nozioni metriche e topologiche di limite ($\eps$-$\de$), algebra dei limiti e forme indeterminate, teoremi di confronto (due carabinieri), continuità locale e teoremi globali (Weierstrass, zeri, valori intermedi).
+    \item \textbf{Calcolo Differenziale e Studio di Funzione}: rapporto incrementale e derivata, regole di derivazione, teoremi di Rolle, Lagrange, Cauchy, de L'Hôpital, formula di Taylor con resto di Peano e di Lagrange, calcolo dei limiti con sviluppi asintotici e studio qualitativo completo del grafico.
+    \item \textbf{Calcolo Integrale in una Variabile}: partizioni e somme di Riemann, proprietà dell'integrale definito, Teorema della Media Integrale, Teorema Fondamentale del Calcolo Integrale (Torricelli-Barrow), tecniche di integrazione indefinita (parti, sostituzione, decomposizione in fratti semplici) e teoria degli integrali impropri su intervalli illimitati o con singolarità.
+    \item \textbf{Equazioni Differenziali Ordinarie (ODE)}: formulazione del Problema di Cauchy, teorema di esistenza e unicità locale (Cauchy-Lipschitz), equazioni a variabili separabili, equazioni lineari del primo ordine (fattore integrante) ed equazioni lineari del secondo ordine a coefficienti costanti (omogenee e metodo di somiglianza).
+\end{enumerate}
+
+\section*{3. Struttura delle Prove d'Esame e Criteri di Valutazione}
+L'esame di Analisi Matematica 1 prevede la verifica delle competenze attraverso prove scritte e orali.
+
+\begin{metodo}[Schema delle Modalità d'Esame]
+\begin{enumerate}
+    \item \textbf{Prove Scritte (Due Modalità Alternative)}:
+    \begin{itemize}
+        \item \textbf{Prove in Itinere}: 2 prove parziali scritte durante il semestre riservate agli studenti frequentanti (I prova a metà semestre su limiti e derivate; II prova a fine semestre su Taylor, integrali e ODE). Il superamento di entrambe con media $\ge 18/30$ esonera dalla prova scritta generale.
+        \item \textbf{Appello Scritto Generale}: strutturato normalmente in due sezioni:
+        \begin{itemize}
+            \item \textbf{Parte A (Quesiti a Risposta Sintetica)}: 8 domande teorico-concettuali e di calcolo rapido (tempo assegnato: $\approx 1\text{h } 15\text{m}$) volte a verificare le competenze di base e i prerequisiti fondamentali.
+            \item \textbf{Parte B (Esercizi Strutturati)}: 3 problemi complessi articolati (tempo assegnato: $\approx 2\text{h}$) vertenti su: (1) Limite con sviluppi di Taylor e confronto asintotico; (2) Studio qualitativo completo di funzione con grafici; (3) Integrale definito/improprio o Problema di Cauchy per ODE.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Prova Orale}:
+    \begin{itemize}
+        \item Accessibile con voto dello scritto $\ge 18/30$.
+        \item Il colloquio verte su: definizioni formali con quantificatori espliciti, enunciati e dimostrazioni rigorose dei teoremi fondamentali del programma (unicità del limite, permanenza del segno, Weierstrass/Zeri, Rolle/Lagrange, Torricelli-Barrow, Cauchy-Lipschitz), ed eventuale discussione critica della prova scritta.
+    \end{itemize}
+\end{enumerate}
+\end{metodo}
+
+\section*{4. Piattaforme, Strumenti e Risorse Didattiche}
+\begin{itemize}
+    \item \textbf{Portale Istituzionale e Registro}: Registro ufficiale delle lezioni su portale \texttt{Unimap} / portale docente con indicazione puntuale degli argomenti trattati in ogni lezione.
+    \item \textbf{Canale Microsoft Teams}: Canale ufficiale del corso per comunicazioni tempestive, condivisione di dispense, schede di esercizi settimanali e ricevimenti docenti.
+    \item \textbf{Materiale Didattico Consigliato}: Schede teoriche fornite dal docente, raccolte di temi d'esame risolti degli anni accademici precedenti e testi di riferimento universitari di Analisi 1.
+\end{itemize}
+
+\cleardoublepage
+
+\mainmatter
+
+% ==============================================================================
+% INCLUSIONE DEI CAPITOLI MODULARI
+% ==============================================================================
+\include{chapters/01_insiemi_funzioni/main}
+\include{chapters/02_trigonometria/main}
+\include{chapters/03_limiti_continuita/main}
+\include{chapters/04_calcolo_differenziale/main}
+\include{chapters/05_taylor_sviluppi/main}
+\include{chapters/06_analisi_astratta/main}
+\include{chapters/07_calcolo_integrale/main}
+\include{chapters/08_equazioni_differenziali/main}
+\include{chapters/09_raccolta_esami_risolti/main}
+
+\end{document}

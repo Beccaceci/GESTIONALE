@@ -1,0 +1,354 @@
+% ==============================================================================
+% CAPITOLO 6: INTRODUZIONE ALLA TEORIA DELL'OFFERTA E MASSIMIZZAZIONE DEL PROFITTO
+% ==============================================================================
+\chapter{Introduzione alla Teoria dell'Offerta}
+\label{chap:introduzione_teoria_offerta}
+
+\begin{tcolorbox}[colback=navyblue!5!white, colframe=navyblue, title=\textbf{Quadro Concettuale del Capitolo}]
+Il presente capitolo costituisce il fondamento microeconomico della teoria dell'offerta. Dopo aver esaminato le determinanti della domanda e le scelte ottime del consumatore, l'analisi si sposta sul lato della produzione, formalizzando la natura economica e giuridica dell'impresa, la distinzione cruciale tra profitto contabile e profitto economico (extraprofitto), la struttura analitica dei ricavi (totali, medi e marginali), la derivazione differenziale della condizione universale di ottimo marginalistico ($\RMg = \CMg$), e le regole decisionali di chiusura temporanea e di uscita definitiva dal mercato nel breve e nel lungo periodo.
+\end{tcolorbox}
+
+\section{L'Impresa, le Forme Giuridiche e l'Obiettivo del Profitto}
+
+Nel sistema economico moderno, l'impresa rappresenta il centro decisionale autonomo deputato alla combinazione e trasformazione di fattori produttivi primari (input, quali lavoro, beni capitali, terra, energia e materie prime) in beni o servizi finali (output) destinati alla vendita sul mercato. 
+
+\subsection{Perché Esistono le Imprese? Coordinamento e Costi di Transazione}
+Come evidenziato dall'economista Ronald Coase nel fondamentale saggio \textit{The Nature of the Firm} (1937), l'allocazione delle risorse nella società può avvenire attraverso due meccanismi alternativi:
+\begin{enumerate}
+    \item \textbf{Il Meccanismo dei Prezzi di Mercato}: transazioni decentralizzate e continue tra agenti indipendenti, ciascuna regolata da contratti puntuali di scambio;
+    \item \textbf{L'Organizzazione Gerarchica dell'Impresa}: coordinamento interno accentrato e autoritativo guidato dall'imprenditore o dal management.
+\end{enumerate}
+L'esistenza delle imprese è giustificata dalla presenza dei \textbf{costi di transazione} (costi di ricerca e negoziazione dei prezzi, costi di redazione e stipula contrattuale, costi di monitoraggio dell'adempimento e rischi legati all'incompletezza contrattuale). Quando il costo di coordinare le attività internamente mediante gerarchia è inferiore alla sommatoria dei costi di transazione necessari per stipulare contratti sul mercato aperto, la produzione viene organizzata all'interno dell'impresa.
+
+\subsection{Tipologie Giuridiche di Impresa}
+Sotto il profilo economico-giuridico, si distinguono tre forme istituzionali principali:
+\begin{itemize}
+    \item \textbf{Impresa Individuale}: l'imprenditore è l'unico proprietario e gestore dell'attività. Gode della totalità dei profitti ma risponde dei debiti contratti con la totalità del proprio patrimonio personale (\textit{responsabilità illimitata}).
+    \item \textbf{Società di Persone} (es. S.n.c., S.a.s.): costituite da due o più soci. La gestione è affidata direttamente ai soci, i quali rispondono solidalmente e illimitatamente delle obbligazioni sociali (salvo i soci accomandanti nelle S.a.s.).
+    \item \textbf{Società di Capitali} (es. S.r.l., S.p.a.): entità giuridiche autonome dotate di personalità giuridica perfetta. I soci godono della \textit{responsabilità limitata}: la perdita massima a cui possono andare incontro è limitata alla quota di capitale sociale conferita, lasciando intatto il patrimonio personale.
+\end{itemize}
+
+\subsection{Separazione tra Proprietà e Controllo: Il Problema dell'Agenzia}
+Nelle grandi società per azioni contemporanee si manifesta una netta separazione tra la \textbf{proprietà} (azionisti, detentori del capitale di rischio) e il \textbf{controllo} (amministratori delegati e manager esecutivi). Tale assetto genera la classica relazione \textit{Principale-Agente}:
+\begin{itemize}
+    \item Gli \textbf{azionisti (principale)} mirano alla massimizzazione del valore attuale netto dei flussi di cassa e del rendimento azionario nel lungo periodo;
+    \item I \textbf{manager (agente)} possono perseguire obiettivi personali non perfettamente allineati, quali la crescita dimensionale del fatturato aziendale, il prestigio professionale, l'espansione dei benefici di status (\textit{perks}) e la sicurezza del posto di lavoro.
+\end{itemize}
+Tuttavia, come sottolineato nella prassi economica, la disciplina imposta dal mercato azionario (minaccia di scalate ostili o \textit{takeover}), la concorrenza sul mercato dei beni e l'utilizzo di contratti di incentivazione legati ai risultati di bilancio (es. piani di \textit{stock option}) costringono il management a considerare la massimizzazione del profitto come vincolo primario di sopravvivenza.
+
+\section{Profitto Economico, Profitto Contabile e Costi Opportunità}
+
+L'analisi economica del comportamento d'impresa si fonda sulla rigorosa distinzione tra la nozione contabile e la nozione economica di costo e di profitto.
+
+\begin{definizione}{Profitto Economico ed Extraprofitto}{profitto_economico}
+Dati i ricavi totali $\RT$ e i costi totali d'impresa $\CT$, il \textbf{profitto economico} ($\profit$) è definito come la differenza tra il ricavo totale e la sommatoria di tutti i \textbf{costi opportunità} (espliciti e impliciti) sostenuti per la produzione:
+\begin{equation}
+    \profit = \RT - \CT = \RT - (\text{Costi Espliciti} + \text{Costi Impliciti})
+\end{equation}
+\begin{itemize}
+    \item \textbf{Costi Espliciti (Monetari / Contabili)}: esborsi finanziari effettivi registrati nei libri contabili (salari, acquisto materie prime, canoni di locazione, interessi passivi, imposte).
+    \item \textbf{Costi Impliciti (Opportunità)}: valore della migliore alternativa a cui l'imprenditore o l'impresa rinuncia per impiegare le proprie risorse proprietarie (il salario alternativo che l'imprenditore guadagnerebbe come dipendente, il rendimento del capitale finanziario proprio investito in titoli privi di rischio, la rendita figurativa di immobili di proprietà adibiti a stabilimento).
+\end{itemize}
+\end{definizione}
+
+\begin{osservazione}[Distinzione tra Profitto Normale ed Extraprofitto]
+Dalla definizione di profitto economico scaturiscono tre scenari fondamentali:
+\begin{enumerate}
+    \item \textbf{Profitto Normale ($\profit = 0$)}: quando i ricavi totali coprono esattamente sia i costi espliciti sia i costi impliciti. In tale stato l'imprenditore e il capitale sono remunerati esattamente al loro costo opportunità di mercato; non vi è incentivo a disinvestire o a trasferire risorse verso altri settori.
+    \item \textbf{Extraprofitto ($\profit > 0$)}: i ricavi eccedono la remunerazione normale di tutti i fattori produttivi. L'impresa ottiene un rendimento superiore a qualsiasi impiego alternativo dell'economia, attirando potenziali nuovi entranti nel settore.
+    \item \textbf{Perdita Economica ($\profit < 0$)}: i ricavi non riescono a coprire l'intero costo opportunità dei fattori, indicando che le risorse sarebbero impiegate in modo più redditizio in attività alternative.
+\end{enumerate}
+\end{osservazione}
+
+\begin{esempio}[Calcolo Comparativo tra Profitto Contabile ed Economico]
+Un ingegnere gestionale decide di avviare una società di consulenza informatica, investendo $50\,000\text{ \euro}$ di risparmi personali precedentemente investiti in titoli di Stato con rendimento annuo del 4\%. L'ingegnere rinuncia a uno stipendio annuo da dipendente pari a $40\,000\text{ \euro}$. Nel primo anno di attività:
+\begin{itemize}
+    \item Ricavi totali incassati: $\RT = 120\,000\text{ \euro}$;
+    \item Spese vive sostenute (affitto uffici, utenze, licenze software, collaboratori): $\text{Costi Espliciti} = 65\,000\text{ \euro}$.
+\end{itemize}
+Calcoliamo il profitto contabile ed economico:
+\begin{align*}
+    \Pi_{\text{contabile}} &= \RT - \text{Costi Espliciti} = 120\,000 - 65\,000 = 55\,000\text{ \euro} \\
+    \text{Costi Impliciti} &= \text{Stipendio Rinunciato} + \text{Interessi Rinunciati} = 40\,000 + (50\,000 \times 0{,}04) = 42\,000\text{ \euro} \\
+    \CT_{\text{economico}} &= 65\,000 + 42\,000 = 107\,000\text{ \euro} \\
+    \profit_{\text{economico}} &= \RT - \CT_{\text{economico}} = 120\,000 - 107\,000 = 13\,000\text{ \euro}
+\end{align*}
+Il profitto contabile ($55\,000\text{ \euro}$) sovrastima la redditività reale: l'extraprofitto effettivo generato dalla scelta imprenditoriale è pari a $13\,000\text{ \euro}$.
+\end{esempio}
+
+\section{La Struttura dei Ricavi: Totale, Medio e Marginale}
+
+L'ammontare delle entrate monetarie generate dalla vendita dell'output dipende congiuntamente dalla quantità prodotta $Q$ e dalla struttura della curva di domanda fronteggiata dall'impresa sul mercato.
+
+\begin{definizione}{Ricavo Totale, Ricavo Medio e Ricavo Marginale}{struttura_ricavi}
+Data la funzione di domanda inversa fronteggiata dall'impresa $P = P(Q)$:
+\begin{itemize}
+    \item \textbf{Ricavo Totale ($\RT$)}: il valore monetario complessivo derivante dalla vendita di $Q$ unità di prodotto:
+    \begin{equation}
+        \RT(Q) = P(Q) \cdot Q
+    \end{equation}
+    \item \textbf{Ricavo Medio ($\RME$)}: l'incasso medio per unità di output venduta, identicamente coincidente con il prezzo di mercato:
+    \begin{equation}
+        \RME(Q) = \frac{\RT(Q)}{Q} = \frac{P(Q) \cdot Q}{Q} = P(Q)
+    \end{equation}
+    \item \textbf{Ricavo Marginale ($\RMg$)}: la variazione infinitesimale del ricavo totale determinata dalla vendita di un'unità addizionale di prodotto:
+    \begin{equation}
+        \RMg(Q) = \dv{\RT(Q)}{Q}
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\subsection{Derivazione Analitica del Ricavo Marginale e Relazione con l'Elasticità}
+Applicando la regola di derivazione del prodotto alla funzione di ricavo totale $\RT(Q) = P(Q) \cdot Q$:
+\begin{equation}
+    \RMg(Q) = \dv{}{Q}[P(Q) \cdot Q] = P(Q) \cdot \dv{Q}{Q} + Q \cdot \dv{P(Q)}{Q} = P(Q) + Q \dv{P}{Q}
+\end{equation}
+Raccogliendo $P(Q)$ a fattor comune ed esplicitando l'elasticità della domanda al prezzo $\epsp = \dv{Q}{P} \frac{P}{Q}$:
+\begin{equation}
+    \RMg(Q) = P(Q) \left[ 1 + \frac{Q}{P(Q)} \dv{P}{Q} \right] = P(Q) \left[ 1 + \frac{1}{\epsp} \right] = P(Q) \left[ 1 - \frac{1}{|\epsp|} \right]
+    \label{eq:amoroso_robinson_ch6}
+\end{equation}
+L'Equazione~\eqref{eq:amoroso_robinson_ch6}, nota come \textbf{relazione di Amoroso-Robinson}, sintetizza il comportamento del ricavo marginale nelle diverse condizioni di mercato:
+\begin{enumerate}
+    \item \textbf{Impresa Price-Taker (Concorrenza Perfetta)}: la singola impresa non ha potere di mercato e fronteggia una domanda infinitamente elastica ($|\epsp| \to \infty$). Di conseguenza $\dv{P}{Q} = 0$, da cui:
+    \begin{equation}
+        \RMg = \RME = P = \text{costante}
+    \end{equation}
+    La curva del ricavo totale è una semiretta lineare passante per l'origine con pendenza pari al prezzo $P$.
+    \item \textbf{Impresa con Potere di Mercato (Monopolio e Concorrenza Imperfetta)}: l'impresa fronteggia una curva di domanda inclinata negativamente ($\dv{P}{Q} < 0$). Per vendere un'unità aggiuntiva, l'impresa deve ridurre il prezzo su tutte le unità vendute; pertanto:
+    \begin{equation}
+        \RMg(Q) < P(Q) \quad \forall Q > 0
+    \end{equation}
+\end{enumerate}
+
+\begin{teorema}{Ricavo Marginale con Domanda Lineare}{rmg_domanda_lineare}
+Se la funzione di domanda inversa è lineare del tipo $P(Q) = a - bQ$ con $a, b > 0$, la funzione del ricavo totale è una parabola concava:
+\begin{equation}
+    \RT(Q) = (a - bQ)Q = aQ - bQ^2
+\end{equation}
+e la funzione del ricavo marginale è una retta avente la stessa intercetta verticale $a$ e pendenza doppia ($-2b$) rispetto alla curva di domanda:
+\begin{equation}
+    \RMg(Q) = \dv{\RT}{Q} = a - 2bQ
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+La derivata prima della funzione quadratica $\RT(Q) = aQ - bQ^2$ rispetto a $Q$ fornisce immediatamente:
+\begin{equation*}
+    \RMg(Q) = \dv{}{Q}(aQ - bQ^2) = a - 2bQ
+\end{equation*}
+L'intercetta sull'asse delle ordinate (per $Q = 0$) è $\RMg(0) = a = P(0)$, mentre l'intercetta sull'asse delle ascisse ($\RMg = 0$) si colloca esattamente a metà dell'intercetta della domanda: $Q = \frac{a}{2b} = \frac{1}{2} Q_{\max}$, punto in cui l'elasticità è unitaria ($|\epsp| = 1$) e il ricavo totale è massimo.
+\end{dimostrazione}
+
+\section{La Condizione Universale di Massimizzazione del Profitto}
+
+L'obiettivo fondamentale dell'impresa consiste nell'individuare il volume di produzione $Q^*$ che rende massimo il profitto economico $\profit(Q) = \RT(Q) - \CT(Q)$.
+
+\begin{modello}{Ottimizzazione Differenziale del Profitto}{ottimizzazione_profitto}
+Assumendo funzioni di ricavo e costo continue e due volte derivabili rispetto a $Q$, il problema di massimizzazione non vincolata si scrive:
+\begin{equation}
+    \max_{Q \ge 0} \profit(Q) = \RT(Q) - \CT(Q)
+\end{equation}
+Le condizioni di ottimalità richiedono l'esame congiunto delle condizioni di primo e secondo ordine.
+\end{modello}
+
+\subsection{Condizione del Primo Ordine (FOC)}
+Annullando la derivata prima della funzione obiettivo:
+\begin{equation}
+    \dv{\profit}{Q} = \dv{\RT}{Q} - \dv{\CT}{Q} = 0 \iff \RMg(Q^*) = \CMg(Q^*)
+    \label{eq:foc_profitto}
+\end{equation}
+L'Equazione~\eqref{eq:foc_profitto} stabilisce la \textbf{regola aurea marginalistica}: il profitto è stazionario quando il ricavo addizionale generato dall'ultima unità prodotta eguaglia esattamente il costo addizionale sostenuto per produrla.
+
+\begin{osservazione}[Dinamica di Aggiustamento Economico verso l'Ottimo]
+L'interpretazione economica della FOC è dimostrata studiando il comportamento d'impresa fuori dall'equilibrio:
+\begin{itemize}
+    \item Se l'impresa produce una quantità $Q_1 < Q^*$, si ha $\RMg(Q_1) > \CMg(Q_1)$. L'espansione della produzione di una quantità infinitesima genera un incremento dei ricavi superiore all'incremento dei costi ($\dd \profit = (\RMg - \CMg)\dd Q > 0$). Conviene dunque espandere la produzione.
+    \item Se l'impresa produce una quantità $Q_2 > Q^*$, si ha $\RMg(Q_2) < \CMg(Q_2)$. L'ultima unità prodotta costa più di quanto rende sul mercato ($\dd \profit < 0$). L'impresa registra una contrazione del profitto e ha convenienza a ridurre la produzione.
+    \item L'unico punto stabile e non ulteriormente migliorabile è $Q^*$, in cui $\RMg(Q^*) = \CMg(Q^*)$.
+\end{itemize}
+\end{osservazione}
+
+\subsection{Condizione del Secondo Ordine (SOC)}
+Affinché il punto stazionario $Q^*$ sia un punto di \textbf{massimo locale} e non di minimo o flesso, la derivata seconda del profitto deve essere strettamente negativa:
+\begin{equation}
+    \dvtwo{\profit}{Q} = \dvtwo{\RT}{Q} - \dvtwo{\CT}{Q} < 0 \iff \dv{\RMg}{Q} < \dv{\CMg}{Q}
+    \label{eq:soc_profitto}
+\end{equation}
+Geometricamente, la pendenza della curva del costo marginale deve essere strettamente maggiore della pendenza della curva del ricavo marginale: la curva $\CMg$ deve intersecare la curva $\RMg$ \textbf{dal basso verso l'alto}.
+
+\begin{esame}[Trabocchetto d'Esame: Violazione della SOC con Costi Marginali Decrescenti]
+Se la curva del costo marginale fosse decrescente con pendenza più ripida del ricavo marginale ($\dv{\CMg}{Q} < \dv{\RMg}{Q}$), il punto in cui $\RMg = \CMg$ individuerebbe un punto di \textbf{minimo profitto} (massima perdita locale). In tale circostanza, l'impresa massimizza il profitto operando agli estremi (producendo $Q = 0$ oppure saturando la capacità produttiva massima dell'impianto).
+\end{esame}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        width=13.5cm,
+        height=7.8cm,
+        axis lines=left,
+        xlabel={Quantità di Output ($Q$)},
+        ylabel={Valore monetario (\euro{})},
+        xmin=0, xmax=11,
+        ymin=-5, ymax=90,
+        xtick={0, 3, 6.5, 9.5},
+        xticklabels={0, $Q_{\text{BEP}}$, $Q^*$, $Q_{\text{max}}$},
+        ytick=\empty,
+        legend pos=north west,
+        legend style={font=\footnotesize, fill=white, fill opacity=0.9},
+        grid=both,
+        grid style={dotted, gray!30}
+    ]
+        % Costi Totali CT = 15 + 2*Q + 0.6*Q^2
+        \addplot[domain=0:10.5, samples=100, smooth, ultra thick, crimsonred] {15 + 2*x + 0.6*x^2};
+        \addlegendentry{$\CT(Q) = \CF + \CV(Q)$}
+        
+        % Ricavi Totali RT = 18*Q - 0.7*Q^2
+        \addplot[domain=0:10.5, samples=100, smooth, ultra thick, navyblue] {18*x - 0.7*x^2};
+        \addlegendentry{$\RT(Q) = P(Q) \cdot Q$}
+        
+        % Profitto Pi = RT - CT
+        \addplot[domain=0:10.5, samples=100, smooth, thick, forestgreen, dashed] {16*x - 1.3*x^2 - 15};
+        \addlegendentry{$\profit(Q) = \RT - \CT$}
+        
+        % Punto di ottimo Q* = 6.15 (approssimato a 6.15)
+        \draw[dotted, thick, black] (axis cs:6.15, 0) -- (axis cs:6.15, 83.5);
+        \draw[dotted, thick, black] (axis cs:6.15, 50.1) -- (axis cs:0, 50.1);
+        \draw[dotted, thick, black] (axis cs:6.15, 83.9) -- (axis cs:0, 83.9);
+        
+        % Linee tangenti parallele nel punto di massimo profitto
+        \addplot[domain=3.5:8.8, samples=10, thin, navyblue!60, opacity=0.8] {9.39*(x - 6.15) + 83.9};
+        \addplot[domain=3.5:8.8, samples=10, thin, crimsonred!60, opacity=0.8] {9.39*(x - 6.15) + 50.1};
+        
+        % Punti notevoli
+        \node[circle, fill=navyblue, inner sep=1.8pt] at (axis cs:6.15, 83.9) {};
+        \node[circle, fill=crimsonred, inner sep=1.8pt] at (axis cs:6.15, 50.1) {};
+        \node[circle, fill=forestgreen, inner sep=2pt] at (axis cs:6.15, 34.2) {};
+        
+        % Annotazioni
+        \draw[<->, thick, forestgreen] (axis cs:6.15, 50.5) -- (axis cs:6.15, 83.5) node[midway, right=2mm, fill=white, inner sep=1pt] {\textbf{Max Profitto $\profit^*$}};
+        \node[below, font=\scriptsize] at (axis cs:6.15, -1) {$Q^*$};
+        
+        % Area di perdita e profitto
+        \node[font=\footnotesize, color=crimsonred] at (axis cs:1.5, 30) {Perdita ($\profit < 0$)};
+        \node[font=\footnotesize, color=forestgreen] at (axis cs:6.15, 20) {Extraprofitto ($\profit > 0$)};
+    \end{axis}
+\end{tikzpicture}
+\caption{Determinazione del volume di produzione ottimale $Q^*$ mediante l'approccio totale: nel punto di massima distanza verticale positiva tra $\RT(Q)$ e $\CT(Q)$, le rette tangenti sono perfettamente parallele, confermando l'uguaglianza tra le pendenze $\RMg = \CMg$.}
+\label{fig:massimizzazione_profitto_totale}
+\end{figure}
+
+\section{Le Decisioni di Produzione e le Regole di Chiusura}
+
+La condizione marginalista $\RMg = \CMg$ individua il candidato ottimale $Q^*$, ma non garantisce che tale produzione sia economicamente sostenibile. L'impresa deve valutare se sia preferibile produrre $Q^*$ oppure azzerare l'attività ($Q=0$).
+
+\subsection{Decisione nel Breve Periodo: La Condizione di Chiusura (\textit{Shut-Down Rule})}
+Nel breve periodo, l'impresa è vincolata da costi fissi non recuperabili nel breve termine ($\CF > 0$). Il profitto derivante dalla produzione di $Q^*$ è:
+\begin{equation}
+    \profit(Q^*) = \RT(Q^*) - \CV(Q^*) - \CF
+\end{equation}
+Se l'impresa decide di cessare temporaneamente la produzione ($Q = 0$), il ricavo è nullo e il costo variabile si annulla, ma l'impresa deve comunque onorare i costi fissi contrattuali, registrando una perdita pari a:
+\begin{equation}
+    \profit(0) = -\CF
+\end{equation}
+L'impresa decide di produrre $Q^* > 0$ se e solo se la perdita prodotta operando è inferiore o uguale alla perdita da inattività:
+\begin{equation}
+    \profit(Q^*) \ge \profit(0) \iff \RT(Q^*) - \CV(Q^*) - \CF \ge -\CF \iff \RT(Q^*) \ge \CV(Q^*)
+\end{equation}
+Dividendo entrambi i membri per $Q^*$:
+\begin{equation}
+    \frac{\RT(Q^*)}{Q^*} \ge \frac{\CV(Q^*)}{Q^*} \iff P \ge \CMEV(Q^*)
+    \label{eq:regola_chiusura_breve}
+\end{equation}
+
+\begin{legge}{Regola di Chiusura di Breve Periodo}{chiusura_breve_periodo}
+Nel breve periodo, l'impresa sceglie di produrre $Q^*$ purché il prezzo unitario di vendita sia superiore o uguale al \textbf{costo medio variabile} ($\CMEV$).
+\begin{itemize}
+    \item Se $P > \CME$: l'impresa copre tutti i costi (fissi e variabili) e realizza un extraprofitto ($\profit > 0$).
+    \item Se $\CMEV \le P < \CME$: l'impresa è in perdita ($\profit < 0$), ma continua a produrre poiché il ricavo copre per intero i costi variabili e una frazione dei costi fissi, riducendo la perdita al di sotto di $\CF$.
+    \item Se $P < \CMEV_{\min}$: l'impresa subisce una perdita superiore ai costi fissi per ogni unità prodotta; la decisione ottimale consiste nella \textbf{chiusura immediata dell'impianto} ($Q = 0$). Il punto di minimo di $\CMEV$ prende il nome di \textbf{punto di chiusura} o \textbf{punto di fuga di breve periodo}.
+\end{itemize}
+\end{legge}
+
+\subsection{Decisione nel Lungo Periodo: La Condizione di Uscita (\textit{Exit Rule})}
+Nel lungo periodo tutti i fattori produttivi sono liberamente variabili e non sussistono costi fissi non recuperabili ($\CF = 0$). Di conseguenza, l'inattività ($Q=0$) genera un profitto identicamente nullo ($\profit(0) = 0$). L'impresa permane nel settore se e solo se:
+\begin{equation}
+    \profit(Q^*) \ge 0 \iff \RT(Q^*) \ge \CT(Q^*) \iff P \ge \CME(Q^*)
+    \label{eq:regola_uscita_lungo}
+\end{equation}
+Se il prezzo scende persistentemente al di sotto del minimo dei costi medi totali di lungo periodo ($P < \min LAC$), l'impresa smantella la capacità produttiva ed \textbf{esce definitivamente dal mercato}.
+
+\section{Metodo Operativo ed Esercizi Guidati}
+
+\begin{metodo}[Algoritmo Operativo per la Massimizzazione del Profitto d'Impresa]
+Per risolvere un problema di massimizzazione del profitto d'impresa:
+\begin{enumerate}
+    \item \textbf{Determinazione delle Funzioni di Ricavo e Costo}: calcolare $\RT(Q) = P(Q) \cdot Q$ e identificare la struttura di costo $\CT(Q) = \CF + \CV(Q)$.
+    \item \textbf{Derivazione delle Grandezze Marginali}: calcolare $\RMg(Q) = \dv{\RT}{Q}$ e $\CMg(Q) = \dv{\CT}{Q}$.
+    \item \textbf{Risoluzione della FOC}: porre $\RMg(Q) = \CMg(Q)$ e ricavare il candidato di output ottimale $Q^*$.
+    \item \textbf{Verifica della SOC}: calcolare $\dv{\RMg}{Q}$ e $\dv{\CMg}{Q}$, verificando che $\dv{\CMg}{Q} > \dv{\RMg}{Q}$ in $Q^*$.
+    \item \textbf{Calcolo del Prezzo e dei Profitti}: determinare $P^* = P(Q^*)$ e calcolare $\profit^* = \RT(Q^*) - \CT(Q^*)$.
+    \item \textbf{Verifica delle Condizioni di Chiusura / Uscita}:
+    \begin{itemize}
+        \item Nel breve periodo, verificare che $P^* \ge \CMEV(Q^*)$;
+        \item Nel lungo periodo, verificare che $P^* \ge \CME(Q^*)$.
+    \end{itemize}
+\end{enumerate}
+\end{metodo}
+
+\begin{esercizio}[Massimizzazione del Profitto con Domanda Lineare e Costi Quadratici]
+Un'impresa opera con una funzione di costo totale di breve periodo data da:
+\begin{equation*}
+    \CT(Q) = 50 + 4Q + Q^2
+\end{equation*}
+e fronteggia una curva di domanda inversa di mercato pari a:
+\begin{equation*}
+    P(Q) = 40 - 2Q
+\end{equation*}
+\textbf{Quesiti}:
+\begin{enumerate}
+    \item Determinare la quantità ottima prodotta $Q^*$, il prezzo di vendita $P^*$ e il profitto massimo $\profit^*$.
+    \item Verificare la condizione del secondo ordine.
+    \item Calcolare il costo medio variabile nel punto di ottimo e verificare la condizione di chiusura di breve periodo.
+\end{enumerate}
+
+\tcbline
+\textbf{Svolgimento Dettagliato}:
+\begin{enumerate}
+    \item \textit{Costruzione dei ricavi e delle grandezze marginali}:
+    \begin{align*}
+        \RT(Q) &= P(Q) \cdot Q = (40 - 2Q)Q = 40Q - 2Q^2 \\
+        \RMg(Q) &= \dv{\RT}{Q} = 40 - 4Q \\
+        \CMg(Q) &= \dv{\CT}{Q} = 4 + 2Q
+    \end{align*}
+    Uguagliando $\RMg$ e $\CMg$:
+    \begin{equation*}
+        40 - 4Q = 4 + 2Q \implies 6Q = 36 \implies Q^* = 6
+    \end{equation*}
+    Il prezzo di equilibrio sul mercato è:
+    \begin{equation*}
+        P^* = 40 - 2(6) = 28\text{ \euro{}}
+    \end{equation*}
+    Il ricavo totale e il costo totale sono:
+    \begin{align*}
+        \RT(6) &= 28 \times 6 = 168\text{ \euro{}} \\
+        \CT(6) &= 50 + 4(6) + 6^2 = 50 + 24 + 36 = 110\text{ \euro{}} \\
+        \profit^* &= \RT(6) - \CT(6) = 168 - 110 = 58\text{ \euro{}}
+    \end{align*}
+    L'impresa realizza un extraprofitto positivo pari a $58\text{ \euro{}}$.
+    
+    \item \textit{Verifica della SOC}:
+    \begin{equation*}
+        \dv{\RMg}{Q} = -4, \quad \dv{\CMg}{Q} = +2 \implies \dv{\CMg}{Q} > \dv{\RMg}{Q} \quad (2 > -4)
+    \end{equation*}
+    La condizione del secondo ordine è verificata strettamente; $Q^* = 6$ è un punto di massimo globale.
+    
+    \item \textit{Verifica della condizione di chiusura}:
+    I costi variabili totali sono $\CV(Q) = 4Q + Q^2$; pertanto:
+    \begin{equation*}
+        \CMEV(Q) = 4 + Q \implies \CMEV(6) = 4 + 6 = 10\text{ \euro{}}
+    \end{equation*}
+    Poiché $P^* = 28\text{ \euro{}} > \CMEV(6) = 10\text{ \euro{}}$, la condizione di chiusura di breve periodo è ampiamente soddisfatta. L'impresa copre interamente i costi variabili e i costi fissi, generando extraprofitti.
+\end{enumerate}
+\end{esercizio}

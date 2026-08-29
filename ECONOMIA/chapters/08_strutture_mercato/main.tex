@@ -1,0 +1,484 @@
+% ==============================================================================
+% CAPITOLO 8: STRUTTURE DI MERCATO: CONCORRENZA, MONOPOLIO E OLIGOPOLIO
+% ==============================================================================
+\chapter{Strutture di Mercato: Concorrenza, Monopolio e Oligopolio}
+\label{chap:strutture_mercato}
+
+\begin{tcolorbox}[colback=navyblue!5!white, colframe=navyblue, title=\textbf{Quadro Concettuale del Capitolo}]
+Il presente capitolo sviluppa la teoria completa delle forme di mercato. L'analisi prende avvio dal paradigma teorico della Concorrenza Perfetta (equilibrio di breve e lungo periodo, curva di offerta, surplus del produttore e teoremi del benessere), prosegue con la disamina del Monopolio (monopolio naturale, regolamentazione di first e second-best, indice di Lerner, discriminazione di prezzo e perdita secca di Harberger), approfondisce la Concorrenza Monopolistica (modello di Chamberlin e capacità produttiva in eccesso) e culmina nell'analisi dell'Oligopolio mediante la Teoria dei Giochi (domanda ad angolo di Sylos Labini, equilibrio di Nash, dilemma del prigioniero, modelli di duopolio di Cournot, Bertrand e Stackelberg).
+\end{tcolorbox}
+
+\section{Tassonomia delle Strutture di Mercato}
+
+La modalità con cui le imprese interagiscono strategicamente tra loro e con i consumatori dipende dal grado di concentrazione dell'offerta, dalla sostituibilità dei prodotti e dalla presenza di barriere all'entrata.
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{lXXXX}
+\toprule
+\textbf{Caratteristica} & \textbf{Concorrenza Perfetta} & \textbf{Concorrenza Monopolistica} & \textbf{Oligopolio} & \textbf{Monopolio} \\
+\midrule
+\textbf{Numero Imprese} & Moltissime (atomicità) & Molte & Poche (interdipendenti) & Una sola \\
+\textbf{Natura Prodotto} & Perfettamente omogeneo & Differenziato (brand) & Omogeneo / Differenziato & Unico (senza sostituti) \\
+\textbf{Barriere Entrata} & Assenti (libertà totale) & Assenti & Elevate & Bloccate (tecniche/legali) \\
+\textbf{Potere di Prezzo} & Nullo (\textit{Price-taker}) & Limitato (markup modesto) & Significativo (strategico) & Massimo (\textit{Price-maker}) \\
+\textbf{Profitti di LP} & Nulli ($\profit = 0$) & Nulli ($\profit = 0$) & Potenzialmente $> 0$ & Extraprofitti ($\profit > 0$) \\
+\textbf{Condizione Ottimo} & $P = \RMg = \CMg$ & $\RMg = \CMg \quad (P > \CMg)$ & Nash / Cournot / Stackelberg & $\RMg = \CMg \quad (P > \CMg)$ \\
+\bottomrule
+\end{tabularx}
+\caption{Quadro comparativo sinottico delle quattro strutture di mercato fondamentali.}
+\label{tab:strutture_mercato_sinottica}
+\end{table}
+
+\section{La Concorrenza Perfetta}
+
+La concorrenza perfetta costituisce il benchmark ideale di massima efficienza allocativa e produttiva.
+
+\subsection{Ipotesi Fondamentali del Modello Concorrenziale}
+\begin{enumerate}
+    \item \textbf{Atomicità dell'Offerta e della Domanda}: venditori e acquirenti sono talmente numerosi e piccoli che la decisione individuale di produzione o acquisto non produce alcun impatto apprezzabile sul prezzo di mercato;
+    \item \textbf{Omogeneità Perfetta del Prodotto}: i beni offerti dalle diverse imprese sono perfetti sostituti agli occhi dei consumatori (cross-elasticità infinita);
+    \item \textbf{Perfetta Informazione e Trasparenza}: tutti gli agenti conoscono istantaneamente prezzi, qualità e tecnologie disponibili sul mercato;
+    \item \textbf{Libertà Totale di Entrata e di Uscita}: assenza di barriere legali, brevetti o costi irrecuperabili (\textit{sunk costs}).
+    \item \textbf{Comportamento Price-Taking}: l'impresa assume il prezzo di mercato $P$ come un parametro esogeno dato.
+\end{enumerate}
+
+\subsection{Equilibrio di Breve Periodo della Singola Impresa}
+Per l'impresa price-taker, la curva di domanda individuale è una retta perfettamente orizzontale al livello del prezzo di equilibrio $P^*$. Il ricavo totale è $\RT(q) = P^* \cdot q$, da cui $\RMg(q) = \RME(q) = P^*$.
+
+\begin{modello}{Massimizzazione del Profitto con Piani di Produzione e Rette di Isoprofitto}{isoprofitto_cp}
+Nel breve periodo con fattore $x_2 = \bar{x}_2$ fisso e fattore $x_1$ variabile, la funzione di profitto è:
+\begin{equation}
+    \profit = P q - w_1 x_1 - w_2 \bar{x}_2
+\end{equation}
+La \textbf{retta di isoprofitto} nel piano $(x_1, q)$ per un prefissato livello di profitto $\profit_0$ è:
+\begin{equation}
+    q = \frac{w_1}{P} x_1 + \frac{\profit_0 + w_2 \bar{x}_2}{P}
+\end{equation}
+Ha pendenza pari al salario reale $w_1/P$ e intercetta verticale crescente con il profitto $\profit_0$. La massimizzazione vincolata alla tecnologia $q = f(x_1)$ richiede la tangenza tra la funzione di produzione concava e la retta di isoprofitto più alta possibile:
+\begin{equation}
+    f'(x_1^*) = \mathrm{PMg}_1 = \frac{w_1}{P} \iff P \cdot \mathrm{PMg}_1 = w_1
+\end{equation}
+\end{modello}
+
+\begin{teorema}{Curva di Offerta di Breve Periodo dell'Impresa Concorrenziale}{offerta_breve_cp}
+La curva di offerta di breve periodo della singola impresa concorrenziale coincide con il \textbf{tratto crescente della curva del costo marginale} situato al di sopra del punto di minimo del costo medio variabile ($\CMEV_{\min}$):
+\begin{equation}
+    S_{\text{impresa}}(P) = \begin{cases}
+        \{ q \mid \CMg(q) = P \} & \text{se } P \ge \min \CMEV \\[1ex]
+        0 & \text{se } P < \min \CMEV
+    \end{cases}
+\end{equation}
+Il punto di minimo della curva $\CMEV$ è detto \textbf{punto di chiusura} o \textbf{punto di fuga di breve periodo}.
+\end{teorema}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    % Subplot 1: Mercato Aggregato
+    \begin{axis}[
+        name=plot1,
+        width=7.2cm,
+        height=7.5cm,
+        axis lines=left,
+        xlabel={Quantità Mercato ($Q$)},
+        ylabel={Prezzo ($P$)},
+        xmin=0, xmax=100,
+        ymin=0, ymax=35,
+        xtick={50},
+        xticklabels={$Q^*$},
+        ytick={18},
+        yticklabels={$P^*$},
+        title={\textbf{(a) Mercato Aggregato}},
+        grid=both,
+        grid style={dotted, gray!30}
+    ]
+        % Domanda Aggregata D: P = 30 - 0.24*Q -> a Q=50, P=18
+        \addplot[domain=5:95, samples=10, ultra thick, navyblue] {30 - 0.24*x};
+        \node[font=\footnotesize, navyblue] at (axis cs:90, 11) {$D$};
+        
+        % Offerta Aggregata S: P = 6 + 0.24*Q -> a Q=50, P=18
+        \addplot[domain=5:95, samples=10, ultra thick, crimsonred] {6 + 0.24*x};
+        \node[font=\footnotesize, crimsonred] at (axis cs:90, 25) {$S$};
+        
+        % Equilibrio
+        \node[circle, fill=forestgreen, inner sep=2pt, label={above right:\footnotesize $E(Q^*, P^*)$}] at (axis cs:50, 18) {};
+        \draw[dotted, thick, black] (axis cs:50, 0) -- (axis cs:50, 18) -- (axis cs:0, 18);
+    \end{axis}
+
+    % Subplot 2: Singola Impresa
+    \begin{axis}[
+        name=plot2,
+        at={($(plot1.east)+(1.2cm,0)$)},
+        width=7.2cm,
+        height=7.5cm,
+        axis lines=left,
+        xlabel={Quantità Impresa ($q$)},
+        ylabel={Costi e Prezzo (\euro{})},
+        xmin=0, xmax=10,
+        ymin=0, ymax=35,
+        xtick={3.2, 5.8},
+        xticklabels={$q_{\text{fuga}}$, $q^*$},
+        ytick={8, 14, 18},
+        yticklabels={$P_{\text{fuga}}$, $\CME^*$, $P^*$},
+        title={\textbf{(b) Singola Impresa}},
+        grid=both,
+        grid style={dotted, gray!30}
+    ]
+        % Domanda individuale orizzontale P = 18
+        \addplot[domain=0:9.5, samples=10, ultra thick, navyblue, dashed] {18};
+        \node[font=\scriptsize, navyblue] at (axis cs:8.5, 19.5) {$P^* = \RMg = \RME$};
+        
+        % CMEV = 8 - 2*q + 0.3*q^2 (min in q=3.33, CMEV=4.67 -> traslato)
+        \addplot[domain=1:9, samples=60, thick, tealblue] {14 - 3.6*x + 0.55*x^2};
+        \node[font=\scriptsize, tealblue] at (axis cs:9, 23) {$\CMEV$};
+        
+        % CME = CMEV + 18/q
+        \addplot[domain=1.5:9, samples=80, ultra thick, navyblue] {18/x + 14 - 3.6*x + 0.55*x^2};
+        \node[font=\scriptsize, navyblue] at (axis cs:9, 29) {$\CME$};
+        
+        % CMg = 14 - 7.2*q + 1.65*q^2
+        \addplot[domain=1.2:7.5, samples=80, ultra thick, crimsonred] {14 - 7.2*x + 1.65*x^2};
+        \node[font=\scriptsize, crimsonred] at (axis cs:7.2, 33) {$\CMg$};
+        
+        % Punto di ottimo dell'impresa a P=18 -> q* = 5.8
+        \draw[dotted, thick, black] (axis cs:5.8, 0) -- (axis cs:5.8, 18);
+        \node[circle, fill=forestgreen, inner sep=2pt] at (axis cs:5.8, 18) {};
+        
+        % Rettangolo del profitto
+        \draw[fill=forestgreen!20, opacity=0.6] (axis cs:0, 14.1) rectangle (axis cs:5.8, 18);
+        \node[font=\scriptsize, forestgreen] at (axis cs:2.9, 16) {\textbf{Extraprofitto $\profit^*$}};
+    \end{axis}
+\end{tikzpicture}
+\caption{Equilibrio di Concorrenza Perfetta: (a) formazione del prezzo di equilibrio $P^*$ sul mercato aggregato dall'intersezione tra domanda $D$ e offerta $S$; (b) la singola impresa price-taker massimizza il profitto producendo $q^*$ in corrispondenza di $P^* = \CMg(q^*)$, realizzando un extraprofitto positivo nel breve periodo.}
+\label{fig:concorrenza_perfetta_equilibrio}
+\end{figure}
+
+\subsection{Equilibrio di Lungo Periodo ed Efficienza Paretiana}
+Nel lungo periodo, la presenza di extraprofitti positivi ($\profit > 0$) attira nuove imprese nel settore grazie all'assenza di barriere all'entrata. L'ingresso di nuovi produttori determina:
+\begin{enumerate}
+    \item Uno spostamento verso destra della curva di offerta aggregata ($S \to S'$);
+    \item Una progressiva riduzione del prezzo di mercato ($P^* \to P_{\text{LP}}^*$);
+    \item Una contrazione della domanda individuale e dei margini di profitto di ciascuna impresa.
+\end{enumerate}
+Il processo di entrata si arresta solo quando l'extraprofitto si annulla completamente ($\profit = 0$).
+
+\begin{legge}{Equilibrio Concorrenziale di Lungo Periodo}{equilibrio_lp_cp}
+Nell'equilibrio di lungo periodo di concorrenza perfetta con libera entrata e uscita:
+\begin{equation}
+    P^* = \RMg = \CMg = \min \CME = \min LAC \implies \profit = 0
+\end{equation}
+L'equilibrio soddisfa simultaneamente due criteri di ottimalità:
+\begin{itemize}
+    \item \textbf{Efficienza Allocativa}: il prezzo eguaglia il costo marginale ($P = \CMg$), garantendo che la disponibilità marginale a pagare dei consumatori coincida esattamente con il costo di produzione dell'ultima unità;
+    \item \textbf{Efficienza Produttiva}: il bene viene prodotto al \textbf{minimo costo medio tecnologicamente possibile} ($\min LAC$), eliminando ogni spreco di risorse.
+\end{itemize}
+\end{legge}
+
+\section{Il Monopolio e la Regolamentazione}
+
+Il monopolio rappresenta la struttura di mercato opposta alla concorrenza: una singola impresa serve l'intera domanda di mercato ed è protetta da barriere all'entrata insormontabili.
+
+\subsection{Cause del Monopolio e Monopolio Naturale}
+Le barriere all'entrata scaturiscono da:
+\begin{itemize}
+    \item \textbf{Barriere Legali e Istituzionali}: brevetti industriali, copyright, concessioni e licenze governative esclusive (es. gestione autostradale o tabacchi).
+    \item \textbf{Controllo Esclusivo di Risorse Scarse}: proprietà esclusiva di giacimenti di materie prime o brevetti chiave.
+    \item \textbf{Economie di Scala e Monopolio Naturale}: quando la Dimensione Ottima Minima (DOM/SME) dell'impianto è talmente grande rispetto alla domanda di mercato da rendere la presenza di una sola impresa la configurazione a minor costo per la collettività.
+\end{itemize}
+
+\begin{definizione}{Monopolio Naturale}{monopolio_naturale}
+Un settore costituisce un \textbf{monopolio naturale} se la funzione di costo presenta la proprietà di \textbf{subadditività}: il costo sostenuto da un'unica impresa per produrre l'intero output di mercato $Q$ è strettamente inferiore alla somma dei costi sostenuti da due o più imprese separate per produrre quote frazionarie ($q_1 + q_2 = Q$):
+\begin{equation}
+    \CT(Q) < \CT(q_1) + \CT(q_2) \quad \forall q_1, q_2 > 0 \text{ con } q_1 + q_2 = Q
+\end{equation}
+Si manifesta tipicamente nelle industrie a rete con altissimi costi fissi di infrastruttura e costi marginali quasi nulli (ferrovie, reti di trasmissione elettrica, acquedotti, autostrade).
+\end{definizione}
+
+\begin{modello}{Il Dilemma della Regolamentazione del Monopolio Naturale}{regolazione_monopolio_naturale}
+L'autorità di regolamentazione (\textit{Regulator}) fronteggia un trade-off fondamentale:
+\begin{itemize}
+    \item \textbf{Tariffazione di First-Best ($P = \CMg$)}: ripristina l'efficienza allocativa massima. Tuttavia, poiché nel monopolio naturale $\CMg < LAC$ su tutto l'intervallo rilevante, l'impresa realizza perdite croniche ($P < LAC \implies \profit < 0$). Lo Stato deve coprire il disavanzo mediante sussidi pubblici (finanziati con imposte distorsive) o gestire direttamente l'infrastruttura.
+    \item \textbf{Tariffazione di Second-Best ($P = LAC$)}: impone un prezzo pari al costo medio totale, garantendo il pareggio di bilancio dell'impresa ($\profit = 0$) senza necessità di trasferimenti pubblici, ma lasciando una modesta perdita secca residua per la collettività.
+\end{itemize}
+\end{modello}
+
+\subsection{Equilibrio del Monopolista e Indice di Lerner}
+Il monopolista fronteggia l'intera curva di domanda di mercato $P(Q)$ con pendenza negativa ($\RMg < P$).
+
+\begin{teorema}{Indice di Lerner e Potere di Mercato}{indice_lerner}
+La massimizzazione del profitto $\max \profit(Q) = P(Q)Q - \CT(Q)$ richiede $\RMg(Q_M) = \CMg(Q_M)$. Utilizzando la formula di Amoroso-Robinson $\RMg = P(1 - 1/|\epsp|)$, l'\textbf{Indice di Lerner} ($L$) che quantifica il potere di mercato dell'impresa è:
+\begin{equation}
+    L = \frac{P_M - \CMg(Q_M)}{P_M} = \frac{1}{|\epsp|}
+    \label{eq:indice_lerner}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Dalla FOC di massimizzazione del profitto:
+\begin{equation*}
+    \RMg = \CMg \iff P_M \left( 1 - \frac{1}{|\epsp|} \right) = \CMg \iff P_M - \frac{P_M}{|\epsp|} = \CMg \iff P_M - \CMg = \frac{P_M}{|\epsp|}
+\end{equation*}
+Dividendo entrambi i membri per il prezzo di monopolio $P_M$:
+\begin{equation*}
+    \frac{P_M - \CMg}{P_M} = \frac{1}{|\epsp|}
+\end{equation*}
+L'Indice di Lerner varia tra $0$ (in concorrenza perfetta, dove $|\epsp| \to \infty$) e $1$ (in monopolio puro con domanda anelastica). Quanto più rigida è la domanda rispetto al prezzo, tanto maggiore è il markup percentuale applicabile sul costo marginale.
+\end{dimostrazione}
+
+\begin{esame}[Trabocchetto d'Esame: Determinazione del Prezzo di Monopolio]
+All'esame ricordare che il monopolista ricava la quantità ottima $Q_M$ dall'intersezione $\RMg(Q) = \CMg(Q)$, ma determina il prezzo di vendita $P_M$ proiettando $Q_M$ sulla \textbf{curva di domanda di mercato} $P(Q)$ e \textbf{MAI} sulla curva del ricavo marginale $\RMg$.
+\end{esame}
+
+\begin{teorema}{Inefficienza e Perdita Secca del Monopolio}{perdita_secca_monopolio}
+Rispetto alla concorrenza perfetta ($P_C = \CMg, Q_C$), il monopolio determina una contrazione dell'output ($Q_M < Q_C$) e un rialzo del prezzo ($P_M > P_C$). Tale distorsione genera un trasferimento di surplus dai consumatori al monopolista e una \textbf{perdita secca di benessere sociale} ($\lossDW$ / Triangolo di Harberger) corrispondente alle transazioni mutuamente vantaggiose distrutte:
+\begin{equation}
+    \lossDW = \int_{Q_M}^{Q_C} (P(Q) - \CMg(Q)) \dd Q = \frac{1}{2} (P_M - \CMg)(Q_C - Q_M)
+\end{equation}
+\end{teorema}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        width=13cm,
+        height=8cm,
+        axis lines=left,
+        xlabel={Quantità ($Q$)},
+        ylabel={Prezzo e Costi (\euro{})},
+        xmin=0, xmax=11,
+        ymin=0, ymax=45,
+        xtick={4, 8},
+        xticklabels={$Q_M$, $Q_C$},
+        ytick={10, 20, 30},
+        yticklabels={$\CMg$, $\CME^*$, $P_M$},
+        grid=both,
+        grid style={dotted, gray!30}
+    ]
+        % Domanda P = 40 - 2.5*Q (QC = (40-10)/2.5 = 12 -> scalato a P=40 - 3.75*Q -> QC=8 per CMg=10)
+        % Domanda: P = 40 - 3.75*Q -> a Q=4: P=25; a Q=8: P=10.
+        % RMg: P = 40 - 7.5*Q -> a Q=4: RMg=10.
+        \addplot[domain=0:9.5, samples=10, ultra thick, navyblue] {40 - 3.75*x};
+        \node[font=\footnotesize, navyblue] at (axis cs:9, 10) {$D = \RME$};
+        
+        \addplot[domain=0:5.2, samples=10, ultra thick, crimsonred] {40 - 7.5*x};
+        \node[font=\footnotesize, crimsonred] at (axis cs:4.8, 6) {$\RMg$};
+        
+        % Costo Marginale costante CMg = 10
+        \addplot[domain=0:9.5, samples=10, ultra thick, forestgreen] {10};
+        \node[font=\footnotesize, forestgreen] at (axis cs:9.2, 12) {$\CMg = \CME$};
+        
+        % Punto di Cournot E(QM, PM) = (4, 25)
+        \node[circle, fill=navyblue, inner sep=2pt, label={above right:\footnotesize Punto di Cournot $E$}] at (axis cs:4, 25) {};
+        
+        % Rettangolo del profitto di monopolio (0, 10) a (4, 25)
+        \draw[fill=navyblue!20, opacity=0.6] (axis cs:0, 10) rectangle (axis cs:4, 25);
+        \node[font=\footnotesize, navyblue] at (axis cs:2, 17.5) {\textbf{Extraprofitto $\profit_M$}};
+        
+        % Triangolo Perdita Secca Harberger tra (4,10), (4,25), (8,10)
+        \addplot[draw=none, fill=crimsonred, fill opacity=0.35] coordinates {(4,10) (4,25) (8,10)};
+        \node[font=\footnotesize, crimsonred] at (axis cs:5.3, 15) {\textbf{Perdita Secca $\lossDW$}};
+        
+        % Linee tratteggiate
+        \draw[dotted, thick, black] (axis cs:4, 0) -- (axis cs:4, 25) -- (axis cs:0, 25);
+        \draw[dotted, thick, black] (axis cs:8, 0) -- (axis cs:8, 10);
+    \end{axis}
+\end{tikzpicture}
+\caption{Equilibrio del Monopolio e Perdita Secca di Benessere: l'intersezione $\RMg = \CMg$ individua la quantità $Q_M$; il prezzo $P_M$ è letto sulla domanda, generando l'extraprofitto (area azzurra) e il triangolo rosso di perdita secca ($\lossDW$).}
+\label{fig:monopolio_perdita_secca}
+\end{figure}
+
+\subsection{Discriminazione di Prezzo}
+Il monopolista può incrementare i propri profitti applicando prezzi differenziati:
+\begin{itemize}
+    \item \textbf{Discriminazione di Primo Grado (Perfetta)}: il monopolista fa pagare a ciascun consumatore il suo prezzo di riserva massimo. Estrae l'intero surplus del consumatore, azzera la perdita secca ($\lossDW = 0$) e produce la quantità concorrenziale $Q_C$.
+    \item \textbf{Discriminazione di Secondo Grado (Auto-selezione / Menu Pricing)}: prezzi unitari differenziati in base al volume acquistato (sconti quantità, tariffe a due parti con quota fissa e quota variabile).
+    \item \textbf{Discriminazione di Terzo Grado (Segmentazione)}: segmentazione del mercato in gruppi con elasticità differenziata (studenti, anziani, professionisti). Il prezzo è più elevato nel sottomercato con domanda più rigida ($P_1/P_2 = \frac{1 - 1/|\eps_2|}{1 - 1/|\eps_1|}$).
+\end{itemize}
+
+\section{La Concorrenza Monopolistica}
+
+Formalizzata da Edward Chamberlin (1933), descrive settori caratterizzati da un'elevata numerosità di imprese e libertà di entrata, in cui ciascun produttore offre un bene differenziato.
+
+\begin{modello}{Modello di Chamberlin della Concorrenza Monopolistica}{concorrenza_monopolistica}
+\begin{itemize}
+    \item \textbf{Breve Periodo}: l'impresa fronteggia una curva di domanda residuale inclinata negativamente. Fissando $\RMg = \CMg$, ottiene extraprofitti positivi ($\profit > 0$).
+    \item \textbf{Lungo Periodo}: l'ingresso di nuovi marchi concorrenti sottrae quote di mercato, traslando la curva di domanda individuale verso il basso e rendendola più elastica fino alla condizione di \textbf{tangenza con la curva del costo medio di lungo periodo} ($LAC$):
+    \begin{equation}
+        P^* = LAC(q^*) \implies \profit = 0
+    \end{equation}
+    \item \textbf{Teorema della Capacità Produttiva in Eccesso}: poiché la curva di domanda è inclinata negativamente, il punto di tangenza si colloca sul tratto decrescente di $LAC$, a sinistra del punto di minimo di lungo periodo ($q^* < q_{\text{DOM}}$). La varietà di prodotto offerta ai consumatori è ottenuta al prezzo di una capacità produttiva non saturata.
+\end{itemize}
+\end{modello}
+
+\section{L'Oligopolio e la Teoria dei Giochi}
+
+L'oligopolio è caratterizzato dalla presenza di un numero ridotto di grandi imprese in condizioni di \textbf{interdipendenza strategica}: il profitto di ciascuna impresa dipende non solo dalle proprie azioni, ma anche dalle decisioni e dalle reazioni dei rivali.
+
+\subsection{La Curva di Domanda ad Angolo (Sweezy e Sylos Labini)}
+Per spiegare l'empirica rigidità dei prezzi nei mercati oligopolistici, Paul Sweezy e Paolo Sylos Labini proposero il modello della domanda ad angolo (\textit{Kinked Demand Curve}):
+\begin{itemize}
+    \item Se un'impresa \textbf{aumenta il prezzo} al di sopra del prezzo corrente $P_0$, i rivali non la seguono per catturare la sua clientela: la domanda è molto elastica e le vendite crollano;
+    \item Se l'impresa \textbf{riduce il prezzo} al di sotto di $P_0$, i rivali la imitano immediatamente per difendere le quote di mercato: la domanda è molto rigida e le vendite aumentano poco.
+\end{itemize}
+La discontinuità nella pendenza della domanda genera un salto verticale (\textit{gap}) nella curva del ricavo marginale $\RMg$; variazioni nei costi marginali $\CMg$ che ricadono all'interno del gap non modificano né il prezzo $P_0$ né la quantità $Q_0$.
+
+\subsection{Teoria dei Giochi ed Equilibrio di Nash}
+L'interazione strategica è formalizzata mediante la Teoria dei Giochi (Von Neumann, Morgenstern, John Nash).
+
+\begin{definizione}{Equilibrio di Nash}{equilibrio_nash}
+Dato un gioco con $N$ giocatori, un insieme di strategie $S_i$ e funzioni di payoff $\Pi_i(s_1, \dots, s_N)$, un profilo di strategie $(s_1^*, s_2^*, \dots, s_N^*)$ è un \textbf{Equilibrio di Nash} se nessun giocatore ha incentivo a deviare unilateralmente dalla propria strategia, data la scelta ottima degli altri:
+\begin{equation}
+    \Pi_i(s_i^*, s_{-i}^*) \ge \Pi_i(s_i, s_{-i}^*) \quad \forall s_i \in S_i, \; \forall i
+\end{equation}
+\end{definizione}
+
+\begin{esempio}[Il Dilemma del Prigioniero applicato all'Oligopolio]
+Due imprese rivali ($A$ e $B$) devono decidere se investire in una campagna pubblicitaria aggressiva ($Pub$) oppure cooperare mantenendo spese minime ($NoPub$):
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{cc|cc}
+\multicolumn{2}{c}{} & \multicolumn{2}{c}{\textbf{Impresa B}} \\
+& & $NoPub$ (Collusione) & $Pub$ (Deviazione) \\
+\cline{2-4}
+\multirow{2}{*}{\textbf{Impresa A}} & $NoPub$ & $(50, 50)$ & $(10, 80)$ \\
+& $Pub$ & $(80, 10)$ & $\mathbf{(30, 30)}$ \\
+\end{tabular}
+\end{center}
+Per entrambe le imprese, la strategia $Pub$ è strettamente dominante ($\Pi_A(Pub, NoPub) = 80 > 50$ e $\Pi_A(Pub, Pub) = 30 > 10$). L'unico equilibrio di Nash è $(Pub, Pub)$ con profitto $(30, 30)$, strettamente sub-ottimale rispetto alla cooperazione collusiva $(50, 50)$. L'incentivo individuale a deviare rende instabili i cartelli collusivi.
+\end{esempio}
+
+\subsection{Modelli Matematici di Duopolio: Cournot, Bertrand e Stackelberg}
+Consideriamo un mercato con domanda aggregata $P(Q) = a - bQ$ con $Q = q_1 + q_2$ e costi marginali costanti e identici $\CT_i(q_i) = c q_i$ ($a > c$).
+
+\subsubsection{1. Modello di Cournot (Concorrenza Simultanea sulle Quantità)}
+Ciascuna impresa sceglie simultaneamente la quantità $q_i$ massimizzando il proprio profitto, assumendo costante la produzione del rivale:
+\begin{equation*}
+    \Pi_1(q_1, q_2) = [a - b(q_1 + q_2)]q_1 - c q_1 = (a - c - b q_2)q_1 - b q_1^2
+\end{equation*}
+Annullando la derivata prima $\pdv{\Pi_1}{q_1} = 0$:
+\begin{equation}
+    a - c - b q_2 - 2b q_1 = 0 \implies q_1 = R_1(q_2) = \frac{a - c - b q_2}{2b}
+    \label{eq:funzione_reazione_cournot}
+\end{equation}
+L'Equazione~\eqref{eq:funzione_reazione_cournot} è la \textbf{funzione di reazione} (o di miglior risposta) dell'impresa 1. Per simmetria, $R_2(q_1) = \frac{a - c - b q_1}{2b}$. Risolvendo il sistema:
+\begin{equation}
+    q_1^* = q_2^* = \frac{a - c}{3b}, \quad Q_{\text{Cournot}} = \frac{2(a - c)}{3b}, \quad P_{\text{Cournot}} = \frac{a + 2c}{3}, \quad \Pi_1^* = \Pi_2^* = \frac{(a - c)^2}{9b}
+\end{equation}
+
+\subsubsection{2. Modello di Bertrand (Concorrenza Simultanea sul Prezzo)}
+Ciascuna impresa fissa simultaneamente il proprio prezzo $p_i$. Se i beni sono omogenei, l'impresa con il prezzo più basso cattura l'intero mercato. L'unico equilibrio di Nash corrisponde all'azzeramento della marginalità:
+\begin{equation}
+    P_1^* = P_2^* = c = \CMg, \quad Q_{\text{Bertrand}} = \frac{a - c}{b}, \quad \Pi_1^* = \Pi_2^* = 0
+\end{equation}
+Questo risultato è noto come \textbf{Paradosso di Bertrand}: la concorrenza di prezzo tra sole due imprese replica istantaneamente l'equilibrio di concorrenza perfetta.
+
+\subsubsection{3. Modello di Stackelberg (Competizione Sequenziale / Leadership di Quantità)}
+L'impresa 1 (Leader) sceglie per prima $q_1$. L'impresa 2 (Follower) osserva $q_1$ e reagisce lungo la propria funzione $q_2 = R_2(q_1) = \frac{a - c - b q_1}{2b}$. Il Leader incorpora la reazione del Follower nella propria funzione obiettivo:
+\begin{equation*}
+    \max_{q_1} \Pi_L = \left[ a - b\left(q_1 + \frac{a - c - b q_1}{2b}\right) \right]q_1 - c q_1 = \left( \frac{a - c}{2} - \frac{b}{2} q_1 \right)q_1
+\end{equation*}
+Annullando la derivata prima:
+\begin{equation}
+    q_L^* = \frac{a - c}{2b}, \quad q_F^* = \frac{a - c}{4b}, \quad Q_{\text{Stack}} = \frac{3(a - c)}{4b}, \quad P_{\text{Stack}} = \frac{a + 3c}{4}
+\end{equation}
+I profitti sono $\Pi_L^* = \frac{(a - c)^2}{8b}$ e $\Pi_F^* = \frac{(a - c)^2}{16b}$. Il Leader gode del \textbf{vantaggio della prima mossa} (\textit{first-mover advantage}).
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=8cm,
+        axis lines=left,
+        xlabel={Quantità Impresa 1 ($q_1$)},
+        ylabel={Quantità Impresa 2 ($q_2$)},
+        xmin=0, xmax=10,
+        ymin=0, ymax=10,
+        xtick={3, 4.5, 6},
+        xticklabels={$q_{\text{Cartello}}$, $q_{\text{Cournot}}$, $q_{\text{Stackelberg}}$},
+        ytick={2.25, 3, 4.5},
+        yticklabels={$q_{F,\text{Stack}}$, $q_{\text{Cartello}}$, $q_{\text{Cournot}}$},
+        grid=both,
+        grid style={dotted, gray!30}
+    ]
+        % Reazione 1: q1 = (9 - q2)/2 -> q2 = 9 - 2*q1
+        \addplot[domain=0:4.5, samples=10, ultra thick, navyblue] {9 - 2*x};
+        \node[font=\footnotesize, navyblue] at (axis cs:1.5, 6.8) {$R_1(q_2)$};
+        
+        % Reazione 2: q2 = (9 - q1)/2
+        \addplot[domain=0:9, samples=10, ultra thick, crimsonred] {4.5 - 0.5*x};
+        \node[font=\footnotesize, crimsonred] at (axis cs:7.5, 1.2) {$R_2(q_1)$};
+        
+        % Equilibrio di Cournot: q1=3, q2=3 -> intersezione
+        \node[circle, fill=forestgreen, inner sep=2.2pt, label={above right:\footnotesize \textbf{Cournot-Nash} $(3, 3)$}] at (axis cs:3, 3) {};
+        
+        % Equilibrio di Stackelberg: qL=4.5, qF=2.25
+        \node[circle, fill=purpleaccent, inner sep=2.2pt, label={above right:\footnotesize \textbf{Stackelberg} $(4.5, 2.25)$}] at (axis cs:4.5, 2.25) {};
+        
+        % Cartello (Monopolio congiunto): q1=2.25, q2=2.25
+        \node[circle, fill=warmamber, inner sep=2.2pt, label={below left:\footnotesize \textbf{Cartello} $(2.25, 2.25)$}] at (axis cs:2.25, 2.25) {};
+        
+        % Linee tratteggiate verso gli assi
+        \draw[dotted, thick, black] (axis cs:3, 0) -- (axis cs:3, 3) -- (axis cs:0, 3);
+        \draw[dotted, thick, black] (axis cs:4.5, 0) -- (axis cs:4.5, 2.25) -- (axis cs:0, 2.25);
+    \end{axis}
+\end{tikzpicture}
+\caption{Spazio delle strategie e curve di reazione nel duopolio: confronto geometrico tra l'equilibrio collusivo di Cartello, l'equilibrio simultaneo di Cournot-Nash e l'equilibrio sequenziale di Stackelberg.}
+\label{fig:curve_reazione_duopolio}
+\end{figure}
+
+\section{Metodo Operativo ed Esercizio Comparativo Globale}
+
+\begin{metodo}[Risoluzione Comparativa dei Regimi di Mercato]
+Data una domanda $P = a - bQ$ e costi marginali costanti $\CT = cQ$:
+\begin{enumerate}
+    \item \textbf{Monopolio}: porre $\RMg = a - 2bQ = c \implies Q_M = \frac{a-c}{2b}, P_M = \frac{a+c}{2}, \Pi_M = \frac{(a-c)^2}{4b}$.
+    \item \textbf{Concorrenza Perfetta}: porre $P = c \implies Q_C = \frac{a-c}{b}, P_C = c, \Pi_C = 0$.
+    \item \textbf{Duopolio di Cournot}: derivare le curve di reazione $q_i = \frac{a-c-bq_j}{2b}$, porre a sistema simmetrico $\implies q_i = \frac{a-c}{3b}$.
+    \item \textbf{Duopolio di Stackelberg}: sostituire $q_F = R_F(q_L)$ nel profitto del leader $\Pi_L$ e massimizzare su $q_L \implies q_L = \frac{a-c}{2b}, q_F = \frac{a-c}{4b}$.
+\end{enumerate}
+\end{metodo}
+
+\begin{esercizio}[Confronto Analitico Completo dei Regimi di Mercato]
+Un mercato è caratterizzato da domanda aggregata $P(Q) = 100 - Q$ e due imprese con costi totali identici $\CT_i(q_i) = 20 q_i$ ($c = 20$). Calcolare $Q, P, \Pi_1, \Pi_2, \Pi_{\text{tot}}$ e $\lossDW$ nei quattro regimi.
+
+\tcbline
+\textbf{Svolgimento Comparativo}:
+\begin{enumerate}
+    \item \textbf{Monopolio / Cartello}:
+    \begin{align*}
+        \RMg &= 100 - 2Q = 20 \implies Q_M = 40, \quad P_M = 100 - 40 = 60\text{ \euro{}} \\
+        \Pi_M &= (60 - 20) \times 40 = 1600\text{ \euro{}}, \quad \lossDW = \frac{1}{2}(60 - 20)(80 - 40) = 800\text{ \euro{}}
+    \end{align*}
+    
+    \item \textbf{Duopolio di Cournot}:
+    \begin{align*}
+        q_1 &= R_1(q_2) = \frac{80 - q_2}{2} \implies q_1^* = q_2^* = \frac{80}{3} \approx 26{,}67, \quad Q_{\text{Cournot}} = 53{,}33 \\
+        P_{\text{Cournot}} &= 100 - 53{,}33 = 46{,}67\text{ \euro{}}, \quad \Pi_1 = \Pi_2 = (46{,}67 - 20) \times 26{,}67 = 711{,}11\text{ \euro{}} \\
+        \Pi_{\text{tot}} &= 1422{,}22\text{ \euro{}}, \quad \lossDW = \frac{1}{2}(46{,}67 - 20)(80 - 53{,}33) = 355{,}56\text{ \euro{}}
+    \end{align*}
+    
+    \item \textbf{Duopolio di Stackelberg (Impresa 1 Leader)}:
+    \begin{align*}
+        q_L^* &= \frac{80}{2} = 40, \quad q_F^* = \frac{80 - 40}{2} = 20, \quad Q_{\text{Stack}} = 60 \\
+        P_{\text{Stack}} &= 100 - 60 = 40\text{ \euro{}} \\
+        \Pi_L &= (40 - 20) \times 40 = 800\text{ \euro{}}, \quad \Pi_F = (40 - 20) \times 20 = 400\text{ \euro{}}, \quad \Pi_{\text{tot}} = 1200\text{ \euro{}} \\
+        \lossDW &= \frac{1}{2}(40 - 20)(80 - 60) = 200\text{ \euro{}}
+    \end{align*}
+    
+    \item \textbf{Concorrenza Perfetta / Bertrand}:
+    \begin{align*}
+        P_C &= 20\text{ \euro{}}, \quad Q_C = 100 - 20 = 80, \quad \Pi_{\text{tot}} = 0, \quad \lossDW = 0
+    \end{align*}
+\end{enumerate}
+\textbf{Gerarchia del Benessere Sociale e dei Prezzi}:
+\begin{equation*}
+    P_M (60) > P_{\text{Cournot}} (46{,}67) > P_{\text{Stackelberg}} (40) > P_{\text{Bertrand}} = P_{\text{Concorrenza}} (20)
+\end{equation*}
+\begin{equation*}
+    Q_M (40) < Q_{\text{Cournot}} (53{,}33) < Q_{\text{Stackelberg}} (60) < Q_{\text{Bertrand}} = Q_{\text{Concorrenza}} (80)
+\end{equation*}
+\end{esercizio}

@@ -1,0 +1,322 @@
+% ==============================================================================
+% CAPITOLO 9: I GRANDI TEOREMI INTEGRALI DEL CALCOLO VETTORIALE
+% ==============================================================================
+
+\chapter{I Grandi Teoremi Integrali del Calcolo Vettoriale}
+\label{chap:teoremi_integrali_calcolo_vettoriale}
+
+\section{La Visione Unitaria dei Teoremi Integrali}
+
+Nel calcolo infinitesimale classico, il \textbf{Teorema Fondamentale del Calcolo Integrale} (formula di Newton-Leibniz) stabilisce un legame profondo tra l'integrazione di una derivata su un segmento monodimensionale $[a,b]$ e la valutazione della funzione originaria sulla frontiera discreta $\partial [a,b] = \graffe{a, b}$:
+\[
+\int_{a}^{b} f'(t) \dt = f(b) - f(a)
+\]
+Nel calcolo multivariabile e vettoriale, questo principio universale --- secondo cui \textit{l'integrale della derivata di un oggetto su una regione multidimensionale coincide con l'integrale dell'oggetto stesso lungo il bordo orientato della regione} --- assume forme geometriche di straordinaria potenza e bellezza:
+\begin{enumerate}
+    \item \textbf{Dimensione 2 (Piano $\Rdue$)}: Il \textbf{Teorema di Gauss-Green} lega l'integrale doppio di una combinazione di derivate parziali su un dominio $D$ all'integrale curvilineo lungo la curva di frontiera $\partial^+ D$.
+    \item \textbf{Dimensione 3 (Superfici con Bordo in $\Rtre$)}: Il \textbf{Teorema del Rotore (o di Stokes)} mette in relazione il flusso del rotore di un campo vettoriale attraverso una superficie aperta $\Sigma$ con la circuitazione del campo lungo il bordo orientato $\partial^+ \Sigma$.
+    \item \textbf{Dimensione 3 (Solidi Chiusi in $\Rtre$)}: Il \textbf{Teorema della Divergenza (o di Gauss)} connette l'integrale di volume della divergenza su un solido $\Omega$ con il flusso netto uscente attraverso la superficie chiusa di frontiera $\partial \Omega$.
+\end{enumerate}
+Nel linguaggio moderno della geometria differenziale, questi tre risultati fondamentali confluiscono nell'unica elegante formula di Stokes per forme differenziali su varietà con bordo: $\int_{\Omega} \diff\omega = \int_{\partial \Omega} \omega$.
+
+\section{Teorema di Gauss-Green nel Piano}
+
+\subsection{Enunciato Formale e Convenzione di Orientazione}
+
+Sia $D \subset \Rdue$ un dominio limitato la cui frontiera $\partial D$ sia una curva chiusa semplice (o l'unione di un numero finito di curve chiuse semplici disgiunte) regolare a tratti.
+
+\begin{definizione}{Orientazione Positiva del Bordo}{def_orientazione_positiva_bordo}
+La frontiera $\partial D$ si dice \textbf{orientata positivamente} (e si denota con $\partial^+ D$) se è percorsa in modo tale che, per un osservatore ideale che cammina lungo la curva nel verso fissato con la testa verso l'alto (nella direzione del versore normale entrante al piano, $\mathbf{k}$), i punti interni del dominio $D$ rimangono costantemente alla sua \textbf{sinistra}.
+Per un dominio semplicemente connesso senza "buchi", l'orientazione positiva corrisponde al verso \textbf{antiorario}. Per i bordi interni che delimitano cavità ("buchi"), l'orientazione positiva è invece in verso \textbf{orario}.
+\end{definizione}
+
+\begin{teorema}{Teorema di Gauss-Green nel Piano}{thm_gauss_green_piano}
+Sia $D \subset \Rdue$ un dominio compatto e misurabile con frontiera $\partial^+ D$ orientata positivamente e regolare a tratti. Siano $F_1, F_2 \in C^1(\overline{D})$ due funzioni a valori reali con derivate parziali continue su una chiusura di $D$. Allora:
+\[
+\iint_D \left( \pder{F_2}{x} - \pder{F_1}{y} \right) \dx\dy = \oint_{\partial^+ D} \left( F_1 \dx + F_2 \dy \right)
+\]
+\end{teorema}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15, >=Stealth]
+    % Dominio D con curva chiusa liscia
+    \draw[ultra thick, fill=navyblue!10, draw=navyblue] 
+        plot [smooth cycle, tension=0.85] coordinates {(0.5,0.2) (3.2,0.6) (4.2,2.4) (2.5,3.6) (0.4,2.8) (-0.6,1.4)};
+    
+    \node[navyblue, font=\huge\bfseries] at (1.8, 1.8) {$D$};
+
+    % Frecce di orientazione sul bordo
+    \draw[line width=1.8pt, crimsonred, ->] (3.2,0.6) -- ++(0.7,0.7) node[below right, font=\bfseries] {$\partial^+ D$};
+    \draw[line width=1.8pt, crimsonred, ->] (2.5,3.6) -- ++(-1.2,-0.2);
+    \draw[line width=1.8pt, crimsonred, ->] (-0.6,1.4) -- ++(0.3,-0.7);
+
+    % Omino / Versore normale e tangente
+    \coordinate (Obs) at (4.0, 1.8);
+    \draw[thick, forestgreen, ->] (Obs) -- ++(-0.8, 0.2) node[left, font=\footnotesize] {$\hat{\bn}_{\text{int}}$ (a sinistra)};
+    \draw[thick, crimsonred, ->] (Obs) -- ++(0.2, 0.9) node[above, font=\footnotesize] {$\mathbf{t}$ (verso)};
+    \filldraw[black] (Obs) circle (2pt);
+
+    \node[align=center, font=\small, draw=gray!40, fill=boxgray, rounded corners] at (1.8, -0.9) 
+        {\textbf{Regola della Mano Sinistra}: Percorrendo il bordo $\partial^+ D$,\\
+        l'interno del dominio $D$ si trova sempre sul lato \textbf{sinistro}.};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Dimostrazione Rigorosa per Domini Normali}
+
+\begin{dimostrazione}
+La dimostrazione procede separando l'identità nella somma di due formule parziali indipendenti:
+\begin{align}
+\label{eq:gg_part1}
+\iint_D -\pder{F_1}{y} \dx\dy &= \oint_{\partial^+ D} F_1 \dx \\
+\label{eq:gg_part2}
+\iint_D \pder{F_2}{x} \dx\dy &= \oint_{\partial^+ D} F_2 \dy
+\end{align}
+
+\medskip\noindent\textbf{1. Dimostrazione della prima formula~\eqref{eq:gg_part1}}:\\
+Assumiamo che il dominio $D$ sia normale rispetto all'asse $x$:
+\[
+D = \graffe{(x,y) \in \Rdue : a \le x \le b, \; \alpha(x) \le y \le \beta(x)}
+\]
+con $\alpha, \beta \in C^1([a,b])$.
+Calcoliamo l'integrale doppio a primo membro applicando la formula di riduzione per fili verticali e il Teorema Fondamentale del Calcolo Integrale rispetto a $y$:
+\begin{align*}
+\iint_D -\pder{F_1}{y} \dx\dy &= -\int_{a}^{b} \left( \int_{\alpha(x)}^{\beta(x)} \pder{F_1}{y}(x,y) \dy \right) \dx \\
+&= -\int_{a}^{b} \Big[ F_1(x, \beta(x)) - F_1(x, \alpha(x)) \Big] \dx \\
+&= \int_{a}^{b} F_1(x, \alpha(x)) \dx - \int_{a}^{b} F_1(x, \beta(x)) \dx
+\end{align*}
+Esaminiamo ora l'integrale curvilineo al secondo membro. La frontiera $\partial^+ D$ orientata in senso antiorario è costituita da quattro curve regolari a tratti:
+\begin{itemize}
+    \item $\gamma_1$ (tratto inferiore): $y = \alpha(x)$, percorso da $x = a$ a $x = b$:
+    \[
+    \int_{\gamma_1} F_1 \dx = \int_{a}^{b} F_1(x, \alpha(x)) \dx
+    \]
+    \item $\gamma_2$ (segmento verticale destro): $x = b$, $y$ varia da $\alpha(b)$ a $\beta(b) \implies \dx = 0 \implies \int_{\gamma_2} F_1 \dx = 0$.
+    \item $\gamma_3$ (tratto superiore): $y = \beta(x)$, percorso da $x = b$ a $x = a$ (nel verso decrescente):
+    \[
+    \int_{\gamma_3} F_1 \dx = \int_{b}^{a} F_1(x, \beta(x)) \dx = -\int_{a}^{b} F_1(x, \beta(x)) \dx
+    \]
+    \item $\gamma_4$ (segmento verticale sinistro): $x = a$, $y$ varia da $\beta(a)$ ad $\alpha(a) \implies \dx = 0 \implies \int_{\gamma_4} F_1 \dx = 0$.
+\end{itemize}
+Sommando i contributi dei quattro tratti:
+\begin{align*}
+\oint_{\partial^+ D} F_1 \dx &= \int_{\gamma_1} F_1\dx + \int_{\gamma_2} F_1\dx + \int_{\gamma_3} F_1\dx + \int_{\gamma_4} F_1\dx \\
+&= \int_{a}^{b} F_1(x, \alpha(x)) \dx - \int_{a}^{b} F_1(x, \beta(x)) \dx
+\end{align*}
+Ciò dimostra esattamente l'uguaglianza~\eqref{eq:gg_part1}.
+
+\medskip\noindent\textbf{2. Dimostrazione della seconda formula~\eqref{eq:gg_part2}}:\\
+Assumiamo che il dominio $D$ sia normale rispetto all'asse $y$:
+\[
+D = \graffe{(x,y) \in \Rdue : c \le y \le d, \; \gamma(y) \le x \le \delta(y)}
+\]
+Integrando per fili orizzontali rispetto a $x$:
+\[
+\iint_D \pder{F_2}{x} \dx\dy = \int_{c}^{d} \left( \int_{\gamma(y)}^{\delta(y)} \pder{F_2}{x}(x,y) \dx \right) \dy = \int_{c}^{d} \Big[ F_2(\delta(y), y) - F_2(\gamma(y), y) \Big] \dy
+\]
+Parametrizzando il bordo $\partial^+ D$ in senso antiorario (il tratto destro $x = \delta(y)$ è percorso da $y=c$ a $y=d$ con $\dy > 0$, mentre il tratto sinistro $x = \gamma(y)$ è percorso da $y=d$ a $y=c$ con verso opposto; i segmenti orizzontali superiore e inferiore hanno $\dy = 0$):
+\[
+\oint_{\partial^+ D} F_2 \dy = \int_{c}^{d} F_2(\delta(y), y) \dy - \int_{c}^{d} F_2(\gamma(y), y) \dy = \iint_D \pder{F_2}{x} \dx\dy
+\]
+
+\medskip\noindent\textbf{3. Conclusione}:\\
+Poiché ogni dominio regolare generale $D$ può essere decomposto in un numero finito di sottodomini regolari contemporaneamente normali rispetto a $x$ e rispetto ad $y$, sommando membro a membro~\eqref{eq:gg_part1} e~\eqref{eq:gg_part2} (i contributi delle frontiere interne comuni si elidono reciprocamente per opposta orientazione), si perviene alla formula generale di Gauss-Green.
+\end{dimostrazione}
+
+\subsection{Calcolo di Aree Piane con le Formule di Gauss-Green}
+
+\begin{metodo}[Formule di Gauss-Green per l'Area]
+Ponendo nella formula di Gauss-Green campi $(F_1, F_2)$ tali che $\pder{F_2}{x} - \pder{F_1}{y} = 1$, si ottengono tre formule universali per calcolare l'area di un dominio tramite un integrale curvilineo lungo il suo bordo orientato:
+\begin{align*}
+\operatorname{Area}(D) &= \iint_D 1 \dx\dy = \oint_{\partial^+ D} x \dy \quad (\text{scelta } F_1 = 0, \, F_2 = x) \\
+\operatorname{Area}(D) &= -\oint_{\partial^+ D} y \dx \quad (\text{scelta } F_1 = -y, \, F_2 = 0) \\
+\operatorname{Area}(D) &= \frac{1}{2} \oint_{\partial^+ D} (x \dy - y \dx) \quad (\text{formula simmetrica})
+\end{align*}
+\end{metodo}
+
+\begin{esempio}{Calcolo dell'Area dell'Asteroide tramite Gauss-Green}{es_area_asteroide}
+L'\textbf{asteroide} è la curva ipocicloide piana di equazione cartesiana $x^{2/3} + y^{2/3} = a^{2/3}$ ($a > 0$), parametrizzata in senso antiorario da:
+\[
+\gamma(t) = \begin{pmatrix} a \cos^3 t \\ a \sen^3 t \end{pmatrix}, \quad t \in [0, 2\pi]
+\]
+Calcoliamo i differenziali delle coordinate:
+\begin{align*}
+\dx &= 3a \cos^2 t (-\sen t) \dt = -3a \cos^2 t \sen t \dt \\
+\dy &= 3a \sen^2 t (\cos t) \dt = 3a \sen^2 t \cos t \dt
+\end{align*}
+Applichiamo la formula simmetrica dell'area:
+\begin{align*}
+\operatorname{Area}(D) &= \frac{1}{2} \oint_{\partial^+ D} (x \dy - y \dx) \\
+&= \frac{1}{2} \int_{0}^{2\pi} \Big[ (a \cos^3 t)(3a \sen^2 t \cos t) - (a \sen^3 t)(-3a \cos^2 t \sen t) \Big] \dt \\
+&= \frac{1}{2} \int_{0}^{2\pi} 3a^2 \Big( \cos^4 t \sen^2 t + \sen^4 t \cos^2 t \Big) \dt \\
+&= \frac{3a^2}{2} \int_{0}^{2\pi} \cos^2 t \sen^2 t (\cos^2 t + \sen^2 t) \dt = \frac{3a^2}{2} \int_{0}^{2\pi} (\sen t \cos t)^2 \dt \\
+&= \frac{3a^2}{2} \int_{0}^{2\pi} \left( \frac{\sen(2t)}{2} \right)^2 \dt = \frac{3a^2}{8} \int_{0}^{2\pi} \sen^2(2t) \dt \\
+&= \frac{3a^2}{8} \left( \frac{2\pi}{2} \right) = \frac{3}{8}\pi a^2
+\end{align*}
+\end{esempio}
+
+\section{Teorema della Divergenza (di Gauss) nello Spazio 3D}
+
+\subsection{Bilancio Globale di Flusso e Densità di Sorgente}
+
+Sia dato un dominio compatto $\Omega \subset \Rtre$ delimitato da una superficie chiusa $\partial \Omega = \Sigma$. Il Teorema della Divergenza formalizza il bilancio fondamentale tra la produzione netta di una grandezza all'interno del volume e il tasso con cui essa fuoriesce attraverso la frontiera.
+
+\begin{teorema}{Teorema della Divergenza (di Gauss) nello Spazio}{thm_divergenza_gauss_3D}
+Sia $\Omega \subset \Rtre$ un dominio compatto con frontiera $\partial \Omega$ orientabile, regolare a tratti e orientata con il versore normale esterno $\hat{\bn}_{\text{ext}}$.
+Sia $\mathbf{F} = (F_1, F_2, F_3): \overline{\Omega} \to \Rtre$ un campo vettoriale di classe $C^1(\overline{\Omega})$. Allora:
+\[
+\iiint_\Omega \dive \mathbf{F} \diff V = \oiint_{\partial \Omega} \mathbf{F} \cdot \hat{\bn}_{\text{ext}} \diff\sigma
+\]
+dove $\dive \mathbf{F} = \pder{F_1}{x} + \pder{F_2}{y} + \pder{F_3}{z}$ e $\diff V = \dx\dy\dz$.
+\end{teorema}
+
+\begin{dimostrazione}
+Dimostriamo l'uguaglianza per la terza componente $F_3$, ovvero che:
+\[
+\iiint_\Omega \pder{F_3}{z} \dx\dy\dz = \oiint_{\partial \Omega} F_3 (\hat{\bn}_{\text{ext}})_z \diff\sigma
+\]
+Assumiamo che il dominio solido $\Omega$ sia normale rispetto al piano $xy$:
+\[
+\Omega = \graffe{(x,y,z) \in \Rtre : (x,y) \in D_{xy}, \; g_1(x,y) \le z \le g_2(x,y)}
+\]
+Integrando per fili verticali rispetto a $z$:
+\begin{align*}
+\iiint_\Omega \pder{F_3}{z} \dx\dy\dz &= \iint_{D_{xy}} \left( \int_{g_1(x,y)}^{g_2(x,y)} \pder{F_3}{z} \dz \right) \dx\dy \\
+&= \iint_{D_{xy}} F_3(x, y, g_2(x,y)) \dx\dy - \iint_{D_{xy}} F_3(x, y, g_1(x,y)) \dx\dy
+\end{align*}
+La frontiera $\partial \Omega$ è composta da tre porzioni:
+\begin{itemize}
+    \item La calotta superiore $\Sigma_2: z = g_2(x,y)$, con vettore normale uscente avente terza componente $+1$:
+    \[
+    \iint_{\Sigma_2} F_3 (\hat{\bn}_{\text{ext}})_z \diff\sigma = \iint_{D_{xy}} F_3(x, y, g_2(x,y)) \dx\dy
+    \]
+    \item La calotta inferiore $\Sigma_1: z = g_1(x,y)$, con vettore normale uscente orientato verso il basso (terza componente $-1$):
+    \[
+    \iint_{\Sigma_1} F_3 (\hat{\bn}_{\text{ext}})_z \diff\sigma = -\iint_{D_{xy}} F_3(x, y, g_1(x,y)) \dx\dy
+    \]
+    \item La parete laterale cilindrica verticale $\Sigma_{\text{lat}}$, i cui versori normali sono orizzontali ($(\hat{\bn}_{\text{ext}})_z = 0$), dunque $\iint_{\Sigma_{\text{lat}}} F_3 (\hat{\bn}_{\text{ext}})_z \diff\sigma = 0$.
+\end{itemize}
+Sommando i tre contributi di superficie, si ritrova esattamente l'integrale triplo. Procedendo in modo analogo per le componenti $F_1$ ed $F_2$ su domini normali rispetto ai piani $yz$ e $xz$, e sommando le tre identità scalari, si ottiene la tesi.
+\end{dimostrazione}
+
+\begin{osservazione}[Significato Fisico Puntuale della Divergenza]
+Facendo collassare il solido $\Omega$ a una sferetta $B_r(P_0)$ centrata in un punto $P_0$ e applicando il Teorema della Media Integrale:
+\[
+\dive \mathbf{F}(P_0) = \lim_{r \to 0^+} \frac{1}{\operatorname{Vol}(B_r(P_0))} \oiint_{\partial B_r(P_0)} \mathbf{F} \cdot \hat{\bn}_{\text{ext}} \diff\sigma
+\]
+La divergenza $\dive \mathbf{F}(P_0)$ esprime dunque la \textbf{densità volumetrica locale di flusso uscente} per unità di volume:
+\begin{itemize}
+    \item Se $\dive \mathbf{F}(P_0) > 0$, il punto $P_0$ agisce da \textbf{sorgente} di campo.
+    \item Se $\dive \mathbf{F}(P_0) < 0$, il punto $P_0$ agisce da \textbf{pozzo} (assorbitore).
+    \item Se $\dive \mathbf{F} \equiv 0$ su tutto lo spazio, il campo si dice \textbf{solenoidale} (o a divergenza nulla) e il flusso attraverso qualsiasi superficie chiusa è \textbf{nullo}.
+\end{itemize}
+\end{osservazione}
+
+\section{Teorema del Rotore (o di Stokes) nello Spazio 3D}
+
+\subsection{Orientazione Coerente del Bordo e Regola della Mano Destra}
+
+\begin{teorema}{Teorema del Rotore (di Stokes)}{thm_stokes_spazio}
+Sia $\Sigma \subset \Rtre$ una superficie regolare a tratti, orientata dal campo continuo di versori normali $\hat{\bn}$, avente per bordo la curva chiusa semplice regolare a tratti $\partial \Sigma$.
+Sia $\partial^+ \Sigma$ il bordo orientato in modo \textbf{coerente} con $\hat{\bn}$ secondo la \textbf{regola della mano destra} (o della vite).
+Sia $\mathbf{F}: A \subseteq \Rtre \to \Rtre$ un campo vettoriale di classe $C^1(A)$ su un aperto contenente $\Sigma$. Allora:
+\[
+\iint_\Sigma (\rot \mathbf{F}) \cdot \hat{\bn} \diff\sigma = \oint_{\partial^+ \Sigma} \mathbf{F} \cdot \diff\mathbf{r}
+\]
+dove $\rot \mathbf{F} = \nabla \times \mathbf{F}$ è il rotore di $\mathbf{F}$.
+\end{teorema}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15, >=Stealth]
+    % Assi 3D
+    \draw[->, thick, gray] (0,0) -- (4.2,0) node[right, black] {$y$};
+    \draw[->, thick, gray] (0,0) -- (-1.6,-1.1) node[below left, black] {$x$};
+    \draw[->, thick, gray] (0,0) -- (0,4.0) node[above, black] {$z$};
+
+    % Calotta aperta Sigma
+    \draw[thick, fill=forestgreen!15, draw=forestgreen, opacity=0.85] 
+        plot[domain=-1.5:1.5, samples=40] (\x, {2.8 - 0.4*\x*\x}) -- 
+        plot[domain=1.5:-1.5, samples=40] (\x, {1.0 - 0.2*\x*\x}) -- cycle;
+    \node[forestgreen!90!black, font=\Large\bfseries] at (0, 2.0) {$\Sigma$};
+
+    % Bordo dSigma
+    \draw[ultra thick, crimsonred] (0, 0.9) ellipse (1.6 and 0.4);
+    \draw[line width=2pt, crimsonred, ->] (1.6, 0.9) -- ++(0, 0.15) node[right, font=\bfseries] {$\partial^+ \Sigma$};
+    \draw[line width=2pt, crimsonred, ->] (-1.6, 0.9) -- ++(0, -0.15);
+
+    % Versore normale n
+    \coordinate (Ptop) at (0, 2.8);
+    \draw[line width=2pt, navyblue, ->] (Ptop) -- ++(0, 1.3) node[above, font=\bfseries] {$\hat{\bn}$};
+    \filldraw[navyblue] (Ptop) circle (2pt);
+
+    \node[align=center, font=\small, draw=gray!40, fill=boxgray, rounded corners] at (1.8, -1.0) 
+        {\textbf{Orientazione Coerente (Mano Destra)}:\\
+        Posizionando il pollice della mano destra lungo $\hat{\bn}$,\\
+        le dita che si chiudono indicano il verso di percorrenza di $\partial^+ \Sigma$.};
+\end{tikzpicture}
+\end{center}
+
+\begin{dimostrazione}[Dimostrazione per Superfici Cartesiane $z = g(x,y)$]
+Sia $\Sigma$ il grafico $z = g(x,y)$ su $D \subset \Rdue$, con normale verso l'alto $\mathbf{N} = (-g_x, -g_y, 1)$.
+La circuitazione del campo lungo il bordo $\partial^+ \Sigma$ parametrizzato da $\mathbf{r}(t) = (x(t), y(t), g(x(t), y(t)))$ con $t \in [a,b]$ è:
+\begin{align*}
+\oint_{\partial^+ \Sigma} \mathbf{F} \cdot \diff\mathbf{r} &= \int_{a}^{b} \Big[ F_1 \dx + F_2 \dy + F_3 (g_x \dx + g_y \dy) \Big] \\
+&= \oint_{\partial^+ D} \Big[ (F_1 + F_3 g_x) \dx + (F_2 + F_3 g_y) \dy \Big]
+\end{align*}
+Applichiamo ora il Teorema di Gauss-Green nel piano al dominio $D$ ponendo $P = F_1 + F_3 g_x$ e $Q = F_2 + F_3 g_y$:
+\[
+\oint_{\partial^+ D} (P \dx + Q \dy) = \iint_D \left( \pder{Q}{x} - \pder{P}{y} \right) \dx\dy
+\]
+Calcoliamo le derivate totali tramite la Chain Rule:
+\begin{align*}
+\pder{Q}{x} &= \pder{}{x}\Big( F_2(x,y,g(x,y)) + F_3(x,y,g(x,y)) g_y(x,y) \Big) \\
+&= \pder{F_2}{x} + \pder{F_2}{z}g_x + \left( \pder{F_3}{x} + \pder{F_3}{z}g_x \right) g_y + F_3 g_{yx} \\
+\pder{P}{y} &= \pder{}{y}\Big( F_1(x,y,g(x,y)) + F_3(x,y,g(x,y)) g_x(x,y) \Big) \\
+&= \pder{F_1}{y} + \pder{F_1}{z}g_y + \left( \pder{F_3}{y} + \pder{F_3}{z}g_y \right) g_x + F_3 g_{xy}
+\end{align*}
+Sottraendo le due espressioni (notando che per il Teorema di Schwarz $F_3 g_{yx} = F_3 g_{xy}$ e che i termini misti $F_{3z} g_x g_y$ si elidono):
+\[
+\pder{Q}{x} - \pder{P}{y} = \left( \pder{F_3}{y} - \pder{F_2}{z} \right)(-g_x) + \left( \pder{F_1}{z} - \pder{F_3}{x} \right)(-g_y) + \left( \pder{F_2}{x} - \pder{F_1}{y} \right)(1) = (\rot \mathbf{F}) \cdot \mathbf{N}
+\]
+Integrando su $D$, otteniamo esattamente $\iint_D (\rot \mathbf{F}) \cdot \mathbf{N} \dx\dy = \iint_\Sigma (\rot \mathbf{F}) \cdot \hat{\bn} \diff\sigma$.
+\end{dimostrazione}
+
+\begin{teorema}{Indipendenza del Flusso del Rotore dalla Superficie}{thm_indipendenza_superficie_rotore}
+Siano $\Sigma_1$ e $\Sigma_2$ due superfici regolari orientate aventi il \textbf{medesimo bordo orientato} $\partial^+ \Sigma_1 = \partial^+ \Sigma_2 = \Gamma$. Allora, per ogni campo $\mathbf{F} \in C^1$:
+\[
+\iint_{\Sigma_1} (\rot \mathbf{F}) \cdot \hat{\bn}_1 \diff\sigma = \iint_{\Sigma_2} (\rot \mathbf{F}) \cdot \hat{\bn}_2 \diff\sigma = \oint_{\Gamma} \mathbf{F} \cdot \diff\mathbf{r}
+\]
+In un problema d'esame in cui si richiede il flusso del rotore su una superficie $\Sigma$ geometricamente complessa, è sempre possibile \textbf{sostituire $\Sigma$ con una superficie piana} (il "tappo" basale) avente lo stesso contorno!
+\end{teorema}
+
+\section{Strategie Risolutive e Tavola Comparativa d'Esame}
+
+\begin{metodo}[Guida alla Scelta del Teorema Integrale Ottimale]
+\renewcommand{\arraystretch}{1.35}
+\noindent\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash\bfseries}p{3.2cm} >{\raggedright\arraybackslash}p{3.8cm} >{\raggedright\arraybackslash}X}
+\toprule
+Tipologia di Problema & Configurazione Spaziale & Strategia Risolutiva Raccomandata \\
+\midrule
+Flusso su Superficie Chiusa $\oiint_\Sigma \mathbf{F} \cdot \hat{\bn} \diff\sigma$ & $\Sigma = \partial \Omega$ racchiude un volume 3D solido $\Omega$. & \textbf{Teorema della Divergenza}:\\ $\oiint_{\partial \Omega} \mathbf{F} \cdot \hat{\bn}_{\text{ext}} \diff\sigma = \iiint_\Omega \dive \mathbf{F} \diff V$. \\
+\midrule
+Flusso del Rotore su Superficie Aperta $\iint_\Sigma (\rot \mathbf{F}) \cdot \hat{\bn} \diff\sigma$ & $\Sigma$ superficie aperta curva con bordo $\Gamma = \partial \Sigma$. & \textbf{Teorema di Stokes}:\\ Passare alla circuitazione 1D $\oint_\Gamma \mathbf{F} \cdot \diff\mathbf{r}$ oppure sostituire $\Sigma$ con il tappo piano. \\
+\midrule
+Flusso di Campo Generico su Superficie Aperta & $\Sigma$ calotta aperta (es. paraboloide, semisfera). & \textbf{Tecnica del Tappo}:\\ Chiudere con il disco basale $D_0 \implies \iint_\Sigma + \iint_{D_0} = \iiint_\Omega \dive \mathbf{F}$. \\
+\midrule
+Circuitazione 3D lungo Curva Piana $\oint_\Gamma \mathbf{F} \cdot \diff\mathbf{r}$ & $\Gamma$ curva chiusa giacente su un piano $\pi$. & \textbf{Teorema di Stokes}:\\ Calcolare $\iint_D (\rot \mathbf{F}) \cdot \hat{\bn} \diff\sigma$ sul dominio piano $D$. \\
+\bottomrule
+\end{tabularx}
+\end{metodo}
+
+\begin{esame}[Attenzione ai Segni della Normale nella Tecnica del Tappo]
+Quando si chiude una superficie aperta $\Sigma$ con un "tappo" piano $D_0$ per formare il solido $\Omega$:
+\[
+\oiint_{\partial \Omega} \mathbf{F} \cdot \hat{\bn}_{\text{ext}} \diff\sigma = \iint_\Sigma \mathbf{F} \cdot \hat{\bn}_{\text{ext}} \diff\sigma + \iint_{D_0} \mathbf{F} \cdot \hat{\bn}_{D_0, \text{ext}} \diff\sigma = \iiint_\Omega \dive \mathbf{F} \diff V
+\]
+Ricordarsi che sul tappo $D_0$ posto ad esempio sul piano $z = 0$, il versore normale esterno al solido punta \textbf{verso il basso}: $\hat{\bn}_{D_0, \text{ext}} = (0, 0, -1)$.
+Pertanto:
+\[
+\iint_\Sigma \mathbf{F} \cdot \hat{\bn}_{\text{ext}} \diff\sigma = \iiint_\Omega \dive \mathbf{F} \diff V - \iint_{D_0} \mathbf{F} \cdot (0, 0, -1) \dx\dy
+\]
+Un errore di segno in questo passaggio compromette irrimediabilmente l'intero esercizio!
+\end{esame}

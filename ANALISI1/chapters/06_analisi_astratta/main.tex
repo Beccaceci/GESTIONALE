@@ -1,0 +1,103 @@
+\chapter{Elementi di Analisi Matematica Astratta}
+\label{chap:analisi_astratta}
+
+Molte delle proprietà fondamentali studiate per le funzioni reali di una variabile poggiano su strutture geometriche e topologiche generali. L'astrazione consente di unificare concetti apparentemente distanti (dalla convergenza dei numeri reali alla convergenza uniforme di successioni di funzioni) all'interno del linguaggio elegante degli **spazi metrici** e degli **spazi di Banach**.
+
+In questo capitolo introduciamo la nozione di spazio metrico, esploriamo la topologia euclidea della retta reale (aperti, chiusi, punti di accumulazione e frontiera), sviluppiamo la teoria della compattezza (Heine-Borel e Bolzano-Weierstrass) e analizziamo la completezza e il Teorema delle Contrazioni di Banach, che garantisce l'esistenza e unicità delle soluzioni per le equazioni differenziali.
+
+% ==============================================================================
+\section{Spazi Metrici e Distanza}
+\label{sec:spazi_metrici_teoria}
+% ==============================================================================
+
+\begin{definizione}{Spazio Metrico}{spazio_metrico_def}
+Uno \textbf{spazio metrico} è una coppia $(X, d)$ formata da un insieme non vuoto $X$ e da una funzione distanza $d \colon X \times X \to [0, +\infty)$ che soddisfa i seguenti tre assiomi per ogni $x, y, z \in X$:
+\begin{enumerate}
+    \item \textbf{Non degenerazione}: $d(x, y) \ge 0$, e $d(x, y) = 0 \iff x = y$.
+    \item \textbf{Simmetria}: $d(x, y) = d(y, x)$.
+    \item \textbf{Disuguaglianza Triangolare}: $d(x, z) \le d(x, y) + d(y, z)$.
+\end{enumerate}
+\end{definizione}
+
+\begin{metodo}[Esempi Cardine di Spazi Metrici]
+\begin{itemize}
+    \item \textbf{Retta Reale Euclidea}: $X = \R$ con distanza standard $d(x, y) = |x - y|$.
+    \item \textbf{Spazio Euclideo $\R^n$}: $d_2(x, y) = \sqrt{\sum_{i=1}^n (x_i - y_i)^2}$.
+    \item \textbf{Spazio delle Funzioni Continue $C([a, b])$}: con la \textbf{distanza del massimo/supremo}:
+    \[
+        d_\infty(f, g) = \|f - g\|_\infty = \max_{x \in [a, b]} |f(x) - g(x)|
+    \]
+    Questa metrica definisce la convergenza uniforme delle successioni di funzioni.
+\end{itemize}
+\end{metodo}
+
+% ==============================================================================
+\section{Topologia della Retta Reale: Aperti, Chiusi e Punti Notevoli}
+\label{sec:topologia_retta_reale_dettaglio}
+% ==============================================================================
+
+Sia dato un sottoinsieme $E \subseteq \R$:
+\begin{definizione}{Classificazione Topologica dei Punti e degli Insiemi}{classificazione_topologica}
+\begin{enumerate}
+    \item Un punto $x_0 \in E$ è \textbf{punto interno} a $E$ se esiste un raggio $r > 0$ tale che l'intorno $(x_0 - r, x_0 + r) \subseteq E$. L'insieme dei punti interni si denota con $\Int(E)$ o $\mathring{E}$.
+    \item Un insieme $E \subseteq \R$ si dice \textbf{aperto} se coincide con il suo interno: $E = \Int(E)$ (ossia ogni suo punto è interno).
+    \item Un insieme $E \subseteq \R$ si dice \textbf{chiuso} se il suo complementare $\R \setminus E$ è aperto.
+    \item Un punto $x_0 \in \R$ è \textbf{punto di accumulazione} per $E$ se ogni intorno bucato $I^*(x_0)$ interseca $E$. L'insieme dei punti di accumulazione è il \textbf{derivato} $\Der(E)$.
+    \item Un punto $x_0 \in E$ è \textbf{punto isolato} se esiste un intorno $I(x_0)$ che non contiene altri punti di $E$ oltre a $x_0$.
+    \item La \textbf{chiusura} di $E$ è $\Cl(E) = \overline{E} = E \cup \Der(E)$. $E$ è chiuso se e solo se $E = \overline{E}$ (ossia contiene tutti i suoi punti di accumulazione).
+    \item La \textbf{frontiera} di $E$ è $\Fr(E) = \partial E = \overline{E} \setminus \Int(E)$.
+\end{enumerate}
+\end{definizione}
+
+\begin{osservazione}[Aperti e Chiusi non sono mutuamente esclusivi]
+Un insieme può non essere né aperto né chiuso (ad esempio l'intervallo semiaperto $[0, 1)$), oppure essere contemporaneamente aperto e chiuso (in $\R$ gli unici insiemi sia aperti che chiusi sono $\emptyset$ e tutto $\R$, per la proprietà di connessione).
+\end{osservazione}
+
+% ==============================================================================
+\section{Compattezza e Teoremi di Bolzano-Weierstrass ed Heine-Borel}
+\label{sec:compattezza_teoria}
+% ==============================================================================
+
+La compattezza è la nozione topologica che generalizza l'idea di ``finitudine'' per insiemi continui.
+
+\begin{definizione}{Insieme Compatto}{compatto_def}
+Uno spazio metrico o sottoinsieme $K \subseteq \R$ si dice \textbf{compatto} se da ogni suo ricoprimento aperto si può estrarre un sottoricoprimento finito (proprietà di Heine-Borel).
+Equivalentemente, $K$ è compatto per successioni se ogni successione $\{x_n\} \subset K$ ammette una sottosuccessione convergente a un elemento di $K$.
+\end{definizione}
+
+\begin{teorema}{Teorema di Heine-Borel}{heine_borel_dim}
+Un sottoinsieme $K \subseteq \R^n$ (in particolare in $\R$) è compatto se e solo se è \textbf{chiuso e limitato}.
+\end{teorema}
+
+\begin{teorema}{Teorema di Bolzano-Weierstrass per Successioni}{bolzano_weierstrass_dim}
+Ogni successione reale limitata $\{x_n\}_{n \in \N} \subset \R$ ammette almeno una sottosuccessione convergente $\{x_{n_k}\}_{k \in \N}$.
+\end{teorema}
+
+\begin{dimostrazione}
+Poiché $\{x_n\}$ è limitata, esiste un intervallo compatto $[a, b]$ tale che $\{x_n\} \subset [a, b]$.
+Dividiamo $[a, b]$ a metà nel punto medio $m = (a+b)/2$. Almeno uno dei due sottointervalli $[a, m]$ o $[m, b]$ contiene infiniti termini della successione. Scegliamo tale sottointervallo $I_1 = [a_1, b_1]$ e selezioniamo un elemento $x_{n_1} \in I_1$.
+Iterando il procedimento di bisezione, costruiamo una successione di intervalli compatti inscatolati $I_1 \supset I_2 \supset \dots \supset I_k$ di ampiezza $\frac{b-a}{2^k} \to 0$, ciascuno contenente infiniti termini.
+Per il Teorema di Cantor dei compatti inscatolati, l'intersezione $\bigcap_{k=1}^\infty I_k = \{x^*\}$ contiene un unico punto $x^* \in \R$.
+La sottosuccessione $\{x_{n_k}\}$ con $x_{n_k} \in I_k$ converge a $x^*$, provando il teorema.
+\end{dimostrazione}
+
+% ==============================================================================
+\section{Completezza e Teorema delle Contrazioni di Banach}
+\label{sec:completezza_banach}
+% ==============================================================================
+
+\begin{definizione}{Successione di Cauchy e Spazio Completo}{cauchy_spazio_completo}
+Sia $(X, d)$ uno spazio metrico. Una successione $\{x_n\} \subset X$ è di \textbf{Cauchy} se gli elementi si avvicinano arbitrariamente tra loro all'aumentare dell'indice:
+\[
+    \forall \eps > 0, \; \exists N \in \N : \forall n, m > N \implies d(x_n, x_m) < \eps
+\]
+Lo spazio metrico $(X, d)$ si dice **completo** se ogni successione di Cauchy in $X$ è convergente a un elemento appartenente a $X$. Uno spazio vettoriale normato completo è detto **Spazio di Banach**.
+\end{definizione}
+
+\begin{teorema}{Teorema del Punto Fisso di Banach-Caccioppoli (delle Contrazioni)}{banach_punto_fisso}
+Sia $(X, d)$ uno spazio metrico completo e sia $T \colon X \to X$ una mappa **strettamente contrattile**, ossia esiste una costante $k \in [0, 1)$ tale che:
+\[
+    d(T(x), T(y)) \le k \cdot d(x, y) \quad \forall x, y \in X
+\]
+Allora $T$ ammette un **unico punto fisso** $\bar{x} \in X$ (tale che $T(\bar{x}) = \bar{x}$). Inoltre, per ogni dato iniziale $x_0 \in X$, la successione definita per ricorrenza $x_{n+1} = T(x_n)$ converge a $\bar{x}$.
+\end{teorema}

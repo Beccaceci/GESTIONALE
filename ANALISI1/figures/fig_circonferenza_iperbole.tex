@@ -1,0 +1,78 @@
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % --- Riquadro Sinistro: Circonferenza Unitaria ---
+    \begin{scope}[shift={(0,0)}]
+        % Titolo
+        \node[font=\bfseries\color{navyblue}] at (0, 2.6) {Circonferenza: $X^2 + Y^2 = 1$};
+        
+        % Assi
+        \draw[->, thick, gray!80] (-2.2, 0) -- (2.2, 0) node[right] {$X$};
+        \draw[->, thick, gray!80] (0, -2.2) -- (0, 2.2) node[above] {$Y$};
+        
+        % Settore circolare ombreggiato (Area = t/2)
+        \def\angcircle{48}
+        \fill[coolblue!25] (0,0) -- (1.8,0) arc (0:\angcircle:1.8) -- cycle;
+        \node[coolblue!90!black, font=\bfseries] at (24:1.0) {Area $= \frac{t}{2}$};
+
+        % Circonferenza
+        \draw[very thick, coolblue] (0,0) circle (1.8);
+
+        % Raggio e coordinate
+        \coordinate (Oc) at (0,0);
+        \coordinate (Pc) at ({\angcircle}:1.8);
+        \draw[thick, crimsonred] (Oc) -- (Pc);
+        \fill[crimsonred] (Pc) circle (2pt);
+        \node[above right, crimsonred, font=\footnotesize] at (Pc) {$P(\cos t, \sin t)$};
+
+        % Proiezioni
+        \draw[dashed, gray] (Pc) -- ({\angcircle}:1.8 |- Oc) node[below, font=\scriptsize] {$\cos t$};
+        \draw[dashed, gray] (Pc) -- (Pc -| Oc) node[left, font=\scriptsize] {$\sin t$};
+
+        % Angolo t
+        \draw[->, thick, forestgreen] (0.6,0) arc (0:\angcircle:0.6);
+        \node[forestgreen, font=\footnotesize] at (24:0.8) {$t$};
+    \end{scope}
+
+    % --- Riquadro Destro: Iperbole Equilatera ---
+    \begin{scope}[shift={(6.5,0)}]
+        % Titolo
+        \node[font=\bfseries\color{navyblue}] at (0, 2.6) {Iperbole Equilatera: $X^2 - Y^2 = 1$};
+        
+        % Assi
+        \draw[->, thick, gray!80] (-1.2, 0) -- (3.2, 0) node[right] {$X$};
+        \draw[->, thick, gray!80] (0, -2.2) -- (0, 2.2) node[above] {$Y$};
+
+        % Asintoti Y = +- X
+        \draw[dashed, gray!70] (-1.2, -1.2) -- (2.2, 2.2) node[above right, font=\tiny] {$Y=X$};
+        \draw[dashed, gray!70] (-1.2, 1.2) -- (2.2, -2.2) node[below right, font=\tiny] {$Y=-X$};
+
+        % Settore iperbolico ombreggiato (Area = t/2)
+        % Usiamo coordinate parametriche per riempire: t_val = 1.1, scala = 1.2
+        % x = a cosh(u), y = a sinh(u) con a = 1.4 (scala grafica)
+        \def\a{1.3}
+        \def\tmax{0.95}
+        \fill[forestgreen!25] (0,0) -- ({\a*cosh(0)},0)
+            \foreach \u in {0.05, 0.1, ..., \tmax} {
+                -- ({\a*cosh(\u)}, {\a*sinh(\u)})
+            }
+            -- (0,0);
+        \node[forestgreen!90!black, font=\bfseries] at (1.1, 0.4) {Area $= \frac{t}{2}$};
+
+        % Ramo destro iperbole
+        \draw[very thick, forestgreen, domain=-1.2:1.2, samples=100] 
+            plot ({\a*cosh(\x)}, {\a*sinh(\x)});
+
+        % Punto P e raggio
+        \coordinate (Oh) at (0,0);
+        \coordinate (Ph) at ({\a*cosh(\tmax)}, {\a*sinh(\tmax)});
+        \draw[thick, crimsonred] (Oh) -- (Ph);
+        \fill[crimsonred] (Ph) circle (2pt);
+        \node[above right, crimsonred, font=\footnotesize] at (Ph) {$P(\cosh t, \sinh t)$};
+
+        % Proiezioni
+        \draw[dashed, gray] (Ph) -- ({\a*cosh(\tmax)}, 0) node[below, font=\scriptsize] {$\cosh t$};
+        \draw[dashed, gray] (Ph) -- (0, {\a*sinh(\tmax)}) node[left, font=\scriptsize] {$\sinh t$};
+
+        % Vertice
+        \fill[black] (\a, 0) circle (1.5pt) node[below left, font=\scriptsize] {$(1,0)$};
+    \end{scope}
+\end{tikzpicture}

@@ -1,0 +1,106 @@
+% ==============================================================================
+% CAPITOLO 1: NUMERI COMPLESSI
+% ==============================================================================
+
+\chapter{Numeri Complessi}
+\label{chap:numeri_complessi}
+
+\section{Introduzione e Motivazione Algebrica}
+L'insieme dei numeri reali $\R$, pur essendo completo dal punto di vista metrico e dell'ordine (assioma di Dedekind), presenta un limite fondamentale dal punto di vista algebrico: \textbf{non è algebricamente chiuso}. Esistono infatti polinomi a coefficienti reali non nulli privi di radici in $\R$, come l'equazione elementare:
+\begin{equation}
+    x^2 + 1 = 0 \iff x^2 = -1.
+\end{equation}
+Per superare tale limitazione, si definisce il campo dei numeri complessi $\C$ introducendo l'\textbf{unità immaginaria} $\iu$, entità formale caratterizzata dalla proprietà:
+\begin{equation}
+    \iu^2 = -1 \quad (\text{ovvero } \iu = \sqrt{-1}).
+\end{equation}
+
+\section{Forma Algebrica (o Cartesiana)}
+
+\begin{definizione}{Numero Complesso in Forma Algebrica}{numero_complesso}
+Un \textbf{numero complesso} $z \in \C$ in forma algebrica (o cartesiana) è un'espressione della forma:
+\begin{equation}
+    z = a + \iu b, \quad \text{con } a, b \in \R,
+\end{equation}
+dove:
+\begin{itemize}
+    \item $a = \Reale(z) \in \R$ è la \textbf{parte reale} di $z$;
+    \item $b = \Immag(z) \in \R$ è la \textbf{parte immaginaria} di $z$.
+\end{itemize}
+Due numeri complessi $z_1 = a_1 + \iu b_1$ e $z_2 = a_2 + \iu b_2$ sono \textbf{uguali} se e solo se:
+\begin{equation}
+    z_1 = z_2 \iff \begin{cases} \Reale(z_1) = \Reale(z_2) \iff a_1 = a_2 \\ \Immag(z_1) = \Immag(z_2) \iff b_1 = b_2 \end{cases}
+\end{equation}
+\end{definizione}
+
+\subsection{Operazioni Fondamentali nel Campo Complesso}
+Su $\C$ sono definite le operazioni binarie di addizione e moltiplicazione che estendono quelle di $\R$:
+\begin{enumerate}
+    \item \textbf{Somma}:
+    \begin{equation}
+        (a + \iu b) + (c + \iu d) = (a + c) + \iu(b + d)
+    \end{equation}
+    \item \textbf{Prodotto}:
+    \begin{equation}
+        (a + \iu b)(c + \iu d) = ac + \iu ad + \iu bc + \iu^2 bd = (ac - bd) + \iu(ad + bc)
+    \end{equation}
+    \item \textbf{Coniugio Complesso}:
+    Dato $z = a + \iu b$, il suo \textbf{coniugato} è definito come $\conj{z} = a - \iu b$.
+    \item \textbf{Modulo}:
+    Il \textbf{modulo} (o valore assoluto complesso) di $z = a + \iu b$ è la grandezza non negativa:
+    \begin{equation}
+        \abs{z} = \sqrt{a^2 + b^2} = \sqrt{z \cdot \conj{z}} \ge 0.
+    \end{equation}
+    \item \textbf{Reciproco e Divisione}:
+    Per ogni $z = a + \iu b \neq 0$:
+    \begin{equation}
+        z\inv = \frac{1}{z} = \frac{\conj{z}}{z \cdot \conj{z}} = \frac{a - \iu b}{a^2 + b^2} = \frac{a}{a^2 + b^2} - \iu \frac{b}{a^2 + b^2}.
+    \end{equation}
+\end{enumerate}
+
+\section{Rappresentazione Geometrica e Piano di Gauss}
+Identificando $z = a + \iu b \in \C$ con la coppia ordinata $(a, b) \in \R^2$, ogni numero complesso corrisponde biunivocamente a un punto (o vettore applicato nell'origine) del \textbf{piano complesso} (o piano di Argand-Gauss), dove l'asse delle ascisse rappresenta l'asse reale e l'asse delle ordinate l'asse immaginario.
+
+\section{Forma Trigonometrica ed Esponenziale}
+
+\begin{definizione}{Forma Trigonometrica}{forma_trigonometrica}
+Ogni numero complesso $z \neq 0$, di coordinate cartesiane $(a, b)$, può essere espresso in coordinate polari $(r, \theta)$ con $r = \abs{z} > 0$ e $\theta = \argom(z) \in (-\pi, \pi]$ (o $[0, 2\pi)$):
+\begin{equation}
+    z = r(\cos\theta + \iu\sen\theta).
+\end{equation}
+Grazie alla \textbf{formula di Eulero} $e^{\iu\theta} = \cos\theta + \iu\sen\theta$, si ottiene la \textbf{forma esponenziale}:
+\begin{equation}
+    z = r e^{\iu\theta}.
+\end{equation}
+\end{definizione}
+
+\begin{teorema}{Formula di De Moivre e Prodotto}{de_moivre}
+Dati $z_1 = r_1 e^{\iu\theta_1}$ e $z_2 = r_2 e^{\iu\theta_2}$, valgono:
+\begin{equation}
+    z_1 z_2 = r_1 r_2 e^{\iu(\theta_1 + \theta_2)} = r_1 r_2 \big(\cos(\theta_1 + \theta_2) + \iu\sen(\theta_1 + \theta_2)\big)
+\end{equation}
+e per ogni $n \in \Z$:
+\begin{equation}
+    z^n = r^n e^{\iu n\theta} = r^n \big(\cos(n\theta) + \iu\sen(n\theta)\big).
+\end{equation}
+\end{teorema}
+
+\section{Radici \texorpdfstring{$n$}{n}-esime nel Campo Complesso}
+
+\begin{teorema}{Radici \texorpdfstring{$n$}{n}-esime dell'Unità e di un Numero Complesso}{radici_nesime}
+Dato $w = R e^{\iu\phi} \in \C \setminus \{0\}$ ed $n \in \N_{\ge 1}$, l'equazione $z^n = w$ ammette esattamente $n$ soluzioni complesse distinte fornite da:
+\begin{equation}
+    z_k = \sqrt[n]{R} \exp\left(\iu \frac{\phi + 2k\pi}{n}\right) = \sqrt[n]{R}\left[\cos\left(\frac{\phi + 2k\pi}{n}\right) + \iu\sen\left(\frac{\phi + 2k\pi}{n}\right)\right]
+\end{equation}
+per $k = 0, 1, 2, \dots, n-1$.
+Nel piano di Gauss, tali radici rappresentano i vertici di un poligono regolare di $n$ lati inscritto in una circonferenza di raggio $\sqrt[n]{R}$ centrata nell'origine.
+\end{teorema}
+
+\section{Equazioni di Base nel Campo Complesso}
+\begin{esame}[Consigli per la risoluzione delle equazioni in $\C$]
+Nelle prove scritte e orali, le equazioni in $\C$ si dividono tipicamente in:
+\begin{enumerate}
+    \item \textbf{Equazioni polinomiali pure}: della forma $z^n = w$, da risolvere con la formula delle radici $n$-esime in forma trigonometrica/esponenziale.
+    \item \textbf{Equazioni con presenza di $z, \conj{z}, \abs{z}$}: si affrontano ponendo $z = x + \iu y$ con $x, y \in \R$ e separando parte reale e parte immaginaria in un sistema reale a due incognite, oppure sfruttando le identità $z \conj{z} = \abs{z}^2$.
+\end{enumerate}
+\end{esame}

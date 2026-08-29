@@ -1,0 +1,526 @@
+% ==============================================================================
+% CAPITOLO 02 - CINEMATICA DEL PUNTO MATERIALE IN 1D, 2D E 3D
+% ==============================================================================
+\chapter{Cinematica del Punto Materiale in 1D, 2D e 3D}
+\label{chap:cinematica_punto}
+
+\begin{tcolorbox}[enhanced, breakable, colback=navyblue!4!white, colframe=navyblue!80!black,
+    coltitle=white, fonttitle=\bfseries\sffamily, title={Quadro Sinottico del Capitolo 02 (Corrispondenza: Lezioni 02 e 03)},
+    sharp corners, rounded corners=south, boxrule=1pt]
+\textbf{Collocazione Modulare:} Parte I -- Cinematica e Dinamica del Punto Materiale\\
+\textbf{Trascrizioni di Riferimento:} \texttt{trascrizioni/Lezione\_02\_...md} e \texttt{trascrizioni/Lezione\_03\_...md}\\
+\textbf{Manuale di Riferimento:} Focardi, Massa, Ugolini -- \emph{Fisica Generale: Meccanica e Termodinamica} (Capitolo 2)\\
+\textbf{Obiettivi Didattici e Competenze:}\par
+\begin{itemize}
+    \item Padroneggiare la definizione vettoriale e differenziale di posizione $\vec{r}(t)$, velocità $\vec{v}(t)$ e accelerazione $\vec{a}(t)$.
+    \item Risolvere analiticamente il problema diretto e inverso della cinematica monodimensionale (moti uniformi, uniformemente accelerati e relazione di Torricelli).
+    \item Analizzare il moto bidimensionale dei proiettili sotto gravità: tempo di volo, altezza massima, gittata, traiettoria parabolica e condizioni di gittata massima.
+    \item Derivare la cinematica curvilinea intrinseca di Frenet-Serret: ascissa curvilinea $s(t)$, terna intrinseca $(\ut, \un)$, raggio di curvatura locale $R(s)$, accelerazione tangenziale $a_t = \dv{v}{t}$ e accelerazione centripeta $a_n = \frac{v^2}{R}$.
+    \item Formulare la cinematica in coordinate polari piane $(r, \theta)$: espressione della velocità radiale/trasversa e dell'accelerazione (con termine di Coriolis $2\dot{r}\dot{\theta}$).
+    \item Padroneggiare il moto circolare uniforme e vario, velocità angolare $\omega$, accelerazione angolare $\alpha$ e periodo $T$.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5em}
+
+% ------------------------------------------------------------------------------
+\section{Vettori Posizione, Velocità e Accelerazione in $\R^3$}
+\label{sec:vettori_cinematici}
+% ------------------------------------------------------------------------------
+
+La \textbf{cinematica} è la branca della meccanica classica che descrive quantitativamente la geometria del moto dei corpi nello spazio e nel tempo, prescindendo dalle cause (forze) che lo determinano o lo modificano.
+
+\begin{definizione}{Vettore Posizione e Traiettoria}{def:posizione_traiettoria}
+Fissato un sistema di riferimento cartesiano tridimensionale ortonormale $(O, x, y, z)$, la posizione di un punto materiale al tempo $t$ è individuata dal \textbf{vettore posizione} $\vec{r}(t)$:
+\begin{equation}
+    \vec{r}(t) = x(t)\ux + y(t)\uy + z(t)\uz
+    \label{eq:vettore_posizione}
+\end{equation}
+La curva continua descritta dall'estremo del vettore $\vec{r}(t)$ al variare del tempo $t \in [t_0, t_1]$ è la \textbf{traiettoria} del punto materiale.
+\end{definizione}
+
+\begin{definizione}{Velocità Media e Istantanea}{def:velocita}
+Dato lo spostamento $\Delta\vec{r} = \vec{r}(t+\Delta t) - \vec{r}(t)$ nell'intervallo $\Delta t$, si definisce:
+\begin{itemize}
+    \item \textbf{Velocità Media}:
+    \begin{equation}
+        \vec{v}_m \coloneqq \frac{\Delta\vec{r}}{\Delta t} = \frac{\vec{r}(t+\Delta t) - \vec{r}(t)}{\Delta t}
+    \end{equation}
+    \item \textbf{Velocità Istantanea}:
+    \begin{equation}
+        \vec{v}(t) \coloneqq \lim_{\Delta t \to 0} \frac{\Delta\vec{r}}{\Delta t} = \dv{\vec{r}}{t} = \dot{x}(t)\ux + \dot{y}(t)\uy + \dot{z}(t)\uz
+        \label{eq:velocita_istantanea}
+    \end{equation}
+\end{itemize}
+Il vettore velocità istantanea $\vec{v}(t)$ è in ogni istante \textbf{rigorosamente tangente} alla traiettoria e orientato nel verso del moto.
+\end{definizione}
+
+\begin{definizione}{Accelerazione Media e Istantanea}{def:accelerazione}
+La variazione del vettore velocità $\Delta\vec{v} = \vec{v}(t+\Delta t) - \vec{v}(t)$ definisce:
+\begin{itemize}
+    \item \textbf{Accelerazione Media}:
+    \begin{equation}
+        \vec{a}_m \coloneqq \frac{\Delta\vec{v}}{\Delta t}
+    \end{equation}
+    \item \textbf{Accelerazione Istantanea}:
+    \begin{equation}
+        \vec{a}(t) \coloneqq \lim_{\Delta t \to 0} \frac{\Delta\vec{v}}{\Delta t} = \dv{\vec{v}}{t} = \dvtwo{\vec{r}}{t} = \ddot{x}(t)\ux + \ddot{y}(t)\uy + \ddot{z}(t)\uz
+        \label{eq:accelerazione_istantanea}
+    \end{equation}
+\end{itemize}
+In generale, il vettore accelerazione $\vec{a}(t)$ non è tangente alla traiettoria, ma è rivolto verso la concavità della curva.
+\end{definizione}
+
+% ------------------------------------------------------------------------------
+\section{Cinematica Monodimensionale e Problema Inverso}
+\label{sec:moto_rettilineo}
+% ------------------------------------------------------------------------------
+
+Nel moto rettilineo lungo l'asse $x$, i vettori si riducono a grandezze scalari dotate di segno algebrico: $x(t)$, $v(t) = \dot{x}(t)$, $a(t) = \ddot{x}(t)$.
+
+\subsection{Integrazione delle Equazioni del Moto}
+Il problema inverso della cinematica consiste nel determinare $v(t)$ e $x(t)$ conoscendo l'accelerazione $a(t)$ e le condizioni iniziali $x(t_0) = x_0$, $v(t_0) = v_0$:
+\begin{align}
+    \dv{v}{t} = a(t) &\implies v(t) = v_0 + \int_{t_0}^t a(t')\,\dd t' \label{eq:int_v} \\
+    \dv{x}{t} = v(t) &\implies x(t) = x_0 + \int_{t_0}^t v(t')\,\dd t' \label{eq:int_x}
+\end{align}
+
+\subsection{Moti Rettilinei Notevoli}
+
+\begin{enumerate}
+    \item \textbf{Moto Rettilineo Uniforme ($a(t) = 0$):}
+    \begin{equation}
+        v(t) = v_0 = \text{cost}, \qquad x(t) = x_0 + v_0(t - t_0)
+    \end{equation}
+    
+    \item \textbf{Moto Rettilineo Uniformemente Accelerato ($a(t) = a = \text{cost}$):}
+    \begin{equation}
+        v(t) = v_0 + a(t - t_0), \qquad x(t) = x_0 + v_0(t - t_0) + \frac{1}{2}a(t - t_0)^2
+        \label{eq:mrua}
+    \end{equation}
+\end{enumerate}
+
+\begin{teorema}{Relazione Indipendente dal Tempo (Formula di Torricelli 1D)}{teo:torricelli_1d}
+Nel moto rettilineo ad accelerazione costante $a$, la velocità finale $v_f$ e iniziale $v_i$ sono legate allo spostamento $\Delta x = x_f - x_i$ dalla relazione:
+\begin{equation}
+    v_f^2 - v_i^2 = 2 a \Delta x
+    \label{eq:torricelli_1d}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Esprimiamo l'accelerazione applicando la regola di derivazione a catena:
+\begin{equation}
+    a = \dv{v}{t} = \dv{v}{x}\dv{x}{t} = v \dv{v}{x} \implies a\,\dd x = v\,\dd v
+\end{equation}
+Integrando entrambi i membri tra le posizioni $(x_i, v_i)$ e $(x_f, v_f)$ con $a = \text{cost}$:
+\begin{equation}
+    a \int_{x_i}^{x_f} \dd x = \int_{v_i}^{v_f} v\,\dd v \implies a(x_f - x_i) = \left[\frac{1}{2}v^2\right]_{v_i}^{v_f} = \frac{1}{2}(v_f^2 - v_i^2)
+\end{equation}
+Moltiplicando per 2 si ottiene l'equazione cercata: $v_f^2 - v_i^2 = 2 a \Delta x$.
+\end{dimostrazione}
+
+\begin{esempio}[Fisiologia delle Accelerazioni e Unità $g$]
+Un'automobile sportiva accelera da $0$ a $\SI{100}{\kilo\metre\per\hour}$ in $t = \SI{5}{\second}$.
+Convertendo la velocità in unità SI:
+\begin{equation}
+    v_f = \frac{100}{3{,}6}\,\si{\metre\per\second} \approx \SI{27.78}{\metre\per\second} \implies a = \frac{v_f - v_0}{\Delta t} = \frac{27{,}78}{5}\,\si{\metre\per\second\squared} \approx \SI{5.56}{\metre\per\second\squared}
+\end{equation}
+Esprimendo $a$ in frazioni dell'accelerazione di gravità standard $g = \SI{9.81}{\metre\per\second\squared}$:
+\begin{equation}
+    a \approx \frac{5{,}56}{9{,}81}\,g \approx 0{,}57\,g
+\end{equation}
+Il corpo umano sopporta continuativamente accelerazioni orizzontali fino a $\sim 1\,g$ senza perdita di coscienza o disagio fisiologico.
+\end{esempio}
+
+% ------------------------------------------------------------------------------
+\section{Cinematica 2D e Moto dei Proiettili nel Piano}
+\label{sec:moto_proiettile}
+% ------------------------------------------------------------------------------
+
+Consideriamo il moto di un grave lanciato all'istante $t=0$ da una posizione iniziale $\vec{r}_0 = (x_0, y_0)$ con velocità iniziale $\vec{v}_0 = v_0\cos\alpha\,\ux + v_0\sin\alpha\,\uy$, soggetto alla sola accelerazione gravitazionale costante $\vec{g} = -g\uy$ (trascurando la resistenza dell'aria).
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Assi cartesiani
+    \draw[->, thick] (-0.5,0) -- (6.5,0) node[right] {$x$};
+    \draw[->, thick] (0,-0.5) -- (0,3.5) node[above] {$y$};
+    
+    % Traiettoria parabolica
+    \draw[crimsonred, very thick, domain=0:5.5, samples=100] plot (\x, {2.2*\x - 0.4*\x*\x});
+    
+    % Vettore velocità iniziale
+    \draw[->, ultra thick, navyblue] (0,0) -- (1.5, 3.3) node[above right] {$\vec{v}_0$};
+    \draw[dashed, navyblue] (1.5,3.3) -- (1.5,0) node[below] {$v_{0x}$};
+    \draw[dashed, navyblue] (1.5,3.3) -- (0,3.3) node[left] {$v_{0y}$};
+    \draw[purpleaccent, thick, -{Stealth}] (0.6,0) arc (0:65.5:0.6) node[midway, right] {$\alpha$};
+    
+    % Vertice e altezza massima
+    \draw[dashed, gray] (2.75,0) -- (2.75, 3.025);
+    \draw[<->, forestgreen, thick] (-0.3,0) -- (-0.3, 3.025) node[midway, left] {$h_{\max}$};
+    \filldraw[forestgreen] (2.75, 3.025) circle (2pt) node[above] {Vertice ($v_y = 0$)};
+    \draw[->, thick, navyblue] (2.75, 3.025) -- (3.75, 3.025) node[right] {$\vec{v} = v_{0x}\ux$};
+    
+    % Gittata
+    \filldraw[crimsonred] (5.5,0) circle (2pt) node[below] {Gittata $R$};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Principio di Indipendenza dei Moti Simultanei (Galileo)}
+Le equazioni differenziali del moto si disaccoppiano completamente lungo le due direzioni ortogonali:
+\begin{align}
+    \text{Asse } x \text{ (MRU):} \quad & a_x = 0 \implies v_x(t) = v_0\cos\alpha, \quad x(t) = x_0 + (v_0\cos\alpha) t \label{eq:proiettile_x} \\
+    \text{Asse } y \text{ (MRUA):} \quad & a_y = -g \implies v_y(t) = v_0\sin\alpha - g t, \quad y(t) = y_0 + (v_0\sin\alpha) t - \frac{1}{2}g t^2 \label{eq:proiettile_y}
+\end{align}
+
+\subsection{Equazione Cartesiana della Traiettoria}
+Ricavando $t = \frac{x - x_0}{v_0\cos\alpha}$ dalla \eqref{eq:proiettile_x} e sostituendolo nella \eqref{eq:proiettile_y} (ponendo per semplicità $x_0 = y_0 = 0$):
+\begin{equation}
+    y(x) = (\tan\alpha) x - \frac{g}{2 v_0^2 \cos^2\alpha} x^2
+    \label{eq:traiettoria_parabolica}
+\end{equation}
+La curva è una \textbf{parabola} con asse di simmetria verticale parallelo all'asse $y$ e concavità rivolta verso il basso.
+
+\subsection{Caratteristiche Notevoli del Volo (con $y_0 = 0$)}
+
+\begin{enumerate}
+    \item \textbf{Tempo di Salita e Altezza Massima ($h_{\max}$):}\\
+    Nel punto di massima quota la componente verticale della velocità si annulla: $v_y(t_s) = 0$:
+    \begin{equation}
+        v_0\sin\alpha - g t_s = 0 \implies t_s = \frac{v_0\sin\alpha}{g}
+    \end{equation}
+    Sostituendo $t_s$ nella legge oraria $y(t)$:
+    \begin{equation}
+        h_{\max} = y(t_s) = (v_0\sin\alpha)\left(\frac{v_0\sin\alpha}{g}\right) - \frac{1}{2}g\left(\frac{v_0\sin\alpha}{g}\right)^2 = \mathbf{\frac{v_0^2 \sin^2\alpha}{2g}}
+        \label{eq:altezza_max}
+    \end{equation}
+
+    \item \textbf{Tempo di Volo ($t_{\text{volo}}$):}\\
+    Il proiettile tocca terra quando $y(t) = 0$:
+    \begin{equation}
+        t\left(v_0\sin\alpha - \frac{1}{2}g t\right) = 0 \implies t_{\text{volo}} = \mathbf{\frac{2 v_0 \sin\alpha}{g}} = 2 t_s
+    \end{equation}
+
+    \item \textbf{Gittata Orizzontale ($R$):}\\
+    La distanza orizzontale coperta all'istante di impatto $t_{\text{volo}}$ è:
+    \begin{equation}
+        R = x(t_{\text{volo}}) = (v_0\cos\alpha)\left(\frac{2 v_0 \sin\alpha}{g}\right) = \frac{v_0^2 (2\sin\alpha\cos\alpha)}{g} = \mathbf{\frac{v_0^2 \sin(2\alpha)}{g}}
+        \label{eq:gittata}
+    \end{equation}
+\end{enumerate}
+
+\begin{teorema}{Angolo di Massima Gittata}{teo:max_gittata}
+A parità di modulo della velocità iniziale $v_0$, la gittata $R(\alpha)$ è massima per un angolo di alzo di $\mathbf{\alpha = 45^\circ} = \frac{\pi}{4}\si{\radian}$, con valore massimo:
+\begin{equation}
+    R_{\max} = \frac{v_0^2}{g} = 2 h_{\max}(\alpha=90^\circ)
+\end{equation}
+Inoltre, angoli complementari ($\alpha_1 + \alpha_2 = 90^\circ$) forniscono la medesima gittata $R(\alpha_1) = R(\alpha_2)$.
+\end{teorema}
+
+% ------------------------------------------------------------------------------
+\section{Cinematica Curvilinea e Terna Intrinseca (Frenet)}
+\label{sec:terna_intrinseca}
+% ------------------------------------------------------------------------------
+
+Quando la traiettoria di un punto materiale è nota a priori (es. un binario o una strada), è vantaggioso descrivere il moto lungo la curva stessa mediante l'\textbf{ascissa curvilinea} $s(t)$.
+
+\begin{definizione}{Ascissa Curvilinea e Velocità Scalare}{def:ascissa_curvilinea}
+Fissata un'origine $O$ sulla curva e un verso di percorrenza positivo:
+\begin{itemize}
+    \item $s(t)$ è la lunghezza dell'arco percorso da $O$ al punto occupato all'istante $t$.
+    \item La \textbf{velocità scalare} (speed) è la derivata temporale di $s(t)$:
+    \begin{equation}
+        v_s(t) = \dot{s}(t) = \dv{s}{t}
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\subsection{I Versori della Terna Intrinseca nel Piano}
+In ogni punto regolare della curva si definiscono:
+\begin{enumerate}
+    \item \textbf{Versore Tangente} $\ut(s)$: tangente alla traiettoria e orientato nel verso delle $s$ crescenti:
+    \begin{equation}
+        \ut = \dv{\vec{r}}{s} \implies |\ut| = \left|\dv{\vec{r}}{s}\right| = \lim_{\Delta s \to 0} \frac{|\Delta\vec{r}|}{\Delta s} = 1
+    \end{equation}
+    \item \textbf{Versore Normale Principale} $\un(s)$: ortogonale a $\ut$ e sempre diretto verso il **centro di curvatura locale** $C$ (lato concavo della traiettoria).
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.3, >=Stealth]
+    % Traiettoria curvilinea
+    \draw[navyblue, very thick] (-1,0.5) to[out=40, in=190] (2,2) to[out=10, in=140] (5,0.5);
+    \node[navyblue] at (5.2,0.8) {Traiettoria};
+    
+    % Punto P
+    \coordinate (P) at (2,2);
+    \filldraw[black] (P) circle (2pt) node[above left] {$P(s)$};
+    
+    % Versori intrinseci
+    \draw[->, ultra thick, crimsonred] (P) -- ($(P) + (1.5, 0.26)$) node[right] {$\ut$};
+    \draw[->, ultra thick, forestgreen] (P) -- ($(P) + (-0.26, 1.5)$) node[above] {$\un$};
+    
+    % Centro di curvatura e cerchio osculatore
+    \coordinate (C) at (2,-0.5);
+    \draw[dashed, gray] (P) -- (C) node[midway, left] {$R(s)$};
+    \filldraw[purpleaccent] (C) circle (2pt) node[below] {$C$ (Centro di curvatura)};
+    \draw[purpleaccent, dashed] (C) circle (2.5);
+\end{tikzpicture}
+\end{center}
+
+\subsection{Scomposizione dell'Accelerazione: Tangenziale e Centripeta}
+
+\begin{teorema}{Scomposizione Intrinseca dell'Accelerazione}{teo:acc_intrinseca}
+Il vettore accelerazione $\vec{a}(t)$ di un punto in moto curvilineo si scompone univocamente in due componenti ortogonali:
+\begin{equation}
+    \vec{a} = a_t \ut + a_n \un = \left(\dv{v_s}{t}\right)\ut + \left(\frac{v_s^2}{R}\right)\un
+    \label{eq:scomposizione_acc}
+\end{equation}
+dove:
+\begin{itemize}
+    \item $a_t = \dv{v_s}{t} = \ddot{s}$ è l'\textbf{accelerazione tangenziale}, responsabile della variazione del modulo della velocità.
+    \item $a_n = \frac{v_s^2}{R}$ è l'\textbf{accelerazione centripeta} (o normale), responsabile della variazione della direzione del vettore velocità.
+    \item $R(s)$ è il \textbf{raggio di curvatura} locale della traiettoria (raggio del cerchio osculatore).
+\end{itemize}
+\end{teorema}
+
+\begin{dimostrazione}
+Poiché $\vec{v} = v_s \ut$, deriviamo rispetto al tempo con la regola del prodotto di Leibniz:
+\begin{equation}
+    \vec{a} = \dv{\vec{v}}{t} = \dv{}{t}(v_s \ut) = \left(\dv{v_s}{t}\right)\ut + v_s \left(\dv{\ut}{t}\right)
+\end{equation}
+Per calcolare la derivata temporale del versore tangente $\ut$, applichiamo la regola della catena:
+\begin{equation}
+    \dv{\ut}{t} = \dv{\ut}{s} \dv{s}{t} = v_s \dv{\ut}{s}
+\end{equation}
+Geometricamente, considerando un incremento d'arco infinitesimo $\dd s = R\,\dd\theta$, l'angolo tra i versori tangenti $\ut(s)$ e $\ut(s+\dd s)$ è pari a $\dd\theta$. La variazione $\dd\ut$ ha modulo $|\dd\ut| = 1 \cdot \dd\theta = \frac{\dd s}{R}$ ed è orientata perpendicolarmente a $\ut$, nel verso del centro di curvatura $\un$:
+\begin{equation}
+    \dv{\ut}{s} = \frac{1}{R}\un \implies \dv{\ut}{t} = \frac{v_s}{R}\un
+\end{equation}
+Sostituendo nell'espressione dell'accelerazione si ottiene esattamente:
+\begin{equation}
+    \vec{a} = \dv{v_s}{t}\ut + \frac{v_s^2}{R}\un
+\end{equation}
+\end{dimostrazione}
+
+\begin{osservazione}[Modulo Totale dell'Accelerazione]
+Poiché $\ut \perp \un$, il modulo dell'accelerazione totale vale:
+\begin{equation}
+    |\vec{a}| = a = \sqrt{a_t^2 + a_n^2} = \sqrt{\left(\dv{v}{t}\right)^2 + \left(\frac{v^2}{R}\right)^2}
+\end{equation}
+Se $a_n = 0 \implies R \to \infty$ (moto rettilineo). Se $a_t = 0 \implies v = \text{cost}$ (moto a modulo di velocità costante, es. moto circolare uniforme).
+\end{osservazione}
+
+% ------------------------------------------------------------------------------
+\section{Cinematica in Coordinate Polari Piane $(r, \theta)$}
+\label{sec:coordinate_polari}
+% ------------------------------------------------------------------------------
+
+Nel piano, la posizione del punto $P$ può essere descritta tramite la distanza radiale $r \ge 0$ dall'origine $O$ e l'angolo polare $\theta \in [0, 2\pi)$ formato con l'asse $x$:
+\begin{equation}
+    x = r\cos\theta, \qquad y = r\sin\theta
+\end{equation}
+
+\begin{definizione}{Versori Polari}{def:versori_polari}
+I versori radiale $\ur$ e trasverso $\utheta$ sono definiti da:
+\begin{align}
+    \ur(\theta) &= \cos\theta\,\ux + \sin\theta\,\uy \label{eq:ur} \\
+    \utheta(\theta) &= -\sin\theta\,\ux + \cos\theta\,\uy \label{eq:utheta}
+\end{align}
+\end{definizione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.3, >=Stealth]
+    \draw[->, thick] (-0.5,0) -- (4,0) node[right] {$x$};
+    \draw[->, thick] (0,-0.5) -- (0,3) node[above] {$y$};
+    
+    \coordinate (O) at (0,0);
+    \coordinate (P) at (2.5,1.8);
+    
+    \draw[navyblue, thick] (O) -- (P) node[midway, above left] {$r$};
+    \filldraw[black] (P) circle (2pt) node[above right] {$P(r, \theta)$};
+    \draw[purpleaccent, thick, -{Stealth}] (0.8,0) arc (0:35.75:0.8) node[midway, right] {$\theta$};
+    
+    % Versori polari
+    \draw[->, ultra thick, crimsonred] (P) -- ($(P) + (1.0, 0.72)$) node[above right] {$\ur$};
+    \draw[->, ultra thick, forestgreen] (P) -- ($(P) + (-0.72, 1.0)$) node[above left] {$\utheta$};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Derivate dei Versori Polari e Vettori Cinematici}
+
+Derivando rispetto al tempo le relazioni \eqref{eq:ur} e \eqref{eq:utheta}:
+\begin{align}
+    \dv{\ur}{t} &= (-\sin\theta\,\dot{\theta})\ux + (\cos\theta\,\dot{\theta})\uy = \dot{\theta}\,\utheta \label{eq:dur_dt} \\
+    \dv{\utheta}{t} &= (-\cos\theta\,\dot{\theta})\ux - (\sin\theta\,\dot{\theta})\uy = -\dot{\theta}\,\ur \label{eq:dutheta_dt}
+\end{align}
+
+\begin{teorema}{Velocità e Accelerazione in Coordinate Polari}{teo:polari_cinematica}
+\begin{itemize}
+    \item \textbf{Vettore Posizione:}
+    \begin{equation}
+        \vec{r}(t) = r(t)\ur(t)
+    \end{equation}
+    \item \textbf{Vettore Velocità:}
+    \begin{equation}
+        \vec{v}(t) = \dot{\vec{r}} = \dot{r}\ur + r\dv{\ur}{t} = \mathbf{\dot{r}\ur + (r\dot{\theta})\utheta}
+        \label{eq:v_polare}
+    \end{equation}
+    con $v_r = \dot{r}$ velocità radiale e $v_\theta = r\dot{\theta}$ velocità trasversa.
+    \item \textbf{Vettore Accelerazione:}
+    \begin{equation}
+        \vec{a}(t) = \ddot{\vec{r}} = \mathbf{(\ddot{r} - r\dot{\theta}^2)\ur + (r\ddot{\theta} + 2\dot{r}\dot{\theta})\utheta}
+        \label{eq:a_polare}
+    \end{equation}
+\end{itemize}
+\end{teorema}
+
+\begin{dimostrazione}
+Derivando la velocità \eqref{eq:v_polare} rispetto al tempo:
+\begin{align*}
+    \vec{a} &= \dv{}{t}\left(\dot{r}\ur + r\dot{\theta}\utheta\right) \\
+    &= \ddot{r}\ur + \dot{r}\dv{\ur}{t} + \dot{r}\dot{\theta}\utheta + r\ddot{\theta}\utheta + r\dot{\theta}\dv{\utheta}{t} \\
+    &= \ddot{r}\ur + \dot{r}(\dot{\theta}\utheta) + \dot{r}\dot{\theta}\utheta + r\ddot{\theta}\utheta + r\dot{\theta}(-\dot{\theta}\ur) \\
+    &= (\ddot{r} - r\dot{\theta}^2)\ur + (r\ddot{\theta} + 2\dot{r}\dot{\theta})\utheta
+\end{align*}
+\end{dimostrazione}
+
+\begin{osservazione}[Il Termine di Coriolis $2\dot{r}\dot{\theta}$]
+Il termine trasverso $2\dot{r}\dot{\theta}$ deriva da due contributi distinti: la variazione della direzione della velocità radiale $\dot{r}\dv{\ur}{t}$ e la variazione del modulo della velocità trasversa dovuta all'allontanamento radiale $\dv{}{t}(r)\dot{\theta}\utheta$.
+\end{osservazione}
+
+% ------------------------------------------------------------------------------
+\section{Moto Circolare Uniforme e Vario}
+\label{sec:moto_circolare}
+% ------------------------------------------------------------------------------
+
+Nel moto circolare, la traiettoria è una circonferenza di raggio costante $R$: $r(t) = R = \text{cost} \implies \dot{r} = 0, \ddot{r} = 0$.
+
+\subsection{Definizioni Angolari}
+\begin{itemize}
+    \item \textbf{Velocità Angolare Istantanea}:
+    \begin{equation}
+        \omega(t) \coloneqq \dot{\theta}(t) = \dv{\theta}{t} \implies v = \omega R
+    \end{equation}
+    \item \textbf{Accelerazione Angolare Istantanea}:
+    \begin{equation}
+        \alpha(t) \coloneqq \dot{\omega}(t) = \ddot{\theta}(t) = \dv{\omega}{t} \implies a_t = \alpha R
+    \end{equation}
+\end{itemize}
+
+\subsection{Moto Circolare Uniforme ($\omega = \text{cost}, \alpha = 0$)}
+\begin{itemize}
+    \item \textbf{Legge oraria angolare}: $\theta(t) = \theta_0 + \omega(t - t_0)$.
+    \item \textbf{Periodo $T$} (tempo per compiere un giro completo $2\pi\,\si{\radian}$):
+    \begin{equation}
+        T = \frac{2\pi}{\omega} \implies f = \frac{1}{T} = \frac{\omega}{2\pi} \quad (\text{Frequenza in }\si{\hertz})
+    \end{equation}
+    \item \textbf{Accelerazione puramente centripeta}:
+    \begin{equation}
+        a_t = 0, \qquad \vec{a} = a_n \un = -(\omega^2 R)\ur = -\left(\frac{v^2}{R}\right)\ur
+    \end{equation}
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+\section{Esercizi Risolti ed Applicativi della Cinematica con Analisi delle Forze}
+\label{sec:esercizi_cinematica}
+% ------------------------------------------------------------------------------
+
+\begin{esercizio}[Gittata su Terreno Inclinato e Analisi Dinamica del Volo]
+\textbf{Testo:}
+Un cannone spara un proiettile con velocità $v_0 = \SI{50}{\metre\per\second}$ su un pendio inclinato di un angolo $\beta = 30^\circ$ rispetto all'orizzontale. Determinare l'angolo di alzo $\alpha$ che massimizza la gittata lungo il pendio $d$ e analizzare le forze agenti durante il volo.
+\end{esercizio}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Terreno inclinato
+    \draw[thick] (0,0) -- (6, 3.464) node[right] {Pendio ($\beta = 30^\circ$)};
+    \draw[dashed, gray] (0,0) -- (6,0) node[right] {Orizzontale};
+    \draw[purpleaccent, thick, -{Stealth}] (1.2,0) arc (0:30:1.2) node[midway, right] {$\beta$};
+    
+    % Traiettoria parabolica
+    \draw[crimsonred, very thick, domain=0:4.6, samples=100] plot (\x, {1.732*\x - 0.2*\x*\x});
+    
+    % Punto P in volo con Diagramma delle Forze (FBD)
+    \coordinate (P) at (2.2, 2.84);
+    \filldraw[black] (P) circle (2.5pt) node[above=3pt] {$P(x, y)$};
+    \draw[->, ultra thick, navyblue] (P) -- ($(P) + (1.2, 0.45)$) node[above right] {$\vec{v}$};
+    \draw[->, ultra thick, forestgreen] (P) -- ($(P) + (0, -1.8)$) node[below] {$\vec{P} = m\vec{g}$};
+    
+    % Punto di impatto
+    \coordinate (Imp) at (4.33, 2.5);
+    \filldraw[crimsonred] (Imp) circle (2.5pt) node[below right] {Impatto $d$};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[enhanced, breakable, colback=forestgreen!5!white, colframe=forestgreen!80!black,
+    title={\textbf{Analisi delle Forze in Gioco (Free-Body Diagram in Volo)}}, fonttitle=\bfseries\sffamily]
+\begin{itemize}
+    \item \textbf{Forze Presenti:}
+    \begin{itemize}
+        \item \textbf{Forza Peso ($\vec{P} = m\vec{g}$):} è l'unica interazione a distanza agente sul proiettile, orientata verticalmente verso il basso lungo $-\uy$. È generata dall'attrazione gravitazionale terrestre.
+    \end{itemize}
+    \item \textbf{Forze Assenti e Motivazione Fisica:}
+    \begin{itemize}
+        \item \textbf{Nessuna forza orizzontale ($F_x = 0$):} trascurando la resistenza aerodinamica dell'aria, nessun corpo è a contatto con il proiettile dopo lo sparo; pertanto l'accelerazione orizzontale è rigorosamente nulla ($a_x = 0$) e la velocità $v_x = v_0\cos\alpha$ è costante.
+        \item \textbf{Nessuna forza normale vincolare ($\vec{N} = \vec{0}$):} il proiettile è in volo libero e non è a contatto con il terreno.
+    \end{itemize}
+\end{itemize}
+\end{tcolorbox}
+
+\textbf{Risoluzione Analitica:}
+\begin{enumerate}
+    \item \textbf{Intersezione tra traiettoria e pendio:}
+    La retta del pendio ha equazione $y = (\tan\beta) x$. Uguagliando alla traiettoria parabolica:
+    \begin{equation}
+        (\tan\beta) x = (\tan\alpha) x - \frac{g}{2 v_0^2 \cos^2\alpha} x^2 \implies x_P = \frac{2 v_0^2 \cos\alpha}{g \cos\beta} \sin(\alpha - \beta)
+    \end{equation}
+    \item \textbf{Distanza lungo il pendio $d = \frac{x_P}{\cos\beta}$:}
+    \begin{equation}
+        d(\alpha) = \frac{v_0^2}{g \cos^2\beta} \left[\sin(2\alpha - \beta) - \sin\beta\right]
+    \end{equation}
+    \item \textbf{Angolo ottimale e massimo valore:}
+    Massimizzando $\sin(2\alpha - \beta) = 1 \implies \mathbf{\alpha_{\text{ott}} = 45^\circ + \frac{\beta}{2} = 60^\circ}$, con $d_{\max} \approx \mathbf{\SI{169.9}{\metre}}$.
+\end{enumerate}
+
+\vspace{0.8em}
+
+\begin{esercizio}[Raggio di Curvatura nel Vertice e Scomposizione della Forza]
+\textbf{Testo:}
+Calcolare il raggio di curvatura $R_V$ nel vertice della parabola di un proiettile lanciato con velocità $v_0$ e angolo $\alpha$, analizzando le componenti intrinseche della forza peso.
+\end{esercizio}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Vertice e cerchio osculatore
+    \draw[crimsonred, very thick, domain=-2.5:2.5, samples=80] plot (\x, {2.5 - 0.3*\x*\x});
+    \coordinate (V) at (0, 2.5);
+    \filldraw[black] (V) circle (2.5pt) node[above=2pt] {Vertice $V$};
+    
+    % Vettore velocità orizzontale
+    \draw[->, ultra thick, navyblue] (V) -- (2, 2.5) node[above] {$\vec{v} = v_{0x}\ut$};
+    
+    % Forze nel vertice
+    \draw[->, ultra thick, forestgreen] (V) -- (0, 0.7) node[right] {$\vec{P} = m\vec{g} = m a_n \un$};
+    
+    % Versori intrinseci
+    \draw[->, thick, purpleaccent] (V) -- (1, 2.5) node[below] {$\ut$};
+    \draw[->, thick, purpleaccent] (V) -- (0, 1.7) node[left] {$\un$};
+    
+    % Centro di curvatura
+    \coordinate (C) at (0, -0.833);
+    \draw[dashed, gray] (V) -- (C) node[midway, left] {$R_V$};
+    \filldraw[purpleaccent] (C) circle (2pt) node[below] {$C$ (Centro di curvatura)};
+    \draw[purpleaccent, dashed] (C) circle (3.333);
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[enhanced, breakable, colback=forestgreen!5!white, colframe=forestgreen!80!black,
+    title={\textbf{Analisi delle Componenti Intrinseche della Forza nel Vertice}}, fonttitle=\bfseries\sffamily]
+\begin{itemize}
+    \item \textbf{Forza Tangenziale ($F_t = m a_t = 0$):} nel vertice, il vettore velocità è puramente orizzontale ($\ut = \ux$) mentre la forza peso è verticale ($\vec{P} \perp \ut$). Poiché $\vec{P}\cdot\ut = 0$, la forza tangenziale è nulla: il modulo della velocità non varia istantaneamente ($\dv{v}{t} = 0$).
+    \item \textbf{Forza Normale Centripeta ($F_n = m a_n = mg$):} l'intera forza peso agisce perpendicolarmente alla traiettoria verso il centro di curvatura ($\un = -\uy$). Essa fornisce esattamente la forza centripeta necessaria a curvare la traiettoria:
+    \begin{equation}
+        F_n = mg = m \frac{v_V^2}{R_V} \implies \mathbf{R_V = \frac{v_V^2}{g} = \frac{v_0^2 \cos^2\alpha}{g}}
+    \end{equation}
+\end{itemize}
+\end{tcolorbox}

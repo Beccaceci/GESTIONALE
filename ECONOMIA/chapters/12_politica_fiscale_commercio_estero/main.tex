@@ -1,0 +1,381 @@
+% ==============================================================================
+% CAPITOLO 12: LA POLITICA FISCALE E IL COMMERCIO ESTERO
+% ==============================================================================
+\chapter{La Politica Fiscale e il Commercio Estero}
+\label{chap:politica_fiscale_commercio_estero}
+
+\begin{tcolorbox}[colback=navyblue!5!white, colframe=navyblue, title=\textbf{Quadro Concettuale del Capitolo}]
+Questo capitolo estende il modello reddito-spesa all'analisi completa a \textbf{quattro settori} integrando il \textbf{Settore Pubblico} (Politica Fiscale) e il \textbf{Resto del Mondo} (Commercio Estero). Vengono formalizzate le imposte fisse e proporzionali, i trasferimenti, il moltiplicatore della spesa pubblica vs trasferimenti, il saldo del bilancio dello Stato ($\mathrm{BS}$), il debito pubblico e lo spread, gli stabilizzatori automatici, il \textbf{Teorema del Bilancio in Pareggio (Haavelmo)}, la funzione delle importazioni e la derivazione rigorosa del \textbf{moltiplicatore in economia aperta} con le dispersioni fiscali ed estere.
+\end{tcolorbox}
+
+\section{Il Settore Pubblico nel Modello Reddito-Spesa}
+
+L'intervento dello Stato modifica i flussi macroeconomici attraverso tre strumenti di bilancio:
+\begin{enumerate}
+    \item \textbf{Spesa Pubblica per Beni e Servizi ($G$)}: acquisto diretto di beni, servizi, stipendi dei dipendenti pubblici e investimenti in infrastrutture. È considerata esogena ($G = G_0$), stabilita dal Parlamento mediante la legge di bilancio annuale.
+    \item \textbf{Trasferimenti Pubblici alle Famiglie ($TR$)}: pagamenti unilaterali a sostegno del reddito (pensioni sociali, indennità di disoccupazione, assegni di maternità) senza controprestazione produttiva diretta ($TR = TR_0$).
+    \item \textbf{Tassazione ($T$)}: prelievo tributario obbligatorio suddiviso in imposte a somma fissa (\textit{lump-sum}, $T_0$) e imposte proporzionali al reddito con aliquota marginale $t \in (0, 1)$:
+    \begin{equation}
+        T = T_0 + t Y
+    \end{equation}
+\end{enumerate}
+
+\subsection{Il Reddito Disponibile e la Nuova Funzione del Consumo}
+
+\begin{definizione}{Reddito Disponibile con Settore Pubblico}{reddito_disponibile_fisco}
+Il \textbf{Reddito Disponibile} ($Y_d$) misura le risorse finanziarie effettive a disposizione delle famiglie dopo l'intervento fiscale:
+\begin{equation}
+    Y_d = Y - T + TR = Y - (T_0 + t Y) + TR_0 = (1 - t)Y + TR_0 - T_0
+\end{equation}
+\end{definizione}
+
+Sostituendo il reddito disponibile nella funzione del consumo keynesiana $C = C_0 + c Y_d$:
+\begin{equation}
+    C = C_0 + c \left[ (1 - t)Y + TR_0 - T_0 \right] = \left[ C_0 + c TR_0 - c T_0 \right] + c(1 - t)Y
+\end{equation}
+
+\begin{osservazione}[Pendenza della Funzione del Consumo con Imposte Proporzionali]
+La propensione marginale al consumo rispetto al reddito nazionale complessivo ($Y$) si riduce a:
+\begin{equation}
+    \dv{C}{Y} = c(1 - t) < c
+\end{equation}
+Poiché una quota $t$ di ciascun euro aggiuntivo di PIL viene prelevata dallo Stato sotto forma di imposte, alle famiglie giunge solo una frazione $(1 - t)$, di cui solo la quota $c$ viene destinata ai consumi. La retta del consumo risulta pertanto \textbf{meno inclinata}.
+\end{osservazione}
+
+\section{Equilibrio Macroeconomico e Moltiplicatori Fiscali}
+
+In un'economia chiusa con settore pubblico ($NX = 0$), la spesa aggregata programmata è:
+\begin{align}
+    \SA &= C + I + G = \left[ C_0 + c TR_0 - c T_0 + c(1 - t)Y \right] + I_0 + G_0 \notag \\
+        &= \underbrace{\left[ C_0 + c TR_0 - c T_0 + I_0 + G_0 \right]}_{A_0 \text{ (Spesa Autonoma Totale)}} + c(1 - t)Y
+\end{align}
+
+\begin{modello}{Equilibrio Reddito-Spesa in Economia Chiusa con Stato}{equilibrio_stato}
+Ponendo la condizione di equilibrio $Y = \SA$:
+\begin{equation}
+    Y = A_0 + c(1 - t)Y \implies Y\left[ 1 - c(1 - t) \right] = A_0
+\end{equation}
+Il reddito di equilibrio è:
+\begin{equation}
+    Y^* = \frac{1}{1 - c(1 - t)} \left[ C_0 + c TR_0 - c T_0 + I_0 + G_0 \right] = \alpha_G \cdot A_0
+\end{equation}
+dove $\alpha_G = \frac{1}{1 - c(1 - t)}$ è il \textbf{moltiplicatore della politica fiscale}.
+\end{modello}
+
+\begin{teorema}{Confronto tra Moltiplicatori Fiscali}{confronto_moltiplicatori}
+Gli effetti sul PIL di equilibrio generati dalle diverse leve di politica fiscale sono:
+\begin{enumerate}
+    \item \textbf{Moltiplicatore della Spesa Pubblica ($G$)}:
+    \begin{equation}
+        \dv{Y^*}{G} = \alpha_G = \frac{1}{1 - c(1 - t)} > 1
+    \end{equation}
+    \item \textbf{Moltiplicatore dei Trasferimenti ($TR$)}:
+    \begin{equation}
+        \dv{Y^*}{TR} = c \cdot \alpha_G = \frac{c}{1 - c(1 - t)} < \alpha_G
+    \end{equation}
+    \item \textbf{Moltiplicatore delle Imposte a Somma Fissa ($T_0$)}:
+    \begin{equation}
+        \dv{Y^*}{T_0} = -c \cdot \alpha_G = -\frac{c}{1 - c(1 - t)} < 0
+    \end{equation}
+\end{enumerate}
+\end{teorema}
+
+\begin{dimostrazione}[Perché la Spesa Pubblica è più Espansiva dei Trasferimenti]
+Si confronti l'impatto di un euro aggiuntivo di spesa pubblica ($\Delta G = 1$) rispetto a un euro di trasferimenti ($\Delta TR = 1$):
+\begin{itemize}
+    \item La spesa pubblica $G$ è una componente diretta della domanda aggregata; pertanto, $\Delta G = 1$ entra immediatamente e al $100\%$ nel flusso di spesa al primo ciclo:
+    \begin{equation}
+        \Delta Y_G = 1 + c(1-t) + [c(1-t)]^2 + \dots = \frac{1}{1 - c(1-t)}
+    \end{equation}
+    \item Il trasferimento $TR$ non acquista beni, ma incrementa solo il reddito disponibile delle famiglie. Le famiglie destinano ai consumi solo la frazione $c$, mentre la quota complementare $(1-c)$ viene immediatamente risparmiata (dispersione al primo ciclo):
+    \begin{equation}
+        \Delta Y_{TR} = c + c[c(1-t)] + c[c(1-t)]^2 + \dots = c \left[ \frac{1}{1 - c(1-t)} \right]
+    \end{equation}
+\end{itemize}
+Poiché $c < 1$, si ha rigorosamente $\dv{Y^*}{G} > \dv{Y^*}{TR}$.
+\end{dimostrazione}
+
+\section{Il Bilancio dello Stato, Deficit, Debito Pubblico e Spread}
+
+\begin{definizione}{Saldo del Bilancio dello Stato (BS)}{saldo_bilancio}
+Il \textbf{Saldo del Bilancio dello Stato} ($\mathrm{BS}$) è la differenza algebrica tra le entrate pubbliche tributarie ($T$) e le uscite totali (spesa pubblica $G$ + trasferimenti $TR$):
+\begin{equation}
+    \mathrm{BS} = T - (G + TR) = (T_0 + t Y) - G_0 - TR_0 = (T_0 - G_0 - TR_0) + t Y
+\end{equation}
+\begin{itemize}
+    \item $\mathrm{BS} > 0$: \textbf{Avanzo / Surplus di Bilancio} (le entrate eccedono le uscite);
+    \item $\mathrm{BS} = 0$: \textbf{Pareggio di Bilancio};
+    \item $\mathrm{BS} < 0$: \textbf{Disavanzo / Deficit di Bilancio} ($\mathrm{BD} = -\mathrm{BS} = G_0 + TR_0 - T_0 - tY$).
+\end{itemize}
+\end{definizione}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Assi
+    \draw[->, line width=1.2pt] (0,0) -- (10.5,0) node[right, font=\small\bfseries] {Reddito ($Y$)};
+    \draw[->, line width=1.2pt] (0,-3.0) -- (0,4.0) node[above, font=\small\bfseries] {Saldo di Bilancio ($\mathrm{BS}$)};
+    
+    % Retta BS_0(Y) = tY - G_0
+    \draw[color=navyblue, line width=2pt] (0, -2.2) -- (9.0, 3.2) node[right, font=\small\bfseries, color=navyblue] {$\mathrm{BS}_0(Y) = tY - G_0 - TR_0$};
+    % Retta BS_1(Y) dopo aumento spesa pubblica Delta G > 0 (traslata in basso)
+    \draw[color=crimsonred, line width=1.8pt, dashed] (0, -3.2) -- (9.0, 2.2) node[right, font=\small\bfseries, color=crimsonred] {$\mathrm{BS}_1(Y) = tY - (G_0 + \Delta G) - TR_0$};
+
+    % Punti di pareggio
+    \coordinate (Yp0) at (3.67, 0);
+    \coordinate (Yp1) at (5.33, 0);
+
+    \fill[navyblue] (Yp0) circle (3pt) node[above left, font=\footnotesize\bfseries, color=navyblue] {$Y_{\mathrm{BS}=0}$};
+    \fill[crimsonred] (Yp1) circle (3pt) node[below right, font=\footnotesize\bfseries, color=crimsonred] {$Y'_{\mathrm{BS}=0}$};
+
+    % Aree di Surplus e Deficit
+    \node[font=\small\bfseries, color=forestgreen] at (7.0, 1.2) {Avanzo ($\mathrm{BS} > 0$)};
+    \node[font=\small\bfseries, color=crimsonred] at (2.0, -1.5) {Disavanzo ($\mathrm{BS} < 0$)};
+
+    % Intercetta
+    \node[left, font=\footnotesize\bfseries, color=navyblue] at (0, -2.2) {$-(G_0 + TR_0)$};
+
+\end{tikzpicture}
+\caption{Il Saldo del Bilancio dello Stato in funzione del reddito. La retta ha pendenza positiva pari all'aliquota marginale $t$; una manovra espansiva di spesa pubblica ($\Delta G > 0$) trasla la retta verso il basso peggiorando il deficit a parità di reddito.}
+\label{fig:saldo_bilancio}
+\end{figure}
+
+\subsection{Gli Stabilizzatori Automatici}
+
+\begin{definizione}{Stabilizzatori Automatici}{stabilizzatori_automatici}
+Gli \textbf{stabilizzatori automatici} sono meccanismi economico-istituzionali intrinseci al bilancio pubblico che agiscono in modo anticiclico senza necessità di interventi normativi discrezionali:
+\begin{itemize}
+    \item \textbf{In fase di recessione ($Y \downarrow$)}: il gettito fiscale sul reddito ($tY$) scende automaticamente e i sussidi di disoccupazione ($TR$) aumentano, sostenendo il reddito disponibile ($Y_d$) e frenando la caduta dei consumi;
+    \item \textbf{In fase di espansione ($Y \uparrow$)}: il gettito fiscale ($tY$) sale spontaneamente e i trasferimenti ($TR$) calano, sottraendo potere d'acquisto e prevenendo il surriscaldamento inflazionistico dell'economia.
+\end{itemize}
+\end{definizione}
+
+\begin{definizione}{Saldo di Bilancio Strutturale (a Pieno Impiego)}{saldo_strutturale}
+Per isolare la componente discrezionale della politica fiscale dagli effetti puramente ciclici, si calcola il \textbf{Saldo di Bilancio a Pieno Impiego} ($\mathrm{BS}_{\mathrm{PO}}$):
+\begin{equation}
+    \mathrm{BS}_{\mathrm{PO}} = t Y_{\mathrm{PO}} - G_0 - TR_0
+\end{equation}
+La variazione di $\mathrm{BS}_{\mathrm{PO}}$ misura l'orientamento effettivo della politica fiscale: se $\Delta \mathrm{BS}_{\mathrm{PO}} < 0$, la politica fiscale è strutturalmente \textbf{espansiva}; se $\Delta \mathrm{BS}_{\mathrm{PO}} > 0$, è \textbf{restrittiva} (\textit{austerità}).
+\end{definizione}
+
+\subsection{Debito Pubblico, Titoli di Stato e Spread}
+Mentre il disavanzo pubblico ($\mathrm{BD}$) è una variabile di \textbf{flusso} misurata su base annua, il \textbf{Debito Pubblico} ($B$) è una variabile di \textbf{stock} che misura il valore complessivo cumulato nel tempo delle passività finanziarie dello Stato:
+\begin{equation}
+    B_t = B_{t-1} + \mathrm{BD}_t + i_t B_{t-1}
+\end{equation}
+dove $i_t B_{t-1}$ rappresenta la spesa per interessi passivi sul debito pregresso.
+
+\begin{empirico}[Lo Spread BTP-Bund e il Rischio Sovrano]
+Per finanziare il debito pubblico, il MEF emette titoli di Stato a breve termine (\textbf{BOT} — Buoni Ordinari del Tesoro, senza cedola) e a medio-lungo termine (\textbf{BTP} — Buoni del Tesoro Poliennali, con cedola semestrale fissa).
+
+Lo \textbf{Spread} misura il differenziale di rendimento tra i titoli di Stato decennali italiani (BTP a 10 anni) e i corrispondenti titoli di Stato tedeschi (Bund a 10 anni), considerati privi di rischio di insolvenza (\textit{risk-free}):
+\begin{equation}
+    \text{Spread} = (r_{\text{BTP 10A}} - r_{\text{Bund 10A}}) \times 100 \quad [\text{espresso in punti base, bps}]
+\end{equation}
+Uno spread di $150\,\text{bps}$ indica che lo Stato italiano paga l'$1{,}50\%$ di interessi in più rispetto alla Germania per collocare il proprio debito sul mercato. Un aumento dello spread incrementa la spesa per interessi nel bilancio pubblico e contrae i margini per gli investimenti e la spesa sociale.
+\end{empirico}
+
+\section{Il Teorema del Bilancio in Pareggio (Haavelmo)}
+
+\begin{teorema}{Teorema del Bilancio in Pareggio di Haavelmo}{teorema_haavelmo}
+Se la spesa pubblica per beni e servizi e le imposte a somma fissa aumentano simultaneamente del medesimo ammontare ($\Delta G = \Delta T_0$), cosicché il saldo del bilancio pubblico rimane esattamente invariato ($\Delta \mathrm{BS} = 0$), il reddito di equilibrio aumenta esattamente della stessa misura dell'incremento di spesa:
+\begin{equation}
+    \Delta Y^* = \Delta G = \Delta T_0 \iff \frac{\Delta Y^*}{\Delta G}\bigg|_{\Delta G = \Delta T_0} = 1
+\end{equation}
+Il moltiplicatore del bilancio in pareggio è \textbf{rigorosamente unitario} ($\alpha_{\text{Haavelmo}} = 1$).
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazione del Teorema di Haavelmo]
+Si consideri la variazione totale del reddito di equilibrio generata dalla variazione congiunta di $G$ e $T_0$ (con $t = 0$):
+\begin{equation}
+    \Delta Y^* = \dv{Y^*}{G} \Delta G + \dv{Y^*}{T_0} \Delta T_0 = \frac{1}{1 - c} \Delta G - \frac{c}{1 - c} \Delta T_0
+\end{equation}
+Ponendo la condizione di pareggio della manovra $\Delta T_0 = \Delta G$:
+\begin{equation}
+    \Delta Y^* = \frac{1}{1 - c} \Delta G - \frac{c}{1 - c} \Delta G = \left( \frac{1 - c}{1 - c} \right) \Delta G = 1 \cdot \Delta G
+\end{equation}
+L'effetto espansivo della spesa pubblica supera l'effetto restrittivo delle tasse perché la spesa pubblica immette domanda al $100\%$, mentre le tasse contraggono la spesa solo per la quota $c$, incidendo per la quota $(1-c)$ sul risparmio.
+\end{dimostrazione}
+
+\section{Il Commercio Estero e l'Economia Aperta}
+
+\subsection{Esportazioni, Importazioni ed Esportazioni Nette}
+In un'economia aperta agli scambi internazionali:
+\begin{itemize}
+    \item \textbf{Esportazioni ($X$)}: domanda di beni e servizi nazionali da parte di residenti esteri. Sono determinate dal reddito estero ($Y^*$) e dal tasso di cambio reale, risultando \textbf{esogene} rispetto al reddito interno:
+    \begin{equation}
+        X = X_0
+    \end{equation}
+    \item \textbf{Importazioni ($M$ o $Z$)}: domanda di beni e servizi esteri da parte dei residenti nazionali. Si compongono di una quota autonoma $M_0$ e di una componente crescente con il reddito nazionale:
+    \begin{equation}
+        M = M_0 + m Y \quad \text{con } m = \PMgM = \dv{M}{Y} \in (0, 1)
+    \end{equation}
+    dove $m$ è la \textbf{Propensione Marginale all'Importazione} (\textit{Marginal Propensity to Import}).
+    
+    \item \textbf{Esportazioni Nette / Saldo Commerciale ($NX$)}:
+    \begin{equation}
+        NX = X - M = X_0 - (M_0 + m Y) = (X_0 - M_0) - m Y
+    \end{equation}
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Assi
+    \draw[->, line width=1.2pt] (0,0) -- (10.5,0) node[right, font=\small\bfseries] {Reddito ($Y$)};
+    \draw[->, line width=1.2pt] (0,-3.0) -- (0,4.0) node[above, font=\small\bfseries] {Esportazioni Nette ($NX$)};
+    
+    % Retta NX(Y) = X_0 - M_0 - m Y
+    \draw[color=purpleaccent, line width=2pt] (0, 2.5) -- (9.5, -2.5) node[right, font=\small\bfseries, color=purpleaccent] {$NX = (X_0 - M_0) - m Y$};
+
+    % Punto di pareggio commerciale
+    \coordinate (Ynx0) at (4.75, 0);
+    \fill[forestgreen] (Ynx0) circle (3.5pt) node[above right, font=\small\bfseries, color=forestgreen] {$Y_{NX=0}$};
+
+    % Aree di Surplus e Deficit Commerciale
+    \node[font=\small\bfseries, color=forestgreen] at (2.0, 1.5) {Surplus Commerciale ($NX > 0$)};
+    \node[font=\small\bfseries, color=crimsonred] at (7.5, -1.5) {Deficit Commerciale ($NX < 0$)};
+
+    % Intercetta
+    \node[left, font=\footnotesize\bfseries, color=purpleaccent] at (0, 2.5) {$X_0 - M_0$};
+
+\end{tikzpicture}
+\caption{Il Saldo Commerciale ($NX$) in funzione del reddito nazionale. La retta ha pendenza negativa $-m$; all'aumentare del reddito interno, le importazioni crescono deteriorando la bilancia commerciale.}
+\label{fig:saldo_commerciale}
+\end{figure}
+
+\subsection{Spesa Aggregata e Moltiplicatore in Economia Aperta (TikZ G22-G24)}
+
+La spesa aggregata a quattro settori è:
+\begin{align}
+    \SA &= C + I + G + NX \notag \\
+        &= \left[ C_0 + c TR_0 - c T_0 + c(1 - t)Y \right] + I_0 + G_0 + \left[ X_0 - M_0 - m Y \right] \notag \\
+        &= \underbrace{\left[ C_0 + c TR_0 - c T_0 + I_0 + G_0 + X_0 - M_0 \right]}_{A_0 \text{ (Spesa Autonoma Economia Aperta)}} + \underbrace{\left[ c(1 - t) - m \right]}_{\text{Pendenza di } \SA} Y
+\end{align}
+
+\begin{teorema}{Il Moltiplicatore del Reddito in Economia Aperta}{moltiplicatore_aperta}
+Ponendo la condizione di equilibrio $Y = \SA$:
+\begin{equation}
+    Y = A_0 + \left[ c(1 - t) - m \right] Y \implies Y\left[ 1 - c(1 - t) + m \right] = A_0
+\end{equation}
+Il reddito di equilibrio in economia aperta è:
+\begin{equation}
+    Y^* = \frac{1}{1 - c(1 - t) + m} A_0 = \alpha_{\text{aperta}} \cdot A_0
+\end{equation}
+dove $\alpha_{\text{aperta}} = \frac{1}{1 - c(1 - t) + m}$ è il \textbf{moltiplicatore dell'economia aperta}.
+\end{teorema}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Assi
+    \draw[->, line width=1.2pt] (0,0) -- (10.5,0) node[right, font=\small\bfseries] {Reddito ($Y$)};
+    \draw[->, line width=1.2pt] (0,0) -- (0,8.0) node[above, font=\small\bfseries] {Spesa Aggregata ($\SA$)};
+    
+    % Bisettrice
+    \draw[dashed, color=gray!80, line width=1.1pt] (0,0) -- (7.8,7.8) node[above right, font=\footnotesize\bfseries, color=gray!80] {$Y = \SA$};
+
+    % Rette SA con diverse pendenze
+    \draw[color=navyblue, line width=1.4pt] (0, 2.0) -- (8.5, 7.5) node[right, font=\scriptsize\bfseries, color=navyblue] {$\SA_1$ (Chiusa, no tasse: pend. $c$)};
+    \draw[color=forestgreen, line width=1.6pt] (0, 2.0) -- (8.5, 6.2) node[right, font=\scriptsize\bfseries, color=forestgreen] {$\SA_2$ (Con tasse: pend. $c(1-t)$)};
+    \draw[color=purpleaccent, line width=2pt] (0, 2.0) -- (8.5, 5.0) node[right, font=\scriptsize\bfseries, color=purpleaccent] {$\SA_3$ (Aperta con estero: pend. $c(1-t)-m$)};
+
+    % Punti di equilibrio
+    \fill[navyblue] (5.7, 5.7) circle (3pt) node[above left, font=\footnotesize\bfseries] {$E_1$};
+    \fill[forestgreen] (4.0, 4.0) circle (3pt) node[above left, font=\footnotesize\bfseries] {$E_2$};
+    \fill[purpleaccent] (3.1, 3.1) circle (3pt) node[above left, font=\footnotesize\bfseries] {$E_3$};
+
+    % Proiezioni
+    \draw[dotted, line width=0.9pt, color=navyblue] (5.7,0) node[below, font=\footnotesize\bfseries] {$Y_1^*$} -- (5.7, 5.7);
+    \draw[dotted, line width=0.9pt, color=forestgreen] (4.0,0) node[below, font=\footnotesize\bfseries] {$Y_2^*$} -- (4.0, 4.0);
+    \draw[dotted, line width=0.9pt, color=purpleaccent] (3.1,0) node[below, font=\footnotesize\bfseries] {$Y_3^*$} -- (3.1, 3.1);
+
+\end{tikzpicture}
+\caption{Confronto tra le pendenze della Spesa Aggregata e i moltiplicatori del reddito. La presenza di imposte ($t$) ed estero ($m$) appiattisce progressivamente la curva $\SA$, riducendo il moltiplicatore da $Y_1^*$ a $Y_3^*$.}
+\label{fig:croce_4settori}
+\end{figure}
+
+\begin{osservazione}[La Gerarchia dei Moltiplicatori e le Tre Dispersioni]
+La relazione di disuguaglianza tra i moltiplicatori del reddito è:
+\begin{equation}
+    \alpha_{\text{aperta}} = \frac{1}{1 - c(1 - t) + m} < \alpha_{\text{chiusa, fisco}} = \frac{1}{1 - c(1 - t)} < \alpha_{\text{base}} = \frac{1}{1 - c}
+\end{equation}
+Il moltiplicatore in economia aperta è il più piccolo a causa delle \textbf{tre dispersioni macroeconomiche} (\textit{leakages}):
+\begin{enumerate}
+    \item Dispersione in \textbf{Risparmio} ($s = 1 - c$): quota di reddito non consumata dalle famiglie;
+    \item Dispersione in \textbf{Tasse} ($t$): quota di reddito prelevata dal fisco;
+    \item Dispersione verso l'\textbf{Estero} ($m$): quota di consumo indirizzata verso beni prodotti oltre frontiera.
+\end{enumerate}
+\end{osservazione}
+
+\section{Metodi Risolutivi ed Esercizi Guidati Svolti}
+
+\begin{metodo}[Risoluzione del Modello Completo a 4 Settori]
+Data la struttura completa dell'economia:
+\begin{enumerate}
+    \item Esplicitare il reddito disponibile $Y_d = (1-t)Y + TR_0 - T_0$;
+    \item Sostituire $Y_d$ in $C(Y_d)$ e calcolare la spesa aggregata $\SA = C + I + G + X - M$;
+    \item Raggruppare i termini noti in $A_0 = C_0 + c TR_0 - c T_0 + I_0 + G_0 + X_0 - M_0$;
+    \item Calcolare la pendenza complessiva di $\SA$: $\text{pendenza} = c(1-t) - m$;
+    \item Calcolare il moltiplicatore: $\alpha_{\text{aperta}} = \frac{1}{1 - c(1-t) + m}$;
+    \item Ricavare il PIL di equilibrio: $Y^* = \alpha_{\text{aperta}} \cdot A_0$;
+    \item Calcolare il gettito fiscale $T^* = T_0 + tY^*$, il saldo di bilancio $\mathrm{BS}^* = T^* - G_0 - TR_0$, e il saldo commerciale $NX^* = X_0 - M_0 - mY^*$.
+\end{enumerate}
+\end{metodo}
+
+\begin{esame}[Trabocchetti d'Esame sulla Politica Fiscale ed Estero]
+\begin{itemize}
+    \item \textbf{Errore nel moltiplicatore dei trasferimenti}: non moltiplicare $\Delta TR$ per il moltiplicatore $\alpha_{\text{aperta}}$ puro! Ricordare che l'effetto sul PIL è $\Delta Y^* = c \cdot \alpha_{\text{aperta}} \cdot \Delta TR$.
+    \item \textbf{Segno del saldo commerciale}: se $X_0 < M(Y^*)$, si ha un disavanzo commerciale ($NX < 0$).
+    \item \textbf{Effetto di $\Delta G$ sul disavanzo}: un aumento di spesa pubblica $\Delta G > 0$ stimola il PIL e genera maggiori entrate fiscali ($\Delta T = t \Delta Y^*$). Tuttavia, poiché $t \alpha_{\text{aperta}} < 1$, l'incremento di gettito fiscale non copre mai integralmente la spesa iniziale; il deficit pubblico \textbf{peggiora sempre} ($\Delta \mathrm{BS} < 0$).
+\end{itemize}
+\end{esame}
+
+\begin{esercizio}[Modello Completo a 4 Settori e Manovra Fiscale]
+Un'economia aperta presenta i seguenti dati strutturali:
+\begin{align*}
+    C &= 50 + 0{,}80 Y_d, \quad t = 0{,}25, \quad TR = 20, \quad T_0 = 0 \\
+    I &= 70, \quad G = 120, \quad X = 60, \quad M = 10 + 0{,}10 Y
+\end{align*}
+
+\textbf{Quesiti}:
+\begin{enumerate}
+    \item Determinare la spesa autonoma totale $A_0$, il moltiplicatore $\alpha_{\text{aperta}}$ e il reddito di equilibrio $Y^*$;
+    \item Calcolare il saldo del bilancio pubblico $\mathrm{BS}^*$ e il saldo commerciale $NX^*$;
+    \item Valutare l'impatto di un incremento della spesa pubblica pari a $\Delta G = 30\,\text{\euro}$ su $Y^*$, $\mathrm{BS}$ e $NX$.
+\end{enumerate}
+
+\textbf{Svolgimento}:
+\begin{enumerate}
+    \item \textbf{Calcolo dell'Equilibrio}:
+    \begin{align*}
+        A_0 &= C_0 + c TR_0 + I_0 + G_0 + X_0 - M_0 \\
+            &= 50 + (0{,}80 \times 20) + 70 + 120 + 60 - 10 \\
+            &= 50 + 16 + 70 + 120 + 60 - 10 = 306\,\text{\euro} \\
+        \alpha_{\text{aperta}} &= \frac{1}{1 - c(1-t) + m} = \frac{1}{1 - 0{,}80(1 - 0{,}25) + 0{,}10} \\
+                              &= \frac{1}{1 - 0{,}80(0{,}75) + 0{,}10} = \frac{1}{1 - 0{,}60 + 0{,}10} = \frac{1}{0{,}50} = 2
+    \end{align*}
+    Il reddito di equilibrio iniziale è:
+    \begin{equation*}
+        Y^* = \alpha_{\text{aperta}} \cdot A_0 = 2 \times 306 = 612\,\text{\euro}
+    \end{equation*}
+
+    \item \textbf{Saldi di Bilancio ed Estero}:
+    \begin{align*}
+        T^* &= t Y^* = 0{,}25 \times 612 = 153\,\text{\euro} \\
+        \mathrm{BS}^* &= T^* - G_0 - TR_0 = 153 - 120 - 20 = +13\,\text{\euro} \quad (\text{Avanzo di Bilancio}) \\
+        M^* &= 10 + 0{,}10 \times 612 = 10 + 61{,}2 = 71{,}2\,\text{\euro} \\
+        NX^* &= X_0 - M^* = 60 - 71{,}2 = -11{,}2\,\text{\euro} \quad (\text{Disavanzo Commerciale})
+    \end{align*}
+
+    \item \textbf{Effetto della Manovra $\Delta G = 30\,\text{\euro}$}:
+    \begin{align*}
+        \Delta Y^* &= \alpha_{\text{aperta}} \cdot \Delta G = 2 \times 30 = +60\,\text{\euro} \implies Y_1^* = 612 + 60 = 672\,\text{\euro} \\
+        \Delta T &= t \Delta Y^* = 0{,}25 \times 60 = +15\,\text{\euro} \\
+        \Delta \mathrm{BS} &= \Delta T - \Delta G = 15 - 30 = -15\,\text{\euro} \implies \mathrm{BS}_1^* = 13 - 15 = -2\,\text{\euro} \quad (\text{Deficit}) \\
+        \Delta M &= m \Delta Y^* = 0{,}10 \times 60 = +6\,\text{\euro} \\
+        \Delta NX &= -\Delta M = -6\,\text{\euro} \implies NX_1^* = -11{,}2 - 6 = -17{,}2\,\text{\euro}
+    \end{align*}
+    La manovra fiscale espansiva incrementa il PIL di $60\,\text{\euro}$, trasforma il bilancio statale da avanzo ($+13$) a deficit ($-2$) e aggrava il disavanzo commerciale verso l'estero da $-11{,}2$ a $-17{,}2$.
+\end{enumerate}
+\end{esercizio}

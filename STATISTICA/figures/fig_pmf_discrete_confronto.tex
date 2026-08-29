@@ -1,0 +1,49 @@
+\begin{tikzpicture}[scale=0.8, >=Stealth]
+    % -------------------------------------------------------------
+    % PANNELLO A: BINOMIALE
+    % -------------------------------------------------------------
+    \begin{scope}[shift={(0,0)}]
+        \node[above, font=\bfseries\footnotesize, text=navyblue] at (2.2,3.8) {(a) Binomiale $\operatorname{Bin}(8, 0.4)$};
+        \draw[->, thick, navyblue] (-0.3,0) -- (4.8,0) node[right, font=\tiny] {$k$};
+        \draw[->, thick, navyblue] (0,-0.2) -- (0,3.8) node[above, font=\tiny] {$p(k)$};
+
+        % Valori n=8, p=0.4: k=0..8
+        \foreach \k/\p in {0/0.017, 1/0.090, 2/0.209, 3/0.279, 4/0.232, 5/0.124, 6/0.041, 7/0.008, 8/0.001} {
+            \draw[ultra thick, coolblue] ({\k*0.5+0.3},0) -- ({\k*0.5+0.3}, {\p*10});
+            \fill[navyblue] ({\k*0.5+0.3}, {\p*10}) circle (1.8pt);
+            \node[below, font=\tiny] at ({\k*0.5+0.3},0) {\k};
+        }
+    \end{scope}
+
+    % -------------------------------------------------------------
+    % PANNELLO B: POISSON
+    % -------------------------------------------------------------
+    \begin{scope}[shift={(5.6,0)}]
+        \node[above, font=\bfseries\footnotesize, text=navyblue] at (2.2,3.8) {(b) Poisson $\operatorname{Pois}(\lambda = 3.5)$};
+        \draw[->, thick, navyblue] (-0.3,0) -- (4.8,0) node[right, font=\tiny] {$k$};
+        \draw[->, thick, navyblue] (0,-0.2) -- (0,3.8) node[above, font=\tiny] {$p(k)$};
+
+        % Pois lambda=3.5: k=0..8
+        \foreach \k/\p in {0/0.030, 1/0.106, 2/0.185, 3/0.216, 4/0.189, 5/0.132, 6/0.077, 7/0.039, 8/0.017} {
+            \draw[ultra thick, forestgreen] ({\k*0.5+0.3},0) -- ({\k*0.5+0.3}, {\p*10});
+            \fill[forestgreen!80!black] ({\k*0.5+0.3}, {\p*10}) circle (1.8pt);
+            \node[below, font=\tiny] at ({\k*0.5+0.3},0) {\k};
+        }
+    \end{scope}
+
+    % -------------------------------------------------------------
+    % PANNELLO C: GEOMETRICA
+    % -------------------------------------------------------------
+    \begin{scope}[shift={(11.2,0)}]
+        \node[above, font=\bfseries\footnotesize, text=navyblue] at (2.2,3.8) {(c) Geometrica $\operatorname{Geom}(p=0.45)$};
+        \draw[->, thick, navyblue] (-0.3,0) -- (4.8,0) node[right, font=\tiny] {$k$};
+        \draw[->, thick, navyblue] (0,-0.2) -- (0,3.8) node[above, font=\tiny] {$p(k)$};
+
+        % Geom p=0.45: k=1..7
+        \foreach \k/\p in {1/0.45, 2/0.247, 3/0.136, 4/0.075, 5/0.041, 6/0.023, 7/0.012} {
+            \draw[ultra thick, purpleaccent] ({\k*0.55-0.1},0) -- ({\k*0.55-0.1}, {\p*6.5});
+            \fill[purpleaccent!80!black] ({\k*0.55-0.1}, {\p*6.5}) circle (1.8pt);
+            \node[below, font=\tiny] at ({\k*0.55-0.1},0) {\k};
+        }
+    \end{scope}
+\end{tikzpicture}

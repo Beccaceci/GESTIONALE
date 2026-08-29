@@ -1,0 +1,36 @@
+\begin{tikzpicture}[scale=0.8, >=Stealth]
+    % Linea del vero parametro mu
+    \draw[ultra thick, dashed, crimsonred] (0,-0.5) -- (0,10.5);
+    \node[above, font=\bfseries\small, text=crimsonred] at (0,10.5) {Vero Parametro $\mu$};
+
+    % Simulazione di 10 intervalli di confidenza estratti
+    \foreach \y/\left/\right/\center/\captures in {
+        10/-1.2/0.8/-0.2/1,
+        9/-0.5/1.5/0.5/1,
+        8/-1.8/0.2/-0.8/1,
+        7/0.3/2.3/1.3/0,
+        6/-1.0/1.0/0.0/1,
+        5/-0.7/1.3/0.3/1,
+        4/-1.5/0.5/-0.5/1,
+        3/-0.2/1.8/0.8/1,
+        2/-1.1/0.9/-0.1/1,
+        1/-0.8/1.2/0.2/1
+    } {
+        \ifnum\captures=1
+            \draw[thick, forestgreen] (\left, \y) -- (\right, \y);
+            \draw[thick, forestgreen] (\left, \y-0.15) -- (\left, \y+0.15);
+            \draw[thick, forestgreen] (\right, \y-0.15) -- (\right, \y+0.15);
+            \fill[forestgreen] (\center, \y) circle (2pt);
+        \else
+            \draw[ultra thick, crimsonred] (\left, \y) -- (\right, \y);
+            \draw[thick, crimsonred] (\left, \y-0.2) -- (\left, \y+0.2);
+            \draw[thick, crimsonred] (\right, \y-0.2) -- (\right, \y+0.2);
+            \fill[crimsonred] (\center, \y) circle (2.5pt);
+            \node[right, font=\tiny\bfseries, text=crimsonred] at (\right, \y) {Non cattura $\mu$};
+        \fi
+    }
+
+    \node[font=\footnotesize\itshape, text=navyblue, align=center] at (0,-1.2) {
+        Nel $95\%$ dei campioni estratti, l'intervallo casuale $[\overline{X}_n - d, \overline{X}_n + d]$ conterrà il parametro fisso $\mu$.
+    };
+\end{tikzpicture}

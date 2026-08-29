@@ -1,0 +1,144 @@
+% ==============================================================================
+% DOCUMENTO PRINCIPALE - APPUNTI DI ALGEBRA LINEARE E GEOMETRIA
+% ==============================================================================
+\documentclass[11pt,a4paper,twoside,openright]{book}
+
+% --- Importazione delle configurazioni modulari ---
+\input{config/packages.tex}
+\input{config/environments.tex}
+\input{config/macros.tex}
+
+% ==============================================================================
+% COMPILAZIONE SELETTIVA (Scommentare per compilare solo capitoli specifici)
+% ==============================================================================
+% \includeonly{
+%   chapters/00_fondamenti_logica_insiemistica/main,
+%   chapters/01_numeri_complessi/main,
+%   chapters/02_spazi_vettoriali/main,
+%   chapters/03_applicazioni_lineari/main,
+%   chapters/04_matrici_sistemi/main,
+%   chapters/05_determinanti/main,
+%   chapters/06_autovalori_autovettori/main,
+%   chapters/07_prodotti_scalari_spettrale/main,
+%   chapters/08_esercizi_esami/main
+% }
+
+% ==============================================================================
+% METADATI DEL DOCUMENTO
+% ==============================================================================
+\title{\Huge\textbf{\textsf{Algebra Lineare e Geometria}}\\[0.5em]
+\Large\textsf{Appunti Completi, Dimostrazioni, Metodi Risolutivi ed Esercizi Guidati}}
+\author{\textbf{\textsf{Nicola Beccaceci}}}
+\date{\textsf{Anno Accademico 2025/2026}}
+
+\begin{document}
+
+% --- Frontespizio / Titolo ---
+\frontmatter
+\begin{titlepage}
+    \centering
+    \vspace*{1.5cm}
+    {\Huge\bfseries\color{navyblue} ALGEBRA LINEARE E GEOMETRIA\par}
+    \vspace{0.6cm}
+    {\Large\scshape Teoria Rigorosa, Dimostrazioni Formali, Algoritmi ed Esercizi d'Esame\par}
+    \vspace{0.8cm}
+    {\large Corso di Laurea in Ingegneria Gestionale\par}
+    \vspace{0.3cm}
+    {\normalsize Corso del Prof.~\textbf{Marco Franciosi}\par}
+    {\small (Insegnamento integrato di \emph{Algebra Lineare e Statistica})\par}
+    \vfill
+    \rule{0.6\textwidth}{1pt}\par
+    \vspace{0.8cm}
+    {\large\textbf{\underline{Nicola Beccaceci}}\par}
+    \vspace{0.4cm}
+    {\small Testi di riferimento consigliati: M.~Abate, M.~Franciosi\par}
+    \vspace{0.2cm}
+    {\small Ultimo aggiornamento: \today\par}
+    \vspace*{1.5cm}
+\end{titlepage}
+
+% --- Indice generale ---
+\tableofcontents
+\cleardoublepage
+
+% --- Guida alla Consultazione ---
+\chapter*{Guida alla Consultazione e Struttura dell'Opera}
+\addcontentsline{toc}{chapter}{Guida alla Consultazione e Struttura dell'Opera}
+Questo volume raccoglie la digitalizzazione integrale, la formalizzazione teorica e l'approfondimento metodologico degli appunti del corso di \textbf{Algebra Lineare e Geometria}, tenuto dal Prof.~\textbf{Marco Franciosi} per il Corso di Laurea in Ingegneria Gestionale (modulo dell'esame integrato di \textbf{Algebra Lineare e Statistica}).
+
+L'opera è concepita secondo i massimi criteri di completezza e chiarezza didattica: ogni argomento integra le definizioni assiomatiche, gli enunciati formali, le dimostrazioni passo-passo, i collegamenti interdisciplinari, i trabocchetti frequenti d'esame e gli algoritmi di calcolo operativo.
+
+\section*{Testi di Riferimento e Bibliografia Adottata}
+La trattazione fa costante riferimento ai testi accademici consigliati per il corso:
+\begin{itemize}
+    \item \textbf{M.~Abate}, \emph{Algebra Lineare}, McGraw-Hill Education.
+    \item \textbf{M.~Abate, C.~de Fabritiis}, \emph{Geometria Analitica con Elementi di Algebra Lineare}, McGraw-Hill Education.
+    \item \textbf{M.~Franciosi}, \emph{Esercizi di Algebra Lineare e Geometria}, Esculapio.
+\end{itemize}
+
+\section*{Codice Visivo dei Box Tematici}
+Per rendere immediata la consultazione sia durante la fase di apprendimento che durante il ripasso pre-esame, il testo adotta una categorizzazione cromatica funzionale:
+\begin{itemize}
+    \item \textbf{\textcolor{navyblue}{Definizioni}}: Concetti cardine espressi con precisione simbolico-quantificatoria ed evidenziazione dei termini fondamentali.
+    \item \textbf{\textcolor{forestgreen}{Teoremi, Proposizioni e Corollari}}: Risultati teorici con esplicitazione rigorosa di ipotesi e tesi, seguiti da dimostrazioni dettagliate contrassegnate dal simbolo $\blacksquare$.
+    \item \textbf{\textcolor{purpleaccent}{Esempi ed Esercizi Guidati}}: Problemi d'esame svolti per intero, con commento strategico su ogni passaggio algebrico.
+    \item \textbf{\textcolor{crimsonred}{Attenzione / Trabocchetti d'Esame}}: Segnalazione puntuale di errori tipici, condizioni di non applicabilità e domande insidiose della prova orale.
+    \item \textbf{\textcolor{warmamber}{Metodi Risolutivi e Algoritmi}}: Schemi operativi sequenziali (riduzione a scala, calcolo autospazi, ortogonalizzazione di Gram-Schmidt, ecc.) per affrontare gli esercizi numerici.
+    \item \textbf{\textcolor{navyblue!80}{Osservazioni e Note Geometriche}}: Interpretazioni visive nello spazio euclideo, proprietà algebriche collaterali e note storiche.
+\end{itemize}
+
+\cleardoublepage
+
+% --- Mappa Concettuale del Programma ---
+\chapter*{Architettura Concettuale del Corso}
+\addcontentsline{toc}{chapter}{Architettura Concettuale del Corso}
+
+Il percorso di Algebra Lineare si articola in macro-aree sinergiche che collegano la struttura astratta degli spazi vettoriali con l'efficacia computazionale del calcolo matriciale:
+
+\begin{enumerate}[start=0]
+    \item \textbf{Fondamenti di Logica Matematica e Teoria degli Insiemi}:
+    Linguaggio logico formale, proposizioni e tavole di verità, implicazioni, condizioni necessarie e sufficienti, contronominali, quantificatori universali ed esistenziali, paradigmi dimostrativi (diretto, contronominale, per assurdo), teoria elementare degli insiemi, operazioni booleane, prodotto cartesiano e diagrammi di Eulero-Venn in TikZ.
+
+    \item \textbf{I Numeri Complessi ($\C$)}:
+    Ampliamento algebrico di $\R$, unità immaginaria, piano di Gauss-Argand, forme algebrica, trigonometrica ed esponenziale (formule di Eulero e De Moivre), radici $n$-esime dell'unità e risoluzione di equazioni algebriche nel campo complesso (Teorema Fondamentale dell'Algebra).
+
+    \item \textbf{Spazi e Sottospazi Vettoriali}:
+    Assiomatica di spazio vettoriale su un campo $\K$, combinazioni lineari, invarianza e insiemi di generatori ($\Span$), indipendenza e dipendenza lineare, basi, coordinate e dimensione, operazioni tra sottospazi (intersezione, somma, somma diretta) e \textbf{Teorema / Formula di Grassmann}.
+
+    \item \textbf{Applicazioni Lineari, Nucleo e Immagine}:
+    Omomorfismi tra spazi vettoriali, conservazione delle combinazioni lineari, caratterizzazione del Nucleo ($\ker$) e dell'Immagine ($\Imm$), iniettività, suriettività e isomorfismi, \textbf{Teorema della Dimensione} (Nullità più Rango).
+
+    \item \textbf{Matrici Associate e Sistemi Lineari}:
+    Rappresentazione matriciale delle trasformazioni lineari rispetto a basi fissate, algebra delle matrici, matrici del cambiamento di base e similitudine, algoritmo di eliminazione di Gauss-Jordan, rango e \textbf{Teorema di Rouché-Capelli}.
+
+    \item \textbf{Determinanti e Sistemi Quadrati}:
+    Definizione assiomatica e costruttiva del determinante, proprietà operative, Teorema di Laplace (sviluppi per riga/colonna), Teorema di Binet, calcolo della matrice inversa via matrice dei cofattori e \textbf{Regola di Cramer}.
+
+    \item \textbf{Autovalori, Autovettori e Diagonalizzazione}:
+    Endomorfismi e matrici quadrate, autovalori, autovettori e autospazi, equazione secolare e polinomio caratteristico, molteplicità algebrica e geometrica, condizioni necessarie e sufficienti per la diagonalizzabilità, diagonalizzazione per similitudine.
+
+    \item \textbf{Prodotti Scalari, Spazi Euclidei e Teorema Spettrale}:
+    Forme bilineari simmetriche e prodotti scalari, norma euclidea e disuguaglianza di Cauchy-Schwarz, ortogonalità e complementi ortogonali, basi ortonormali e algoritmo di \textbf{Gram-Schmidt}, matrici ortogonali, \textbf{Teorema Spettrale} per matrici simmetriche reali e introduzione alle forme quadratiche.
+
+    \item \textbf{Temi d'Esame Ufficiali e Prove Scritte Risolte}:
+    Guida metodologica e strategica alla prova scritta, gestione del tempo e delle penalità nella prima parte (quesiti a risposta sintetica), raccolta di quesiti rapidi risolti per ciascun modulo didattico e svolgimento integrale commentato di temi d'esame ufficiali con sistemi lineari parametrici, applicazioni lineari su basi non canoniche, triangolarizzabilità/diagonalizzabilità e diagonalizzazione ortogonale spettrale.
+\end{enumerate}
+
+\cleardoublepage
+
+\mainmatter
+
+% ==============================================================================
+% INCLUSIONE DEI CAPITOLI MODULARI
+% ==============================================================================
+\include{chapters/00_fondamenti_logica_insiemistica/main}
+\include{chapters/01_numeri_complessi/main}
+\include{chapters/02_spazi_vettoriali/main}
+\include{chapters/03_applicazioni_lineari/main}
+\include{chapters/04_matrici_sistemi/main}
+\include{chapters/05_determinanti/main}
+\include{chapters/06_autovalori_autovettori/main}
+\include{chapters/07_prodotti_scalari_spettrale/main}
+\include{chapters/08_esercizi_esami/main}
+
+\end{document}

@@ -1,0 +1,283 @@
+\section{Sessione d'Esame 2024: Testi e Soluzioni Svolte Passo-Passo}
+\label{sec:sessione_2024}
+
+In questa sezione vengono presentati e risolti integralmente gli appelli d'esame dell'anno accademico 2023/2024, fornendo per ogni quesito la strategia teorica, i calcoli analitici espliciti a 4 cifre significative e i relativi snippet di codice computazionale in linguaggio R.
+
+---
+
+\subsection{Appello del 04 Giugno 2024}
+
+\begin{esercizio}{Appello 04.06.2024 -- Esercizio 1: Call Center ed Esponenziale}{es_24_06_1}
+La durata in minuti di una chiamata a un call center è una v.a. $X \sim \operatorname{Exp}(\lambda = 1/3)$, avente densità:
+\begin{equation*}
+    f_X(x) = \begin{cases}
+        \frac{1}{3} e^{-x/3}, & x \ge 0 \\
+        0, & x < 0
+    \end{cases}
+\end{equation*}
+\begin{enumerate}
+    \item[(a)] Calcolare la probabilità che una chiamata scelta a caso abbia una durata minore o uguale a 3 minuti.
+    \item[(b)] Calcolare la probabilità che scegliendo 5 telefonate a caso indipendenti, almeno 2 abbiano durata maggiore o uguale a 3 minuti.
+    \item[(c)] Un operatore guadagna un bonus alla terza chiamata di durata superiore a 6 minuti. Calcolare il valore atteso del numero di chiamate necessarie per ottenere il bonus.
+\end{enumerate}
+\end{esercizio}
+
+\begin{dimostrazione}
+\textbf{(a) Probabilità di durata $\le 3$ minuti:}
+Utilizzando la funzione di ripartizione dell'Esponenziale $F_X(t) = 1 - e^{-\lambda t}$:
+\begin{equation*}
+    \mathbb{P}(X \le 3) = F_X(3) = 1 - e^{-3 \cdot (1/3)} = \bm{1 - e^{-1} \approx 0.6321} \qquad \text{\textbf{(Opzione a)}}
+\end{equation*}
+
+\textbf{(b) Binomiale su 5 telefonate:}
+La probabilità che una singola chiamata duri almeno 3 minuti è $p = \mathbb{P}(X \ge 3) = e^{-1} \approx 0.36788$.
+Su un campione di $n=5$ chiamate indipendenti, il numero di chiamate $Y$ di durata $\ge 3$ segue $Y \sim \operatorname{Bin}(5, p)$.
+\begin{align*}
+    \mathbb{P}(Y \ge 2) &= 1 - \mathbb{P}(Y = 0) - \mathbb{P}(Y = 1) = 1 - (1-p)^5 - 5 p (1-p)^4 \\
+    &= 1 - (0.63212)^5 - 5(0.36788)(0.63212)^4 \\
+    &= 1 - 0.10098 - 0.29381 = \bm{0.6052 \approx 0.604} \qquad \text{\textbf{(Opzione a)}}
+\end{align*}
+
+\textbf{(c) Valore atteso per il 3° successo (Binomiale Negativa):}
+La probabilità di una chiamata con durata $> 6$ minuti è $p_6 = \mathbb{P}(X > 6) = e^{-6/3} = e^{-2} \approx 0.135335$.
+Il numero totale $N$ di chiamate per ottenere $r = 3$ successi segue $N \sim \operatorname{NB}(r=3, p=e^{-2})$, con valore atteso:
+\begin{equation*}
+    \mathbb{E}[N] = \frac{r}{p_6} = \frac{3}{e^{-2}} = 3 e^2 \approx 3 \cdot 7.389056 = \bm{22.1672 \text{ chiamate}} \qquad \blacksquare
+\end{equation*}
+\end{dimostrazione}
+
+\begin{esercizio}{Appello 04.06.2024 -- Esercizio 2: Poisson e Binomiale con CLT}{es_24_06_2}
+Il numero di ordini orari ricevuti da Svalvolati SA segue una legge di Poisson con parametro $\mu = 7/6$ indipendente per ogni ora.
+\begin{enumerate}
+    \item[(a)] Calcolare la probabilità di ricevere almeno 3 ordini nelle prime tre ore della giornata.
+    \item[(b)] Le valvole funzionano con probabilità $p = 0.95$. In scatole da 400 unità, sia $X$ il numero di valvole funzionanti. Calcolare $\mathbb{E}[X]$ e $\operatorname{SD}(X)$.
+    \item[(c)] Calcolare approssimativamente tramite CLT con correzione di continuità la probabilità $\mathbb{P}(X \ge 385)$.
+\end{enumerate}
+\end{esercizio}
+
+\begin{dimostrazione}
+\textbf{(a) Somma di Poisson in 3 ore:}
+Per la proprietà di additività, $S_3 = \sum_{i=1}^3 Y_i \sim \operatorname{Pois}(3 \cdot 7/6 = 3.5)$.
+\begin{align*}
+    \mathbb{P}(S_3 \ge 3) &= 1 - e^{-3.5}\left(1 + 3.5 + \frac{3.5^2}{2}\right) = 1 - e^{-3.5}(1 + 3.5 + 6.125) \\
+    &= 1 - 10.625 \, e^{-3.5} = 1 - 0.32085 = \bm{0.6791 \approx 0.68} \qquad \text{\textbf{(Opzione b)}}
+\end{align*}
+
+\textbf{(b) Momenti della Binomiale $\operatorname{Bin}(400, 0.95)$:}
+\begin{align*}
+    \mathbb{E}[X] &= n p = 400 \cdot 0.95 = \bm{380} \\
+    \operatorname{Var}(X) &= n p (1-p) = 400 \cdot 0.95 \cdot 0.05 = 19 \implies \operatorname{SD}(X) = \sqrt{19} \approx \bm{4.3589}
+\end{align*}
+
+\textbf{(c) Approssimazione Normale con Correzione di Continuità:}
+Applichiamo la correzione di Yates ponendo $X \ge 385 \implies Y \ge 384.5$:
+\begin{align*}
+    \mathbb{P}(X \ge 385) &\approx 1 - \Phi\left(\frac{384.5 - 380}{\sqrt{19}}\right) = 1 - \Phi\left(\frac{4.5}{4.3589}\right) \\
+    &= 1 - \Phi(1.0324) \approx 1 - 0.8490 = \bm{0.1510} \quad (\bm{15.10\%}) \qquad \blacksquare
+\end{align*}
+\end{dimostrazione}
+
+\begin{esercizio}{Appello 04.06.2024 -- Esercizio 3: Inferenza su Scarti Chimici}{es_24_06_3}
+Un impianto produceva in media $\mu_0 = 7.53\text{ kg}$ di scarti al giorno. Su $n=8$ misurazioni con un nuovo processo si ottengono: $7.2, 6.8, 7.5, 7.4, 7.1, 7.3, 7.6, 7.3$. Si assume normalità.
+\begin{enumerate}
+    \item[(a)] Calcolare la media campionaria $\overline{x}$ e la deviazione standard campionaria corretta $s$.
+    \item[(b)] Determinare l'intervallo di confidenza al $95\%$ per la media $\mu$.
+    \item[(c)] Formulare il test per dimostrare la riduzione degli scarti.
+    \item[(d)] Testare l'ipotesi a livello $\alpha = 0.01$ (1\%) e trarre le conclusioni.
+\end{enumerate}
+\end{esercizio}
+
+\begin{dimostrazione}
+\textbf{(a) Statistiche Descrittive Campionarie:}
+\begin{align*}
+    \sum_{i=1}^8 x_i &= 58.2 \implies \bm{\overline{x} = \frac{58.2}{8} = 7.2750\text{ kg}} \\
+    \sum_{i=1}^8 x_i^2 &= 423.84 \implies s^2 = \frac{1}{7}\left(423.84 - 8(7.275)^2\right) = \frac{0.435}{7} \approx 0.062143 \\
+    \bm{s} &= \sqrt{0.062143} \approx \bm{0.2493\text{ kg}}
+\end{align*}
+
+\textbf{(b) Intervallo di Confidenza di Student al $95\%$ ($n-1 = 7$ g.d.l.):}
+Dalla tavola $t$-Student: $t_{0.025, 7} = 2.365$.
+\begin{equation*}
+    d = 2.365 \cdot \frac{0.2493}{\sqrt{8}} = 0.2085 \implies \operatorname{IC}_{0.95}(\mu) = [7.2750 \pm 0.2085] = \bm{[7.0665, \; 7.4835]\text{ kg}}
+\end{equation*}
+
+\textbf{(c) Formulazione delle Ipotesi:}
+$H_0: \mu = 7.53$ (il processo non riduce gli scarti) vs $H_1: \mu < 7.53$ (il processo riduce gli scarti, unilaterale sinistro).
+
+\textbf{(d) Esecuzione del Test $t$ a livello $\alpha = 0.01$:}
+\begin{equation*}
+    T_{\text{oss}} = \frac{\overline{x} - \mu_0}{s / \sqrt{n}} = \frac{7.2750 - 7.53}{0.2493 / \sqrt{8}} = \frac{-0.2550}{0.08814} = \bm{-2.8931}
+\end{equation*}
+La soglia critica con 7 g.d.l. al livello $\alpha = 0.01$ unilaterale sinistro è $-t_{0.01, 7} = -2.998$.
+Poiché $T_{\text{oss}} = -2.8931 > -2.998$, la statistica \textbf{non cade nella regione di rifiuto}.
+\textbf{Conclusione:} \emph{Non si rifiuta $H_0$ al livello dell'1\% ($p$-value $\approx 0.0116 > 0.01$). L'evidenza campionaria non è sufficientemente forte all'1\% per dichiarare una riduzione statisticamente significativa.} $\blacksquare$
+\end{dimostrazione}
+
+\begin{esercizio}{Appello 04.06.2024 -- Esercizio 4: Densità Parametrica e Stimatore MLE}{es_24_06_4}
+Sia $f_\theta(x) = \frac{x}{\theta^2} e^{-x/\theta} \mathbb{I}_{(0,\infty)}(x)$ con $\theta > 0$.
+\begin{enumerate}
+    \item[(a)] Verificare che $f_\theta$ è una PDF e calcolare $\mathbb{E}[2X_1 + 3]$ in funzione di $\theta$.
+    \item[(b)] Identificare lo stimatore di massima verosimiglianza $\widehat{\theta}_{\text{MLE}}$.
+    \item[(c)] Discutere correttezza e consistenza di $\widehat{\theta}_{\text{MLE}}$.
+\end{enumerate}
+\end{esercizio}
+
+\begin{dimostrazione}
+\textbf{(a) Verifica PDF e Momenti:}
+$f_\theta(x) \ge 0$. Usando la formula notevole $\int_0^\infty x^n e^{-\lambda x} dx = \frac{n!}{\lambda^{n+1}}$ con $n=1, \lambda=1/\theta$:
+\begin{equation*}
+    \int_0^\infty \frac{x}{\theta^2} e^{-x/\theta} dx = \frac{1}{\theta^2} \left(1! \theta^2\right) = 1
+\end{equation*}
+$\mathbb{E}[X] = \int_0^\infty \frac{x^2}{\theta^2} e^{-x/\theta} dx = \frac{1}{\theta^2}(2! \theta^3) = 2\theta$.
+Per linearità: $\mathbb{E}[2X_1 + 3] = 2(2\theta) + 3 = \bm{4\theta + 3}$.
+
+\textbf{(b) Derivazione MLE:}
+\begin{align*}
+    L(\theta) &= \prod_{i=1}^n \left(\frac{x_i}{\theta^2} e^{-x_i/\theta}\right) = \left(\prod x_i\right) \theta^{-2n} \exp\left(-\frac{1}{\theta}\sum x_i\right) \\
+    \ell(\theta) &= \sum \ln x_i - 2n \ln\theta - \frac{1}{\theta}\sum x_i \implies \frac{d\ell}{d\theta} = -\frac{2n}{\theta} + \frac{1}{\theta^2}\sum x_i = 0 \\
+    &\implies 2n\theta = \sum_{i=1}^n x_i \implies \bm{\widehat{\theta}_{\text{MLE}} = \frac{1}{2n} \sum_{i=1}^n X_i = \frac{\overline{X}_n}{2}}
+\end{align*}
+
+\textbf{(c) Correttezza e Consistenza:}
+$\mathbb{E}[\widehat{\theta}_{\text{MLE}}] = \frac{1}{2}\mathbb{E}[\overline{X}_n] = \frac{1}{2}(2\theta) = \theta \implies \textbf{Corretto}$.
+Per la WLLN, $\overline{X}_n \xrightarrow{\mathbb{P}} 2\theta \implies \widehat{\theta} = \overline{X}_n/2 \xrightarrow{\mathbb{P}} \theta \implies \textbf{Consistente}$. $\blacksquare$
+\end{dimostrazione}
+
+\begin{esercizio}{Appello 04.06.2024 -- Esercizio 5: Integrazione Monte Carlo con R}{es_24_06_5}
+Si consideri l'integrale $I = \int_{-\infty}^{+\infty} \frac{\cos(7 + \ln(x^2+1))}{2 + x^4} e^{-(x-2)^2/8} dx$.
+\begin{enumerate}
+    \item[(a)] Illustrare il principio teorico di Monte Carlo applicato a questo integrale.
+    \item[(b)] Scrivere il codice R completo per la stima numerica.
+\end{enumerate}
+\end{esercizio}
+
+\begin{dimostrazione}
+Riconosciamo il nucleo di una densità normale $X \sim \mathcal{N}(\mu=2, \sigma^2=4)$, la cui PDF è $f(x) = \frac{1}{\sqrt{2\pi \cdot 4}} e^{-(x-2)^2/8} = \frac{1}{2\sqrt{2\pi}} e^{-(x-2)^2/8}$.
+Possiamo riscrivere l'integrale come:
+\begin{equation*}
+    I = 2\sqrt{2\pi} \int_{-\infty}^{+\infty} \underbrace{\frac{\cos(7 + \ln(x^2+1))}{2 + x^4}}_{g(x)} f(x) \, dx = 2\sqrt{2\pi} \, \mathbb{E}[g(X)]
+\end{equation*}
+\textbf{Codice R per la Stima Monte Carlo:}
+\begin{lstlisting}[language=R]
+set.seed(42)
+N <- 10^6
+# Campionamento da Normale(mu=2, sigma=2)
+x <- rnorm(N, mean = 2, sd = 2)
+# Valutazione della funzione trasformata
+g_x <- cos(7 + log(x^2 + 1)) / (2 + x^4)
+# Calcolo della stima dell'integrale
+I_hat <- 2 * sqrt(2 * pi) * mean(g_x)
+print(I_hat)
+\end{lstlisting}
+\end{dimostrazione}
+
+---
+
+\subsection{Appello del 25 Giugno 2024}
+
+\begin{esercizio}{Appello 25.06.2024 -- Esercizio 1: Estrazione Biglie e Somma CLT}{es_24_06_25_1}
+Una scatola contiene 30 biglie numerate da 1 a 10 in 3 colori (rosso, bianco, verde).
+\begin{enumerate}
+    \item[(a)] Senza reinserimento, $X_1$ e $X_2$ sono indipendenti?
+    \item[(b)] Senza reinserimento, qual è la probabilità che la somma dei numeri sia esattamente 18?
+    \item[(c)] Con reinserimento, qual è la probabilità di pescare almeno 4 biglie rosse in 5 tentativi?
+    \item[(d)] Con reinserimento su 100 estrazioni, calcolare $\mathbb{E}[X_1 + 3X_2]$ e $\operatorname{Var}(2X_1 + 9)$.
+    \item[(e)] Calcolare tramite CLT la probabilità che la somma $\sum_{i=1}^{100} X_i$ sia inferiore a 500.
+\end{enumerate}
+\end{esercizio}
+
+\begin{dimostrazione}
+\textbf{(a) Indipendenza:} Senza reinserimento l'estrazione altera lo spazio campionario $\implies$ \textbf{No (Opzione b)}.
+
+\textbf{(b) Somma = 18:} Le coppie numeriche ordinate sono $(8, 10)$, $(10, 8)$ (ciascuna $3 \times 3 = 9$ modi) e $(9, 9)$ ($3 \times 2 = 6$ modi). Casi favorevoli $= 9+9+6 = 24$. Casi possibili $= 30 \times 29 = 870$.
+\begin{equation*}
+    \mathbb{P}(\text{Somma} = 18) = \frac{24}{870} = \frac{4}{145} \approx \bm{0.0276 \approx 0.028} \qquad \text{\textbf{(Opzione d)}}
+\end{equation*}
+
+\textbf{(c) Almeno 4 rosse su 5 estrazioni con reinserimento ($p = 10/30 = 1/3$):}
+\begin{equation*}
+    \mathbb{P}(Y \ge 4) = \binom{5}{4}\left(\frac{1}{3}\right)^4\left(\frac{2}{3}\right) + \left(\frac{1}{3}\right)^5 = \frac{10}{243} + \frac{1}{243} = \frac{11}{243} \approx \bm{0.0453 \approx 0.045} \qquad \text{\textbf{(Opzione c)}}
+\end{equation*}
+
+\textbf{(d) Momenti per variabile uniforme discreta su $\{1, \dots, 10\}$:}
+$\mathbb{E}[X] = \frac{1+10}{2} = 5.5$, $\operatorname{Var}(X) = \frac{10^2 - 1}{12} = \frac{99}{12} = 8.25$.
+\begin{align*}
+    \mathbb{E}[X_1 + 3X_2] &= 5.5 + 3(5.5) = \bm{22} \\
+    \operatorname{Var}(2X_1 + 9) &= 4 \operatorname{Var}(X_1) = 4(8.25) = \bm{33}
+\end{align*}
+
+\textbf{(e) Somma di 100 variabili con CLT:} $\mathbb{E}[S_{100}] = 550$, $\sigma_S = \sqrt{100 \cdot 8.25} = \sqrt{825} \approx 28.7228$.
+\begin{equation*}
+    \mathbb{P}(S_{100} < 500) \approx \Phi\left(\frac{499.5 - 550}{28.7228}\right) = \Phi(-1.758) = 1 - 0.9606 = \bm{0.0394} \quad (\bm{3.94\%}) \qquad \blacksquare
+\end{equation*}
+\end{dimostrazione}
+
+\begin{esercizio}{Appello 25.06.2024 -- Esercizio 2: Vendite Parigi vs Londra}{es_24_06_25_2}
+Vendite su 6 giorni: Parigi ($2659.5, 1882.5, 2165.0, 1949.0, 2453.5, 2050.0$), Londra ($2963.0, 2685.0, 3083.5, 2151.5, 2466.5, 2020.0$).
+\begin{enumerate}
+    \item[(a)] Calcolare medie e deviazioni standard campionarie di entrambi i negozi.
+    \item[(b)] Con $\sigma_1$ incognita, calcolare l'IC bilaterale al $90\%$ per $\mu_1$ (Parigi).
+    \item[(c)] Formulare il test per dimostrare la superiorità del negozio di Londra.
+    \item[(d)] Con $\sigma_1 = 300, \sigma_2 = 400$, testare a livello $\alpha = 0.05$ (5\%) e concludere.
+\end{enumerate}
+\end{esercizio}
+
+\begin{dimostrazione}
+\textbf{(a) Statistiche Campionarie ($n_1 = n_2 = 6$):}
+\begin{align*}
+    \text{Parigi:} \quad & \bm{\overline{x}_1 = 2193.25\text{ €}}, \quad s_1^2 = 87834.375 \implies \bm{s_1 = 296.37\text{ €}} \\
+    \text{Londra:} \quad & \bm{\overline{x}_2 = 2561.58\text{ €}}, \quad s_2^2 = 196884.375 \implies \bm{s_2 = 443.72\text{ €}}
+\end{align*}
+
+\textbf{(b) Intervallo di Confidenza al $90\%$ per Parigi ($t_{0.05, 5} = 2.015$):}
+\begin{equation*}
+    d = 2.015 \cdot \frac{296.37}{\sqrt{6}} = 243.79 \implies \operatorname{IC}_{0.90}(\mu_1) = [2193.25 \pm 243.79] = \bm{[1949.46, \; 2437.04]\text{ €}}
+\end{equation*}
+
+\textbf{(c) Ipotesi del Test:} $H_0: \mu_2 - \mu_1 \le 0$ vs $H_1: \mu_2 - \mu_1 > 0$ (unilaterale destro).
+
+\textbf{(d) Test Z con varianze note $\sigma_1 = 300, \sigma_2 = 400$ a livello $\alpha = 0.05$:}
+\begin{equation*}
+    \operatorname{SE} = \sqrt{\frac{400^2}{6} + \frac{300^2}{6}} = \sqrt{\frac{250000}{6}} \approx 204.124 \implies Z_{\text{oss}} = \frac{2561.58 - 2193.25}{204.124} = \frac{368.33}{204.124} = \bm{1.8045}
+\end{equation*}
+La soglia critica gaussiana è $z_{0.05} = 1.645$.
+Poiché $Z_{\text{oss}} = 1.8045 > 1.645$, \textbf{si rifiuta $H_0$ al livello del 5\%} ($p$-value $\approx 0.0356 < 0.05$).
+\textbf{Conclusione:} \emph{I dati forniscono evidenza statisticamente significativa che il negozio di Londra ha vendite medie superiori a quello di Parigi.} $\blacksquare$
+\end{dimostrazione}
+
+\begin{esercizio}{Appello 25.06.2024 -- Esercizi 3, 4 e 5: Bayes, MLE Bernoulli e Monte Carlo}{es_24_06_25_345}
+\begin{enumerate}
+    \item[(3)] Screening con 3 test indipendenti: prevalenza $\mathbb{P}(M)=0.02$, $\mathbb{P}(T^+|M)=0.99$, $\mathbb{P}(T^-|S)=0.97 \implies \mathbb{P}(T^+|S)=0.03$. Calcolare $\mathbb{P}(T_1^+)$, $\mathbb{P}(\ge 2 + \mid S)$ e $\mathbb{P}(M \mid \ge 2 +)$.
+    \item[(4)] Modello Bernoulli $p(k|\theta) = \theta^k(1-\theta)^{1-k}$. Ricavare lo stimatore MLE, verificarne correttezza e consistenza.
+    \item[(5)] Monte Carlo per $I = \int_{-7}^{10} \frac{\sin(7 + \ln(x^2+1))}{2 + e^x} dx$ con codice R.
+\end{enumerate}
+\end{esercizio}
+
+\begin{dimostrazione}
+\textbf{Esercizio 3 (Bayes su 3 test ripetuti):}
+\begin{itemize}
+    \item $\mathbb{P}(T_1^+) = 0.99(0.02) + 0.03(0.98) = 0.0198 + 0.0294 = \bm{0.0492}$ ($4.92\%$).
+    \item Per persona sana ($S$): $Y \sim \operatorname{Bin}(3, 0.03)$.
+    $\mathbb{P}(\ge 2 + \mid S) = 3(0.03)^2(0.97) + (0.03)^3 = \bm{0.002646}$ ($0.2646\%$).
+    \item Per persona malata ($M$): $Y \sim \operatorname{Bin}(3, 0.99)$.
+    $\mathbb{P}(\ge 2 + \mid M) = 3(0.99)^2(0.01) + (0.99)^3 = 0.029403 + 0.970299 = 0.999702$.
+    \item Evidenza totale: $\mathbb{P}(\ge 2 +) = 0.999702(0.02) + 0.002646(0.98) = 0.022587$.
+    \item Probabilità a posteriori: $\mathbb{P}(M \mid \ge 2 +) = \frac{0.019994}{0.022587} = \bm{0.8852}$ ($\bm{88.52\%}$).
+\end{itemize}
+
+\textbf{Esercizio 4 (MLE Bernoulli):}
+$L(\theta) = \theta^{\sum x_i}(1-\theta)^{n-\sum x_i} \implies \ell(\theta) = \sum x_i \ln\theta + (n-\sum x_i)\ln(1-\theta)$.
+Annullando la derivata prima: $\frac{\sum x_i}{\theta} - \frac{n-\sum x_i}{1-\theta} = 0 \implies \bm{\widehat{\theta}_{\text{MLE}} = \overline{X}_n}$.
+$\mathbb{E}[\widehat{\theta}] = \theta \implies \textbf{Corretto}$. Per la WLLN, $\overline{X}_n \xrightarrow{\mathbb{P}} \theta \implies \textbf{Consistente}$.
+
+\textbf{Esercizio 5 (Monte Carlo su $[-7, 10]$):}
+Poniamo $X \sim \operatorname{Unif}(-7, 10)$ con densità $f(x) = 1/17$. L'integrale è $I = 17 \, \mathbb{E}[g(X)]$.
+\begin{lstlisting}[language=R]
+set.seed(123)
+N <- 10^6
+x <- runif(N, min = -7, max = 10)
+g_x <- sin(7 + log(x^2 + 1)) / (2 + exp(x))
+I_hat <- 17 * mean(g_x)
+print(I_hat)
+\end{lstlisting}
+\end{dimostrazione}

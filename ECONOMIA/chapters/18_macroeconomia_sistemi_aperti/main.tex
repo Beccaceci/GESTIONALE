@@ -1,0 +1,398 @@
+% ==============================================================================
+% CAPITOLO 18: MACROECONOMIA DEI SISTEMI ECONOMICI APERTI
+% ==============================================================================
+\chapter{Macroeconomia dei Sistemi Economici Aperti: Il Modello Mundell-Fleming}
+\label{chap:macroeconomia_sistemi_aperti}
+
+\begin{tcolorbox}[colback=navyblue!5!white, colframe=navyblue, title=\textbf{Quadro Concettuale del Capitolo}]
+Questo capitolo conclude la trattazione della Macroeconomia sviluppando il celebre \textbf{Modello Mundell-Fleming} (IS-LM-BP per una piccola economia aperta) formulato da Robert Mundell e Marcus Fleming. Il modello integra il commercio internazionale di beni e la mobilità internazionale dei capitali finanziari nello schema IS-LM, determinando l'equilibrio congiunto del reddito, del tasso di interesse e del tasso di cambio. Verrà analizzata l'efficacia comparata della \textbf{politica fiscale} e della \textbf{politica monetaria} nei due regimi polari di \textbf{cambi fissi} e \textbf{cambi flessibili} in ipotesi di \textbf{perfetta mobilità dei capitali}. Si dimostrerà come in cambi fissi la moneta diventi endogena rendendo la politica fiscale massimamente efficace e quella monetaria impotente, mentre in cambi flessibili si verifichi l'opposto con lo \textbf{spiazzamento totale da tasso di cambio}. Si formalizzerà infine il \textbf{Trilemma Macroeconomico di Mundell-Obstfeld} (Trinità Impossibile).
+\end{tcolorbox}
+
+\section{Architettura del Modello Mundell-Fleming (IS-LM-BP)}
+
+Il modello estende lo schema IS-LM a una \textbf{piccola economia aperta} inserita nei mercati internazionali dei beni e dei capitali.
+
+\begin{modello}{Struttura Formale del Modello IS-LM-BP}{modello_mundell_fleming}
+Il modello si compone di tre equazioni macroeconomiche fondamentali:
+\begin{equation}
+    \begin{cases}
+        \IS: & Y = \alpha_G \Big[ A_0 - d \cdot r + NX(Y, \cambionom) \Big] \\[0.6em]
+        \LM: & \dfrac{M}{P} = k Y - h r \\[0.8em]
+        \BP: & NX(Y, \cambionom) + CF(r - r^*) = 0
+    \end{cases} \label{eq:sistema_mf}
+\end{equation}
+dove:
+\begin{itemize}
+    \item $NX(Y, \cambionom) = X_0 - m Y - n \cambionom$ rappresenta le esportazioni nette (bilancia commerciale), con propensione marginale all'importazione $m = \pdv{M}{Y} > 0$ e sensibilità al cambio $n > 0$;
+    \item $CF(r - r^*) = \sigma (r - r^*)$ rappresenta i movimenti netti di capitale finanziario privato, guidati dal differenziale tra il tasso di interesse interno $r$ e il tasso di interesse mondiale esogeno $r^*$, con parametro di mobilità $\sigma \ge 0$;
+    \item $\cambionom$ è il tasso di cambio nominale quotato all'europea ($\text{USD/EUR}$).
+\end{itemize}
+\end{modello}
+
+\subsection{La Curva BP e i Gradi di Mobilità Internazionale dei Capitali}
+
+\begin{definizione}{Curva BP}{def_curva_bp}
+La \textbf{Curva BP} è il luogo geometrico di tutte le combinazioni di reddito reale $Y$ e tasso di interesse $r$ che assicurano l'equilibrio complessivo della Bilancia dei Pagamenti ($\text{Saldo BP} = 0$, ovvero $\mathrm{CA} + \mathrm{FA}_{\text{priv}} = 0$).
+\end{definizione}
+
+Esplicitando il tasso di interesse $r$ dall'equazione della BP:
+\begin{equation}
+    r = r^* + \frac{m}{\sigma} Y - \frac{X_0 - n \cambionom}{\sigma}
+\end{equation}
+La pendenza della curva BP è $\dv{r}{Y}\big|_{\BP} = \frac{m}{\sigma} \ge 0$. Si distinguono tre scenari:
+\begin{enumerate}
+    \item \textbf{Assenza di Mobilità dei Capitali ($\sigma = 0$)}: i capitali non possono attraversare le frontiere; la curva BP è una retta \textbf{verticale} in corrispondenza del reddito che azzera il disavanzo commerciale: $Y = \frac{X_0 - n \cambionom}{m}$.
+    \item \textbf{Mobilità Imperfetta dei Capitali ($0 < \sigma < \infty$)}: la curva BP è \textbf{inclinata positivamente}. Un aumento di reddito genera maggiori importazioni ($m \Delta Y > 0$); per ripristinare il pareggio della BP occorre un rialzo del tasso di interesse interno ($r > r^*$) che attiri un afflusso compensativo di capitali finanziari.
+    \item \textbf{Perfetta Mobilità dei Capitali ($\sigma \to \infty$)}: le attività finanziarie nazionali ed estere sono perfette sostitute e i capitali si muovono istantaneamente al minimo differenziale di rendimento.
+\end{enumerate}
+
+\begin{teorema}{Curva BP con Perfetta Mobilità dei Capitali}{bp_perfetta_mobilita}
+In condizioni di perfetta mobilità internazionale dei capitali ($\sigma \to \infty$), qualsiasi scostamento infinitesimale di $r$ da $r^*$ genera flussi di capitale di ampiezza illimitata. Pertanto, la condizione di equilibrio della bilancia dei pagamenti impone:
+\begin{equation}
+    r = r^* \label{eq:bp_orizzontale}
+\end{equation}
+La curva BP nel piano cartesiano $(Y, r)$ è una retta \textbf{perfettamente orizzontale} al livello del tasso di interesse internazionale $r^*$.
+\end{teorema}
+
+\section{Politiche Macroeconomiche in Regime di Cambi Fissi}
+
+In regime di cambi fissi, il tasso di cambio è ancorato alla parità ufficiale $\bar{\cambionom}$ e la Banca Centrale è obbligata a intervenire acquistando o vendendo valuta estera ($\Delta RU \neq 0$).
+
+\subsection{1. Politica Fiscale Espansiva: Massima Efficacia}
+
+\begin{teorema}{Efficacia della Politica Fiscale in Cambi Fissi}{fiscale_cambi_fissi}
+In un regime di cambi fissi con perfetta mobilità dei capitali, la politica fiscale ha la \textbf{massima efficacia espansiva}: non subisce alcuno spiazzamento finanziario e il PIL cresce dell'intero moltiplicatore dell'economia aperta.
+\end{teorema}
+
+\begin{dimostrazione}[ del Meccanismo di Trasmissione Fiscale in Cambi Fissi]
+\begin{enumerate}
+    \item \textbf{Shock Iniziale}: il governo aumenta la spesa pubblica di $\Delta G > 0$. La curva $\IS$ trasla verso destra da $\IS_0$ a $\IS_1$.
+    \item \textbf{Pressione sui Tassi}: nel punto di intersezione provvisorio tra $\IS_1$ e $\LM_0$, il tasso di interesse interno sale al di sopra di quello mondiale: $r_1 > r^*$.
+    \item \textbf{Afflusso di Capitali}: il differenziale positivo $(r_1 - r^* > 0)$ induce gli investitori internazionali a comprare massicciamente titoli nazionali, generando un enorme afflusso di valuta estera e una forte \textbf{pressione all'apprezzamento} del tasso di cambio.
+    \item \textbf{Intervento Obbligato della Banca Centrale}: per impedire l'apprezzamento e difendere la parità fissa $\bar{\cambionom}$, la Banca Centrale è costretta ad acquistare la valuta estera offerta in eccesso, immettendo sul mercato moneta nazionale ($\Delta M > 0, \Delta RU > 0$).
+    \item \textbf{Accomodamento Monetario Endogeno}: l'incremento automatico della base monetaria sposta la curva $\LM$ verso destra da $\LM_0$ a $\LM_1$.
+    \item \textbf{Equilibrio Finale}: la traslazione della LM prosegue finché il tasso di interesse interno non ritorna esattamente al livello mondiale $r = r^*$.
+    Il reddito di equilibrio finale è:
+    \begin{equation}
+        \Delta Y^* = \alpha_{\text{aperto}} \Delta G = \frac{1}{1 - c(1-t) + m} \Delta G > 0
+    \end{equation}
+\end{enumerate}
+\end{dimostrazione}
+
+\subsection{2. Politica Monetaria Espansiva: Totale Inefficacia}
+
+\begin{teorema}{Inefficacia della Politica Monetaria in Cambi Fissi}{monetaria_cambi_fissi}
+In un regime di cambi fissi con perfetta mobilità dei capitali, la Banca Centrale \textbf{perde completamente il controllo dell'offerta di moneta}: l'offerta di moneta diviene una variabile endogena e qualsiasi tentativo di espansione monetaria è totalmente inefficace sul PIL ($\Delta Y = 0$).
+\end{teorema}
+
+\begin{dimostrazione}[ dell'Impotenza Monetaria in Cambi Fissi]
+\begin{enumerate}
+    \item La Banca Centrale acquista titoli sul mercato aperto per immettere liquidità $\Delta M > 0$; la curva $\LM$ trasla temporaneamente a destra da $\LM_0$ a $\LM_1$.
+    \item Il tasso di interesse interno scende al di sotto del livello internazionale: $r_1 < r^*$.
+    \item I capitali finanziari fuggono istantaneamente all'estero alla ricerca di rendimenti più elevati: si genera un massiccio disavanzo della bilancia dei pagamenti e una fortissima \textbf{pressione al deprezzamento} della valuta nazionale.
+    \item Per difendere la parità fissa $\bar{\cambionom}$, la Banca Centrale deve intervenire vendendo le proprie riserve ufficiali di valuta estera in cambio di moneta nazionale ($\Delta RU < 0$).
+    \item Il riassorbimento della moneta nazionale distrugge base monetaria, costringendo la curva $\LM$ a \textbf{retrocedere verso sinistra da $\LM_1$ a $\LM_0$}.
+    \item L'equilibrio finale coincide esattamente con quello di partenza: $Y^* = Y_0, r^* = r^*$, con l'unica conseguenza di una perdita secca di riserve valutarie della Banca Centrale.
+\end{enumerate}
+\end{dimostrazione}
+
+\section{Politiche Macroeconomiche in Regime di Cambi Flessibili}
+
+In regime di cambi flessibili, il tasso di cambio oscilla liberamente sul Forex per garantire l'equilibrio della bilancia dei pagamenti ($\Delta RU = 0$).
+
+\subsection{1. Politica Fiscale Espansiva: Spiazzamento Totale da Cambio}
+
+\begin{teorema}{Inefficacia della Politica Fiscale in Cambi Flessibili}{fiscale_cambi_flessibili}
+In un regime di cambi flessibili con perfetta mobilità dei capitali, la politica fiscale è \textbf{completamente inefficace nel modificare il livello del PIL} ($\Delta Y = 0$), a causa del fenomeno dello \textbf{Spiazzamento Totale da Tasso di Cambio}.
+\end{teorema}
+
+\begin{dimostrazione}[ dello Spiazzamento da Cambio]
+\begin{enumerate}
+    \item Il governo incrementa la spesa pubblica di $\Delta G > 0$; la curva $\IS$ si sposta a destra da $\IS_0$ a $\IS_1$.
+    \item Il tasso di interesse interno tende a salire ($r_1 > r^*$), attirando ingenti flussi di capitale estero.
+    \item In assenza di interventi della Banca Centrale, l'eccesso di domanda di valuta nazionale provoca un \textbf{apprezzamento immediato del tasso di cambio nominale} ($\cambionom \uparrow$).
+    \item L'apprezzamento rende i beni nazionali più costosi per gli acquirenti esteri e i beni esteri più convenienti per i residenti: la competitività crolla e le \textbf{esportazioni nette si riducono} ($\Delta NX < 0$).
+    \item La contrazione di $NX$ sposta la curva $\IS$ all'indietro verso sinistra finché essa non ritorna esattamente nella posizione iniziale $\IS_0$.
+    \item L'equilibrio finale si ricompone al reddito iniziale $Y_0$ al tasso $r^*$: la spesa pubblica ha spiazzato le esportazioni nette in misura esattamente equivalente ($\Delta NX = -\Delta G$), lasciando il PIL inalterato ($\Delta Y = 0$).
+\end{enumerate}
+\end{dimostrazione}
+
+\subsection{2. Politica Monetaria Espansiva: Massima Efficacia}
+
+\begin{teorema}{Efficacia della Politica Monetaria in Cambi Flessibili}{monetaria_cambi_flessibili}
+In un regime di cambi flessibili con perfetta mobilità dei capitali, la politica monetaria acquisisce la \textbf{massima efficacia espansiva}: la trasmissione non passa attraverso la riduzione del tasso di interesse (che resta vincolato a $r = r^*$), bensì attraverso il \textbf{canale del deprezzamento del tasso di cambio e l'espansione delle esportazioni nette}.
+\end{teorema}
+
+\begin{dimostrazione}[ della Trasmissione Monetaria via Tasso di Cambio]
+\begin{enumerate}
+    \item La Banca Centrale aumenta l'offerta di moneta $\Delta M > 0$; la curva $\LM$ trasla verso destra da $\LM_0$ a $\LM_1$.
+    \item Il tasso interno scende temporaneamente al di sotto di quello mondiale ($r_1 < r^*$), innescando un immediato deflusso di capitali finanziari verso l'estero.
+    \item La vendita di moneta nazionale sul mercato Forex provoca un \textbf{forte deprezzamento del tasso di cambio} ($\cambionom \downarrow$).
+    \item Il deprezzamento aumenta la competitività di prezzo delle merci nazionali: le esportazioni aumentano e le importazioni calano ($\Delta NX > 0$).
+    \item L'incremento della domanda estera sposta la curva $\IS$ verso destra da $\IS_0$ a $\IS_1$, finché non interseca la nuova $\LM_1$ esattamente in corrispondenza del tasso mondiale $r = r^*$.
+    \item Il PIL di equilibrio aumenta pienamente:
+    \begin{equation}
+        \Delta Y^* = \frac{1}{k}\Delta\left(\frac{M}{P}\right) > 0
+    \end{equation}
+\end{enumerate}
+\end{dimostrazione}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.95, >=Stealth]
+    % GRAFICO A SINISTRA: CAMBI FISSI
+    \begin{scope}[xshift=0cm]
+        \draw[->, line width=1.1pt] (0,0) -- (6.8,0) node[right, font=\small\bfseries] {$Y$};
+        \draw[->, line width=1.1pt] (0,0) -- (0,5.5) node[above, font=\small\bfseries] {$r$};
+        \node[font=\footnotesize\bfseries, color=navyblue] at (3.4, 5.2) {(a) Cambi Fissi: Fiscale Espansiva};
+
+        % BP Orizzontale
+        \draw[line width=1.8pt, color=forestgreen] (0, 2.5) -- (6.2, 2.5) node[right, font=\footnotesize\bfseries] {$\mathrm{BP} \; (r = r^*)$};
+        \node[left, font=\footnotesize\bfseries, color=forestgreen] at (0, 2.5) {$r^*$};
+
+        % Curve IS
+        \draw[line width=1.5pt, color=navyblue] (0.8, 4.5) -- (4.8, 0.5) node[right, font=\scriptsize\bfseries] {$\IS_0$};
+        \draw[line width=1.6pt, color=navyblue!60!blue] (2.2, 5.2) -- (6.2, 1.2) node[right, font=\scriptsize\bfseries] {$\IS_1 (\Delta G > 0)$};
+
+        % Curve LM
+        \draw[line width=1.5pt, color=purpleaccent] (0.8, 0.5) -- (4.8, 4.5) node[above left, font=\scriptsize\bfseries] {$\LM_0$};
+        \draw[line width=1.6pt, dashed, color=tealblue] (2.2, 0.5) -- (6.2, 4.5) node[right, font=\scriptsize\bfseries] {$\LM_1 (\text{Endogena})$};
+
+        % Equilibri
+        \coordinate (E0) at (2.8, 2.5);
+        \coordinate (E1) at (4.2, 2.5);
+
+        \fill[navyblue] (E0) circle (2.5pt) node[above left=2pt, font=\scriptsize\bfseries] {$E_0$};
+        \fill[forestgreen] (E1) circle (2.5pt) node[above right=2pt, font=\scriptsize\bfseries] {$E_1$};
+
+        \draw[dotted, line width=0.8pt, color=navyblue] (2.8, 0) node[below, font=\scriptsize\bfseries] {$Y_0^*$} -- (E0);
+        \draw[dotted, line width=0.8pt, color=forestgreen] (4.2, 0) node[below, font=\scriptsize\bfseries] {$Y_1^*$} -- (E1);
+        \draw[->, line width=1.2pt, color=crimsonred] (2.8, 2.7) -- node[above, font=\tiny\bfseries] {$\Delta Y > 0$} (4.2, 2.7);
+    \end{scope}
+
+    % GRAFICO A DESTRA: CAMBI FLESSIBILI
+    \begin{scope}[xshift=7.8cm]
+        \draw[->, line width=1.1pt] (0,0) -- (6.8,0) node[right, font=\small\bfseries] {$Y$};
+        \draw[->, line width=1.1pt] (0,0) -- (0,5.5) node[above, font=\small\bfseries] {$r$};
+        \node[font=\footnotesize\bfseries, color=purpleaccent] at (3.4, 5.2) {(b) Cambi Flessibili: Monetaria Espansiva};
+
+        % BP Orizzontale
+        \draw[line width=1.8pt, color=forestgreen] (0, 2.5) -- (6.2, 2.5) node[right, font=\footnotesize\bfseries] {$\mathrm{BP} \; (r = r^*)$};
+        \node[left, font=\footnotesize\bfseries, color=forestgreen] at (0, 2.5) {$r^*$};
+
+        % Curve LM
+        \draw[line width=1.5pt, color=purpleaccent] (0.8, 0.5) -- (4.8, 4.5) node[above left, font=\scriptsize\bfseries] {$\LM_0$};
+        \draw[line width=1.6pt, color=purpleaccent!60!black] (2.2, 0.5) -- (6.2, 4.5) node[right, font=\scriptsize\bfseries] {$\LM_1 (\Delta M > 0)$};
+
+        % Curve IS
+        \draw[line width=1.5pt, color=navyblue] (0.8, 4.5) -- (4.8, 0.5) node[right, font=\scriptsize\bfseries] {$\IS_0$};
+        \draw[line width=1.6pt, dashed, color=tealblue] (2.2, 5.2) -- (6.2, 1.2) node[right, font=\scriptsize\bfseries] {$\IS_1 (e \downarrow, NX \uparrow)$};
+
+        % Equilibri
+        \coordinate (E0f) at (2.8, 2.5);
+        \coordinate (E1f) at (4.2, 2.5);
+
+        \fill[purpleaccent] (E0f) circle (2.5pt) node[above left=2pt, font=\scriptsize\bfseries] {$E_0$};
+        \fill[forestgreen] (E1f) circle (2.5pt) node[above right=2pt, font=\scriptsize\bfseries] {$E_1$};
+
+        \draw[dotted, line width=0.8pt, color=purpleaccent] (2.8, 0) node[below, font=\scriptsize\bfseries] {$Y_0^*$} -- (E0f);
+        \draw[dotted, line width=0.8pt, color=forestgreen] (4.2, 0) node[below, font=\scriptsize\bfseries] {$Y_1^*$} -- (E1f);
+        \draw[->, line width=1.2pt, color=crimsonred] (2.8, 2.7) -- node[above, font=\tiny\bfseries] {$\Delta Y > 0$} (4.2, 2.7);
+    \end{scope}
+
+\end{tikzpicture}
+\caption{Efficacia comparata nel Modello Mundell-Fleming con perfetta mobilità dei capitali: (a) In Cambi Fissi la politica fiscale è massimamente efficace grazie all'accomodamento monetario endogeno; (b) In Cambi Flessibili la politica monetaria è massimamente efficace grazie al deprezzamento del cambio e al traino delle esportazioni nette.}
+\label{fig:mundell_fleming_cambi_fissi_flessibili}
+\end{figure}
+
+\subsection{Quadro Sinottico Comparativo di Mundell-Fleming}
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{l X X}
+\toprule
+\textbf{Regime di Cambio} & \textbf{Politica Fiscale ($\Delta G > 0$)} & \textbf{Politica Monetaria ($\Delta M > 0$)} \\
+\midrule
+\textbf{Cambi Fissi} & 
+\textbf{Massimamente Efficace}\newline
+$\Delta Y = \alpha_{\text{aperto}} \Delta G$\newline
+($r = r^*$, $\LM$ si sposta a destra, zero spiazzamento) & 
+\textbf{Completamente Inefficace}\newline
+$\Delta Y = 0$\newline
+(la moneta è endogena; perdita di riserve valutarie) \\
+\midrule
+\textbf{Cambi Flessibili} & 
+\textbf{Completamente Inefficace}\newline
+$\Delta Y = 0$\newline
+(spiazzamento totale da cambio: $\cambionom \uparrow \implies \Delta NX = -\Delta G$) & 
+\textbf{Massimamente Efficace}\newline
+$\Delta Y = \frac{1}{k}\Delta \frac{M}{P}$\newline
+(deprezzamento del cambio: $\cambionom \downarrow \implies NX \uparrow$) \\
+\bottomrule
+\end{tabularx}
+\caption{Matrice riassuntiva dell'efficacia delle politiche economiche nel Modello Mundell-Fleming.}
+\label{tab:sinottico_mundell_fleming}
+\end{table}
+
+\section{Il Trilemma Macroeconomico (Trinità Impossibile di Mundell)}
+
+\begin{teorema}{Il Trilemma Macroeconomico (Mundell-Obstfeld)}{trilemma_mundell}
+Un'economia nazionale integrata nel sistema mondiale può scegliere \textbf{contemporaneamente al massimo due} dei seguenti tre regimi istituzionali:
+\begin{enumerate}
+    \item \textbf{Stabilità del Tasso di Cambio (Regime di Cambi Fissi)};
+    \item \textbf{Perfetta Mobilità Internazionale dei Capitali (Integrazione Finanziaria)};
+    \item \textbf{Autonomia della Politica Monetaria Nazionale}.
+\end{enumerate}
+È analiticamente e operativamente impossibile conseguire simultaneamente tutti e tre gli obiettivi.
+\end{teorema}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Vertici del Triangolo
+    \coordinate (V1) at (0, 0);          % Cambi Fissi
+    \coordinate (V2) at (7.0, 0);        % Autonomia Monetaria
+    \coordinate (V3) at (3.5, 5.5);      % Perfetta Mobilità Capitali
+
+    % Disegno lati del triangolo
+    \draw[line width=2pt, color=navyblue] (V1) -- (V2) -- (V3) -- cycle;
+
+    % Nodi ai vertici
+    \node[rectangle, draw=navyblue, fill=navyblue!12!white, line width=1.2pt, rounded corners=4pt, align=center, font=\small\bfseries] at (V1) {
+        \textbf{1. Cambi Fissi}\\
+        (Stabilità Valutaria)
+    };
+
+    \node[rectangle, draw=purpleaccent, fill=purpleaccent!12!white, line width=1.2pt, rounded corners=4pt, align=center, font=\small\bfseries] at (V2) {
+        \textbf{2. Politica Monetaria}\\
+        \textbf{Autonoma}
+    };
+
+    \node[rectangle, draw=forestgreen, fill=forestgreen!12!white, line width=1.2pt, rounded corners=4pt, align=center, font=\small\bfseries] at (V3) {
+        \textbf{3. Libera Circolazione}\\
+        \textbf{dei Capitali}
+    };
+
+    % Etichette sui tre lati con esempi storici
+    \node[align=center, font=\scriptsize\bfseries, color=navyblue, rotate=58] at (1.5, 3.0) {
+        \textbf{Opzione A: Eurozona / Gold Standard}\\
+        (Cambi Fissi + Libera Mobilità)\\
+        $\implies$ Rinuncia alla sovranità monetaria
+    };
+
+    \node[align=center, font=\scriptsize\bfseries, color=purpleaccent, rotate=-58] at (5.5, 3.0) {
+        \textbf{Opzione B: USA / UK / Giappone}\\
+        (Cambi Flessibili + Libera Mobilità)\\
+        $\implies$ Rinuncia alla stabilità del cambio
+    };
+
+    \node[align=center, font=\scriptsize\bfseries, color=crimsonred] at (3.5, -0.6) {
+        \textbf{Opzione C: Accordi di Bretton Woods (1944-1971) / Cina anni '90}\\
+        (Cambi Fissi + Politica Monetaria Autonoma)\\
+        $\implies$ Rinuncia alla libera mobilità dei capitali (Controlli sui capitali)
+    };
+
+\end{tikzpicture}
+\caption{La Trinità Impossibile (Trilemma di Mundell). Ciascun Paese deve collocarsi necessariamente su uno dei tre lati del triangolo, rinunciando all'obiettivo posto al vertice opposto.}
+\label{fig:trilemma_mundell}
+\end{figure}
+
+\section{Metodi Risolutivi ed Eserciziario d'Esame}
+
+\begin{metodo}[Algoritmo Risolutivo per il Modello Mundell-Fleming]
+Per risolvere un problema di economia aperta con perfetta mobilità dei capitali:
+\begin{enumerate}
+    \item \textbf{Identificazione del Regime di Cambio}:
+    \begin{itemize}
+        \item Se \textbf{Cambi Fissi}: fissare $r = r^*$, $\cambionom = \bar{\cambionom}$. Il reddito $Y^*$ è determinato interamente dalla curva IS al tasso $r^*$. L'offerta di moneta $M$ è endogena e si ricava sostituendo $(Y^*, r^*)$ nella LM.
+        \item Se \textbf{Cambi Flessibili}: fissare $r = r^*$ e offerta di moneta $M = \bar{M}$. Il reddito $Y^*$ è determinato interamente dalla curva LM al tasso $r^*$. Il tasso di cambio nominale di equilibrio $\cambionom^*$ si ricava sostituendo $(Y^*, r^*)$ nella curva IS.
+    \end{itemize}
+    \item \textbf{Valutazione degli Shock}:
+    \begin{itemize}
+        \item In cambi fissi con $\Delta G$: calcolare $\Delta Y = \alpha_{\text{aperto}}\Delta G$ e l'incremento di moneta $\Delta M = P(k \Delta Y)$.
+        \item In cambi flessibili con $\Delta G$: $\Delta Y = 0$; calcolare la svalutazione/apprezzamento necessario ad assorbire lo shock: $\Delta NX = -\Delta G$.
+    \end{itemize}
+\end{enumerate}
+\end{metodo}
+
+\begin{esercizio}[Risoluzione Completa Mundell-Fleming in Cambi Fissi e Flessibili]
+Si consideri una piccola economia aperta descritta dalle seguenti relazioni:
+\begin{align*}
+    C &= 200 + 0{,}8(Y - T), \quad T = 0{,}25 Y, \quad I = 400 - 2000 r, \quad G = 300 \\
+    NX &= 150 - 0{,}1 Y - 100 \cambionom \\
+    \left(\frac{M}{P}\right)^{\mathrm{d}} &= 0{,}5 Y - 1000 r, \quad P = 1{,}0, \quad r^* = 0{,}05 \; (5\%)
+\end{align*}
+\textbf{Richieste}:
+\begin{enumerate}
+    \item Determinare l'equazione della curva IS ed esprimere $Y$ in funzione di $r$ ed $\cambionom$.
+    \item \textbf{Regime di Cambi Fissi} con parità fissata a $\bar{\cambionom} = 1{,}0$: calcolare il reddito di equilibrio $Y^*$, lo stock di moneta di equilibrio $M^*$, il consumo $C^*$, l'investimento $I^*$ e il saldo commerciale $NX^*$.
+    \item Valutare l'effetto di un incremento di spesa pubblica $\Delta G = 50$ in regime di cambi fissi.
+    \item \textbf{Regime di Cambi Flessibili} con stock di moneta fissato esogenamente a $\bar{M} = 850$: calcolare il reddito di equilibrio $Y^*$ e il tasso di cambio di equilibrio $\cambionom^*$. Valutare l'effetto di $\Delta G = 50$.
+\end{enumerate}
+
+\textbf{Svolgimento}:
+\begin{enumerate}
+    \item \textbf{Equazione della Curva IS}:
+    \begin{align*}
+        Y &= C + I + G + NX = 200 + 0{,}8(0{,}75 Y) + 400 - 2000 r + 300 + 150 - 0{,}1 Y - 100 \cambionom \\
+        Y &= 1050 + 0{,}6 Y - 0{,}1 Y - 2000 r - 100 \cambionom = 1050 + 0{,}5 Y - 2000 r - 100 \cambionom \\
+        0{,}5 Y &= 1050 - 2000 r - 100 \cambionom \implies Y = 2100 - 4000 r - 200 \cambionom \quad (\alpha_{\text{aperto}} = 2{,}0)
+    \end{align*}
+
+    \item \textbf{Cambi Fissi ($\bar{\cambionom} = 1{,}0, r = r^* = 0{,}05$)}:
+    \begin{align*}
+        Y^* &= 2100 - 4000(0{,}05) - 200(1{,}0) = 2100 - 200 - 200 = 1700
+    \end{align*}
+    Dalla curva LM ricaviamo l'offerta endogena di moneta $M^*$:
+    \begin{equation*}
+        \frac{M^*}{1{,}0} = 0{,}5(1700) - 1000(0{,}05) = 850 - 50 = 800 \implies M^* = 800
+    \end{equation*}
+    Componenti dell'equilibrio:
+    \begin{align*}
+        C^* &= 200 + 0{,}8(0{,}75 \times 1700) = 200 + 0{,}6(1700) = 200 + 1020 = 1220 \\
+        I^* &= 400 - 2000(0{,}05) = 300 \\
+        NX^* &= 150 - 0{,}1(1700) - 100(1{,}0) = 150 - 170 - 100 = -120 \quad (\text{Disavanzo})
+    \end{align*}
+    Verifica: $C^* + I^* + G + NX^* = 1220 + 300 + 300 - 120 = 1700 = Y^*$.
+
+    \item \textbf{Effetto di $\Delta G = 50$ in Cambi Fissi}:
+    Nuova spesa autonoma: $1050 + 50 = 1100 \implies \text{Nuova IS}: Y = 2200 - 4000 r - 200 \cambionom$.
+    Nuovo reddito:
+    \begin{equation*}
+        Y_1^* = 2200 - 200 - 200 = 1800 \implies \Delta Y = 1800 - 1700 = +100 = \alpha_{\text{aperto}} \Delta G = 2 \times 50
+    \end{equation*}
+    Nuovo stock di moneta endogeno:
+    \begin{equation*}
+        M_1^* = 0{,}5(1800) - 50 = 900 - 50 = 850 \implies \Delta M = +50
+    \end{equation*}
+    La politica fiscale è pienamente efficace con moltiplicatore $2{,}0$.
+
+    \item \textbf{Cambi Flessibili con $\bar{M} = 850$}:
+    In cambi flessibili il reddito è bloccato dalla LM al tasso $r = r^* = 0{,}05$:
+    \begin{equation*}
+        850 = 0{,}5 Y - 1000(0{,}05) \implies 0{,}5 Y = 850 + 50 = 900 \implies Y^* = 1800
+    \end{equation*}
+    Sostituendo $Y = 1800$ e $r = 0{,}05$ nell'equazione della IS iniziale:
+    \begin{equation*}
+        1800 = 2100 - 4000(0{,}05) - 200 \cambionom = 1900 - 200 \cambionom \implies 200 \cambionom = 100 \implies \cambionom^* = 0{,}50
+    \end{equation*}
+    Se ora il governo aumenta la spesa di $\Delta G = 50$, dalla LM il reddito rimane inchiodato a $Y^* = 1800$ ($\Delta Y = 0$).
+    Dalla nuova equazione IS ($Y = 2200 - 4000 r - 200 \cambionom$):
+    \begin{equation*}
+        1800 = 2200 - 200 - 200 \cambionom_1 \implies 200 \cambionom_1 = 200 \implies \cambionom_1^* = 1{,}00
+    \end{equation*}
+    Il tasso di cambio si apprezza da $0{,}50$ a $1{,}00$ (+100 per cento), provocando una contrazione delle esportazioni nette esattamente di:
+    \begin{equation*}
+        \Delta NX = -100(1{,}00 - 0{,}50) = -50 = -\Delta G \quad (\textbf{Spiazzamento Totale da Cambio})
+    \end{equation*}
+\end{enumerate}
+\end{esercizio}
+
+\begin{esame}[Tranelli Cruciali sul Modello Mundell-Fleming]
+\begin{enumerate}
+    \item \textbf{Spiazzamento Fiscale}: in cambi fissi non c'è spiazzamento (massima efficacia); in cambi flessibili lo spiazzamento è del 100 per cento, ma avviene sul \textbf{tasso di cambio reale e sulle esportazioni nette} ($NX \downarrow$), non sul tasso di interesse o sugli investimenti ($r = r^*$).
+    \item \textbf{Sovranità Monetaria}: all'esame si chiede spesso perché un Paese dell'Eurozona non possa attuare una politica monetaria nazionale. La risposta risiede nel Trilemma: avendo cambi fissi irrevocabili (euro) e perfetta mobilità dei capitali, la Banca Centrale nazionale non può manovrare autonomamente l'offerta di moneta o i tassi di interesse.
+\end{enumerate}
+\end{esame}

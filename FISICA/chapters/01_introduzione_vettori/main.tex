@@ -1,0 +1,501 @@
+% ==============================================================================
+% CAPITOLO 01 - INTRODUZIONE ALLA FISICA, GRANDEZZE E CALCOLO VETTORIALE
+% ==============================================================================
+\chapter{Introduzione alla Fisica, Grandezze e Calcolo Vettoriale}
+\label{chap:introduzione_vettori}
+
+\begin{tcolorbox}[enhanced, breakable, colback=navyblue!4!white, colframe=navyblue!80!black,
+    coltitle=white, fonttitle=\bfseries\sffamily, title={Quadro Sinottico del Capitolo 01 (Corrispondenza: Lezione 01)},
+    sharp corners, rounded corners=south, boxrule=1pt]
+\textbf{Collocazione Modulare:} Parte I -- Cinematica e Dinamica del Punto Materiale\\
+\textbf{Trascrizione di Riferimento:} \texttt{trascrizioni/Lezione\_01\_2021-09-29\_Introduzione\_Grandezze\_Fisiche\_Vettori\_Cinematica\_1D.md}\\
+\textbf{Manuale di Riferimento:} Focardi, Massa, Ugolini -- \emph{Fisica Generale: Meccanica e Termodinamica} (Capitoli 1 e 2)\\
+\textbf{Obiettivi Didattici e Competenze:}\par
+\begin{itemize}
+    \item Comprendere il metodo galileiano, la modellizzazione fisica e il passaggio dal problema reale alla formalizzazione quantitativa.
+    \item Padroneggiare il Sistema Internazionale (SI), i monomi dimensionali, i prefissi e l'analisi dimensionale come strumento di verifica algebrica automatica.
+    \item Applicare rigorosamente il metodo del fattore unitario per le conversioni di unità di misura e la gestione delle variazioni finite ($\Delta$).
+    \item Assimilare le definizioni operative di unità astronomiche (Anno Luce, Unità Astronomica, Parsec) e risolvere problemi di stima (stime di Fermi).
+    \item Padroneggiare l'algebra vettoriale in $\R^3$: componenti cartesiane, prodotto scalare (proiezioni), prodotto vettoriale (aree e rotazioni), prodotto misto e derivazione temporale di vettori e versori (formule di Poisson).
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5em}
+
+% ------------------------------------------------------------------------------
+\section{Il Metodo Scientifico, la Modellizzazione e il Problem Solving}
+\label{sec:metodo_scientifico}
+% ------------------------------------------------------------------------------
+
+La fisica è una scienza sperimentale e quantitativa che ha per scopo l'individuazione e la formulazione delle leggi fondamentali che governano i fenomeni naturali. Per l'ingegnere, lo studio della fisica costituisce il fondamento metodologico per il \emph{problem solving}: la capacità di analizzare un sistema fisico o un processo industriale complesso, estrarne le variabili dominanti, trascurare gli effetti secondari e tradurre la realtà empirica nel linguaggio rigoroso della matematica.
+
+\begin{definizione}{Modello Fisico e Approssimazione}{def:modello_fisico}
+Un \textbf{modello fisico} è una rappresentazione schematizzata e semplificata di un sistema reale, progettata per descriverne il comportamento con un prefissato livello di accuratezza entro uno specifico dominio di validità.
+\end{definizione}
+
+\begin{esempio}[Livelli di Modellizzazione di un Aereo]
+Consideriamo il moto di un aereo di linea:
+\begin{itemize}
+    \item \textbf{Modello del Punto Materiale}: se l'obiettivo è studiare la rotta transcontinentale da Roma a New York ($d \approx 7000\text{ km}$), le dimensioni lineari dell'aereo ($L \approx 60\text{ m}$) sono del tutto trascurabili rispetto alla distanza percorsa ($L/d \approx 10^{-5}$). L'aereo è descritto come un punto geometrico dotato di massa $M$ e posizione $\vec{r}(t)$.
+    \item \textbf{Modello del Corpo Rigido}: durante le manovre di decollo, rollio, beccheggio e atterraggio, l'orientazione spaziale e la rotazione attorno al baricentro sono fondamentali; l'aereo viene allora modellizzato come un solido esteso indeformabile.
+    \item \textbf{Modello Deformabile / Aerodinamico}: nello studio delle sollecitazioni sulle ali, della portanza e delle turbolenze dell'aria circostante, si considerano la flessione strutturale e le equazioni della dinamica dei fluidi continui.
+\end{itemize}
+\end{esempio}
+
+\begin{osservazione}[Falsificabilità delle Teorie Fisiche]
+Una legge fisica non è una verità immutabile, ma un'ipotesi verificata sperimentalmente fino a prova contraria (principio di falsificabilità di Popper). Una nuova evidenza sperimentale può limitare il campo di applicabilità di una legge (es. il passaggio dalla meccanica newtoniana alla relatività speciale per velocità prossime a quella della luce $c$).
+\end{osservazione}
+
+% ------------------------------------------------------------------------------
+\section{Grandezze Fisiche, Sistema Internazionale e Analisi Dimensionale}
+\label{sec:grandezze_si}
+% ------------------------------------------------------------------------------
+
+Una proprietà della materia o di un fenomeno è una \textbf{grandezza fisica} se può essere misurata oggettivamente, ovvero se è possibile stabilire un protocollo operativo per associarle un valore numerico e un'unità di misura.
+
+\subsection{Grandezze Fondamentali e Derivate del Sistema Internazionale (SI)}
+
+Nel Sistema Internazionale (SI), detto storicamente anche sistema **MKS**, la meccanica poggia su tre grandezze fondamentali indipendenti:
+\begin{enumerate}
+    \item \textbf{Lunghezza} ($L$): unità di misura il \textbf{metro} ($\si{\metre}$), definito operativamente tramite la velocità della luce nel vuoto ($c = \SI{299792458}{\metre\per\second}$).
+    \item \textbf{Tempo} ($T$): unità di misura il \textbf{secondo} ($\si{\second}$), definito tramite la frequenza di transizione iperfine del cesio-133.
+    \item \textbf{Massa} ($M$): unità di misura il \textbf{chilogrammo} ($\si{\kilogram}$), definito fissando il valore numerico della costante di Planck $h$.
+\end{enumerate}
+
+\begin{definizione}{Monomio Dimensionale}{def:monomio_dimensionale}
+Ogni grandezza derivata $Q$ possiede un'equazione dimensionale espressa esclusivamente sotto forma di \textbf{monomio}:
+\begin{equation}
+    [Q] = [L]^\alpha \, [M]^\beta \, [T]^\gamma
+    \label{eq:monomio_dimensionale}
+\end{equation}
+dove $\alpha, \beta, \gamma \in \mathbb{Q}$ sono gli esponenti dimensionali.
+\end{definizione}
+
+\begin{esame}[Impossibilità di Polinomi Dimensionali]
+Un'unità di misura non può mai essere un polinomio (es. $\si{\kilogram} + \si{\metre}$). Le grandezze fisiche si combinano tra loro solo mediante prodotti, quozienti o potenze dimensionali.
+\end{esame}
+
+\begin{table}[htbp]
+\centering
+\caption{Prefissi del Sistema Internazionale (multipli e sottomultipli).}
+\label{tab:prefissi_si}
+\begin{tabularx}{\textwidth}{lcccc|lcccc}
+\toprule
+\textbf{Prefisso} & \textbf{Simbolo} & \textbf{Fattore} & \textbf{Ordine} & \textbf{Esempio} & \textbf{Prefisso} & \textbf{Simbolo} & \textbf{Fattore} & \textbf{Ordine} & \textbf{Esempio} \\
+\midrule
+deci  & $\mathrm{d}$ & $10^{-1}$ & $-1$ & $\si{\deci\metre}$ & deca & $\mathrm{da}$ & $10^{1}$  & $+1$ & $\si{\deca\metre}$ \\
+centi & $\mathrm{c}$ & $10^{-2}$ & $-2$ & $\si{\centi\metre}$ & etto & $\mathrm{h}$  & $10^{2}$  & $+2$ & $\si{\hecto\pascal}$ \\
+milli & $\mathrm{m}$ & $10^{-3}$ & $-3$ & $\si{\milli\second}$ & chilo & $\mathrm{k}$  & $10^{3}$  & $+3$ & $\si{\kilo\gram}$ \\
+micro & $\mu$        & $10^{-6}$ & $-6$ & $\si{\micro\metre}$ & mega & $\mathrm{M}$  & $10^{6}$  & $+6$ & $\si{\mega\joule}$ \\
+nano  & $\mathrm{n}$ & $10^{-9}$ & $-9$ & $\si{\nano\second}$ & giga & $\mathrm{G}$  & $10^{9}$  & $+9$ & $\si{\giga\watt}$ \\
+pico  & $\mathrm{p}$ & $10^{-12}$ & $-12$ & $\si{\pico\farad}$ & tera & $\mathrm{T}$  & $10^{12}$ & $+12$ & $\si{\tera\byte}$ \\
+femto & $\mathrm{f}$ & $10^{-15}$ & $-15$ & $\si{\femto\metre}$ & peta & $\mathrm{P}$  & $10^{15}$ & $+15$ & $\si{\peta\joule}$ \\
+atto  & $\mathrm{a}$ & $10^{-18}$ & $-18$ & $\si{\atto\second}$ & exa  & $\mathrm{E}$  & $10^{18}$ & $+18$ & $\si{\exa\metre}$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Principio di Omogeneità e Funzioni Trascendenti}
+
+\begin{legge}{Principio di Omogeneità Dimensionale}{legge:omogeneita_dimensionale}
+In qualsiasi equazione fisica valida:
+\begin{equation}
+    A + B = C
+\end{equation}
+tutti i termini addendi e il risultato devono avere la medesima dimensione fisica:
+\begin{equation}
+    [A] = [B] = [C]
+\end{equation}
+Non ha senso fisico sommare grandezze con dimensioni diverse (es. una massa con una lunghezza).
+\end{legge}
+
+\begin{teorema}{Adimensionalità degli Argomenti delle Funzioni Trascendenti}{teo:funzioni_trascendenti}
+L'argomento di qualsiasi funzione trascendente ($\exp(z)$, $\ln(z)$, $\sin(z)$, $\cos(z)$, $\tan(z)$) deve essere una grandezza \textbf{adimensionale}: $[z] = 1$.
+\end{teorema}
+
+\begin{dimostrazione}
+Ogni funzione analitica $f(z)$ può essere espansa in serie di potenze di Taylor attorno all'origine:
+\begin{equation}
+    f(z) = \sum_{n=0}^{\infty} c_n z^n = c_0 + c_1 z + c_2 z^2 + c_3 z^3 + \dots
+\end{equation}
+Applicando il principio di omogeneità dimensionale all'espansione, ogni addendo $c_n z^n$ deve avere la stessa dimensione. Poiché $c_0$ è un coefficiente numerico puro adimensionale ($[c_0]=1$), deve risultare:
+\begin{equation}
+    [z]^0 = [z]^1 = [z]^2 = \dots = [z]^n \implies [z] = 1
+\end{equation}
+Se $z$ possedesse un'unità di misura (ad esempio $\si{\kilogram}$), la serie genererebbe una somma insensata di $\si{\kilogram} + \si{\kilogram}^2 + \si{\kilogram}^3$, violando l'omogeneità.
+\end{dimostrazione}
+
+\begin{definizione}{Radiante come Numero Puro}{def:radiante}
+L'angolo piano $\theta$ sotteso da un arco di circonferenza $s$ di raggio $R$ è definito come:
+\begin{equation}
+    \theta = \frac{s}{R} \implies [\theta] = \frac{[L]}{[L]} = 1
+\end{equation}
+Il \textbf{radiante} ($\si{\radian}$) è pertanto un numero puro adimensionale.
+\end{definizione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \draw[thick, fill=blue!5] (0,0) -- (3,0) arc (0:45:3) -- cycle;
+    \draw[navyblue, thick] (0,0) -- (3,0) node[midway, below] {$R$};
+    \draw[navyblue, thick] (0,0) -- (45:3) node[midway, above left] {$R$};
+    \draw[crimsonred, very thick] (3,0) arc (0:45:3) node[midway, right] {$s = R\theta$};
+    \draw[purpleaccent, thick, -{Stealth}] (0.8,0) arc (0:45:0.8) node[midway, right] {$\theta = \frac{s}{R}$};
+    \filldraw[black] (0,0) circle (1.5pt) node[below left] {$O$};
+\end{tikzpicture}
+\end{center}
+
+\begin{metodo}[Controllo Dimensionale nelle Formule]
+Per verificare immediatamente la plausibilità di un'equazione derivata durante un calcolo:
+\begin{enumerate}
+    \item Sostituire a ciascuna variabile la sua dimensione fondamentale $[L]$, $[M]$, $[T]$.
+    \item Semplificare le frazioni algebriche dimensionali a destra e a sinistra del segno di uguale.
+    \item Se i due membri non coincidono, l'espressione contiene un errore algebrico a monte e va corretta prima di inserire i valori numerici.
+\end{enumerate}
+\end{metodo}
+
+% ------------------------------------------------------------------------------
+\section{Conversioni di Unità, Variazioni Finite e Stime di Fermi}
+\label{sec:conversioni_stime}
+% ------------------------------------------------------------------------------
+
+\subsection{Metodo del Fattore Unitario}
+Per convertire un valore da un'unità all'altra si moltiplica per una frazione equivalente a $1$ costruita con l'uguaglianza tra le due unità.
+
+\begin{esempio}[Conversione da $\si{\kilo\metre\per\hour}$ a $\si{\metre\per\second}$]
+Sapendo che $\SI{1}{\kilo\metre} = \SI{1000}{\metre}$ e $\SI{1}{\hour} = \SI{3600}{\second}$:
+\begin{equation}
+    v = \SI{100}{\kilo\metre\per\hour} = 100\,\frac{\si{\kilo\metre}}{\si{\hour}} \times \left(\frac{\SI{1000}{\metre}}{\SI{1}{\kilo\metre}}\right) \times \left(\frac{\SI{1}{\hour}}{\SI{3600}{\second}}\right) = \frac{100}{3{,}6}\,\si{\metre\per\second} \approx \SI{27.78}{\metre\per\second}
+\end{equation}
+\end{esempio}
+
+\subsection{Variazioni Finite ($\Delta$) e Loro Segno}
+
+\begin{definizione}{Operatore Variazione $\Delta$}{def:operatore_delta}
+Data una qualsiasi grandezza fisica $X$, la sua variazione finita nell'intervallo tra lo stato iniziale $i$ e lo stato finale $f$ è definita rigorosamente da:
+\begin{equation}
+    \Delta X \coloneqq X_f - X_i
+\end{equation}
+\end{definizione}
+
+\begin{esame}[Attenzione al Segno di $\Delta$]
+La sottrazione non è commutativa: $\Delta X = X_f - X_i \neq X_i - X_f$.
+\begin{itemize}
+    \item Se la grandezza cresce ($X_f > X_i$), $\Delta X > 0$ (variazione positiva / incremento).
+    \item Se la grandezza diminuisce ($X_f < X_i$), $\Delta X < 0$ (variazione negativa / decremento).
+\end{itemize}
+\end{esame}
+
+% ------------------------------------------------------------------------------
+\section{Esercizi Risolti ed Applicativi della Lezione 01}
+\label{sec:esercizi_lezione_01}
+% ------------------------------------------------------------------------------
+
+\begin{esercizio}[Anno Luce e Distanza Terra-Sole]
+\textbf{Testo:}
+\begin{enumerate}
+    \item Calcolare il valore in metri di $1\text{ anno luce}$ ($\si{\ly}$), definito come la distanza percorsa nel vuoto dalla luce ($c = \SI{2.9979e8}{\metre\per\second}$) in un anno siderale ($\SI{365.25}{\text{giorni}}$).
+    \item Esprimere la distanza media Terra-Sole ($1\text{ Unità Astronomica} = \SI{1.496e11}{\metre}$) in anni luce e in minuti luce.
+\end{enumerate}
+
+\textbf{Risoluzione Guidata:}
+\begin{enumerate}
+    \item \textbf{Calcolo dei secondi in un anno:}
+    \begin{equation}
+        \Delta t_{\text{anno}} = 365{,}25 \times 24 \times 3600\,\si{\second} = \SI{3.15576e7}{\second} \approx \pi \times 10^7\,\si{\second}
+    \end{equation}
+    La distanza di 1 anno luce vale:
+    \begin{equation}
+        1\,\si{\ly} = c \cdot \Delta t_{\text{anno}} = (\SI{2.9979e8}{\metre\per\second}) \times (\SI{3.15576e7}{\second}) = \mathbf{\SI{9.461e15}{\metre}}
+    \end{equation}
+    
+    \item \textbf{Distanza Terra-Sole:}
+    \begin{equation}
+        d_{\text{TS}} = \frac{\SI{1.496e11}{\metre}}{\SI{9.461e15}{\metre\per\ly}} = \mathbf{\SI{1.581e-5}{\ly}}
+    \end{equation}
+    In minuti luce:
+    \begin{equation}
+        t_{\text{luce}} = \frac{d_{\text{TS}}}{c} = \frac{\SI{1.496e11}{\metre}}{\SI{2.9979e8}{\metre\per\second}} \approx \SI{499}{\second} \approx \mathbf{8\text{ minuti e } 19\text{ secondi}}
+    \end{equation}
+\end{enumerate}
+\end{esercizio}
+
+\begin{esercizio}[Definizione Geometrica e Calcolo del Parsec]
+\textbf{Testo:}
+Il \textbf{parsec} ($\si{\parsec}$, \emph{parallax second}) è la distanza alla quale il semiasse maggiore dell'orbita terrestre ($1\text{ AU} = \SI{1.496e11}{\metre}$) sottende un angolo di parallasse di $1''$ (un secondo d'arco). Calcolare il valore di $1\text{ pc}$ in metri, in $\si{\astronomicalunit}$ e in $\si{\ly}$.
+\end{esercizio}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+    % Sole e Terra
+    \filldraw[orange!90!black] (0,0) circle (4pt) node[below=2pt] {Sole};
+    \filldraw[blue!70!black] (0,2.5) circle (3pt) node[above=2pt] {Terra};
+    \draw[navyblue, thick, dashed] (0,0) -- (0,2.5) node[midway, left] {$1\text{ AU}$};
+    
+    % Stella distante
+    \filldraw[crimsonred] (8,0) circle (2.5pt) node[right=2pt] {Stella a $1\text{ pc}$};
+    \draw[forestgreen, thick] (0,0) -- (8,0) node[midway, below] {$d = 1\text{ pc}$};
+    \draw[charcoalgray, thick] (0,2.5) -- (8,0);
+    
+    % Angolo di parallasse
+    \draw[purpleaccent, thick, -{Stealth}] (6.8,0) arc (180:162.6:1.2) node[midway, left=2pt] {$\theta = 1''$};
+    \draw[dashed, gray] (0,0) rectangle (0.3,0.3);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Dimostrazione e Calcolo:}
+Poiché l'angolo $\theta = 1''$ è estremamente piccolo, vale l'approssimazione per piccoli angoli $\tan\theta \approx \sin\theta \approx \theta_{\text{rad}}$:
+\begin{equation}
+    \theta_{\text{rad}} = 1'' \times \left(\frac{1^\circ}{3600''}\right) \times \left(\frac{\pi\text{ rad}}{180^\circ}\right) = \frac{\pi}{648000}\,\si{\radian} \approx \SI{4.84814e-6}{\radian}
+\end{equation}
+Dalla relazione trigonometrica $1\text{ AU} = d \cdot \tan\theta \approx d \cdot \theta_{\text{rad}}$:
+\begin{equation}
+    1\,\si{\parsec} = \frac{1\,\si{\astronomicalunit}}{\theta_{\text{rad}}} = \frac{\SI{1.496e11}{\metre}}{\SI{4.84814e-6}{\radian}} = \mathbf{\SI{3.086e16}{\metre}}
+\end{equation}
+In unità astronomiche e anni luce:
+\begin{equation}
+    1\,\si{\parsec} = \frac{1}{\SI{4.84814e-6}{}}\,\si{\astronomicalunit} \approx \mathbf{206265\,\si{\astronomicalunit}} \approx \mathbf{3{,}26\,\si{\ly}}
+\end{equation}
+
+\begin{esercizio}[Stima Dimensionale del Combustibile per Viaggio Interstellare]
+\textbf{Testo:}
+Stimare tramite analisi dimensionale il volume di carburante $V$ (in litri) necessario a un'astronave di massa $M = \SI{10}{\tonne} = \SI{10000}{\kilogram}$ per raggiungere Proxima Centauri ($d = \SI{4.2}{\ly} \approx \SI{3.97e16}{\metre}$) in un tempo di viaggio $\Delta t = 30\text{ anni} \approx \SI{9.46e8}{\second}$, ipotizzando che la densità di energia specifica della benzina sia $\rho_E = \SI{32}{\mega\joule\per\litre}$.
+\end{esercizio}
+
+\textbf{Risoluzione:}
+\begin{enumerate}
+    \item \textbf{Velocità media di crociera:}
+    \begin{equation}
+        v = \frac{d}{\Delta t} = \frac{\SI{3.97e16}{\metre}}{\SI{9.46e8}{\second}} \approx \SI{4.2e7}{\metre\per\second} = 0{,}14\,c
+    \end{equation}
+    \item \textbf{Energia cinetica dell'astronave (ordine di grandezza non relativistico):}
+    \begin{equation}
+        E_k \sim M v^2 = (10^4\,\si{\kilogram}) \times (\SI{4.2e7}{\metre\per\second})^2 \approx \SI{1.76e19}{\joule}
+    \end{equation}
+    \item \textbf{Volume di combustibile richiesto:}
+    \begin{equation}
+        V = \frac{E_k}{\rho_E} = \frac{\SI{1.76e19}{\joule}}{\SI{32e6}{\joule\per\litre}} \approx \mathbf{\SI{5.5e11}{\litre}} = \SI{5.5e8}{\metre\cubed}
+    \end{equation}
+\end{enumerate}
+\begin{osservazione}[Limite del Modello Classico]
+L'enorme volume ottenuto ($\sim 0{,}55\text{ km}^3$ di carburante) evidenzia l'impossibilità pratica del volo interstellare con propulsione chimica tradizionale e la necessità di considerare il peso del carburante stesso (equazione del razzo di Ciolkovskij).
+\end{osservazione}
+
+\begin{esercizio}[Confronto Energetico: Auto a Benzina vs Auto Elettrica]
+\textbf{Testo:}
+Confrontare l'energia totale immagazzinata in un serbatoio di benzina da $V = \SI{45}{\litre}$ ($\rho_E = \SI{32}{\mega\joule\per\litre}$) con quella di una batteria per auto elettrica di capacità $C = \SI{100}{\kilo\watt\hour}$.
+\end{esercizio}
+
+\textbf{Risoluzione:}
+\begin{itemize}
+    \item \textbf{Energia chimica del serbatoio di benzina:}
+    \begin{equation}
+        E_{\text{benzina}} = 45\,\si{\litre} \times \SI{32}{\mega\joule\per\litre} = \SI{1440}{\mega\joule} = \mathbf{\SI{1.44e9}{\joule}}
+    \end{equation}
+    \item \textbf{Energia elettrica della batteria:}
+    \begin{equation}
+        E_{\text{batteria}} = 100\,\si{\kilo\watt\hour} = 100 \times 10^3\,\si{\watt} \times 3600\,\si{\second} = \SI{360}{\mega\joule} = \mathbf{\SI{3.6e8}{\joule}}
+    \end{equation}
+    \item \textbf{Rapporto energetico:}
+    \begin{equation}
+        \frac{E_{\text{benzina}}}{E_{\text{batteria}}} = \frac{\SI{1440}{\mega\joule}}{\SI{360}{\mega\joule}} = 4{,}0
+    \end{equation}
+\end{itemize}
+\begin{osservazione}[Rendimento dei Motori Termici vs Elettrici]
+Sebbene il serbatoio a benzina contenga circa 4 volte più energia della batteria, il motore a combustione interna ha un rendimento termodinamico del $\eta \approx 25\div 30\%$ (a causa dei limiti imposti dal ciclo di Carnot), dissipando la maggior parte dell'energia in calore. Il motore elettrico ha invece un rendimento $\eta > 90\%$, rendendo l'autonomia effettiva dei due veicoli comparabile.
+\end{osservazione}
+
+% ------------------------------------------------------------------------------
+\section{Elementi di Calcolo Vettoriale per la Fisica}
+\label{sec:calcolo_vettoriale_completo}
+% ------------------------------------------------------------------------------
+
+In fisica le grandezze si dividono in:
+\begin{itemize}
+    \item \textbf{Scalari}: individuate univocamente da un numero reale e dall'unità di misura (es. tempo $t$, massa $m$, temperatura $T$, energia $E$).
+    \item \textbf{Vettoriali}: caratterizzate da un modulo (intensità non negativa), una direzione (la retta d'azione), un verso e, per vettori applicati, un punto di applicazione (es. spostamento $\Delta\vec{r}$, velocità $\vec{v}$, accelerazione $\vec{a}$, forza $\vec{F}$, momento angolare $\vec{L}$).
+\end{itemize}
+
+\subsection{Rappresentazione Cartesiana in $\R^3$}
+
+Fissata una terna cartesiana ortonormale destra $(O, x, y, z)$ con versori fondamentali $\ux, \uy, \uz$ tali che:
+\begin{equation}
+    \ux\cdot\ux = \uy\cdot\uy = \uz\cdot\uz = 1, \qquad \ux\cdot\uy = \uy\cdot\uz = \uz\cdot\ux = 0
+\end{equation}
+un generico vettore $\vec{v}$ si decompone in modo unico come:
+\begin{equation}
+    \vec{v} = v_x \ux + v_y \uy + v_z \uz
+\end{equation}
+dove $v_x, v_y, v_z \in \R$ sono le componenti cartesiane scalari.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Assi
+    \draw[->, thick] (0,0,0) -- (4,0,0) node[below] {$x$};
+    \draw[->, thick] (0,0,0) -- (0,3.5,0) node[left] {$z$};
+    \draw[->, thick] (0,0,0) -- (0,0,3.5) node[below left] {$y$};
+    
+    % Coordinate punto
+    \coordinate (O) at (0,0,0);
+    \coordinate (P) at (2.5,2.2,1.8);
+    \coordinate (Pxy) at (2.5,0,1.8);
+    \coordinate (Px) at (2.5,0,0);
+    \coordinate (Py) at (0,0,1.8);
+    \coordinate (Pz) at (0,2.2,0);
+    
+    % Linee di proiezione
+    \draw[dashed, gray] (Px) -- (Pxy) -- (Py);
+    \draw[dashed, gray] (Pxy) -- (P);
+    \draw[dashed, gray] (P) -- (Pz);
+    
+    % Vettore principale
+    \draw[->, very thick, crimsonred] (O) -- (P) node[above right] {$\vec{v} = v_x\ux + v_y\uy + v_z\uz$};
+    
+    % Versori
+    \draw[->, ultra thick, navyblue] (O) -- (1,0,0) node[below] {$\ux$};
+    \draw[->, ultra thick, navyblue] (O) -- (0,1,0) node[left] {$\uz$};
+    \draw[->, ultra thick, navyblue] (O) -- (0,0,1) node[below left] {$\uy$};
+\end{tikzpicture}
+\end{center}
+
+Il \textbf{modulo} (norma euclidea) del vettore è:
+\begin{equation}
+    |\vec{v}| = v = \sqrt{v_x^2 + v_y^2 + v_z^2}
+\end{equation}
+e il versore associato nella direzione di $\vec{v}$ è:
+\begin{equation}
+    \hat{\bm{v}} = \frac{\vec{v}}{|\vec{v}|} = \frac{v_x}{v}\ux + \frac{v_y}{v}\uy + \frac{v_z}{v}\uz = \cos\alpha\,\ux + \cos\beta\,\uy + \cos\gamma\,\uz
+\end{equation}
+dove $\cos\alpha, \cos\beta, \cos\gamma$ sono i \textbf{coseni direttori}, soddisfacenti l'identità $\cos^2\alpha + \cos^2\beta + \cos^2\gamma = 1$.
+
+\subsection{Prodotto Scalare (Dot Product)}
+
+\begin{definizione}{Prodotto Scalare}{def:prodotto_scalare}
+Dati due vettori $\vec{a}$ e $\vec{b}$ che formano un angolo convesso $\theta \in [0, \pi]$, il loro \textbf{prodotto scalare} è il numero reale:
+\begin{equation}
+    \vec{a}\cdot\vec{b} \coloneqq |\vec{a}| |\vec{b}| \cos\theta
+    \label{eq:prodotto_scalare_geo}
+\end{equation}
+In coordinate cartesiane ortonormali:
+\begin{equation}
+    \vec{a}\cdot\vec{b} = a_x b_x + a_y b_y + a_z b_z
+    \label{eq:prodotto_scalare_cart}
+\end{equation}
+\end{definizione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2]
+    \draw[->, very thick, navyblue] (0,0) -- (4,0) node[right] {$\vec{a}$};
+    \draw[->, very thick, forestgreen] (0,0) -- (2.5,2) node[above right] {$\vec{b}$};
+    \draw[dashed, crimsonred, thick] (2.5,2) -- (2.5,0);
+    \draw[crimsonred, ultra thick] (0,0) -- (2.5,0) node[midway, below] {$b_\parallel = |\vec{b}|\cos\theta$};
+    \draw[purpleaccent, thick, -{Stealth}] (0.8,0) arc (0:38.6:0.8) node[midway, right] {$\theta$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Proprietà fondamentali del prodotto scalare:}
+\begin{enumerate}
+    \item \textbf{Commutatività:} $\vec{a}\cdot\vec{b} = \vec{b}\cdot\vec{a}$.
+    \item \textbf{Distributività rispetto alla somma:} $\vec{a}\cdot(\vec{b} + \vec{c}) = \vec{a}\cdot\vec{b} + \vec{a}\cdot\vec{c}$.
+    \item \textbf{Modulo e quadrato scalare:} $\vec{a}\cdot\vec{a} = |\vec{a}|^2 = a^2$.
+    \item \textbf{Condizione di ortogonalità:} Due vettori non nulli sono perpendicolari se e solo se $\vec{a}\cdot\vec{b} = 0 \iff \theta = \pi/2$.
+    \item \textbf{Calcolo dell'angolo compreso:} $\cos\theta = \frac{\vec{a}\cdot\vec{b}}{|\vec{a}||\vec{b}|} = \frac{a_x b_x + a_y b_y + a_z b_z}{\sqrt{a_x^2+a_y^2+a_z^2}\sqrt{b_x^2+b_y^2+b_z^2}}$.
+\end{enumerate}
+
+\subsection{Prodotto Vettoriale (Cross Product)}
+
+\begin{definizione}{Prodotto Vettoriale}{def:prodotto_vettoriale}
+Il \textbf{prodotto vettoriale} di due vettori $\vec{a}$ e $\vec{b}$ è un vettore $\vec{c} = \vec{a}\times\vec{b}$ definito da:
+\begin{enumerate}
+    \item \textbf{Modulo:} $|\vec{a}\times\vec{b}| = |\vec{a}| |\vec{b}| \sin\theta$ (pari all'area del parallelogramma generato da $\vec{a}$ e $\vec{b}$).
+    \item \textbf{Direzione:} perpendicolare al piano individuato da $\vec{a}$ e $\vec{b}$ ($\vec{c}\perp\vec{a}$ e $\vec{c}\perp\vec{b}$).
+    \item \textbf{Verso:} determinato dalla \textbf{regola della mano destra} (ruotando il primo vettore $\vec{a}$ sul secondo $\vec{b}$ lungo l'angolo minore $\theta$).
+\end{enumerate}
+\end{definizione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    \coordinate (O) at (0,0);
+    \coordinate (A) at (3.5,0);
+    \coordinate (B) at (1.5,2);
+    \coordinate (C) at (5,2);
+    
+    % Parallelogramma
+    \fill[purpleaccent!10] (O) -- (A) -- (C) -- (B) -- cycle;
+    \draw[dashed, gray] (A) -- (C) -- (B);
+    \draw[dashed, crimsonred, thick] (B) -- (1.5,0) node[midway, left] {$h = |\vec{b}|\sin\theta$};
+    
+    % Vettori di base
+    \draw[->, very thick, navyblue] (O) -- (A) node[below right] {$\vec{a}$};
+    \draw[->, very thick, forestgreen] (O) -- (B) node[above left] {$\vec{b}$};
+    
+    % Vettore prodotto vettoriale
+    \draw[->, ultra thick, crimsonred] (O) -- (0,3) node[above] {$\vec{c} = \vec{a}\times\vec{b}$};
+    
+    % Angolo
+    \draw[thick, -{Stealth}] (0.8,0) arc (0:53.13:0.8) node[midway, right=2pt] {$\theta$};
+    \node at (2.8,1) {\textbf{\color{purpleaccent}Area $= |\vec{a}\times\vec{b}|$}};
+\end{tikzpicture}
+\end{center}
+
+In coordinate cartesiane, il prodotto vettoriale si calcola formalmente come determinante:
+\begin{equation}
+    \vec{a}\times\vec{b} = \det \begin{pmatrix} \ux & \uy & \uz \\ a_x & a_y & a_z \\ b_x & b_y & b_z \end{pmatrix} = (a_y b_z - a_z b_y)\ux + (a_z b_x - a_x b_z)\uy + (a_x b_y - a_y b_x)\uz
+\end{equation}
+
+\textbf{Proprietà fondamentali del prodotto vettoriale:}
+\begin{enumerate}
+    \item \textbf{Anticommutatività:} $\vec{b}\times\vec{a} = -(\vec{a}\times\vec{b})$.
+    \item \textbf{Distributività rispetto alla somma:} $\vec{a}\times(\vec{b} + \vec{c}) = \vec{a}\times\vec{b} + \vec{a}\times\vec{c}$.
+    \item \textbf{Auto-prodotto nullo:} $\vec{a}\times\vec{a} = \vec{0}$.
+    \item \textbf{Condizione di parallelismo:} Due vettori non nulli sono paralleli/antiparalleli se e solo se $\vec{a}\times\vec{b} = \vec{0} \iff \theta = 0 \text{ oppure } \pi$.
+    \item \textbf{Prodotti tra versori fondamentali:}
+    \begin{equation}
+        \ux\times\uy = \uz, \qquad \uy\times\uz = \ux, \qquad \uz\times\ux = \uy
+    \end{equation}
+\end{enumerate}
+
+\subsection{Prodotto Misto (Triple Scalar Product)}
+
+\begin{definizione}{Prodotto Misto}{def:prodotto_misto}
+Il \textbf{prodotto misto} di tre vettori $\vec{a}, \vec{b}, \vec{c}$ è lo scalare definito da:
+\begin{equation}
+    \vec{a}\cdot(\vec{b}\times\vec{c}) = \det \begin{pmatrix} a_x & a_y & a_z \\ b_x & b_y & b_z \\ c_x & c_y & c_z \end{pmatrix}
+\end{equation}
+\end{definizione}
+
+\textbf{Significato Geometrico e Proprietà:}
+\begin{itemize}
+    \item Il valore assoluto $|\vec{a}\cdot(\vec{b}\times\vec{c})|$ rappresenta il \textbf{volume del parallelepipedo} avente per spigoli i tre vettori $\vec{a}, \vec{b}, \vec{c}$.
+    \item \textbf{Invarianza per permutazioni cicliche:}
+    \begin{equation}
+        \vec{a}\cdot(\vec{b}\times\vec{c}) = \vec{b}\cdot(\vec{c}\times\vec{a}) = \vec{c}\cdot(\vec{a}\times\vec{b})
+    \end{equation}
+    \item \textbf{Condizione di complanarità:} Tre vettori sono complanari se e solo se $\vec{a}\cdot(\vec{b}\times\vec{c}) = 0$.
+\end{itemize}
+
+\subsection{Derivata di un Vettore e Formule di Poisson}
+
+Quando un vettore $\vec{v}(t)$ varia nel tempo sia in modulo che in direzione, la sua derivata temporale è definita dal limite del rapporto incrementale:
+\begin{equation}
+    \dv{\vec{v}}{t} = \lim_{\Delta t \to 0} \frac{\vec{v}(t+\Delta t) - \vec{v}(t)}{\Delta t} = \dv{v_x}{t}\ux + \dv{v_y}{t}\uy + \dv{v_z}{t}\uz
+\end{equation}
+
+\begin{teorema}{Derivata di un Vettore a Modulo Costante (Formule di Poisson)}{teo:poisson}
+Se un vettore $\vec{u}(t)$ ha modulo costante nel tempo ($|\vec{u}(t)| = u_0 = \text{cost}$, come ad esempio un versore $\hat{\bm{u}}(t)$), la sua derivata temporale è sempre **rigorosamente ortogonale** al vettore stesso:
+\begin{equation}
+    \vec{u}(t)\cdot\dv{\vec{u}}{t} = 0
+\end{equation}
+Inoltre, esiste un vettore velocità angolare istantanea $\vec{\omega}(t)$ tale che:
+\begin{equation}
+    \dv{\hat{\bm{u}}}{t} = \vec{\omega} \times \hat{\bm{u}}
+    \label{eq:poisson_versore}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Poiché $|\vec{u}(t)|^2 = \vec{u}(t)\cdot\vec{u}(t) = u_0^2 = \text{cost}$, deriviamo entrambi i membri rispetto al tempo applicando la regola di Leibniz per il prodotto scalare:
+\begin{equation}
+    \dv{}{t}\left(\vec{u}(t)\cdot\vec{u}(t)\right) = \dv{\vec{u}}{t}\cdot\vec{u}(t) + \vec{u}(t)\cdot\dv{\vec{u}}{t} = 2\,\vec{u}(t)\cdot\dv{\vec{u}}{t} = 0
+\end{equation}
+Dividendo per 2 si ottiene $\vec{u}(t)\cdot\dv{\vec{u}}{t} = 0$, il che dimostra che la derivata temporale è perpendicolare al vettore $\vec{u}(t)$. La variazione infinitesima di un versore consiste esclusivamente in una rotazione pura descritta da $\dd\hat{\bm{u}} = \dd\vec{\theta} \times \hat{\bm{u}}$, da cui dividendo per $\dd t$ segue la formula di Poisson $\dv{\hat{\bm{u}}}{t} = \vec{\omega}\times\hat{\bm{u}}$.
+\end{dimostrazione}

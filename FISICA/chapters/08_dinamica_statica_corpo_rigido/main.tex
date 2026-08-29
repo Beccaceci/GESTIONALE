@@ -1,0 +1,327 @@
+% ==============================================================================
+% CAPITOLO 08 - STATICA E DINAMICA DEL CORPO RIGIDO
+% ==============================================================================
+\chapter{Statica e Dinamica del Corpo Rigido}
+\label{chap:dinamica_statica_corpo_rigido}
+
+\begin{tcolorbox}[enhanced, breakable, colback=navyblue!4!white, colframe=navyblue!80!black,
+    coltitle=white, fonttitle=\bfseries\sffamily, title={Quadro Sinottico del Capitolo 08 (Corrispondenza: Lezioni 16, 17, 18, 19, 20 e 21)},
+    sharp corners, rounded corners=south, boxrule=1pt]
+\textbf{Collocazione Modulare:} Parte II -- Leggi di Conservazione, Urti e Corpo Rigido\\
+\textbf{Trascrizioni di Riferimento:} \texttt{trascrizioni/Lezione\_16\_...md} fino a \texttt{Lezione\_21\_...md}\\
+\textbf{Manuale di Riferimento:} Focardi, Massa, Ugolini -- \emph{Fisica Generale: Meccanica e Termodinamica} (Capitolo 8)\\
+\textbf{Obiettivi Didattici e Competenze:}\par
+\begin{itemize}
+    \item Definire il corpo rigido, i gradi di libertà e la formula fondamentale della cinematica rigida ($\vec{v}_P = \vec{v}_Q + \vec{\omega}\times\vec{PQ}$).
+    \item Calcolare il Momento di Inerzia $I_z$ per geometrie notevoli e dimostrare il Teorema di Huygens-Steiner (assi paralleli).
+    \item Formulare le condizioni cardinali per la statica del corpo rigido ($\sum\vec{F} = \vec{0}$, $\sum\vec{M} = \vec{0}$).
+    \item Padroneggiare la dinamica rotazionale attorno ad un asse fisso ($M_z = I_z \alpha$) e l'energia cinetica $E_k = \frac{1}{2}I_z\omega^2$.
+    \item Analizzare il moto di puro rotolamento (condizione di aderenza $\vec{v}_C = \vec{0}$, conservazione dell'energia meccanica e calcolo dell'attrito statico).
+    \item Studiare il pendolo fisico, il centro di percussione e gli urti anelastici ed elastici con corpi vincolati.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5em}
+
+% ------------------------------------------------------------------------------
+\section{Cinematica e Geometria delle Masse del Corpo Rigido}
+\label{sec:cinematica_rigida}
+% ------------------------------------------------------------------------------
+
+\begin{definizione}{Corpo Rigido}{def:corpo_rigido}
+Un \textbf{corpo rigido} è un sistema continuo di punti materiali in cui la distanza reciproca tra qualsiasi coppia di punti $P_i, P_j$ rimane rigorosamente invariata nel tempo sotto l'azione di qualsiasi forza:
+\begin{equation}
+    |\vec{r}_i(t) - \vec{r}_j(t)| = d_{ij} = \text{cost} \quad \forall t, \, \forall i, j
+\end{equation}
+Un corpo rigido libero nello spazio tridimensionale possiede **6 gradi di libertà** (3 coordinate per la traslazione del $CM$ e 3 angoli di Eulero per l'orientazione spaziale); nel moto piano possiede **3 gradi di libertà**.
+\end{definizione}
+
+\begin{teorema}{Formula Fondamentale della Cinematica dei Corpi Rigidi}{teo:cinematica_rigida}
+Dati due punti arbitrari $P$ e $Q$ solidali al corpo rigido, le rispettive velocità istantanee sono legate dalla relazione:
+\begin{equation}
+    \vec{v}_P = \vec{v}_Q + \vec{\omega} \times \vec{QP}
+    \label{eq:formula_corpo_rigido}
+\end{equation}
+dove $\vec{\omega}(t)$ è il vettore velocità angolare istantanea, identico per tutti i punti del solido.
+\end{teorema}
+
+% ------------------------------------------------------------------------------
+\section{Momento di Inerzia e Teorema di Huygens-Steiner}
+\label{sec:momento_inerzia}
+% ------------------------------------------------------------------------------
+
+\begin{definizione}{Momento di Inerzia rispetto a un Asse}{def:momento_inerzia}
+Dato un asse di rotazione $z$, il \textbf{momento di inerzia} $I_z$ misura l'inerzia del corpo ad accelerare angolarmente attorno a tale asse:
+\begin{equation}
+    I_z \coloneqq \sum_{i=1}^N m_i r_{i\perp}^2 = \int_V r_\perp^2\,\dd m = \int_V r_\perp^2\,\rho(\vec{r})\,\dd V
+    \label{eq:momento_inerzia_def}
+\end{equation}
+dove $r_\perp$ è la distanza ortogonale dell'elemento di massa $\dd m$ dall'asse $z$. L'unità di misura nel SI è $\si{\kilogram\metre\squared}$.
+\end{definizione}
+
+\begin{table}[htbp]
+\centering
+\caption{Momenti di Inerzia di corpi omogenei di massa $M$ rispetto ad assi baricentrali notevoli.}
+\label{tab:momenti_inerzia}
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+\textbf{Corpo Geometrico} & \textbf{Posizione Asse di Rotazione} & \textbf{Momento di Inerzia $I_{CM}$} \\
+\midrule
+\textbf{Asta sottile} (lunghezza $L$) & Asse ortogonale passante per il $CM$ & $I_{CM} = \frac{1}{12}M L^2$ \\
+\textbf{Asta sottile} (lunghezza $L$) & Asse ortogonale passante per un estremo & $I_{\text{est}} = \frac{1}{3}M L^2$ \\
+\textbf{Anello sottile / Cilindro cavo} (raggio $R$) & Asse di simmetria cilindrica & $I_{CM} = M R^2$ \\
+\textbf{Disco pieno / Cilindro omogeneo} (raggio $R$) & Asse di simmetria cilindrica & $I_{CM} = \frac{1}{2}M R^2$ \\
+\textbf{Sfera piena omogenea} (raggio $R$) & Asse diametrale & $I_{CM} = \frac{2}{5}M R^2$ \\
+\textbf{Guscio sferico sottile} (raggio $R$) & Asse diametrale & $I_{CM} = \frac{2}{3}M R^2$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{teorema}{Teorema di Huygens-Steiner (degli Assi Paralleli)}{teo:huygens_steiner}
+Il momento di inerzia $I_z$ di un corpo rigido di massa totale $M$ rispetto a un asse $z$ è pari alla somma del momento di inerzia $I_{CM}$ rispetto all'asse parallelo passante per il Centro di Massa e del prodotto della massa per il quadrato della distanza $d$ tra i due assi:
+\begin{equation}
+    \mathbf{I_z = I_{CM} + M d^2}
+    \label{eq:huygens_steiner}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Poniamo l'origine nel $CM$, cosicché $\int x\,\dd m = \int y\,\dd m = 0$. Consideriamo un asse $z'$ parallelo a $z$ a distanza $d = (x_0, y_0)$:
+\begin{align*}
+    I_{z'} &= \int \left[(x - x_0)^2 + (y - y_0)^2\right]\dd m \\
+    &= \int (x^2 + y^2)\,\dd m + (x_0^2 + y_0^2)\int \dd m - 2x_0 \underbrace{\int x\,\dd m}_{=0} - 2y_0 \underbrace{\int y\,\dd m}_{=0} \\
+    &= I_{CM} + M d^2
+\end{align*}
+\end{dimostrazione}
+
+% ------------------------------------------------------------------------------
+\section{Dinamica Rotazionale attorno ad un Asse Fisso}
+\label{sec:dinamica_rotazionale}
+% ------------------------------------------------------------------------------
+
+Per un corpo rigido vincolato a ruotare attorno a un asse fisso $z$ con velocità angolare $\vec{\omega} = \omega\uz$:
+\begin{itemize}
+    \item La componente assiale del momento angolare vale:
+    \begin{equation}
+        L_z = I_z \omega
+    \end{equation}
+    \item Proiettando la seconda equazione cardinale sull'asse $z$:
+    \begin{equation}
+        \mathbf{M_z^{(E)} = I_z \alpha = I_z \dv{\omega}{t} = I_z \dvtwo{\theta}{t}}
+        \label{eq:seconda_cardinale_rotazione}
+    \end{equation}
+    \item L'\textbf{energia cinetica di rotazione} è:
+    \begin{equation}
+        E_{k,\text{rot}} = \frac{1}{2}I_z \omega^2
+    \end{equation}
+    \item Il \textbf{lavoro del momento torcente} per una rotazione finita da $\theta_1$ a $\theta_2$ è pari alla variazione di energia cinetica rotazionale:
+    \begin{equation}
+        W = \int_{\theta_1}^{\theta_2} M_z\,\dd\theta = \frac{1}{2}I_z \omega_2^2 - \frac{1}{2}I_z \omega_1^2
+    \end{equation}
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+\section{Statica del Corpo Rigido ed Equilibrio}
+\label{sec:statica_corpo_rigido}
+% ------------------------------------------------------------------------------
+
+\begin{legge}{Condizioni Cardinali dell'Equilibrio Statico}{legge:equilibrio_statico}
+Un corpo rigido inizialmente in quiete permane in equilibrio statico se e solo se sono simultaneamente soddisfatte le due equazioni cardinali:
+\begin{equation}
+    \begin{cases}
+        \sum_{i=1}^N \vec{F}_i^{(E)} = \vec{0} & \text{(Equilibrio alla traslazione)} \\[1ex]
+        \sum_{i=1}^N \vec{M}_{O,i}^{(E)} = \vec{0} & \text{(Equilibrio alla rotazione rispetto a un qualsiasi polo } O\text{)}
+    \end{cases}
+    \label{eq:condizioni_statica}
+\end{equation}
+\end{legge}
+
+% ------------------------------------------------------------------------------
+\section{Dinamica del Moto di Puro Rotolamento nel Piano}
+\label{sec:puro_rotolamento}
+% ------------------------------------------------------------------------------
+
+Il moto di puro rotolamento (es. una ruota, una sfera o un cilindro che rotola senza strisciare su una superficie fissa) combina traslazione e rotazione.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Piano orizzontale
+    \draw[thick] (-1,0) -- (5,0);
+    \fill[pattern=north east lines] (-1,-0.2) rectangle (5,0);
+    
+    % Ruota / Cilindro
+    \coordinate (C) at (2,1.5);
+    \draw[thick, navyblue, fill=blue!5] (C) circle (1.5);
+    \filldraw[black] (C) circle (2pt) node[above right] {$CM$};
+    
+    % Vettore velocità del CM
+    \draw[->, ultra thick, crimsonred] (C) -- (3.5, 1.5) node[above] {$\vec{v}_{CM} = \omega R\ux$};
+    
+    % Velocità angolare
+    \draw[->, very thick, purpleaccent] (2, 2.5) arc (90:0:1) node[right] {$\omega$};
+    
+    % Punto di contatto C (CIR)
+    \coordinate (Pcont) at (2,0);
+    \filldraw[forestgreen] (Pcont) circle (2.5pt) node[below=2pt] {$C$ (CIR: $\vec{v}_C = \vec{0}$)};
+    
+    % Forza di attrito statico
+    \draw[->, ultra thick, forestgreen] (Pcont) -- (0.8,0) node[below left] {$\vec{f}_s$};
+    
+    % Punto sommitale T
+    \coordinate (T) at (2,3);
+    \filldraw[black] (T) circle (1.5pt);
+    \draw[->, very thick, navyblue] (T) -- (5, 3) node[above] {$\vec{v}_T = 2\vec{v}_{CM}$};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Condizione di Aderenza e Legami Cinematici}
+Nel punto di contatto istantaneo $C$, la velocità relativa è rigorosamente nulla:
+\begin{equation}
+    \vec{v}_C = \vec{v}_{CM} + \vec{\omega}\times\vec{R}_C = \vec{0} \iff \mathbf{v_{CM} = \omega R, \quad a_{CM} = \alpha R}
+    \label{eq:legami_rotolamento}
+\end{equation}
+Il punto $C$ funge da \textbf{Centro Istantaneo di Rotazione (CIR)}.
+
+\subsection{Energia Cinetica nel Puro Rotolamento (Teorema di König)}
+\begin{equation}
+    E_k = \frac{1}{2}M v_{CM}^2 + \frac{1}{2}I_{CM}\omega^2 = \frac{1}{2}\left(M + \frac{I_{CM}}{R^2}\right)v_{CM}^2 = \frac{1}{2}I_C \omega^2
+    \label{eq:ek_rotolamento}
+\end{equation}
+
+\begin{esame}[Lavoro Nullo dell'Attrito Statico nel Puro Rotolamento]
+Poiché il punto di applicazione istantaneo $C$ ha velocità nulla ($\vec{v}_C = \vec{0}$), la potenza dell'attrito statico è identicamente nulla: $P = \vec{f}_s\cdot\vec{v}_C = 0 \implies W_{f_s} = 0$.
+Nel puro rotolamento **l'energia meccanica totale si conserva integralmente**, a meno di attrito volvente.
+\end{esame}
+
+\subsection{Puro Rotolamento su Piano Inclinato di un Angolo $\theta$}
+Scrivendo le equazioni cardinali:
+\begin{align}
+    \text{Traslazione lungo il piano:} \quad & Mg\sin\theta - f_s = M a_{CM} \\
+    \text{Rotazione attorno al } CM: \quad & f_s R = I_{CM}\alpha = I_{CM}\left(\frac{a_{CM}}{R}\right) \implies f_s = I_{CM}\frac{a_{CM}}{R^2}
+\end{align}
+Sostituendo si ricavano l'accelerazione del baricentro e la forza di attrito statico:
+\begin{equation}
+    \mathbf{a_{CM} = \frac{g\sin\theta}{1 + \frac{I_{CM}}{M R^2}}}, \qquad \mathbf{f_s = Mg\sin\theta\left(\frac{\frac{I_{CM}}{MR^2}}{1 + \frac{I_{CM}}{MR^2}}\right)}
+    \label{eq:acm_rotolamento_piano}
+\end{equation}
+La condizione di non slittamento ($f_s \le \mu_s N = \mu_s Mg\cos\theta$) impone:
+\begin{equation}
+    \mathbf{\tan\theta \le \mu_s \left(1 + \frac{MR^2}{I_{CM}}\right)}
+\end{equation}
+
+% ------------------------------------------------------------------------------
+\section{Esercizi Risolti ed Applicativi con Diagrammi di Corpo Libero}
+\label{sec:esercizi_corpo_rigido}
+% ------------------------------------------------------------------------------
+
+\begin{esercizio}[Gara di Puro Rotolamento su Piano Inclinato]
+\textbf{Testo:}
+Un anello sottile ($I = M R^2$), un disco pieno ($I = \frac{1}{2}M R^2$) e una sfera piena ($I = \frac{2}{5}M R^2$) partono simultaneamente da fermi dalla sommità di un piano inclinato di altezza $h$. Determinare le velocità alla base, l'ordine di arrivo e analizzare dettagliatamente il diagramma delle forze nel punto di contatto e al baricentro.
+\end{esercizio}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Piano inclinato a 30 gradi
+    \draw[thick] (0,0) -- (6,0) -- (6, 3.464) -- cycle;
+    \node at (5.5, 0.3) {$\theta$};
+    
+    % Ruota / Sfera in puro rotolamento
+    \begin{scope}[shift={(3.0, 1.732)}, rotate=30]
+        % Superficie di contatto C
+        \coordinate (C) at (0, -1.2);
+        \coordinate (CM) at (0,0);
+        
+        \draw[very thick, fill=navyblue!15, draw=navyblue] (CM) circle (1.2);
+        \filldraw[black] (CM) circle (2pt) node[above right] {$CM$};
+        \filldraw[crimsonred] (C) circle (2pt) node[below=2pt] {$C$ (CIR)};
+        
+        % Forze al CM
+        \draw[->, ultra thick, forestgreen] (CM) -- (0, -2.2) node[below] {$\vec{P} = M\vec{g}$};
+        
+        % Forze al punto di contatto C
+        \draw[->, ultra thick, navyblue] (C) -- (0, 0.4) node[right] {$\vec{N} = Mg\cos\theta\,\hat{\bm{n}}$};
+        \draw[->, ultra thick, crimsonred] (C) -- (-1.5, -1.2) node[below left] {$\vec{f}_s$ (Attrito statico)};
+        
+        % Verso di rotazione e traslazione
+        \draw[->, very thick, purpleaccent] (0.5, 0.6) arc (45:-45:0.6) node[midway, right] {$\alpha, \omega$};
+        \draw[->, very thick, purpleaccent] (CM) -- (1.5, 0) node[above] {$a_{CM}$};
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[enhanced, breakable, colback=forestgreen!5!white, colframe=forestgreen!80!black,
+    title={\textbf{Analisi delle Forze in Gioco nel Puro Rotolamento}}, fonttitle=\bfseries\sffamily]
+\begin{itemize}
+    \item \textbf{Forza di Attrito Statico ($\vec{f}_s$):}
+    \begin{itemize}
+        \item \textbf{Direzione e Verso:} è applicata nel punto di contatto $C$ e diretta \textbf{in salita lungo il piano inclinato}.
+        \item \textbf{Perché punta verso l'alto:} in assenza di attrito, la componente del peso parallela al piano ($Mg\sin\theta$) farebbe slittare il punto di contatto verso il basso. L'attrito statico si oppone alla tendenza allo slittamento relativo verso il basso.
+        \item \textbf{Ruolo Dinamico:} genera il momento meccanico frenante rispetto al baricentro $\tau_{CM} = f_s R$ che induce l'accelerazione angolare oraria $\alpha = a_{CM}/R$, consentendo la perfetta rotazione senza strisciamento.
+        \item \textbf{Perché compie lavoro nullo ($W_{f_s} = 0$):} il punto geometrico di contatto $C$ ha velocità istantanea rigorosamente nulla ($\vec{v}_C = \vec{0}$). La potenza istantanea erogata dall'attrito è $P = \vec{f}_s\cdot\vec{v}_C = 0 \implies W = 0$. Non vi è dissipazione termica.
+    \end{itemize}
+    \item \textbf{Reazione Normale ($\vec{N}$):} perpendicolare al piano; bilancia la componente $Mg\cos\theta$ e non compie lavoro ($\vec{N}\perp\dd\vec{r}_{CM}$).
+\end{itemize}
+\end{tcolorbox}
+
+\textbf{Risoluzione Analitica:}
+Applicando la conservazione dell'energia meccanica totale ($E_{\text{mec}} = Mgh = \text{cost}$):
+\begin{equation}
+    Mgh = \frac{1}{2}M v_{CM}^2 + \frac{1}{2}I_{CM}\omega^2 = \frac{1}{2}M v_{CM}^2\left(1 + \frac{I_{CM}}{MR^2}\right) \implies \mathbf{v_{CM} = \sqrt{\frac{2gh}{1 + \frac{I_{CM}}{MR^2}}}}
+\end{equation}
+Confrontando il coefficiente di forma $c = \frac{I_{CM}}{MR^2}$:
+\begin{itemize}
+    \item \textbf{Sfera Piena} ($c = 2/5 = 0{,}40$): $v_{CM} = \sqrt{\frac{10}{7}gh} \approx 1{,}195\sqrt{gh}$ (\textbf{$1^\circ$ Posto}).
+    \item \textbf{Disco Pieno} ($c = 1/2 = 0{,}50$): $v_{CM} = \sqrt{\frac{4}{3}gh} \approx 1{,}155\sqrt{gh}$ (\textbf{$2^\circ$ Posto}).
+    \item \textbf{Anello Sottile} ($c = 1{,}00$): $v_{CM} = \sqrt{gh} = 1{,}000\sqrt{gh}$ (\textbf{$3^\circ$ Posto}).
+\end{itemize}
+
+\vspace{0.8em}
+
+\begin{esercizio}[Equilibrio Statico di un'Asta Incernierata con Cavo]
+\textbf{Testo:}
+Un'asta omogenea di massa $M = \SI{10}{\kilogram}$ e lunghezza $L = \SI{2.0}{\metre}$ è incernierata a una parete verticale in $O$ e mantenuta orizzontale da un cavo fissato all'altro estremo $B$, formante un angolo $\alpha = 30^\circ$ con l'asta. Determinare la tensione $T$ del cavo e la reazione vincolare $\vec{R}_O = (R_x, R_y)$ della cerniera.
+\end{esercizio}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Parete verticale
+    \draw[thick] (0,-1) -- (0,3);
+    \fill[pattern=north east lines] (-0.3,-1) rectangle (0,3);
+    
+    % Asta orizzontale
+    \draw[very thick, brown!80!black] (0,0) -- (4,0);
+    \filldraw[black] (0,0) circle (2.5pt) node[below left] {$O$ (Cerniera)};
+    \filldraw[black] (2,0) circle (2pt) node[below] {$CM$};
+    \filldraw[black] (4,0) circle (2pt) node[below right] {$B$};
+    
+    % Cavo
+    \draw[thick, dashed, purpleaccent] (4,0) -- (0, 2.309) node[midway, above right] {Cavo};
+    \draw[thick, purpleaccent, -{Stealth}] (3.2,0) arc (180:150:0.8) node[midway, left] {$\alpha$};
+    
+    % Forze
+    \draw[->, ultra thick, forestgreen] (2,0) -- (2, -1.8) node[right] {$\vec{P} = M\vec{g}$};
+    \draw[->, ultra thick, crimsonred] (4,0) -- ($(4,0) + (-1.732, 1.0)$) node[above] {$\vec{T}$};
+    \draw[->, ultra thick, navyblue] (0,0) -- (1.5, 0) node[above] {$R_x\ux$};
+    \draw[->, ultra thick, navyblue] (0,0) -- (0, 1.5) node[left] {$R_y\uy$};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[enhanced, breakable, colback=forestgreen!5!white, colframe=forestgreen!80!black,
+    title={\textbf{Analisi delle Forze e Condizioni di Statica}}, fonttitle=\bfseries\sffamily]
+\begin{itemize}
+    \item \textbf{Cerniera Ideale ($O$):} non impone alcun vincolo di momento meccanico ($M_z = 0$), ma impedisce qualsiasi traslazione; pertanto esercita una reazione vincolare incognita $\vec{R}_O = R_x\ux + R_y\uy$ avente sia componente orizzontale che verticale.
+    \item \textbf{Tensione del Cavo ($\vec{T}$):} orientata lungo la direzione del cavo (modulo $T$, componenti $T_x = -T\cos\alpha$, $T_y = T\sin\alpha$).
+    \item \textbf{Forza Peso ($\vec{P}$):} applicata nel baricentro geometrico $CM$ a distanza $L/2$ dal perno $O$.
+\end{itemize}
+\end{tcolorbox}
+
+\textbf{Risoluzione Analitica:}
+Imponendo l'equilibrio dei momenti rispetto al polo della cerniera $O$:
+\begin{equation}
+    \sum M_{O,z} = 0 \implies (T\sin\alpha) L - Mg\left(\frac{L}{2}\right) = 0 \implies \mathbf{T = \frac{Mg}{2\sin\alpha} = \frac{10 \times 9{,}81}{2\sin(30^\circ)} = \SI{98.1}{\newton}}
+\end{equation}
+Imponendo l'equilibrio delle forze:
+\begin{align}
+    \sum F_x &= 0 \implies R_x - T\cos\alpha = 0 \implies \mathbf{R_x = T\cos(30^\circ) = 98{,}1 \times \frac{\sqrt{3}}{2} \approx \SI{84.96}{\newton}} \\
+    \sum F_y &= 0 \implies R_y + T\sin\alpha - Mg = 0 \implies \mathbf{R_y = Mg - T\sin(30^\circ) = 98{,}1 - 49{,}05 = \SI{49.05}{\newton}}
+\end{align}

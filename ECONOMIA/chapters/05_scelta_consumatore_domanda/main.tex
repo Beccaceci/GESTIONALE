@@ -1,0 +1,620 @@
+% ==============================================================================
+% CAPITOLO 5: LA SCELTA DEL CONSUMATORE E LA TEORIA DELLA DOMANDA
+% ==============================================================================
+\chapter{La Scelta del Consumatore e la Teoria della Domanda}
+\label{chap:scelta_consumatore_domanda}
+
+\begin{tcolorbox}[colback=navyblue!5!white, colframe=navyblue, title=\textbf{Quadro Concettuale e Obiettivi Didattici}]
+Il presente capitolo sviluppa i fondamenti assiomatici della microeconomia neoclassica: la frontiera delle possibilità di spesa (vincolo di bilancio, prezzi relativi e potere d'acquisto); gli assiomi delle preferenze razionali e le proprietà analitiche delle curve di indifferenza; la definizione e derivazione infinitesima del Saggio Marginale di Sostituzione ($\SMS$); la risoluzione analitica del problema di ottimo del consumatore tramite i moltiplicatori di Lagrange e le condizioni di tangenza; la disamina delle preferenze speciali (Cobb-Douglas, perfetti sostituti con soluzioni d'angolo, perfetti complementi con vertici di Leontief); la derivazione geometrica e algebrica delle curve di domanda marshalliane dai Sentieri di Espansione del Prezzo (SEP); la scomposizione dell'effetto prezzo secondo Hicks e Slutsky (effetto sostituzione, effetto reddito, beni ordinari e Paradosso di Giffen); infine, l'estensione al modello di scelta intertemporale (consumo presente, consumo futuro e tasso di interesse).
+\end{tcolorbox}
+
+\section{Il Vincolo di Bilancio}
+
+\subsection{La Rappresentazione Analitica e Geometrica}
+Si consideri un consumatore razionale che deve allocare il proprio reddito monetario nominale $R > 0$ tra due beni di consumo, $X_1$ e $X_2$, acquistabili sul mercato a prezzi esogeni e positivi $p_1 > 0$ e $p_2 > 0$.
+Un generico \textbf{paniere di consumo} è rappresentato da un vettore nello spazio cartesiano $\R_+^2$:
+\begin{equation}
+    A = (x_1, x_2) \quad \text{con } x_1 \ge 0, \, x_2 \ge 0
+\end{equation}
+
+\begin{definizione}{Insieme di Bilancio e Retta di Bilancio}{vincolo_bilancio}
+L'\textbf{insieme di bilancio} è il sottoinsieme dei panieri accessibili al consumatore la cui spesa complessiva non eccede il reddito disponibile:
+\begin{equation}
+    p_1 x_1 + p_2 x_2 \le R
+\end{equation}
+La \textbf{retta di bilancio} (o frontiera delle possibilità di consumo) rappresenta il luogo geometrico dei panieri che comportano l'esaustione integrale del reddito monetario:
+\begin{equation}
+    p_1 x_1 + p_2 x_2 = R \iff x_2 = \frac{R}{p_2} - \frac{p_1}{p_2} x_1
+\end{equation}
+\end{definizione}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.15, >=Latex]
+    % Assi
+    \draw[->, thick] (0,0) -- (7.5,0) node[below right] {\textbf{Bene 1 ($x_1$)}};
+    \draw[->, thick] (0,0) -- (0,5.8) node[above left] {\textbf{Bene 2 ($x_2$)}};
+    
+    % Insieme di Bilancio (Area ombreggiata)
+    \fill[navyblue!12] (0,0) -- (0,4.8) -- (6.0,0) -- cycle;
+    
+    % Retta di Bilancio Principale
+    \draw[very thick, navyblue] (0, 4.8) node[left] {$\dfrac{R}{p_2}$} -- (6.0, 0) node[below] {$\dfrac{R}{p_1}$};
+    
+    % Pendenza e Angolo
+    \node[navyblue!90!black, font=\bfseries\small] at (4.0, 3.2) {Pendenza: $-\dfrac{p_1}{p_2}$};
+    \node[navyblue!80!black, font=\footnotesize] at (2.0, 1.6) {Insieme dei Panieri Ammissibili};
+    
+    % Panieri Esemplificativi
+    \filldraw[forestgreen] (2.2, 2.0) circle (2.5pt) node[right, font=\footnotesize] {$A$ (Spesa $< R$)};
+    \filldraw[purpleaccent] (3.0, 2.4) circle (2.5pt) node[above right, font=\footnotesize] {$B$ (Spesa $= R$)};
+    \filldraw[crimsonred] (4.5, 3.8) circle (2.5pt) node[above right, font=\footnotesize] {$C$ (Non accessibile)};
+\end{tikzpicture}
+\caption{Rappresentazione geometrica dell'insieme di bilancio e della retta di bilancio $x_2 = \frac{R}{p_2} - \frac{p_1}{p_2} x_1$.}
+\label{fig:vincolo_bilancio_base}
+\end{figure}
+
+\subsection{Significato Economico dei Parametri della Retta}
+I parametri della retta di bilancio racchiudono precisi significati economici:
+\begin{itemize}
+    \item \textbf{Intercetta Verticale ($\frac{R}{p_2}$)}: massima quantità acquistabile di bene 2 se il reddito fosse interamente devoluto al consumo di tale bene (\textbf{potere d'acquisto in termini di bene 2});
+    \item \textbf{Intercetta Orizzontale ($\frac{R}{p_1}$)}: massima quantità acquistabile di bene 1 devolvendo l'intero reddito ad esso (\textbf{potere d'acquisto in termini di bene 1});
+    \item \textbf{Pendenza o Pendenza Economica ($-\frac{p_1}{p_2}$)}: il \textbf{prezzo relativo}, che esprime il costo opportunità oggettivo di mercato del bene 1 in termini di bene 2 (il numero di unità di bene 2 cui il consumatore deve necessariamente rinunciare sul mercato per acquistare una unità addizionale di bene 1).
+\end{itemize}
+
+\subsection{Statica Comparata del Vincolo di Bilancio}
+La configurazione geometrica della retta varia al mutare dei parametri esogeni:
+\begin{enumerate}
+    \item \textbf{Variazione del Reddito ($\Delta R$)}: una variazione del reddito a prezzi costanti non altera la pendenza $-\frac{p_1}{p_2}$, ma genera una \textbf{traslazione parallela} della retta:
+    \begin{itemize}
+        \item $\Delta R > 0$: traslazione verso l'esterno (ampliamento delle possibilità di consumo);
+        \item $\Delta R < 0$: traslazione verso l'origine (contrazione dell'insieme di bilancio).
+    \end{itemize}
+    
+    \item \textbf{Variazione del Prezzo di un Singolo Bene ($\Delta p_1$)}: una variazione di $p_1$ a reddito $R$ e prezzo $p_2$ invariati non sposta l'intercetta verticale $\frac{R}{p_2}$, ma modifica l'intercetta orizzontale $\frac{R}{p_1}$ e la pendenza $-\frac{p_1}{p_2}$, generando una \textbf{rotazione} attorno al perno $\left(0, \frac{R}{p_2}\right)$:
+    \begin{itemize}
+        \item Rincaro ($\Delta p_1 > 0$): rotazione verso l'interno (aumento della pendenza in valore assoluto, riduzione dell'insieme ammissibile);
+        \item Riduzione ($\Delta p_1 < 0$): rotazione verso l'esterno.
+    \end{itemize}
+    
+    \item \textbf{Variazione Proporzionale di Tutti i Prezzi e del Reddito (Assenza di Illusione Monetaria)}:
+    Se tutti i prezzi e il reddito vengono moltiplicati per un fattore scalare $\lambda > 0$, l'equazione diviene $(\lambda p_1) x_1 + (\lambda p_2) x_2 = \lambda R \iff p_1 x_1 + p_2 x_2 = R$.
+    La retta di bilancio resta \textbf{perfettamente invariata}. Il vincolo di bilancio è matematicamente \textbf{omogeneo di grado zero} rispetto a $(p_1, p_2, R)$.
+\end{enumerate}
+
+\section{Le Preferenze del Consumatore e le Curve di Indifferenza}
+
+\subsection{Gli Assiomi delle Preferenze Razionali}
+Il consumatore esprime preferenze su coppie di panieri attraverso la relazione binaria d'ordine debole $\succsim$ ("almeno tanto preferito quanto"):
+
+\begin{modello}{Assiomi Neoclassici delle Preferenze Razionali}{assiomi_preferenze}
+Un ordinamento di preferenze si definisce \textbf{razionale e regolare} se soddisfa quattro assiomi fondamentali:
+\begin{enumerate}
+    \item \textbf{Completezza}: per ogni coppia di panieri $A, B \in \R_+^2$, il consumatore è sempre in grado di esprimere una scelta: vale $A \succsim B$, oppure $B \succsim A$, oppure entrambi ($A \sim B$, indifferenza).
+    \item \textbf{Transitività (Coerenza Logica)}: per ogni terna di panieri $A, B, C$, se $A \succsim B$ e $B \succsim C$, allora $A \succsim C$. Questo assioma esclude scelte circolari incoerenti.
+    \item \textbf{Non-Sazietà (Monotonicità Stretta)}: se il paniere $A$ contiene quantità di tutti i beni non inferiori rispetto a $B$ e una quantità strettamente superiore di almeno un bene ($x_{1,A} \ge x_{1,B}, x_{2,A} \ge x_{2,B}$ con almeno una disuguaglianza stretta), allora $A \succ B$ ("più è meglio").
+    \item \textbf{Convessità Stretta (Preferenza per la Varietà)}: per ogni coppia di panieri indifferenti $A \sim B$, qualsiasi combinazione convessa stretta $C = \lambda A + (1-\lambda)B$ con $\lambda \in (0,1)$ è strettamente preferita agli estremi ($C \succ A \sim B$).
+\end{enumerate}
+\end{modello}
+
+\subsection{Le Curve di Indifferenza e le loro Proprietà}
+
+\begin{definizione}{Curva di Indifferenza}{curva_indifferenza}
+Una \textbf{curva di indifferenza} è il luogo geometrico di tutti i panieri di consumo che garantiscono al consumatore il medesimo livello di utilità o soddisfazione soggettiva:
+\begin{equation}
+    \mathcal{I}(\bar{U}) = \{ (x_1, x_2) \in \R_+^2 \mid U(x_1, x_2) = \bar{U} \}
+\end{equation}
+\end{definizione}
+
+Dagli assiomi delle preferenze discendono quattro proprietà geometriche inderogabili:
+\begin{enumerate}
+    \item \textbf{Pendenza Negativa}: per mantenere costante l'utilità, all'aumento del consumo di $x_1$ deve necessariamente corrispondere una riduzione di $x_2$ (conseguenza diretta della non-sazietà);
+    \item \textbf{Ordinamento Radiale}: curve di indifferenza più distanti dall'origine contengono panieri con quantità maggiori di beni e sono associate a livelli di utilità via via superiori;
+    \item \textbf{Convessità verso l'Origine}: la pendenza in valore assoluto decresce man mano che ci si muove da sinistra a destra lungo la curva (conseguenza della convessità stretta);
+    \item \textbf{Non-Intersecabilità}: due curve di indifferenza distinte non possono mai intersecarsi.
+\end{enumerate}
+
+\begin{teorema}{Non-Intersecabilità delle Curve di Indifferenza}{non_intersecabilita_curve}
+Due curve di indifferenza associate a livelli di utilità distinti $U_1 \neq U_2$ non possono avere alcun punto in comune.
+\end{teorema}
+
+\begin{dimostrazione}[Per Assurdo]
+Si ipotizzi per assurdo che due curve di indifferenza $\mathcal{I}_1$ e $\mathcal{I}_2$ si intersechino in un punto comune $P$.
+Sia $A \in \mathcal{I}_1$ un paniere appartenente alla prima curva e $B \in \mathcal{I}_2$ un paniere appartenente alla seconda, situato in modo che $B$ contenga strettamente più beni di $A$ (dunque $B \succ A$ per non-sazietà).
+\begin{itemize}
+    \item Poiché $P, A \in \mathcal{I}_1 \implies P \sim A$;
+    \item Poiché $P, B \in \mathcal{I}_2 \implies P \sim B$;
+    \item Per l'assioma di transitività: $P \sim A \land P \sim B \implies A \sim B$.
+\end{itemize}
+Tuttavia, per non-sazietà deve valere $B \succ A$, generando una \textbf{contraddizione logica insanabile}. Dunque le curve non possono intersecarsi.
+\end{dimostrazione}
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}[b]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.8, >=Latex]
+    \draw[->, thick] (0,0) -- (5.5,0) node[below] {$x_1$};
+    \draw[->, thick] (0,0) -- (0,5.0) node[left] {$x_2$};
+    
+    % Curve di Indifferenza
+    \draw[thick, navyblue, domain=0.6:4.8, samples=50] plot (\x, {1.2/\x}) node[right, font=\scriptsize] {$U_1$};
+    \draw[very thick, purpleaccent, domain=0.9:5.0, samples=50] plot (\x, {2.5/\x}) node[right, font=\scriptsize] {$U_2 > U_1$};
+    \draw[thick, forestgreen, domain=1.3:5.2, samples=50] plot (\x, {4.2/\x}) node[right, font=\scriptsize] {$U_3 > U_2$};
+    
+    \node[font=\footnotesize\bfseries, align=center] at (2.8, -0.8) {(a) Mappa Regolare di Indifferenza};
+\end{tikzpicture}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.8, >=Latex]
+    \draw[->, thick] (0,0) -- (5.5,0) node[below] {$x_1$};
+    \draw[->, thick] (0,0) -- (0,5.0) node[left] {$x_2$};
+    
+    % Curve che si intersecano (Assurdo)
+    \draw[thick, crimsonred, domain=0.8:4.8] plot (\x, {0.6 + 2.5/\x}) node[right, font=\scriptsize] {$\mathcal{I}_1$};
+    \draw[thick, navyblue, domain=0.8:4.8] plot (\x, {4.5 - 0.7*\x}) node[right, font=\scriptsize] {$\mathcal{I}_2$};
+    
+    \coordinate (P) at (2.0, 3.1);
+    \coordinate (A) at (3.5, 1.3);
+    \coordinate (B) at (3.5, 2.05);
+    
+    \filldraw[purpleaccent] (P) circle (2pt) node[above=2pt, font=\scriptsize] {$P$};
+    \filldraw[crimsonred] (A) circle (2pt) node[below=2pt, font=\scriptsize] {$A$};
+    \filldraw[navyblue] (B) circle (2pt) node[above=2pt, font=\scriptsize] {$B$};
+    \draw[dotted] (3.5,0) node[below, font=\scriptsize] {$x_1$} -- (B);
+    
+    \node[font=\footnotesize\bfseries, align=center] at (2.8, -0.8) {(b) Dimostrazione per Assurdo\\(Intersezione Impossibile)};
+\end{tikzpicture}
+\end{minipage}
+\caption{Mappa delle curve di indifferenza e dimostrazione geometrica di non-intersecabilità.}
+\label{fig:curve_indifferenza_mappa}
+\end{figure}
+
+\section{Il Saggio Marginale di Sostituzione ($\SMS$)}
+
+\subsection{Definizione Formale e Derivazione Differenziale}
+
+\begin{definizione}{Saggio Marginale di Sostituzione ($\SMS$)}{sms_definizione}
+Il \textbf{Saggio Marginale di Sostituzione} ($\SMS_{1,2}$) tra il bene 1 e il bene 2 misura il tasso al quale il consumatore è disposto a cedere unità di bene 2 in cambio di una quantità addizionale di bene 1, mantenendo rigorosamente invariato il proprio livello di utilità:
+\begin{equation}
+    \SMS = - \left. \dv{x_2}{x_1} \right|_{U = \bar{U}}
+\end{equation}
+Geometricamente, l'$\SMS$ corrisponde all'opposto della pendenza della retta tangente alla curva di indifferenza nel punto considerato.
+\end{definizione}
+
+\begin{teorema}{Rapporto tra Utilità Marginali e $\SMS$}{sms_utilita_marginali}
+Sia $U(x_1, x_2)$ una funzione di utilità differenziabile con utilità marginali strettamente positive $U_1 = \pdv{U}{x_1} > 0$ e $U_2 = \pdv{U}{x_2} > 0$.
+L'$\SMS$ coincide in ogni punto con il rapporto tra le utilità marginali dei due beni:
+\begin{equation}
+    \SMS = \frac{U_1(x_1, x_2)}{U_2(x_1, x_2)} = \frac{\pdv{U}{x_1}}{\pdv{U}{x_2}}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Consideriamo il differenziale totale della funzione di utilità lungo una curva di indifferenza ($U(x_1, x_2) = \text{costante} \implies \dd U = 0$):
+\begin{equation}
+    \dd U = \pdv{U}{x_1} \dd x_1 + \pdv{U}{x_2} \dd x_2 = U_1 \dd x_1 + U_2 \dd x_2 = 0
+\end{equation}
+Esplicitando il rapporto differenziale $\dv{x_2}{x_1}$:
+\begin{equation}
+    U_2 \dd x_2 = - U_1 \dd x_1 \implies \dv{x_2}{x_1} = - \frac{U_1}{U_2}
+\end{equation}
+Applicando la definizione di $\SMS = - \dv{x_2}{x_1}$:
+\begin{equation}
+    \SMS = - \left( - \frac{U_1}{U_2} \right) = \frac{U_1}{U_2}
+\end{equation}
+\end{dimostrazione}
+
+\section{Strutture di Preferenza e Tipologie di Beni}
+
+La forma funzionale di $U(x_1, x_2)$ descrive diverse tipologie di comportamento economico:
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{l X c X}
+\toprule
+\textbf{Tipologia di Preferenze} & \textbf{Forma Funzionale di Utilità} & \textbf{Saggio Marginale ($\SMS$)} & \textbf{Morfologia Geometrica} \\
+\midrule
+1. \textbf{Cobb-Douglas (Regolari)} & $U = x_1^\alpha x_2^\beta$ & $\SMS = \dfrac{\alpha x_2}{\beta x_1}$ & Curve iperboliche lisce e strettamente convesse. Tangenza interna. \\
+2. \textbf{Perfetti Sostituti} & $U = a x_1 + b x_2$ & $\SMS = \dfrac{a}{b} = \text{costante}$ & Rette parallele con pendenza costante. Soluzioni d'angolo. \\
+3. \textbf{Perfetti Complementi} & $U = \min\{a x_1, \, b x_2\}$ & $\SMS = \begin{cases} \infty & (ax_1 < bx_2) \\ 0 & (ax_1 > bx_2) \end{cases}$ & Curve a gomito o ad "L" con vertici lungo il raggio $a x_1 = b x_2$. \\
+4. \textbf{Quasi-Lineari} & $U = v(x_1) + x_2$ & $\SMS = v'(x_1)$ & Curve traslate verticalmente lungo l'asse $x_2$. Assenza effetto reddito su $x_1$. \\
+\bottomrule
+\end{tabularx}
+\caption{Quadro comparativo delle principali tipologie di funzioni di utilità e relativi $\SMS$.}
+\label{tab:tipologie_preferenze}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.68, >=Latex]
+    \draw[->, thick] (0,0) -- (4.8,0) node[below] {$x_1$};
+    \draw[->, thick] (0,0) -- (0,4.8) node[left] {$x_2$};
+    \draw[very thick, navyblue, domain=0.7:4.2] plot (\x, {2.2/\x});
+    \draw[thick, crimsonred] (0,4.0) -- (4.0,0);
+    \filldraw[purpleaccent] (2.0, 2.0) circle (2pt) node[above right, font=\tiny] {$E^*$};
+    \node[font=\scriptsize\bfseries, align=center] at (2.4, -0.8) {(a) Cobb-Douglas};
+\end{tikzpicture}
+\hspace{0.5cm}
+\begin{tikzpicture}[scale=0.68, >=Latex]
+    \draw[->, thick] (0,0) -- (4.8,0) node[below] {$x_1$};
+    \draw[->, thick] (0,0) -- (0,4.8) node[left] {$x_2$};
+    \draw[very thick, navyblue] (0,4.2) -- (3.0,0);
+    \draw[thick, crimsonred] (0,3.5) -- (4.2,0);
+    \filldraw[purpleaccent] (4.2, 0) circle (2.5pt) node[above=2pt, font=\tiny] {$E^*$};
+    \node[font=\scriptsize\bfseries, align=center] at (2.4, -0.8) {(b) Sostituti (Angolo)};
+\end{tikzpicture}
+\hspace{0.5cm}
+\begin{tikzpicture}[scale=0.68, >=Latex]
+    \draw[->, thick] (0,0) -- (4.8,0) node[below] {$x_1$};
+    \draw[->, thick] (0,0) -- (0,4.8) node[left] {$x_2$};
+    \draw[dashed, gray] (0,0) -- (4.2,4.2) node[above, font=\tiny] {$ax_1 = bx_2$};
+    \draw[very thick, navyblue] (1.8, 4.2) -- (1.8, 1.8) -- (4.2, 1.8);
+    \draw[thick, crimsonred] (0,4.0) -- (4.0,0);
+    \filldraw[purpleaccent] (2.0, 2.0) circle (2pt) node[above right, font=\tiny] {$E^*$};
+    \node[font=\scriptsize\bfseries, align=center] at (2.4, -0.8) {(c) Complementi ("L")};
+\end{tikzpicture}
+\caption{Confronto delle scelte ottime del consumatore nelle tre configurazioni di preferenza cardine.}
+\label{fig:ottimo_confronto_preferenze}
+\end{figure}
+
+\section{L'Ottimo del Consumatore (Scelta Razionale)}
+
+\subsection{Formulazione con il Metodo di Lagrange}
+Il consumatore razionale mira a massimizzare la propria utilità sotto il vincolo delle risorse finanziarie disponibili:
+\begin{equation}
+    \max_{x_1, x_2} U(x_1, x_2) \quad \text{sotto il vincolo} \quad p_1 x_1 + p_2 x_2 = R
+\end{equation}
+
+Costruiamo la funzione \textbf{Lagrangiana}:
+\begin{equation}
+    \mathcal{L}(x_1, x_2, \lambda) = U(x_1, x_2) - \lambda (p_1 x_1 + p_2 x_2 - R)
+\end{equation}
+dove $\lambda$ è il moltiplicatore di Lagrange (che rappresenta l'\textbf{utilità marginale del reddito}).
+
+\begin{teorema}{Condizioni di Primo Ordine e Condizione di Tangenza}{foc_ottimo_consumatore}
+Per preferenze strettamente convesse con soluzioni interne ($x_1^* > 0, x_2^* > 0$), le condizioni necessarie e sufficienti di primo ordine (FOC) sono:
+\begin{equation}
+    \begin{cases}
+        \pdv{\mathcal{L}}{x_1} = U_1(x_1, x_2) - \lambda p_1 = 0 \\[0.5em]
+        \pdv{\mathcal{L}}{x_2} = U_2(x_1, x_2) - \lambda p_2 = 0 \\[0.5em]
+        \pdv{\mathcal{L}}{\lambda} = R - p_1 x_1 - p_2 x_2 = 0
+    \end{cases}
+\end{equation}
+Dividendo membro a membro le prime due equazioni si ricava la celebre \textbf{Condizione di Ottimo di Tangenza}:
+\begin{equation}
+    \frac{U_1(x_1^*, x_2^*)}{U_2(x_1^*, x_2^*)} = \frac{p_1}{p_2} \iff \SMS(x_1^*, x_2^*) = \frac{p_1}{p_2}
+\end{equation}
+\end{teorema}
+
+\textbf{Significato Economico della Condizione di Ottimo}:
+\begin{itemize}
+    \item Il termine di sinistra $\SMS = \frac{U_1}{U_2}$ esprime la valutazione soggettiva e psicologica del consumatore;
+    \item Il termine di destra $\frac{p_1}{p_2}$ esprime il costo opportunità oggettivo imposto dal mercato.
+\end{itemize}
+Nel punto di ottimo, la disponibilità soggettiva a scambiare beni coincide con il tasso di cambio oggettivo di mercato. Riscrivendo la condizione nella forma dell'\textbf{eguaglianza delle utilità marginali ponderate per il prezzo}:
+\begin{equation}
+    \frac{U_1}{p_1} = \frac{U_2}{p_2} = \lambda^*
+\end{equation}
+In ottimo, l'ultimo euro speso nell'acquisto di bene 1 apporta esattamente lo stesso incremento di utilità dell'ultimo euro speso nell'acquisto di bene 2.
+
+\subsection{Ottimo per Preferenze Speciali}
+\begin{enumerate}
+    \item \textbf{Perfetti Sostituti ($U = ax_1 + bx_2 \implies \SMS = a/b$)}:
+    \begin{itemize}
+        \item Se $\frac{a}{b} > \frac{p_1}{p_2}$: il consumatore destina tutto il reddito al bene 1 $\implies x_1^* = \frac{R}{p_1}, \, x_2^* = 0$;
+        \item Se $\frac{a}{b} < \frac{p_1}{p_2}$: il consumatore destina tutto il reddito al bene 2 $\implies x_1^* = 0, \, x_2^* = \frac{R}{p_2}$;
+        \item Se $\frac{a}{b} = \frac{p_1}{p_2}$: qualsiasi paniere lungo l'intera retta di bilancio è un ottimo indifferente.
+    \end{itemize}
+    
+    \item \textbf{Perfetti Complementi ($U = \min\{ax_1, bx_2\}$)}:
+    Il consumo efficiente impone di non sprecare risorse, posizionandosi sul vertice $a x_1 = b x_2 \implies x_2 = \frac{a}{b} x_1$.
+    Sostituendo nel vincolo di bilancio $p_1 x_1 + p_2 \left(\frac{a}{b} x_1\right) = R$:
+    \begin{equation}
+        x_1^* = \frac{b R}{b p_1 + a p_2}, \qquad x_2^* = \frac{a R}{b p_1 + a p_2}
+    \end{equation}
+\end{enumerate}
+
+\section{Statica Comparata e Derivazione della Domanda Individuale}
+
+\subsection{Il Sentiero di Espansione del Prezzo (SEP) e la Curva di Domanda}
+Facendo variare con continuità il prezzo $p_1$ a reddito $R$ e prezzo $p_2$ costanti, la retta di bilancio ruota, generando una successione di panieri di ottimo $E_1, E_2, E_3, \dots$:
+
+\begin{definizione}{Sentiero di Espansione del Prezzo (SEP)}{sep_definizione}
+Il \textbf{Sentiero di Espansione del Prezzo (SEP)} (o \textit{Price Consumption Curve}) è il luogo geometrico di tutti i panieri di ottimo scelti dal consumatore al variare del prezzo di un bene, \textit{ceteris paribus}.
+\end{definizione}
+
+Proiettando le coordinate ottime $(x_1^*, p_1)$ in un piano cartesiano sottostante avente in ordinata il prezzo $p_1$ e in ascissa la quantità $x_1$, si traccia la \textbf{Curva di Domanda Individuale Marshalliana} $x_1(p_1)$:
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1, >=Latex]
+    % --- GRAFICO SUPERIORE: Scelta del Consumatore ---
+    \begin{scope}[yshift=4.8cm]
+        \draw[->, thick] (0,0) -- (7.5,0) node[below right] {$x_1$};
+        \draw[->, thick] (0,0) -- (0,4.5) node[above left] {$x_2$};
+        
+        % Rette di bilancio per p_1A > p_1B > p_1C
+        \draw[thick, navyblue!50] (0, 3.8) -- (2.2, 0);
+        \draw[thick, navyblue!75] (0, 3.8) -- (4.2, 0);
+        \draw[thick, navyblue] (0, 3.8) -- (6.8, 0);
+        
+        % Curve di Indifferenza
+        \draw[purpleaccent, thick] (0.5, 3.2) to[out=-60, in=165] (1.3, 1.8) to[out=-15, in=115] (2.6, 0.6);
+        \draw[purpleaccent, thick] (0.8, 3.6) to[out=-55, in=165] (2.4, 2.0) to[out=-15, in=120] (4.6, 0.8);
+        \draw[purpleaccent, thick] (1.2, 4.0) to[out=-50, in=165] (4.0, 1.9) to[out=-15, in=125] (6.6, 0.9);
+        
+        % Punti di Ottimo
+        \coordinate (EA) at (1.3, 1.8);
+        \coordinate (EB) at (2.4, 2.0);
+        \coordinate (EC) at (4.0, 1.9);
+        
+        \filldraw[crimsonred] (EA) circle (2pt) node[above left, font=\scriptsize] {$E_A$};
+        \filldraw[crimsonred] (EB) circle (2pt) node[above=2pt, font=\scriptsize] {$E_B$};
+        \filldraw[crimsonred] (EC) circle (2pt) node[above right, font=\scriptsize] {$E_C$};
+        
+        % Curva SEP
+        \draw[very thick, forestgreen] (EA) to[out=10, in=190] (EB) to[out=0, in=185] (EC) node[right, font=\footnotesize\bfseries] {SEP};
+        
+        % Linee di proiezione verso il basso
+        \draw[dotted, gray!80] (1.3, 1.8) -- (1.3, -4.5);
+        \draw[dotted, gray!80] (2.4, 2.0) -- (2.4, -4.5);
+        \draw[dotted, gray!80] (4.0, 1.9) -- (4.0, -4.5);
+    \end{scope}
+    
+    % --- GRAFICO INFERIORE: Derivazione della Curva di Domanda ---
+    \begin{scope}[yshift=0cm]
+        \draw[->, thick] (0,0) -- (7.5,0) node[below right] {\textbf{Quantità $x_1$}};
+        \draw[->, thick] (0,0) -- (0,4.2) node[above left] {\textbf{Prezzo $p_1$}};
+        
+        % Punti corrispondenti
+        \coordinate (DA) at (1.3, 3.4);
+        \coordinate (DB) at (2.4, 2.2);
+        \coordinate (DC) at (4.0, 1.1);
+        
+        \filldraw[crimsonred] (DA) circle (2pt) node[right, font=\scriptsize] {$A(x_{1A}, p_{1A})$};
+        \filldraw[crimsonred] (DB) circle (2pt) node[right, font=\scriptsize] {$B(x_{1B}, p_{1B})$};
+        \filldraw[crimsonred] (DC) circle (2pt) node[right, font=\scriptsize] {$C(x_{1C}, p_{1C})$};
+        
+        \draw[dotted] (0, 3.4) node[left, font=\footnotesize] {$p_{1A}$} -- (DA);
+        \draw[dotted] (0, 2.2) node[left, font=\footnotesize] {$p_{1B}$} -- (DB);
+        \draw[dotted] (0, 1.1) node[left, font=\footnotesize] {$p_{1C}$} -- (DC);
+        
+        \draw[dotted] (DA) -- (1.3, 0) node[below, font=\footnotesize] {$x_{1A}$};
+        \draw[dotted] (DB) -- (2.4, 0) node[below, font=\footnotesize] {$x_{1B}$};
+        \draw[dotted] (DC) -- (4.0, 0) node[below, font=\footnotesize] {$x_{1C}$};
+        
+        % Curva di Domanda
+        \draw[ultra thick, navyblue] (0.8, 3.9) to[out=-50, in=155] (DA) to[out=-25, in=155] (DB) to[out=-25, in=165] (DC) to[out=-15, in=170] (6.0, 0.5) node[right, font=\bfseries\small] {$x_1(p_1)$};
+    \end{scope}
+\end{tikzpicture}
+\caption{Derivazione geometrica della curva di domanda individuale marshalliana a partire dal Sentiero di Espansione del Prezzo (SEP).}
+\label{fig:derivazione_domanda_sep}
+\end{figure}
+
+\section{Scomposizione dell'Effetto Prezzo: Hicks e Slutsky}
+
+Quando varia il prezzo di un bene ($p_1 \to p_1'$), la variazione complessiva della quantità domandata (\textbf{Effetto Totale}, $\text{ET} = x_1^C - x_1^A$) è generata dall'interazione di due forze microeconomiche distinte:
+\begin{enumerate}
+    \item \textbf{Effetto Sostituzione ($\text{ES}$)}: la variazione della domanda dovuta esclusivamente al mutamento della pendenza dei prezzi relativi ($p_1'/p_2$), a potere d'acquisto o utilità costante;
+    \item \textbf{Effetto Reddito ($\text{ER}$)}: la variazione della domanda indotta dalla variazione del potere d'acquisto reale del consumatore ($R/p_1$) a prezzi relativi costanti.
+\end{enumerate}
+
+\subsection{La Scomposizione di Hicks (a Utilità Costante)}
+Nella compensazione hicksiana, si introduce una \textbf{retta di bilancio fittizia compensata} parallela alla nuova retta di bilancio (pendenza $-p_1'/p_2$) e tangente alla curva di indifferenza originaria $\mathcal{I}_0$:
+\begin{itemize}
+    \item Passaggio da $A$ a $B$ (\textbf{Effetto Sostituzione di Hicks}): movimento lungo la stessa curva di indifferenza $\mathcal{I}_0$ fino al punto $B$. L'$\text{ES}$ è \textbf{sempre rigorosamente negativo} ($\Delta p_1 > 0 \implies \Delta x_1^{\text{ES}} \le 0$).
+    \item Passaggio da $B$ a $C$ (\textbf{Effetto Reddito di Hicks}): traslazione parallela dal vincolo compensato al vincolo effettivo finale $\mathcal{I}_1$.
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2, >=Latex]
+    % Assi
+    \draw[->, thick] (0,0) -- (8.0,0) node[below right] {$x_1$};
+    \draw[->, thick] (0,0) -- (0,6.0) node[above left] {$x_2$};
+    
+    % Retta Iniziale (Blu)
+    \draw[thick, navyblue] (0, 5.2) -- (6.8, 0) node[below] {$V_0$};
+    
+    % Retta Finale (Rosso) dopo rincaro di p_1
+    \draw[thick, crimsonred] (0, 5.2) -- (3.0, 0) node[below] {$V_1$};
+    
+    % Retta Compensata di Hicks (Verde tratteggiata, tangente a U0 con pendenza V1)
+    \draw[very thick, dashed, forestgreen] (0, 4.0) -- (5.0, 0) node[below, font=\scriptsize] {$V_{\text{comp}}$};
+    
+    % Curve di Indifferenza
+    \draw[very thick, purpleaccent, domain=1.0:6.5, samples=50] plot (\x, {0.8 + 3.2/\x}) node[right, font=\scriptsize] {$U_0$};
+    \draw[thick, purpleaccent!70!black, domain=0.8:5.5, samples=50] plot (\x, {0.4 + 1.8/\x}) node[right, font=\scriptsize] {$U_1$};
+    
+    % Punti A (Iniziale), B (Compensato), C (Finale)
+    \coordinate (A) at (3.2, 1.8);
+    \coordinate (B) at (2.2, 2.25);
+    \coordinate (C) at (1.4, 1.68);
+    
+    \filldraw[navyblue] (A) circle (2.5pt) node[above right, font=\footnotesize] {$A$ (Iniziale)};
+    \filldraw[forestgreen] (B) circle (2.5pt) node[above right, font=\footnotesize] {$B$ (Hicks)};
+    \filldraw[crimsonred] (C) circle (2.5pt) node[above left, font=\footnotesize] {$C$ (Finale)};
+    
+    % Proiezioni su asse X
+    \draw[dotted, thick] (A) -- (3.2, 0) node[below, font=\footnotesize] {$x_1^A$};
+    \draw[dotted, thick] (B) -- (2.2, 0) node[below, font=\footnotesize] {$x_1^B$};
+    \draw[dotted, thick] (C) -- (1.4, 0) node[below, font=\footnotesize] {$x_1^C$};
+    
+    % Frecce Effetti
+    \draw[->, ultra thick, forestgreen] (3.1, -0.6) -- (2.3, -0.6) node[midway, below, font=\scriptsize\bfseries] {$\text{ES} < 0$};
+    \draw[->, ultra thick, crimsonred] (2.1, -0.6) -- (1.5, -0.6) node[midway, below, font=\scriptsize\bfseries] {$\text{ER} < 0$};
+    \draw[->, ultra thick, purpleaccent] (3.1, -1.2) -- (1.5, -1.2) node[midway, below, font=\small\bfseries] {$\text{Effetto Totale (ET)}$};
+\end{tikzpicture}
+\caption{Scomposizione di Hicks per un bene normale a seguito di un aumento del prezzo $p_1$: sia l'Effetto Sostituzione ($A \to B$) che l'Effetto Reddito ($B \to C$) agiscono nella direzione di ridurre la quantità domandata.}
+\label{fig:scomposizione_hicks}
+\end{figure}
+
+\subsection{L'Equazione di Slutsky e i Beni di Giffen}
+
+\begin{teorema}{Equazione Fondamentale di Slutsky}{equazione_slutsky}
+La derivata della domanda marshalliana rispetto al proprio prezzo si scompone analiticamente come:
+\begin{equation}
+    \pdv{x_1}{p_1} = \underbrace{\left. \pdv{x_1}{p_1} \right|_{\text{comp}}}_{\text{Effetto Sostituzione } (< 0)} - \underbrace{x_1 \cdot \pdv{x_1}{R}}_{\text{Effetto Reddito}}
+\end{equation}
+\end{teorema}
+
+In base al segno e alla grandezza dei due effetti, si classificano tre comportamenti di mercato:
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{l c c c X}
+\toprule
+\textbf{Tipologia di Bene} & \textbf{Effetto Sostituzione} & \textbf{Effetto Reddito} & \textbf{Effetto Totale} & \textbf{Inclinazione Curva Domanda} \\
+\midrule
+1. \textbf{Bene Normale} & $\text{ES} < 0$ & $\text{ER} < 0$ & $\text{ET} < 0$ & \textbf{Certamente Negativa} ($\dv{x_1}{p_1} < 0$) \\
+2. \textbf{Bene Inferiore Ordinario} & $\text{ES} < 0$ & $\text{ER} > 0$ & $\text{ET} < 0$ & \textbf{Negativa} ($|\text{ES}| > |\text{ER}|$) \\
+3. \textbf{Bene di Giffen} & $\text{ES} < 0$ & $\text{ER} > 0$ & $\mathbf{\text{ET} > 0}$ & \textbf{Positiva} ($|\text{ER}| > |\text{ES}|$) \\
+\bottomrule
+\end{tabularx}
+\caption{Quadro comparativo della scomposizione dell'effetto prezzo per le diverse categorie di beni.}
+\label{tab:scomposizione_slutsky_classi}
+\end{table}
+
+\begin{definizione}{Bene di Giffen e Paradosso di Giffen}{bene_giffen}
+Un \textbf{bene di Giffen} è un bene talmente inferiore per il quale l'effetto reddito sovrasta l'effetto sostituzione ($|\text{ER}| > |\text{ES}|$). All'aumentare del prezzo, la quantità domandata aumenta, violando la legge fondamentale della domanda ($\dv{x_1}{p_1} > 0$).
+\end{definizione}
+
+\section{Estensione: La Scelta Intertemporale (Consumo e Risparmio)}
+
+\subsection{Il Modello a Due Periodi di Fisher}
+Si estenda la teoria del consumatore a un orizzonte temporale a due stadi: il periodo corrente $t=1$ (presente) e il periodo successivo $t=2$ (futuro).
+Il consumatore dispone di una dotazione di reddito monetario $(M_1, M_2)$, pianifica i consumi $(C_1, C_2)$ e può dare o prendere a prestito sui mercati finanziari al tasso di interesse reale $r > 0$.
+
+\begin{definizione}{Vincolo di Bilancio Intertemporale}{vincolo_intertemporale}
+Il valore attuale del flusso di consumo deve eguagliare il valore attuale del flusso di reddito:
+\begin{equation}
+    C_1 + \frac{C_2}{1+r} = M_1 + \frac{M_2}{1+r} \iff C_1(1+r) + C_2 = M_1(1+r) + M_2
+\end{equation}
+La retta di bilancio intertemporale passa necessariamente per il \textbf{punto di dotazione iniziale} $(M_1, M_2)$ e ha pendenza pari a:
+\begin{equation}
+    \text{Pendenza} = - (1 + r)
+\end{equation}
+\end{definizione}
+
+\subsection{Ottimo Intertemporale: Risparmiatori e Debitori}
+Sia $U(C_1, C_2)$ la funzione di utilità intertemporale. Il \textbf{Saggio Marginale di Preferenza Intertemporale} ($\SMPI$) è:
+\begin{equation}
+    \SMPI = \frac{\pdv{U}{C_1}}{\pdv{U}{C_2}} = 1 + \rho
+\end{equation}
+dove $\rho > 0$ è il tasso soggettivo di preferenza temporale (impazienza).
+
+\begin{teorema}{Condizione di Ottimo Intertemporale}{ottimo_intertemporale}
+In equilibrio intertemporale interno vale:
+\begin{equation}
+    \SMPI = 1 + r \iff \frac{U_1(C_1^*, C_2^*)}{U_2(C_1^*, C_2^*)} = 1 + r
+\end{equation}
+\begin{itemize}
+    \item Se $C_1^* < M_1$: l'individuo è un \textbf{Risparmiatore Netto}, con risparmio corrente $S = M_1 - C_1^* > 0$ che genera un consumo futuro $C_2^* = M_2 + S(1+r)$;
+    \item Se $C_1^* > M_1$: l'individuo è un \textbf{Mutuatario o Debitore Netto}, con debito $B = C_1^* - M_1 > 0$ da rimborsare nel periodo 2 ($C_2^* = M_2 - B(1+r)$).
+\end{itemize}
+\end{teorema}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.15, >=Latex]
+    % Assi
+    \draw[->, thick] (0,0) -- (7.5,0) node[below right] {\textbf{Consumo Presente $C_1$}};
+    \draw[->, thick] (0,0) -- (0,6.0) node[above left] {\textbf{Consumo Futuro $C_2$}};
+    
+    % Retta di Bilancio Intertemporale
+    \draw[very thick, navyblue] (0, 5.2) node[left] {$M_2 + M_1(1+r)$} -- (6.0, 0) node[below] {$M_1 + \frac{M_2}{1+r}$};
+    
+    % Punto di Dotazione
+    \coordinate (M) at (3.5, 2.2);
+    \filldraw[purpleaccent] (M) circle (2.5pt) node[above right] {Dotazione $(M_1, M_2)$};
+    \draw[dotted, thick] (3.5,0) node[below] {$M_1$} -- (M) -- (0,2.2) node[left] {$M_2$};
+    
+    % Curva di Indifferenza e Ottimo Risparmiatore
+    \draw[very thick, forestgreen, domain=1.0:5.5, samples=50] plot (\x, {0.9 + 2.5/(\x - 0.2)});
+    \coordinate (E) at (2.2, 3.3);
+    \filldraw[forestgreen!80!black] (E) circle (2.5pt) node[above right] {$E^*(C_1^*, C_2^*)$};
+    \draw[dotted, thick] (2.2,0) node[below] {$C_1^*$} -- (E) -- (0,3.3) node[left] {$C_2^*$};
+    
+    % Risparmio S
+    \draw[<->, ultra thick, crimsonred] (2.2, 0.4) -- (3.5, 0.4) node[midway, above, font=\scriptsize\bfseries] {Risparmio $S > 0$};
+\end{tikzpicture}
+\caption{Equilibrio di scelta intertemporale per un individuo risparmiatore netto ($C_1^* < M_1$).}
+\label{fig:scelta_intertemporale}
+\end{figure}
+
+\section{Metodi Risolutivi ed Esercizi Svolti}
+
+\begin{metodo}[Algoritmo per la Risoluzione dell'Ottimo di Cobb-Douglas]
+Data la funzione di utilità $U(x_1, x_2) = x_1^\alpha x_2^\beta$ con vincolo $p_1 x_1 + p_2 x_2 = R$:
+\begin{enumerate}
+    \item Calcolare le utilità marginali: $U_1 = \alpha x_1^{\alpha-1} x_2^\beta, \quad U_2 = \beta x_1^\alpha x_2^{\beta-1}$;
+    \item Calcolare il saggio marginale: $\SMS = \frac{U_1}{U_2} = \frac{\alpha x_2}{\beta x_1}$;
+    \item Uguagliare all'inclinazione del vincolo: $\frac{\alpha x_2}{\beta x_1} = \frac{p_1}{p_2} \implies p_2 x_2 = \frac{\beta}{\alpha} p_1 x_1$;
+    \item Sostituire nel vincolo di bilancio: $p_1 x_1 + \frac{\beta}{\alpha} p_1 x_1 = R \implies p_1 x_1 \left(1 + \frac{\beta}{\alpha}\right) = R$;
+    \item Ricavare le funzioni di domanda marshalliane:
+    \begin{equation}
+        x_1^*(p_1, R) = \frac{\alpha}{\alpha + \beta} \cdot \frac{R}{p_1}, \qquad x_2^*(p_2, R) = \frac{\beta}{\alpha + \beta} \cdot \frac{R}{p_2}
+    \end{equation}
+    (Ciascun bene assorbe una quota fissa e costante del reddito totale pari a $\frac{\alpha}{\alpha+\beta}$ e $\frac{\beta}{\alpha+\beta}$).
+\end{enumerate}
+\end{metodo}
+
+\begin{esercizio}[Calcolo dell'Ottimo e Scomposizione di Hicks]
+Un consumatore ha preferenze descritte dalla funzione di utilità $U(x_1, x_2) = x_1 x_2$.
+Il reddito è $R = 120\,\text{\euro}$, i prezzi iniziali sono $p_1 = 2\,\text{\euro}$ e $p_2 = 1\,\text{\euro}$.
+Successivamente, il prezzo del bene 1 quadruplica a $p_1' = 8\,\text{\euro}$.
+\begin{enumerate}
+    \item Calcolare il paniere ottimo iniziale $A(x_{1A}, x_{2A})$ e l'utilità $U_0$.
+    \item Calcolare il paniere ottimo finale $C(x_{1C}, x_{2C})$ e l'utilità $U_1$.
+    \item Calcolare il paniere teorico compensato di Hicks $B(x_{1B}, x_{2B})$ e quantificare l'Effetto Sostituzione ($\text{ES}$) e l'Effetto Reddito ($\text{ER}$).
+\end{enumerate}
+
+\textbf{Svolgimento}:
+\begin{enumerate}
+    \item \textbf{Ottimo Iniziale $A$}:
+    Poiché $\alpha = \beta = 1$, le quote di spesa sono al $50\%$:
+    \begin{equation}
+        x_{1A} = \frac{1}{2} \cdot \frac{120}{2} = 30\,\text{unità}, \qquad x_{2A} = \frac{1}{2} \cdot \frac{120}{1} = 60\,\text{unità}
+    \end{equation}
+    Utilità iniziale: $U_0 = 30 \times 60 = 1.800$.
+    
+    \item \textbf{Ottimo Finale $C$ con $p_1' = 8$}:
+    \begin{equation}
+        x_{1C} = \frac{1}{2} \cdot \frac{120}{8} = 7{,}5\,\text{unità}, \qquad x_{2C} = \frac{1}{2} \cdot \frac{120}{1} = 60\,\text{unità}
+    \end{equation}
+    Effetto Totale su $x_1$: $\text{ET} = x_{1C} - x_{1A} = 7{,}5 - 30 = -22{,}5\,\text{unità}$.
+    
+    \item \textbf{Paniere Compensato di Hicks $B$}:
+    Il paniere $B$ soddisfa la nuova condizione di tangenza ai prezzi $(p_1'=8, p_2=1)$ sulla curva di indifferenza iniziale ($U_0 = 1.800$):
+    \begin{equation}
+        \begin{cases}
+            \SMS = \dfrac{x_{2B}}{x_{1B}} = \dfrac{p_1'}{p_2} = \dfrac{8}{1} = 8 \implies x_{2B} = 8 x_{1B} \\[0.6em]
+            x_{1B} \cdot x_{2B} = 1.800
+        \end{cases}
+    \end{equation}
+    Sostituendo: $x_{1B} (8 x_{1B}) = 1.800 \implies 8 x_{1B}^2 = 1.800 \implies x_{1B}^2 = 225 \implies x_{1B} = 15\,\text{unità}$.
+    Di conseguenza $x_{2B} = 8(15) = 120\,\text{unità}$.
+    
+    \textbf{Quantificazione degli Effetti}:
+    \begin{itemize}
+        \item \textbf{Effetto Sostituzione}: $\text{ES} = x_{1B} - x_{1A} = 15 - 30 = -15\,\text{unità}$;
+        \item \textbf{Effetto Reddito}: $\text{ER} = x_{1C} - x_{1B} = 7{,}5 - 15 = -7{,}5\,\text{unità}$;
+        \item \textbf{Verifica}: $\text{ET} = \text{ES} + \text{ER} = -15 + (-7{,}5) = -22{,}5\,\text{unità}$.
+    \end{itemize}
+\end{enumerate}
+\end{esercizio}
+
+\begin{esame}[Checklist anti-errore per il Capitolo 5]
+\begin{itemize}
+    \item Ricordare che l'$\SMS = \frac{U_1}{U_2}$ ha $U_1$ a numeratore (utilità marginale del bene in ascissa) e $U_2$ a denominatore.
+    \item Per preferenze di tipo perfetti sostituti non usare Lagrange ma confrontare direttamente il valore scalare di $\SMS = a/b$ con il rapporto dei prezzi $p_1/p_2$.
+    \item Non confondere la scomposizione di Hicks (stessa curva di indifferenza $U_0$) con la scomposizione di Slutsky (stesso paniere iniziale $A$ acquistabile al nuovo reddito compensato $R' = p_1' x_{1A} + p_2 x_{2A}$).
+\end{itemize}
+\end{esame}

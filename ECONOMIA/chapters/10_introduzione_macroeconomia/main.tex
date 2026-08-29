@@ -1,0 +1,644 @@
+% ==============================================================================
+% CAPITOLO 10: INTRODUZIONE ALLA MACROECONOMIA E CONTABILITÀ NAZIONALE
+% ==============================================================================
+\chapter{Introduzione alla Macroeconomia e Contabilità Nazionale}
+\label{chap:introduzione_macroeconomia}
+
+\begin{tcolorbox}[colback=navyblue!5!white, colframe=navyblue, title=\textbf{Quadro Concettuale del Capitolo}]
+Questo capitolo inaugura la trattazione organica della \textbf{Macroeconomia} (Parte IV del trattato). Vengono definiti i concetti fondanti della disciplina, la distinzione metodologica rispetto alla microeconomia, i tre grandi temi dell'indagine macroeconomica (crescita di lungo periodo, fluttuazioni cicliche e patologie di disoccupazione/inflazione), il modello del flusso circolare del reddito a quattro settori, la definizione rigorosa del Prodotto Interno Lordo (\PIL) e i tre metodi contabili equivalenti di calcolo, l'identità fondamentale dei saldi settoriali, la distinzione tra grandezze nominali e reali mediante il Deflatore e l'Indice dei Prezzi al Consumo (\text{IPC}), e i limiti strutturali del \PIL\ come indicatore di benessere sociale.
+\end{tcolorbox}
+
+\section{Oggetto, Metodo e Orizzonti Temporali della Macroeconomia}
+
+\begin{definizione}{Macroeconomia e Grandezze Aggregate}{macroeconomia}
+La \textbf{Macroeconomia} è la branca della scienza economica che studia il funzionamento, la struttura, il comportamento e i processi decisionali di un sistema economico inteso nel suo \textbf{complesso}. 
+
+A differenza della microeconomia — incentrata sulle scelte di singoli agenti razionali (il singolo consumatore, la singola impresa concorrenziale o monopolistica) e sull'equilibrio di mercati specifici —, la macroeconomia analizza le relazioni intercorrenti tra \textbf{variabili aggregate}:
+\begin{itemize}
+    \item Il \textbf{Prodotto Interno Lordo} (\PIL) e il reddito nazionale complessivo;
+    \item Il \textbf{livello generale dei prezzi} e il tasso di inflazione;
+    \item Il livello complessivo di \textbf{occupazione e disoccupazione};
+    \item La \textbf{spesa aggregata per consumi e investimenti};
+    \item I \textbf{tassi di interesse} e i mercati monetari e finanziari;
+    \item I \textbf{flussi di commercio internazionale} (esportazioni, importazioni e bilancia dei pagamenti).
+\end{itemize}
+\end{definizione}
+
+\subsection{Microeconomia vs Macroeconomia e la Fallacia di Composizione}
+Il passaggio dalla microeconomia alla macroeconomia non è una semplice sommatoria algebrica dei comportamenti individuali. In macroeconomia si verifica frequentemente la cosiddetta \textbf{fallacia di composizione} (\textit{fallacy of composition}): un'azione o un comportamento razionale e vantaggioso per un singolo individuo può rivelarsi dannoso o controproducente se adottato simultaneamente da tutti i membri della collettività.
+
+\begin{esempio}[La Fallacia di Composizione e il Paradosso della Parsimonia]
+Se un singolo individuo decide di risparmiare una quota maggiore del proprio reddito, la sua ricchezza personale e la sua sicurezza finanziaria futura aumentano, senza che ciò alteri il reddito dell'intera nazione. Se invece \textbf{tutte le famiglie} di un paese decidono simultaneamente di risparmiare di più riducendo i consumi, la domanda complessiva di beni crolla; le imprese subiscono un calo di vendite, riducono la produzione e licenziano lavoratori, contraendo il reddito nazionale al punto che il risparmio totale finale dell'economia può addirittura ridursi (fenomeno noto come \textit{Paradosso della Parsimonia}).
+\end{esempio}
+
+\subsection{Gli Orizzonti Temporali dell'Analisi Macroeconomica}
+La macroeconomia moderna distingue l'analisi economica in base alla flessibilità dei prezzi e dei salari e alla mobilità dei fattori produttivi su tre distinti orizzonti temporali:
+
+\begin{enumerate}
+    \item \textbf{Breve Periodo (Modello Keynesiano / Modello Reddito-Spesa)}:
+    \begin{itemize}
+        \item I prezzi e i salari nominali sono \textbf{vischiosi} o rigidi (\textit{sticky prices});
+        \item La capacità produttiva e lo stock di capitale sono fissi;
+        \item Il livello della produzione è determinato prevalentemente dal lato della \textbf{domanda aggregata} (\textit{principio della domanda effettiva}); variazioni della spesa provocano variazioni delle quantità prodotte e dell'occupazione, non dei prezzi.
+    \end{itemize}
+    
+    \item \textbf{Medio Periodo (Modello AD-AS e Curva di Phillips)}:
+    \begin{itemize}
+        \item I prezzi e i salari iniziano ad aggiustarsi gradualmente alle condizioni di eccesso di domanda o di offerta sul mercato del lavoro e dei beni;
+        \item Il sistema economico tende progressivamente a convergere verso il livello di produzione potenziale o di pieno impiego ($Y_{\mathrm{PO}}$);
+        \item L'inflazione e le aspettative inflazionistiche diventano determinanti centrali dell'equilibrio.
+    \end{itemize}
+    
+    \item \textbf{Lungo Periodo (Teoria Neoclassica della Crescita)}:
+    \begin{itemize}
+        \item I prezzi e i salari sono \textbf{pienamente flessibili};
+        \item La produzione è determinata esclusivamente dal lato dell'\textbf{offerta aggregata} (disponibilità di fattori produttivi: lavoro, capitale fisico, capitale umano e livello della tecnologia $A$);
+        \item La moneta è neutrale per le variabili reali; la politica economica si concentra sull'accumulazione di capitale, sull'innovazione tecnologica e sull'efficienza istituzionale.
+    \end{itemize}
+\end{enumerate}
+
+\section{I Tre Grandi Temi della Macroeconomia}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05, >=Stealth]
+    % Assi cartesiani
+    \draw[->, line width=1.2pt] (0,0) -- (11.5,0) node[right, font=\small\bfseries] {Tempo ($t$)};
+    \draw[->, line width=1.2pt] (0,0) -- (0,6.5) node[above, font=\small\bfseries] {PIL Reale ($Y$)};
+    
+    % Griglia leggera
+    \draw[help lines, color=gray!25, ystep=1, xstep=1] (0,0) grid (11,6);
+
+    % Trend potenziale di lungo periodo (Y_PO)
+    \draw[dashed, color=navyblue, line width=1.6pt] (0.5, 1.2) -- (10.5, 5.8) node[above right, font=\footnotesize\bfseries, color=navyblue] {PIL Potenziale $Y_{\mathrm{PO}}$ (Trend)};
+    
+    % Fluttuazioni cicliche del PIL effettivo
+    \draw[color=forestgreen, line width=2pt, smooth] 
+        (0.5, 1.2) 
+        sin (2.5, 3.8) 
+        cos (4.5, 2.2) 
+        sin (6.5, 5.0) 
+        cos (8.5, 3.6) 
+        sin (10.5, 6.2);
+    
+    % Punti notevoli e annotazioni
+    \fill[purpleaccent] (2.5, 3.8) circle (3pt) node[above, font=\small\bfseries, color=purpleaccent] {Picco (Peak)};
+    \fill[crimsonred] (4.5, 2.2) circle (3pt) node[below, font=\small\bfseries, color=crimsonred] {Valle (Trough)};
+    \fill[forestgreen] (6.5, 5.0) circle (3pt) node[above, font=\small\bfseries, color=forestgreen] {Picco (Boom)};
+    \fill[warmamber!90!black] (8.5, 3.6) circle (3pt) node[below, font=\small\bfseries, color=warmamber!90!black] {Ripresa};
+
+    % Frecce Output Gap
+    \draw[<->, crimsonred, line width=1.3pt] (4.5, 2.3) -- (4.5, 3.1) node[midway, right, font=\scriptsize\bfseries] {Output Gap $<0$ (Recessione)};
+    \draw[<->, purpleaccent, line width=1.3pt] (2.5, 2.2) -- (2.5, 3.7) node[midway, left, font=\scriptsize\bfseries] {Output Gap $>0$ (Boom)};
+
+    % Legenda
+    \node[draw=gray!50, fill=white, rounded corners=3pt, font=\scriptsize, align=left, anchor=north west] at (0.5, 6.2) {
+        \textcolor{forestgreen}{\rule{0.4cm}{2pt}} \textbf{PIL Effettivo Corrente $Y(t)$}\\
+        \textcolor{navyblue}{\rule{0.4cm}{1.5pt}} \textbf{PIL Potenziale di Trend $Y_{\mathrm{PO}}$}
+    };
+\end{tikzpicture}
+\caption{Rappresentazione geometrica del Ciclo Economico: andamento del PIL corrente effettivo attorno al trend di crescita del PIL potenziale di lungo periodo con le quattro fasi cicliche.}
+\label{fig:ciclo_economico}
+\end{figure}
+
+L'analisi macroeconomica ruota attorno a tre questioni fondamentali che condizionano il benessere materiale delle società:
+
+\subsection{1. La Crescita Economica e il Trend di Lungo Periodo}
+La \textbf{crescita economica} è l'aumento sostenuto nel tempo della capacità produttiva di beni e servizi di un sistema economico. Viene quantificata attraverso il \textbf{tasso di crescita percentuale annuo del PIL reale}:
+\begin{equation}
+    g_Y = \frac{\PIL_{\text{reale}, t} - \PIL_{\text{reale}, t-1}}{\PIL_{\text{reale}, t-1}} \times 100
+\end{equation}
+Per valutare il miglioramento effettivo del tenore di vita della popolazione, si adotta il \textbf{PIL reale pro capite}:
+\begin{equation}
+    y_t = \frac{\PIL_{\text{reale}, t}}{\text{Popolazione}_t}
+\end{equation}
+La crescita di lungo periodo è guidata da tre fattori strutturali:
+\begin{itemize}
+    \item L'\textbf{accumulazione di capitale fisico} (macchinari, fabbricati, reti infrastrutturali e digitali);
+    \item L'\textbf{accumulazione di capitale umano} (istruzione, competenze tecniche, salute e formazione);
+    \item Il \textbf{progresso tecnologico e l'innovazione} (capacità di ottenere maggiore output a parità di input impiegati).
+\end{itemize}
+
+\subsection{2. Il Ciclo Economico e le Fluttuazioni di Breve Periodo}
+Il \textbf{ciclo economico} è l'alternanza di fasi di espansione e contrazione dell'attività economica aggregata attorno al sentiero di crescita potenziale di lungo periodo (si veda il grafico sopra riportato).
+
+\begin{definizione}{PIL Potenziale e Output Gap}{potenziale_output_gap}
+\begin{itemize}
+    \item Il \textbf{PIL Potenziale} ($Y_{\mathrm{PO}}$ o $\bar{Y}$) è il livello massimo di produzione che un'economia può sostenere stabilmente nel tempo quando tutti i fattori produttivi (lavoro e capitale) sono impiegati ai loro livelli normali di utilizzo (\textbf{pieno impiego}), senza generare pressioni inflazionistiche.
+    \item L'\textbf{Output Gap} (divario di produzione) misura la distanza percentuale tra il PIL effettivo corrente $Y$ e il PIL potenziale $Y_{\mathrm{PO}}$:
+    \begin{equation}
+        \text{Output Gap} = \frac{Y - Y_{\mathrm{PO}}}{Y_{\mathrm{PO}}} \times 100
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+Le quattro fasi tipiche del ciclo economico sono:
+\begin{enumerate}
+    \item \textbf{Espansione (Boom / Ripresa)}: periodo in cui il PIL cresce a ritmi sostenuti, l'occupazione aumenta e l'output gap si riduce o diventa positivo ($Y > Y_{\mathrm{PO}}$);
+    \item \textbf{Picco (Peak)}: punto di massimo dell'attività economica che conclude la fase espansiva;
+    \item \textbf{Recessione / Contrazione}: fase caratterizzata da una flessione dell'attività economica diffusa nell'intero sistema economico. Convenzionalmente, in contabilità nazionale si definisce \textbf{recessione tecnica} una variazione congiunturale negativa del PIL reale per almeno \textbf{due trimestri consecutivi};
+    \item \textbf{Valle / Punto di Minimo (Trough)}: il punto più basso della flessione, a partire dal quale ha inizio la successiva fase di ripresa economica.
+\end{enumerate}
+
+\subsection{3. Inflazione e Disoccupazione: Le Due Grandi Patologie Macroeconomiche}
+
+\begin{definizione}{Inflazione e Disoccupazione}{inflaz_disocc}
+\begin{itemize}
+    \item L'\textbf{Inflazione} ($\infl$) è l'aumento continuo e generalizzato del livello medio dei prezzi dei beni e dei servizi in un dato periodo di tempo, che comporta una corrispondente perdita del potere d'acquisto della moneta.
+    \item La \textbf{Disoccupazione} misura la condizione di coloro che, pur essendo in età lavorativa, abili al lavoro e attivamente alla ricerca di un'occupazione retribuita, non riescono a trovarla. Il \textbf{tasso di disoccupazione} ($u$) è dato dal rapporto percentuale tra persone in cerca di occupazione ($U$) e Forze di Lavoro complessive ($FL = L + U$):
+    \begin{equation}
+        u = \frac{U}{FL} \times 100 = \frac{U}{L + U} \times 100
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\begin{esame}[Distinzione tra Disoccupati e Inattivi]
+Per essere classificato come disoccupato secondo gli standard statistici internazionali (ILO / Eurostat / ISTAT), un individuo deve:
+\begin{enumerate}
+    \item Essere privo di impiego;
+    \item Essere disponibile a lavorare entro le due settimane successive;
+    \item Aver compiuto azioni attive di ricerca di lavoro nelle quattro settimane precedenti.
+\end{enumerate}
+Gli individui che hanno smesso di cercare lavoro per scoraggiamento non fanno parte delle Forze di Lavoro ($FL$) e rientrano nella categoria degli \textbf{inattivi} (\textit{lavoratori scoraggiati}). Quando molti disoccupati si scoraggiano ed escono dalle forze di lavoro, il tasso statistico di disoccupazione può apparentemente scendere, pur in presenza di un peggioramento delle condizioni del mercato del lavoro.
+\end{esame}
+
+\section{Obiettivi e Strumenti della Politica Macroeconomica}
+
+I governi e le autorità monetarie intervengono sul sistema economico per raggiungere quattro obiettivi macroeconomici fondamentali (il cosiddetto \textit{Quadrilatero Magico}):
+\begin{enumerate}
+    \item Crescita economica stabile e sostenibile;
+    \item Piena occupazione delle risorse lavorative (basso tasso di disoccupazione);
+    \item Stabilità dei prezzi (inflazione bassa e prevedibile, vicina all'obiettivo del $2\%$ annuo per la BCE);
+    \item Equilibrio dei conti con l'estero e stabilità del tasso di cambio.
+\end{enumerate}
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{l p{3.5cm} X X}
+\toprule
+\textbf{Politica} & \textbf{Autorità Decisore} & \textbf{Strumenti Principali} & \textbf{Obiettivi Primari} \\
+\midrule
+\textbf{Politica Fiscale} & 
+Governo e Parlamento (MEF) & 
+$\bullet$ Spesa pubblica ($G$)\newline
+$\bullet$ Trasferimenti ($TR$)\newline
+$\bullet$ Imposte dirette/indirette ($T$) & 
+Stabilizzazione del reddito e dell'occupazione, fornitura di beni pubblici, controllo del debito sovrano. \\
+\midrule
+\textbf{Politica Monetaria} & 
+Banca Centrale (BCE, Federal Reserve) & 
+$\bullet$ Tassi di interesse ufficiali\newline
+$\bullet$ Operazioni di mercato aperto\newline
+$\bullet$ Riserva obbligatoria ($r_{\text{obb}}$)\newline
+$\bullet$ Misure non convenzionali (QE) & 
+Stabilità dei prezzi nel medio termine, controllo dell'offerta di moneta e credito, stabilità finanziaria. \\
+\midrule
+\textbf{Politiche dell'Offerta} & 
+Governo e Istituzioni & 
+$\bullet$ Riforme del mercato del lavoro\newline
+$\bullet$ Incentivi fiscali all'innovazione\newline
+$\bullet$ Concorrenza e liberalizzazioni\newline
+$\bullet$ Istruzione e infrastrutture & 
+Aumento del PIL potenziale $Y_{\mathrm{PO}}$, incremento della produttività totale dei fattori e della competitività. \\
+\bottomrule
+\end{tabularx}
+\caption{Quadro sinottico comparativo delle politiche macroeconomiche: autorità, strumenti e finalità.}
+\label{tab:politiche_macro_estesa}
+\end{table}
+
+\section{Il Modello del Flusso Circolare del Reddito a Quattro Settori}
+
+Il \textbf{flusso circolare del reddito} è la rappresentazione sintetica dei flussi monetari e reali che intercorrono tra i diversi settori istituzionali dell'economia.
+
+\subsection{La Struttura a Quattro Settori e Tre Mercati}
+Il modello macroeconomico completo articola il sistema economico in:
+\begin{itemize}
+    \item \textbf{Quattro Settori Istituzionali}:
+    \begin{enumerate}
+        \item \textbf{Famiglie}: proprietarie dei fattori produttivi (lavoro, capitale, terra); percepiscono redditi ($Y$) e decidono come ripartirli tra consumo privato ($C$), risparmio ($S$) e imposte nette ($T - TR$);
+        \item \textbf{Imprese}: organizzano i fattori produttivi per produrre beni e servizi finali, pagano le remunerazioni ai fattori ed effettuano investimenti fissi e in scorte ($I$);
+        \item \textbf{Settore Pubblico (Stato)}: preleva imposte ($T$), eroga trasferimenti ($TR$) ed effettua spesa pubblica per beni e servizi ($G$);
+        \item \textbf{Resto del Mondo}: acquista beni e servizi nazionali (\textbf{esportazioni}, $X$) e vende beni e servizi esteri ai residenti (\textbf{importazioni}, $M$ o $Z$).
+    \end{enumerate}
+    
+    \item \textbf{Tre Grandi Mercati}:
+    \begin{enumerate}
+        \item \textbf{Mercato dei Beni e Servizi Finali}: dove si forma il Prodotto Interno Lordo;
+        \item \textbf{Mercato dei Fattori Produttivi}: dove le famiglie offrono lavoro e capitale in cambio di salari, profitti, rendite e interessi;
+        \item \textbf{Mercati Finanziari e Sistema Bancario}: dove il risparmio privato viene convogliato per finanziare gli investimenti delle imprese, il deficit pubblico e il disavanzo estero.
+    \end{enumerate}
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    box/.style={rectangle, draw=navyblue, fill=navyblue!8, line width=1.2pt, rounded corners=3pt, align=center, minimum width=3.2cm, minimum height=1.1cm, font=\bfseries\sffamily\small},
+    mkt/.style={ellipse, draw=purpleaccent, fill=purpleaccent!8, line width=1.1pt, align=center, minimum width=3.4cm, minimum height=1.0cm, font=\bfseries\sffamily\footnotesize},
+    arr_inc/.style={->, >=Stealth, line width=1.3pt, color=forestgreen!80!black},
+    arr_leak/.style={->, >=Stealth, line width=1.3pt, color=crimsonred!80!black},
+    arr_main/.style={->, >=Stealth, line width=1.4pt, color=navyblue},
+    node distance=2.5cm and 3.5cm
+]
+    % Nodi Settori
+    \node[box] (fam) at (0, 3) {FAMIGLIE};
+    \node[box] (imp) at (0, -3) {IMPRESE};
+    \node[box] (gov) at (5.5, 0) {SETTORE PUBBLICO\\(Stato)};
+    \node[box] (row) at (-5.5, 0) {RESTO DEL MONDO\\(Estero)};
+
+    % Nodi Mercati
+    \node[mkt] (mkt_goods) at (-2.2, 0) {Mercato dei Beni\\e Servizi Finali};
+    \node[mkt] (mkt_factors) at (2.2, 0) {Mercato dei Fattori\\Produttivi};
+    \node[mkt, fill=warmamber!10, draw=warmamber!90!black] (mkt_fin) at (0, 0) {Mercati Finanziari\\e Banche};
+
+    % Flussi Principali di Produzione e Reddito
+    \draw[arr_main] (imp.east) to[out=0, in=-90] node[right, font=\footnotesize\bfseries] {Costi Fattori (Salari, Profitti, Rendite)} (mkt_factors.south);
+    \draw[arr_main] (mkt_factors.north) to[out=90, in=0] node[right, font=\footnotesize\bfseries] {Reddito Nazionale Lordo ($Y$)} (fam.east);
+    
+    \draw[arr_main] (fam.west) to[out=180, in=90] node[left, font=\footnotesize\bfseries] {Spesa per Consumi Privati ($C$)} (mkt_goods.north);
+    \draw[arr_main] (mkt_goods.south) to[out=-90, in=180] node[left, font=\footnotesize\bfseries] {Ricavi Vendite Finali ($Y$)} (imp.west);
+
+    % Prelievi (Leakages) in Rosso
+    \draw[arr_leak] (fam.south) -- node[left, font=\footnotesize\bfseries, crimsonred] {Risparmio ($S$)} (mkt_fin.north);
+    \draw[arr_leak] (fam.south east) to[out=-30, in=120] node[above, font=\footnotesize\bfseries, crimsonred] {Imposte Nette ($T - TR$)} (gov.north west);
+    \draw[arr_leak] (fam.south west) to[out=-150, in=60] node[above, font=\footnotesize\bfseries, crimsonred] {Importazioni ($M$)} (row.north east);
+
+    % Immissioni (Injections) in Verde
+    \draw[arr_inc] (mkt_fin.south) -- node[right, font=\footnotesize\bfseries, forestgreen!80!black] {Investimenti ($I$)} (imp.north);
+    \draw[arr_inc] (gov.south west) to[out=-120, in=30] node[below, font=\footnotesize\bfseries, forestgreen!80!black] {Spesa Pubblica ($G$)} (imp.north east);
+    \draw[arr_inc] (row.south east) to[out=-60, in=150] node[below, font=\footnotesize\bfseries, forestgreen!80!black] {Esportazioni ($X$)} (imp.north west);
+
+\end{tikzpicture}
+\caption{Diagramma del Flusso Circolare del Reddito a 4 Settori. In blu il circuito principale reddito-spesa, in rosso i \textbf{Prelievi} ($S, T, M$) e in verde le \textbf{Immissioni} ($I, G, X$).}
+\label{fig:flusso_circolare}
+\end{figure}
+
+\subsection{Prelievi (Leakages) e Immissioni (Injections)}
+Nel flusso circolare del reddito si identificano due categorie fondamentali di flussi finanziari:
+
+\begin{definizione}{Prelievi e Immissioni}{prelievi_immissioni}
+\begin{itemize}
+    \item I \textbf{Prelievi (Leakages / Dispersioni, $W$)} rappresentano la quota di reddito percepita dalle famiglie che non viene reimmessa direttamente nell'acquisto di beni di produzione interna:
+    \begin{equation}
+        W = S + T_d + M
+    \end{equation}
+    dove $S$ è il risparmio privato, $T_d$ sono le imposte dirette al netto dei trasferimenti ($T_d = T - TR$), e $M$ sono le importazioni di beni esteri.
+    
+    \item Le \textbf{Immissioni (Injections / Iniezioni, $J$)} rappresentano la spesa per beni e servizi nazionali generata da fonti diverse dalle famiglie residenti:
+    \begin{equation}
+        J = I + G + X
+    \end{equation}
+    dove $I$ sono gli investimenti privati delle imprese, $G$ è la spesa pubblica per beni e servizi, e $X$ sono le esportazioni verso l'estero.
+\end{itemize}
+\end{definizione}
+
+\begin{teorema}{Condizione di Equilibrio del Flusso Circolare}{equilibrio_flusso}
+In un sistema macroeconomico stazionario in equilibrio, la somma totale dei prelievi deve eguagliare la somma totale delle immissioni:
+\begin{equation}
+    \text{Totale Prelievi} = \text{Totale Immissioni} \iff S + T + M = I + G + X
+\end{equation}
+\end{teorema}
+
+\section{La Definizione Rigorosa del PIL e i Tre Metodi di Misurazione}
+
+\begin{definizione}{Prodotto Interno Lordo (PIL)}{definizione_pil_rigorosa}
+Il \textbf{Prodotto Interno Lordo (PIL)} è il valore monetario complessivo, espresso ai prezzi di mercato correnti, di tutti i \textbf{beni e servizi finali} prodotti all'interno dei confini geografici di un Paese in un determinato intervallo temporale (solitamente l'anno solare o il trimestre), al lordo degli ammortamenti del capitale fisso.
+\end{definizione}
+
+L'analisi puntuale di questa definizione evidenzia cinque requisiti essenziali:
+\begin{enumerate}
+    \item \textbf{Valore Monetario di Mercato}: per aggregare grandezze fisiche eterogenee (tonnellate di acciaio, visite mediche, automobili, software) si moltiplica la quantità fisica di ciascun bene per il rispettivo prezzo di mercato corrente ($P_i \cdot Q_i$).
+    \item \textbf{Beni e Servizi Finali}: vengono inclusi esclusivamente i beni destinati all'uso finale (consumo o investimento). Sono tassativamente esclusi i \textbf{beni intermedi} (materie prime, semilavorati, componenti) utilizzati e incorporati nel ciclo produttivo nello stesso periodo, per evitare il grave errore di \textbf{doppio conteggio} (\textit{double counting}).
+    \item \textbf{Territorialità (Interno)}: rileva il luogo geografico in cui si svolge l'attività produttiva. Il PIL misura la produzione realizzata all'interno dei confini nazionali, sia essa compiuta da cittadini italiani o da operatori esteri residenti in Italia.
+    \item \textbf{Lordo degli Ammortamenti}: include la quota di produzione necessaria a rimpiazzare il logorio fisico e l'obsolescenza tecnologica del capitale esistente (\textbf{ammortamento}). Sottraendo l'ammortamento si ottiene il \textbf{Prodotto Interno Netto} ($\mathrm{PIN} = \PIL - \text{Ammortamenti}$).
+    \item \textbf{Flusso Temporale}: il PIL è una grandezza di \textbf{flusso}, riferita a quanto prodotto nel periodo considerato (es. anno 2025). Le transazioni di beni usati (es. vendita di un appartamento costruito nel 1990 o di un'auto usata) non entrano nel PIL dell'anno corrente (se non per le sole provvigioni di intermediazione).
+\end{enumerate}
+
+\subsection{I Tre Metodi di Calcolo del PIL}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    block/.style={rectangle, draw=navyblue, fill=navyblue!6, line width=1.2pt, rounded corners=4pt, align=center, minimum width=11cm, minimum height=1.6cm, font=\small},
+    titleblock/.style={font=\bfseries\sffamily\color{navyblue}}
+]
+    \node[block] (b1) at (0, 3.8) {
+        \textbf{\textsf{\color{navyblue}1. METODO DELLA SPESA (Beni Finali)}}\\[0.3em]
+        $\PIL = C + I + G + NX = C + I + G + (X - M)$
+    };
+    
+    \node[block] (b2) at (0, 1.9) {
+        \textbf{\textsf{\color{purpleaccent}2. METODO DEL VALORE AGGIUNTO (Settori Produttivi)}}\\[0.3em]
+        $\PIL = \sum_{j=1}^{N} \mathrm{VA}_j = \sum_{j=1}^{N} (\text{Produzione Lorda}_j - \text{Consumi Intermedi}_j)$
+    };
+    
+    \node[block] (b3) at (0, 0) {
+        \textbf{\textsf{\color{forestgreen}3. METODO DEL REDDITO (Remunerazione Fattori)}}\\[0.3em]
+        $\PIL = \sum \text{Redditi da Lavoro (Salari)} + \sum \text{Redditi da Capitale (Profitti, Rendite, Interessi)} + T_{\text{ind. nette}}$
+    };
+
+    \draw[<->, >=Stealth, line width=1.5pt, color=warmamber!90!black] (b1.south) -- (b2.north) node[midway, right, font=\scriptsize\bfseries] {Equivalenza Contabile};
+    \draw[<->, >=Stealth, line width=1.5pt, color=warmamber!90!black] (b2.south) -- (b3.north) node[midway, right, font=\scriptsize\bfseries] {Identità Fondamentale};
+
+\end{tikzpicture}
+\caption{I Tre Metodi di Misurazione del PIL istituiti dalla contabilità nazionale (SEC 2010 / SNA 2008).}
+\label{fig:tre_metodi_pil}
+\end{figure}
+
+\begin{teorema}{I Tre Metodi di Misurazione del PIL}{tre_metodi_pil_teorema}
+Per la struttura contabile a partita doppia del flusso circolare del reddito, il PIL calcolato con ciascuno dei tre metodi conduce \textbf{rigorosamente al medesimo valore numerico}:
+\begin{enumerate}
+    \item \textbf{Metodo della Spesa}: somma delle spese per beni e servizi finali sostenute dai quattro settori istituzionali:
+    \begin{equation}
+        \PIL = C + I + G + NX
+    \end{equation}
+    dove $C$ è il consumo finale delle famiglie, $I$ sono gli investimenti lordi (investimenti fissi di imprese e famiglie + variazione delle scorte $\Delta \text{Scorte}$), $G$ è la spesa pubblica per consumi e investimenti collettivi, e $NX = X - M$ sono le esportazioni nette.
+    
+    \item \textbf{Metodo del Valore Aggiunto}: somma dei valori aggiunti generati da tutte le unità produttive dell'economia:
+    \begin{equation}
+        \PIL = \sum_{j=1}^{N} \mathrm{VA}_j
+    \end{equation}
+    dove il \textbf{Valore Aggiunto} della singola impresa $j$ è definito come la differenza tra il ricavo della produzione lorda e il costo sostenuto per l'acquisto di beni e servizi intermedi forniti da altre imprese:
+    \begin{equation}
+        \mathrm{VA}_j = \text{Valore della Produzione Vendibile}_j - \text{Acquisto di Beni Intermedi}_j
+    \end{equation}
+    
+    \item \textbf{Metodo del Reddito}: somma di tutte le remunerazioni lorde corrisposte ai fattori primari della produzione impiegati nel processo economico:
+    \begin{equation}
+        \PIL = W + \Pi_{\text{lorde}} + R_{\text{rendite}} + \text{Interessi Netti} + T_{\text{indirette nette}}
+    \end{equation}
+    dove $W$ è il monte salari (redditi da lavoro dipendente comprensivi di oneri sociali), $\Pi_{\text{lorde}}$ è il risultato lordo di gestione (profitti d'impresa e redditi misti da lavoro autonomo), e $T_{\text{indirette nette}}$ sono le imposte indirette sulla produzione e sulle importazioni al netto dei contributi pubblici.
+\end{enumerate}
+\end{teorema}
+
+\begin{dimostrazione}[Equivalenza tra Spesa, Valore Aggiunto e Reddito]
+Si consideri un'economia composta da $N$ imprese. Per ciascuna impresa $j$, il valore della produzione totale $Y_j$ è impiegato o come bene intermedio venduto ad altre imprese ($\sum_{k} \mathrm{INT}_{jk}$) oppure come bene finale venduto agli acquirenti finali ($F_j$):
+\begin{equation}
+    Y_j = \sum_{k=1}^N \mathrm{INT}_{jk} + F_j
+\end{equation}
+Sommando su tutte le $N$ imprese:
+\begin{equation}
+    \sum_{j=1}^N Y_j = \sum_{j=1}^N \sum_{k=1}^N \mathrm{INT}_{jk} + \sum_{j=1}^N F_j
+\end{equation}
+D'altra parte, per definizione di valore aggiunto, la produzione di ciascuna impresa $j$ è pari al suo valore aggiunto più i beni intermedi acquistati dalle altre imprese:
+\begin{equation}
+    Y_j = \mathrm{VA}_j + \sum_{k=1}^N \mathrm{INT}_{kj}
+\end{equation}
+Sommando su tutte le imprese:
+\begin{equation}
+    \sum_{j=1}^N Y_j = \sum_{j=1}^N \mathrm{VA}_j + \sum_{j=1}^N \sum_{k=1}^N \mathrm{INT}_{kj}
+\end{equation}
+Poiché la somma di tutti i beni intermedi venduti coincide necessariamente con la somma di tutti i beni intermedi acquistati all'interno del sistema economico ($\sum_{j}\sum_{k} \mathrm{INT}_{jk} = \sum_{j}\sum_{k} \mathrm{INT}_{kj}$), eguagliando le due espressioni si ricava:
+\begin{equation}
+    \sum_{j=1}^N \mathrm{VA}_j = \sum_{j=1}^N F_j = \text{Spesa Totale per Beni Finali}
+\end{equation}
+Inoltre, il valore aggiunto di ciascuna impresa deve essere integralmente distribuito sotto forma di salari ai lavoratori ($W$), rendite ai proprietari fondiari, interessi ai creditori o profitti residui agli azionisti/imprenditori ($\Pi$):
+\begin{equation}
+    \mathrm{VA}_j = W_j + \Pi_j \implies \sum_{j=1}^N \mathrm{VA}_j = \sum_{j=1}^N W_j + \sum_{j=1}^N \Pi_j = \text{Reddito Nazionale Complessivo}
+\end{equation}
+I tre metodi misurano pertanto la medesima grandezza macroeconomica da tre prospettive contabili coincidenti.
+\end{dimostrazione}
+
+\subsection{Esempio Applicativo Completo: La Filiera Produttiva a Tre Stadi}
+
+\begin{esempio}[Calcolo del PIL con i Tre Metodi per la Filiera del Pane]
+Si consideri un'economia semplificata con una filiera produttiva articolata in tre stadi:
+\begin{enumerate}
+    \item \textbf{Azienda Agricola}: coltiva grano senza acquistare beni intermedi. Vende il grano al mulino per $100\,\text{\euro}$. Paga salari ai braccianti per $60\,\text{\euro}$ e ottiene un profitto di $40\,\text{\euro}$.
+    \item \textbf{Mulino}: acquista il grano per $100\,\text{\euro}$, lo macina e vende la farina al panificio per $220\,\text{\euro}$. Paga salari agli operai per $70\,\text{\euro}$ e ottiene un profitto di $50\,\text{\euro}$.
+    \item \textbf{Panificio}: acquista la farina per $220\,\text{\euro}$, produce pane e lo vende direttamente ai consumatori finali per $380\,\text{\euro}$. Paga salari per $90\,\text{\euro}$ e ottiene un profitto di $70\,\text{\euro}$.
+\end{enumerate}
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{l X X X X}
+\toprule
+\textbf{Stadio Produttivo} & \textbf{Ricavo di Vendita} & \textbf{Consumi Intermedi} & \textbf{Valore Aggiunto} & \textbf{Redditi (Salari + Profitti)} \\
+\midrule
+1. Azienda Agricola (Grano) & $100\,\text{\euro}$ & $0\,\text{\euro}$ & $100\,\text{\euro}$ & $60 + 40 = 100\,\text{\euro}$ \\
+2. Mulino (Farina)          & $220\,\text{\euro}$ & $100\,\text{\euro}$ & $120\,\text{\euro}$ & $70 + 50 = 120\,\text{\euro}$ \\
+3. Panificio (Pane finale)  & $380\,\text{\euro}$ & $220\,\text{\euro}$ & $160\,\text{\euro}$ & $90 + 70 = 160\,\text{\euro}$ \\
+\midrule
+\textbf{Totale Complessivo} & $\mathbf{700\,\text{\euro}}$ & $\mathbf{320\,\text{\euro}}$ & $\mathbf{380\,\text{\euro}}$ & $\mathbf{380\,\text{\euro}}$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Verifica dei Tre Metodi}:
+\begin{itemize}
+    \item \textbf{Metodo della Spesa Finale}: l'unico bene finale venduto ai consumatori è il pane $\implies \PIL = 380\,\text{\euro}$.
+    \item \textbf{Metodo del Valore Aggiunto}: $\PIL = \mathrm{VA}_{\text{agricoltura}} + \mathrm{VA}_{\text{mulino}} + \mathrm{VA}_{\text{panificio}} = 100 + 120 + 160 = 380\,\text{\euro}$.
+    \item \textbf{Metodo del Reddito}: Salari totali $= 60 + 70 + 90 = 220\,\text{\euro}$; Profitti totali $= 40 + 50 + 70 = 160\,\text{\euro}$. $\PIL = \text{Salari} + \text{Profitti} = 220 + 160 = 380\,\text{\euro}$.
+\end{itemize}
+Se si fosse sommata la produzione lorda di tutte le imprese ($100 + 220 + 380 = 700\,\text{\euro}$), si sarebbe commesso un errore di doppio conteggio pari esattamente al valore dei beni intermedi ($320\,\text{\euro}$).
+\end{esempio}
+
+\section{Gli Aggregati di Contabilità Nazionale e l'Identità dei Saldi Settoriali}
+
+\subsection{Dagli Aggregati Lordi al Reddito Disponibile}
+La contabilità nazionale definisce una gerarchia di aggregati collegati:
+
+\begin{definizione}{PIL, PNL, PIN e Reddito Nazionale}{aggregati_collegati}
+\begin{itemize}
+    \item \textbf{Prodotto Nazionale Lordo (PNL)}: misura il valore della produzione generata dai fattori produttivi (lavoro e capitale) di proprietà di residenti nazionali, ovunque essi siano impiegati nel mondo:
+    \begin{equation}
+        \PNL = \PIL + \text{RPA}
+    \end{equation}
+    dove $\text{RPA}$ (\textit{Redditi Netti da Fattori dall'Estero}) è la differenza tra i redditi percepiti all'estero da residenti nazionali e i redditi percepiti in patria da fattori non residenti.
+    
+    \item \textbf{Prodotto Interno Netto (PIN)} e \textbf{Prodotto Nazionale Netto (PNN)}:
+    \begin{equation}
+        \mathrm{PIN} = \PIL - \text{Ammortamenti}, \quad \mathrm{PNN} = \PNL - \text{Ammortamenti}
+    \end{equation}
+    
+    \item \textbf{Reddito Nazionale (RN) al Costo dei Fattori}:
+    \begin{equation}
+        \mathrm{RN} = \mathrm{PNN}_{\text{prezzi di mercato}} - \text{Imposte Indirette Nette}
+    \end{equation}
+    
+    \item \textbf{Reddito Disponibile delle Famiglie ($Y_d$)}: l'ammontare effettivo di risorse monetarie a disposizione dei nuclei familiari per consumi privati ($C$) e risparmio ($S$):
+    \begin{equation}
+        Y_d = Y - T_d + TR = C + S
+    \end{equation}
+    dove $T_d$ sono le imposte dirette pagate e $TR$ sono i trasferimenti monetari erogati dallo Stato (sussidi di disoccupazione, pensioni, assegni familiari).
+\end{itemize}
+\end{definizione}
+
+\subsection{L'Identità Contabile Fondamentale dei Tre Saldi Settoriali}
+
+\begin{teorema}{Identità Contabile dei Saldi Settoriali}{identita_saldi}
+In qualsiasi economia aperta con settore pubblico, per identità contabile, il saldo del settore privato deve eguagliare la somma algebrica del disavanzo del settore pubblico e del saldo commerciale con l'estero:
+\begin{equation}
+    (S - I) \equiv (G + TR - T) + (X - M) \equiv \mathrm{Deficit Pubblico} + \text{Esportazioni Nette}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}[Derivazione dell'Identità dei Saldi]
+Si consideri l'identità del PIL dal lato della spesa:
+\begin{equation}
+    Y \equiv C + I + G + NX \quad \text{con } NX = X - M
+\end{equation}
+D'altra parte, il reddito aggregato $Y$ allocato dalle famiglie tramite il reddito disponibile $Y_d$ soddisfa:
+\begin{equation}
+    Y_d = Y - T + TR = C + S \implies Y \equiv C + S + T - TR
+\end{equation}
+Uguagliando la spesa complessiva al reddito aggregato:
+\begin{equation}
+    C + I + G + (X - M) \equiv C + S + T - TR
+\end{equation}
+Sottraendo il consumo $C$ da entrambi i membri e riordinando i termini algebrici:
+\begin{equation}
+    (S - I) \equiv (G + TR - T) + (X - M)
+\end{equation}
+oppure, isolando il risparmio privato $S$:
+\begin{equation}
+    S \equiv I + \mathrm{BD} + NX \quad \text{dove } \mathrm{BD} = G + TR - T \text{ è il Bilancio in Disavanzo}
+\end{equation}
+\end{dimostrazione}
+
+\begin{osservazione}[Interpretazione Macroeconomica dei Tre Saldi]
+L'identità dimostra che il risparmio privato delle famiglie ($S$) svolge una triplice funzione di finanziamento all'interno del sistema economico:
+\begin{enumerate}
+    \item Finanziare gli investimenti privati in beni capitali delle imprese ($I$);
+    \item Finanziare il disavanzo del bilancio pubblico dello Stato ($\mathrm{BD} = G + TR - T$);
+    \item Finanziare i crediti verso l'estero nel caso di un surplus commerciale ($NX > 0$).
+\end{enumerate}
+Se il settore privato è in equilibrio ($S = I$), qualsiasi disavanzo pubblico ($\mathrm{BD} > 0$) deve necessariamente tradursi in un disavanzo commerciale con l'estero ($NX < 0$, fenomeno noto come \textbf{Deficit Gemelli} o \textit{Twin Deficits}).
+\end{osservazione}
+
+\section{PIL Nominale, PIL Reale e Misure del Livello dei Prezzi}
+
+\subsection{Deflazione del PIL: Valori Correnti vs Valori Costanti}
+Poiché il PIL è una grandezza monetaria data dal prodotto tra prezzi e quantità ($\sum p_i q_i$), una sua variazione nel tempo può riflettere:
+\begin{enumerate}
+    \item Un incremento effettivo della quantità fisica di beni e servizi prodotti (\textbf{crescita reale});
+    \item Un incremento generalizzato del livello dei prezzi (\textbf{inflazione pura});
+    \item Una combinazione di entrambe le componenti.
+\end{enumerate}
+
+\begin{definizione}{PIL Nominale e PIL Reale}{pil_nom_reale}
+Dato un paniere di $N$ beni e servizi prodotti nell'anno $t$:
+\begin{itemize}
+    \item Il \textbf{PIL Nominale (a prezzi correnti)} è calcolato moltiplicando le quantità prodotte nell'anno $t$ per i prezzi vigenti nell'anno $t$ medesimo:
+    \begin{equation}
+        \PIL_{\text{nom}, t} = \sum_{i=1}^N p_{i, t} \cdot q_{i, t}
+    \end{equation}
+    \item Il \textbf{PIL Reale (a prezzi costanti dell'anno base $0$)} è calcolato moltiplicando le quantità prodotte nell'anno $t$ per i prezzi fissati a un anno base di riferimento ($0$):
+    \begin{equation}
+        \PIL_{\text{reale}, t} = \sum_{i=1}^N p_{i, 0} \cdot q_{i, t}
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\subsection{Il Deflatore del PIL vs l'Indice dei Prezzi al Consumo (IPC)}
+
+\begin{definizione}{Deflatore del PIL e Indice dei Prezzi al Consumo}{deflatore_ipc}
+\begin{itemize}
+    \item Il \textbf{Deflatore del PIL} è il rapporto percentuale tra il PIL nominale e il PIL reale dell'anno $t$:
+    \begin{equation}
+        \text{Deflatore del PIL}_t = \frac{\PIL_{\text{nom}, t}}{\PIL_{\text{reale}, t}} \times 100 = \frac{\sum_{i=1}^N p_{i, t} q_{i, t}}{\sum_{i=1}^N p_{i, 0} q_{i, t}} \times 100
+    \end{equation}
+    Il deflatore è un \textbf{indice dei prezzi a pesi variabili (Indice di Paasche)}, poiché la ponderazione dei prezzi dipende dalle quantità correnti prodotte $q_{i, t}$.
+    
+    \item L'\textbf{Indice dei Prezzi al Consumo (IPC)} misura il costo di acquisto nel tempo di un paniere prefissato e costante di beni e servizi consumati dalla famiglia media rappresentativa:
+    \begin{equation}
+        \text{IPC}_t = \frac{\sum_{i=1}^M p_{i, t} q_{i, 0}}{\sum_{i=1}^M p_{i, 0} q_{i, 0}} \times 100
+    \end{equation}
+    L'IPC è un \textbf{indice dei prezzi a pesi fissi (Indice di Laspeyres)}, basato sul paniere dell'anno base $q_{i, 0}$.
+\end{itemize}
+\end{definizione}
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{l X X}
+\toprule
+\textbf{Caratteristica} & \textbf{Deflatore del PIL} & \textbf{Indice dei Prezzi al Consumo (IPC)} \\
+\midrule
+\textbf{Tipologia di Indice} & Indice di Paasche (pesi variabili correnti $q_t$) & Indice di Laspeyres (pesi fissi anno base $q_0$) \\
+\textbf{Beni Inclusi} & \textbf{Tutti} i beni e servizi finali prodotti all'interno del territorio nazionale (inclusi beni capitali e spesa pubblica) & Solo i beni e servizi inclusi nel paniere di spesa per il consumo delle famiglie \\
+\textbf{Beni Importati} & \textbf{Esclusi} (poiché non prodotti nel Paese) & \textbf{Inclusi} se acquistati dai consumatori residenti (es. petrolio, caffè, smartphone esteri) \\
+\textbf{Beni Capitali / Macchinari} & \textbf{Inclusi} negli investimenti d'impresa & \textbf{Esclusi} (non rientrano nel consumo familiare) \\
+\textbf{Distorsione da Sostituzione} & Tende a \textbf{sottostimare} l'inflazione effettiva & Tende a \textbf{sovrastimare} l'inflazione (non cattura subito la sostituzione verso beni più economici) \\
+\bottomrule
+\end{tabularx}
+\caption{Confronto analitico tra Deflatore del PIL e Indice dei Prezzi al Consumo (IPC).}
+\label{tab:deflatore_vs_ipc}
+\end{table}
+
+\begin{metodo}[Calcolo del PIL Reale, Deflatore e Tasso di Inflazione]
+Per condurre l'analisi della dinamica economica tra due anni ($t_0$ e $t_1$):
+\begin{enumerate}
+    \item Calcolare $\PIL_{\text{nom}, t_0} = \sum p_{i, 0} q_{i, 0}$ e $\PIL_{\text{nom}, t_1} = \sum p_{i, 1} q_{i, 1}$;
+    \item Calcolare il PIL reale all'anno base: $\PIL_{\text{reale}, t_1} = \sum p_{i, 0} q_{i, 1}$ (all'anno base $\PIL_{\text{reale}, 0} = \PIL_{\text{nom}, 0}$);
+    \item Calcolare il tasso di crescita reale dell'economia: $g_Y = \frac{\PIL_{\text{reale}, t_1} - \PIL_{\text{reale}, t_0}}{\PIL_{\text{reale}, t_0}} \times 100$;
+    \item Calcolare il Deflatore per ciascun anno: $\text{Def}_0 = 100$, $\text{Def}_1 = \frac{\PIL_{\text{nom}, 1}}{\PIL_{\text{reale}, 1}} \times 100$;
+    \item Calcolare il tasso di inflazione tramite il deflatore: $\infl_1 = \frac{\text{Def}_1 - \text{Def}_0}{\text{Def}_0} \times 100$.
+\end{enumerate}
+\end{metodo}
+
+\begin{esercizio}[Calcolo di PIL Reale, Crescita e Inflazione]
+Un'economia stilizzata produce solo due beni: Automobili e Pizza. I dati di prezzo e quantità sono riportati in tabella:
+\begin{center}
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Bene} & \textbf{Prezzo 2024 ($p_{24}$)} & \textbf{Quantità 2024 ($q_{24}$)} & \textbf{Prezzo 2025 ($p_{25}$)} & \textbf{Quantità 2025 ($q_{25}$)} \\
+\midrule
+Automobili & $20.000\,\text{\euro}$ & $10$ & $22.000\,\text{\euro}$ & $12$ \\
+Pizza      & $10\,\text{\euro}$     & $1.000$ & $12\,\text{\euro}$     & $1.100$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Risoluzione}:
+\begin{enumerate}
+    \item \textbf{PIL Nominale}:
+    \begin{align*}
+        \PIL_{\text{nom}, 24} &= (20.000 \times 10) + (10 \times 1.000) = 200.000 + 10.000 = 210.000\,\text{\euro} \\
+        \PIL_{\text{nom}, 25} &= (22.000 \times 12) + (12 \times 1.100) = 264.000 + 13.200 = 277.200\,\text{\euro}
+    \end{align*}
+    La crescita del PIL nominale è: $\Delta\% \PIL_{\text{nom}} = \frac{277.200 - 210.000}{210.000} \times 100 = +32\%$.
+    
+    \item \textbf{PIL Reale 2025 (a prezzi base 2024)}:
+    \begin{equation*}
+        \PIL_{\text{reale}, 25} = (20.000 \times 12) + (10 \times 1.100) = 240.000 + 11.000 = 251.000\,\text{\euro}
+    \end{equation*}
+    La crescita reale effettiva del PIL è:
+    \begin{equation*}
+        g_{25} = \frac{251.000 - 210.000}{210.000} \times 100 = \frac{41.000}{210.000} \times 100 \approx +19,52\%
+    \end{equation*}
+    
+    \item \textbf{Deflatore del PIL 2025 e Tasso di Inflazione}:
+    \begin{align*}
+        \text{Deflatore}_{25} &= \frac{\PIL_{\text{nom}, 25}}{\PIL_{\text{reale}, 25}} \times 100 = \frac{277.200}{251.000} \times 100 \approx 110,44 \\
+        \infl_{25} &= \frac{110,44 - 100}{100} \times 100 = +10,44\%
+    \end{align*}
+    Si noti la relazione moltiplicativa: $(1 + g_Y)(1 + \infl) = 1,1952 \times 1,1044 \approx 1,32 = (1 + \Delta\% \PIL_{\text{nom}})$.
+\end{enumerate}
+\end{esercizio}
+
+\section{I Limiti del PIL come Misura del Benessere Economico e Sociale}
+
+Sebbene il PIL pro capite sia il parametro standard per quantificare l'attività economica di una nazione, esso presenta limiti strutturali non trascurabili come indicatore di benessere collettivo:
+
+\begin{enumerate}
+    \item \textbf{Esclusione del Lavoro Non di Mercato}: non rientrano nel PIL le attività di cura familiare, il lavoro domestico, il volontariato e l'autoproduzione (\textit{fai-da-te}), benché generino un elevatissimo valore sociale ed economico.
+    \item \textbf{Economia Sommersa e Illegale}: il PIL non rileva integralmente le attività dell'economia informale, il lavoro nero e le transazioni illegali (pur con recenti stime convenzionali introdotte da Eurostat).
+    \item \textbf{Esternalità Negative e Degrado Ambientale}: il PIL conteggia con segno positivo la produzione che genera inquinamento, congestione e disboscamento; inoltre, conteggia positivamente anche le spese successive sostenute per bonificare i danni ambientali causati! Non vi è alcuna deduzione per il consumo e l'esaurimento dello stock di capitale naturale.
+    \item \textbf{Distribuzione del Reddito e Disuguaglianza}: il PIL pro capite è una media aritmetica che non fornisce alcuna informazione su come il reddito sia ripartito tra la popolazione (non distingue tra una società egualitaria e una in cui l'intera ricchezza è concentrata nelle mani di una ristretta oligarchia).
+    \item \textbf{Valutazione dei Servizi Pubblici al Costo}: in assenza di un prezzo di mercato per la sanità, l'istruzione e la sicurezza pubbliche, il loro valore nel PIL viene convenzionalmente registrato pari alla somma dei costi di produzione (stipendi del personale).
+\end{enumerate}
+
+\begin{empirico}[Confronto Sanità Pubblica vs Sanità Privata e l'Indice ISU]
+Negli Stati Uniti, dove il sistema sanitario è largamente privatizzato, la spesa sanitaria supera il $17\%$ del PIL, generando un contributo contabile enorme al PIL. In Italia e nei paesi europei con Servizio Sanitario Nazionale pubblico e universalistico, la spesa sanitaria si attesta intorno all'$8-9\%$ del PIL. Tuttavia, gli indicatori oggettivi di salute pubblica (aspettativa di vita alla nascita, mortalità infantile) in Italia sono storicamente superiori a quelli statunitensi. Il maggior costo americano è in larga parte riconducibile a costi transattivi, asimmetrie informative, spese assicurative e contenziosi legali che gonfiano il PIL senza garantire una salute migliore.
+
+Per superare i limiti del PIL, le Nazioni Unite (UNDP) hanno introdotto l'\textbf{Indice di Sviluppo Umano (ISU / HDI)}, calcolato come media geometrica di tre dimensioni normalizzate:
+\begin{equation}
+    \text{ISU} = \sqrt[3]{I_{\text{Salute}} \times I_{\text{Istruzione}} \times I_{\text{Reddito}}}
+\end{equation}
+dove la salute è misurata dalla speranza di vita alla nascita, l'istruzione dalla media e attesa degli anni di scolarizzazione, e il reddito dal logaritmo del PIL reale pro capite a parità di potere d'acquisto (PPA).
+\end{empirico}

@@ -1,0 +1,168 @@
+\chapter{Calcolo Differenziale e Studio di Funzione}
+\label{chap:calcolo_differenziale}
+
+Il calcolo differenziale costituisce il motore computazionale dell'Analisi Matematica. Attraverso la nozione di **derivata**, esso consente di quantificare il tasso di variazione istantaneo di una grandezza, determinare l'inclinazione locale della retta tangente a una curva ed esplorare la struttura geometrica fine di una funzione (punti di massimo, minimo, flessi e asintoti).
+
+In questo capitolo introduciamo il concetto di derivata a partire dal rapporto incrementale, dimostriamo le regole di derivazione e i grandi teoremi differenziali (Fermat, Rolle, Lagrange, Cauchy e de l'Hôpital) e formalizziamo lo schema operativo in sette fasi per lo studio qualitativo completo del grafico.
+
+% ==============================================================================
+\section{Il Concetto di Derivata e Significato Geometrico}
+\label{sec:derivata_definizione_dettagliata}
+% ==============================================================================
+
+Sia $f \colon (a, b) \to \R$ una funzione e sia $x_0 \in (a, b)$. Se consideriamo un incremento $h \neq 0$ tale che $x_0 + h \in (a, b)$, la retta secante passante per i punti $(x_0, f(x_0))$ e $(x_0 + h, f(x_0 + h))$ ha coefficiente angolare:
+\[
+    m_{\text{sec}}(h) = \frac{\Delta y}{\Delta x} = \frac{f(x_0 + h) - f(x_0)}{h}
+\]
+Facendo tendere l'incremento $h$ a zero, la retta secante tende alla posizione limite della **retta tangente** al grafico nel punto $(x_0, f(x_0))$.
+
+\begin{definizione}{Derivata Prima in un Punto}{derivata_prima_def}
+La funzione $f$ si dice **derivabile nel punto $x_0$** se esiste finito il limite del rapporto incrementale:
+\[
+    f'(x_0) = \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h} = \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}
+\]
+Il valore $f'(x_0)$ rappresenta il coefficiente angolare della retta tangente, la cui equazione cartesiana è:
+\[
+    y = f(x_0) + f'(x_0)(x - x_0)
+\]
+\end{definizione}
+
+\begin{teorema}{La Derivabilità Implica la Continuità}{derivabilita_implica_continuita}
+Se $f$ è derivabile in $x_0$, allora $f$ è continua in $x_0$.
+\end{teorema}
+
+\begin{dimostrazione}
+Scriviamo l'identità algebrica per $x \neq x_0$:
+\[
+    f(x) - f(x_0) = \frac{f(x) - f(x_0)}{x - x_0} \cdot (x - x_0)
+\]
+Passando al limite per $x \to x_0$ e applicando il teorema del limite del prodotto:
+\[
+    \lim_{x \to x_0} [f(x) - f(x_0)] = \lim_{x \to x_0} \left( \frac{f(x) - f(x_0)}{x - x_0} \right) \cdot \lim_{x \to x_0} (x - x_0) = f'(x_0) \cdot 0 = 0
+\]
+Dunque $\lim_{x \to x_0} f(x) = f(x_0)$, provando che $f$ è continua in $x_0$.
+\end{dimostrazione}
+
+\begin{osservazione}[Il Viceversa è Falso: Punti di Non Derivabilità]
+La continuità non implica la derivabilità. Il controesempio classico è $f(x) = |x|$ in $x_0 = 0$: $f$ è continua ovunque, ma i limiti del rapporto incrementale valgono $\lim_{h \to 0^+} \frac{|h|}{h} = +1$ e $\lim_{h \to 0^-} \frac{|h|}{h} = -1$. Essendo $f'_+(0) \neq f'_-(0)$, il punto $(0, 0)$ è un **punto angoloso**.
+\end{osservazione}
+
+% ==============================================================================
+\section{Algebra delle Derivate e Dimostrazioni Rigorose}
+\label{sec:algebra_derivate_dimostrazioni}
+% ==============================================================================
+
+\begin{teorema}{Regole di Derivazione Fondamentali}{regole_derivazione_th}
+Siano $f, g$ derivabili in $x$:
+\begin{enumerate}
+    \item \textbf{Somma}: $(f + g)'(x) = f'(x) + g'(x)$.
+    \item \textbf{Prodotto (Regola di Leibniz)}: $(f \cdot g)'(x) = f'(x)g(x) + f(x)g'(x)$.
+    \item \textbf{Quoziente}: $\left(\frac{f}{g}\right)'(x) = \frac{f'(x)g(x) - f(x)g'(x)}{g(x)^2}$ (con $g(x) \neq 0$).
+    \item \textbf{Funzione Composta (Chain Rule)}: $(g \circ f)'(x) = g'(f(x)) \cdot f'(x)$.
+    \item \textbf{Funzione Inversa}: $(f^{-1})'(y_0) = \frac{1}{f'(x_0)}$ con $y_0 = f(x_0)$ e $f'(x_0) \neq 0$.
+\end{enumerate}
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazione della Regola del Prodotto]
+Calcoliamo il limite del rapporto incrementale aggiungendo e sottraendo il termine misto $f(x+h)g(x)$:
+\begin{align*}
+    (fg)'(x) &= \lim_{h \to 0} \frac{f(x+h)g(x+h) - f(x)g(x)}{h} \\
+    &= \lim_{h \to 0} \frac{f(x+h)g(x+h) - f(x+h)g(x) + f(x+h)g(x) - f(x)g(x)}{h} \\
+    &= \lim_{h \to 0} \left[ f(x+h) \cdot \frac{g(x+h) - g(x)}{h} + g(x) \cdot \frac{f(x+h) - f(x)}{h} \right]
+\end{align*}
+Poiché $f$ è derivabile in $x$, essa è continua in $x$, da cui $\lim_{h \to 0} f(x+h) = f(x)$. Passando al limite:
+\[
+    (fg)'(x) = f(x)g'(x) + g(x)f'(x)
+\]
+\end{dimostrazione}
+
+% ==============================================================================
+\section{Teoremi Fondamentali del Calcolo Differenziale}
+\label{sec:teoremi_differenziali_dimostrazioni}
+% ==============================================================================
+
+I teoremi di Fermat, Rolle, Lagrange e Cauchy collegano le proprietà locali della derivata al comportamento globale della funzione.
+
+\begin{teorema}{Teorema di Fermat sui Punti Stazionari}{fermat_dim}
+Sia $f \colon (a, b) \to \R$ derivabile nel punto $x_0 \in (a, b)$. Se $x_0$ è un punto di massimo o minimo locale per $f$, allora la derivata prima si annulla:
+\[
+    f'(x_0) = 0
+\]
+\end{teorema}
+
+\begin{dimostrazione}
+Supponiamo che $x_0$ sia un punto di massimo locale. Esiste un intorno $(x_0-\de, x_0+\de) \subseteq (a, b)$ tale che $f(x) \le f(x_0)$ per ogni $x$ nell'intorno, ossia $f(x) - f(x_0) \le 0$.
+Valutiamo i limiti laterali del rapporto incrementale:
+\begin{itemize}
+    \item Per $h > 0$: $\frac{f(x_0+h) - f(x_0)}{h} \le 0 \implies f'_+(x_0) = \lim_{h \to 0^+} \frac{f(x_0+h)-f(x_0)}{h} \le 0$.
+    \item Per $h < 0$: $\frac{f(x_0+h) - f(x_0)}{h} \ge 0 \implies f'_-(x_0) = \lim_{h \to 0^-} \frac{f(x_0+h)-f(x_0)}{h} \ge 0$.
+\end{itemize}
+Essendo $f$ derivabile in $x_0$, i limiti laterali devono coincidere: $0 \le f'(x_0) \le 0 \implies f'(x_0) = 0$.
+\end{dimostrazione}
+
+\begin{teorema}{Teorema di Rolle}{rolle_dim}
+Sia $f \colon [a, b] \to \R$ continua su $[a, b]$, derivabile su $(a, b)$ e tale che $f(a) = f(b)$.
+Allora esiste almeno un punto $c \in (a, b)$ in cui la tangente è orizzontale:
+\[
+    f'(c) = 0
+\]
+\end{teorema}
+
+\begin{dimostrazione}
+Per il Teorema di Weierstrass, $f$ ammette massimo assoluto $M$ e minimo assoluto $m$ su $[a, b]$.
+\begin{itemize}
+    \item Se $M = m$, la funzione è costante su $[a, b]$, per cui $f'(x) = 0$ per ogni $x \in (a, b)$.
+    \item Se $M > m$, poiché $f(a) = f(b)$, almeno uno tra il punto di massimo o di minimo deve cadere all'interno dell'intervallo aperto $(a, b)$. Sia $c \in (a, b)$ tale punto estremale interno. Per il Teorema di Fermat, $f'(c) = 0$.
+\end{itemize}
+\end{dimostrazione}
+
+\begin{teorema}{Teorema del Valor Medio di Lagrange}{lagrange_dim}
+Sia $f \colon [a, b] \to \R$ continua su $[a, b]$ e derivabile su $(a, b)$.
+Allora esiste almeno un punto $c \in (a, b)$ tale che:
+\[
+    \frac{f(b) - f(a)}{b - a} = f'(c)
+\]
+Geometricamente, esiste almeno un punto $c$ in cui la retta tangente è parallela alla retta secante congiungente gli estremi $(a, f(a))$ e $(b, f(b))$.
+\end{teorema}
+
+\begin{dimostrazione}
+Consideriamo la funzione ausiliaria $g \colon [a, b] \to \R$, definita sottraendo a $f(x)$ l'ordinata della corda secante:
+\[
+    g(x) = f(x) - \left[ f(a) + \frac{f(b) - f(a)}{b - a}(x - a) \right]
+\]
+La funzione $g$ è continua su $[a, b]$ e derivabile su $(a, b)$. Inoltre $g(a) = f(a) - f(a) = 0$ e $g(b) = f(b) - [f(a) + f(b) - f(a)] = 0 \implies g(a) = g(b) = 0$.
+Applicando il Teorema di Rolle a $g(x)$, esiste un punto $c \in (a, b)$ tale che $g'(c) = 0$. Poiché:
+\[
+    g'(x) = f'(x) - \frac{f(b) - f(a)}{b - a} \implies g'(c) = 0 \iff f'(c) = \frac{f(b) - f(a)}{b - a}
+\]
+provando la tesi.
+\end{dimostrazione}
+
+\begin{teorema}{Teorema di Cauchy (degli Incrementi Finiti Generalizzato)}{cauchy_dim}
+Siano $f, g \colon [a, b] \to \R$ continue su $[a, b]$ e derivabili su $(a, b)$ con $g'(x) \neq 0$ per ogni $x \in (a, b)$.
+Allora esiste $c \in (a, b)$ tale che:
+\[
+    \frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(c)}{g'(c)}
+\]
+\end{teorema}
+
+\begin{dimostrazione}
+Si definisce la funzione ausiliaria $h(x) = [g(b) - g(a)]f(x) - [f(b) - f(a)]g(x)$. Si verifica che $h(a) = h(b)$ e si applica il Teorema di Rolle.
+\end{dimostrazione}
+
+% ==============================================================================
+\section{Schema Operativo per lo Studio di Funzione}
+\label{sec:schema_studio_funzione}
+% ==============================================================================
+
+\begin{metodo}[Protocollo in 7 Fasi per lo Studio Qualitativo del Grafico]
+\begin{enumerate}
+    \item \textbf{Dominio naturale}: condizioni di realtà per radici pari, frazioni, logaritmi, inverse trigonometriche.
+    \item \textbf{Simmetrie e periodicità}: parità ($f(-x) = f(x)$), disparità ($f(-x) = -f(x)$) e periodicità ($f(x+T) = f(x)$).
+    \item \textbf{Intersezioni con gli assi e segno}: zeri ($f(x) = 0$) e regioni $f(x) > 0$.
+    \item \textbf{Limiti agli estremi e asintoti}: asintoti verticali ($x = x_0$), orizzontali ($y = L$) e obliqui ($y = mx + q$ con $m = \lim \frac{f(x)}{x}$ e $q = \lim [f(x) - mx]$).
+    \item \textbf{Derivata prima e punti singolari}: calcolo di $f'(x)$, dominio di $f'$, identificazione di cuspidi, punti angolosi e flessi a tangente verticale. Monotonia ($f' > 0 \implies$ crescente) e punti di estremo locale ($f' = 0$).
+    \item \textbf{Derivata seconda e concavità}: calcolo di $f''(x)$, concavità ($f'' < 0$), convessità ($f'' > 0$) e flessi a tangente obliqua ($f'' = 0$ con cambio di segno).
+    \item \textbf{Sintesi grafica}: tracciamento del grafico qualitativo globale.
+\end{enumerate}
+\end{metodo}

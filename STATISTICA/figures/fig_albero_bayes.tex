@@ -1,0 +1,34 @@
+\begin{tikzpicture}[
+    grow=right,
+    level 1/.style={sibling distance=3.2cm, level distance=3.5cm},
+    level 2/.style={sibling distance=1.6cm, level distance=3.8cm},
+    edge from parent/.style={draw=navyblue, thick, ->, >=Stealth},
+    every node/.style={font=\footnotesize},
+    boxnode/.style={draw=navyblue, fill=coolblue!15, rounded corners=3pt, inner sep=4pt, font=\bfseries\footnotesize}
+]
+    \node[boxnode] {Popolazione}
+        child {
+            node[boxnode, draw=crimsonred, fill=crimsonred!10] {Malato ($M$)}
+            child {
+                node[font=\scriptsize, align=left] {Esito $-$ (Falso Negativo)\\$\mathbb{P}(M \cap T^-) = \mathbb{P}(M)\mathbb{P}(T^-|M)$}
+                edge from parent node[below, font=\tiny, text=crimsonred] {$T^-$ (Falso Neg.: $1-\text{Sens}$)}
+            }
+            child {
+                node[font=\scriptsize, align=left] {Esito $+$ (Vero Positivo)\\$\mathbb{P}(M \cap T^+) = \mathbb{P}(M)\mathbb{P}(T^+|M)$}
+                edge from parent node[above, font=\tiny, text=forestgreen!80!black] {$T^+$ (Sensibilità)}
+            }
+            edge from parent node[above, font=\scriptsize\bfseries] {Prevalenza $\mathbb{P}(M)$}
+        }
+        child {
+            node[boxnode, draw=forestgreen, fill=forestgreen!10] {Sano ($S = M^c$)}
+            child {
+                node[font=\scriptsize, align=left] {Esito $-$ (Vero Negativo)\\$\mathbb{P}(S \cap T^-) = \mathbb{P}(S)\mathbb{P}(T^-|S)$}
+                edge from parent node[below, font=\tiny, text=forestgreen!80!black] {$T^-$ (Specificità)}
+            }
+            child {
+                node[font=\scriptsize, align=left] {Esito $+$ (Falso Positivo)\\$\mathbb{P}(S \cap T^+) = \mathbb{P}(S)\mathbb{P}(T^+|S)$}
+                edge from parent node[above, font=\tiny, text=crimsonred] {$T^+$ (Falso Pos.: $1-\text{Spec}$)}
+            }
+            edge from parent node[below, font=\scriptsize\bfseries] {Complemento $1-\mathbb{P}(M)$}
+        };
+\end{tikzpicture}

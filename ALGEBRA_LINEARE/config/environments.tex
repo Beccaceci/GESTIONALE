@@ -1,0 +1,240 @@
+% ==============================================================================
+% DEFINIZIONE AMBIENTI TCOLORBOX & TEOREMI - ALGEBRA LINEARE
+% ==============================================================================
+
+% Contatore globale per teoremi, definizioni, proposizioni condiviso per capitolo
+\newcounter{mathcounter}[chapter]
+\renewcommand{\themathcounter}{\thechapter.\arabic{mathcounter}}
+\crefname{mathcounter}{risultato}{risultati}
+\Crefname{mathcounter}{Risultato}{Risultati}
+
+% --- 1. DEFINIZIONE ---
+\newtcbtheorem[use counter=mathcounter, number within=chapter]{definizione}{Definizione}{
+    enhanced,
+    breakable,
+    colback=blue!3!white,
+    colframe=navyblue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    fontupper=\itshape,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={
+        sharp corners,
+        rounded corners=north,
+        colback=navyblue,
+        boxrule=0pt
+    },
+    separator sign={:~},
+    description font=\normalfont\bfseries,
+    sharp corners,
+    rounded corners=south,
+    boxrule=1.2pt,
+    top=4mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}{def}
+
+% --- 2. TEOREMA ---
+\newtcbtheorem[use counter=mathcounter, number within=chapter]{teorema}{Teorema}{
+    enhanced,
+    breakable,
+    colback=forestgreen!3!white,
+    colframe=forestgreen,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    fontupper=\itshape,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={
+        sharp corners,
+        rounded corners=north,
+        colback=forestgreen,
+        boxrule=0pt
+    },
+    separator sign={:~},
+    description font=\normalfont\bfseries,
+    sharp corners,
+    rounded corners=south,
+    boxrule=1.2pt,
+    top=4mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}{thm}
+
+% --- 3. PROPOSIZIONE & COROLLARIO & LEMMA ---
+\newtcbtheorem[use counter=mathcounter, number within=chapter]{proposizione}{Proposizione}{
+    enhanced,
+    breakable,
+    colback=coolblue!4!white,
+    colframe=coolblue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    fontupper=\itshape,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={
+        sharp corners,
+        rounded corners=north,
+        colback=coolblue,
+        boxrule=0pt
+    },
+    separator sign={:~},
+    description font=\normalfont\bfseries,
+    sharp corners,
+    rounded corners=south,
+    boxrule=1pt,
+    top=4mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}{prop}
+
+\newtcbtheorem[use counter=mathcounter, number within=chapter]{corollario}{Corollario}{
+    enhanced,
+    breakable,
+    colback=forestgreen!2!white,
+    colframe=forestgreen!80!black,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    fontupper=\itshape,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={
+        sharp corners,
+        rounded corners=north,
+        colback=forestgreen!80!black,
+        boxrule=0pt
+    },
+    separator sign={:~},
+    description font=\normalfont\bfseries,
+    sharp corners,
+    rounded corners=south,
+    boxrule=1pt,
+    top=4mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}{cor}
+
+\newtcbtheorem[use counter=mathcounter, number within=chapter]{lemma}{Lemma}{
+    enhanced,
+    breakable,
+    colback=tealaccent!3!white,
+    colframe=tealaccent,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    fontupper=\itshape,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={
+        sharp corners,
+        rounded corners=north,
+        colback=tealaccent,
+        boxrule=0pt
+    },
+    separator sign={:~},
+    description font=\normalfont\bfseries,
+    sharp corners,
+    rounded corners=south,
+    boxrule=1pt,
+    top=4mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}{lem}
+
+% --- 4. ESEMPIO & ESERCIZIO GUIDATO ---
+\newcounter{esempiocounter}[chapter]
+\renewcommand{\theesempiocounter}{\thechapter.\arabic{esempiocounter}}
+\crefname{esempiocounter}{esempio}{esempi}
+\Crefname{esempiocounter}{Esempio}{Esempi}
+
+\newtcbtheorem[use counter=esempiocounter, number within=chapter]{esempio}{Esempio}{
+    enhanced,
+    breakable,
+    colback=purpleaccent!3!white,
+    colframe=purpleaccent,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={
+        sharp corners,
+        rounded corners=north,
+        colback=purpleaccent,
+        boxrule=0pt
+    },
+    separator sign={:~},
+    description font=\normalfont\bfseries,
+    sharp corners,
+    rounded corners=south,
+    boxrule=1pt,
+    top=4mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}{es}
+
+% --- 5. OSSERVAZIONE & NOTA ---
+\newtcolorbox{osservazione}[1][]{
+    enhanced,
+    breakable,
+    colback=subtlegray,
+    colframe=navyblue!60,
+    coltitle=navyblue,
+    fonttitle=\bfseries\sffamily,
+    title={\textbf{Osservazione \ifstrempty{#1}{}{(#1)}}},
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=white, boxrule=0.5pt, colframe=navyblue!60},
+    boxrule=0.8pt,
+    leftrule=3pt,
+    sharp corners,
+    top=3mm,
+    bottom=2mm,
+    left=3mm,
+    right=3mm
+}
+
+% --- 6. INSIGHT ESAME & TRAPPOLE FREQUENTI ---
+\newtcolorbox{esame}[1][Consiglio per l'Esame / Trabocchetto Frequente]{
+    enhanced,
+    breakable,
+    colback=crimsonred!4!white,
+    colframe=crimsonred,
+    coltitle=crimsonred,
+    fonttitle=\bfseries\sffamily,
+    title={\textbf{#1}},
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=white, boxrule=0.8pt, colframe=crimsonred},
+    boxrule=0.8pt,
+    leftrule=3.5pt,
+    sharp corners,
+    top=3.5mm,
+    bottom=2.5mm,
+    left=3mm,
+    right=3mm
+}
+
+% --- 7. METODO RISOLUTIVO / STEP-BY-STEP ---
+\newtcolorbox{metodo}[1][Algoritmo / Metodo Risolutivo Standard]{
+    enhanced,
+    breakable,
+    colback=warmamber!4!white,
+    colframe=warmamber,
+    coltitle=warmamber!90!black,
+    fonttitle=\bfseries\sffamily,
+    title={\textbf{\textsf{#1}}},
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=white, boxrule=0.8pt, colframe=warmamber},
+    boxrule=0.8pt,
+    leftrule=3.5pt,
+    sharp corners,
+    top=3.5mm,
+    bottom=2.5mm,
+    left=3mm,
+    right=3mm
+}
+
+% --- 8. AMBIENTE DIMOSTRAZIONE ELEGANTE ---
+\newenvironment{dimostrazione}[1][Dimostrazione]{
+    \par\noindent\textbf{\textsf{\textcolor{navyblue}{#1.}}}\quad\ignorespaces
+}{
+    \hfill\(\blacksquare\)\par\vspace{0.8em}
+}

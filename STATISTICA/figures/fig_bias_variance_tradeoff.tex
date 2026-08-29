@@ -1,0 +1,53 @@
+\begin{tikzpicture}[scale=0.8, >=Stealth]
+    % Bersaglio 1: Basso Bias, Bassa Varianza (Ideale)
+    \begin{scope}[shift={(0,0)}]
+        \draw[thick, navyblue] (0,0) circle (1.5cm);
+        \draw[thin, gray!70] (0,0) circle (1.0cm);
+        \draw[thin, gray!70] (0,0) circle (0.5cm);
+        \fill[crimsonred] (0,0) circle (2pt) node[below=2pt, font=\tiny\bfseries] {$\theta$};
+
+        \foreach \pt in {(0.1,0.1), (-0.1,-0.15), (0.15,-0.08), (-0.05,0.12), (0.02, -0.05)} {
+            \fill[forestgreen] \pt circle (1.8pt);
+        }
+        \node[below, font=\scriptsize\bfseries, text=forestgreen] at (0,-1.7) {Bias $=0$, Var Bassa};
+    \end{scope}
+
+    % Bersaglio 2: Alto Bias, Bassa Varianza
+    \begin{scope}[shift={(4.5,0)}]
+        \draw[thick, navyblue] (0,0) circle (1.5cm);
+        \draw[thin, gray!70] (0,0) circle (1.0cm);
+        \draw[thin, gray!70] (0,0) circle (0.5cm);
+        \fill[crimsonred] (0,0) circle (2pt) node[below=2pt, font=\tiny\bfseries] {$\theta$};
+
+        \foreach \pt in {(0.8,0.8), (0.9,0.7), (0.75,0.85), (0.85,0.9), (0.7, 0.75)} {
+            \fill[warmamber!90!black] \pt circle (1.8pt);
+        }
+        \node[below, font=\scriptsize\bfseries, text=warmamber!90!black] at (0,-1.7) {Bias Alto, Var Bassa};
+    \end{scope}
+
+    % Bersaglio 3: Basso Bias, Alta Varianza
+    \begin{scope}[shift={(9.0,0)}]
+        \draw[thick, navyblue] (0,0) circle (1.5cm);
+        \draw[thin, gray!70] (0,0) circle (1.0cm);
+        \draw[thin, gray!70] (0,0) circle (0.5cm);
+        \fill[crimsonred] (0,0) circle (2pt) node[below=2pt, font=\tiny\bfseries] {$\theta$};
+
+        \foreach \pt in {(-0.8,0.6), (0.7,0.8), (-0.5,-0.9), (0.8,-0.5), (-0.1, 0.2)} {
+            \fill[coolblue] \pt circle (1.8pt);
+        }
+        \node[below, font=\scriptsize\bfseries, text=coolblue] at (0,-1.7) {Bias $=0$, Var Alta};
+    \end{scope}
+
+    % Bersaglio 4: Alto Bias, Alta Varianza (Pessimo)
+    \begin{scope}[shift={(13.5,0)}]
+        \draw[thick, navyblue] (0,0) circle (1.5cm);
+        \draw[thin, gray!70] (0,0) circle (1.0cm);
+        \draw[thin, gray!70] (0,0) circle (0.5cm);
+        \fill[crimsonred] (0,0) circle (2pt) node[below=2pt, font=\tiny\bfseries] {$\theta$};
+
+        \foreach \pt in {(0.6,0.5), (1.2,1.1), (0.3,1.3), (1.1,0.4), (0.8, 1.0)} {
+            \fill[crimsonred] \pt circle (1.8pt);
+        }
+        \node[below, font=\scriptsize\bfseries, text=crimsonred] at (0,-1.7) {Bias Alto, Var Alta};
+    \end{scope}
+\end{tikzpicture}

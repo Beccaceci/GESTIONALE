@@ -1,0 +1,272 @@
+% ==============================================================================
+% CAPITOLO 3: TEOREMA DELLE FUNZIONI IMPLICITE (DEL DINI)
+% ==============================================================================
+
+\chapter{Teorema delle Funzioni Implicite e Invertibilità Locale}
+\label{chap:funzioni_implicite}
+
+\section{Geometria delle Equazioni vs Funzioni Esplicite}
+
+In molteplici problemi della fisica matematica, della meccanica razionale e dell'ingegneria, le relazioni funzionali tra variabili non si presentano nella comoda forma esplicita:
+\[
+y = g(x) \quad \text{oppure} \quad z = g(x, y)
+\]
+ma emergono in modo del tutto naturale sotto forma di equazioni di vincolo, bilanci energetici o relazioni di stato in forma \textbf{implicita}:
+\[
+f(x, y) = 0 \quad \text{oppure} \quad f(x, y, z) = 0
+\]
+Si pensi all'equazione di una circonferenza unitaria $x^2 + y^2 - 1 = 0$, all'equazione di stato dei gas reali di Van der Waals $\left( P + \frac{a}{V^2} \right)(V - b) - RT = 0$, o all'equilibrio tra domanda e offerta in modelli microeconomici non lineari.
+
+Dal punto di vista geometrico, un'equazione scalare $f(x,y) = 0$ individua il luogo dei punti del piano in cui il campo scalare $f$ si annulla, ossia la \textbf{curva di livello zero} $L_0(f)$.
+Il problema fondamentale dell'\textbf{esplicitazione locale} (noto storicamente come problema delle funzioni implicite) si articola nei seguenti quesiti:
+\begin{enumerate}
+    \item Sotto quali condizioni analitiche su $f$ l'equazione $f(x,y) = 0$ definisce univocamente, in un intorno di un punto fissato $(x_0, y_0)$, una funzione $y = g(x)$?
+    \item Qual è la regolarità (continuità, derivabilità) della funzione implicita $g$?
+    \item È possibile calcolare le derivate prima $g'(x)$ e seconda $g''(x)$, e determinarne la retta tangente e la convessità, \textbf{senza dover ricavare analiticamente la formula esplicita di $g(x)$}?
+\end{enumerate}
+A queste domande risponde in modo definitivo il celebre \textbf{Teorema di Ulisse Dini} (1876).
+
+\section{Il Teorema del Dini per una Equazione in Due Variabili}
+
+\begin{teorema}{Teorema del Dini in $\mathbb{R}^2$}{thm_dini_r2_fondamentale}
+Sia $A \subseteq \Rdue$ un insieme aperto, sia $f: A \to \R$ una funzione di classe $C^1(A)$, e sia $(x_0, y_0) \in A$ un punto che soddisfa le due condizioni:
+\begin{enumerate}
+    \item \textbf{Appartenenza al luogo di zeri}: $f(x_0, y_0) = 0$;
+    \item \textbf{Condizione di non degenerazione trasversale}: $\pder{f}{y}(x_0, y_0) \neq 0$.
+\end{enumerate}
+Allora esistono un intorno sferico aperto (o rettangolo aperto) $I \times J = (x_0 - \delta, x_0 + \delta) \times (y_0 - \eps, y_0 + \eps) \subseteq A$ (con $\delta > 0, \eps > 0$) e un'unica funzione $g: I \to J$ tale che:
+\begin{enumerate}[label=(\alph*)]
+    \item $g(x_0) = y_0$;
+    \item $f(x, g(x)) = 0$ per ogni $x \in I$;
+    \item Per ogni $(x, y) \in I \times J$, si ha $f(x, y) = 0 \iff y = g(x)$;
+    \item La funzione $g$ è di classe $C^1(I)$ e la sua derivata prima è data da:
+    \[
+    g'(x) = -\frac{\pder{f}{x}(x, g(x))}{\pder{f}{y}(x, g(x))}, \quad \forall x \in I
+    \]
+    In particolare, nel punto $x_0$:
+    \[
+    g'(x_0) = -\frac{\pder{f}{x}(x_0, y_0)}{\pder{f}{y}(x_0, y_0)}
+    \]
+\end{enumerate}
+\end{teorema}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Assi cartesiani
+    \draw[->, gray!80] (-0.5,0) -- (6,0) node[right, black] {$x$};
+    \draw[->, gray!80] (0,-0.5) -- (0,4.5) node[above, black] {$y$};
+
+    % Rettangolo I x J
+    \draw[thick, dashed, fill=navyblue!5, draw=navyblue!70] (1.8,1.2) rectangle (4.2,3.6);
+    \node[navyblue] at (3.8,1.5) {$I \times J$};
+
+    % Punto base (x0, y0)
+    \coordinate (P0) at (3.0, 2.4);
+    \filldraw[navyblue] (P0) circle (2.2pt) node[below right] {$(x_0, y_0)$};
+
+    % Estremi y0 - eps e y0 + eps
+    \coordinate (Ptop) at (3.0, 3.6);
+    \coordinate (Pbot) at (3.0, 1.2);
+    \node[crimsonred, above] at (Ptop) {\small $f(x_0, y_0+\eps) > 0 \; (+)$};
+    \node[forestgreen, below] at (Pbot) {\small $f(x_0, y_0-\eps) < 0 \; (-)$};
+
+    % Freccia di stretta crescenza lungo y
+    \draw[->, thick, warmamber] (3.0, 1.4) -- (3.0, 3.4) node[midway, right] {\small $f_y > 0$};
+
+    % Curva f(x,y) = 0 ossia y = g(x)
+    \draw[ultra thick, forestgreen] plot[domain=1.9:4.1, samples=30] (\x, {2.4 + 0.55*sin((\x-3.0)*130)});
+    \node[forestgreen] at (4.5, 3.1) {$y = g(x)$};
+
+    % Linee di proiezione tratteggiate
+    \draw[dotted, gray] (3.0,0) -- (3.0,2.4);
+    \draw[dotted, gray] (0,2.4) -- (3.0,2.4);
+    \node[below] at (3.0,0) {$x_0$};
+    \node[left] at (0,2.4) {$y_0$};
+    \node[below] at (1.8,0) {\small $x_0-\delta$};
+    \node[below] at (4.2,0) {\small $x_0+\delta$};
+\end{tikzpicture}
+\end{center}
+
+\begin{dimostrazione}
+Supponiamo, senza alcuna perdita di generalità, che $\pder{f}{y}(x_0, y_0) > 0$ (il caso in cui la derivata parziale sia strettamente negativa è del tutto simmetrico e si riconduce al precedente considerando la funzione $-f$).
+La dimostrazione si articola in tre passaggi sequenziali rigorosi:
+
+\paragraph{Passo 1: Esistenza e Unicità Locale di $g(x)$.}
+Poiché $f \in C^1(A)$, la derivata parziale $f_y$ è una funzione continua in $A$. Per il Teorema della Permanenza del Segno, esiste un intorno rettangolare $R_0 = (x_0-\delta_0, x_0+\delta_0) \times [y_0-\eps, y_0+\eps] \subseteq A$ (con $\eps > 0, \delta_0 > 0$) tale che:
+\[
+\pder{f}{y}(x, y) > 0, \quad \forall (x, y) \in R_0
+\]
+Ciò implica che per ogni $x \in (x_0-\delta_0, x_0+\delta_0)$ fissato, la funzione parziale di una sola variabile:
+\[
+\psi_x(y) = f(x, y)
+\]
+è \textbf{strettamente crescente} rispetto a $y$ sull'intervallo $[y_0 - \eps, y_0 + \eps]$.\\
+In particolare, per $x = x_0$, sapendo che $f(x_0, y_0) = 0$, la stretta monotonia impone:
+\[
+f(x_0, y_0 - \eps) < f(x_0, y_0) = 0 < f(x_0, y_0 + \eps)
+\]
+Grazie alla continuità globale di $f$, le funzioni di una variabile $x \mapsto f(x, y_0 - \eps)$ e $x \mapsto f(x, y_0 + \eps)$ sono continue. Esiste dunque un raggio $\delta \in (0, \delta_0)$ tale che per ogni $x \in I = (x_0 - \delta, x_0 + \delta)$:
+\[
+f(x, y_0 - \eps) < 0 \quad \text{e} \quad f(x, y_0 + \eps) > 0
+\]
+Fissato un qualsiasi $x \in I$, la funzione $\psi_x(y) = f(x,y)$ è continua sull'intervallo compatto $[y_0-\eps, y_0+\eps]$, assume valori di segno opposto agli estremi ed è strettamente crescente. Per il \textbf{Teorema di Esistenza degli Zeri} (di Bolzano) unito alla stretta monotonia, esiste uno ed un \textbf{unico} valore $y \in (y_0 - \eps, y_0 + \eps) = J$ tale che $f(x, y) = 0$.
+Definiamo tale valore univoco come $g(x)$. Risulta banalmente $g(x_0) = y_0$ e $f(x, g(x)) = 0$ per ogni $x \in I$.
+
+\paragraph{Passo 2: Continuità di $g(x)$.}
+Sia $x \in I$ e sia $y = g(x)$. Per dimostrare che $g$ è continua in $x$, mostriamo che per ogni $\eps' \in (0, \eps)$ esiste un $\delta' > 0$ tale che per ogni $x' \in (x - \delta', x + \delta')$ si abbia $\abs{g(x') - g(x)} < \eps'$.\\
+La costruzione del Passo 1 può essere ripetuta identicamente sostituendo a $\eps$ il valore arbitrariamente piccolo $\eps' \in (0, \eps)$: poiché $f(x, g(x) - \eps') < 0$ e $f(x, g(x) + \eps') > 0$, per continuità di $f$ esiste $\delta' > 0$ tale che per ogni $x' \in (x - \delta', x + \delta')$ risulta $f(x', g(x) - \eps') < 0 < f(x', g(x) + \eps')$. L'unico zero $g(x')$ deve pertanto cadere nell'intervallo $(g(x) - \eps', g(x) + \eps')$, dimostrando che $\abs{g(x') - g(x)} < \eps'$. Dunque $g \in C(I)$.
+
+\paragraph{Passo 3: Derivabilità di $g(x)$ e Formula della Derivata Prima.}
+Sia $x \in I$ e sia $h \neq 0$ tale che $x + h \in I$. Poniamo l'incremento corrispondente della funzione implicita:
+\[
+k = g(x + h) - g(x)
+\]
+Poiché $g$ è continua, quando $h \to 0$ si ha $k \to 0$.
+Per definizione di $g$, sappiamo che $f(x+h, g(x)+k) = 0$ e $f(x, g(x)) = 0$. La variazione di $f$ è dunque identicamente nulla:
+\[
+0 = f(x + h, g(x) + k) - f(x, g(x))
+\]
+Applicando il Teorema del Valor Medio di Lagrange in due variabili (Teorema~\ref{lagrange_rn_dimostrazione}) al segmento che congiunge $(x, g(x))$ a $(x+h, g(x)+k)$:
+\[
+0 = \pder{f}{x}(\xi_h, \eta_h) \cdot h + \pder{f}{y}(\xi_h, \eta_h) \cdot k
+\]
+dove $(\xi_h, \eta_h)$ è un punto intermedio appartenente al segmento di congiunzione.\\
+Poiché $f_y(\xi_h, \eta_h) > 0$ nel rettangolo, possiamo dividere per $h$ e per $f_y(\xi_h, \eta_h)$, isolando il rapporto incrementale:
+\[
+\frac{g(x+h) - g(x)}{h} = \frac{k}{h} = -\frac{\pder{f}{x}(\xi_h, \eta_h)}{\pder{f}{y}(\xi_h, \eta_h)}
+\]
+Passando al limite per $h \to 0$: poiché $h \to 0$ e $k \to 0$, per il Teorema del Confronto il punto intermedio converge: $(\xi_h, \eta_h) \to (x, g(x))$.
+Essendo $f \in C^1(A)$, le derivate parziali $f_x$ e $f_y$ sono continue, per cui:
+\[
+g'(x) = \lim_{h \to 0} \frac{g(x+h) - g(x)}{h} = -\frac{\pder{f}{x}(x, g(x))}{\pder{f}{y}(x, g(x))}
+\]
+Poiché il numeratore $f_x(x, g(x))$ e il denominatore $f_y(x, g(x))$ sono funzioni continue di $x$ (in quanto composizione di funzioni continue) e il denominatore non si annulla mai su $I$, la derivata prima $g'(x)$ è a sua volta continua su $I$. Concludiamo che $g \in C^1(I)$.
+\end{dimostrazione}
+
+\begin{osservazione}[Cosa accade se $f_y(x_0, y_0) = 0$ ma $f_x(x_0, y_0) \neq 0$?]
+Se la derivata parziale rispetto a $y$ si annulla ma $\pder{f}{x}(x_0, y_0) \neq 0$, la curva di livello $f(x,y) = 0$ ammette nel punto una \textbf{retta tangente verticale} ($x = x_0$). In tal caso non è possibile esplicitare $y = g(x)$, ma scambiando i ruoli delle variabili il Teorema del Dini garantisce l'esplicitazione locale di $x$ in funzione di $y$:
+\[
+x = h(y) \quad \text{con} \quad h'(y_0) = -\frac{f_y(x_0, y_0)}{f_x(x_0, y_0)} = 0
+\]
+Se invece \textbf{entrambe} le derivate parziali si annullano contemporaneamente ($\nabla f(x_0, y_0) = \bzero$), il punto $(x_0, y_0)$ si definisce \textbf{punto singolare} per la curva (può trattarsi di un nodo con auto-intersezione, di una cuspide o di un punto isolato), e il Teorema del Dini non è applicabile.
+\end{osservazione}
+
+\section{Calcolo delle Derivate di Ordine Superiore e Studio Qualitativo}
+
+Se la funzione $f$ possiede regolarità superiore ($f \in C^k(A)$ con $k \ge 2$), allora anche la funzione implicita $g$ risulta di classe $C^k(I)$. Possiamo ricavare la formula esplicita della derivata seconda $g''(x)$ differenziando l'identità fondamentale.
+
+\begin{metodo}[Algoritmo per il Calcolo di $g''(x_0)$ e Studio di Concavità/Convessità]
+Per calcolare la derivata seconda della funzione implicita $y = g(x)$:
+\begin{enumerate}
+    \item Si parte dall'identità fondamentale valida per ogni $x \in I$:
+    \[
+    f(x, g(x)) \equiv 0
+    \]
+    \item Si deriva rispetto a $x$ ambo i membri applicando la Chain Rule:
+    \[
+    f_x(x, g(x)) + f_y(x, g(x)) \, g'(x) = 0 \implies g'(x) = -\frac{f_x(x, g(x))}{f_y(x, g(x))}
+    \]
+    \item Si differenzia nuovamente rispetto a $x$ applicando la regola di Leibniz e la Chain Rule:
+    \[
+    \der{}{x} \Big[ f_x(x, g(x)) \Big] + \der{}{x} \Big[ f_y(x, g(x)) \Big] g'(x) + f_y(x, g(x)) g''(x) = 0
+    \]
+    Sviluppando le derivate totali:
+    \[
+    \Big( f_{xx} + f_{xy} g'(x) \Big) + \Big( f_{yx} + f_{yy} g'(x) \Big) g'(x) + f_y g''(x) = 0
+    \]
+    \item Applicando il Teorema di Schwarz ($f_{xy} = f_{yx}$):
+    \[
+    f_{xx} + 2 f_{xy} g'(x) + f_{yy} \big( g'(x) \big)^2 + f_y g''(x) = 0
+    \]
+    \item Isolando $g''(x)$ e sostituendo l'espressione di $g'(x) = -f_x / f_y$:
+    \[
+    g''(x) = -\frac{f_{xx} + 2 f_{xy} g'(x) + f_{yy} [g'(x)]^2}{f_y} = -\frac{f_{xx} f_y^2 - 2 f_{xy} f_x f_y + f_{yy} f_x^2}{f_y^3}
+    \]
+    \item \textbf{Criterio per i punti stazionari di $g(x)$}:
+    Un punto $x_0$ è stazionario per $g$ ($g'(x_0) = 0$) se e solo se $f_x(x_0, y_0) = 0$. In tal caso la formula della derivata seconda si semplifica notevolmente:
+    \[
+    g''(x_0) = -\frac{f_{xx}(x_0, y_0)}{f_y(x_0, y_0)}
+    \]
+    \begin{itemize}
+        \item Se $g''(x_0) > 0 \implies x_0$ è punto di \textbf{minimo locale} per $g$;
+        \item Se $g''(x_0) < 0 \implies x_0$ è punto di \textbf{massimo locale} per $g$;
+        \item Se $g''(x_0) = 0 \implies$ occorre procedere all'analisi delle derivate di ordine superiore.
+    \end{itemize}
+\end{enumerate}
+\end{metodo}
+
+\begin{esempio}{Studio Completo della Curva: Il Folium di Cartesio}{es_folium_cartesio_completo}
+Si consideri l'equazione implicita:
+\[
+f(x, y) = x^3 + y^3 - 3xy = 0
+\]
+\begin{enumerate}
+    \item \textbf{Verifica del Teorema del Dini nel punto $P_0 = \left(\frac{3}{2}, \frac{3}{2}\right)$}:
+    \begin{align*}
+        f\left(\frac{3}{2}, \frac{3}{2}\right) &= \left(\frac{3}{2}\right)^3 + \left(\frac{3}{2}\right)^3 - 3\left(\frac{3}{2}\right)\left(\frac{3}{2}\right) = \frac{27}{8} + \frac{27}{8} - \frac{27}{4} = 0 \quad \checkmark \\
+        f_x(x, y) &= 3x^2 - 3y \implies f_x\left(\frac{3}{2}, \frac{3}{2}\right) = 3\left(\frac{9}{4}\right) - \frac{9}{2} = \frac{27}{4} - \frac{18}{4} = \frac{9}{4} \\
+        f_y(x, y) &= 3y^2 - 3x \implies f_y\left(\frac{3}{2}, \frac{3}{2}\right) = \frac{9}{4} \neq 0 \quad \checkmark
+    \end{align*}
+    Poiché $f \in C^\infty(\Rdue)$ e $f_y(P_0) \neq 0$, il Teorema del Dini garantisce l'esistenza locale di una funzione $y = g(x)$ di classe $C^\infty$ definita in un intorno $I$ di $x_0 = 3/2$ tale che $g(3/2) = 3/2$.
+    
+    \item \textbf{Derivata prima e retta tangente in $P_0$}:
+    \[
+    g'\left(\frac{3}{2}\right) = -\frac{f_x\left(\frac{3}{2}, \frac{3}{2}\right)}{f_y\left(\frac{3}{2}, \frac{3}{2}\right)} = -\frac{9/4}{9/4} = -1
+    \]
+    L'equazione della retta tangente in $P_0$ è:
+    \[
+    y - \frac{3}{2} = -1 \left( x - \frac{3}{2} \right) \iff x + y = 3
+    \]
+    
+    \item \textbf{Derivata seconda e concavità}:
+    Calcoliamo le derivate seconde pure e miste in $P_0$:
+    \[
+    f_{xx}(x,y) = 6x \implies f_{xx}(P_0) = 9, \quad f_{yy}(x,y) = 6y \implies f_{yy}(P_0) = 9, \quad f_{xy}(x,y) = -3
+    \]
+    Applicando la formula di $g''$:
+    \[
+    g''\left(\frac{3}{2}\right) = -\frac{f_{xx} + 2f_{xy}g' + f_{yy}(g')^2}{f_y} = -\frac{9 + 2(-3)(-1) + 9(-1)^2}{9/4} = -\frac{9 + 6 + 9}{9/4} = -\frac{24}{9/4} = -\frac{32}{3} < 0
+    \]
+    Poiché $g''(3/2) < 0$, la funzione implicita $g$ è \textbf{strettamente concava} nell'intorno del punto $P_0$.
+    
+    \item \textbf{Sviluppo di Taylor al secondo ordine di $g(x)$ attorno a $x_0 = 3/2$}:
+    \[
+    g(x) = \frac{3}{2} - \left(x - \frac{3}{2}\right) - \frac{16}{3}\left(x - \frac{3}{2}\right)^2 + \smallo\left(\left(x - \frac{3}{2}\right)^2\right)
+    \]
+\end{enumerate}
+\end{esempio}
+
+\section{Generalizzazione: Ipersuperfici in \texorpdfstring{$\mathbb{R}^{n+1}$}{R\textasciicircum(n+1)} e Sistemi Impliciti}
+
+\begin{teorema}{Teorema del Dini per Ipersuperfici in $\mathbb{R}^{n+1}$}{thm_dini_ipersuperfici_rn}
+Sia $A \subseteq \Rn \times \R$ un aperto, sia $f: A \to \R$ una funzione di classe $C^1(A)$, e sia $(\bx_0, y_0) \in A$ (con $\bx_0 \in \Rn, y_0 \in \R$) tale che:
+\begin{enumerate}
+    \item $f(\bx_0, y_0) = 0$;
+    \item $\pder{f}{y}(\bx_0, y_0) \neq 0$.
+\end{enumerate}
+Allora esistono un intorno aperto $U \subseteq \Rn$ di $\bx_0$, un intervallo aperto $J \subseteq \R$ di $y_0$ con $U \times J \subseteq A$, ed un'unica funzione $g: U \to J$ di classe $C^1(U)$ tale che:
+\begin{itemize}
+    \item $g(\bx_0) = y_0$;
+    \item $f(\bx, g(\bx)) = 0$ per ogni $\bx \in U$;
+    \item Il vettore gradiente di $g$ in ogni punto $\bx \in U$ è dato da:
+    \[
+    \nabla g(\bx) = -\frac{1}{\pder{f}{y}(\bx, g(\bx))} \nabla_\bx f(\bx, g(\bx))
+    \]
+    ossia componente per componente:
+    \[
+    \pder{g}{x_i}(\bx) = -\frac{\pder{f}{x_i}(\bx, g(\bx))}{\pder{f}{y}(\bx, g(\bx))}, \quad \forall i=1,\dots,n
+    \]
+\end{itemize}
+\end{teorema}
+
+\begin{corollario}{Piano Tangente a una Superficie Implicita in $\mathbb{R}^3$}{cor_piano_tangente_implicito}
+Sia data una superficie definita in forma implicita dall'equazione $f(x, y, z) = 0$, con $f \in C^1$ e $P_0 = (x_0, y_0, z_0)$ tale che $f(P_0) = 0$ e $\nabla f(P_0) \neq \bzero$.
+L'equazione del \textbf{piano tangente} alla superficie nel punto $P_0$ è:
+\[
+\scal{\nabla f(P_0), \mathbf{x} - \mathbf{x}_0} = 0 \iff f_x(P_0)(x - x_0) + f_y(P_0)(y - y_0) + f_z(P_0)(z - z_0) = 0
+\]
+La retta normale alla superficie in $P_0$ è la retta passante per $P_0$ e diretta lungo il vettore gradiente $\nabla f(P_0)$:
+\[
+\begin{cases} x(t) = x_0 + t f_x(P_0) \\ y(t) = y_0 + t f_y(P_0) \\ z(t) = z_0 + t f_z(P_0) \end{cases} \quad t \in \R
+\]
+\end{corollario}

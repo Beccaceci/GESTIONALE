@@ -1,0 +1,27 @@
+\begin{tikzpicture}[scale=0.85, >=Stealth]
+    \draw[->, thick, navyblue] (-4.2,0) -- (4.2,0) node[right, font=\footnotesize] {$z$};
+    \draw[->, thick, navyblue] (0,-0.2) -- (0,3.8) node[above, font=\footnotesize] {$\phi(z)$};
+
+    % Area di confidenza 1 - alpha (centrale)
+    \fill[coolblue!30, domain=-1.96:1.96, variable=\x]
+        (-1.96,0) -- plot ({\x}, {3.5*exp(-\x*\x/2)}) -- (1.96,0) -- cycle;
+
+    % Code di non confidenza alpha/2
+    \fill[crimsonred!35, domain=-3.8:-1.96, variable=\x]
+        (-3.8,0) -- plot ({\x}, {3.5*exp(-\x*\x/2)}) -- (-1.96,0) -- cycle;
+    \fill[crimsonred!35, domain=1.96:3.8, variable=\x]
+        (1.96,0) -- plot ({\x}, {3.5*exp(-\x*\x/2)}) -- (3.8,0) -- cycle;
+
+    \draw[domain=-3.8:3.8, smooth, variable=\x, very thick, navyblue]
+        plot ({\x}, {3.5*exp(-\x*\x/2)});
+
+    \draw[thick, dashed, crimsonred] (-1.96,0) -- (-1.96, {3.5*exp(-1.96*1.96/2)});
+    \draw[thick, dashed, crimsonred] (1.96,0) -- (1.96, {3.5*exp(-1.96*1.96/2)});
+
+    \node[below, font=\small\bfseries, text=crimsonred] at (-1.96,0) {$-z_{\alpha/2}$};
+    \node[below, font=\small\bfseries, text=crimsonred] at (1.96,0) {$+z_{\alpha/2}$};
+
+    \node[font=\bfseries\small, text=navyblue] at (0,1.2) {Livello di Confidenza $1 - \alpha$ ($95\%$)};
+    \node[font=\tiny\bfseries, text=crimsonred] at (-2.8,0.5) {$\alpha/2 = 2.5\%$};
+    \node[font=\tiny\bfseries, text=crimsonred] at (2.8,0.5) {$\alpha/2 = 2.5\%$};
+\end{tikzpicture}

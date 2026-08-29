@@ -1,0 +1,1321 @@
+\chapter{Equazioni Differenziali Ordinarie (ODE)}
+\label{chap:equazioni_differenziali}
+
+Le \textbf{equazioni differenziali ordinarie} (ODE, dall'inglese \emph{Ordinary Differential Equations}) costituiscono uno dei pilastri fondamentali della matematica pura e applicata. Esse rappresentano il linguaggio naturale attraverso cui formulare le leggi fondamentali della fisica (dalla meccanica classica all'elettromagnetismo), della dinamica delle popolazioni, dell'ingegneria dei controlli, dell'economia quantitativa e della termodinamica. In tali modelli, la velocità di variazione temporale o spaziale di una grandezza dipende dallo stato istantaneo della grandezza stessa e dalle condizioni ambientali.
+
+% ==============================================================================
+% SEZIONE 1: DEFINIZIONI GENERALI, PROBLEMA DI CAUCHY E TEOREMA DI BANACH
+% ==============================================================================
+\section{Definizioni Fondamentali, Ordine e Problema di Cauchy}
+\label{sec:ode_definizioni_cauchy}
+
+\begin{definizione}{Equazione Differenziale Ordinaria}{ode_generale}
+Sia $\Omega \subseteq \R \times \R^{n+1}$ un sottoinsieme aperto non vuoto e sia $F \colon \Omega \to \R$ una funzione continua. Un'\textbf{equazione differenziale ordinaria} (ODE) di ordine $n \in \N_{\ge 1}$ in \textbf{forma implicita} è una relazione della forma:
+\begin{equation}
+    \label{eq:ode_implicita}
+    F\big(t, \, x(t), \, x'(t), \, x''(t), \, \dots, \, x^{(n)}(t)\big) = 0
+\end{equation}
+dove $t \in I \subseteq \R$ è la variabile indipendente reale (spesso interpretata fisicamente come il tempo), $x \colon I \to \R$ è la \textbf{funzione incognita} e $x^{(k)}(t) = \nder{x}{t}{k}$ denota la derivata di ordine $k$ di $x$ rispetto a $t$.
+
+Se la derivata di ordine massimo $x^{(n)}(t)$ può essere esplicitata globalmente o localmente come funzione delle derivate di ordine inferiore e del tempo, l'equazione si dice in \textbf{forma normale}:
+\begin{equation}
+    \label{eq:ode_normale}
+    x^{(n)}(t) = f\big(t, \, x(t), \, x'(t), \, \dots, \, x^{(n-1)}(t)\big)
+\end{equation}
+dove $f \colon A \subseteq \R \times \R^n \to \R$ è una funzione assegnata.
+\end{definizione}
+
+\begin{definizione}{Ordine e Soluzione di un'Equazione Differenziale}{ordine_soluzione_ode}
+\begin{enumerate}
+    \item L'\textbf{ordine} di un'equazione differenziale è il massimo intero positivo $n$ corrispondente all'ordine di derivazione più elevato della funzione incognita che compare effettivamente nell'equazione.
+    \item Una funzione $x \colon I \to \R$, definita su un intervallo $I \subseteq \R$, si dice \textbf{soluzione} (o \textbf{curva integrale}) dell'equazione differenziale \eqref{eq:ode_normale} se:
+    \begin{itemize}
+        \item $x \in C^n(I)$, ovvero $x$ è derivabile almeno $n$ volte con continuità su $I$;
+        \item per ogni $t \in I$, il punto $\big(t, x(t), x'(t), \dots, x^{(n-1)}(t)\big)$ appartiene al dominio di $f$;
+        \item l'identità $x^{(n)}(t) = f\big(t, x(t), x'(t), \dots, x^{(n-1)}(t)\big)$ è verificata puntualmente per ogni $t \in I$.
+    \end{itemize}
+\end{enumerate}
+\end{definizione}
+
+\begin{esempio}{Primo Approccio alla Struttura delle Soluzioni}{primo_approccio_ode}
+Consideriamo la semplicissima equazione differenziale lineare del primo ordine:
+\[
+    x'(t) + x(t) = 0
+\]
+Moltiplicando ambo i membri per il fattore strettamente positivo $e^t$:
+\[
+    e^t x'(t) + e^t x(t) = 0 \iff \der{}{t}\big( e^t x(t) \big) = 0
+\]
+Poiché l'unica classe di funzioni avente derivata identicamente nulla su un intervallo connesso è costituita dalle funzioni costanti, si deduce:
+\[
+    e^t x(t) = c \quad (c \in \R) \iff x(t) = c\, e^{-t}
+\]
+L'insieme di tutte le soluzioni dell'equazione (detto \textbf{integrale generale}) costituisce una famiglia uniparametrica di curve dipendente da una costante arbitraria $c \in \R$.
+\end{esempio}
+
+\subsection{Legame con il Teorema Fondamentale del Calcolo Integrale}
+
+Nel caso più elementare in cui l'equazione del primo ordine in forma normale $x'(t) = f(t, x(t))$ presenti un secondo membro indipendente dallo stato $x$, ossia $f(t, x) = f(t)$, l'equazione si riduce alla ricerca delle primitive di una funzione continua:
+\[
+    x'(t) = f(t), \qquad t \in I
+\]
+In virtù del \textbf{Teorema Fondamentale del Calcolo Integrale}, fissato un punto $t_0 \in I$, la funzione integrale:
+\[
+    x(t) = x_0 + \int_{t_0}^t f(s) \diff s
+\]
+è l'unica funzione derivabile che soddisfa sia l'equazione differenziale $x'(t) = f(t)$ su tutto $I$ sia la condizione iniziale $x(t_0) = x_0$.
+
+\subsection{Problema di Cauchy e Teorema di Picard-Lindelöf}
+
+\begin{definizione}{Problema di Cauchy del Primo Ordine}{problema_cauchy_1ord}
+Sia $\Omega \subseteq \R^2$ un aperto, $(t_0, x_0) \in \Omega$ e $f \colon \Omega \to \R$ continua. Il \textbf{Problema di Cauchy} (o problema ai valori iniziali) per un'equazione del primo ordine consiste nel determinare una funzione $x \colon I \to \R$, con $I \subseteq \R$ intervallo aperto contenente $t_0$, tale che:
+\begin{equation}
+    \label{eq:problema_cauchy_def}
+    \begin{cases}
+        x'(t) = f(t, x(t)) & \forall t \in I \\
+        x(t_0) = x_0
+    \end{cases}
+\end{equation}
+\end{definizione}
+
+\begin{proposizione}{Formulazione Integrale Equivalente}{prop_formulazione_integrale}
+Sia $f \colon \Omega \to \R$ continua e sia $I$ un intervallo contenente $t_0$. Una funzione $x \in C^1(I)$ è soluzione del problema di Cauchy \eqref{eq:problema_cauchy_def} se e solo se $x \in C^0(I)$ e soddisfa l'\textbf{equazione integrale di Volterra}:
+\begin{equation}
+    \label{eq:volterra_cauchy}
+    x(t) = x_0 + \int_{t_0}^t f(s, x(s)) \diff s \qquad \forall t \in I
+\end{equation}
+\end{proposizione}
+
+\begin{dimostrazione}[Equivalenza Differenziale-Integrale]
+$(\implies)$ Se $x \in C^1(I)$ risolve \eqref{eq:problema_cauchy_def}, integrando $x'(s) = f(s, x(s))$ tra $t_0$ e $t$ e applicando il Teorema Fondamentale del Calcolo:
+\[
+    \int_{t_0}^t x'(s) \diff s = x(t) - x(t_0) \implies x(t) = x_0 + \int_{t_0}^t f(s, x(s)) \diff s
+\]
+$(\impliedby)$ Se $x \in C^0(I)$ soddisfa \eqref{eq:volterra_cauchy}, l'integranda $s \mapsto f(s, x(s))$ è continua come composizione di funzioni continue. Dal Teorema Fondamentale del Calcolo, la funzione a secondo membro è derivabile su $I$ con continuità ($x \in C^1(I)$), e derivando rispetto a $t$:
+\[
+    x'(t) = \der{}{t} \left( x_0 + \int_{t_0}^t f(s, x(s)) \diff s \right) = f(t, x(t))
+\]
+Inoltre, valutando per $t = t_0$, si ottiene $x(t_0) = x_0 + \int_{t_0}^{t_0} f(s, x(s))\diff s = x_0$.
+\end{dimostrazione}
+
+\begin{teorema}{Teorema di Esistenza e Unicità Locale (Picard-Lindelöf / Cauchy-Lipschitz)}{cauchy_lipschitz}
+Sia $\Omega \subseteq \R^2$ un aperto contenente $(t_0, x_0)$ e sia $f \colon \Omega \to \R$ una funzione continua. Supponiamo che $f$ sia \textbf{localmente lipschitziana rispetto alla variabile $x$ uniformemente rispetto a $t$}, ovvero che per ogni rettangolo chiuso:
+\[
+    \mathcal{R} = [t_0 - a, t_0 + a] \times [x_0 - b, x_0 + b] \subset \Omega \qquad (a > 0, b > 0)
+\]
+esista una costante $L \ge 0$ (costante di Lipschitz) tale che:
+\begin{equation}
+    \label{eq:lipschitz_condition}
+    |f(t, x_1) - f(t, x_2)| \le L\, |x_1 - x_2| \qquad \forall (t, x_1), (t, x_2) \in \mathcal{R}
+\end{equation}
+Allora esiste $\delta > 0$ tale che il Problema di Cauchy \eqref{eq:problema_cauchy_def} ammette un'\textbf{unica soluzione locale} $x \in C^1([t_0 - \delta, \, t_0 + \delta])$.
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazione tramite Teorema del Punto Fisso di Banach]
+Sia $M = \max_{(t,x) \in \mathcal{R}} |f(t, x)| < +\infty$ (esistente per il Teorema di Weierstrass). Scegliamo:
+\[
+    \delta \in \left( 0, \, \min\left\{ a, \, \frac{b}{M}, \, \frac{1}{2L} \right\} \right)
+\]
+Definiamo lo spazio metrico funzionale:
+\[
+    X = \big\{ x \in C([t_0 - \delta, t_0 + \delta]) \;\colon\; \|x - x_0\|_\infty \le b \big\}
+\]
+munito della \textbf{norma del supremo} $\|x\|_\infty = \max_{t \in [t_0-\delta, t_0+\delta]} |x(t)|$. Poiché $X$ è un sottoinsieme chiuso dello spazio di Banach $C([t_0-\delta, t_0+\delta])$, $(X, \|\cdot\|_\infty)$ è uno \textbf{spazio metrico completo}.
+
+Definiamo l'\textbf{operatore integrale di Picard} $T \colon X \to C([t_0 - \delta, t_0 + \delta])$ ponendo:
+\[
+    (Tx)(t) = x_0 + \int_{t_0}^t f(s, x(s)) \diff s
+\]
+\textbf{Passo 1: $T$ mappa $X$ in se stesso ($T(X) \subseteq X$)}.
+Per ogni $x \in X$ e per ogni $t \in [t_0 - \delta, t_0 + \delta]$:
+\[
+    |(Tx)(t) - x_0| = \left| \int_{t_0}^t f(s, x(s)) \diff s \right| \le \int_{t_0}^t |f(s, x(s))| \diff s \le M |t - t_0| \le M\delta \le M \frac{b}{M} = b
+\]
+Quindi $\|Tx - x_0\|_\infty \le b$, il che dimostra che $Tx \in X$.
+
+\textbf{Passo 2: $T$ è una contrazione su $X$}.
+Siano $x, y \in X$. Sfruttando la lipschitzianità di $f$:
+\begin{align*}
+    |(Tx)(t) - (Ty)(t)| &= \left| \int_{t_0}^t \big( f(s, x(s)) - f(s, y(s)) \big) \diff s \right| \\
+    &\le \int_{t_0}^t |f(s, x(s)) - f(s, y(s))| \diff s \\
+    &\le L \int_{t_0}^t |x(s) - y(s)| \diff s \le L\, \|x - y\|_\infty |t - t_0| \le L\delta\, \|x - y\|_\infty
+\end{align*}
+Passando all'estremo superiore su $t \in [t_0 - \delta, t_0 + \delta]$:
+\[
+    \|Tx - Ty\|_\infty \le (L\delta) \|x - y\|_\infty \le \frac{1}{2} \|x - y\|_\infty
+\]
+Essendo la costante di contrazione $k = L\delta \le \frac{1}{2} < 1$, l'operatore $T$ è una \textbf{contrazione stretta}.
+
+\textbf{Passo 3: Conclusione}.
+Per il \textbf{Teorema delle Contrazioni di Banach-Caccioppoli}, esiste un unico punto fisso $x^* \in X$ tale che $T(x^*) = x^*$. In virtù della Proposizione \ref{prop:prop_formulazione_integrale}, tale punto fisso è l'unica soluzione locale di classe $C^1$ del problema di Cauchy.
+\end{dimostrazione}
+
+\begin{osservazione}[Condizione Sufficiente di Lipschitzianità: Continuità di $\partial f/\partial x$]
+Se la funzione $f(t, x)$ ammette derivata parziale $\frac{\partial f}{\partial x}(t, x)$ continua sull'aperto $\Omega$, allora per il Teorema del Valor Medio di Lagrange, per ogni compatto $\mathcal{R} \subset \Omega$:
+\[
+    |f(t, x_1) - f(t, x_2)| = \left| \frac{\partial f}{\partial x}(t, \xi) \right| |x_1 - x_2| \le L\, |x_1 - x_2|
+\]
+dove $L = \max_{(t,x) \in \mathcal{R}} \left| \frac{\partial f}{\partial x}(t, x) \right| < +\infty$. Pertanto, la condizione $f, \frac{\partial f}{\partial x} \in C^0(\Omega)$ garantisce automaticamente l'esistenza e unicità locale.
+\end{osservazione}
+
+\begin{esame}[Controesempio Classico di Non Unicità: Il Pennello di Peano]
+Consideriamo il problema di Cauchy:
+\[
+    \begin{cases}
+        x'(t) = 3\, (x(t))^{2/3} \\
+        x(0) = 0
+    \end{cases}
+\]
+La funzione $f(t, x) = 3x^{2/3}$ è continua su $\R^2$, ma la sua derivata $\frac{\partial f}{\partial x} = \frac{2}{x^{1/3}}$ \textbf{non è limitata} in alcun intorno di $x = 0$ ($f$ è Hölderiana di esponente $2/3$, non Lipschitziana).
+
+Il problema ammette la soluzione banale $x_1(t) \equiv 0$, ma separando le variabili si trova anche la famiglia di soluzioni non banali:
+\[
+    \int \frac{\diff x}{3 x^{2/3}} = \int \diff t \implies x^{1/3} = t + c \implies x(t) = t^3 \quad (\text{per } c = 0)
+\]
+In realtà, per ogni $c \ge 0$, la funzione:
+\[
+    x_c(t) = \begin{cases} 0 & t \le c \\ (t - c)^3 & t > c \end{cases}
+\]
+è una soluzione $C^1(\R)$ valida. Dal punto iniziale $(0, 0)$ si dirama un'\textbf{infinità continua di soluzioni} (fenomeno del \emph{Pennello di Peano}), evidenziando la necessità inderogabile dell'ipotesi di Lipschitzianità per garantire l'unicità.
+\end{esame}
+
+\newpage
+
+% ==============================================================================
+% SEZIONE 2: VARIABILI SEPARABILI
+% ==============================================================================
+\section{Equazioni a Variabili Separabili}
+\label{sec:variabili_separabili}
+
+\begin{definizione}{Equazione a Variabili Separabili}{equazione_variabili_separabili}
+Un'equazione differenziale del primo ordine in forma normale si dice a \textbf{variabili separabili} se il secondo membro è fattorizzabile nel prodotto di una funzione dipendente esclusivamente dalla variabile di stato $x$ e una funzione dipendente unicamente dal tempo $t$:
+\begin{equation}
+    \label{eq:variabili_separabili}
+    x'(t) = g(x(t)) \cdot h(t)
+\end{equation}
+con $g \in C^0(J)$ e $h \in C^0(I)$, dove $J, I \subseteq \R$ sono intervalli aperti.
+\end{definizione}
+
+\begin{metodo}[Procedura Risolutiva Standard a 4 Fasi]
+Per risolvere l'equazione a variabili separabili $x'(t) = g(x(t))\, h(t)$:
+\begin{enumerate}
+    \item \textbf{Ricerca delle Soluzioni Stazionarie (Equilibri)}:
+    Si cercano gli zeri reali della funzione $g(x)$, ovvero le radici dell'equazione algebrica $g(\bar{x}) = 0$.
+    Per ciascun $\bar{x}$ trovato, la funzione costante:
+    \[
+        x(t) \equiv \bar{x} \qquad \forall t \in I
+    \]
+    è una soluzione stazionaria dell'equazione differenziale.
+    
+    \item \textbf{Separazione delle Variabili Formale}:
+    Nei sottointervalli in cui $g(x) \neq 0$, si dividono ambo i membri per $g(x(t))$ e si integrano formalmente rispetto a $t$:
+    \[
+        \frac{x'(t)}{g(x(t))} = h(t) \implies \int \frac{x'(t)}{g(x(t))} \diff t = \int h(t) \diff t
+    \]
+    
+    \item \textbf{Integrazione con Cambio di Variabile}:
+    Effettuando la sostituzione formale $x = x(t)$ con $\diff x = x'(t) \diff t$:
+    \[
+        \int \frac{1}{g(x)} \diff x = \int h(t) \diff t + c, \qquad c \in \R
+    \]
+    Siano $G(x) = \int \frac{1}{g(x)} \dx$ e $H(t) = \int h(t) \dt$ due primitive scelte. L'equazione implicita che definisce le curve integrali è:
+    \begin{equation}
+        \label{eq:separabili_implicita}
+        G(x(t)) = H(t) + c
+    \end{equation}
+    
+    \item \textbf{Esplicitazione e Determinazione dell'Intervallo Massimale}:
+    Poiché $\frac{\diff}{\dx} G(x) = \frac{1}{g(x)} \neq 0$, la funzione $G$ è strettamente monotona nel sottointervallo considerato e ammette un'inversa $G^{-1}$. La soluzione esplicita è:
+    \[
+        x(t) = G^{-1}\big( H(t) + c \big)
+    \]
+    Se è assegnata una condizione iniziale $x(t_0) = x_0$ con $g(x_0) \neq 0$, la costante $c$ è determinata univocamente da $c = G(x_0) - H(t_0)$.
+\end{enumerate}
+\end{metodo}
+
+\begin{teorema}{Risoluzione Rigorosa del Problema di Cauchy a Variabili Separabili}{prop_variabili_separabili}
+Siano $h \in C^0(I)$ e $g \in C^1(J)$. Sia $t_0 \in I$ e $x_0 \in J$.
+\begin{enumerate}
+    \item Se $g(x_0) = 0$, l'unica soluzione locale del problema di Cauchy è la soluzione stazionaria $x(t) \equiv x_0$.
+    \item Se $g(x_0) \neq 0$, sia $J_0 \subseteq J$ l'intervallo massimale contenente $x_0$ su cui $g(x) \neq 0$. Allora l'unica soluzione del problema di Cauchy è data da:
+    \begin{equation}
+        \label{eq:cauchy_separabili_integrale}
+        \int_{x_0}^{x(t)} \frac{1}{g(u)} \diff u = \int_{t_0}^t h(s) \diff s
+    \end{equation}
+    ed è definita sull'intervallo massimale $I_{\text{max}} = \{ t \in I \;\colon\; \int_{t_0}^t h(s)\diff s \in \operatorname{Im}(G) \}$, dove $G(x) = \int_{x_0}^x \frac{1}{g(u)}\du$.
+\end{enumerate}
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazione del Teorema \ref{thm:prop_variabili_separabili}]
+La funzione $G(x) = \int_{x_0}^x \frac{1}{g(u)} \diff u$ è di classe $C^2(J_0)$ e la sua derivata prima $G'(x) = \frac{1}{g(x)}$ ha segno costante su $J_0$ (essendo $g$ continua e non nulla). Di conseguenza $G \colon J_0 \to \operatorname{Im}(G)$ è un diffeomorfismo strettamente monotono.
+
+Definendo $H(t) = \int_{t_0}^t h(s) \diff s$, l'equazione $G(x(t)) = H(t)$ è equivalente a $x(t) = G^{-1}(H(t))$ per tutti i $t$ tali che $H(t) \in \operatorname{Im}(G)$.
+Derivando $x(t)$ rispetto a $t$ tramite la formula della derivata della funzione inversa:
+\[
+    x'(t) = (G^{-1})'(H(t)) \cdot H'(t) = \frac{1}{G'(G^{-1}(H(t)))} \cdot h(t) = \frac{1}{G'(x(t))} \cdot h(t) = g(x(t)) \cdot h(t)
+\]
+Inoltre $x(t_0) = G^{-1}(H(t_0)) = G^{-1}(0) = x_0$, poiché $G(x_0) = 0$. L'unicità segue direttamente dal Teorema di Cauchy-Lipschitz, poiché $g \in C^1 \implies g \text{ localmente lipschitziana}$.
+\end{dimostrazione}
+
+\newpage
+
+% ==============================================================================
+% SEZIONE 3: STUDIO QUALITATIVO, INTERVALLO MASSIMALE E BLOW-UP
+% ==============================================================================
+\section{Studio Qualitativo, Intervallo Massimale e Fenomeno del Blow-up}
+\label{sec:blow_up_esempi}
+
+Nello studio delle equazioni differenziali non lineari, anche in presenza di secondi membri $f(t, x)$ definiti ed infinitamente derivabili su tutto $\R^2$, la soluzione del problema di Cauchy può \textbf{non esistere globalmente su tutto $\R$}.
+
+\begin{definizione}{Intervallo Massimale di Esistenza e Blow-up}{def_blowup}
+Sia $x \colon I_{\text{max}} \to \R$ una soluzione del problema di Cauchy $x' = f(t, x), x(t_0) = x_0$.
+\begin{enumerate}
+    \item $I_{\text{max}} = (T_-, T_+)$ è detto \textbf{intervallo massimale di esistenza} se la soluzione $x(t)$ non ammette alcun prolungamento continuo derivabile su un intervallo strettamente più ampio contenente $I_{\text{max}}$.
+    \item Se $T_+ < +\infty$ e si verifica:
+    \begin{equation}
+        \lim_{t \to T_+^-} |x(t)| = +\infty
+    \end{equation}
+    si dice che la soluzione manifesta il fenomeno del \textbf{Blow-up in tempo finito} (o esplosione asintotica). Analogamente per $t \to T_-^+$ se $T_- > -\infty$.
+\end{enumerate}
+\end{definizione}
+
+\begin{esempio}{Analisi Completa dell'Equazione $x'(t) = x^2 - x$}{blow_up_confronto}
+Consideriamo l'equazione differenziale autonoma a variabili separabili:
+\begin{equation}
+    \label{eq:riccati_base}
+    x'(t) = x^2 - x = x(x-1)
+\end{equation}
+
+\textbf{1. Soluzioni Stazionarie e Segno di $x'$}:
+Risolvendo $x(x-1) = 0$, individuiamo le due soluzioni stazionarie:
+\[
+    x_1(t) \equiv 0, \qquad x_2(t) \equiv 1
+\]
+Per il Teorema di Cauchy-Lipschitz, le curve integrali non possono intersecarsi. Pertanto il piano cartesiano $(t, x)$ viene partizionato in tre regioni invarianti:
+\begin{itemize}
+    \item Regione Superiore ($x > 1$): $x' = x(x-1) > 0 \implies x(t)$ è \textbf{strettamente crescente}.
+    \item Regione Intermedia ($0 < x < 1$): $x' = x(x-1) < 0 \implies x(t)$ è \textbf{strettamente decrescente}.
+    \item Regione Inferiore ($x < 0$): $x' = x(x-1) > 0 \implies x(t)$ è \textbf{strettamente crescente}.
+\end{itemize}
+
+\textbf{2. Integrazione Generale}:
+Integrando per $x \notin \{0, 1\}$ tramite decomposizione in fratti semplici $\frac{1}{x(x-1)} = \frac{1}{x-1} - \frac{1}{x}$:
+\[
+    \int \left( \frac{1}{x-1} - \frac{1}{x} \right) \diff x = \int 1 \diff t \implies \log\left| \frac{x-1}{x} \right| = t + c
+\]
+Applicando l'esponenziale:
+\begin{equation}
+    \label{eq:sol_generale_riccati}
+    \frac{x(t)-1}{x(t)} = C\, e^t \iff x(t) = \frac{1}{1 - C e^t}, \qquad C = \frac{x_0 - 1}{x_0} \in \R \setminus \{0\}
+\end{equation}
+Riscrivendo in funzione del dato iniziale $x(0) = x_0$:
+\begin{equation}
+    \label{eq:sol_x0_riccati}
+    x(t) = \frac{x_0}{x_0 - (x_0 - 1) e^t}
+\end{equation}
+
+\rule{\textwidth}{0.4pt}
+
+\noindent\textbf{CASO A: Dato Iniziale Interno $0 < x_0 < 1$ (Soluzione Globale)}
+Se $x_0 \in (0, 1)$, allora $x_0 - 1 < 0$, per cui poniamo $\alpha = 1 - x_0 > 0$. La soluzione diventa:
+\[
+    x(t) = \frac{x_0}{x_0 + \alpha e^t}
+\]
+Poiché $x_0 > 0$ e $\alpha e^t > 0$ per ogni $t \in \R$, il denominatore $x_0 + \alpha e^t > x_0 > 0$ \textbf{non si annulla mai su tutto $\R$}.
+\begin{itemize}
+    \item \textbf{Intervallo massimale}: $I_{\text{max}} = (-\infty, +\infty) = \R$ (\textbf{esistenza globale}).
+    \item \textbf{Comportamento asintotico}:
+    \[
+        \lim_{t \to -\infty} x(t) = \frac{x_0}{x_0 + 0} = 1^-, \qquad \lim_{t \to +\infty} x(t) = \lim_{t \to +\infty} \frac{x_0}{x_0 + \alpha e^t} = 0^+
+    \]
+    La curva è una transizione sigmoide decrescente confinata nella striscia $0 < x(t) < 1$.
+\end{itemize}
+
+\rule{\textwidth}{0.4pt}
+
+\noindent\textbf{CASO B: Dato Iniziale Superiore $x_0 > 1$ (Blow-up in Tempo Finito a $+\infty$)}
+Se $x_0 > 1$, allora $x_0 - 1 > 0$. Il denominatore in \eqref{eq:sol_x0_riccati} si annulla quando:
+\[
+    x_0 - (x_0 - 1) e^t = 0 \iff e^t = \frac{x_0}{x_0 - 1} \iff t = T_+ = \ln\left( \frac{x_0}{x_0 - 1} \right)
+\]
+Poiché $\frac{x_0}{x_0 - 1} > 1$, si ha $T_+ > 0$.
+\begin{itemize}
+    \item \textbf{Intervallo massimale}: $I_{\text{max}} = (-\infty, \, T_+)$.
+    \item \textbf{Blow-up a destra}: per $t \to T_+^-$, il denominatore tende a $0^+$ (essendo $e^t < e^{T_+}$), pertanto:
+    \[
+        \lim_{t \to T_+^-} x(t) = +\infty \qquad \left( \text{Tempo di blow-up } T_+ = \ln\left(\frac{x_0}{x_0-1}\right) \right)
+    \]
+    \item \textbf{Comportamento a $-\infty$}: $\lim_{t \to -\infty} x(t) = 1^+$.
+\end{itemize}
+Ad esempio, se $x_0 = 2$, il tempo di esplosione è $T_+ = \ln(2/1) = \ln 2 \approx 0.6931$.
+
+\rule{\textwidth}{0.4pt}
+
+\noindent\textbf{CASO C: Dato Iniziale Inferiore $x_0 < 0$ (Blow-up all'Indietro)}
+Se $x_0 < 0$, ponendo $x_0 = -\beta$ ($\beta > 0$):
+\[
+    x(t) = \frac{-\beta}{-\beta - (-\beta - 1)e^t} = \frac{\beta}{\beta - (\beta+1)e^t}
+\]
+Il denominatore si annulla per $e^t = \frac{\beta}{\beta+1} < 1 \iff t = T_- = \ln\left(\frac{|x_0|}{|x_0|+1}\right) < 0$.
+\begin{itemize}
+    \item \textbf{Intervallo massimale}: $I_{\text{max}} = (T_-, \, +\infty)$.
+    \item \textbf{Blow-up all'indietro}: $\lim_{t \to T_-^+} x(t) = -\infty$.
+    \item \textbf{Comportamento a $+\infty$}: $\lim_{t \to +\infty} x(t) = 0^-$.
+\end{itemize}
+\end{esempio}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+    \begin{axis}[
+        axis lines = center,
+        xlabel = {$t$},
+        ylabel = {$x(t)$},
+        xmin = -3.5, xmax = 2.5,
+        ymin = -1.5, ymax = 4.5,
+        xtick = {-2, 0, 0.693},
+        xticklabels = {$-2$, $0$, $T_+=\ln 2$},
+        ytick = {-1, 0, 0.5, 1, 2},
+        yticklabels = {$-1$, $0$, $\frac{1}{2}$, $1$, $2$},
+        grid = major,
+        grid style = {dashed, gray!30},
+        width = 12.5cm,
+        height = 8cm,
+        legend style={at={(0.03,0.97)},anchor=north west, font=\small}
+    ]
+        % Soluzioni stazionarie
+        \addplot[dashed, line width=1.2pt, gray!80] coordinates {(-3.5, 0) (2.5, 0)};
+        \addlegendentry{Equilibrio $x(t) \equiv 0$}
+        
+        \addplot[dashed, line width=1.2pt, gray!80] coordinates {(-3.5, 1) (2.5, 1)};
+        \addlegendentry{Equilibrio $x(t) \equiv 1$}
+        
+        % Asintoto verticale a t = ln(2) approx 0.69315
+        \addplot[crimsonred, dashed, line width=1.3pt] coordinates {(0.69315, -1.5) (0.69315, 4.5)};
+        
+        % Caso A: x0 = 1/2 -> x(t) = 1 / (1 + e^t) (Globale)
+        \addplot[forestgreen, line width=1.6pt, domain=-3.5:2.5, samples=120] {1 / (1 + exp(x))};
+        \addlegendentry{Caso A ($x_0=\frac{1}{2}$): $x(t)=\frac{1}{1+e^t}$ (Globale su $\R$)}
+        
+        % Caso B: x0 = 2 -> x(t) = 2 / (2 - e^t) = 1 / (1 - 0.5*e^t) (Blow-up)
+        \addplot[crimsonred, line width=1.6pt, domain=-3.5:0.65, samples=150] {2 / (2 - exp(x))};
+        \addlegendentry{Caso B ($x_0=2$): Blow-up a $T_+ = \ln 2$}
+        
+        % Caso C: x0 = -0.5 -> x(t) = -0.5 / (-0.5 + 1.5*e^t) = 1 / (1 - 3*e^t)
+        % T_- = ln(1/3) approx -1.0986
+        \addplot[purpleaccent, dashed, line width=1.1pt] coordinates {(-1.0986, -1.5) (-1.0986, 4.5)};
+        \addplot[purpleaccent, line width=1.6pt, domain=-1.03:2.5, samples=150] {-0.5 / (-0.5 - (-1.5)*exp(x))};
+        \addlegendentry{Caso C ($x_0=-\frac{1}{2}$): Blow-up a $T_- = -\ln 3$}
+        
+        % Punti iniziali
+        \node[circle,fill=forestgreen,inner sep=2pt] at (axis cs:0, 0.5) {};
+        \node[circle,fill=crimsonred,inner sep=2pt] at (axis cs:0, 2) {};
+        \node[circle,fill=purpleaccent,inner sep=2pt] at (axis cs:0, -0.5) {};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+% ==============================================================================
+% SEZIONE 4: TEOREMA DELL'ASINTOTO, CONFRONTO E LEMMA DI GRÖNWALL
+% ==============================================================================
+\section{Teoremi Qualitativi: Asintoto, Confronto e Lemma di Grönwall}
+\label{sec:teoremi_qualitativi}
+
+Nello studio delle equazioni differenziali, le tecniche qualitative consentono di determinare le proprietà asintotiche delle soluzioni (stabilità, convergenza ad equilibri, stime di crescita e tempi di blow-up) senza la necessità di integrare esplicitamente l'equazione.
+
+\subsection{Teorema dell'Asintoto}
+
+\begin{teorema}{Teorema dell'Asintoto}{teorema_asintoto}
+Sia $f \colon [t_0, +\infty) \to \R$ una funzione derivabile. Supponiamo che:
+\begin{enumerate}
+    \item $\lim_{t \to +\infty} f(t) = \ell \in \R$ \quad (\textbf{limite finito});
+    \item esista il limite della derivata prima $\lim_{t \to +\infty} f'(t) = m \in \Rext$.
+\end{enumerate}
+Allora necessariamente la derivata prima tende a zero:
+\begin{equation}
+    \label{eq:tesi_asintoto}
+    m = \lim_{t \to +\infty} f'(t) = 0
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazione Rigorosa con il Teorema del Valor Medio di Lagrange]
+Poiché per ipotesi $\lim_{t \to +\infty} f(t) = \ell$, considerando l'incremento di $f$ sull'intervallo compatto $[t, t+1]$:
+\[
+    \lim_{t \to +\infty} \big( f(t+1) - f(t) \big) = \ell - \ell = 0
+\]
+Per ogni fissato $t \ge t_0$, la funzione $f$ è continua su $[t, t+1]$ e derivabile in $(t, t+1)$. Applicando il \textbf{Teorema di Lagrange}, esiste un punto dipendente da $t$, $\xi(t) \in (t, t+1)$, tale che:
+\[
+    \frac{f(t+1) - f(t)}{(t+1) - t} = f'(\xi(t)) \implies f(t+1) - f(t) = f'(\xi(t))
+\]
+Poiché $t < \xi(t) < t+1$, per il Teorema del Confronto (Carabinieri) quando $t \to +\infty$ si ha anche $\xi(t) \to +\infty$.
+Essendo per ipotesi esistente $\lim_{u \to +\infty} f'(u) = m$, lungo la successione/famiglia $\xi(t) \to +\infty$ si ha:
+\[
+    m = \lim_{\xi(t) \to +\infty} f'(\xi(t)) = \lim_{t \to +\infty} \big( f(t+1) - f(t) \big) = 0
+\]
+Pertanto $m = 0$.
+\end{dimostrazione}
+
+\begin{esame}[Controesempio Fondamentale: Mancanza del Limite della Derivata]
+È fondamentale sottolineare che il Teorema dell'Asintoto asserisce che \emph{se} il limite di $f'$ esiste, allora è nullo; esso \textbf{non garantisce l'esistenza del limite della derivata}.
+Consideriamo la funzione classica:
+\[
+    f(t) = \frac{\sin(t^2)}{t}, \qquad t \ge 1
+\]
+\begin{enumerate}
+    \item Poiché $|\sin(t^2)| \le 1$, per il teorema del confronto dei limiti:
+    \[
+        \lim_{t \to +\infty} f(t) = \lim_{t \to +\infty} \frac{\sin(t^2)}{t} = 0 \quad (\ell = 0 \in \R)
+    \]
+    \item Calcolando la derivata prima mediante la regola del quoziente e della catena:
+    \[
+        f'(t) = \frac{2t \cos(t^2) \cdot t - \sin(t^2) \cdot 1}{t^2} = 2\cos(t^2) - \frac{\sin(t^2)}{t^2}
+    \]
+    Poiché $\lim_{t \to +\infty} \frac{\sin(t^2)}{t^2} = 0$ ma il termine $2\cos(t^2)$ \textbf{oscilla indefinitamente tra $-2$ e $+2$}, il limite:
+    \[
+        \lim_{t \to +\infty} f'(t) \quad \textbf{NON ESISTE}
+    \]
+\end{enumerate}
+Geometricamente, la funzione $f(t)$ è schiacciata a zero dall'inviluppo $\pm 1/t$, ma le sue oscillazioni diventano sempre più dense (frequenza infinita), generando pendenze non nulle.
+\end{esame}
+
+\subsection{Teorema del Confronto per Equazioni Differenziali}
+
+\begin{teorema}{Teorema del Confronto}{teorema_confronto_ode}
+Siano $f, g \colon [t_0, T) \times \R \to \R$ continue, con $f$ localmente lipschitziana rispetto a $x$. Siano $x_1, x_2 \in C^1([t_0, T))$ soluzioni rispettivamente di:
+\[
+    \begin{cases} x_1'(t) = f(t, x_1(t)) \\ x_1(t_0) = x_{1,0} \end{cases} \qquad \text{e} \qquad \begin{cases} x_2'(t) = g(t, x_2(t)) \\ x_2(t_0) = x_{2,0} \end{cases}
+\]
+Supponiamo che:
+\begin{enumerate}
+    \item $x_{1,0} \le x_{2,0}$;
+    \item $f(t, x) \le g(t, x)$ per ogni $(t, x) \in [t_0, T) \times \R$.
+\end{enumerate}
+Allora:
+\begin{equation}
+    \label{eq:confronto_tesi}
+    x_1(t) \le x_2(t) \qquad \forall t \in [t_0, T)
+\end{equation}
+Se inoltre $x_{1,0} < x_{2,0}$, allora $x_1(t) < x_2(t)$ per ogni $t \in [t_0, T)$.
+\end{teorema}
+
+\begin{esempio}{Stima del Tempo di Blow-up tramite Confronto: $x' = x^2+1$ vs $x' = x^3+1$}{es_confronto_blowup}
+Consideriamo i due problemi di Cauchy con la medesima condizione iniziale $x_0 = 1$ a $t_0 = 0$:
+\[
+    \text{(I)} \quad \begin{cases} x_1'(t) = x_1^2 + 1 \\ x_1(0) = 1 \end{cases} \qquad \text{e} \qquad \text{(II)} \quad \begin{cases} x_2'(t) = x_2^3 + 1 \\ x_2(0) = 1 \end{cases}
+\]
+\textbf{1. Soluzione esatta di (I)}:
+Integrando per separazione di variabili:
+\[
+    \int_1^{x_1} \frac{\diff u}{u^2+1} = \int_0^t \diff s \implies \arctan(x_1) - \arctan(1) = t \implies \arctan(x_1) = t + \frac{\pi}{4}
+\]
+\[
+    x_1(t) = \tan\left( t + \frac{\pi}{4} \right)
+\]
+L'argomento della tangente raggiunge $\frac{\pi}{2}$ per $t = \frac{\pi}{2} - \frac{\pi}{4} = \frac{\pi}{4}$. Dunque $x_1(t)$ subisce blow-up a:
+\[
+    T_1 = \frac{\pi}{4} \approx 0.7854
+\]
+
+\textbf{2. Confronto qualitativo per (II)}:
+Per ogni $x \ge 1$, vale la disuguaglianza algebrica $x^3 + 1 \ge x^2 + 1$.
+Poiché $x_1(0) = x_2(0) = 1$, per il Teorema del Confronto si ha:
+\[
+    x_2(t) \ge x_1(t) \qquad \forall t \ge 0 \text{ per cui entrambe sono definite}
+\]
+Dato che $x_2$ cresce con velocità strettamente superiore a $x_1$, la barriera asintotica di divergenza a $+\infty$ viene raggiunta prima. Pertanto il tempo di blow-up $T_2$ del secondo problema è \textbf{strettamente anticipato}:
+\[
+    T_2 < T_1 = \frac{\pi}{4}
+\]
+\end{esempio}
+
+\subsection{Lemma di Grönwall (Forma Differenziale e Integrale)}
+
+\begin{teorema}{Lemma di Grönwall Differenziale}{lemma_gronwall_diff}
+Siano $a, b \in C^0([t_0, T])$ e sia $u \in C^1([t_0, T])$ una funzione soddisfacente la disuguaglianza differenziale lineare:
+\begin{equation}
+    \label{eq:gronwall_diff}
+    u'(t) \le a(t) u(t) + b(t) \qquad \forall t \in [t_0, T]
+\end{equation}
+Allora per ogni $t \in [t_0, T]$ vale la stima:
+\begin{equation}
+    \label{eq:gronwall_diff_tesi}
+    u(t) \le u(t_0)\, e^{\int_{t_0}^t a(s) \diff s} + \int_{t_0}^t b(s)\, e^{\int_s^t a(z) \diff z} \diff s
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazione con Fattore Integrante]
+Definiamo la funzione $A(t) = \int_{t_0}^t a(s)\ds$. Moltiplichiamo ambo i membri della disuguaglianza \eqref{eq:gronwall_diff} per il fattore positivo $e^{-A(t)}$:
+\[
+    u'(t) e^{-A(t)} - a(t) u(t) e^{-A(t)} \le b(t) e^{-A(t)} \iff \der{}{t}\big( u(t) e^{-A(t)} \big) \le b(t) e^{-A(t)}
+\]
+Integrando ambo i membri tra $t_0$ e $t$:
+\[
+    \int_{t_0}^t \der{}{s}\big( u(s) e^{-A(s)} \big) \diff s \le \int_{t_0}^t b(s) e^{-A(s)} \diff s
+\]
+\[
+    u(t) e^{-A(t)} - u(t_0) \le \int_{t_0}^t b(s) e^{-A(s)} \diff s
+\]
+Moltiplicando per $e^{A(t)} = e^{\int_{t_0}^t a(s)\ds}$ e sfruttando $e^{A(t)} e^{-A(s)} = e^{A(t)-A(s)} = e^{\int_s^t a(z)\dz}$, si ottiene esattamente la tesi \eqref{eq:gronwall_diff_tesi}.
+\end{dimostrazione}
+
+\begin{corollario}{Lemma di Grönwall Integrale e Unicità}{cor_gronwall_integrale}
+Sia $u \in C^0([t_0, T])$ non negativa ($u(t) \ge 0$) soddisfacente:
+\[
+    u(t) \le \alpha + \int_{t_0}^t \beta(s) u(s) \diff s \qquad \forall t \in [t_0, T]
+\]
+con $\alpha \ge 0$ e $\beta(s) \ge 0$ continua. Allora:
+\begin{equation}
+    u(t) \le \alpha \exp\left( \int_{t_0}^t \beta(s) \diff s \right) \qquad \forall t \in [t_0, T]
+\end{equation}
+In particolare, se $\alpha = 0$, allora $u(t) \equiv 0$ su tutto $[t_0, T]$ (principio cardine per dimostrare l'unicità globale).
+\end{corollario}
+
+\newpage
+
+% ==============================================================================
+% SEZIONE 5: EQUAZIONI LINEARI DEL PRIMO ORDINE
+% ==============================================================================
+\section{Equazioni Differenziali Lineari del Primo Ordine}
+\label{sec:lineari_primo_ordine}
+
+\begin{definizione}{Equazione Differenziale Lineare del Primo Ordine}{lineare_1ord_def}
+Un'equazione differenziale ordinaria del primo ordine si dice \textbf{lineare} se è lineare rispetto alla funzione incognita $x(t)$ e alla sua derivata prima $x'(t)$:
+\begin{equation}
+    \label{eq:lineare_1ord}
+    x'(t) + a(t) x(t) = b(t)
+\end{equation}
+dove $a, b \in C^0(I)$ sono funzioni continue definite su un intervallo $I \subseteq \R$.
+\begin{itemize}
+    \item $a(t)$ è detto \textbf{coefficiente} dell'equazione;
+    \item $b(t)$ è detto \textbf{termine noto} (o forzante).
+\end{itemize}
+Se $b(t) \equiv 0$, l'equazione è detta \textbf{omogenea}; se $b(t) \not\equiv 0$, l'equazione è detta \textbf{non omogenea} (o completa).
+\end{definizione}
+
+\subsection{Equazione Omogenea del Primo Ordine}
+L'equazione omogenea associata $x'(t) + a(t)x(t) = 0$ è a variabili separabili:
+\[
+    \frac{x'(t)}{x(t)} = -a(t) \implies \int_{x(t_0)}^{x(t)} \frac{\diff u}{u} = -\int_{t_0}^t a(s) \diff s \implies \log\left|\frac{x(t)}{x(t_0)}\right| = -\int_{t_0}^t a(s) \diff s
+\]
+Otteniamo la formula fondamentale per l'omogenea:
+\begin{equation}
+    \label{eq:omogenea_1ord_sol}
+    x_{\text{om}}(t) = x(t_0)\, e^{-\int_{t_0}^t a(s) \diff s} = c\, e^{-A(t)} \qquad (c \in \R)
+\end{equation}
+
+\subsection{Risoluzione dell'Equazione Completa: Due Metodi Fondamentali a Confronto}
+
+\begin{metodo}[Metodo 1: Fattore Integrante Indefinito $e^{A(t)}$]
+Per risolvere $x'(t) + a(t)x(t) = b(t)$:
+\begin{enumerate}
+    \item Si calcola una primitiva arbitraria del coefficiente: $A(t) = \int a(t) \diff t$.
+    \item Si moltiplicano ambo i membri dell'equazione per il \textbf{fattore integrante} positivo $\mu(t) = e^{A(t)}$:
+    \[
+        e^{A(t)} x'(t) + a(t) e^{A(t)} x(t) = b(t) e^{A(t)} \iff \der{}{t}\big( x(t) e^{A(t)} \big) = b(t) e^{A(t)}
+    \]
+    \item Si integra indefinitamente rispetto a $t$:
+    \[
+        x(t) e^{A(t)} = \int b(t) e^{A(t)} \diff t + c \qquad (c \in \R)
+    \]
+    \item Si moltiplica per $e^{-A(t)}$, ottenendo la formula esplicita dell'\textbf{integrale generale}:
+    \begin{equation}
+        \label{eq:metodo1_formula}
+        x(t) = e^{-A(t)} \left[ \int b(t) e^{A(t)} \diff t + c \right]
+    \end{equation}
+\end{enumerate}
+\end{metodo}
+
+\begin{teorema}{Metodo 2: Formula di Cauchy e Variazione delle Costanti}{cauchy_formula_lineare}
+Sia $I \subseteq \R$ un intervallo, $t_0 \in I$, $x_0 \in \R$ e $a, b \in C^0(I)$. L'unica soluzione globale $x \in C^1(I)$ del problema di Cauchy:
+\begin{equation}
+    \label{eq:cauchy_1ord_completo}
+    \begin{cases}
+        x'(t) + a(t) x(t) = b(t) \\
+        x(t_0) = x_0
+    \end{cases}
+\end{equation}
+è data dalla \textbf{Formula di Rappresentazione di Cauchy}:
+\begin{equation}
+    \label{eq:cauchy_formula_chiusa}
+    x(t) = \underbrace{x_0\, e^{-\int_{t_0}^t a(s) \diff s}}_{\text{Evoluzione Libera (Dato Iniziale)}} + \underbrace{\int_{t_0}^t b(s)\, e^{-\int_s^t a(z) \diff z} \diff s}_{\text{Risposta Forzata (Integrale di Convoluzione Ponderato)}}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazione tramite Variazione delle Costanti di Lagrange]
+Cerchiamo la soluzione dell'equazione completa nella forma:
+\[
+    x(t) = c(t)\, e^{-A(t)}, \qquad \text{dove } A(t) = \int_{t_0}^t a(s) \diff s, \quad A(t_0) = 0
+\]
+in cui la costante $c$ dell'omogenea viene promossa a funzione incognita $c(t)$ (\emph{variazione della costante}).
+Derivando $x(t)$ con la regola del prodotto:
+\[
+    x'(t) = c'(t) e^{-A(t)} - c(t) a(t) e^{-A(t)}
+\]
+Sostituendo nell'equazione differenziale completa $x'(t) + a(t)x(t) = b(t)$:
+\[
+    \big( c'(t) e^{-A(t)} - c(t) a(t) e^{-A(t)} \big) + a(t) \big( c(t) e^{-A(t)} \big) = b(t)
+\]
+I termini contenenti $c(t)$ si elidono esattamente:
+\[
+    c'(t) e^{-A(t)} = b(t) \implies c'(t) = b(t) e^{A(t)} = b(t) e^{\int_{t_0}^t a(s) \diff s}
+\]
+Integriamo $c'(s)$ tra l'istante iniziale $t_0$ e l'istante $t$:
+\[
+    c(t) - c(t_0) = \int_{t_0}^t b(s) e^{\int_{t_0}^s a(z) \diff z} \diff s
+\]
+Poiché $x(t_0) = c(t_0) e^{-A(t_0)} = c(t_0) e^0 = c(t_0)$, imponendo la condizione iniziale si ha $c(t_0) = x_0$.
+Sostituendo $c(t)$ nell'espressione di $x(t)$:
+\begin{align*}
+    x(t) &= \left( x_0 + \int_{t_0}^t b(s) e^{\int_{t_0}^s a(z) \diff z} \diff s \right) e^{-\int_{t_0}^t a(s) \diff s} \\
+    &= x_0\, e^{-\int_{t_0}^t a(s) \diff s} + \int_{t_0}^t b(s) \left( e^{-\int_{t_0}^t a(z) \diff z} \cdot e^{\int_{t_0}^s a(z) \diff z} \right) \diff s
+\end{align*}
+Sfruttando le proprietà dell'integrale e dell'esponenziale:
+\[
+    -\int_{t_0}^t a(z)\dz + \int_{t_0}^s a(z)\dz = -\left( \int_{t_0}^t a(z)\dz - \int_{t_0}^s a(z)\dz \right) = -\int_s^t a(z)\dz
+\]
+Si ottiene l'espressione esatta:
+\[
+    x(t) = x_0\, e^{-\int_{t_0}^t a(s) \diff s} + \int_{t_0}^t b(s)\, e^{-\int_s^t a(z) \diff z} \diff s
+\]
+\end{dimostrazione}
+
+\begin{osservazione}[Il Nucleo di Evoluzione (Funzione di Green del Primo Ordine)]
+Definendo il \textbf{nucleo integrale di transizione}:
+\begin{equation}
+    \label{eq:propagatore_green}
+    K(t, s) = e^{-\int_s^t a(z) \diff z}
+\end{equation}
+la formula di Cauchy si riscrive nella forma compatta:
+\[
+    x(t) = x_0 K(t, t_0) + \int_{t_0}^t K(t, s) b(s) \diff s
+\]
+$K(t, s)$ rappresenta la risposta all'istante $t$ prodotta da un impulso unitario applicato al sistema all'istante $s \le t$.
+\end{osservazione}
+
+\begin{esempio}{Problema di Cauchy del I Ordine Risolto con i Due Metodi}{es_lineare_completo_confronto}
+Risolvere il problema di Cauchy:
+\[
+    \begin{cases}
+        x'(t) + 4 x(t) = 7 e^{-2t} \\
+        x(0) = 3
+    \end{cases}
+\]
+
+\textbf{Metodo 1 (Fattore Integrante)}:
+$a(t) = 4 \implies A(t) = 4t$. Fattore integrante: $e^{4t}$.
+\[
+    \der{}{t}\big( x(t) e^{4t} \big) = 7 e^{-2t} \cdot e^{4t} = 7 e^{2t}
+\]
+\[
+    x(t) e^{4t} = \int 7 e^{2t} \diff t + c = \frac{7}{2} e^{2t} + c \implies x(t) = \frac{7}{2} e^{-2t} + c\, e^{-4t}
+\]
+Imponendo $x(0) = 3$:
+\[
+    3 = \frac{7}{2} + c \implies c = 3 - \frac{7}{2} = -\frac{1}{2} \implies x(t) = \frac{7}{2} e^{-2t} - \frac{1}{2} e^{-4t}
+\]
+
+\textbf{Metodo 2 (Formula di Cauchy con Integrali Definiti)}:
+$t_0 = 0$, $x_0 = 3$, $a(t) = 4$, $b(t) = 7e^{-2t}$.
+\[
+    x(t) = 3\, e^{-\int_0^t 4 \diff s} + \int_0^t 7 e^{-2s} e^{-\int_s^t 4 \diff z} \diff s = 3 e^{-4t} + 7 \int_0^t e^{-2s} e^{-4(t-s)} \diff s
+\]
+\[
+    x(t) = 3 e^{-4t} + 7 e^{-4t} \int_0^t e^{2s} \diff s = 3 e^{-4t} + 7 e^{-4t} \left[ \frac{e^{2s}}{2} \right]_0^t = 3 e^{-4t} + 7 e^{-4t} \left( \frac{e^{2t}-1}{2} \right)
+\]
+\[
+    x(t) = 3 e^{-4t} + \frac{7}{2} e^{-2t} - \frac{7}{2} e^{-4t} = \frac{7}{2} e^{-2t} - \frac{1}{2} e^{-4t}
+\]
+I due metodi conducono in modo impeccabile al medesimo risultato analitico.
+\end{esempio}
+
+\newpage
+
+% ==============================================================================
+% SEZIONE 6: EQUAZIONI DEL SECONDO ORDINE - TEORIA GENERALE E WRONSKIANO
+% ==============================================================================
+\section{Equazioni Lineari del Secondo Ordine: Teoria Generale}
+\label{sec:lineari_secondo_ordine}
+
+\begin{definizione}{Equazione Differenziale Lineare del Secondo Ordine}{def_lineare_2ord}
+Un'equazione differenziale lineare del secondo ordine in forma normale si presenta nella forma:
+\begin{equation}
+    \label{eq:lineare_2ord}
+    x''(t) + a(t) x'(t) + b(t) x(t) = c(t)
+\end{equation}
+dove $a, b, c \in C^0(I)$ sono funzioni continue sull'intervallo $I \subseteq \R$.
+\begin{itemize}
+    \item Se $c(t) \equiv 0$, l'equazione è detta \textbf{omogenea}:
+    \begin{equation}
+        \label{eq:omogenea_2ord}
+        \mathcal{L}[x](t) \coloneqq x''(t) + a(t) x'(t) + b(t) x(t) = 0
+    \end{equation}
+    \item Se $c(t) \not\equiv 0$, l'equazione è detta \textbf{non omogenea} (o completa).
+\end{itemize}
+Il relativo \textbf{Problema di Cauchy} assegna lo stato di posizione e velocità iniziale allo stesso istante $t_0 \in I$:
+\begin{equation}
+    \label{eq:cauchy_2ord}
+    \begin{cases}
+        x''(t) + a(t) x'(t) + b(t) x(t) = c(t) \\
+        x(t_0) = x_0 \\
+        x'(t_0) = \dot{x}_0
+    \end{cases}
+\end{equation}
+\end{definizione}
+
+\begin{teorema}{Spazio Vettoriale delle Soluzioni dell'Omogenea}{spazio_soluzioni_omogenea}
+Sia $\mathcal{L} \colon C^2(I) \to C^0(I)$ l'operatore differenziale lineare definito da $\mathcal{L}[x] = x'' + a(t)x' + b(t)x$.
+L'insieme $X_{\text{om}} = \ker(\mathcal{L}) = \{ x \in C^2(I) \;\colon\; \mathcal{L}[x] = 0 \}$ di tutte le soluzioni dell'equazione omogenea \eqref{eq:omogenea_2ord} costituisce uno \textbf{spazio vettoriale reale di dimensione 2}:
+\begin{equation}
+    \dim(X_{\text{om}}) = 2
+\end{equation}
+Pertanto, se $\{x_1(t), x_2(t)\}$ è una base di soluzioni linearmente indipendenti, l'\textbf{integrale generale dell'omogenea} è:
+\begin{equation}
+    \label{eq:integrale_generale_omogenea}
+    X_{\text{om}}(t) = K_1 x_1(t) + K_2 x_2(t), \qquad K_1, K_2 \in \R
+\end{equation}
+\end{teorema}
+
+\subsection{Il Determinante Wronskiano e l'Identità di Abel}
+
+\begin{definizione}{Matrice e Determinante Wronskiano}{def_wronskiano}
+Date due funzioni $x_1, x_2 \in C^1(I)$, si definisce \textbf{Determinante Wronskiano} (o Wronskiano) di $\{x_1, x_2\}$ la funzione $W \colon I \to \R$ data da:
+\begin{equation}
+    \label{eq:wronskiano_def}
+    W(t) = W(x_1, x_2)(t) \coloneqq \det \begin{pmatrix} x_1(t) & x_2(t) \\ x_1'(t) & x_2'(t) \end{pmatrix} = x_1(t) x_2'(t) - x_1'(t) x_2(t)
+\end{equation}
+\end{definizione}
+
+\begin{teorema}{Identità di Abel (Formula di Liouville-Abel)}{teorema_identita_abel}
+Siano $x_1(t)$ e $x_2(t)$ due soluzioni arbitrarie dell'equazione omogenea $x'' + a(t)x' + b(t)x = 0$ su $I$.
+Allora il loro Wronskiano $W(t)$ soddisfa l'equazione differenziale lineare del primo ordine:
+\begin{equation}
+    \label{eq:ode_wronskiano}
+    W'(t) = -a(t) W(t) \qquad \forall t \in I
+\end{equation}
+Di conseguenza, fissato $t_0 \in I$:
+\begin{equation}
+    \label{eq:abel_formula}
+    W(t) = W(t_0) \, \exp\left( -\int_{t_0}^t a(s) \diff s \right) \qquad \forall t \in I
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazione Formale dell'Identità di Abel]
+Calcoliamo la derivata prima di $W(t) = x_1(t) x_2'(t) - x_1'(t) x_2(t)$ applicando la regola di Leibniz:
+\[
+    W'(t) = \big( x_1'(t) x_2'(t) + x_1(t) x_2''(t) \big) - \big( x_1''(t) x_2(t) + x_1'(t) x_2'(t) \big) = x_1(t) x_2''(t) - x_1''(t) x_2(t)
+\]
+Poiché $x_1$ e $x_2$ risolvono l'equazione omogenea, esplicitiamo le derivate seconde:
+\[
+    x_1''(t) = -a(t) x_1'(t) - b(t) x_1(t), \qquad x_2''(t) = -a(t) x_2'(t) - b(t) x_2(t)
+\]
+Sostituendo:
+\begin{align*}
+    W'(t) &= x_1(t) \big( -a(t) x_2'(t) - b(t) x_2(t) \big) - \big( -a(t) x_1'(t) - b(t) x_1(t) \big) x_2(t) \\
+    &= -a(t) \big( x_1(t) x_2'(t) - x_1'(t) x_2(t) \big) - b(t) \big( x_1(t) x_2(t) - x_1(t) x_2(t) \big) \\
+    &= -a(t) W(t) - b(t) \cdot 0 = -a(t) W(t)
+\end{align*}
+Integrando l'equazione $W'(t) = -a(t)W(t)$ come ODE del I ordine a variabili separabili, si ottiene direttamente \eqref{eq:abel_formula}.
+\end{dimostrazione}
+
+\begin{corollario}{Caratterizzazione dell'Indipendenza Lineare tramite Wronskiano}{cor_wronskiano_indipendenza}
+Siano $x_1, x_2$ due soluzioni dell'omogenea su $I$. In virtù della formula di Abel:
+\begin{enumerate}
+    \item Il fattore esponenziale $\exp(-\int_{t_0}^t a(s)\ds)$ non si annulla mai in $I$. Di conseguenza:
+    \[
+        \text{o } W(t) = 0 \; \forall t \in I, \qquad \text{oppure } W(t) \neq 0 \; \forall t \in I
+    \]
+    \item Le funzioni $\{x_1(t), x_2(t)\}$ formano una \textbf{base} dello spazio delle soluzioni $X_{\text{om}}$ se e solo se $W(t_0) \neq 0$ in un singolo punto $t_0 \in I$.
+\end{enumerate}
+\end{corollario}
+
+\subsection{Struttura dello Spazio Affine delle Soluzioni Complete}
+
+\begin{proposizione}{Struttura Affine e Principio di Sovrapposizione}{prop_struttura_affine}
+\begin{enumerate}
+    \item \textbf{Principio di Sovrapposizione}: se $x_1(t)$ risolve $\mathcal{L}[x] = c_1(t)$ e $x_2(t)$ risolve $\mathcal{L}[x] = c_2(t)$, allora $x(t) = \alpha x_1(t) + \beta x_2(t)$ risolve l'equazione $\mathcal{L}[x] = \alpha c_1(t) + \beta c_2(t)$.
+    \item \textbf{Integrale Generale dell'Equazione Completa}: sia $\bar{x}(t)$ una \textbf{soluzione particolare} dell'equazione completa $\mathcal{L}[x] = c(t)$. Allora la totalità delle soluzioni è lo spazio affine dato da:
+    \begin{equation}
+        \label{eq:struttura_affine}
+        x(t) = X_{\text{om}}(t) + \bar{x}(t) = K_1 x_1(t) + K_2 x_2(t) + \bar{x}(t), \qquad K_1, K_2 \in \R
+    \end{equation}
+\end{enumerate}
+\end{proposizione}
+
+\newpage
+
+% ==============================================================================
+% SEZIONE 7: OMOGENEE A COEFFICIENTI COSTANTI E INTERPRETAZIONE FISICA
+% ==============================================================================
+\section{Omogenee a Coefficienti Costanti e Oscillatore Armonico}
+\label{sec:omogenee_costanti}
+
+Consideriamo l'equazione lineare omogenea del secondo ordine a coefficienti costanti $a, b \in \R$:
+\begin{equation}
+    \label{eq:omogenea_costanti}
+    x''(t) + a\, x'(t) + b\, x(t) = 0
+\end{equation}
+Inserendo l'\emph{ansatz} esponenziale di Eulero $x(t) = e^{\lambda t}$ ($\lambda \in \C$), si ha $x'(t) = \lambda e^{\lambda t}$ e $x''(t) = \lambda^2 e^{\lambda t}$. Sostituendo:
+\[
+    e^{\lambda t} \big( \lambda^2 + a\lambda + b \big) = 0 \iff P(\lambda) \coloneqq \lambda^2 + a\lambda + b = 0
+\]
+L'\textbf{Equazione Caratteristica} ammette discriminante $\Delta = a^2 - 4b$.
+
+\begin{metodo}[I Tre Regimi Algebrici dell'Omogenea a Coefficienti Costanti]
+\begin{enumerate}
+    \item \textbf{Caso 1: $\Delta > 0$ (Due Radici Reali Distinte $\lambda_1 \neq \lambda_2 \in \R$)}
+    \[
+        \lambda_{1,2} = \frac{-a \pm \sqrt{\Delta}}{2} \implies X_{\text{om}}(t) = K_1 e^{\lambda_1 t} + K_2 e^{\lambda_2 t}, \quad K_1, K_2 \in \R
+    \]
+
+    \item \textbf{Caso 2: $\Delta = 0$ (Una Radice Reale Doppia $\lambda_0 = -\frac{a}{2} \in \R$)}
+    La prima soluzione è $x_1(t) = e^{\lambda_0 t}$. La seconda soluzione linearmente indipendente è $x_2(t) = t e^{\lambda_0 t}$:
+    \[
+        X_{\text{om}}(t) = (K_1 + K_2 t) e^{\lambda_0 t}, \quad K_1, K_2 \in \R
+    \]
+    \emph{Dimostrazione della comparsa del termine $t$}: poniamo $x_2(t) = v(t) e^{\lambda_0 t}$. Derivando e sostituendo in $x'' + ax' + bx = 0$, poiché $\lambda_0^2 + a\lambda_0 + b = 0$ e $2\lambda_0 + a = 0$, l'equazione si riduce a $v''(t) = 0 \implies v(t) = t$.
+
+    \item \textbf{Caso 3: $\Delta < 0$ (Radici Complesse Coniugate $\lambda_{1,2} = \rho \pm i\omega$ con $\omega > 0$)}
+    \[
+        \rho = -\frac{a}{2}, \qquad \omega = \frac{\sqrt{4b - a^2}}{2}
+    \]
+    Sfruttando l'identità di Eulero $e^{(\rho \pm i\omega)t} = e^{\rho t}(\cos(\omega t) \pm i\sin(\omega t))$, la base reale è $\{e^{\rho t}\cos(\omega t), e^{\rho t}\sin(\omega t)\}$:
+    \[
+        X_{\text{om}}(t) = e^{\rho t} \big( K_1 \cos(\omega t) + K_2 \sin(\omega t) \big), \quad K_1, K_2 \in \R
+    \]
+\end{enumerate}
+\end{metodo}
+
+\subsection{Interpretazione Meccanica e Fisica: Oscillatore Armonico Smorzato}
+
+Il modello canonico per l'equazione del secondo ordine a coefficienti costanti è il sistema meccanico massa-molla-smorzatore (o il circuito RLC in parallelo/serie):
+\begin{equation}
+    \label{eq:oscillatore_fisica}
+    m \ddot{x}(t) + \gamma \dot{x}(t) + k x(t) = 0 \iff \ddot{x}(t) + 2\zeta \omega_0 \dot{x}(t) + \omega_0^2 x(t) = 0
+\end{equation}
+dove $\omega_0 = \sqrt{k/m}$ è la \textbf{pulsazione naturale non smorzata} e $\zeta = \frac{\gamma}{2\sqrt{km}}$ è il \textbf{fattore di smorzamento adimensionale}.
+Il discriminante vale $\Delta = 4\omega_0^2(\zeta^2 - 1)$. Si distinguono quattro regimi fisici:
+
+\begin{enumerate}
+    \item \textbf{Oscillatore Armonico Semplice / Non Smorzato ($\gamma = 0 \iff \zeta = 0$)}:
+    Radici immaginarie pure $\lambda = \pm i\omega_0$. La soluzione è puramente periodica con moto armonico conservativo:
+    \[
+        x(t) = A \cos(\omega_0 t - \varphi)
+    \]
+    
+    \item \textbf{Regime Sottosmorzato ($0 < \zeta < 1 \iff \Delta < 0$)}:
+    Radici complesse $\lambda = -\zeta\omega_0 \pm i\omega_d$, dove $\omega_d = \omega_0 \sqrt{1 - \zeta^2}$ è la \textbf{pseudo-pulsazione}. Il moto presenta oscillazioni smorzate racchiuse dall'inviluppo esponenziale decadente $\pm A e^{-\zeta\omega_0 t}$:
+    \[
+        x(t) = A\, e^{-\zeta\omega_0 t} \cos(\omega_d t - \varphi)
+    \]
+    
+    \item \textbf{Smorzamento Critico ($\zeta = 1 \iff \Delta = 0$)}:
+    Radice reale doppia $\lambda_0 = -\omega_0$. La massa ritorna alla posizione di equilibrio nel minor tempo possibile senza compiere alcuna oscillazione attorno a $x=0$:
+    \[
+        x(t) = (K_1 + K_2 t) e^{-\omega_0 t}
+    \]
+    
+    \item \textbf{Regime Sovrasmorzato ($\zeta > 1 \iff \Delta > 0$)}:
+    Due radici reali negative $\lambda_{1,2} = -\omega_0(\zeta \pm \sqrt{\zeta^2 - 1}) < 0$. Decadimento aperiodico lento governato dalla costante di tempo dominante $|\lambda_1|^{-1}$.
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.05]
+    \begin{axis}[
+        axis lines = center,
+        xlabel = {$t$ [s]},
+        ylabel = {$x(t)$ [m]},
+        xmin = 0, xmax = 10,
+        ymin = -1.2, ymax = 1.4,
+        grid = major,
+        grid style = {dashed, gray!30},
+        width = 12.5cm,
+        height = 7cm,
+        legend style={at={(0.97,0.97)},anchor=north east, font=\small}
+    ]
+        % Non smorzato (zeta = 0, omega0 = 2)
+        \addplot[navyblue, dashed, line width=1.1pt, domain=0:10, samples=150] {cos(deg(2*x))};
+        \addlegendentry{Non Smorzato ($\zeta=0$): moto armonico puro}
+        
+        % Sottosmorzato (zeta = 0.2, omega0 = 2, omega_d = 2*sqrt(0.96) approx 1.96)
+        \addplot[forestgreen, line width=1.5pt, domain=0:10, samples=200] {exp(-0.4*x)*cos(deg(1.96*x))};
+        \addlegendentry{Sottosmorzato ($\zeta=0.2$): pseudo-oscillazioni}
+        
+        % Inviluppo sottosmorzato
+        \addplot[forestgreen!60!black, dotted, line width=0.9pt, domain=0:10, samples=100] {exp(-0.4*x)};
+        \addplot[forestgreen!60!black, dotted, line width=0.9pt, domain=0:10, samples=100] {-exp(-0.4*x)};
+        
+        % Smorzamento critico (zeta = 1, omega0 = 2) -> (1 + 2*t)*exp(-2t)
+        \addplot[crimsonred, line width=1.5pt, domain=0:10, samples=120] {(1 + 2*x)*exp(-2*x)};
+        \addlegendentry{Critico ($\zeta=1$): ritorno rapido senza oscillazioni}
+        
+        % Sovrasmorzato (zeta = 2.5, omega0 = 2) -> lambda1 = -2*(2.5-sqrt(5.25)) = -2*(2.5-2.291) = -0.418, lambda2 = -9.58
+        \addplot[warmamber, line width=1.5pt, domain=0:10, samples=120] {1.045*exp(-0.418*x) - 0.045*exp(-9.58*x)};
+        \addlegendentry{Sovrasmorzato ($\zeta=2.5$): decadimento aperiodico lento}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+% ==============================================================================
+% SEZIONE 8: METODO DI SOMIGLIANZA E RISONANZA
+% ==============================================================================
+\section{Metodo di Somiglianza e Fenomeno della Risonanza}
+\label{sec:metodo_somiglianza}
+
+Per determinare una soluzione particolare $\bar{x}(t)$ dell'equazione non omogenea a coefficienti costanti:
+\begin{equation}
+    x''(t) + a\, x'(t) + b\, x(t) = c(t)
+\end{equation}
+quando la forzante $c(t)$ è formata da combinazioni lineari di prodotti di polinomi, esponenziali e funzioni trigonometriche, si applica il \textbf{Metodo di Somiglianza} (o dei coefficienti indeterminati).
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.45}
+\begin{tabularx}{\textwidth}{>{\bfseries\raggedright\arraybackslash}p{5.5cm} >{\raggedright\arraybackslash}X}
+\toprule
+\textcolor{navyblue}{Struttura del Termine Noto $c(t)$} & \textcolor{navyblue}{Forma della Soluzione Particolare $\bar{x}(t)$} \\
+\midrule
+Polinomio $P_d(t)$ di grado $d$ & 
+$\bar{x}(t) = t^r Q_d(t) = t^r (A_d t^d + \dots + A_1 t + A_0)$ \newline
+dove $r$ è la molteplicità di $\lambda = 0$ come radice di $P(\lambda)$. \\
+\midrule
+Esponenziale $A\, e^{\mu t}$ & 
+$\bar{x}(t) = K\, t^r e^{\mu t}$, dove: \newline
+$\bullet$ $r = 0$ se $\mu$ non è radice di $P(\lambda)$ (senza risonanza); \newline
+$\bullet$ $r = 1$ se $\mu$ è radice semplice ($P(\mu) = 0, P'(\mu) \neq 0$); \newline
+$\bullet$ $r = 2$ se $\mu$ è radice doppia ($P(\mu) = P'(\mu) = 0$). \\
+\midrule
+Trigonometrica \newline $A\cos(\alpha t) + B\sin(\alpha t)$ & 
+$\bar{x}(t) = t^r \big( K_1 \cos(\alpha t) + K_2 \sin(\alpha t) \big)$, dove: \newline
+$\bullet$ $r = 0$ se $\pm i\alpha$ non sono radici di $P(\lambda)$; \newline
+$\bullet$ $r = 1$ se $\pm i\alpha$ sono radici caratteristiche (risonanza pura). \\
+\midrule
+Prodotto Esponenziale-Trigonometrico \newline $e^{\mu t}\big( P(t)\cos(\alpha t) + Q(t)\sin(\alpha t) \big)$ \newline con $d = \max(\deg P, \deg Q)$ & 
+$\bar{x}(t) = t^r e^{\mu t} \big( U_d(t) \cos(\alpha t) + V_d(t) \sin(\alpha t) \big)$, dove $r$ è la molteplicità del numero complesso $\mu + i\alpha$ come radice di $P(\lambda)$. \\
+\bottomrule
+\end{tabularx}
+\caption{Schema completo del Metodo di Somiglianza con fattore di risonanza $t^r$.}
+\label{tab:somiglianza}
+\end{table}
+
+\subsection{Analisi Matematica e Fisica della Risonanza}
+
+Consideriamo un oscillatore armonico non smorzato soggetto a una forzante sinusoidale periodica di ampiezza $F_0$ e pulsazione $\omega$:
+\begin{equation}
+    \label{eq:risonanza_ode}
+    \ddot{x}(t) + \omega_0^2 x(t) = F_0 \cos(\omega t), \qquad x(0) = 0, \quad \dot{x}(0) = 0
+\end{equation}
+
+\textbf{1. Risposta Fuori Risonanza ($\omega \neq \omega_0$)}:
+Cercando $\bar{x}(t) = K \cos(\omega t)$, sostituendo si ottiene $(-\omega^2 + \omega_0^2)K = F_0 \implies K = \frac{F_0}{\omega_0^2 - \omega^2}$.
+Imponendo le condizioni iniziali nulle:
+\begin{equation}
+    \label{eq:battimenti_sol}
+    x(t) = \frac{F_0}{\omega_0^2 - \omega^2} \big( \cos(\omega t) - \cos(\omega_0 t) \big) = \frac{2F_0}{\omega_0^2 - \omega^2} \sin\left( \frac{\omega_0 - \omega}{2} t \right) \sin\left( \frac{\omega_0 + \omega}{2} t \right)
+\end{equation}
+Se $\omega \approx \omega_0$, si manifesta il fenomeno dei \textbf{battimenti}: una modulazione d'ampiezza a bassa frequenza $\Omega_{\text{mod}} = \frac{|\omega_0-\omega|}{2}$ sovrapposta a una portante veloce ad alta frequenza $\Omega_{\text{port}} = \frac{\omega_0+\omega}{2}$.
+
+\textbf{2. Passaggio al Limite per $\omega \to \omega_0$ e Risonanza Perfetta}:
+Valutando il limite della soluzione \eqref{eq:battimenti_sol} per $\omega \to \omega_0$ mediante la regola di de l'Hôpital rispetto alla variabile $\omega$:
+\begin{equation}
+    \lim_{\omega \to \omega_0} \frac{F_0 \big( \cos(\omega t) - \cos(\omega_0 t) \big)}{\omega_0^2 - \omega^2} \overset{\text{Hôpital}}{=} \lim_{\omega \to \omega_0} \frac{-F_0 t \sin(\omega t)}{-2\omega} = \frac{F_0}{2\omega_0} \, t\, \sin(\omega_0 t)
+\end{equation}
+La soluzione in condizioni di \textbf{risonanza esatta} è:
+\begin{equation}
+    \label{eq:sol_risonanza_lineare}
+    \bar{x}(t) = \frac{F_0}{2\omega_0} \, t\, \sin(\omega_0 t)
+\end{equation}
+L'ampiezza dell'oscillazione $A(t) = \frac{F_0}{2\omega_0} t$ \textbf{cresce linearmente e illimitatamente nel tempo}, portando alla catastrofe strutturale elastica.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.05]
+    \begin{axis}[
+        axis lines = center,
+        xlabel = {$t$},
+        ylabel = {$x(t)$},
+        xmin = 0, xmax = 25,
+        ymin = -13, ymax = 13,
+        grid = major,
+        grid style = {dashed, gray!30},
+        width = 12.5cm,
+        height = 6.5cm,
+        legend style={at={(0.05,0.95)},anchor=north west, font=\small}
+    ]
+        % Inviluppo lineare di risonanza +/- 0.5*t
+        \addplot[crimsonred, dashed, line width=1.1pt, domain=0:25] {0.5*x};
+        \addplot[crimsonred, dashed, line width=1.1pt, domain=0:25] {-0.5*x};
+        \addlegendentry{Inviluppo di ampiezza risonante $A(t) = \pm \frac{F_0}{2\omega_0} t$}
+        
+        % Curva di risonanza x(t) = 0.5 * t * sin(x)
+        \addplot[navyblue, line width=1.4pt, domain=0:25, samples=300] {0.5*x*sin(deg(x))};
+        \addlegendentry{Risposta in risonanza $\bar{x}(t) = \frac{F_0}{2\omega_0} t \sin(\omega_0 t)$}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+% ==============================================================================
+% SEZIONE 9: METODO DI VARIAZIONE DELLE COSTANTI DI LAGRANGE (II ORDINE)
+% ==============================================================================
+\section{Metodo di Variazione delle Costanti di Lagrange al II Ordine}
+\label{sec:lagrange_secondo_ordine}
+
+Quando il termine noto $c(t)$ dell'equazione differenziale non appartiene alle famiglie standard della tabella di somiglianza (ad esempio termini trigonometrici frazionari come $c(t) = \tan t$, $c(t) = \frac{1}{\cos t} = \sec t$, oppure funzioni razionali-esponenziali come $c(t) = \frac{1}{1+e^t}$), il metodo di somiglianza non è applicabile. In tali casi, il \textbf{Metodo di Variazione delle Costanti di Lagrange} costituisce il metodo analitico universale.
+
+\begin{teorema}{Metodo di Variazione delle Costanti per Equazioni del II Ordine}{teorema_lagrange_2ord}
+Sia data l'equazione differenziale lineare del secondo ordine:
+\begin{equation}
+    x''(t) + a(t) x'(t) + b(t) x(t) = c(t)
+\end{equation}
+Sia $\{x_1(t), x_2(t)\}$ un sistema fondamentale di soluzioni dell'omogenea associata e sia $W(t) = x_1(t)x_2'(t) - x_1'(t)x_2(t) \neq 0$ il loro determinante Wronskiano.
+Allora una soluzione particolare $\bar{x}(t)$ è data da:
+\begin{equation}
+    \label{eq:lagrange_particolare_ansatz}
+    \bar{x}(t) = c_1(t) x_1(t) + c_2(t) x_2(t)
+\end{equation}
+dove le funzioni derivate $c_1'(t)$ e $c_2'(t)$ sono l'unica soluzione del sistema algebrico lineare:
+\begin{equation}
+    \label{eq:sistema_lagrange}
+    \begin{cases}
+        c_1'(t) x_1(t) + c_2'(t) x_2(t) = 0 & \text{(Condizione Ausiliaria di Lagrange)} \\
+        c_1'(t) x_1'(t) + c_2'(t) x_2'(t) = c(t) & \text{(Condizione Dinamica)}
+    \end{cases}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazione Costruttiva del Metodo di Lagrange]
+Calcoliamo la derivata prima dell'\emph{ansatz} $\bar{x}(t) = c_1(t)x_1(t) + c_2(t)x_2(t)$:
+\[
+    \bar{x}'(t) = c_1'(t) x_1(t) + c_2'(t) x_2(t) + c_1(t) x_1'(t) + c_2(t) x_2'(t)
+\]
+Poiché abbiamo introdotto due funzioni incognite $c_1(t), c_2(t)$ per determinare una singola funzione $\bar{x}(t)$, disponiamo di un grado di libertà. Imponiamo la \textbf{condizione ausiliaria di Lagrange}:
+\begin{equation}
+    \label{eq:vincolo_lagrange}
+    c_1'(t) x_1(t) + c_2'(t) x_2(t) = 0
+\end{equation}
+Sotto tale vincolo, la derivata prima si semplifica in:
+\[
+    \bar{x}'(t) = c_1(t) x_1'(t) + c_2(t) x_2'(t)
+\]
+Derivando ulteriormente per ottenere la derivata seconda:
+\[
+    \bar{x}''(t) = c_1'(t) x_1'(t) + c_2'(t) x_2'(t) + c_1(t) x_1''(t) + c_2(t) x_2''(t)
+\]
+Sostituiamo $\bar{x}, \bar{x}', \bar{x}''$ nell'equazione completa $\bar{x}'' + a(t)\bar{x}' + b(t)\bar{x} = c(t)$:
+\begin{align*}
+    &\big( c_1'(t) x_1'(t) + c_2'(t) x_2'(t) + c_1(t) x_1''(t) + c_2(t) x_2''(t) \big) \\
+    &\quad + a(t) \big( c_1(t) x_1'(t) + c_2(t) x_2'(t) \big) + b(t) \big( c_1(t) x_1(t) + c_2(t) x_2(t) \big) = c(t)
+\end{align*}
+Raggruppando i coefficienti di $c_1(t)$ e $c_2(t)$:
+\[
+    c_1(t) \underbrace{\big( x_1'' + a x_1' + b x_1 \big)}_{= 0} + c_2(t) \underbrace{\big( x_2'' + a x_2' + b x_2 \big)}_{= 0} + \big( c_1'(t) x_1'(t) + c_2'(t) x_2'(t) \big) = c(t)
+\]
+Poiché $x_1$ e $x_2$ sono soluzioni dell'omogenea, i primi due blocchi si annullano identicamente, lasciando:
+\begin{equation}
+    \label{eq:dinamica_lagrange}
+    c_1'(t) x_1'(t) + c_2'(t) x_2'(t) = c(t)
+\end{equation}
+Unendo \eqref{eq:vincolo_lagrange} e \eqref{eq:dinamica_lagrange}, otteniamo il sistema lineare \eqref{eq:sistema_lagrange}.
+In forma matriciale:
+\[
+    \begin{pmatrix} x_1(t) & x_2(t) \\ x_1'(t) & x_2'(t) \end{pmatrix} \begin{pmatrix} c_1'(t) \\ c_2'(t) \end{pmatrix} = \begin{pmatrix} 0 \\ c(t) \end{pmatrix}
+\]
+Poiché il determinante della matrice è il Wronskiano $W(t) \neq 0$, il sistema ammette un'unica soluzione determinabile mediante la \textbf{Regola di Cramer}:
+\begin{equation}
+    \label{eq:cramer_c1_c2}
+    c_1'(t) = \frac{\det \begin{pmatrix} 0 & x_2(t) \\ c(t) & x_2'(t) \end{pmatrix}}{W(t)} = -\frac{x_2(t) c(t)}{W(t)}, \qquad c_2'(t) = \frac{\det \begin{pmatrix} x_1(t) & 0 \\ x_1'(t) & c(t) \end{pmatrix}}{W(t)} = \frac{x_1(t) c(t)}{W(t)}
+\end{equation}
+Integrando rispetto a $t$:
+\begin{equation}
+    \label{eq:lagrange_formule_integrali}
+    c_1(t) = -\int \frac{x_2(t) c(t)}{W(t)} \diff t, \qquad c_2(t) = \int \frac{x_1(t) c(t)}{W(t)} \diff t
+\end{equation}
+Sostituendo in $\bar{x}(t) = c_1(t)x_1(t) + c_2(t)x_2(t)$ si ottiene la soluzione particolare.
+\end{dimostrazione}
+
+\begin{esempio}{Applicazione del Metodo di Lagrange: $x''(t) + x(t) = \frac{1}{\cos t}$}{es_lagrange_secante}
+Determinare l'integrale generale dell'equazione differenziale per $t \in \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$:
+\[
+    x''(t) + x(t) = \frac{1}{\cos t}
+\]
+
+\textbf{1. Soluzione dell'Omogenea}:
+$\lambda^2 + 1 = 0 \implies \lambda = \pm i$. Base: $x_1(t) = \cos t$, $x_2(t) = \sin t$.
+\[
+    X_{\text{om}}(t) = K_1 \cos t + K_2 \sin t
+\]
+
+\textbf{2. Calcolo del Determinante Wronskiano}:
+\[
+    W(t) = \det \begin{pmatrix} \cos t & \sin t \\ -\sin t & \cos t \end{pmatrix} = \cos^2 t - (-\sin^2 t) = \cos^2 t + \sin^2 t = 1 \neq 0
+\]
+
+\textbf{3. Calcolo delle Funzioni $c_1(t)$ e $c_2(t)$}:
+Applicando le formule di Lagrange con $c(t) = \frac{1}{\cos t}$:
+\[
+    c_1'(t) = -\frac{x_2(t) c(t)}{W(t)} = -\frac{\sin t \cdot \frac{1}{\cos t}}{1} = -\tan t = -\frac{\sin t}{\cos t}
+\]
+\[
+    c_1(t) = -\int \frac{\sin t}{\cos t} \diff t = \log|\cos t| = \log(\cos t) \quad \text{per } t \in \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)
+\]
+\[
+    c_2'(t) = \frac{x_1(t) c(t)}{W(t)} = \frac{\cos t \cdot \frac{1}{\cos t}}{1} = 1 \implies c_2(t) = \int 1 \diff t = t
+\]
+
+\textbf{4. Costruzione della Soluzione Particolare}:
+\[
+    \bar{x}(t) = c_1(t) x_1(t) + c_2(t) x_2(t) = \cos t \cdot \log(\cos t) + t \sin t
+\]
+
+\textbf{5. Integrale Generale}:
+\[
+    x(t) = K_1 \cos t + K_2 \sin t + \cos t \cdot \log(\cos t) + t \sin t, \qquad K_1, K_2 \in \R
+\]
+\end{esempio}
+
+\newpage
+
+% ==============================================================================
+% SEZIONE 10: ESERCIZI D'ESAME COMPLETI SVOLTI E COMMENTATI
+% ==============================================================================
+\section{Esercizi Completi Svolti per la Preparazione all'Esame}
+\label{sec:esercizi_esame_svolti}
+
+\begin{esempio}{Problema di Cauchy Lineare del I Ordine a Coefficienti Razionali}{es_esame_lineare1}
+Risolvere il problema di Cauchy:
+\[
+    \begin{cases}
+        x'(t) + \frac{4t}{1+t^2} x(t) = \frac{t}{(1+t^2)^2} \\
+        x(0) = 2
+    \end{cases}
+\]
+
+\textbf{Risoluzione}:
+Identifichiamo $a(t) = \frac{4t}{1+t^2}$ e $b(t) = \frac{t}{(1+t^2)^2}$.
+\begin{enumerate}
+    \item Calcolo della primitiva $A(t)$:
+    \[
+        A(t) = \int \frac{4t}{1+t^2} \diff t = 2 \int \frac{2t}{1+t^2} \diff t = 2 \log(1+t^2) = \log(1+t^2)^2
+    \]
+    \item Fattore integrante:
+    \[
+        e^{A(t)} = e^{\log(1+t^2)^2} = (1+t^2)^2
+    \]
+    \item Integrazione del prodotto con la forzante:
+    \[
+        \int b(t) e^{A(t)} \diff t = \int \frac{t}{(1+t^2)^2} \cdot (1+t^2)^2 \diff t = \int t \diff t = \frac{t^2}{2}
+    \]
+    \item Integrale generale:
+    \[
+        x(t) = e^{-A(t)} \left( \frac{t^2}{2} + c \right) = \frac{1}{(1+t^2)^2} \left( \frac{t^2}{2} + c \right)
+    \]
+    \item Imposizione della condizione iniziale $x(0) = 2$:
+    \[
+        2 = \frac{1}{(1+0)^2} (0 + c) \implies c = 2
+    \]
+    \item Soluzione unica:
+    \[
+        x(t) = \frac{t^2 + 4}{2(1+t^2)^2}
+    \]
+\end{enumerate}
+\end{esempio}
+
+\begin{esempio}{Equazione del II Ordine con Risonanza Esponenziale Doppia}{es_esame_secondo_doppia}
+Determinare la soluzione del problema di Cauchy:
+\[
+    \begin{cases}
+        x''(t) - 6 x'(t) + 9 x(t) = 4 e^{3t} \\
+        x(0) = 1 \\
+        x'(0) = 0
+    \end{cases}
+\]
+
+\textbf{Risoluzione}:
+\begin{enumerate}
+    \item \textbf{Omogenea}: $P(\lambda) = \lambda^2 - 6\lambda + 9 = (\lambda - 3)^2 = 0 \implies \lambda_0 = 3$ (radice reale doppia, molteplicità $m = 2$).
+    \[
+        X_{\text{om}}(t) = K_1 e^{3t} + K_2 t e^{3t}
+    \]
+    \item \textbf{Soluzione Particolare con Risonanza Doppia}:
+    Poiché l'esponente della forzante $\mu = 3$ coincide con la radice caratteristica doppia, impostiamo:
+    \[
+        \bar{x}(t) = K\, t^2 e^{3t}
+    \]
+    Calcoliamo le derivate:
+    \[
+        \bar{x}'(t) = 2K t e^{3t} + 3K t^2 e^{3t} = (2Kt + 3Kt^2) e^{3t}
+    \]
+    \[
+        \bar{x}''(t) = (2K + 6Kt) e^{3t} + 3(2Kt + 3Kt^2) e^{3t} = (2K + 12Kt + 9Kt^2) e^{3t}
+    \]
+    Sostituendo nell'equazione completa $\bar{x}'' - 6\bar{x}' + 9\bar{x} = 4e^{3t}$:
+    \[
+        e^{3t} \Big[ (9K - 18K + 9K)t^2 + (12K - 12K)t + 2K \Big] = 4e^{3t} \implies 2K e^{3t} = 4e^{3t} \implies K = 2
+    \]
+    Dunque $\bar{x}(t) = 2t^2 e^{3t}$.
+    \item \textbf{Integrale Generale e Derivata}:
+    \[
+        x(t) = (K_1 + K_2 t + 2t^2) e^{3t}
+    \]
+    \[
+        x'(t) = (K_2 + 4t) e^{3t} + 3(K_1 + K_2 t + 2t^2) e^{3t} = \big[ (3K_1 + K_2) + (3K_2 + 4)t + 6t^2 \big] e^{3t}
+    \]
+    \item \textbf{Condizioni Iniziali}:
+    \[
+        \begin{cases}
+            x(0) = 1 \implies K_1 = 1 \\
+            x'(0) = 0 \implies 3K_1 + K_2 = 0 \implies 3(1) + K_2 = 0 \implies K_2 = -3
+        \end{cases}
+    \]
+    \item \textbf{Soluzione Finale}:
+    \[
+        x(t) = (1 - 3t + 2t^2) e^{3t}
+    \]
+\end{enumerate}
+\end{esempio}
+
+\begin{esempio}{Equazione del II Ordine con Risonanza Trigonometrica}{es_esame_risonanza_trig}
+Determinare l'integrale generale dell'equazione differenziale:
+\[
+    x''(t) + 4 x(t) = 12 \sin(2t)
+\]
+
+\textbf{Risoluzione}:
+\begin{enumerate}
+    \item \textbf{Omogenea}: $\lambda^2 + 4 = 0 \implies \lambda = \pm 2i \implies \omega_0 = 2$.
+    \[
+        X_{\text{om}}(t) = K_1 \cos(2t) + K_2 \sin(2t)
+    \]
+    \item \textbf{Soluzione Particolare (Risonanza)}:
+    La pulsazione forzante $\alpha = 2$ coincide con la frequenza propria $\omega_0 = 2$. Cerchiamo $\bar{x}(t)$ nella forma:
+    \[
+        \bar{x}(t) = t \big( A \cos(2t) + B \sin(2t) \big)
+    \]
+    Calcoliamo le derivate:
+    \[
+        \bar{x}'(t) = A\cos(2t) + B\sin(2t) + t \big( -2A\sin(2t) + 2B\cos(2t) \big)
+    \]
+    \[
+        \bar{x}''(t) = -4A\sin(2t) + 4B\cos(2t) - 4t \big( A\cos(2t) + B\sin(2t) \big)
+    \]
+    Sostituendo in $\bar{x}'' + 4\bar{x}$:
+    \begin{align*}
+        \bar{x}''(t) + 4\bar{x}(t) &= \big( -4A\sin(2t) + 4B\cos(2t) - 4t(A\cos 2t + B\sin 2t) \big) \\
+        &\quad + 4t\big( A\cos(2t) + B\sin(2t) \big) \\
+        &= -4A\sin(2t) + 4B\cos(2t) = 12\sin(2t)
+    \end{align*}
+    Uguagliando i coefficienti di seno e coseno:
+    \[
+        \begin{cases} -4A = 12 \implies A = -3 \\ 4B = 0 \implies B = 0 \end{cases}
+    \]
+    La soluzione particolare è $\bar{x}(t) = -3t \cos(2t)$.
+    \item \textbf{Integrale Generale}:
+    \[
+        x(t) = K_1 \cos(2t) + K_2 \sin(2t) - 3t \cos(2t), \qquad K_1, K_2 \in \R
+    \]
+\end{enumerate}
+\end{esempio}

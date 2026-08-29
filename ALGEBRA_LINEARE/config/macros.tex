@@ -1,0 +1,110 @@
+% ==============================================================================
+% MACRO E SCORCIATOIE MATEMATICHE - ALGEBRA LINEARE
+% ==============================================================================
+
+% Insiemi numerici e campi standard
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+
+% Numeri Complessi
+\newcommand{\iu}{\mathrm{i}}            % Unità immaginaria
+\newcommand{\ju}{\mathrm{j}}            % Unità immaginaria ingegneristica
+\newcommand{\conj}[1]{\overline{#1}}    % Coniugato complesso
+\DeclareMathOperator{\Reale}{Re}
+\DeclareMathOperator{\Immag}{Im}
+\DeclareMathOperator{\Arg}{Arg}
+\DeclareMathOperator{\argom}{arg}
+
+% Spazi vettoriali, sottospazi e combinazioni lineari
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\Lin}{Lin}
+\DeclareMathOperator{\vett}{span}
+\DeclareMathOperator{\dimens}{dim}
+\newcommand{\vspan}{\Span}
+
+% Morfismi, Nucleo e Immagine
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\nucleo}{ker}
+\DeclareMathOperator{\Imm}{Im}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Iso}{Iso}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\Ort}{O}
+\DeclareMathOperator{\id}{id}
+\newcommand{\Id}{\mathrm{Id}}
+
+% Matrici, Vettori e Operatori Matriciali
+\newcommand{\Mat}{\operatorname{Mat}}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\rango}{rg}
+\DeclareMathOperator{\nul}{null}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\cof}{cof}
+
+% Vettori formattati e notazioni
+\newcommand{\vv}[1]{\mathbf{#1}}
+\newcommand{\uv}[1]{\hat{\mathbf{#1}}}
+\newcommand{\vzero}{\mathbf{0}}
+\newcommand{\vbase}[1]{\mathbf{e}_{#1}}
+
+% Autovalori, Autospazi e Spettro
+\DeclareMathOperator{\Spettro}{Spec}
+\DeclareMathOperator{\Sp}{Sp}
+\newcommand{\ma}{\mu_a} % Molteplicità algebrica
+\newcommand{\mg}{\mu_g} % Molteplicità geometrica
+\newcommand{\Autospazio}{V_\lambda}
+
+% Prodotti scalari, norme e ortogonalità
+\DeclarePairedDelimiter{\scal}{\langle}{\rangle}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\tonde}{(}{)}
+\DeclarePairedDelimiter{\quadre}{[}{]}
+\DeclarePairedDelimiter{\graffe}{\{}{\}}
+
+\newcommand{\ortogonale}{^{\perp}}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\Ortog}{Ort}
+
+% Trasposta, Aggiunta ed Hermitiana
+\newcommand{\trasposta}[1]{{#1}^{\mathsf{T}}}
+\newcommand{\T}{^{\mathsf{T}}}
+\newcommand{\hermitiana}[1]{{#1}^{\mathsf{H}}}
+\newcommand{\Htrans}{^{\mathsf{H}}}
+\newcommand{\inv}{^{-1}}
+
+% Somma diretta e prodotto tensoriale
+\newcommand{\sommadiretta}{\oplus}
+\newcommand{\Sommadiretta}{\bigoplus}
+
+% Lettere greche comuni
+\newcommand{\eps}{\varepsilon}
+\newcommand{\de}{\delta}
+\newcommand{\la}{\lambda}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\om}{\omega}
+\newcommand{\vphi}{\varphi}
+
+% Funzioni trigonometriche in italiano
+\DeclareMathOperator{\sen}{sen}
+\DeclareMathOperator{\arcsen}{arcsen}
+\DeclareMathOperator{\tg}{tg}
+\DeclareMathOperator{\arctg}{arctg}
+\DeclareMathOperator{\cotg}{cotg}
+\DeclareMathOperator{\arccotg}{arccotg}

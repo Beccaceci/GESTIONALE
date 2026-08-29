@@ -1,0 +1,186 @@
+\chapter{Nozioni di Base di Trigonometria}
+\label{chap:trigonometria}
+
+La trigonometria costituisce uno degli strumenti analitici più pervasivi dell'intera matematica applicata e dell'ingegneria. Nata storicamente per risolvere problemi geometrici di triangolazione e astronomia, nell'Analisi Matematica moderna essa assume il ruolo di teoria fondamentale delle funzioni periodiche, delle oscillazioni armoniche e delle rotazioni nel piano complesso.
+
+In questo capitolo ricostruiamo la teoria trigonometrica a partire dalla definizione analitico-geometrica sulla circonferenza unitaria, deduciamo con rigore le formule algebriche di addizione e duplicazione, esaminiamo le simmetrie degli archi associati e definiamo le funzioni inverse, evidenziando le consuete trappole d'esame legate ai domini di invertibilità.
+
+% ==============================================================================
+\section{La Circonferenza Goniometrica e Funzioni Fondamentali}
+\label{sec:circonferenza_goniometrica_dettaglio}
+% ==============================================================================
+
+Nel piano cartesiano ortonormale $\R^2$, si definisce **circonferenza goniometrica** la circonferenza di centro l'origine $O(0,0)$ e raggio unitario $R = 1$, avente equazione cartesiana:
+\[
+    x^2 + y^2 = 1
+\]
+Gli angoli vengono misurati assumendo come semiretta iniziale il semiasse positivo delle ascisse ($x \ge 0$) e convenendo che il verso antiorario corrisponda al verso di rotazione positivo. La misura naturale dell'angolo è il **radiante**, definito come il rapporto adimensionale tra la lunghezza dell'arco di circonferenza intercettato $s$ e il raggio $R = 1$ ($s = R\alpha \implies \alpha = s$).
+
+\begin{definizione}{Seno, Coseno, Tangente e Cotangente}{funzioni_trig_def}
+Dato un angolo orientato $\alpha \in \R$, sia $P_\alpha$ il punto corrispondente sulla circonferenza goniometrica. Si definiscono:
+\begin{enumerate}
+    \item \textbf{Coseno} ($\cos \alpha$): l'ascissa del punto $P_\alpha \implies x = \cos \alpha$.
+    \item \textbf{Seno} ($\sen \alpha$): l'ordinata del punto $P_\alpha \implies y = \sen \alpha$.
+    \item \textbf{Tangente} ($\tg \alpha$): il rapporto tra seno e coseno, definito per $\alpha \neq \frac{\pi}{2} + k\pi$ ($k \in \Z$):
+    \[
+        \tg \alpha = \frac{\sen \alpha}{\cos \alpha}
+    \]
+    Geometricamente, $\tg \alpha$ rappresenta l'ordinata del punto di intersezione $Q_\alpha(1, \tg \alpha)$ tra la semiretta $OP_\alpha$ e la retta tangente verticale $x = 1$.
+    \item \textbf{Cotangente} ($\cotg \alpha$): il rapporto tra coseno e seno, definito per $\alpha \neq k\pi$ ($k \in \Z$):
+    \[
+        \cotg \alpha = \frac{\cos \alpha}{\sen \alpha} = \frac{1}{\tg \alpha}
+    \]
+\end{enumerate}
+\end{definizione}
+
+\begin{teorema}{Prima Relazione Fondamentale}{relazione_fondamentale_trig}
+Per ogni angolo reale $\alpha \in \R$:
+\[
+    \cos^2 \alpha + \sen^2 \alpha = 1
+\]
+\end{teorema}
+
+\begin{dimostrazione}
+Poiché per ogni $\alpha \in \R$ il punto $P_\alpha(\cos \alpha, \sen \alpha)$ appartiene alla circonferenza unitaria $x^2 + y^2 = 1$, sostituendo le coordinate $x = \cos \alpha$ e $y = \sen \alpha$ nell'equazione cartesiana della circonferenza si ottiene immediatamente $\cos^2 \alpha + \sen^2 \alpha = 1$.
+\end{dimostrazione}
+
+\begin{metodo}[Tavola dei Valori Notevoli degli Angoli Fondamentali]
+Attraverso la geometria dei triangoli rettangoli notevoli (triangolo rettangolo isoscele con angoli di $\pi/4$ e metà triangolo equilatero con angoli di $\pi/6$ e $\pi/3$), si ricavano i valori esatti:
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \small
+    \begin{tabular}{lcccccccc}
+        \toprule
+        \textbf{Angolo $\alpha$ (rad)} & $0$ & $\frac{\pi}{6}$ & $\frac{\pi}{4}$ & $\frac{\pi}{3}$ & $\frac{\pi}{2}$ & $\pi$ & $\frac{3\pi}{2}$ & $2\pi$ \\
+        \midrule
+        $\sen \alpha$ & $0$ & $\frac{1}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{\sqrt{3}}{2}$ & $1$ & $0$ & $-1$ & $0$ \\
+        $\cos \alpha$ & $1$ & $\frac{\sqrt{3}}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{1}{2}$ & $0$ & $-1$ & $0$ & $1$ \\
+        $\tg \alpha$ & $0$ & $\frac{\sqrt{3}}{3}$ & $1$ & $\sqrt{3}$ & \text{N.D.} & $0$ & \text{N.D.} & $0$ \\
+        $\cotg \alpha$ & \text{N.D.} & $\sqrt{3}$ & $1$ & $\frac{\sqrt{3}}{3}$ & $0$ & \text{N.D.} & $0$ & \text{N.D.} \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+\end{metodo}
+
+% ==============================================================================
+\section{Parità, Periodicità e Archi Associati}
+\label{sec:archi_associati}
+% ==============================================================================
+
+L'esame della circonferenza goniometrica evidenzia immediate proprietà di simmetria:
+\begin{itemize}
+    \item \textbf{Coseno}: è una funzione \textbf{pari} e $2\pi$-periodica: $\cos(-\alpha) = \cos(\alpha)$, $\cos(\alpha + 2\pi) = \cos \alpha$.
+    \item \textbf{Seno}: è una funzione \textbf{dispari} e $2\pi$-periodica: $\sen(-\alpha) = -\sen(\alpha)$, $\sen(\alpha + 2\pi) = \sen \alpha$.
+    \item \textbf{Tangente}: è una funzione \textbf{dispari} e $\pi$-periodica: $\tg(-\alpha) = -\tg(\alpha)$, $\tg(\alpha + \pi) = \tg \alpha$.
+\end{itemize}
+
+\subsection{Riduzione al Primo Quadrante (Archi Associati)}
+Le relazioni tra le funzioni goniometriche di angoli associati derivano da riflessioni assiali o rotazioni:
+\begin{enumerate}
+    \item \textbf{Angoli Supplementari} ($\pi - \alpha$):
+    \[
+        \sen(\pi - \alpha) = \sen \alpha, \qquad \cos(\pi - \alpha) = -\cos \alpha, \qquad \tg(\pi - \alpha) = -\tg \alpha
+    \]
+    \item \textbf{Angoli che Differiscono di $\pi$} ($\pi + \alpha$):
+    \[
+        \sen(\pi + \alpha) = -\sen \alpha, \qquad \cos(\pi + \alpha) = -\cos \alpha, \qquad \tg(\pi + \alpha) = \tg \alpha
+    \]
+    \item \textbf{Angoli Complementari} ($\frac{\pi}{2} - \alpha$):
+    \[
+        \sen\left(\frac{\pi}{2} - \alpha\right) = \cos \alpha, \qquad \cos\left(\frac{\pi}{2} - \alpha\right) = \sen \alpha, \qquad \tg\left(\frac{\pi}{2} - \alpha\right) = \cotg \alpha
+    \]
+    \item \textbf{Angoli che Differiscono di $\frac{\pi}{2}$} ($\frac{\pi}{2} + \alpha$):
+    \[
+        \sen\left(\frac{\pi}{2} + \alpha\right) = \cos \alpha, \qquad \cos\left(\frac{\pi}{2} + \alpha\right) = -\sen \alpha, \qquad \tg\left(\frac{\pi}{2} + \alpha\right) = -\cotg \alpha
+    \]
+\end{enumerate}
+
+\begin{osservazione}[Traslazione tra Seno e Coseno]
+La relazione $\cos x = \sen\left(x + \frac{\pi}{2}\right)$ dimostra analiticamente che il grafico della funzione coseno si ottiene traslando a sinistra di $\frac{\pi}{2}$ unità il grafico della funzione seno.
+\end{osservazione}
+
+% ==============================================================================
+\section{Formulario Ragionato della Trigonometria Analitica}
+\label{sec:formulario_trig}
+% ==============================================================================
+
+Tutte le identità trigonometriche avanzate si deducono rigorosamente a partire dalle formule di addizione e sottrazione.
+
+\begin{teorema}{Formule di Addizione e Sottrazione}{formule_addizione}
+Per ogni coppia di angoli reali $\alpha, \beta \in \R$:
+\begin{align*}
+    \sen(\alpha \pm \beta) &= \sen \alpha \cos \beta \pm \cos \alpha \sen \beta \\
+    \cos(\alpha \pm \beta) &= \cos \alpha \cos \beta \mp \sen \alpha \sen \beta \\
+    \tg(\alpha \pm \beta) &= \frac{\tg \alpha \pm \tg \beta}{1 \mp \tg \alpha \tg \beta} \quad \left(\text{per } \alpha, \beta, \alpha \pm \beta \neq \frac{\pi}{2} + k\pi\right)
+\end{align*}
+\end{teorema}
+
+\begin{metodo}[Formule Derivate: Duplicazione, Bisezione e Parametriche]
+Dalle formule di addizione si deducono immediatamente:
+\begin{enumerate}
+    \item \textbf{Formule di Duplicazione} (ponendo $\beta = \alpha$):
+    \[
+        \sen(2\alpha) = 2\sen\alpha\cos\alpha
+    \]
+    \[
+        \cos(2\alpha) = \cos^2\alpha - \sen^2\alpha = 2\cos^2\alpha - 1 = 1 - 2\sen^2\alpha
+    \]
+    \[
+        \tg(2\alpha) = \frac{2\tg\alpha}{1 - \tg^2\alpha}
+    \]
+
+    \item \textbf{Formule di Bisezione e Linearizzazione}:
+    \[
+        \sen^2\alpha = \frac{1 - \cos(2\alpha)}{2} \implies \left|\sen\left(\frac{\alpha}{2}\right)\right| = \sqrt{\frac{1 - \cos\alpha}{2}}
+    \]
+    \[
+        \cos^2\alpha = \frac{1 + \cos(2\alpha)}{2} \implies \left|\cos\left(\frac{\alpha}{2}\right)\right| = \sqrt{\frac{1 + \cos\alpha}{2}}
+    \]
+
+    \item \textbf{Formule Parametriche Razionali} ($t = \tg(\alpha/2)$ per $\alpha \neq \pi + 2k\pi$):
+    \[
+        \sen\alpha = \frac{2t}{1 + t^2}, \qquad \cos\alpha = \frac{1 - t^2}{1 + t^2}, \qquad \tg\alpha = \frac{2t}{1 - t^2}
+    \]
+    Queste formule sono lo strumento cardine per il calcolo delle primitive di funzioni razionali trigonometriche mediante la sostituzione $t = \tg(x/2), \dx = \frac{2}{1+t^2}\dt$.
+\end{enumerate}
+\end{metodo}
+
+% ==============================================================================
+\section{Funzioni Trigonometriche Inverse}
+\label{sec:inverse_trigonometriche_dettaglio}
+% ==============================================================================
+
+Poiché le funzioni $\sen x, \cos x, \tg x$ sono periodiche su $\R$, esse non sono iniettive sull'intero dominio naturale. Per poterne definire le funzioni inverse, è necessario restringere formalmente il loro dominio a un intervallo standard in cui risultino strettamente monotone e biettive sull'immagine.
+
+\begin{definizione}{Funzioni Inverse Fondamentali}{funzioni_inverse_trig_def}
+\begin{enumerate}
+    \item \textbf{Arcoseno} ($\arcsen$): inversa della restrizione $\sen \colon [-\frac{\pi}{2}, \frac{\pi}{2}] \to [-1, 1]$:
+    \[
+        \arcsen \colon [-1, 1] \to \left[-\frac{\pi}{2}, \frac{\pi}{2}\right], \qquad y = \arcsen x \iff \sen y = x \text{ con } y \in \left[-\frac{\pi}{2}, \frac{\pi}{2}\right]
+    \]
+    $\arcsen x$ è una funzione strettamente crescente e dispari.
+
+    \item \textbf{Arcocoseno} ($\arccos$): inversa della restrizione $\cos \colon [0, \pi] \to [-1, 1]$:
+    \[
+        \arccos \colon [-1, 1] \to [0, \pi], \qquad y = \arccos x \iff \cos y = x \text{ con } y \in [0, \pi]
+    \]
+    $\arccos x$ è una funzione strettamente decrescente. Vale l'identità: $\arcsen x + \arccos x = \frac{\pi}{2}$.
+
+    \item \textbf{Arcotangente} ($\arctg$): inversa della restrizione $\tg \colon (-\frac{\pi}{2}, \frac{\pi}{2}) \to \R$:
+    \[
+        \arctg \colon \R \to \left(-\frac{\pi}{2}, \frac{\pi}{2}\right), \qquad y = \arctg x \iff \tg y = x \text{ con } y \in \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)
+    \]
+    $\arctg x$ è una funzione strettamente crescente, dispari, con asintoti orizzontali $y = \pm \frac{\pi}{2}$ per $x \to \pm \infty$.
+\end{enumerate}
+\end{definizione}
+
+\begin{esame}[La Trappola della Cancellazione $\arcsen(\sen x)$]
+L'uguaglianza $\arcsen(\sen x) = x$ è vera **esclusivamente se $x \in [-\frac{\pi}{2}, \frac{\pi}{2}]$**.
+Qualora $x$ cada fuori da tale intervallo, bisogna prima ricondurre l'argomento nell'intervallo principale mediante gli archi associati.
+Ad esempio, per $x = \frac{3\pi}{4} \notin [-\pi/2, \pi/2]$:
+\begin{align*}
+    \sen\left(\frac{3\pi}{4}\right) &= \sen\left(\pi - \frac{\pi}{4}\right) = \sen\left(\frac{\pi}{4}\right) \\
+    \implies \arcsen\left(\sen\left(\frac{3\pi}{4}\right)\right) &= \arcsen\left(\sen\left(\frac{\pi}{4}\right)\right) = \frac{\pi}{4} \quad \left(\neq \frac{3\pi}{4}\right)
+\end{align*}
+\end{esame}

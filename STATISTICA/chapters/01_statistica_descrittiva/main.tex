@@ -1,0 +1,475 @@
+% ==============================================================================
+% CAPITOLO 1: STATISTICA DESCRITTIVA
+% ==============================================================================
+\chapter{Statistica Descrittiva}
+\label{chap:statistica_descrittiva}
+
+\begin{abstract}
+Il presente capitolo espone in modo rigoroso, organico e approfondito i fondamenti dell'analisi statistica descrittiva univariata e bivariata su dati empirici. Partendo dalla rilevazione del dato grezzo e dalla strutturazione delle distribuzioni di frequenza, si approfondiscono i concetti di sintesi di posizione (media aritmetica, mediana, moda e quantili) e di dispersione (varianza campionaria corretta, deviazione standard, scarto interquartile). Vengono dimostrate analiticamente le proprietà algebriche e variazionali fondamentali (tra cui il principio del baricentro, la minimizzazione $L_1$ ed $L_2$ e la correzione di Bessel per la non distorsione della varianza). Nella seconda parte, l'indagine si estende alla statistica bivariata attraverso la geometria della covarianza nei quattro quadranti baricentrici, il coefficiente di correlazione lineare di Pearson (con dimostrazione della limitatezza $[-1,1]$ mediante la disuguaglianza di Cauchy-Schwarz), la stima della retta di regressione dei minimi quadrati (OLS) e l'analisi critica delle trappole metodologiche d'esame.
+\end{abstract}
+
+% ==============================================================================
+% SEZIONE 1.1: DATASET, FREQUENZE E RAPPRESENTAZIONI EMPIRICHE
+% ==============================================================================
+\section{Database Empirico, Rilevazione dei Dati e Distribuzioni di Frequenza}
+\label{sec:database_frequenze}
+
+Nel contesto dell'ingegneria e delle scienze applicate, qualsiasi indagine quantitativa trae origine dall'osservazione sistematica di un fenomeno reale. Che si tratti di misurare la resistenza a rottura di una partita di provini d'acciaio, il tempo di risposta di un server distribuito o il numero di pezzi difettosi per lotto di produzione, il primo contatto con la realtà empirica si concretizza in un insieme finito di numeri reali, disordinati e grezzi.
+
+L'obiettivo primario della \textbf{statistica descrittiva} non è ancora quello di formulare leggi generali probabilistiche (compito demandato all'inferenza statistica), bensì di organizzare, condensare, visualizzare e sintetizzare la massa dei dati osservati, preservando il massimo contenuto informativo senza alterare la struttura del fenomeno sottostante.
+
+\begin{definizione}{Database Empirico (Campione Univariato)}{database_univariato}
+Sia $\mathcal{U}$ un collettivo statistico (o popolazione di riferimento) composto da $n$ unità statistiche elementari. Si definisce \textbf{database empirico} o \textbf{campione univariato di dimensione $n$} la $n$-upla ordinata delle osservazioni numeriche:
+\begin{equation}
+D = \{x_1, x_2, \dots, x_n\} \subset \mathbb{R}^n, \quad n \in \mathbb{N}_{\ge 1}
+\end{equation}
+dove l'indice $i \in \{1, \dots, n\}$ contrassegna la specifica unità statistica esaminata, e $x_i \in \mathbb{R}$ indica il valore assunto dal carattere quantitativo $X$ su tale unità.
+\end{definizione}
+
+Quando la numerosità campionaria $n$ cresce, l'elenco sequenziale dei valori grezzi $x_1, \dots, x_n$ diventa di difficile lettura visiva e computazionale. Spesso molte unità presentano la medesima modalità numerica (valori duplicati o coincidenti). Risulta quindi indispensabile operare una prima compressione dei dati mediante il passaggio alle \textbf{distribuzioni di frequenza}.
+
+Sia $\{u_1, u_2, \dots, u_k\}$ l'insieme delle $k \le n$ distinte modalità numeriche assunte dal carattere nel campione $D$, ordinate in senso strettamente crescente:
+\begin{equation}
+u_1 < u_2 < \dots < u_{k-1} < u_k
+\end{equation}
+
+\begin{definizione}{Frequenze Assolute, Relative e Cumulate}{frequenze_statistiche}
+Dato un campione $D$ con $k$ modalità distinte $\{u_1, \dots, u_k\}$, si definiscono per ogni modalità $u_j$ ($j=1,\dots,k$):
+\begin{enumerate}
+    \item \textbf{Frequenza assoluta} $n_j$: il numero esatto di osservazioni campionarie che hanno manifestato la modalità $u_j$:
+    \begin{equation}
+    n_j = \sum_{i=1}^n \IndGraffe{x_i = u_j}, \quad \text{con il vincolo di conservazione della massa campionaria:} \quad \sum_{j=1}^k n_j = n
+    \end{equation}
+    dove $\IndGraffe{\cdot}$ è la funzione indicatrice (pari a $1$ se la condizione interna è verificata, $0$ altrimenti).
+    \item \textbf{Frequenza relativa} $f_j$: la proporzione o quota di osservazioni associate alla modalità $u_j$ sul totale del campione:
+    \begin{equation}
+    f_j = \frac{n_j}{n}, \quad \text{con i vincoli di non negatività e normalizzazione:} \quad f_j \in [0, 1] \quad \text{e} \quad \sum_{j=1}^k f_j = 1
+    \end{equation}
+    \item \textbf{Frequenza assoluta cumulata} $N_j$ e \textbf{frequenza relativa cumulata} $F_j$: rappresentano rispettivamente il numero e la quota di osservazioni campionarie con valore non superiore a $u_j$:
+    \begin{equation}
+    N_j = \sum_{m=1}^j n_m, \qquad F_j = \sum_{m=1}^j f_m = \frac{N_j}{n} \quad (j=1,\dots,k)
+    \end{equation}
+    con le condizioni di bordo evidenti $N_1 = n_1, N_k = n$ e $F_1 = f_1, F_k = 1$.
+\end{enumerate}
+\end{definizione}
+
+\paragraph{Interpretazione Concettuale ed Empirica.}
+La frequenza relativa $f_j$ rappresenta la controparte empirica della nozione teorica di probabilità $\mathbb{P}(X = u_j)$ che verrà formalizzata nel Capitolo \ref{chap:elementi_di_probabilita}. All'aumentare indefinito della numerosità campionaria ($n \to \infty$), per la Legge dei Grandi Numeri le frequenze relative $f_j$ tenderanno a stabilizzarsi attorno alle probabilità teoriche del fenomeno generatore.
+
+La funzione di frequenza cumulata $F_j$ costituisce a sua volta l'analogo empirico della Funzione di Ripartizione (CDF) $F_X(x)$, fornendo per ogni soglia la frazione di popolazione che si colloca al di sotto di essa.
+
+% ==============================================================================
+% SEZIONE 1.2: INDICI DI POSIZIONE (TENDENZA CENTRALE)
+% ==============================================================================
+\section{Indici di Posizione e Tendenza Centrale}
+\label{sec:indici_posizione_dettaglio}
+
+Una distribuzione di frequenza racchiude l'intera informazione del dataset, ma per confrontare rapidamente popolazioni differenti o monitorare processi industriali è indispensabile riassumere l'ordine di grandezza del fenomeno mediante indici sintetici di posizione o \textbf{misure di tendenza centrale}. Ciascun indice risponde a un preciso criterio geometrico o variazionale.
+
+\subsection{Media Campionaria: Il Baricentro Fisico dei Dati}
+
+La media aritmetica campionaria rappresenta l'indice di posizione più diffuso e naturale nell'ingegneria.
+
+\begin{definizione}{Media Campionaria (Media Aritmetica)}{media_campionaria}
+Dato il campione $D = \{x_1, \dots, x_n\}$, la \textbf{media campionaria} $\overline{x}$ è definita come la media aritmetica semplice di tutte le osservazioni:
+\begin{equation}
+\overline{x} = \frac{1}{n}\sum_{i=1}^n x_i
+\end{equation}
+Qualora i dati siano organizzati nella tabella delle frequenze con modalità $\{u_1, \dots, u_k\}$ e frequenze assolute $\{n_1, \dots, n_k\}$ (o relative $\{f_1, \dots, f_k\}$), la media campionaria si esprime come media ponderata:
+\begin{equation}
+\overline{x} = \frac{1}{n}\sum_{j=1}^k u_j n_j = \sum_{j=1}^k u_j f_j
+\end{equation}
+\end{definizione}
+
+\paragraph{Significato Meccanico e Variazionale della Media.}
+La media campionaria possiede due proprietà matematiche che ne spiegano la centralità:
+\begin{enumerate}
+    \item \textbf{Interpretazione del Baricentro Fisico:} Se immaginiamo una barra rigida priva di massa su cui posizioniamo pesi unitari in corrispondenza delle ascisse $x_1, \dots, x_n$, il punto $\overline{x}$ coincide esattamente con il centro di massa (fulcro di equilibrio) del sistema. Posizionando il fulcro in $\overline{x}$, i momenti delle forze generate dagli scarti positivi e negativi si bilanciano perfettamente, annullando la risultante rotazionale.
+    \item \textbf{Minimizzazione dell'Errore Quadratico ($L_2$ Loss):} In ambito di stima e approssimazione, se vogliamo sostituire l'intero dataset $D$ con un unico valore costante $c$, la scelta ottimale che minimizza l'energia totale dell'errore (la somma dei quadrati delle deviazioni) è proprio $c = \overline{x}$.
+\end{enumerate}
+
+\begin{teorema}{Proprietà Fondamentali della Media Campionaria}{prop_media_campionaria}
+La media campionaria $\overline{x}$ soddisfa rigorosamente le seguenti due proprietà:
+\begin{enumerate}
+    \item \textbf{Annullamento della somma degli scarti (Principio di Equilibrio)}:
+    \begin{equation}
+    \sum_{i=1}^n (x_i - \overline{x}) = 0
+    \end{equation}
+    \item \textbf{Teorema di König-Huygens sul Minimo degli Scarti Quadratici}:
+    La funzione di costo quadratico $g(c) = \sum_{i=1}^n (x_i - c)^2$, definita per ogni $c \in \mathbb{R}$, ammette un unico punto di minimo globale in $c = \overline{x}$.
+\end{enumerate}
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazione dell'annullamento della somma degli scarti]
+Sfruttando la linearità dell'operatore di sommatoria:
+\begin{equation}
+\sum_{i=1}^n (x_i - \overline{x}) = \sum_{i=1}^n x_i - \sum_{i=1}^n \overline{x} = \sum_{i=1}^n x_i - n\overline{x}
+\end{equation}
+Poiché per definizione $n\overline{x} = \sum_{i=1}^n x_i$, sostituendo si ottiene immediatamente:
+\begin{equation}
+\sum_{i=1}^n (x_i - \overline{x}) = n\overline{x} - n\overline{x} = 0 \qquad \blacksquare
+\end{equation}
+\end{dimostrazione}
+
+\begin{dimostrazione}[Dimostrazione del Teorema di König-Huygens]
+Consideriamo la funzione $g(c) = \sum_{i=1}^n (x_i - c)^2$. Sviluppando il quadrato del binomio:
+\begin{equation}
+g(c) = \sum_{i=1}^n \left(x_i^2 - 2c x_i + c^2\right) = \sum_{i=1}^n x_i^2 - 2c \sum_{i=1}^n x_i + n c^2
+\end{equation}
+La funzione $g(c)$ è un polinomio di secondo grado in $c$, convesso poiché il coefficiente del termine quadratico è $n > 0$. La derivata seconda è $g''(c) = 2n > 0, \forall c$. Ponendo a zero la derivata prima rispetto a $c$:
+\begin{equation}
+g'(c) = -2\sum_{i=1}^n x_i + 2nc = 0 \iff 2nc = 2\sum_{i=1}^n x_i \iff c = \frac{1}{n}\sum_{i=1}^n x_i = \overline{x}
+\end{equation}
+Essendo la funzione strettamente convessa ovunque, $c = \overline{x}$ costituisce il minimo globale assoluto. $\blacksquare$
+\end{dimostrazione}
+
+\subsection{Mediana Campionaria: Robustezza e Minimizzazione $L_1$}
+
+Sebbene la media sia ottimale sotto penalizzazione quadratica, essa risente pesantemente dei valori estremi anomali (\emph{outlier}). Per ovviare a tale vulnerabilità, si introduce la \textbf{mediana campionaria}.
+
+\begin{definizione}{Statistiche d'Ordine e Mediana Campionaria}{mediana_campionaria}
+Sia $(x_{(1)}, x_{(2)}, \dots, x_{(n)})$ il vettore delle \textbf{statistiche d'ordine} del campione, ottenuto riordinando le osservazioni $x_i$ in senso non decrescente:
+\begin{equation}
+x_{(1)} \le x_{(2)} \le \dots \le x_{(n-1)} \le x_{(n)}
+\end{equation}
+La \textbf{mediana campionaria}, denotata con $\widetilde{x}$ o $\med(x)$, è l'elemento che divide il campione ordinato in due metà di eguale numerosità:
+\begin{equation}
+\widetilde{x} = \begin{cases}
+x_{\left(\frac{n+1}{2}\right)}, & \text{se } n \text{ è dispari}, \\[8pt]
+\dfrac{x_{\left(\frac{n}{2}\right)} + x_{\left(\frac{n}{2}+1\right)}}{2}, & \text{se } n \text{ è pari}.
+\end{cases}
+\end{equation}
+\end{definizione}
+
+\begin{osservazione}[Proprietà Variazionale $L_1$ della Mediana]
+Mentre la media $\overline{x}$ minimizza la somma degli scarti quadratici ($L_2$), la mediana campionaria $\widetilde{x}$ è il valore che minimizza la somma degli \textbf{scarti assoluti} ($L_1$ Loss):
+\begin{equation}
+\min_{c \in \mathbb{R}} \sum_{i=1}^n |x_i - c| = \sum_{i=1}^n |x_i - \widetilde{x}|
+\end{equation}
+Questa proprietà spiega matematicamente perché la mediana è un indicatore \textbf{robusto}: la funzione scarto assoluto penalizza linearmente gli scarti anziché quadraticamente, rendendo la stima insensibile a singoli errori grossolani di misura o a code pesanti.
+\end{osservazione}
+
+\subsection{Moda Campionaria e Asimmetria Geometrica}
+
+\begin{definizione}{Moda Campionaria}{moda_campionaria}
+La \textbf{moda campionaria}, denotata con $\moda(x)$ o $Mo$, è la modalità numerica $u_j$ a cui è associata la massima frequenza assoluta $n_j$ (o relativa $f_j$):
+\begin{equation}
+\moda(x) = \arg\max_{u_j} n_j
+\end{equation}
+Se la distribuzione ammette un unico massimo relativo si definisce \textbf{unimodale}; se presenta due o più picchi locali di frequenza viene detta \textbf{bimodale} o \textbf{multimodale} (spesso indice della compresenza di due sottopopolazioni eterogenee).
+\end{definizione}
+
+\begin{figure}[htbp]
+\centering
+\input{figures/fig_istogramma_asimmetria.tex}
+\caption{Confronto geometrico tra Moda, Mediana e Media in una distribuzione asimmetrica a destra (positiva). La Moda individua il picco massimo della densità; la Mediana divide l'area sottesa esattamente al 50\%; la Media è trascinata verso destra dal braccio di leva degli outlier nella coda.}
+\label{fig:istogramma_asimmetria}
+\end{figure}
+
+Come evidenziato in Figura \ref{fig:istogramma_asimmetria}:
+\begin{itemize}
+    \item Nelle distribuzioni \textbf{simmetriche unimodali}, i tre indici coincidono: $\moda(x) = \med(x) = \overline{x}$.
+    \item Nelle distribuzioni \textbf{asimmetriche a destra} (coda destra allungata, tipica dei tempi di attesa o dei redditi): $\moda(x) < \med(x) < \overline{x}$.
+    \item Nelle distribuzioni \textbf{asimmetriche a sinistra} (coda sinistra allungata): $\overline{x} < \med(x) < \moda(x)$.
+\end{itemize}
+
+\subsection{Quantili e Percentili Campionari}
+
+I quantili estendono il concetto di mediana a qualsiasi frazione di ripartizione campionaria.
+
+\begin{definizione}{Quantile Campionario di Livello $p$ e Percentili}{quantili_campionari}
+Dato un livello di probabilità $p \in (0, 1)$, il \textbf{quantile campionario di ordine $p$} (denotato con $q_p$) è il valore al di sotto del quale ricade una frazione $p$ delle osservazioni campionarie.
+Operativamente, ordinato il campione $x_{(1)} \le \dots \le x_{(n)}$:
+\begin{enumerate}
+    \item Si calcola la posizione reale $k = n \cdot p$.
+    \item Se $k \notin \mathbb{N}$, si arrotonda per eccesso alla parte intera superiore $\lceil k \rceil$, e si pone $q_p = x_{(\lceil k \rceil)}$.
+    \item Se $k \in \mathbb{N}$, si calcola la media dei due elementi contigui: $q_p = \frac{x_{(k)} + x_{(k+1)}}{2}$.
+\end{enumerate}
+I \textbf{percentili} corrispondono alla scala centesimale ($p = k/100$ per $k=1,\dots,99$). I \textbf{quartili} dividono il campione in quattro parti uguali:
+\begin{itemize}
+    \item \textbf{Primo quartile} $Q_1 = q_{0.25}$ (25-esimo percentile);
+    \item \textbf{Secondo quartile} $Q_2 = q_{0.50} = \widetilde{x}$ (mediana);
+    \item \textbf{Terzo quartile} $Q_3 = q_{0.75}$ (75-esimo percentile).
+\end{itemize}
+\end{definizione}
+
+% ==============================================================================
+% SEZIONE 1.3: INDICI DI DISPERSIONE E VARIABILITÀ
+% ==============================================================================
+\section{Indici di Dispersione e Variabilità}
+\label{sec:indici_variabilita}
+
+Gli indici di posizione descrivono dove i dati sono centrati, ma non offrono alcuna informazione sulla loro dispersione. Due processi produttivi possono avere la medesima media nominale $\overline{x} = 100\text{ mm}$, ma il primo potrebbe avere oscillazioni contenute entro $\pm 0.1\text{ mm}$ (alta qualità) e il secondo oscillazioni di $\pm 10\text{ mm}$ (prodotto non conforme). La misura quantitativa della dispersione è affidata agli indici di variabilità.
+
+\subsection{Varianza Campionaria Corretta e Correzione di Bessel}
+
+\begin{definizione}{Varianza Campionaria e Deviazione Standard}{varianza_campionaria}
+Dato un campione $D = \{x_1, \dots, x_n\}$ con $n \ge 2$:
+\begin{enumerate}
+    \item La \textbf{varianza campionaria corretta} $S^2$ è definita come:
+    \begin{equation}
+    S^2 = \frac{1}{n-1}\sum_{i=1}^n (x_i - \overline{x})^2
+    \end{equation}
+    \item La \textbf{deviazione standard campionaria} (o scarto quadratico medio) $S$ è la radice quadrata positiva della varianza:
+    \begin{equation}
+    S = \sqrt{S^2} = \sqrt{\frac{1}{n-1}\sum_{i=1}^n (x_i - \overline{x})^2}
+    \end{equation}
+\end{enumerate}
+\end{definizione}
+
+\paragraph{Perché dividiamo per $n-1$ anziché per $n$? (La Correzione di Bessel).}
+Uno dei dubbi più frequenti riguarda la presenza del denominatore $n-1$. L'intuizione fondamentale è legata ai \textbf{gradi di libertà} e alla natura della stima:
+\begin{itemize}
+    \item Gli scarti $(x_i - \overline{x})$ sono calcolati rispetto alla media campionaria $\overline{x}$, e non rispetto alla vera media incognita della popolazione $\mu$.
+    \item Come dimostrato nel Teorema \ref{prop_media_campionaria}, la media campionaria $\overline{x}$ minimizza la somma dei quadrati $\sum (x_i - c)^2$. Di conseguenza, la somma calcolata attorno a $\overline{x}$ è sistematicamente \emph{minore} della somma che si otterrebbe attorno a $\mu$:
+    \begin{equation}
+    \sum_{i=1}^n (x_i - \overline{x})^2 \le \sum_{i=1}^n (x_i - \mu)^2
+    \end{equation}
+    \item Se dividessimo per $n$, lo stimatore risulterebbe affetto da una distorsione sistematica verso il basso (sottostimerebbe la reale dispersione della popolazione).
+    \item Poiché il vincolo lineare $\sum_{i=1}^n (x_i - \overline{x}) = 0$ consuma esattamente $1$ grado di libertà (fissati i primi $n-1$ scarti, l'$n$-esimo è univocamente determinato), la somma contiene solo $n-1$ scarti liberi e indipendenti. Dividere per $n-1$ compensa esattamente tale deficit informativo, garantendo che $\mathbb{E}[S^2] = \sigma^2$ (stimatore non distorto).
+\end{itemize}
+
+\begin{teorema}{Formula Computazionale Operativa per la Varianza}{thm_formula_computazionale_varianza}
+La devianza totale ammette la seguente fondamentale identità algebrica:
+\begin{equation}
+\sum_{i=1}^n (x_i - \overline{x})^2 = \sum_{i=1}^n x_i^2 - n\overline{x}^2 = \sum_{i=1}^n x_i^2 - \frac{1}{n}\left(\sum_{i=1}^n x_i\right)^2
+\end{equation}
+Pertanto, la varianza campionaria si calcola in un singolo passaggio computazionale come:
+\begin{equation}
+S^2 = \frac{1}{n-1}\left( \sum_{i=1}^n x_i^2 - n\overline{x}^2 \right) = \frac{1}{n-1}\left( \sum_{i=1}^n x_i^2 - \frac{1}{n}\left(\sum_{i=1}^n x_i\right)^2 \right)
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazione dell'Identità Computazionale di König-Huygens]
+Sviluppando il quadrato all'interno della sommatoria:
+\begin{align}
+\sum_{i=1}^n (x_i - \overline{x})^2 &= \sum_{i=1}^n \left( x_i^2 - 2\overline{x}x_i + \overline{x}^2 \right) \\
+&= \sum_{i=1}^n x_i^2 - 2\overline{x}\sum_{i=1}^n x_i + \sum_{i=1}^n \overline{x}^2 \\
+&= \sum_{i=1}^n x_i^2 - 2\overline{x}(n\overline{x}) + n\overline{x}^2 \\
+&= \sum_{i=1}^n x_i^2 - 2n\overline{x}^2 + n\overline{x}^2 = \sum_{i=1}^n x_i^2 - n\overline{x}^2 \qquad \blacksquare
+\end{align}
+\end{dimostrazione}
+
+\subsection{Scarto Interquartile (IQR) e Anatomia del Boxplot}
+
+Accanto alla deviazione standard $S$ (sensibile agli outlier), si impiega lo \textbf{scarto interquartile} come misura di variabilità robusta.
+
+\begin{definizione}{Scarto Interquartile (Interquartile Range - IQR)}{def_iqr}
+Lo \textbf{scarto interquartile} è la differenza tra il terzo e il primo quartile del campione:
+\begin{equation}
+\text{IQR} = Q_3 - Q_1
+\end{equation}
+Rappresenta l'ampiezza dell'intervallo centrale che racchiude esattamente il $50\%$ delle osservazioni campionarie.
+\end{definizione}
+
+\begin{figure}[htbp]
+\centering
+\input{figures/fig_boxplot_anatomia.tex}
+\caption{Anatomia strutturata del Boxplot (diagramma a scatola e baffi di Tukey). La scatola delimita l'IQR tra $Q_1$ e $Q_3$, con la linea interna sulla Mediana $\widetilde{x}$. I baffi si estendono fino alle osservazioni estreme non outlier contenute nelle recinzioni interne $[Q_1 - 1.5\,\text{IQR}, \; Q_3 + 1.5\,\text{IQR}]$. I punti esterni sono segnalati individualmente come outlier.}
+\label{fig:boxplot_anatomia}
+\end{figure}
+
+Il Boxplot (Figura \ref{fig:boxplot_anatomia}) implementa il criterio di Tukey per il rilevamento oggettivo degli outlier:
+\begin{itemize}
+    \item \textbf{Recinzione inferiore interna:} $LF = Q_1 - 1.5 \cdot \text{IQR}$.
+    \item \textbf{Recinzione superiore interna:} $UF = Q_3 + 1.5 \cdot \text{IQR}$.
+    \item Qualsiasi osservazione $x_i < LF$ o $x_i > UF$ viene classificata come \textbf{outlier} ed evidenziata con un simbolo isolato.
+\end{itemize}
+
+% ==============================================================================
+% SEZIONE 1.4: STATISTICA BIVARIATA, COVARIANZA E CORRELAZIONE
+% ==============================================================================
+\section{Statistica Descrittiva Bivariata: Covarianza e Correlazione}
+\label{sec:statistica_bivariata}
+
+Quando su ciascuna unità statistica vengono misurati simultaneamente due caratteri quantitativi $X$ e $Y$, il dataset assume la forma bivariata:
+\begin{equation}
+D_{XY} = \{(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)\} \subset \mathbb{R}^2
+\end{equation}
+L'obiettivo fondamentale dell'analisi bivariata è determinare l'esistenza, il verso e l'intensità del legame associativo tra le due variabili.
+
+\subsection{Covarianza Campionaria e Concordanza Geometrica}
+
+\begin{definizione}{Covarianza Campionaria}{covarianza_campionaria}
+Dato un campione bivariato di dimensione $n \ge 2$, con medie $\overline{x}$ e $\overline{y}$, si definisce \textbf{covarianza campionaria} (denotata con $s_{xy}$ o $q$):
+\begin{equation}
+s_{xy} = q = \frac{1}{n-1}\sum_{i=1}^n (x_i - \overline{x})(y_i - \overline{y})
+\end{equation}
+\end{definizione}
+
+\begin{teorema}{Formula Computazionale Operativa per la Covarianza}{thm_computazionale_covarianza}
+La codevianza ammette l'identità:
+\begin{equation}
+\sum_{i=1}^n (x_i - \overline{x})(y_i - \overline{y}) = \sum_{i=1}^n x_i y_i - n\overline{x}\overline{y} = \sum_{i=1}^n x_i y_i - \frac{1}{n}\left(\sum_{i=1}^n x_i\right)\left(\sum_{i=1}^n y_i\right)
+\end{equation}
+Pertanto:
+\begin{equation}
+s_{xy} = \frac{1}{n-1}\left( \sum_{i=1}^n x_i y_i - n\overline{x}\overline{y} \right)
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Sviluppando il prodotto degli scarti:
+\begin{align}
+\sum_{i=1}^n (x_i - \overline{x})(y_i - \overline{y}) &= \sum_{i=1}^n \left( x_i y_i - \overline{x}y_i - \overline{y}x_i + \overline{x}\overline{y} \right) \\
+&= \sum_{i=1}^n x_i y_i - \overline{x}\sum_{i=1}^n y_i - \overline{y}\sum_{i=1}^n x_i + n\overline{x}\overline{y} \\
+&= \sum_{i=1}^n x_i y_i - \overline{x}(n\overline{y}) - \overline{y}(n\overline{x}) + n\overline{x}\overline{y} \\
+&= \sum_{i=1}^n x_i y_i - 2n\overline{x}\overline{y} + n\overline{x}\overline{y} = \sum_{i=1}^n x_i y_i - n\overline{x}\overline{y} \qquad \blacksquare
+\end{align}
+\end{dimostrazione}
+
+\begin{figure}[htbp]
+\centering
+\input{figures/fig_scatter_quadranti_correlazione.tex}
+\caption{Interpretazione geometrica della covarianza e della concordanza. Il piano cartesiano viene traslato nel baricentro $(\overline{x}, \overline{y})$. Nei quadranti I e III il prodotto degli scarti $(x_i - \overline{x})(y_i - \overline{y})$ è strettamente positivo (concordanza, $r > 0$). Nei quadranti II e IV il prodotto è negativo (discordanza, $r < 0$).}
+\label{fig:scatter_quadranti_correlazione}
+\end{figure}
+
+\subsection{Coefficiente di Correlazione Lineare di Pearson}
+
+La covarianza $s_{xy}$ dipende dall'unità di misura delle due variabili (ad esempio, $\text{kg} \cdot \text{m}$). Per disporre di una misura adimensionale e standardizzata, si normalizza la covarianza per il prodotto delle deviazioni standard.
+
+\begin{definizione}{Coefficiente di Correlazione Lineare di Pearson}{correlazione_pearson}
+Si definisce \textbf{coefficiente di correlazione lineare campionario} $r$ (o $r_{xy}$):
+\begin{equation}
+r = \frac{s_{xy}}{s_x s_y} = \frac{\sum_{i=1}^n (x_i - \overline{x})(y_i - \overline{y})}{\sqrt{\sum_{i=1}^n (x_i - \overline{x})^2}\sqrt{\sum_{i=1}^n (y_i - \overline{y})^2}}
+\end{equation}
+\end{definizione}
+
+\begin{teorema}{Proprietà di Limitatezza di Pearson (Dimostrazione via Cauchy-Schwarz)}{thm_limitarieta_correlazione}
+Per qualsiasi campione bivariato con deviazioni standard $s_x > 0$ e $s_y > 0$:
+\begin{equation}
+-1 \le r \le 1
+\end{equation}
+Inoltre:
+\begin{itemize}
+    \item $r = +1$ se e solo se esiste una perfetta relazione lineare crescente $y_i = a x_i + b$ con $a > 0$.
+    \item $r = -1$ se e solo se esiste una perfetta relazione lineare decrescente $y_i = a x_i + b$ con $a < 0$.
+    \item $r = 0$ indica assenza di correlazione lineare (incorrelazione).
+\end{itemize}
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazione tramite la Disuguaglianza di Cauchy-Schwarz]
+Definiamo nello spazio euclideo $\mathbb{R}^n$ i due vettori degli scarti centrati:
+\begin{equation}
+\mathbf{u} = \begin{pmatrix} x_1 - \overline{x} \\ \vdots \\ x_n - \overline{x} \end{pmatrix}, \qquad
+\mathbf{v} = \begin{pmatrix} y_1 - \overline{y} \\ \vdots \\ y_n - \overline{y} \end{pmatrix}
+\end{equation}
+Il prodotto scalare standard in $\mathbb{R}^n$ è $\langle \mathbf{u}, \mathbf{v} \rangle = \sum_{i=1}^n (x_i - \overline{x})(y_i - \overline{y}) = (n-1)s_{xy}$.
+Le norme euclidee sono:
+\begin{equation}
+\|\mathbf{u}\| = \sqrt{\sum_{i=1}^n (x_i - \overline{x})^2} = \sqrt{n-1} \, s_x, \qquad \|\mathbf{v}\| = \sqrt{\sum_{i=1}^n (y_i - \overline{y})^2} = \sqrt{n-1} \, s_y
+\end{equation}
+Per la fondamentale \textbf{disuguaglianza di Cauchy-Schwarz}, per ogni coppia di vettori in uno spazio prehilbertiano:
+\begin{equation}
+|\langle \mathbf{u}, \mathbf{v} \rangle| \le \|\mathbf{u}\| \, \|\mathbf{v}\|
+\end{equation}
+Sostituendo le espressioni dei nostri vettori centrati:
+\begin{equation}
+|(n-1)s_{xy}| \le \left(\sqrt{n-1}s_x\right)\left(\sqrt{n-1}s_y\right) = (n-1)s_x s_y
+\end{equation}
+Dividendo ambo i membri per la quantità strettamente positiva $(n-1)s_x s_y$:
+\begin{equation}
+\left|\frac{s_{xy}}{s_x s_y}\right| \le 1 \iff |r| \le 1 \iff -1 \le r \le 1
+\end{equation}
+L'uguaglianza $|\langle \mathbf{u}, \mathbf{v} \rangle| = \|\mathbf{u}\|\|\mathbf{v}\|$ sussiste se e solo se i vettori $\mathbf{u}$ e $\mathbf{v}$ sono linearmente dipendenti (paralleli), ossia $\mathbf{v} = a \mathbf{u}$ per qualche costante $a \neq 0$. Ciò equivale a $y_i - \overline{y} = a(x_i - \overline{x}) \implies y_i = a x_i + (\overline{y} - a\overline{x})$, che rappresenta una perfetta retta sul piano cartesiano. $\blacksquare$
+\end{dimostrazione}
+
+% ==============================================================================
+% SEZIONE 1.5: REGRESSIONE LINEARE SEMPLICE OLS
+% ==============================================================================
+\section{La Retta di Regressione Lineare dei Minimi Quadrati (OLS)}
+\label{sec:regressione_lineare_descrittiva}
+
+Quando tra le variabili $X$ e $Y$ sussiste un legame di correlazione significativo, si cerca di modellare la risposta quantitativa $Y$ come funzione lineare della variabile antecedente $X$:
+\begin{equation}
+\widehat{y}_i = a x_i + b
+\end{equation}
+La determinazione della retta ottima si fonda sul criterio dei \textbf{Minimi Quadrati Ordinari} (\emph{Ordinary Least Squares - OLS}), che consiste nel minimizzare la somma dei quadrati dei residui verticali $e_i = y_i - \widehat{y}_i$.
+
+\begin{figure}[htbp]
+\centering
+\input{figures/fig_regressione_ols_residui.tex}
+\caption{Retta di regressione dei minimi quadrati OLS. I segmenti verticali tratteggiati evidenziano i residui $e_i = y_i - \widehat{y}_i$. Il criterio OLS individua la retta che minimizza la somma delle aree dei quadrati dei residui, passando necessariamente per il baricentro $(\overline{x}, \overline{y})$.}
+\label{fig:regressione_ols_residui}
+\end{figure}
+
+\begin{teorema}{Coefficienti della Retta di Regressione OLS}{thm_coefficienti_ols}
+La funzione di perdita $S(a, b) = \sum_{i=1}^n (y_i - (a x_i + b))^2$ ammette un unico punto di minimo globale dato da:
+\begin{align}
+a &= \frac{s_{xy}}{s_x^2} = \frac{\sum_{i=1}^n (x_i - \overline{x})(y_i - \overline{y})}{\sum_{i=1}^n (x_i - \overline{x})^2} = r \frac{s_y}{s_x} \\
+b &= \overline{y} - a\overline{x}
+\end{align}
+Pertanto, l'equazione della retta OLS in forma baricentrica è:
+\begin{equation}
+\widehat{y} - \overline{y} = a (x - \overline{x})
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Calcoliamo le derivate parziali di $S(a, b)$ rispetto a $b$ e ad $a$, ponendole a zero (sistema delle equazioni normali):
+\begin{align}
+\frac{\partial S}{\partial b} &= -2\sum_{i=1}^n (y_i - ax_i - b) = 0 \implies \sum_{i=1}^n y_i - a\sum_{i=1}^n x_i - nb = 0 \implies b = \overline{y} - a\overline{x} \\
+\frac{\partial S}{\partial a} &= -2\sum_{i=1}^n x_i (y_i - ax_i - b) = 0
+\end{align}
+Sostituendo $b = \overline{y} - a\overline{x}$ nella seconda equazione:
+\begin{equation}
+\sum_{i=1}^n x_i \left( y_i - a x_i - (\overline{y} - a\overline{x}) \right) = 0 \iff \sum_{i=1}^n x_i (y_i - \overline{y}) - a \sum_{i=1}^n x_i (x_i - \overline{x}) = 0
+\end{equation}
+Poiché $\sum x_i (y_i - \overline{y}) = \sum (x_i - \overline{x})(y_i - \overline{y})$ e $\sum x_i (x_i - \overline{x}) = \sum (x_i - \overline{x})^2$, ricaviamo immediatamente:
+\begin{equation}
+a = \frac{\sum_{i=1}^n (x_i - \overline{x})(y_i - \overline{y})}{\sum_{i=1}^n (x_i - \overline{x})^2} = \frac{(n-1)s_{xy}}{(n-1)s_x^2} = \frac{s_{xy}}{s_x^2} \qquad \blacksquare
+\end{equation}
+\end{dimostrazione}
+
+% ==============================================================================
+% SEZIONE 1.6: TRASFORMAZIONI LINEARI ED AFFINI
+% ==============================================================================
+\section{Proprietà di Invarianza e Trasformazioni Lineari}
+\label{sec:trasformazioni_lineari_descrittiva}
+
+Nell'elaborazione di dati sperimentali è frequente operare cambi di scala o di unità di misura (ad esempio conversione da gradi Celsius a Fahrenheit: $Y = 1.8X + 32$).
+
+\begin{teorema}{Effetto delle Trasformazioni Affini sugli Indici Descrittivi}{thm_trasformazioni_affini}
+Sia $X = \{x_1, \dots, x_n\}$ un campione con media $\overline{x}$ e deviazione standard $S_x$. Sia $Y = \{y_1, \dots, y_n\}$ il campione trasformato per via affine: $y_i = a x_i + b$ con $a, b \in \mathbb{R}$. Allora:
+\begin{enumerate}
+    \item \textbf{Media campionaria:} $\overline{y} = a\overline{x} + b$ (proprietà di preservazione lineare).
+    \item \textbf{Mediana e quantili:} $\widetilde{y} = a\widetilde{x} + b$ per $a > 0$.
+    \item \textbf{Varianza campionaria:} $S_y^2 = a^2 S_x^2$ (invariante rispetto alla costante additiva $b$).
+    \item \textbf{Deviazione standard:} $S_y = |a| S_x$.
+    \item \textbf{Covarianza campionaria:} per $U = aX + b$ e $V = cY + d$, si ha $s_{uv} = ac \cdot s_{xy}$.
+    \item \textbf{Correlazione lineare:} $r_{uv} = \operatorname{sgn}(ac) \cdot r_{xy} = \frac{ac}{|ac|} r_{xy}$.
+\end{enumerate}
+\end{teorema}
+
+% ==============================================================================
+% SEZIONE 1.7: TRAPPOLE D'ESAME E METODI OPERATIVI
+% ==============================================================================
+\section{Consigli per l'Esame, Trappole Frequenti e Schemi Risolutivi}
+\label{sec:consigli_esame_cap1}
+
+\begin{esame}[Trappola 1: Incorrelazione Lineare ($r=0$) vs Indipendenza]
+Nelle prove d'esame è frequente l'errore concettuale di confondere l'assenza di correlazione lineare ($r = 0$) con l'indipendenza stocastica:
+\begin{itemize}
+    \item Il coefficiente $r$ quantifica \textbf{esclusivamente l'intensità del legame lineare}.
+    \item Due variabili possono essere legate da una perfetta relazione deterministica non lineare (es. $Y = X^2$ con $X$ distribuita simmetricamente rispetto all'origine) ed avere esattamente $s_{xy} = 0 \implies r = 0$.
+    \item Vale sempre l'implicazione: \textbf{Indipendenza $\implies r = 0$}, mentre \textbf{$r = 0 \centernot\implies$ Indipendenza}.
+\end{itemize}
+\end{esame}
+
+\begin{esame}[Trappola 2: Correlazione Spuria vs Causalità (\emph{Cum Hoc Ergo Propter Hoc})]
+Un coefficiente di correlazione elevato ($r \approx 1$) dimostra che le due serie storiche o campionarie variano congiuntamente, ma \textbf{non dimostra in alcun modo un rapporto di causa-effetto}. Spesso l'associazione è indotta da una terza variabile non osservata di confondimento $Z$ (\emph{confounding factor}) che influenza simultaneamente $X$ e $Y$.
+\end{esame}
+
+\begin{metodo}[Calcolo Tabellare Veloce di Media, Varianza e Covarianza all'Esame]
+Per evitare errori di calcolo e risparmiare tempo durante la prova scritta, non calcolare gli scarti individuali $(x_i - \overline{x})$, bensì organizza i calcoli cumulando i seguenti 5 totalizzatori:
+\begin{equation}
+\Sigma_x = \sum_{i=1}^n x_i, \quad \Sigma_y = \sum_{i=1}^n y_i, \quad \Sigma_{x2} = \sum_{i=1}^n x_i^2, \quad \Sigma_{y2} = \sum_{i=1}^n y_i^2, \quad \Sigma_{xy} = \sum_{i=1}^n x_i y_i
+\end{equation}
+Dopodiché applica direttamente le formule computazionali di König-Huygens:
+\begin{align}
+\overline{x} &= \frac{\Sigma_x}{n}, \qquad \overline{y} = \frac{\Sigma_y}{n} \\
+S_x^2 &= \frac{1}{n-1}\left(\Sigma_{x2} - \frac{\Sigma_x^2}{n}\right), \qquad S_y^2 = \frac{1}{n-1}\left(\Sigma_{y2} - \frac{\Sigma_y^2}{n}\right) \\
+s_{xy} &= \frac{1}{n-1}\left(\Sigma_{xy} - \frac{\Sigma_x \Sigma_y}{n}\right), \qquad r = \frac{s_{xy}}{S_x S_y}
+\end{align}
+\end{metodo}

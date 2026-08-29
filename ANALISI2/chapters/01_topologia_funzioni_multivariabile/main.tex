@@ -1,0 +1,575 @@
+% ==============================================================================
+% CAPITOLO 1: TOPOLOGIA IN R^n E FUNZIONI DI PIÙ VARIABILI
+% ==============================================================================
+
+\chapter{Topologia in \texorpdfstring{$\mathbb{R}^n$}{R\textasciicircum n} e Funzioni di Più Variabili}
+\label{chap:topologia_funzioni_multivariabile}
+
+\section{Dalla Retta Reale allo Spazio Pluridimensionale}
+
+Lo studio dell'Analisi Matematica a una variabile reale ha come teatro naturale la retta $\R$, in cui la totalità dell'ordinamento algebrico e la nozione intuitiva di vicinanza tra numeri reali si fondono in una struttura geometrica lineare e unidimensionale. Tuttavia, la descrizione dei fenomeni naturali, fisici, ingegneristici ed economico-gestionali richiede quasi sempre la modellizzazione simultanea di molteplici gradi di libertà. Si pensi alla posizione di un corpo rigido nello spazio fisico tridimensionale, alla distribuzione di temperatura e pressione in un fluido in funzione del tempo e della quota, o alla funzione di produzione di un impianto industriale dipendente dalle quantità impiegate di materie prime, energia, capitale e ore lavorative.
+
+Per affrontare questi problemi con il dovuto rigore, è necessario estendere i concetti cardine del calcolo infinitesimale (distanza, intorno, convergenza, limite, continuità) a spazi a $n$ dimensioni. In questo capitolo porremo le fondamenta geometriche e topologiche dello spazio euclideo $\Rn$, analizzando la nozione di distanza e prodotto scalare, per poi passare allo studio delle funzioni reali di più variabili, con particolare enfasi sul calcolo dei limiti e sulle profonde differenze concettuali rispetto al caso monodimensionale.
+
+\section{Struttura Vettoriale, Metrica ed Euclidea di \texorpdfstring{$\mathbb{R}^n$}{R\textasciicircum n}}
+
+Consideriamo l'insieme delle $n$-uple ordinate di numeri reali:
+\[
+\Rn = \R \times \dots \times \R = \graffe{\bx = (x_1, x_2, \dots, x_n) : x_i \in \R, \; \forall i=1,\dots,n}
+\]
+Su $\Rn$ sono definite le usuali operazioni di spazio vettoriale reale:
+\begin{itemize}
+    \item \textbf{Somma vettoriale}: $\bx + \by = (x_1 + y_1, x_2 + y_2, \dots, x_n + y_n)$;
+    \item \textbf{Prodotto per scalare}: $\lambda \bx = (\lambda x_1, \lambda x_2, \dots, \lambda x_n)$ per ogni $\lambda \in \R$.
+\end{itemize}
+L'elemento neutro della somma è l'origine $\bzero = (0, \dots, 0)$.
+
+Per poter sviluppare l'analisi infinitesimale, la sola struttura algebrica lineare non è sufficiente: occorre poter quantificare la ``distanza'' tra due vettori e l'``estensione'' (modulo o lunghezza) di ciascun elemento. Questa esigenza motiva l'introduzione astratta di spazio metrico.
+
+\begin{definizione}{Spazio Metrico e Assiomi di Distanza}{spazio_metrico}
+Uno \textbf{spazio metrico} è una coppia ordinata $(E, d)$, dove $E$ è un insieme non vuoto e $d: E \times E \to \R$ è una funzione, detta \textbf{distanza} o \textbf{metrica}, che soddisfa i seguenti tre assiomi per ogni terna di punti $P, Q, R \in E$:
+\begin{enumerate}
+    \item \textbf{Positività e Separazione}: $d(P, Q) \ge 0$ per ogni $P, Q \in E$, con $d(P, Q) = 0 \iff P = Q$;
+    \item \textbf{Simmetria}: $d(P, Q) = d(Q, P)$ per ogni $P, Q \in E$;
+    \item \textbf{Disuguaglianza Triangolare}: $d(P, Q) \le d(P, R) + d(R, Q)$ per ogni $P, Q, R \in E$.
+\end{enumerate}
+\end{definizione}
+
+L'assioma di disuguaglianza triangolare traduce l'evidenza geometrica secondo cui il tragitto rettilineo diretto tra due punti $P$ e $Q$ è sempre non superiore a qualunque percorso che passi per un vertice intermedio $R$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    \coordinate (P) at (0,0);
+    \coordinate (Q) at (5,0);
+    \coordinate (R) at (3,2.4);
+
+    \draw[thick, navyblue, ->] (P) -- node[below=2pt] {\small $d(P,Q)$ (segmento diretto)} (Q);
+    \draw[thick, forestgreen, ->] (P) -- node[above left=1pt] {\small $d(P,R)$} (R);
+    \draw[thick, warmamber, ->] (R) -- node[above right=1pt] {\small $d(R,Q)$} (Q);
+
+    \filldraw[navyblue] (P) circle (2.2pt) node[below left] {$P$};
+    \filldraw[navyblue] (Q) circle (2.2pt) node[below right] {$Q$};
+    \filldraw[forestgreen] (R) circle (2.2pt) node[above] {$R$};
+
+    \node[draw=navyblue!60, fill=subtlegray, rounded corners, align=center] at (2.5,-1.2) 
+        {\small \textbf{Interpretazione Geometrica}: Il segmento diretto soddisfa $d(P,Q) \le d(P,R) + d(R,Q)$,\\
+        \small con uguaglianza stretta se e solo se $R$ giace esattamente sul segmento $\overline{PQ}$.};
+\end{tikzpicture}
+\end{center}
+
+Nello spazio vettoriale $\Rn$, la nozione di metrica discende in modo canonico dalla presenza di un prodotto scalare, che arricchisce la struttura rendendola uno spazio pre-hilbertiano euclideo.
+
+\begin{definizione}{Prodotto Scalare Canonico e Norma Euclidea}{prodotto_scalare_norma}
+Dati due vettori $\bx = (x_1, \dots, x_n)$ e $\by = (y_1, \dots, y_n)$ in $\Rn$, si definiscono:
+\begin{itemize}
+    \item \textbf{Prodotto scalare canonico} (prodotto interno euclideo):
+    \[
+    \scal{\bx, \by} = \bx \cdot \by = \sum_{i=1}^{n} x_i y_i = x_1 y_1 + x_2 y_2 + \dots + x_n y_n
+    \]
+    \item \textbf{Norma euclidea} (lunghezza o modulo di $\bx$):
+    \[
+    \norm{\bx} = \sqrt{\scal{\bx, \bx}} = \sqrt{\sum_{i=1}^{n} x_i^2} = \sqrt{x_1^2 + x_2^2 + \dots + x_n^2}
+    \]
+    \item \textbf{Distanza euclidea} tra due punti $\bx$ e $\by$:
+    \[
+    d(\bx, \by) = \norm{\bx - \by} = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}
+    \]
+\end{itemize}
+\end{definizione}
+
+\begin{proposizione}{Proprietà Fondamentali del Prodotto Scalare}{prop_prodotto_scalare}
+Per ogni terna di vettori $\bu, \bv, \bw \in \Rn$ e per ogni scalare reale $\lambda \in \R$, valgono le seguenti proprietà:
+\begin{enumerate}
+    \item \textbf{Definita positività}: $\scal{\bv, \bv} \ge 0$, e $\scal{\bv, \bv} = 0 \iff \bv = \bzero$;
+    \item \textbf{Simmetria (Commutatività)}: $\scal{\bv, \bw} = \scal{\bw, \bv}$;
+    \item \textbf{Omogeneità}: $\scal{\lambda \bv, \bw} = \lambda \scal{\bv, \bw} = \scal{\bv, \lambda \bw}$;
+    \item \textbf{Bilinearità / Distributività}: $\scal{\bu + \bv, \bw} = \scal{\bu, \bw} + \scal{\bv, \bw}$.
+\end{enumerate}
+\end{proposizione}
+
+Il cardine su cui poggia l'intera geometria euclidea e l'analisi negli spazi a più dimensioni è la disuguaglianza di Cauchy-Schwarz, che lega il valore assoluto del prodotto scalare al prodotto delle rispettive norme.
+
+\begin{teorema}{Disuguaglianza di Cauchy-Schwarz}{cauchy_schwarz_dim}
+Per ogni coppia di vettori $\bv, \bw \in \Rn$, sussiste la disuguaglianza fondamentale:
+\[
+\abs{\scal{\bv, \bw}} \le \norm{\bv} \, \norm{\bw}
+\]
+ossia, in coordinate esplicite:
+\[
+\abs{\sum_{i=1}^n v_i w_i} \le \sqrt{\sum_{i=1}^n v_i^2} \cdot \sqrt{\sum_{i=1}^n w_i^2}
+\]
+Inoltre, l'uguaglianza $\abs{\scal{\bv, \bw}} = \norm{\bv} \norm{\bw}$ si verifica se e solo se $\bv$ e $\bw$ sono linearmente dipendenti (ossia paralleli, $\bv = \lambda \bw$ oppure uno dei due è il vettore nullo).
+\end{teorema}
+
+\begin{dimostrazione}
+Se $\bw = \bzero$, l'uguaglianza è banalmente verificata poiché ambo i membri valgono zero ($0 \le 0$).\\
+Supponiamo dunque $\bw \neq \bzero$, il che implica $\norm{\bw}^2 = \scal{\bw, \bw} > 0$. Consideriamo per ogni parametro reale $\lambda \in \R$ il vettore ausiliario $\bz(\lambda) = \bv + \lambda \bw$. In virtù dell'assioma di definita positività del prodotto scalare, la norma al quadrato di $\bz(\lambda)$ è sempre non negativa per qualsiasi scelta di $\lambda \in \R$:
+\[
+0 \le \norm{\bv + \lambda \bw}^2 = \scal{\bv + \lambda \bw, \bv + \lambda \bw}
+\]
+Sviluppando il prodotto scalare mediante le proprietà di bilinearità e simmetria:
+\begin{align*}
+\scal{\bv + \lambda \bw, \bv + \lambda \bw} &= \scal{\bv, \bv} + \scal{\bv, \lambda \bw} + \scal{\lambda \bw, \bv} + \scal{\lambda \bw, \lambda \bw} \\
+&= \scal{\bv, \bv} + 2\lambda\scal{\bv, \bw} + \lambda^2\scal{\bw, \bw}
+\end{align*}
+Riconosciamo un trinomio quadratico nella variabile reale $\lambda$:
+\[
+P(\lambda) = a \lambda^2 + 2b \lambda + c \ge 0, \quad \forall \lambda \in \R
+\]
+avendo posto i coefficienti:
+\[
+a = \scal{\bw, \bw} = \norm{\bw}^2 > 0, \quad b = \scal{\bv, \bw}, \quad c = \scal{\bv, \bv} = \norm{\bv}^2
+\]
+Poiché il coefficiente direttivo $a > 0$, la parabola $y = P(\lambda)$ è convessa (rivolta verso l'alto). Affinché $P(\lambda) \ge 0$ per ogni $\lambda \in \R$, la parabola non può intersecare l'asse delle ascisse in due punti distinti; deve dunque avere discriminante minore o uguale a zero:
+\[
+\frac{\Delta}{4} = b^2 - ac \le 0 \implies b^2 \le ac
+\]
+Sostituendo i valori espliciti dei coefficienti:
+\[
+\left( \scal{\bv, \bw} \right)^2 \le \norm{\bv}^2 \, \norm{\bw}^2
+\]
+Estraendo la radice quadrata aritmetica (non negativa) da entrambi i membri, si ottiene:
+\[
+\abs{\scal{\bv, \bw}} \le \norm{\bv} \, \norm{\bw}
+\]
+che conclude la prima parte della dimostrazione.
+
+Per quanto riguarda il caso di uguaglianza, $\abs{\scal{\bv, \bw}} = \norm{\bv}\norm{\bw} \iff \Delta = 0$, il che accade se e solo se esiste un unico valore reale $\lambda_0 = -b/a$ in cui $P(\lambda_0) = 0$. Questo equivale a $\norm{\bv + \lambda_0 \bw}^2 = 0 \iff \bv + \lambda_0 \bw = \bzero \iff \bv = -\lambda_0 \bw$, provando che i due vettori sono linearmente dipendenti.
+\end{dimostrazione}
+
+Dalla disuguaglianza di Cauchy-Schwarz scaturisce immediatamente la disuguaglianza triangolare (o di Minkowski) per la norma euclidea.
+
+\begin{corollario}{Disuguaglianza Triangolare per la Norma Euclidea}{cor_minkowski}
+Per ogni coppia di vettori $\bv, \bw \in \Rn$, si ha:
+\[
+\norm{\bv + \bw} \le \norm{\bv} + \norm{\bw}
+\]
+\end{corollario}
+
+\begin{dimostrazione}
+Valutiamo il quadrato della norma della somma sviluppando il prodotto scalare:
+\begin{align*}
+\norm{\bv + \bw}^2 &= \scal{\bv + \bw, \bv + \bw} = \norm{\bv}^2 + 2\scal{\bv, \bw} + \norm{\bw}^2 \\
+&\le \norm{\bv}^2 + 2\abs{\scal{\bv, \bw}} + \norm{\bw}^2
+\end{align*}
+Applicando la disuguaglianza di Cauchy-Schwarz $\abs{\scal{\bv, \bw}} \le \norm{\bv}\norm{\bw}$:
+\[
+\norm{\bv + \bw}^2 \le \norm{\bv}^2 + 2\norm{\bv}\norm{\bw} + \norm{\bw}^2 = \left( \norm{\bv} + \norm{\bw} \right)^2
+\]
+Estraendo la radice quadrata si ottiene $\norm{\bv + \bw} \le \norm{\bv} + \norm{\bw}$.
+\end{dimostrazione}
+
+\section{Interpretazione Geometrica del Prodotto Scalare e Angolo tra Vettori}
+
+La disuguaglianza di Cauchy-Schwarz assicura che per ogni coppia di vettori non nulli $\bv, \bw \neq \bzero$, il rapporto numerico:
+\[
+\frac{\scal{\bv, \bw}}{\norm{\bv} \, \norm{\bw}} \in [-1, 1]
+\]
+appartiene all'intervallo di definizione della funzione arcocoseno. Ciò permette di dare una definizione puramente analitica dell'angolo compreso tra due vettori nello spazio euclideo $n$-dimensionale.
+
+\begin{teorema}{Interpretazione Geometrica: Angolo tra Vettori e Teorema del Coseno}{interpretazione_geometrica_scalare}
+Siano $\bv, \bw \in \Rn \setminus \graffe{\bzero}$ due vettori non nulli. L'angolo convesso $\theta \in [0, \pi]$ formato da $\bv$ e $\bw$ è definito univocamente dalla relazione:
+\[
+\cos\theta = \frac{\scal{\bv, \bw}}{\norm{\bv} \, \norm{\bw}} \iff \scal{\bv, \bw} = \norm{\bv} \, \norm{\bw} \cos\theta
+\]
+In particolare:
+\begin{itemize}
+    \item \textbf{Vettori paralleli concordi}: $\theta = 0 \implies \cos\theta = 1 \implies \scal{\bv, \bw} = \norm{\bv}\norm{\bw}$;
+    \item \textbf{Vettori paralleli discordi}: $\theta = \pi \implies \cos\theta = -1 \implies \scal{\bv, \bw} = -\norm{\bv}\norm{\bw}$;
+    \item \textbf{Vettori ortogonali (perpendicolari)}: $\theta = \frac{\pi}{2} \implies \cos\theta = 0 \implies \scal{\bv, \bw} = 0$.
+\end{itemize}
+\end{teorema}
+
+\begin{dimostrazione}
+Consideriamo il triangolo individuato nel piano bidimensionale generato dai vettori $\bv, \bw$ e dal vettore differenza $\bv - \bw$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    \coordinate (O) at (0,0);
+    \coordinate (V) at (4,0);
+    \coordinate (W) at (2.2,2.5);
+
+    \draw[thick, navyblue, ->] (O) -- node[below=2pt] {$\bv$} (V);
+    \draw[thick, forestgreen, ->] (O) -- node[above left=2pt] {$\bw$} (W);
+    \draw[thick, crimsonred, ->] (W) -- node[above right=2pt] {$\bv - \bw$} (V);
+
+    % Angolo theta
+    \draw[thick, warmamber] (0.7,0) arc (0:48.6:0.7);
+    \node[warmamber] at (1.0,0.35) {$\theta$};
+
+    \filldraw[navyblue] (O) circle (1.8pt) node[below left] {$O$};
+    \filldraw[navyblue] (V) circle (1.8pt) node[right] {$V$};
+    \filldraw[forestgreen] (W) circle (1.8pt) node[above] {$W$};
+\end{tikzpicture}
+\end{center}
+
+Per il Teorema di Carnot (Teorema del Coseno) applicato al triangolo di lunghezze di lato $\|\bv\|$, $\|\bw\|$ e $\|\bv - \bw\|$:
+\[
+\norm{\bv - \bw}^2 = \norm{\bv}^2 + \norm{\bw}^2 - 2\norm{\bv}\norm{\bw}\cos\theta
+\]
+Sviluppando algebricamente il membro sinistro mediante il prodotto scalare:
+\[
+\norm{\bv - \bw}^2 = \scal{\bv - \bw, \bv - \bw} = \norm{\bv}^2 - 2\scal{\bv, \bw} + \norm{\bw}^2
+\]
+Uguagliando le due espressioni:
+\[
+\norm{\bv}^2 + \norm{\bw}^2 - 2\scal{\bv, \bw} = \norm{\bv}^2 + \norm{\bw}^2 - 2\norm{\bv}\norm{\bw}\cos\theta
+\]
+Semplificando i termini identici $\norm{\bv}^2 + \norm{\bw}^2$ e dividendo per $-2$, si ottiene l'identità:
+\[
+\scal{\bv, \bw} = \norm{\bv} \, \norm{\bw} \cos\theta
+\]
+\end{dimostrazione}
+
+\begin{esempio}{Calcolo di Prodotto Scalare, Moduli e Angolo in $\mathbb{R}^3$}{es_angolo_vettori_calcolo}
+Siano assegnati i vettori $\mathbf{u} = (1, 2, -2)$ e $\mathbf{w} = (-2, 1, 2)$ in $\mathbb{R}^3$.
+\begin{align*}
+    \scal{\mathbf{u}, \mathbf{w}} &= (1)(-2) + (2)(1) + (-2)(2) = -2 + 2 - 4 = -4 \\
+    \norm{\mathbf{u}} &= \sqrt{1^2 + 2^2 + (-2)^2} = \sqrt{1 + 4 + 4} = \sqrt{9} = 3 \\
+    \norm{\mathbf{w}} &= \sqrt{(-2)^2 + 1^2 + 2^2} = \sqrt{4 + 1 + 4} = \sqrt{9} = 3
+\end{align*}
+Il coseno dell'angolo formato dai due vettori è:
+\[
+\cos\theta = \frac{\scal{\mathbf{u}, \mathbf{w}}}{\norm{\mathbf{u}}\norm{\mathbf{w}}} = \frac{-4}{3 \cdot 3} = -\frac{4}{9} \approx -0.444
+\]
+Poiché $\cos\theta < 0$, l'angolo compreso è ottuso ($\theta = \arccos(-4/9) \approx 2.031\text{ rad} \approx 116.39^\circ$).
+\end{esempio}
+
+\section{Topologia dello Spazio Euclideo \texorpdfstring{$\mathbb{R}^n$}{R\textasciicircum n}}
+
+Per poter parlare rigorosamente di limiti e continuità, occorre definire gli intorni dei punti nello spazio euclideo. La generalizzazione naturale dell'intervallo aperto $(x_0 - r, x_0 + r) \subset \R$ è la sfera aperta.
+
+\begin{definizione}{Palla Aperta, Palla Chiusa e Sfera}{palla_aperta_def}
+Sia $\bx_0 \in \Rn$ e sia $r > 0$ un numero reale positivo.
+\begin{itemize}
+    \item La \textbf{palla aperta} (o intorno sferico aperto) di centro $\bx_0$ e raggio $r$ è l'insieme:
+    \[
+    \mathcal{B}_r(\bx_0) = \graffe{\bx \in \Rn : d(\bx, \bx_0) < r} = \graffe{\bx \in \Rn : \norm{\bx - \bx_0} < r}
+    \]
+    \item La \textbf{palla chiusa} di centro $\bx_0$ e raggio $r$ è l'insieme:
+    \[
+    \overline{\mathcal{B}}_r(\bx_0) = \graffe{\bx \in \Rn : \norm{\bx - \bx_0} \le r}
+    \]
+    \item La \textbf{sfera} (superficie sferica) di centro $\bx_0$ e raggio $r$ è l'insieme:
+    \[
+    \mathbb{S}_r(\bx_0) = \graffe{\bx \in \Rn : \norm{\bx - \bx_0} = r}
+    \]
+\end{itemize}
+\end{definizione}
+
+\begin{definizione}{Classificazione Topologica dei Punti rispetto a un Insieme}{classificazione_punti_completa}
+Sia $A \subseteq \Rn$ un sottoinsieme arbitrario e sia $\bx_0 \in \Rn$. Il punto $\bx_0$ si definisce:
+\begin{enumerate}
+    \item \textbf{Punto interno} ad $A$: se esiste un raggio $r > 0$ tale che l'intera palla aperta $\mathcal{B}_r(\bx_0)$ è contenuta in $A$:
+    \[
+    \exists r > 0 \quad \text{tale che} \quad \mathcal{B}_r(\bx_0) \subseteq A
+    \]
+    L'insieme di tutti i punti interni ad $A$ si chiama \textbf{parte interna} (o semplicemente interno) di $A$ e si denota con $\Int(A)$ o $\mathring{A}$.
+    
+    \item \textbf{Punto esterno} ad $A$: se è un punto interno al complementare $A^c = \Rn \setminus A$, ossia:
+    \[
+    \exists r > 0 \quad \text{tale che} \quad \mathcal{B}_r(\bx_0) \cap A = \emptyset
+    \]
+    
+    \item \textbf{Punto di frontiera} per $A$: se in ogni sua palla aperta cadono sia punti appartenenti ad $A$ sia punti non appartenenti ad $A$:
+    \[
+    \forall r > 0, \quad \mathcal{B}_r(\bx_0) \cap A \neq \emptyset \quad \text{e} \quad \mathcal{B}_r(\bx_0) \cap A^c \neq \emptyset
+    \]
+    L'insieme di tutti i punti di frontiera si chiama \textbf{frontiera} (o bordo) di $A$ e si denota con $\partial A$ o $\Fr(A)$.
+    
+    \item \textbf{Punto di accumulazione} per $A$: se in ogni sua palla aperta privata del punto $\bx_0$ stesso cade almeno un elemento di $A$:
+    \[
+    \forall r > 0, \quad \left( \mathcal{B}_r(\bx_0) \setminus \graffe{\bx_0} \right) \cap A \neq \emptyset
+    \]
+    L'insieme di tutti i punti di accumulazione di $A$ si chiama \textbf{derivato} di $A$ e si denota con $\operatorname{Acc}(A)$ o $\operatorname{Der}(A)$.
+    
+    \item \textbf{Punto isolato} per $A$: se $\bx_0 \in A$ ma non è di accumulazione, ossia:
+    \[
+    \bx_0 \in A \quad \text{ed esiste } r > 0 \quad \text{tale che} \quad \mathcal{B}_r(\bx_0) \cap A = \graffe{\bx_0}
+    \]
+\end{enumerate}
+\end{definizione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15, >=Stealth]
+    % Dominio A con riempimento e bordo
+    \draw[thick, fill=navyblue!8, draw=navyblue] plot [smooth cycle, tension=0.75] coordinates {(0,0) (2.8,0.7) (4.6,-0.2) (5.2,2.2) (3.2,3.1) (1.0,2.5) (-0.6,1.4)};
+    \node[navyblue] at (2.2,1.6) {\Large $A$};
+
+    % Punto interno
+    \coordinate (Pint) at (1.5,1.0);
+    \draw[dashed, coolblue, fill=coolblue!20] (Pint) circle (0.5);
+    \filldraw[coolblue] (Pint) circle (2.2pt) node[below=3pt] {\small $\bx_{\text{int}} \in \Int(A)$};
+
+    % Punto di frontiera
+    \coordinate (Pfr) at (5.2,2.2);
+    \draw[dashed, crimsonred, fill=crimsonred!20] (Pfr) circle (0.55);
+    \filldraw[crimsonred] (Pfr) circle (2.2pt) node[above right] {\small $\bx_{\text{fr}} \in \partial A$};
+
+    % Punto esterno
+    \coordinate (Pext) at (6.2,0.6);
+    \draw[dashed, forestgreen, fill=forestgreen!15] (Pext) circle (0.5);
+    \filldraw[forestgreen] (Pext) circle (2.2pt) node[right] {\small $\bx_{\text{ext}} \in \operatorname{Ext}(A)$};
+
+    % Punto isolato
+    \coordinate (Piso) at (-1.8,0.6);
+    \draw[dashed, warmamber, fill=warmamber!20] (Piso) circle (0.45);
+    \filldraw[warmamber] (Piso) circle (2.2pt) node[left] {\small $\bx_{\text{iso}}$ (isolato)};
+\end{tikzpicture}
+\end{center}
+
+\begin{definizione}{Insiemi Aperti, Chiusi, Chiusura e Compattezza}{aperti_chiusi_compattezza}
+Sia $A \subseteq \Rn$:
+\begin{itemize}
+    \item $A$ è \textbf{aperto} se ogni suo punto è interno: $A = \Int(A)$ (ossia $\forall \bx \in A, \; \exists r > 0 \text{ t.c. } \mathcal{B}_r(\bx) \subseteq A$).
+    \item $A$ è \textbf{chiuso} se il suo complementare $A^c = \Rn \setminus A$ è aperto. Equivalentemente, $A$ è chiuso se e solo se contiene tutti i suoi punti di accumulazione ($\operatorname{Acc}(A) \subseteq A$) o, ancora, se e solo se contiene la propria frontiera ($\partial A \subseteq A$).
+    \item La \textbf{chiusura} (o aderenza) di $A$ è l'insieme:
+    \[
+    \overline{A} = \Cl(A) = A \cup \operatorname{Acc}(A) = A \cup \partial A = \Int(A) \cup \partial A
+    \]
+    \item $A$ è \textbf{limitato} se è contenuto in una palla aperta di raggio finito:
+    \[
+    \exists M > 0 \quad \text{tale che} \quad A \subseteq \mathcal{B}_M(\bzero) \iff \sup_{\bx \in A} \norm{\bx} < +\infty
+    \]
+    \item $A$ è \textbf{compatto} se da ogni suo ricoprimento aperto è possibile estrarre un sottoricoprimento finito (definizione topologica di Heine-Borel-Lebesgue).
+\end{itemize}
+\end{definizione}
+
+\begin{teorema}{Teorema di Heine-Borel in $\mathbb{R}^n$}{heine_borel_rn}
+Un sottoinsieme $K \subseteq \Rn$ è compatto se e solo se è \textbf{chiuso e limitato}.
+\end{teorema}
+
+\begin{osservazione}[Completezza e Teorema di Bolzano-Weierstrass]
+Lo spazio euclideo $\Rn$ è uno \textbf{spazio metrico completo}: ogni successione di Cauchy $\graffe{\bx_k}_{k \in \N} \subset \Rn$ (ossia tale che $\forall \eps > 0, \; \exists N \in \N : \forall j, k > N \implies \norm{\bx_j - \bx_k} < \eps$) converge a un punto limite $\bar{\bx} \in \Rn$.
+Inoltre vale il \textbf{Teorema di Bolzano-Weierstrass}: da ogni successione limitata in $\Rn$ è sempre possibile estrarre una sottosuccessione convergente.
+\end{osservazione}
+
+\begin{definizione}{Insiemi Connessi per Archi e Convessi}{connessione_convessita}
+Sia $A \subseteq \Rn$:
+\begin{itemize}
+    \item $A$ si dice \textbf{connesso per archi} se per ogni coppia di punti $\bx_0, \bx_1 \in A$ esiste una curva continua $\gamma: [0, 1] \to A$ tale che $\gamma(0) = \bx_0$ e $\gamma(1) = \bx_1$.
+    \item $A$ si dice \textbf{convesso} se per ogni coppia di punti $\bx_0, \bx_1 \in A$ l'intero segmento rettilineo che li congiunge è contenuto in $A$:
+    \[
+    S(\bx_0, \bx_1) = \graffe{(1-t)\bx_0 + t\bx_1 : t \in [0, 1]} \subseteq A
+    \]
+    Ogni insieme convesso è banalmente connesso per archi.
+\end{itemize}
+\end{definizione}
+
+\begin{esame}[Trabocchetti Concettuali Tipici d'Esame]
+\begin{enumerate}
+    \item \textbf{Aperto non significa ``non chiuso''}: Gli insiemi non sono porte! Esistono insiemi che non sono né aperti né chiusi (ad esempio il semintervallo $[0, 1) \times (0, 1] \subset \mathbb{R}^2$ oppure $\Q^2$), ed esistono insiemi che sono contemporaneamente aperti e chiusi (in $\Rn$ solo $\emptyset$ e l'intero $\Rn$).
+    \item \textbf{Punti di accumulazione vs appartenenza}: Un punto di accumulazione $\bx_0 \in \operatorname{Acc}(A)$ \textit{non} appartiene necessariamente ad $A$. Ad esempio, per la palla bucata $A = \mathcal{B}_1(\bzero) \setminus \graffe{\bzero}$, il centro $\bzero$ è di accumulazione per $A$ ma $\bzero \notin A$.
+    \item \textbf{Punti isolati}: Un punto isolato $\bx_0$ appartiene sempre per definizione ad $A$, ma \textit{non} è mai un punto di accumulazione ($\bx_0 \notin \operatorname{Acc}(A)$).
+\end{enumerate}
+\end{esame}
+
+\section{Funzioni Multivariabili: Domini, Grafici e Insiemi di Livello}
+
+\begin{definizione}{Funzione Reale di Più Variabili}{campo_scalare_def}
+Sia $D \subseteq \Rn$ un sottoinsieme non vuoto. Una \textbf{funzione reale di $n$ variabili reali} (o campo scalare) è una legge univoca $f: D \to \R$ che associa a ogni vettore $\bx = (x_1, \dots, x_n) \in D$ un unico numero reale $z = f(\bx) = f(x_1, \dots, x_n)$.
+\begin{itemize}
+    \item Il \textbf{dominio naturale} (o campo di esistenza) è il più ampio sottoinsieme di $\Rn$ in cui l'espressione analitica di $f$ è ben definita in $\R$.
+    \item Il \textbf{grafico} di $f$ è il sottoinsieme di $\R^{n+1}$ costituito da:
+    \[
+    \operatorname{Graf}(f) = \graffe{(\bx, f(\bx)) \in \Rn \times \R : \bx \in D} \subset \R^{n+1}
+    \]
+    Per $n = 2$, il grafico $z = f(x,y)$ rappresenta una \textbf{superficie bidimensionale} nello spazio euclideo $\mathbb{R}^3$.
+    \item L'\textbf{insieme di livello} di $f$ a quota $c \in \R$ è il sottoinsieme del dominio $D$:
+    \[
+    L_c(f) = \graffe{\bx \in D : f(\bx) = c}
+    \]
+    Per $n = 2$, $L_c(f)$ è una curva nel piano cartesiano $xy$, detta \textbf{curva di livello} (o isoipsa).
+\end{itemize}
+\end{definizione}
+
+\begin{osservazione}[Significato Fisico ed Economico delle Curve di Livello]
+Le curve di livello sono lo strumento fondamentale per rappresentare su un supporto bidimensionale una grandezza dipendente da due variabili:
+\begin{itemize}
+    \item In \textbf{geografia / topografia}, rappresentano le isoipse (curve a quota altimetrica costante);
+    \item In \textbf{termodinamica e meteorologia}, rappresentano le isoterme (temperatura costante) e le isobare (pressione costante);
+    \item In \textbf{ingegneria gestionale ed economia}, descrivono gli \textbf{isoquanti di produzione} (combinazioni di fattori produttivi che generano il medesimo output) o le \textbf{curve di indifferenza} del consumatore.
+\end{itemize}
+\end{osservazione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Assi 3D
+    \draw[->, gray!80] (0,0) -- (4.2,0) node[right, black] {$y$};
+    \draw[->, gray!80] (0,0) -- (-2.2,-1.6) node[below left, black] {$x$};
+    \draw[->, gray!80] (0,0) -- (0,3.8) node[above, black] {$z$};
+
+    % Superficie parabolica campana
+    \draw[thick, navyblue, fill=navyblue!12, fill opacity=0.7] 
+        plot[domain=-1.8:1.8, samples=40] (\x, {2.6 - 0.6*\x*\x}) -- cycle;
+
+    % Piano di taglio z = c
+    \draw[dashed, crimsonred, thick] (-2.2,1.5) -- (3.2,1.5) node[right] {Piano $z = c$};
+
+    % Linee tratteggiate di proiezione verso il piano xy
+    \draw[dotted, crimsonred] (-1.35,1.5) -- (-1.35,-0.6);
+    \draw[dotted, crimsonred] (1.35,1.5) -- (1.35,-0.6);
+
+    % Curva di livello proiettata sul piano xy
+    \draw[thick, forestgreen, fill=forestgreen!10] (0.2,-0.7) ellipse (1.6 and 0.55);
+    \node[forestgreen] at (2.4,-0.8) {$L_c(f) = \{(x,y) \in D : f(x,y)=c\}$};
+
+    \node[navyblue] at (1.6,2.9) {$z = f(x,y)$ (Grafico 3D)};
+\end{tikzpicture}
+\end{center}
+
+\begin{esempio}{Determinazione di Dominio e Curve di Livello}{es_dominio_livello}
+Determinare il dominio naturale e descrivere le curve di livello della funzione:
+\[
+f(x,y) = \ln\left( 4 - x^2 - y^2 \right) + \sqrt{y - x}
+\]
+\textbf{Svolgimento}:
+Il dominio $D$ è determinato dalla contemporanea validità delle condizioni di realtà:
+\[
+\begin{cases}
+4 - x^2 - y^2 > 0 &\implies x^2 + y^2 < 4 \quad (\text{interno del cerchio di raggio } 2) \\
+y - x \ge 0 &\implies y \ge x \quad (\text{semipiano sopra la bisettrice } y=x)
+\end{cases}
+\]
+Dunque $D = \graffe{(x,y) \in \Rdue : x^2 + y^2 < 4 \text{ e } y \ge x}$ è un semidisco aperto sulla circonferenza e chiuso sul segmento di bisettrice $y = x$.
+
+Per le curve di livello $f(x,y) = c$, considerando per semplicità la componente radiale $g(x,y) = 4 - x^2 - y^2 = k > 0$, le curve di livello sono archi di circonferenze concentriche di raggio $R = \sqrt{4-k}$ per $0 < k \le 4$.
+\end{esempio}
+
+\section{Limiti per Funzioni Multivariabili e Tecniche di Non Esistenza}
+
+\begin{definizione}{Limite in Più Variabili}{def_limite_multivar_completa}
+Sia $f: D \subseteq \Rn \to \R$ e sia $\bx_0 \in \Rn$ un punto di accumulazione per $D$. Diciamo che il limite di $f(\bx)$ per $\bx$ che tende a $\bx_0$ è $L \in \R$, e scriviamo:
+\[
+\lim_{\bx \to \bx_0} f(\bx) = L
+\]
+se per ogni intorno sferico di $L$ su $\R$ esiste un intorno sferico di $\bx_0$ in $\Rn$ tale che l'immagine di ogni punto di $D$ (escluso al più $\bx_0$) cade nell'intorno di $L$:
+\[
+\forall \eps > 0, \quad \exists \de > 0 \quad \text{tale che} \quad \forall \bx \in D, \; 0 < \norm{\bx - \bx_0} < \de \implies \abs{f(\bx) - L} < \eps
+\]
+\end{definizione}
+
+\begin{esame}[La Profonda Differenza tra Limiti in 1D e in Più Variabili]
+In Analisi 1, sulla retta reale $\R$, un punto $x_0$ può essere avvicinato esclusivamente da due direzioni: da destra ($x \to x_0^+$) e da sinistra ($x \to x_0^-$). L'uguaglianza tra limite destro e limite sinistro garantisce l'esistenza del limite.\\
+In $\Rdue$ o $\Rn$, invece, ci si può avvicinare al punto $(x_0, y_0)$ lungo:
+\begin{itemize}
+    \item Infinite rette con pendenza $m \in \R$;
+    \item Infinite parabole $y - y_0 = k (x - x_0)^2$;
+    \item Infinite curve polinomiali, esponenziali, logaritmiche, spirali o cammini frattali!
+\end{itemize}
+\textbf{Principio Fondamentale}:
+\begin{enumerate}
+    \item Se calcolando il limite lungo due diverse direzioni o curve si ottengono due valori distinti, \textbf{il limite NON esiste}.
+    \item Se lungo tutte le rette passanti per il punto il limite assume lo stesso valore costante $L$, \textbf{NON si può concludere che il limite esista e valga $L$}! Potrebbe infatti esistere una parabola lungo la quale il limite assume un valore differente.
+\end{enumerate}
+\end{esame}
+
+\begin{metodo}[Schema Operativo per lo Studio dei Limiti in Due Variabili $\lim_{(x,y) \to (0,0)} f(x,y)$]
+\begin{enumerate}
+    \item \textbf{Fase 1: Test delle Rette (Fascio $y = mx$)}:
+    Si valuta la restrizione della funzione al fascio di rette passanti per l'origine:
+    \[
+    \lim_{x \to 0} f(x, mx) = \varphi(m)
+    \]
+    Se $\varphi(m)$ dipende dalla pendenza $m \implies$ \textbf{il limite non esiste}.
+    
+    \item \textbf{Fase 2: Test delle Curve Omogenee / Parabole ($y = k x^\alpha$)}:
+    Se lungo tutte le rette si ottiene un valore costante $L$ indipendente da $m$, si cerca una relazione $y = k x^\alpha$ che bilanci i gradi dei monomi a denominatore.
+    Se $\lim_{x \to 0} f(x, k x^\alpha) = \psi(k)$ dipende dal parametro $k \implies$ \textbf{il limite non esiste}.
+    
+    \item \textbf{Fase 3: Dimostrazione dell'Esistenza con Coordinate Polari}:
+    Se tutti i test direzionali suggeriscono che il candidato limite sia $L$, si effettua il cambio di coordinate polari:
+    \[
+    \begin{cases} x = x_0 + \rho \cos\theta \\ y = y_0 + \rho \sen\theta \end{cases} \quad \text{con } \rho = \norm{\bx - \bx_0} \to 0^+ \text{ e } \theta \in [0, 2\pi)
+    \]
+    Si valuta la differenza in valore assoluto:
+    \[
+    \abs{f(x_0+\rho\cos\theta, y_0+\rho\sen\theta) - L}
+    \]
+    Se è possibile \textbf{maggiorare uniformemente rispetto a $\theta$} tale quantità con una funzione $g(\rho)$ infinitesima dipendente unicamente da $\rho$:
+    \[
+    \abs{f(x_0+\rho\cos\theta, y_0+\rho\sen\theta) - L} \le g(\rho), \quad \text{con } \lim_{\rho \to 0^+} g(\rho) = 0
+    \]
+    allora per il Teorema dei Carabinieri il limite globale esiste ed è esattamente $L$.
+    
+    \item \textbf{Fase 4: Maggiorazioni Notevoli}:
+    Spesso sono risolutive le disuguaglianze algebriche standard:
+    \[
+    \abs{x} \le \sqrt{x^2+y^2} = \rho, \quad \abs{y} \le \sqrt{x^2+y^2} = \rho, \quad \abs{xy} \le \frac{x^2+y^2}{2} = \frac{\rho^2}{2}
+    \]
+    e per le frazioni: $\frac{x^2}{x^2+y^2} \le 1$, $\frac{y^2}{x^2+y^2} \le 1$.
+\end{enumerate}
+\end{metodo}
+
+\begin{esempio}{Controesempio Fondamentale: Limite Costante sulle Rette ma Nullo sulle Parabole}{es_controes_parabole}
+Studiare l'esistenza del limite:
+\[
+\lim_{(x,y) \to (0,0)} \frac{x^2 y}{x^4 + y^2}
+\]
+\textbf{Risoluzione}:
+\begin{enumerate}
+    \item Restrizione alle rette $y = mx$:
+    \[
+    \lim_{x \to 0} \frac{x^2 (mx)}{x^4 + (mx)^2} = \lim_{x \to 0} \frac{m x^3}{x^2(x^2 + m^2)} = \lim_{x \to 0} \frac{m x}{x^2 + m^2} = 0 \quad (\forall m \neq 0)
+    \]
+    Lungo gli assi cartesiani ($x=0$ o $y=0$) la funzione è identicamente nulla. Dunque lungo qualsiasi retta il limite vale $0$.
+    \item Restrizione alla famiglia di parabole $y = k x^2$:
+    I gradi a denominatore sono $x^4$ e $y^2 = (k x^2)^2 = k^2 x^4$, perfettamente bilanciati!
+    \[
+    \lim_{x \to 0} f(x, k x^2) = \lim_{x \to 0} \frac{x^2 (k x^2)}{x^4 + (k x^2)^2} = \lim_{x \to 0} \frac{k x^4}{x^4(1 + k^2)} = \frac{k}{1 + k^2}
+    \]
+    Il valore del limite varia con continuità al variare del parametro $k$ della parabola:
+    \begin{itemize}
+        \item Se $k = 1 \implies \lim = 1/2$;
+        \item Se $k = -1 \implies \lim = -1/2$;
+        \item Se $k = 2 \implies \lim = 2/5$.
+    \end{itemize}
+    \textbf{Conclusione}: Il limite globale $\lim_{(x,y) \to (0,0)} \frac{x^2 y}{x^4 + y^2}$ \textbf{non esiste}.
+\end{enumerate}
+\end{esempio}
+
+\begin{esempio}{Dimostrazione di Esistenza con Coordinate Polari}{es_polari_maggiorazione}
+Dimostrare l'esistenza del limite e calcolarne il valore:
+\[
+\lim_{(x,y) \to (0,0)} \frac{x^3 y^2}{x^2 + y^2}
+\]
+\textbf{Risoluzione}:
+Passando in coordinate polari $x = \rho\cos\theta, y = \rho\sen\theta$:
+\[
+f(\rho\cos\theta, \rho\sen\theta) = \frac{(\rho\cos\theta)^3 (\rho\sen\theta)^2}{\rho^2} = \frac{\rho^5 \cos^3\theta \sen^2\theta}{\rho^2} = \rho^3 \cos^3\theta \sen^2\theta
+\]
+Valutiamo il valore assoluto della differenza rispetto al candidato limite $L = 0$:
+\[
+\abs{f(\rho\cos\theta, \rho\sen\theta) - 0} = \rho^3 \abs{\cos^3\theta} \abs{\sen^2\theta} \le \rho^3 \cdot 1 \cdot 1 = \rho^3
+\]
+Poiché la funzione maggiorante $g(\rho) = \rho^3$ non dipende da $\theta$ e $\lim_{\rho \to 0^+} g(\rho) = 0$, per il Teorema dei Carabinieri concludiamo con certezza che:
+\[
+\lim_{(x,y) \to (0,0)} \frac{x^3 y^2}{x^2 + y^2} = 0
+\]
+\end{esempio}
+
+\section{Continuità e Teoremi Globali in Più Variabili}
+
+\begin{definizione}{Continuità}{def_continuita_rn}
+Sia $f: D \subseteq \Rn \to \R$ e sia $\bx_0 \in D$. La funzione $f$ si dice \textbf{continua nel punto $\bx_0$} se:
+\begin{enumerate}
+    \item Se $\bx_0$ è punto isolato di $D$, $f$ è continua in $\bx_0$ per convenzione;
+    \item Se $\bx_0$ è punto di accumulazione di $D$, $f$ è continua in $\bx_0$ se e solo se:
+    \[
+    \lim_{\bx \to \bx_0} f(\bx) = f(\bx_0)
+    \]
+\end{enumerate}
+La funzione $f$ si dice \textbf{continua su $D$} (e si scrive $f \in C(D)$) se è continua in ogni punto $\bx_0 \in D$.
+\end{definizione}
+
+\begin{teorema}{Teorema di Weierstrass in $\mathbb{R}^n$}{weierstrass_multivar}
+Sia $K \subset \Rn$ un insieme \textbf{compatto} (chiuso e limitato) non vuoto e sia $f: K \to \R$ una funzione \textbf{continua}.
+Allora $f$ assume su $K$ il suo \textbf{massimo assoluto} e il suo \textbf{minimo assoluto}, ossia esistono due punti $\bx_{\min}, \bx_{\max} \in K$ tali che:
+\[
+f(\bx_{\min}) \le f(\bx) \le f(\bx_{\max}), \quad \forall \bx \in K
+\]
+\end{teorema}
+
+\begin{teorema}{Teorema dei Valori Intermedi (di Connessione)}{thm_valori_intermedi}
+Sia $E \subseteq \Rn$ un insieme \textbf{connesso per archi} e sia $f: E \to \R$ una funzione continua. Allora l'immagine $f(E) \subseteq \R$ è un intervallo di $\R$. In particolare, se $f$ assume due valori $y_1 < y_2$, allora per ogni valore intermedio $\gamma \in (y_1, y_2)$ esiste almeno un punto $\boldsymbol{\xi} \in E$ tale che $f(\boldsymbol{\xi}) = \gamma$.
+\end{teorema}

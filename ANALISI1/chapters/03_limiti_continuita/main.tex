@@ -1,0 +1,223 @@
+\chapter{Limiti e Continuità}
+\label{chap:limiti_continuita}
+
+Il concetto di **limite** rappresenta il vero punto di svolta concettuale che separa l'algebra classica dall'Analisi Matematica. Esso permette di descrivere il comportamento locale e asintotico di una funzione in prossimità di un punto o all'infinito, superando l'impossibilità algebrica di valutare direttamente espressioni in punti singolari o forme indeterminate.
+
+In questo capitolo introduciamo la nozione rigorosa di limite tramite il linguaggio topologico degli intorni ($\eps$-$\de$), dimostriamo i teoremi fondamentali di convergenza e confronto, presentiamo la tavola dei limiti notevoli con dimostrazione geometrica e sviluppiamo la teoria delle funzioni continue, culminando con i teoremi globali di Weierstrass e degli zeri.
+
+% ==============================================================================
+\section{Topologia della Retta Reale e Definizione di Limite}
+\label{sec:definizione_limite_dettagliata}
+% ==============================================================================
+
+Prima di poter definire il limite di una funzione per $x$ che tende a $x_0$, è necessario precisare la natura topologica del punto di accumulazione.
+
+\begin{definizione}{Intorno e Punto di Accumulazione}{punto_accumulazione}
+Sia $x_0 \in \R$ ed $r > 0$:
+\begin{itemize}
+    \item L'\textbf{intorno sferico} di centro $x_0$ e raggio $r$ è l'intervallo aperto $I_r(x_0) = (x_0 - r, x_0 + r) = \{x \in \R \mid |x - x_0| < r\}$.
+    \item L'\textbf{intorno bucato} è l'intorno privato del centro: $I^*_r(x_0) = I_r(x_0) \setminus \{x_0\} = \{x \in \R \mid 0 < |x - x_0| < r\}$.
+    \item Dato un sottoinsieme $A \subseteq \R$, un punto $x_0 \in \R$ si dice \textbf{punto di accumulazione} per $A$ se ogni intorno bucato di $x_0$ contiene almeno un punto di $A$:
+    \[
+        \forall r > 0, \quad I^*_r(x_0) \cap A \neq \emptyset
+    \]
+\end{itemize}
+\end{definizione}
+
+\begin{osservazione}[Il Punto di Accumulazione non deve appartenere ad $A$]
+Un punto di accumulazione $x_0$ può appartenere oppure no all'insieme di definizione $A = \dom(f)$. L'operazione di limite analizza il comportamento della funzione nei punti vicini a $x_0$, disinteressandosi completamente di cosa accada esattamente nel punto $x_0$ (che potrebbe persino non essere nel dominio).
+\end{osservazione}
+
+\subsection{La Definizione \texorpdfstring{$\eps$-$\de$}{Epsilon-Delta} di Limite}
+La formalizzazione dovuta a Cauchy e Weierstrass traduce l'idea intuitiva (``$f(x)$ si avvicina arbitrariamente a $L$ quando $x$ è sufficientemente vicino a $x_0$'') in un controllo quantitativo rigoroso dell'errore di uscita in funzione della tolleranza di ingresso.
+
+\begin{definizione}{Limite Finito al Finito ($\lim_{x \to x_0} f(x) = L$)}{limite_finito_finito}
+Sia $f \colon A \subseteq \R \to \R$ e sia $x_0$ un punto di accumulazione per $A$. Si dice che:
+\[
+    \lim_{x \to x_0} f(x) = L \in \R
+\]
+se per ogni margine di tolleranza $\eps > 0$ (errore sull'output) esiste un raggio $\de = \de(\eps) > 0$ (errore sull'input) tale che, per ogni $x \in A$ con $0 < |x - x_0| < \de$, si ha $|f(x) - L| < \eps$. In simboli logici:
+\[
+    \forall \eps > 0, \; \exists \de > 0 \quad \text{tale che} \quad \forall x \in A, \; 0 < |x - x_0| < \de \implies |f(x) - L| < \eps
+\]
+\end{definizione}
+
+\begin{metodo}[Quadro Sinottico delle Estensioni con Infinito]
+\begin{enumerate}
+    \item \textbf{Limite Infinito al Finito} ($\lim_{x \to x_0} f(x) = +\infty$):
+    \[
+        \forall M > 0, \; \exists \de > 0 : \forall x \in A, \; 0 < |x - x_0| < \de \implies f(x) > M
+    \]
+    Geometricamente corrisponde a un \textbf{asintoto verticale} $x = x_0$.
+    \item \textbf{Limite Finito all'Infinito} ($\lim_{x \to +\infty} f(x) = L$):
+    \[
+        \forall \eps > 0, \; \exists K > 0 : \forall x \in A, \; x > K \implies |f(x) - L| < \eps
+    \]
+    Geometricamente corrisponde a un \textbf{asintoto orizzontale} $y = L$.
+    \item \textbf{Limite Infinito all'Infinito} ($\lim_{x \to +\infty} f(x) = +\infty$):
+    \[
+        \forall M > 0, \; \exists K > 0 : \forall x \in A, \; x > K \implies f(x) > M
+    \]
+\end{enumerate}
+\end{metodo}
+
+\subsection{Limiti Destri, Sinistri e Condizione di Esistenza}
+Spesso il comportamento a destra e a sinistra di un punto diverge. Si definiscono il **limite destro** ($\lim_{x \to x_0^+} f(x)$ considerando $x \in (x_0, x_0+\de)$) e il **limite sinistro** ($\lim_{x \to x_0^-} f(x)$ considerando $x \in (x_0-\de, x_0)$).
+
+\begin{teorema}{Condizione Necessaria e Sufficiente di Esistenza del Limite}{limite_destro_sinistro}
+Sia $x_0$ punto di accumulazione bilaterale per $A$. Il limite $\lim_{x \to x_0} f(x)$ esiste ed è uguale a $L \in \Rext$ se e solo se esistono entrambi i limiti laterali e coincidono:
+\[
+    \lim_{x \to x_0} f(x) = L \iff \lim_{x \to x_0^+} f(x) = \lim_{x \to x_0^-} f(x) = L
+\]
+\end{teorema}
+
+% ==============================================================================
+\section{Teoremi Fondamentali sui Limiti}
+\label{sec:teoremi_limiti_dimostrazioni}
+% ==============================================================================
+
+Sviluppiamo ora le dimostrazioni complete dei teoremi cardine della teoria della convergenza.
+
+\begin{teorema}{Unicità del Limite}{unicita_limite_dim}
+Se una funzione ammette limite per $x \to x_0$, allora tale limite è unico.
+\end{teorema}
+
+\begin{dimostrazione}
+Supponiamo per assurdo che esistano due limiti distinti $L_1, L_2 \in \R$ con $L_1 \neq L_2$, e poniamo $\eps = \frac{|L_1 - L_2|}{2} > 0$.
+Per la definizione di limite applicata a $L_1$ e $L_2$, esistono $\de_1 > 0$ e $\de_2 > 0$ tali che:
+\begin{align*}
+    0 < |x - x_0| < \de_1 &\implies |f(x) - L_1| < \eps \\
+    0 < |x - x_0| < \de_2 &\implies |f(x) - L_2| < \eps
+\end{align*}
+Scegliendo $\de = \min\{\de_1, \de_2\} > 0$ e un punto $x \in A$ con $0 < |x - x_0| < \de$, per la disuguaglianza triangolare si ha:
+\[
+    |L_1 - L_2| = |L_1 - f(x) + f(x) - L_2| \le |f(x) - L_1| + |f(x) - L_2| < \eps + \eps = 2\eps = |L_1 - L_2|
+\]
+Otteniamo la contraddizione $|L_1 - L_2| < |L_1 - L_2|$, il che prova che $L_1 = L_2$.
+\end{dimostrazione}
+
+\begin{teorema}{Teorema della Permanenza del Segno}{permanenza_segno_dim}
+Sia $\lim_{x \to x_0} f(x) = L > 0$ (rispettivamente $L < 0$). Allora esiste un intorno bucato $I^*_\de(x_0)$ nel quale la funzione assume valori strettamente positivi: $f(x) > 0$ $\forall x \in I^*_\de(x_0) \cap A$.
+\end{teorema}
+
+\begin{dimostrazione}
+Scegliamo nella definizione di limite $\eps = \frac{L}{2} > 0$. Esiste allora $\de > 0$ tale che per ogni $x \in A$ con $0 < |x - x_0| < \de$:
+\[
+    |f(x) - L| < \frac{L}{2} \iff -\frac{L}{2} < f(x) - L < \frac{L}{2} \iff 0 < \frac{L}{2} < f(x) < \frac{3L}{2}
+\]
+In particolare $f(x) > \frac{L}{2} > 0$, provando la tesi.
+\end{dimostrazione}
+
+\begin{teorema}{Teorema del Confronto (dei Due Carabinieri)}{due_carabinieri_dim}
+Siano $f, g, h \colon A \to \R$ tre funzioni definite in un intorno bucato di $x_0$ tali che:
+\begin{enumerate}
+    \item $g(x) \le f(x) \le h(x)$ per ogni $x \in I^*_r(x_0) \cap A$;
+    \item $\lim_{x \to x_0} g(x) = \lim_{x \to x_0} h(x) = L \in \R$.
+\end{enumerate}
+Allora esiste anche il limite di $f(x)$ e si ha:
+\[
+    \lim_{x \to x_0} f(x) = L
+\]
+\end{teorema}
+
+\begin{dimostrazione}
+Fissato $\eps > 0$, per le ipotesi su $g$ e $h$ esistono $\de_1, \de_2 > 0$ tali che:
+\begin{align*}
+    0 < |x - x_0| < \de_1 &\implies L - \eps < g(x) < L + \eps \\
+    0 < |x - x_0| < \de_2 &\implies L - \eps < h(x) < L + \eps
+\end{align*}
+Posto $\de = \min\{r, \de_1, \de_2\} > 0$, per ogni $x \in A$ con $0 < |x - x_0| < \de$ si ha la catena di disuguaglianze:
+\[
+    L - \eps < g(x) \le f(x) \le h(x) < L + \eps \implies L - \eps < f(x) < L + \eps \iff |f(x) - L| < \eps
+\]
+il che dimostra che $\lim_{x \to x_0} f(x) = L$.
+\end{dimostrazione}
+
+% ==============================================================================
+\section{Limiti Notevoli e Dimostrazione Geometrica}
+\label{sec:limiti_notevoli_dimostrazione}
+% ==============================================================================
+
+\begin{teorema}{Limite Notevole Trigonometrico Fondamentale}{limite_notevole_seno}
+\[
+    \lim_{x \to 0} \frac{\sen x}{x} = 1
+\]
+\end{teorema}
+
+\begin{dimostrazione}
+Consideriamo $x \in (0, \pi/2)$. Sulla circonferenza goniometrica, confrontiamo le aree di tre figure geometriche annidate:
+1. Triangolo rettangolo interno $O P A$ di base $1$ e altezza $\sen x$: $\operatorname{Area}(OPA) = \frac{1 \cdot \sen x}{2}$.
+2. Settore circolare $O P A$ di raggio $1$ e angolo al centro $x$: $\operatorname{Area}(\text{settore}) = \frac{1^2 \cdot x}{2} = \frac{x}{2}$.
+3. Triangolo rettangolo esterno $O T A$ di base $1$ e altezza $\tg x$: $\operatorname{Area}(OTA) = \frac{1 \cdot \tg x}{2}$.
+Poiché ciascuna figura contiene la precedente:
+\[
+    \frac{\sen x}{2} < \frac{x}{2} < \frac{\tg x}{2} \iff \sen x < x < \frac{\sen x}{\cos x}
+\]
+Dividendo tutti i membri per $\sen x > 0$:
+\[
+    1 < \frac{x}{\sen x} < \frac{1}{\cos x} \iff \cos x < \frac{\sen x}{x} < 1
+\]
+Poiché $\cos(-x) = \cos x$ e $\frac{\sen(-x)}{-x} = \frac{-\sen x}{-x} = \frac{\sen x}{x}$, la disuguaglianza vale identica per simmetria per ogni $x \in (-\pi/2, 0)$.
+Poiché $\lim_{x \to 0} \cos x = 1$, applicando il Teorema dei Due Carabinieri si conclude che $\lim_{x \to 0} \frac{\sen x}{x} = 1$.
+\end{dimostrazione}
+
+\begin{corollario}{Limite Notevole del Coseno}{limite_coseno}
+\[
+    \lim_{x \to 0} \frac{1 - \cos x}{x^2} = \frac{1}{2}
+\]
+\end{corollario}
+
+\begin{dimostrazione}
+Moltiplicando e dividendo per $1 + \cos x$:
+\begin{align*}
+    \lim_{x \to 0} \frac{1 - \cos x}{x^2} &= \lim_{x \to 0} \frac{(1 - \cos x)(1 + \cos x)}{x^2(1 + \cos x)} = \lim_{x \to 0} \frac{1 - \cos^2 x}{x^2(1 + \cos x)} \\
+    &= \lim_{x \to 0} \left(\frac{\sen x}{x}\right)^2 \cdot \frac{1}{1 + \cos x} = 1^2 \cdot \frac{1}{1 + 1} = \frac{1}{2}
+\end{align*}
+\end{dimostrazione}
+
+% ==============================================================================
+\section{Funzioni Continue e Teoremi Globali}
+\label{sec:continuita_teoremi_globali}
+% ==============================================================================
+
+\begin{definizione}{Continuità in un Punto e su un Insieme}{continuita_def}
+Sia $f \colon A \subseteq \R \to \R$ e $x_0 \in A$:
+\begin{itemize}
+    \item $f$ è \textbf{continua nel punto $x_0$} se $\lim_{x \to x_0} f(x) = f(x_0)$, ossia:
+    \[
+        \forall \eps > 0, \; \exists \de > 0 : \forall x \in A, \; |x - x_0| < \de \implies |f(x) - f(x_0)| < \eps
+    \]
+    \item $f$ è \textbf{continua sull'insieme $A$} se è continua in ogni punto $x_0 \in A$.
+\end{itemize}
+\end{definizione}
+
+\begin{esame}[La Continuità è una Proprietà Interna al Dominio]
+È un errore comune considerare $f(x) = \frac{1}{x}$ come una funzione discontinua.
+La funzione $f(x) = 1/x$ ha dominio $A = \R \setminus \{0\}$ ed è **perfettamente continua su tutto il suo dominio**. Il punto $x = 0$ non appartiene a $\dom(f)$, dunque non ha senso discutere la continuità in $0$.
+\end{esame}
+
+\subsection{I Teoremi Fondamentali sulle Funzioni Continue}
+I seguenti tre teoremi costituiscono l'ossatura analitica per lo studio delle equazioni non lineari e dei problemi di ottimizzazione.
+
+\begin{teorema}{Teorema di Weierstrass (Esistenza di Massimi e Minimi Assoluti)}{weierstrass_dim}
+Sia $f \colon [a, b] \to \R$ una funzione continua definita su un intervallo chiuso e limitato (compatto) $[a, b]$.
+Allora $f$ ammette punto di massimo assoluto $x_{\max} \in [a, b]$ e punto di minimo assoluto $x_{\min} \in [a, b]$:
+\[
+    \exists x_{\min}, x_{\max} \in [a, b] \quad \text{tali che} \quad f(x_{\min}) \le f(x) \le f(x_{\max}) \quad \forall x \in [a, b]
+\]
+\end{teorema}
+
+\begin{teorema}{Teorema di Esistenza degli Zeri}{teorema_zeri}
+Sia $f \colon [a, b] \to \R$ una funzione continua tale che ai bordi assuma valori di segno opposto:
+\[
+    f(a) \cdot f(b) < 0
+\]
+Allora esiste almeno un punto interno $c \in (a, b)$ tale che $f(c) = 0$.
+\end{teorema}
+
+\begin{teorema}{Teorema dei Valori Intermedi (di Darboux)}{valori_intermedi}
+Sia $f \colon [a, b] \to \R$ continua. Allora $f$ assume tutti i valori compresi tra il suo minimo assoluto $m$ e il suo massimo assoluto $M$, ossia la sua immagine è l'intervallo compatto:
+\[
+    \Imm(f) = [m, M]
+\]
+\end{teorema}

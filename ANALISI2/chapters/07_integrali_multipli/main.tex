@@ -1,0 +1,642 @@
+% ==============================================================================
+% CAPITOLO 7: INTEGRALI MULTIPLI (DOPPI E TRIPLI)
+% ==============================================================================
+
+\chapter{Integrali Multipli: Integrali Doppi e Tripli}
+\label{chap:integrali_multipli}
+
+\section{Introduzione Concettuale e Misura di Peano-Jordan}
+
+Nel calcolo infinitesimale monodimensionale, l'integrale di Riemann di una funzione continua e limitata $f: [a,b] \to \R$ nasce per formalizzare rigorosamente l'idea geometrica di \textit{area con segno} del trapezoide sotteso al grafico di $f$. Quando si passa a funzioni scalari di due o più variabili indipendenti, ad esempio $f: D \subset \Rdue \to \R$ o $f: \Omega \subset \Rtre \to \R$, la naturale generalizzazione conduce al concetto di \textbf{integrale multiplo} (doppio, triplo o $n$-plo).
+
+Nel caso bidimensionale, l'integrale doppio $\iint_D f(x,y) \dx\dy$ esprime il \textit{volume con segno} del cilindroide delimitato inferiormente dal dominio piano $D$, superiormente dalla superficie grafica $z = f(x,y)$ e lateralmente dalla superficie cilindrica retta con direttrice $\partial D$. Nel caso tridimensionale, l'integrale triplo $\iiint_\Omega f(x,y,z) \dx\dy\dz$ quantifica grandezze fisiche fondamentali distribuite nello spazio, quali la massa totale di un corpo solido a densità variabile $\delta(x,y,z)$, la carica elettrica complessiva o i momenti di inerzia.
+
+Prima di poter definire l'integrale di una funzione su un dominio $D \subset \Rdue$, è tuttavia indispensabile stabilire con rigore quando un sottoinsieme del piano possieda un'area ben definita. Tale questione è risolta dalla teoria della \textbf{misura di Peano-Jordan}.
+
+\subsection{Costruzione della Misura di Peano-Jordan}
+
+Sia dato lo spazio euclideo $\Rdue$. Un \textbf{rettangolo chiuso elementare} con lati paralleli agli assi coordinati è un insieme della forma:
+\[
+R = [a_1, b_1] \times [a_2, b_2] = \graffe{(x,y) \in \Rdue : a_1 \le x \le b_1, \; a_2 \le y \le b_2}
+\]
+La sua area elementare è definita naturalmente dal prodotto delle lunghezze dei lati:
+\[
+\operatorname{Area}(R) = (b_1 - a_1)(b_2 - a_2)
+\]
+Un \textbf{plurirettangolo} $P \subset \Rdue$ è l'unione di un numero finito di rettangoli elementari aventi a due a due gli interni disgiunti: $P = \bigcup_{k=1}^N R_k$. L'area di un plurirettangolo è semplicemente la somma delle aree dei singoli rettangoli costituenti: $\operatorname{Area}(P) = \sum_{k=1}^N \operatorname{Area}(R_k)$.
+
+\begin{definizione}{Misura Interna ed Esterna di Peano-Jordan}{def_misura_peano_jordan}
+Sia $E \subset \Rdue$ un sottoinsieme limitato. Si definiscono:
+\begin{itemize}
+    \item \textbf{Misura interna di Peano-Jordan} di $E$:
+    \[
+    \mathfrak{m}_*(E) = \sup \graffe{\operatorname{Area}(P) : P \text{ è un plurirettangolo con } P \subseteq E}
+    \]
+    \item \textbf{Misura esterna di Peano-Jordan} di $E$:
+    \[
+    \mathfrak{m}^*(E) = \inf \graffe{\operatorname{Area}(Q) : Q \text{ è un plurirettangolo con } E \subseteq Q}
+    \]
+\end{itemize}
+Evidentemente si ha sempre $0 \le \mathfrak{m}_*(E) \le \mathfrak{m}^*(E) < +\infty$.
+
+L'insieme limitato $E$ si dice \textbf{misurabile secondo Peano-Jordan} (o \textbf{quadrabile}) se la misura interna e la misura esterna coincidono:
+\[
+\mathfrak{m}_*(E) = \mathfrak{m}^*(E) =: \operatorname{mis}(E) \quad (\text{o } \operatorname{Area}(E))
+\]
+\end{definizione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15, >=Stealth]
+    % Griglia sottostante tratteggiata
+    \draw[step=0.6, very thin, lightgray!60] (-0.2,-0.2) grid (5.6,4.0);
+    \draw[->, thick, gray] (-0.3,0) -- (5.8,0) node[right, black] {$x$};
+    \draw[->, thick, gray] (0,-0.3) -- (0,4.2) node[above, black] {$y$};
+
+    % Plurirettangolo circoscritto Q (blu chiaro)
+    \fill[coolblue!25, opacity=0.7] 
+        (0.6,0.6) rectangle (4.8,3.6);
+    
+    % Plurirettangolo inscritto P (verde bosco chiaro)
+    \fill[forestgreen!40, opacity=0.8] 
+        (1.2,1.2) rectangle (4.2,3.0);
+
+    % Insieme E curvilineo
+    \draw[ultra thick, navyblue, fill=navyblue!10, fill opacity=0.5] 
+        plot [smooth cycle, tension=0.8] coordinates {(1.0,1.5) (2.2,0.8) (4.5,1.4) (4.6,3.2) (2.8,3.5) (1.2,2.8)};
+    
+    \node[navyblue] at (3.0, 2.3) {\Large $E$};
+    \node[forestgreen!80!black, font=\bfseries] at (1.8, 1.6) {$P \subseteq E$};
+    \node[coolblue!80!black, font=\bfseries] at (4.4, 3.8) {$E \subseteq Q$};
+
+    % Didascalia
+    \node[align=center, font=\small, draw=gray!40, fill=boxgray, rounded corners] at (2.8, -0.9) 
+        {Approssimazione interna $P$ ed esterna $Q$ tramite unioni finite di rettangoli.\\
+        $E$ è misurabile se e solo se $\sup \operatorname{Area}(P) = \inf \operatorname{Area}(Q)$.};
+\end{tikzpicture}
+\end{center}
+
+Il criterio operativo fondamentale per stabilire la misurabilità di un dominio nel piano fa capo alla "sottigliezza" geometrica della sua frontiera topologica $\partial E$.
+
+\begin{teorema}{Caratterizzazione della Misurabilità di Peano-Jordan}{thm_caratt_peano_jordan}
+Un sottoinsieme limitato $E \subset \Rdue$ è misurabile secondo Peano-Jordan se e solo se la sua frontiera $\partial E$ ha \textbf{misura di Peano-Jordan nulla}, ovvero:
+\[
+\operatorname{mis}(\partial E) = \mathfrak{m}^*(\partial E) = 0
+\]
+In particolare, qualsiasi dominio limitato la cui frontiera sia costituita da un numero finito di curve regolari o continue a tratti (es. cerchi, poligoni, ellissi, domini delimitati da grafici di funzioni continue) è \textbf{misurabile secondo Peano-Jordan}.
+\end{teorema}
+
+\begin{osservazione}[Insiemi non misurabili secondo Peano-Jordan]
+Si consideri il sottoinsieme dei punti a coordinate razionali nel quadrato unitario $E = ([0,1] \times [0,1]) \cap \Q^2$. Poiché ogni rettangolo non degenere contiene sia punti a coordinate razionali sia punti a coordinate irrazionali, l'unico plurirettangolo inscritto è l'insieme vuoto ($\mathfrak{m}_*(E) = 0$), mentre ogni plurirettangolo circoscritto deve coprire l'intero quadrato chiuso ($\mathfrak{m}^*(E) = 1$). Ne consegue che $E$ non è misurabile secondo Peano-Jordan. La moderna teoria della \textit{Misura di Lebesgue} supera questa limitazione, assegnando a $E$ misura di Lebesgue pari a zero. Tuttavia, per tutti i domini di interesse nell'ingegneria e nella fisica matematica, la misura di Peano-Jordan coincide perfettamente con quella di Lebesgue.
+\end{osservazione}
+
+\section{Costruzione dell'Integrale di Riemann in Due Variabili}
+
+Definita la classe dei domini ammissibili, passiamo alla costruzione dell'integrale per una funzione scalare limitata $f: R \to \R$, dove inizialmente assumiamo che il dominio sia un rettangolo chiuso $R = [a,b] \times [c,d] \subset \Rdue$.
+
+\subsection{Partizioni e Somme di Darboux}
+
+Una \textbf{partizione} $\mathcal{P}$ del rettangolo $R$ è data dal prodotto cartesiano di una partizione $\mathcal{P}_x = \graffe{a = x_0 < x_1 < \dots < x_n = b}$ dell'intervallo $[a,b]$ e di una partizione $\mathcal{P}_y = \graffe{c = y_0 < y_1 < \dots < y_m = d}$ dell'intervallo $[c,d]$. La partizione $\mathcal{P} = \mathcal{P}_x \times \mathcal{P}_y$ suddivide $R$ in $n \times m$ sottorettangoli disgiunti negli interni:
+\[
+R_{ij} = [x_{i-1}, x_i] \times [y_{j-1}, y_j], \quad \operatorname{Area}(R_{ij}) = \Delta x_i \Delta y_j = (x_i - x_{i-1})(y_j - y_{j-1})
+\]
+Per ciascun sottorettangolo $R_{ij}$, poniamo:
+\[
+m_{ij} = \inf_{(x,y) \in R_{ij}} f(x,y), \quad M_{ij} = \sup_{(x,y) \in R_{ij}} f(x,y)
+\]
+Si definiscono la \textbf{somma inferiore di Darboux} $s(f, \mathcal{P})$ e la \textbf{somma superiore di Darboux} $S(f, \mathcal{P})$:
+\[
+s(f, \mathcal{P}) = \sum_{i=1}^n \sum_{j=1}^m m_{ij} \operatorname{Area}(R_{ij}), \quad S(f, \mathcal{P}) = \sum_{i=1}^n \sum_{j=1}^m M_{ij} \operatorname{Area}(R_{ij})
+\]
+Geometricamente, $s(f, \mathcal{P})$ rappresenta il volume di un \textit{pluricilindroide a gradini inscritto}, mentre $S(f, \mathcal{P})$ rappresenta il volume di un \textit{pluricilindroide circoscritto}.
+
+\begin{definizione}{Integrabilità secondo Riemann su Rettangoli}{def_riemann_rettangolo}
+Sia $f: R \to \R$ limitata. Si definiscono l'integrale inferiore e l'integrale superiore di Riemann:
+\[
+\underline{\iint_R} f(x,y) \dx\dy = \sup_{\mathcal{P}} s(f, \mathcal{P}), \quad \overline{\iint_R} f(x,y) \dx\dy = \inf_{\mathcal{P}} S(f, \mathcal{P})
+\]
+La funzione $f$ si dice \textbf{integrabile secondo Riemann} su $R$ se l'integrale inferiore coincide con quello superiore:
+\[
+\underline{\iint_R} f(x,y) \dx\dy = \overline{\iint_R} f(x,y) \dx\dy =: \iint_R f(x,y) \dx\dy
+\]
+\end{definizione}
+
+\subsection{Estensione a Domini Generali e Proprietà Fondamentali}
+
+Sia ora $D \subset \Rdue$ un insieme limitato e misurabile secondo Peano-Jordan, e sia $f: D \to \R$ una funzione limitata. Scegliamo un qualsiasi rettangolo chiuso $R$ tale che $D \subseteq R$ e definiamo l'estensione $\tilde{f}: R \to \R$:
+\[
+\tilde{f}(x,y) = \begin{cases} f(x,y) & \text{se } (x,y) \in D \\ 0 & \text{se } (x,y) \in R \setminus D \end{cases} = f(x,y) \chi_D(x,y)
+\]
+dove $\chi_D$ è la \textbf{funzione caratteristica} dell'insieme $D$. Poniamo allora per definizione:
+\[
+\iint_D f(x,y) \dx\dy := \iint_R \tilde{f}(x,y) \dx\dy
+\]
+Si dimostra che tale definizione è ben posta (indipendente dalla scelta del rettangolo contenitore $R$).
+
+\begin{teorema}{Integrabilità delle Funzioni Continue su Compatti Misurabili}{thm_integrabilita_continue}
+Sia $D \subset \Rdue$ un dominio compatto (chiuso e limitato) misurabile secondo Peano-Jordan.
+Se $f: D \to \R$ è una funzione \textbf{continua}, allora $f$ è \textbf{integrabile secondo Riemann} su $D$.
+\end{teorema}
+
+\begin{proposizione}{Proprietà dell'Integrale Doppio}{prop_proprieta_integrali}
+Siano $f, g: D \to \R$ funzioni integrabili sul dominio misurabile $D \subset \Rdue$, e siano $\alpha, \beta \in \R$.
+\begin{enumerate}
+    \item \textbf{Linearità}: $\iint_D [\alpha f(x,y) + \beta g(x,y)] \dx\dy = \alpha \iint_D f(x,y) \dx\dy + \beta \iint_D g(x,y) \dx\dy$.
+    \item \textbf{Monotonia (Positività)}: Se $f(x,y) \le g(x,y)$ per ogni $(x,y) \in D$, allora:
+    \[
+    \iint_D f(x,y) \dx\dy \le \iint_D g(x,y) \dx\dy
+    \]
+    In particolare, se $f(x,y) \ge 0$, allora $\iint_D f(x,y) \dx\dy \ge 0$.
+    \item \textbf{Disuguaglianza Triangolare}: $\abs{\iint_D f(x,y) \dx\dy} \le \iint_D \abs{f(x,y)} \dx\dy$.
+    \item \textbf{Additività rispetto al Dominio}: Se $D = D_1 \cup D_2$ con $D_1, D_2$ misurabili e sovrapposti al più lungo la frontiera ($\operatorname{mis}(D_1 \cap D_2) = 0$):
+    \[
+    \iint_D f(x,y) \dx\dy = \iint_{D_1} f(x,y) \dx\dy + \iint_{D_2} f(x,y) \dx\dy
+    \]
+    \item \textbf{Teorema della Media Integrale}: Se $D$ è compatto, connesso e misurabile, e $f \in C(D)$, allora esiste almeno un punto $(x_0, y_0) \in D$ tale che:
+    \[
+    \iint_D f(x,y) \dx\dy = f(x_0, y_0) \cdot \operatorname{Area}(D)
+    \]
+\end{enumerate}
+\end{proposizione}
+
+\section{Integrali Doppi su Domini Normali e Formule di Riduzione}
+
+Il calcolo effettivo degli integrali doppi non avviene attraverso il passaggio al limite sulle somme di Darboux, bensì riconducendo l'integrazione su due dimensioni a due integrazioni monodimensionali successive. Tale procedimento prende il nome di \textbf{integrazione per riduzione} o \textbf{Teorema di Fubini-Tonelli}.
+
+\subsection{Geometria dei Domini Normali (o Semplici)}
+
+Un dominio piano si dice "normale" se è delimitato da due rette parallele a uno degli assi e dai grafici di due funzioni continue rispetto all'altra coordinata.
+
+\begin{definizione}{Domini Normali nel Piano}{def_domini_normali_dettaglio}
+\begin{itemize}
+    \item Un insieme compatto $D \subset \Rdue$ si dice \textbf{normale rispetto all'asse $x$} (o $y$-semplice) se:
+    \[
+    D = \graffe{(x,y) \in \Rdue : a \le x \le b, \; \alpha(x) \le y \le \beta(x)}
+    \]
+    con $\alpha, \beta: [a,b] \to \R$ funzioni continue tali che $\alpha(x) \le \beta(x)$ per ogni $x \in [a,b]$.
+    \item Un insieme compatto $D \subset \Rdue$ si dice \textbf{normale rispetto all'asse $y$} (o $x$-semplice) se:
+    \[
+    D = \graffe{(x,y) \in \Rdue : c \le y \le d, \; \gamma(y) \le x \le \delta(y)}
+    \]
+    con $\gamma, \delta: [c,d] \to \R$ funzioni continue tali che $\gamma(y) \le \delta(y)$ per ogni $y \in [c,d]$.
+\end{itemize}
+\end{definizione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Dominio normale rispetto a x (a sinistra)
+    \begin{scope}[shift={(0,0)}]
+        \draw[->, thick, gray] (-0.3,0) -- (4.2,0) node[right, black] {$x$};
+        \draw[->, thick, gray] (0,-0.3) -- (0,3.6) node[above, black] {$y$};
+
+        \draw[dashed, thick, gray] (0.8,0) -- (0.8, 1.0) -- (0.8,2.7);
+        \draw[dashed, thick, gray] (3.4,0) -- (3.4, 0.9) -- (3.4,2.9);
+        \node[below] at (0.8,0) {$a$};
+        \node[below] at (3.4,0) {$b$};
+
+        % Curve alfa(x) e beta(x)
+        \draw[very thick, navyblue] plot[domain=0.8:3.4, samples=40] (\x, {0.6 + 0.35*sin(\x*110)});
+        \node[navyblue, font=\small] at (3.7,0.7) {$y = \alpha(x)$};
+
+        \draw[very thick, forestgreen] plot[domain=0.8:3.4, samples=40] (\x, {2.4 + 0.45*cos(\x*80)});
+        \node[forestgreen, font=\small] at (3.7,2.8) {$y = \beta(x)$};
+
+        % Segmento verticale x fisso (fetta verticale)
+        \draw[ultra thick, crimsonred] (2.0, {0.6 + 0.35*sin(2.0*110)}) -- (2.0, {2.4 + 0.45*cos(2.0*80)});
+        \filldraw[crimsonred] (2.0, {0.6 + 0.35*sin(2.0*110)}) circle (1.5pt);
+        \filldraw[crimsonred] (2.0, {2.4 + 0.45*cos(2.0*80)}) circle (1.5pt);
+        \node[below, crimsonred] at (2.0,0) {$x$};
+        \node[right, crimsonred, font=\footnotesize] at (2.0, 1.8) {filo verticale $\dy$};
+
+        % Riempimento dominio
+        \fill[navyblue!15, opacity=0.6] 
+            (0.8, {0.6 + 0.35*sin(0.8*110)}) -- 
+            plot[domain=0.8:3.4, samples=40] (\x, {0.6 + 0.35*sin(\x*110)}) -- 
+            (3.4, {2.4 + 0.45*cos(3.4*80)}) -- 
+            plot[domain=3.4:0.8, samples=40] (\x, {2.4 + 0.45*cos(\x*80)}) -- cycle;
+        
+        \node[black, font=\bfseries] at (1.2, 1.7) {$D$};
+        \node[below, font=\small\bfseries] at (2.0, -0.6) {Dominio Normale risp. ad $x$};
+    \end{scope}
+
+    % Dominio normale rispetto a y (a destra)
+    \begin{scope}[shift={(6.0,0)}]
+        \draw[->, thick, gray] (-0.3,0) -- (4.2,0) node[right, black] {$x$};
+        \draw[->, thick, gray] (0,-0.3) -- (0,3.6) node[above, black] {$y$};
+
+        \draw[dashed, thick, gray] (0,0.8) -- (1.1,0.8);
+        \draw[dashed, thick, gray] (0,3.1) -- (1.3,3.1);
+        \node[left] at (0,0.8) {$c$};
+        \node[left] at (0,3.1) {$d$};
+
+        % Curve gamma(y) e delta(y)
+        \draw[very thick, navyblue] plot[domain=0.8:3.1, samples=40] ({0.7 + 0.4*sin(\x*100)}, \x);
+        \node[navyblue, font=\small, above] at (0.9,3.1) {$x = \gamma(y)$};
+
+        \draw[very thick, forestgreen] plot[domain=0.8:3.1, samples=40] ({2.8 + 0.45*cos(\x*90)}, \x);
+        \node[forestgreen, font=\small, above] at (3.2,3.1) {$x = \delta(y)$};
+
+        % Segmento orizzontale y fisso (fetta orizzontale)
+        \draw[ultra thick, crimsonred] ({0.7 + 0.4*sin(2.0*100)}, 2.0) -- ({2.8 + 0.45*cos(2.0*90)}, 2.0);
+        \filldraw[crimsonred] ({0.7 + 0.4*sin(2.0*100)}, 2.0) circle (1.5pt);
+        \filldraw[crimsonred] ({2.8 + 0.45*cos(2.0*90)}, 2.0) circle (1.5pt);
+        \node[left, crimsonred] at (0,2.0) {$y$};
+        \node[above, crimsonred, font=\footnotesize] at (2.0, 2.0) {filo orizzontale $\dx$};
+
+        % Riempimento dominio
+        \fill[forestgreen!15, opacity=0.6] 
+            ({0.7 + 0.4*sin(0.8*100)}, 0.8) -- 
+            plot[domain=0.8:3.1, samples=40] ({0.7 + 0.4*sin(\x*100)}, \x) -- 
+            ({2.8 + 0.45*cos(3.1*90)}, 3.1) -- 
+            plot[domain=3.1:0.8, samples=40] ({2.8 + 0.45*cos(\x*90)}, \x) -- cycle;
+
+        \node[black, font=\bfseries] at (2.0, 1.2) {$D$};
+        \node[below, font=\small\bfseries] at (2.0, -0.6) {Dominio Normale risp. ad $y$};
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Enunciato e Dimostrazione del Teorema di Fubini-Tonelli}
+
+\begin{teorema}{Teorema di Fubini-Tonelli per Integrali Doppi}{thm_fubini_tonelli_doppi}
+Sia $f: D \to \R$ una funzione continua sul compatto misurabile $D \subset \Rdue$.
+\begin{enumerate}
+    \item Se $D$ è normale rispetto all'asse $x$, $D = \graffe{(x,y) : a \le x \le b, \; \alpha(x) \le y \le \beta(x)}$, allora la funzione $S(x) = \int_{\alpha(x)}^{\beta(x)} f(x,y) \dy$ è continua su $[a,b]$ e si ha la formula di riduzione:
+    \[
+    \iint_D f(x,y) \dx\dy = \int_{a}^{b} \left( \int_{\alpha(x)}^{\beta(x)} f(x,y) \dy \right) \dx
+    \]
+    \item Se $D$ è normale rispetto all'asse $y$, $D = \graffe{(x,y) : c \le y \le d, \; \gamma(y) \le x \le \delta(y)}$, allora la funzione $T(y) = \int_{\gamma(y)}^{\delta(y)} f(x,y) \dx$ è continua su $[c,d]$ e si ha la formula di riduzione:
+    \[
+    \iint_D f(x,y) \dx\dy = \int_{c}^{d} \left( \int_{\gamma(y)}^{\delta(y)} f(x,y) \dx \right) \dy
+    \]
+\end{enumerate}
+\end{teorema}
+
+\begin{dimostrazione}
+Dimostriamo il caso fondamentale in cui il dominio è un rettangolo $R = [a,b] \times [c,d]$ e la funzione $f$ è continua su $R$.
+Poiché $R$ è compatto, per il Teorema di Heine-Cantor $f$ è uniformemente continua: per ogni $\eps > 0$ esiste $\delta > 0$ tale che per ogni coppia di punti $(x,y), (x',y') \in R$ con $\sqrt{(x-x')^2 + (y-y')^2} < \delta$ si ha $\abs{f(x,y) - f(x',y')} < \frac{\eps}{(b-a)(d-c)}$.
+
+Fissata una partizione $\mathcal{P} = \mathcal{P}_x \times \mathcal{P}_y$ con diametro dei sottorettangoli minore di $\delta$, consideriamo la funzione sezione $S(x) = \int_c^d f(x,y)\dy$. Per ogni $x \in [x_{i-1}, x_i]$ e per ogni $y \in [y_{j-1}, y_j]$, si ha $m_{ij} \le f(x,y) \le M_{ij}$. Integrando rispetto a $y$ sull'intervallo $[y_{j-1}, y_j]$ e sommando su $j=1,\dots,m$:
+\[
+\sum_{j=1}^m m_{ij} \Delta y_j \le S(x) \le \sum_{j=1}^m M_{ij} \Delta y_j, \quad \forall x \in [x_{i-1}, x_i]
+\]
+Integrando ora ciascun membro rispetto a $x$ su $[x_{i-1}, x_i]$ e sommando su tutti gli indici $i=1,\dots,n$, otteniamo:
+\[
+s(f, \mathcal{P}) = \sum_{i=1}^n \sum_{j=1}^m m_{ij} \Delta x_i \Delta y_j \le \int_a^b S(x)\dx \le \sum_{i=1}^n \sum_{j=1}^m M_{ij} \Delta x_i \Delta y_j = S(f, \mathcal{P})
+\]
+Poiché $f$ è integrabile secondo Riemann, passando all'estremo superiore sulle somme inferiori e all'estremo inferiore sulle somme superiori, la quantità $\int_a^b S(x)\dx = \int_a^b \left(\int_c^d f(x,y)\dy\right)\dx$ è stretta tra due quantità che convergono all'integrale doppio $\iint_R f(x,y)\dx\dy$. Per il teorema del confronto, l'uguaglianza è provata.
+
+Per un dominio normale generale $D = \graffe{a \le x \le b, \alpha(x) \le y \le \beta(x)}$, si racchiude $D$ in un rettangolo $R = [a,b] \times [c,d]$ con $c \le \min \alpha(x)$ e $d \ge \max \beta(x)$ e si applica il risultato all'estensione $f \cdot \chi_D$:
+\begin{align*}
+\iint_D f(x,y) \dx\dy &= \iint_R (f \chi_D) \dx\dy = \int_a^b \left( \int_c^d f(x,y)\chi_D(x,y) \dy \right) \dx \\
+&= \int_a^b \left( \int_{\alpha(x)}^{\beta(x)} f(x,y) \dy \right) \dx
+\end{align*}
+\end{dimostrazione}
+
+\begin{esempio}{Calcolo di Integrale Doppio su Dominio Normale}{es_fubini_normale}
+Si calcoli l'integrale doppio:
+\[
+I = \iint_D (x^2 + 2y) \dx\dy
+\]
+dove $D$ è la regione piana compresa tra la parabola $y = x^2$ e la retta $y = 2 - x$.
+
+\medskip\noindent\textbf{Risoluzione:}
+\begin{enumerate}
+    \item \textbf{Determinazione dei punti di intersezione}:
+    Uguagliando le due espressioni:
+    \[
+    x^2 = 2 - x \iff x^2 + x - 2 = 0 \iff (x + 2)(x - 1) = 0 \implies x_1 = -2, \quad x_2 = 1
+    \]
+    Nell'intervallo $[-2, 1]$, la retta sta al di sopra della parabola ($2 - x \ge x^2$).
+    \item \textbf{Descrizione come dominio normale rispetto ad $x$}:
+    \[
+    D = \graffe{(x,y) \in \Rdue : -2 \le x \le 1, \; x^2 \le y \le 2 - x}
+    \]
+    \item \textbf{Applicazione della formula di riduzione}:
+    \begin{align*}
+    I &= \int_{-2}^{1} \left( \int_{x^2}^{2-x} (x^2 + 2y) \dy \right) \dx = \int_{-2}^{1} \Big[ x^2 y + y^2 \Big]_{y = x^2}^{y = 2-x} \dx \\
+    &= \int_{-2}^{1} \Big[ x^2(2 - x) + (2 - x)^2 - \big( x^2(x^2) + (x^2)^2 \big) \Big] \dx \\
+    &= \int_{-2}^{1} \Big[ 2x^2 - x^3 + 4 - 4x + x^2 - x^4 - x^4 \Big] \dx \\
+    &= \int_{-2}^{1} \Big[ -2x^4 - x^3 + 3x^2 - 4x + 4 \Big] \dx
+    \end{align*}
+    \item \textbf{Integrazione termine a termine}:
+    \begin{align*}
+    I &= \left[ -\frac{2}{5}x^5 - \frac{1}{4}x^4 + x^3 - 2x^2 + 4x \right]_{-2}^{1} \\
+    &= \left( -\frac{2}{5} - \frac{1}{4} + 1 - 2 + 4 \right) - \left( -\frac{2}{5}(-32) - \frac{1}{4}(16) + (-8) - 2(4) + 4(-2) \right) \\
+    &= \left( \frac{11}{4} - \frac{2}{5} \right) - \left( \frac{64}{5} - 4 - 8 - 8 - 8 \right) = \frac{47}{20} - \left( \frac{64}{5} - 28 \right) \\
+    &= \frac{47}{20} - \left( -\frac{76}{5} \right) = \frac{47}{20} + \frac{304}{20} = \frac{351}{20}
+    \end{align*}
+\end{enumerate}
+\end{esempio}
+
+\section{Teorema del Cambio di Variabili negli Integrali Doppi}
+
+Quando il dominio di integrazione presenta simmetrie circolari, radiali o ellittiche, oppure la funzione integranda assume una forma particolarmente complessa nelle coordinate cartesiane, è opportuno effettuare una trasformazione di coordinate.
+
+\subsection{Significato Geometrico del Determinante Jacobiano}
+
+Sia $\Phi: \Omega' \subset \Rdue \to \Omega \subset \Rdue$ un'applicazione di classe $C^1$, $(u,v) \mapsto (x(u,v), y(u,v))$. Consideriamo un rettangolino infinitesimo nel piano dei parametri $[u, u+\du] \times [v, v+\dv]$ avente area $\du\dv$. Sotto l'azione della mappa differenziabile $\Phi$, i segmenti di coordinate paralleli all'asse $u$ e all'asse $v$ si trasformano nei vettori tangenti:
+\[
+\mathbf{t}_u = \pder{\Phi}{u} \du = \begin{pmatrix} \pder{x}{u} \\ \pder{y}{u} \end{pmatrix} \du, \quad \mathbf{t}_v = \pder{\Phi}{v} \dv = \begin{pmatrix} \pder{x}{v} \\ \pder{y}{v} \end{pmatrix} \dv
+\]
+L'area del parallelogramma deformato generato da questi due vettori tangenti infinitesimi è data dal modulo del loro prodotto vettoriale (o determinante $2 \times 2$):
+\[
+\diff A = \norm{\mathbf{t}_u \times \mathbf{t}_v} = \abs{\det \begin{pmatrix} \pder{x}{u} & \pder{x}{v} \\ \pder{y}{u} & \pder{y}{v} \end{pmatrix}} \du\dv = \abs{\det \Jac_\Phi(u,v)} \du\dv
+\]
+Il valore assoluto del determinante Jacobiano, $\abs{\det \Jac_\Phi(u,v)}$, rappresenta dunque il \textbf{fattore locale di dilatazione o contrazione dell'area}.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Piano UV (a sinistra)
+    \begin{scope}[shift={(0,0)}]
+        \draw[->, thick, gray] (-0.3,0) -- (3.5,0) node[right, black] {$u$};
+        \draw[->, thick, gray] (0,-0.3) -- (0,3.2) node[above, black] {$v$};
+
+        % Rettangolo infinitesimo du dv
+        \fill[coolblue!30, draw=coolblue, thick] (1.0,1.0) rectangle (2.2,2.0);
+        \node[black, font=\small] at (1.6,1.5) {$\du\dv$};
+        
+        \node[below] at (1.0,0) {$u_0$};
+        \node[below] at (2.2,0) {$u_0+\du$};
+        \node[left] at (0,1.0) {$v_0$};
+        \node[left] at (0,2.0) {$v_0+\dv$};
+        \draw[dashed, gray] (1.0,0) -- (1.0,1.0);
+        \draw[dashed, gray] (2.2,0) -- (2.2,1.0);
+        \draw[dashed, gray] (0,1.0) -- (1.0,1.0);
+        \draw[dashed, gray] (0,2.0) -- (1.0,2.0);
+
+        \node[below, font=\bfseries] at (1.6, -0.6) {Piano dei parametri $(u,v)$};
+    \end{scope}
+
+    % Freccia di trasformazione Phi
+    \draw[->, ultra thick, navyblue] (3.8,1.5) -- (5.2,1.5) node[midway, above] {$\Phi(u,v)$};
+
+    % Piano XY (a destra)
+    \begin{scope}[shift={(5.8,0)}]
+        \draw[->, thick, gray] (-0.3,0) -- (3.8,0) node[right, black] {$x$};
+        \draw[->, thick, gray] (0,-0.3) -- (0,3.2) node[above, black] {$y$};
+
+        % Parallelogramma curvilineo trasformato
+        \coordinate (P0) at (0.8,0.7);
+        \coordinate (P1) at (2.4,1.1);
+        \coordinate (P2) at (1.4,2.6);
+        \coordinate (P3) at (3.0,3.0);
+
+        \fill[forestgreen!25, draw=forestgreen, thick] (P0) -- (P1) -- (P3) -- (P2) -- cycle;
+        
+        % Vettori tangenti
+        \draw[->, very thick, crimsonred] (P0) -- (P1) node[midway, below right, font=\footnotesize] {$\pder{\Phi}{u}\du$};
+        \draw[->, very thick, navyblue] (P0) -- (P2) node[midway, above left, font=\footnotesize] {$\pder{\Phi}{v}\dv$};
+
+        \node[black, font=\small, align=center] at (1.9,1.8) {$\diff x\dy =$\\ $\abs{\det \Jac_\Phi}\du\dv$};
+        \node[below, font=\bfseries] at (1.8, -0.6) {Piano fisico $(x,y)$};
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{teorema}{Teorema del Cambio di Variabili negli Integrali Doppi}{thm_cambio_coordinate_doppi}
+Siano $\Omega', \Omega \subset \Rdue$ due aperti e sia $\Phi: \Omega' \to \Omega$ una trasformazione soddisfacente le seguenti ipotesi:
+\begin{enumerate}
+    \item $\Phi$ è di classe $C^1(\Omega')$;
+    \item $\Phi$ è iniettiva su $\Omega'$ (dunque un $C^1$-diffeomorfismo sull'immagine);
+    \item Il determinante Jacobiano non si annulla: $\det \Jac_\Phi(u,v) \neq 0$ per ogni $(u,v) \in \Omega'$.
+\end{enumerate}
+Sia $D' \subset \Omega'$ un compatto misurabile secondo Peano-Jordan e sia $D = \Phi(D') \subset \Omega$.
+Allora, per ogni funzione continua $f: D \to \R$:
+\[
+\iint_D f(x,y) \dx\dy = \iint_{D'} f(x(u,v), y(u,v)) \, \abs{\det \Jac_\Phi(u,v)} \du\dv
+\]
+\end{teorema}
+
+\subsection{Coordinate Polari nel Piano}
+
+La trasformazione in coordinate polari piane fa corrispondere a ogni coppia $(x,y)$ la distanza dall'origine (o polo) $\rho \ge 0$ e l'angolo di anomalia $\theta \in [0, 2\pi)$ formato con il semiasse positivo delle ascisse:
+\[
+\Phi(\rho, \theta): \begin{cases} x = x_0 + \rho \cos\theta \\ y = y_0 + \rho \sen\theta \end{cases}
+\]
+Calcoliamo esplicitamente la matrice Jacobiana e il relativo determinante:
+\[
+\Jac_\Phi(\rho, \theta) = \begin{pmatrix} \pder{x}{\rho} & \pder{x}{\theta} \\ \pder{y}{\rho} & \pder{y}{\theta} \end{pmatrix} = \begin{pmatrix} \cos\theta & -\rho \sen\theta \\ \sen\theta & \rho \cos\theta \end{pmatrix}
+\]
+\[
+\det \Jac_\Phi(\rho, \theta) = (\cos\theta)(\rho \cos\theta) - (-\rho \sen\theta)(\sen\theta) = \rho \cos^2\theta + \rho \sen^2\theta = \rho
+\]
+Poiché $\rho \ge 0$, si ha $\abs{\det \Jac} = \rho$. L'elemento d'area in coordinate polari è dunque:
+\[
+\diff x \dy = \rho \drho \dtheta
+\]
+
+\begin{metodo}[Trasformazioni Notevoli in Coordinate Polari]
+\begin{itemize}
+    \item \textbf{Corona Circolare Centrata nell'Origine}:
+    $D = \graffe{R_1^2 \le x^2 + y^2 \le R_2^2} \implies D' = [R_1, R_2] \times [0, 2\pi]$.
+    \item \textbf{Cerchio Traslato Tangente all'Asse $y$}:
+    L'equazione $x^2 + y^2 \le 2R x$ in coordinate polari diventa $\rho^2 \le 2R \rho \cos\theta \implies \rho \le 2R \cos\theta$, con $\theta \in [-\pi/2, \pi/2]$.
+    \item \textbf{Coordinate Ellittiche (Polari Riscalate)}:
+    Per il dominio ellittico $\frac{x^2}{a^2} + \frac{y^2}{b^2} \le 1$, ponendo:
+    \[
+    \begin{cases} x = a \rho \cos\theta \\ y = b \rho \sen\theta \end{cases} \implies \abs{\det \Jac} = a b \rho \implies \diff x \dy = a b \rho \drho \dtheta
+    \]
+    con $\rho \in [0,1]$ e $\theta \in [0, 2\pi]$.
+\end{itemize}
+\end{metodo}
+
+\begin{esempio}{Calcolo dell'Integrale di Gauss tramite Integrali Doppi}{es_gauss_integrale}
+Vogliamo calcolare il valore del celebre integrale improprio di Eulero-Gauss:
+\[
+I = \int_{-\infty}^{+\infty} e^{-x^2} \dx
+\]
+\textbf{Risoluzione:}
+Consideriamo il prodotto $I^2$:
+\[
+I^2 = \left( \int_{-\infty}^{+\infty} e^{-x^2} \dx \right) \left( \int_{-\infty}^{+\infty} e^{-y^2} \dy \right) = \iint_{\Rdue} e^{-(x^2+y^2)} \dx\dy
+\]
+Applichiamo il passaggio in coordinate polari sul disco $B_R = \graffe{x^2+y^2 \le R^2}$:
+\[
+\iint_{B_R} e^{-(x^2+y^2)} \dx\dy = \int_{0}^{2\pi} \left( \int_{0}^{R} e^{-\rho^2} \rho \drho \right) \dtheta = 2\pi \left[ -\frac{1}{2} e^{-\rho^2} \right]_0^R = \pi (1 - e^{-R^2})
+\]
+Passando al limite per $R \to +\infty$:
+\[
+I^2 = \lim_{R \to +\infty} \pi (1 - e^{-R^2}) = \pi \implies I = \sqrt{\pi}
+\]
+\end{esempio}
+
+\section{Integrali Tripli: Metodi per Fili, per Strati e Sistemi Spaziali}
+
+L'estensione della teoria dell'integrazione a domini tridimensionali $\Omega \subset \Rtre$ segue la medesima struttura logica. Se $f: \Omega \to \R$ è continua e $\Omega$ è compatto e misurabile secondo Peano-Jordan in $\Rtre$, l'integrale triplo è denotato da $\iiint_\Omega f(x,y,z) \dx\dy\dz$ (o $\iiint_\Omega f \dV$).
+
+\subsection{Integrazione per Fili vs. Integrazione per Strati}
+
+Per il calcolo pratico si utilizzano due strategie di riduzione concettualmente distinte:
+
+\begin{definizione}{Integrazione per Fili (Colonne Parallele all'Asse $z$)}{def_fili}
+Sia il solido $\Omega \subset \Rtre$ delimitato inferiormente e superiormente da due superfici $z = g_1(x,y)$ e $z = g_2(x,y)$ definite su una proiezione piana $D_{xy} \subset \Rdue$:
+\[
+\Omega = \graffe{(x,y,z) \in \Rtre : (x,y) \in D_{xy}, \; g_1(x,y) \le z \le g_2(x,y)}
+\]
+La formula di riduzione \textbf{per fili} è:
+\[
+\iiint_\Omega f(x,y,z) \dx\dy\dz = \iint_{D_{xy}} \left( \int_{g_1(x,y)}^{g_2(x,y)} f(x,y,z) \dz \right) \dx\dy
+\]
+\end{definizione}
+
+\begin{definizione}{Integrazione per Strati (Fette Orizzontali a Quota $z$)}{def_strati}
+Sia la quota $z$ del solido $\Omega$ compresa tra $z_{\min}$ e $z_{\max}$, e per ogni quota fissata $z \in [z_{\min}, z_{\max}]$ sia $\Omega_z = \graffe{(x,y) \in \Rdue : (x,y,z) \in \Omega}$ la sezione piana orizzontale. La formula di riduzione \textbf{per strati} è:
+\[
+\iiint_\Omega f(x,y,z) \dx\dy\dz = \int_{z_{\min}}^{z_{\max}} \left( \iint_{\Omega_z} f(x,y,z) \dx\dy \right) \dz
+\]
+\end{definizione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.05, >=Stealth]
+    % Metodo per fili (sinistra)
+    \begin{scope}[shift={(0,0)}]
+        \draw[->, thick, gray] (-0.2,0) -- (3.5,0) node[right, black] {$y$};
+        \draw[->, thick, gray] (0,-0.2) -- (-1.4,-0.9) node[below left, black] {$x$};
+        \draw[->, thick, gray] (0,-0.2) -- (0,3.8) node[above, black] {$z$};
+
+        % Dominio base D_xy nel piano z=0
+        \draw[thick, fill=coolblue!20, draw=coolblue] (1.0,0.5) ellipse (1.0 and 0.4);
+        \node[coolblue!90!black, font=\footnotesize] at (1.0,0.5) {$D_{xy}$};
+
+        % Superficie superiore g2 e inferiore g1
+        \draw[thick, draw=navyblue, fill=navyblue!10, opacity=0.7] 
+            plot[domain=-0.8:0.8] (\x+1.5, {2.8 - 0.4*\x*\x}) -- 
+            plot[domain=0.8:-0.8] (\x+1.5, {1.6 + 0.3*\x*\x}) -- cycle;
+
+        % Filo verticale
+        \draw[ultra thick, crimsonred] (1.5,1.7) -- (1.5,2.7);
+        \filldraw[crimsonred] (1.5,1.7) circle (1.5pt);
+        \filldraw[crimsonred] (1.5,2.7) circle (1.5pt);
+        \draw[dashed, crimsonred] (1.5,0.5) -- (1.5,1.7);
+        \filldraw[crimsonred] (1.5,0.5) circle (1.2pt) node[below right, font=\tiny] {$(x,y)$};
+
+        \node[above, navyblue, font=\footnotesize] at (1.5,2.8) {$z = g_2(x,y)$};
+        \node[below, navyblue, font=\footnotesize] at (1.5,1.5) {$z = g_1(x,y)$};
+        \node[below, font=\bfseries] at (1.2, -1.2) {Integrazione per Fili};
+    \end{scope}
+
+    % Metodo per strati (destra)
+    \begin{scope}[shift={(6.0,0)}]
+        \draw[->, thick, gray] (-0.2,0) -- (3.5,0) node[right, black] {$y$};
+        \draw[->, thick, gray] (0,-0.2) -- (-1.4,-0.9) node[below left, black] {$x$};
+        \draw[->, thick, gray] (0,-0.2) -- (0,3.8) node[above, black] {$z$};
+
+        % Solido tipo cono rovesciato
+        \draw[thick, draw=forestgreen] (0,0.4) -- (2.2,3.2);
+        \draw[thick, draw=forestgreen] (0,0.4) -- (-0.8,3.2);
+        \draw[thick, draw=forestgreen] (0.7,3.2) ellipse (1.5 and 0.35);
+
+        % Sezione orizzontale a quota z (strato)
+        \fill[forestgreen!30, draw=forestgreen, thick, opacity=0.8] (0.5,2.0) ellipse (0.9 and 0.22);
+        \draw[dashed, crimsonred] (0,2.0) -- (0.5,2.0);
+        \node[left, crimsonred, font=\footnotesize] at (0,2.0) {$z$};
+        \node[right, forestgreen!90!black, font=\footnotesize] at (1.4,2.0) {sezione $\Omega_z$};
+
+        \node[left, font=\footnotesize] at (0,0.4) {$z_{\min}$};
+        \node[left, font=\footnotesize] at (0,3.2) {$z_{\max}$};
+        \node[below, font=\bfseries] at (1.2, -1.2) {Integrazione per Strati};
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Coordinate Cilindriche e Sferiche nello Spazio}
+
+\begin{teorema}{Coordinate Cilindriche}{thm_coord_cilindriche}
+La trasformazione in coordinate cilindriche con asse $z$ è definita da:
+\[
+\begin{cases} x = \rho \cos\theta \\ y = \rho \sen\theta \\ z = z \end{cases} \quad \text{con } \rho \ge 0, \; \theta \in [0, 2\pi], \; z \in \R
+\]
+La matrice Jacobiana è una matrice a blocchi:
+\[
+\Jac(\rho, \theta, z) = \begin{pmatrix} \cos\theta & -\rho\sen\theta & 0 \\ \sen\theta & \rho\cos\theta & 0 \\ 0 & 0 & 1 \end{pmatrix} \implies \det \Jac = \rho
+\]
+L'elemento di volume tridimensionale è:
+\[
+\diff V = \dx\dy\dz = \rho \drho \dtheta \dz
+\]
+\end{teorema}
+
+\begin{teorema}{Coordinate Sferiche (Polari nello Spazio)}{thm_coord_sferiche}
+La trasformazione in coordinate sferiche è definita ponendo:
+\[
+\begin{cases} x = r \sen\varphi \cos\theta \\ y = r \sen\varphi \sen\theta \\ z = r \cos\varphi \end{cases} \quad \text{con } r \ge 0, \; \theta \in [0, 2\pi], \; \varphi \in [0, \pi]
+\]
+dove $r$ è la distanza dall'origine, $\theta$ è la longitudine/azimuth e $\varphi$ è la colatitudine/angolo zenitale misurato dal semiasse positivo $z$.
+\end{teorema}
+
+\begin{dimostrazione}[Calcolo analitico dello Jacobiano sferico]
+Calcoliamo esplicitamente le nove derivate parziali che compongono la matrice Jacobiana $\Jac(r, \theta, \varphi)$:
+\[
+\Jac = \begin{pmatrix} 
+\pder{x}{r} & \pder{x}{\theta} & \pder{x}{\varphi} \\ 
+\pder{y}{r} & \pder{y}{\theta} & \pder{y}{\varphi} \\ 
+\pder{z}{r} & \pder{z}{\theta} & \pder{z}{\varphi} 
+\end{pmatrix} = 
+\begin{pmatrix} 
+\sen\varphi \cos\theta & -r \sen\varphi \sen\theta & r \cos\varphi \cos\theta \\ 
+\sen\varphi \sen\theta & r \sen\varphi \cos\theta & r \cos\varphi \sen\theta \\ 
+\cos\varphi & 0 & -r \sen\varphi 
+\end{pmatrix}
+\]
+Sviluppiamo il determinante lungo la terza riga (che contiene uno zero):
+\begin{align*}
+\det \Jac &= \cos\varphi \det \begin{pmatrix} -r \sen\varphi \sen\theta & r \cos\varphi \cos\theta \\ r \sen\varphi \cos\theta & r \cos\varphi \sen\theta \end{pmatrix} - r \sen\varphi \det \begin{pmatrix} \sen\varphi \cos\theta & -r \sen\varphi \sen\theta \\ \sen\varphi \sen\theta & r \sen\varphi \cos\theta \end{pmatrix} \\
+&= \cos\varphi \Big[ -r^2 \sen\varphi \cos\varphi \sen^2\theta - r^2 \sen\varphi \cos\varphi \cos^2\theta \Big] \\
+&\quad - r \sen\varphi \Big[ r \sen^2\varphi \cos^2\theta - (-r \sen^2\varphi \sen^2\theta) \Big] \\
+&= \cos\varphi \Big[ -r^2 \sen\varphi \cos\varphi (\sen^2\theta + \cos^2\theta) \Big] - r \sen\varphi \Big[ r \sen^2\varphi (\cos^2\theta + \sen^2\theta) \Big] \\
+&= -r^2 \sen\varphi \cos^2\varphi - r^2 \sen^3\varphi = -r^2 \sen\varphi (\cos^2\varphi + \sen^2\varphi) = -r^2 \sen\varphi
+\end{align*}
+Poiché per convenzione $\varphi \in [0, \pi]$, si ha $\sen\varphi \ge 0$. Prendendo il valore assoluto:
+\[
+\abs{\det \Jac(r, \theta, \varphi)} = r^2 \sen\varphi \implies \diff V = r^2 \sen\varphi \dr \dtheta \dphi
+\]
+\end{dimostrazione}
+
+\section{Applicazioni Fisiche: Masse, Baricentri e Momenti d'Inerzia}
+
+\begin{definizione}{Grandezze Meccaniche dei Solidi}{def_grandezze_meccaniche}
+Sia dato un corpo tridimensionale occupante il dominio $\Omega \subset \Rtre$, caratterizzato da una densità volumetrica di massa continua $\delta(x,y,z) \ge 0$.
+\begin{itemize}
+    \item \textbf{Volume}: $\operatorname{Vol}(\Omega) = \iiint_\Omega 1 \dx\dy\dz$.
+    \item \textbf{Massa Totale}: $M = \iiint_\Omega \delta(x,y,z) \dx\dy\dz$.
+    \item \textbf{Coordinate del Baricentro (Centro di Massa)} $G = (x_G, y_G, z_G)$:
+    \begin{align*}
+    x_G &= \frac{1}{M} \iiint_\Omega x \, \delta(x,y,z) \dV, \quad y_G = \frac{1}{M} \iiint_\Omega y \, \delta(x,y,z) \dV, \\
+    z_G &= \frac{1}{M} \iiint_\Omega z \, \delta(x,y,z) \dV
+    \end{align*}
+    \item \textbf{Momento d'Inerzia rispetto all'asse $z$}:
+    \[
+    I_z = \iiint_\Omega (x^2 + y^2) \delta(x,y,z) \dV
+    \]
+\end{itemize}
+\end{definizione}
+
+\begin{esame}[Principi di Simmetria per il Baricentro]
+Se la densità $\delta$ è omogenea (costante) e il solido $\Omega$ ammette un piano di simmetria geometrica (ad esempio il piano $yz$, cioè $\Omega$ è invariante per la trasformazione $x \mapsto -x$), allora la coordinata baricentrica corrispondente è identicamente \textbf{nulla}: $x_G = 0$.
+Sfruttare sempre le simmetrie prima di calcolare gli integrali per evitare calcoli ridondanti!
+\end{esame}
+
+\begin{esempio}{Baricentro di un Emisfero Omogeneo}{es_baricentro_emisfero}
+Si determini il baricentro dell'emisfero superiore omogeneo ($\delta = 1$):
+\[
+\Omega = \graffe{(x,y,z) \in \Rtre : x^2 + y^2 + z^2 \le R^2, \; z \ge 0}
+\]
+\textbf{Risoluzione:}
+\begin{enumerate}
+    \item Per simmetria di rotazione attorno all'asse $z$, $x_G = y_G = 0$.
+    \item Il volume dell'emisfero è noto: $M = \operatorname{Vol}(\Omega) = \frac{2}{3}\pi R^3$.
+    \item Calcoliamo il momento statico rispetto al piano $xy$ in coordinate sferiche:
+    Nel nostro caso $r \in [0, R]$, $\theta \in [0, 2\pi]$, $\varphi \in [0, \pi/2]$ (essendo $z \ge 0$).
+    Poiché $z = r\cos\varphi$ e $\dV = r^2\sen\varphi\dr\dtheta\dphi$:
+    \begin{align*}
+    \iiint_\Omega z \dV &= \int_{0}^{2\pi} \dtheta \int_{0}^{\pi/2} \dphi \int_{0}^{R} (r\cos\varphi)(r^2\sen\varphi) \dr \\
+    &= (2\pi) \left( \int_{0}^{\pi/2} \sen\varphi \cos\varphi \dphi \right) \left( \int_{0}^{R} r^3 \dr \right) \\
+    &= (2\pi) \left[ \frac{\sen^2\varphi}{2} \right]_0^{\pi/2} \left[ \frac{r^4}{4} \right]_0^R = (2\pi) \left( \frac{1}{2} \right) \left( \frac{R^4}{4} \right) = \frac{\pi R^4}{4}
+    \end{align*}
+    \item La quota del baricentro è:
+    \[
+    z_G = \frac{\frac{\pi R^4}{4}}{\frac{2}{3}\pi R^3} = \frac{3}{8} R
+    \]
+    Dunque il baricentro è posizionato nel punto $G = \left(0, 0, \frac{3}{8}R\right)$.
+\end{enumerate}
+\end{esempio}

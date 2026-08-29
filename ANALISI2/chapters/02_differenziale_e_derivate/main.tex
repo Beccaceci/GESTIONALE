@@ -1,0 +1,478 @@
+% ==============================================================================
+% CAPITOLO 2: CALCOLO DIFFERENZIALE MULTIVARIABILE E DERIVATE
+% ==============================================================================
+
+\chapter{Calcolo Differenziale Multivariabile e Derivate}
+\label{chap:differenziale_e_derivate}
+
+\section{Oltre la Dimensione Uno: La Sfida della Derivazione in Più Variabili}
+
+Nel calcolo infinitesimale monodimensionale, la nozione di derivata $f'(x_0)$ possiede una limpida triplice valenza:
+\begin{enumerate}
+    \item \textbf{Analitica}: limite del rapporto incrementale $\lim_{h \to 0} \frac{f(x_0+h)-f(x_0)}{h}$;
+    \item \textbf{Geometrica}: coefficiente angolare della retta tangente al grafico $y = f(x)$ nel punto $(x_0, f(x_0))$;
+    \item \textbf{Approssimativa / Differenziale}: coefficiente della migliore approssimazione lineare affine della funzione nell'intorno del punto, $f(x_0+h) = f(x_0) + f'(x_0) h + \smallo(h)$.
+\end{enumerate}
+In una sola variabile reale, la derivabilità in un punto garantisce automaticamente la continuità e la possibilità di approssimare localmente il grafico con una retta.
+
+Nel passaggio a funzioni di due o più variabili $f: A \subseteq \Rn \to \R$, questo perfetto equilibrio si spezza in modo drammatico. Poiché da un punto dello spazio ci si può muovere lungo infinite direzioni distinte, il semplice calcolo dei rapporti incrementali lungo alcune direzioni (o persino lungo tutte le direzioni possibili) \textbf{non è più sufficiente} a garantire né la continuità della funzione, né l'esistenza di un piano tangente ben definito.
+
+In questo capitolo ricostruiremo l'edificio del calcolo differenziale multivariabile: partendo dalle derivate parziali e direzionali, introdurremo la nozione fondamentale di \textbf{differenziale totale}, dimostreremo i grandi teoremi della differenziabilità (Teorema del Valor Medio di Lagrange, Teorema del Differenziale Totale, Regola della Catena) e ne esploreremo le profonde implicazioni geometriche e fisiche.
+
+\section{Derivate Parziali e Vettore Gradiente}
+
+\begin{definizione}{Derivate Parziali}{def_derivate_parziali}
+Sia $f: A \subseteq \Rn \to \R$ una funzione definita su un aperto $A$, e sia $\bx_0 = (x_{1,0}, \dots, x_{n,0}) \in A$. La \textbf{derivata parziale} di $f$ rispetto alla $i$-esima variabile $x_i$ nel punto $\bx_0$ è il limite del rapporto incrementale ottenuto variando esclusivamente la coordinata $x_i$ e mantenendo fisse tutte le rimanenti $n-1$ coordinate:
+\[
+\pder{f}{x_i}(\bx_0) = \lim_{t \to 0} \frac{f(\bx_0 + t \mathbf{e}_i) - f(\bx_0)}{t} = \lim_{t \to 0} \frac{f(x_{1,0}, \dots, x_{i,0}+t, \dots, x_{n,0}) - f(x_{1,0}, \dots, x_{n,0})}{t}
+\]
+dove $\mathbf{e}_i = (0, \dots, 1, \dots, 0)$ indica l'$i$-esimo versore della base canonica di $\Rn$.
+\end{definizione}
+
+Nel caso bidimensionale di una funzione $f(x,y)$ definita in un intorno del punto $(x_0, y_0) \in \Rdue$, le derivate parziali prime sono indicate con le notazioni equivalenti:
+\[
+\pder{f}{x}(x_0, y_0) = f_x(x_0, y_0) = D_x f(x_0, y_0) = \lim_{h \to 0} \frac{f(x_0 + h, y_0) - f(x_0, y_0)}{h}
+\]
+\[
+\pder{f}{y}(x_0, y_0) = f_y(x_0, y_0) = D_y f(x_0, y_0) = \lim_{k \to 0} \frac{f(x_0, y_0 + k) - f(x_0, y_0)}{k}
+\]
+
+\begin{osservazione}[Significato Geometrico delle Derivate Parziali]
+Dal punto di vista geometrico, sezionando la superficie tridimensionale $z = f(x,y)$ con il piano verticale $y = y_0$, si ottiene la curva piana $z = g(x) = f(x, y_0)$. La derivata parziale $\pder{f}{x}(x_0, y_0)$ rappresenta la pendenza (coefficiente angolare) della retta tangente a tale curva nel punto $(x_0, y_0, f(x_0, y_0))$.
+Analogamente, $\pder{f}{y}(x_0, y_0)$ è la pendenza della curva $z = h(y) = f(x_0, y)$ ottenuta sezionando la superficie con il piano verticale ortogonale $x = x_0$.
+\end{osservazione}
+
+\begin{definizione}{Vettore Gradiente}{def_gradiente_rn}
+Se $f$ ammette tutte le $n$ derivate parziali prime nel punto $\bx_0 \in A$, il \textbf{vettore gradiente} di $f$ in $\bx_0$ è il vettore colonna formato dalle derivate parziali ordinate:
+\[
+\nabla f(\bx_0) = \grad f(\bx_0) = \begin{pmatrix} \pder{f}{x_1}(\bx_0) \\ \pder{f}{x_2}(\bx_0) \\ \vdots \\ \pder{f}{x_n}(\bx_0) \end{pmatrix} \in \Rn
+\]
+\end{definizione}
+
+\section{Derivate Direzionali e Limiti dell'Approccio Monodimensionale}
+
+Limitarsi alle direzioni parallele agli assi coordinati è una restrizione artificiale dovuta alla scelta del sistema di riferimento cartesiano. Possiamo esplorare la variazione di $f$ muovendoci lungo una qualsiasi retta orientata nello spazio.
+
+\begin{definizione}{Derivata Direzionale}{def_derivata_direzionale}
+Sia $f: A \subseteq \Rn \to \R$ con $A$ aperto, $\bx_0 \in A$ e sia $\bv \in \Rn$ un versore di direzione (ossia un vettore di modulo unitario, $\norm{\bv} = 1$). La \textbf{derivata direzionale} di $f$ in $\bx_0$ lungo la direzione $\bv$ è definita dal limite del rapporto incrementale:
+\[
+D_\bv f(\bx_0) = \pder{f}{\bv}(\bx_0) = \lim_{t \to 0} \frac{f(\bx_0 + t\bv) - f(\bx_0)}{t}
+\]
+se tale limite esiste finito in $\R$.
+\end{definizione}
+
+Se consideriamo la restrizione di $f$ alla retta parametrizzata $\mathbf{r}(t) = \bx_0 + t\bv$, definendo la funzione scalare di una variabile $g(t) = f(\bx_0 + t\bv)$, la derivata direzionale coincide esattamente con la derivata ordinaria di $g$ calcolata nell'origine parametrica:
+\[
+D_\bv f(\bx_0) = g'(0)
+\]
+In particolare, scegliendo come versori i vettori della base canonica $\bv = \mathbf{e}_i$, si ritrovano le derivate parziali: $D_{\mathbf{e}_i} f(\bx_0) = \pder{f}{x_i}(\bx_0)$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15, >=Stealth]
+    % Assi 3D
+    \draw[->, gray!80] (0,0) -- (4.2,0) node[right, black] {$y$};
+    \draw[->, gray!80] (0,0) -- (-2.2,-1.5) node[below left, black] {$x$};
+    \draw[->, gray!80] (0,0) -- (0,3.6) node[above, black] {$z$};
+
+    % Punto base sul piano xy
+    \coordinate (P0) at (1.5,-0.4);
+    \filldraw[navyblue] (P0) circle (2pt) node[below=2pt] {$\bx_0 = (x_0, y_0)$};
+
+    % Versore v
+    \draw[ultra thick, crimsonred, ->] (P0) -- ++(1.4,0.7) node[above right] {$\bv = (v_1, v_2), \; \|\bv\|=1$};
+
+    % Retta d'incremento
+    \draw[dashed, coolblue, thick] (P0) -- ++(-1.4,-0.7);
+    \draw[dashed, coolblue, thick] (P0) -- ++(2.2,1.1) node[right] {Retta $\bx_0 + t\bv$};
+
+    % Spiegazione
+    \node[draw=navyblue!60, fill=subtlegray, rounded corners, align=center] at (1.8,-2.2) 
+        {\small La derivata direzionale misura il tasso di variazione istantaneo di $f$\\
+        \small lungo la direzione individuata dal versore orientato $\bv$.};
+\end{tikzpicture}
+\end{center}
+
+\begin{esame}[Attenzione: Esistenza delle Derivate Direzionali Non Implica la Continuità!]
+Un errore concettuale frequentissimo è ritenere che l'esistenza di tutte le derivate parziali (o persino di tutte le derivate direzionali in ogni direzione $\bv$) garantisca la continuità della funzione nel punto.\\
+\textbf{Questo è falso in più variabili!}
+\end{esame}
+
+\begin{esempio}{Funzione con Tutte le Derivate Direzionali ma Discontinua}{es_derivate_discontinua}
+Si consideri la funzione $f: \Rdue \to \R$ definita da:
+\[
+f(x,y) = \begin{cases} \dfrac{x^2 y}{x^4 + y^2} & \text{se } (x,y) \neq (0,0) \\ 0 & \text{se } (x,y) = (0,0) \end{cases}
+\]
+\begin{enumerate}
+    \item \textbf{Calcolo delle derivate direzionali in $(0,0)$}:
+    Sia $\bv = (v_1, v_2)$ un qualsiasi versore unitario con $v_1^2 + v_2^2 = 1$.
+    \begin{itemize}
+        \item Se $v_2 = 0 \implies \bv = (\pm 1, 0)$, lungo l'asse $x$ la funzione è identicamente nulla $\implies D_\bv f(0,0) = 0$.
+        \item Se $v_2 \neq 0$:
+        \begin{align*}
+        D_\bv f(0,0) &= \lim_{t \to 0} \frac{f(t v_1, t v_2) - 0}{t} = \lim_{t \to 0} \frac{1}{t} \frac{t^3 v_1^2 v_2}{t^4 v_1^4 + t^2 v_2^2} \\
+        &= \lim_{t \to 0} \frac{t^3 v_1^2 v_2}{t^3 (t^2 v_1^4 + v_2^2)} = \frac{v_1^2 v_2}{v_2^2} = \frac{v_1^2}{v_2}
+        \end{align*}
+    \end{itemize}
+    Dunque la derivata direzionale $D_\bv f(0,0)$ \textbf{esiste finita per qualsiasi versore $\bv \in \Rdue$} (in particolare $f_x(0,0) = 0$ e $f_y(0,0) = 0$).
+    \item \textbf{Discontinuità nell'origine}:
+    Come visto nell'Esempio~\ref{es_controes_parabole}, lungo la parabola $y = x^2$ si ha $f(x, x^2) = \frac{x^4}{x^4 + x^4} = \frac{1}{2} \neq f(0,0) = 0$.
+    La funzione \textbf{non è continua} nell'origine!
+\end{enumerate}
+\end{esempio}
+
+\section{Il Teorema del Valor Medio di Lagrange Multivariabile}
+
+Prima di affrontare la nozione di differenziabilità, enunciamo e dimostriamo l'estensione fondamentale del Teorema di Lagrange a campi scalari in più variabili.
+
+\begin{teorema}{Teorema del Valor Medio di Lagrange in $\mathbb{R}^n$}{lagrange_rn_dimostrazione}
+Sia $A \subseteq \Rn$ un insieme aperto e sia $f: A \to \R$ una funzione differenziabile in $A$. Siano $\bx, \by \in A$ due punti tali che il segmento rettilineo di congiunzione:
+\[
+S(\bx, \by) = \graffe{(1-t)\bx + t\by : t \in [0, 1]} \subseteq A
+\]
+sia interamente contenuto in $A$.
+Allora esiste almeno un punto intermedio $\boldsymbol{\xi} \in S(\bx, \by)$, con $\boldsymbol{\xi} = (1-\theta)\bx + \theta\by$ per un opportuno $\theta \in (0, 1)$, tale che:
+\[
+f(\by) - f(\bx) = \scal{\nabla f(\boldsymbol{\xi}), \by - \bx} = \sum_{i=1}^n \pder{f}{x_i}(\boldsymbol{\xi}) \, (y_i - x_i)
+\]
+\end{teorema}
+
+\begin{dimostrazione}
+Definiamo la funzione ausiliaria scalare di una sola variabile reale $g: [0, 1] \to \R$ ponendo:
+\[
+g(t) = f\big( (1-t)\bx + t\by \big) = f\big( \bx + t(\by - \bx) \big)
+\]
+La funzione $g$ descrive i valori assunti da $f$ lungo il segmento rettilineo che congiunge $\bx$ a $\by$.
+Verifichiamo le ipotesi del Teorema di Lagrange classico per $g$:
+\begin{enumerate}
+    \item $g$ è continua sull'intervallo chiuso $[0, 1]$ in quanto composizione della funzione lineare $t \mapsto \bx + t(\by - \bx)$ con la funzione differenziabile (e quindi continua) $f$;
+    \item $g$ è derivabile sull'intervallo aperto $(0, 1)$ per la regola della catena multivariabile, e la sua derivata prima vale:
+    \[
+    g'(t) = \scal{\nabla f(\bx + t(\by - \bx)), \by - \bx}
+    \]
+\end{enumerate}
+Per il Teorema del Valor Medio di Lagrange classico in una variabile reale, esiste un valore $\theta \in (0, 1)$ tale che:
+\[
+g(1) - g(0) = g'(\theta) \cdot (1 - 0) = g'(\theta)
+\]
+Poiché $g(0) = f(\bx)$ e $g(1) = f(\by)$, sostituendo l'espressione di $g'(\theta)$ e ponendo $\boldsymbol{\xi} = \bx + \theta(\by - \bx) \in S(\bx, \by)$:
+\[
+f(\by) - f(\bx) = \scal{\nabla f(\boldsymbol{\xi}), \by - \bx}
+\]
+che conclude la dimostrazione.
+\end{dimostrazione}
+
+\begin{corollario}{Caratterizzazione delle Funzioni Costanti su Domini Connessi}{cor_grad_nullo_costante}
+Sia $A \subseteq \Rn$ un aperto connesso per archi e sia $f: A \to \R$ una funzione differenziabile. Allora:
+\[
+\nabla f(\bx) = \bzero, \quad \forall \bx \in A \iff f \text{ è costante su } A
+\]
+\end{corollario}
+
+\section{Differenziabilità, Differenziale Totale e Piano Tangente}
+
+La vera generalizzazione multidimensionale del concetto di derivabilità è la \textbf{differenziabilità}. L'idea guida è la possibilità di approssimare la variazione reale dell'iper-superficie con un'applicazione lineare al prim'ordine, commettendo un errore che decade a zero più velocemente della distanza dal punto di tangenza.
+
+\begin{definizione}{Differenziabilità e Differenziale Totale}{def_differenziabilita_rigorosa}
+Sia $f: A \subseteq \Rn \to \R$ con $A$ aperto, e sia $\bx_0 \in A$. La funzione $f$ si dice \textbf{differenziabile in $\bx_0$} se esiste un vettore $\mathbf{a} \in \Rn$ tale che per ogni incremento $\mathbf{h} \in \Rn$:
+\[
+f(\bx_0 + \mathbf{h}) = f(\bx_0) + \scal{\mathbf{a}, \mathbf{h}} + \smallo(\norm{\mathbf{h}}) \quad \text{per } \mathbf{h} \to \bzero
+\]
+ossia, in forma di limite:
+\[
+\lim_{\mathbf{h} \to \bzero} \frac{f(\bx_0 + \mathbf{h}) - f(\bx_0) - \scal{\mathbf{a}, \mathbf{h}}}{\norm{\mathbf{h}}} = 0
+\]
+Se $f$ è differenziabile in $\bx_0$, il vettore $\mathbf{a}$ coincide necessariamente con il gradiente $\nabla f(\bx_0)$.
+L'applicazione lineare $df(\bx_0): \Rn \to \R$ definita da:
+\[
+df(\bx_0)(\mathbf{h}) = \scal{\nabla f(\bx_0), \mathbf{h}} = \sum_{i=1}^n \pder{f}{x_i}(\bx_0) \, h_i
+\]
+si chiama \textbf{differenziale totale} di $f$ in $\bx_0$.
+\end{definizione}
+
+\begin{teorema}{Conseguenze Fondamentali della Differenziabilità}{thm_prop_differenziabilita}
+Se $f: A \subseteq \Rn \to \R$ è differenziabile nel punto $\bx_0 \in A$, allora:
+\begin{enumerate}
+    \item $f$ è \textbf{continua} in $\bx_0$;
+    \item $f$ ammette tutte le \textbf{derivate parziali} prime in $\bx_0$, e $\mathbf{a} = \nabla f(\bx_0)$;
+    \item $f$ ammette tutte le \textbf{derivate direzionali} lungo qualsiasi versore $\bv$ ($\norm{\bv}=1$), e vale la \textbf{Formula del Gradiente}:
+    \[
+    D_\bv f(\bx_0) = \scal{\nabla f(\bx_0), \bv} = \sum_{i=1}^n \pder{f}{x_i}(\bx_0) \, v_i
+    \]
+\end{enumerate}
+\end{teorema}
+
+\begin{dimostrazione}
+Dimostriamo le tre affermazioni:
+\begin{enumerate}
+    \item Dalla definizione di differenziabilità:
+    \[
+    \lim_{\mathbf{h} \to \bzero} \Big( f(\bx_0 + \mathbf{h}) - f(\bx_0) \Big) = \lim_{\mathbf{h} \to \bzero} \Big( \scal{\mathbf{a}, \mathbf{h}} + \smallo(\norm{\mathbf{h}}) \Big) = 0
+    \]
+    poiché $\abs{\scal{\mathbf{a}, \mathbf{h}}} \le \norm{\mathbf{a}}\norm{\mathbf{h}} \to 0$. Dunque $\lim_{\bx \to \bx_0} f(\bx) = f(\bx_0)$, il che prova la continuità di $f$ in $\bx_0$.
+    \item Scegliendo l'incremento lungo una generica direzione $\bv$ ($\norm{\bv}=1$), poniamo $\mathbf{h} = t\bv$ con $t \in \R \setminus \graffe{0}$. La condizione di differenziabilità porge:
+    \[
+    \lim_{t \to 0} \frac{f(\bx_0 + t\bv) - f(\bx_0) - \scal{\mathbf{a}, t\bv}}{\norm{t\bv}} = 0 \implies \lim_{t \to 0} \frac{f(\bx_0 + t\bv) - f(\bx_0) - t\scal{\mathbf{a}, \bv}}{\abs{t}} = 0
+    \]
+    Separando i limiti per $t \to 0^+$ e $t \to 0^-$, otteniamo:
+    \[
+    \lim_{t \to 0} \frac{f(\bx_0 + t\bv) - f(\bx_0)}{t} = \scal{\mathbf{a}, \bv}
+    \]
+    Questo dimostra simultaneamente che la derivata direzionale $D_\bv f(\bx_0)$ esiste per qualsiasi versore $\bv$ e vale $D_\bv f(\bx_0) = \scal{\mathbf{a}, \bv}$.
+    \item Scegliendo in particolare $\bv = \mathbf{e}_i$, otteniamo $\pder{f}{x_i}(\bx_0) = \scal{\mathbf{a}, \mathbf{e}_i} = a_i$. Ne segue che il vettore $\mathbf{a}$ coincide univocamente con il gradiente $\nabla f(\bx_0)$.
+\end{enumerate}
+\end{dimostrazione}
+
+\begin{teorema}{Equazione del Piano Tangente}{piano_tangente_teorema}
+Sia $f: A \subseteq \Rdue \to \R$ una funzione differenziabile nel punto $(x_0, y_0) \in A$. L'equazione cartesiana del \textbf{piano tangente} al grafico di $f$ nel punto tridimensionale $(x_0, y_0, f(x_0, y_0))$ è:
+\[
+z = f(x_0, y_0) + \pder{f}{x}(x_0, y_0)(x - x_0) + \pder{f}{y}(x_0, y_0)(y - y_0)
+\]
+\end{teorema}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Assi cartesiani 3D
+    \draw[->, gray!80] (0,0) -- (4.5,0) node[right, black] {$y$};
+    \draw[->, gray!80] (0,0) -- (-2.4,-1.6) node[below left, black] {$x$};
+    \draw[->, gray!80] (0,0) -- (0,4.2) node[above, black] {$z$};
+
+    % Superficie curva
+    \draw[thick, navyblue!80, fill=navyblue!10, fill opacity=0.6] 
+        plot[domain=-1.6:1.6, samples=30] (\x, {2.2 - 0.4*\x*\x}) -- cycle;
+
+    % Punto di tangenza
+    \coordinate (Ptop) at (0, 2.2);
+    \filldraw[crimsonred] (Ptop) circle (2.2pt) node[above right] {$P_0 = (x_0, y_0, f(x_0, y_0))$};
+
+    % Piano tangente (parallelogramma inclinato)
+    \draw[thick, crimsonred, fill=crimsonred!12, fill opacity=0.7] 
+        (-2.0, 1.6) -- (1.5, 2.8) -- (2.5, 2.4) -- (-1.0, 1.2) -- cycle;
+    \node[crimsonred] at (2.2, 3.2) {Piano Tangente $\Pi_T$};
+\end{tikzpicture}
+\end{center}
+
+\section{Il Teorema del Differenziale Totale}
+
+Poiché verificare la differenziabilità direttamente mediante la definizione di limite può risultare laborioso, disponiamo di un potentissimo criterio operativo: la condizione sufficiente del $C^1$.
+
+\begin{teorema}{Teorema del Differenziale Totale}{thm_differenziale_totale_dimostrazione}
+Sia $f: A \subseteq \Rn \to \R$ con $A$ aperto, e sia $\bx_0 \in A$.
+Se le derivate parziali prime $\pder{f}{x_1}, \dots, \pder{f}{x_n}$ esistono in un intorno sferico $\mathcal{B}_r(\bx_0) \subseteq A$ e sono \textbf{continue nel punto $\bx_0$} ($f \in C^1$), allora la funzione $f$ è \textbf{differenziabile nel punto $\bx_0$}.
+\end{teorema}
+
+\begin{dimostrazione}
+Illustriamo la dimostrazione dettagliata nel caso bidimensionale $n=2$ per il punto $(x_0, y_0) \in A$ (l'estensione a $\Rn$ segue iterando il medesimo procedimento su ciascuna delle $n$ coordinate).\\
+Sia $\mathbf{h} = (h, k) \in \Rdue$ un vettore incremento non nullo tale che $\norm{\mathbf{h}} = \sqrt{h^2+k^2} < r$.
+Esprimiamo la variazione totale di $f$ scomponendola nella somma di due variazioni parziali lungo i lati del rettangolo coordinato:
+\begin{align*}
+f(x_0 + h, y_0 + k) - f(x_0, y_0) &= \Big[ f(x_0 + h, y_0 + k) - f(x_0, y_0 + k) \Big] \\
+&\quad + \Big[ f(x_0, y_0 + k) - f(x_0, y_0) \Big]
+\end{align*}
+\begin{enumerate}
+    \item Il primo termine tra parentesi quadre rappresenta l'incremento della funzione di una variabile $x \mapsto f(x, y_0 + k)$ sull'intervallo di estremi $x_0$ e $x_0+h$. Poiché $f_x$ esiste in $\mathcal{B}_r(\bx_0)$, applichiamo il Teorema di Lagrange monodimensionale: esiste un punto $\xi$ strettamente compreso tra $x_0$ e $x_0+h$ tale che:
+    \[
+    f(x_0 + h, y_0 + k) - f(x_0, y_0 + k) = \pder{f}{x}(\xi, y_0 + k) \cdot h
+    \]
+    \item Il secondo termine tra parentesi quadre rappresenta l'incremento della funzione di una variabile $y \mapsto f(x_0, y)$ sull'intervallo di estremi $y_0$ e $y_0+k$. Applicando nuovamente il Teorema di Lagrange: esiste un punto $\eta$ strettamente compreso tra $y_0$ e $y_0+k$ tale che:
+    \[
+    f(x_0, y_0 + k) - f(x_0, y_0) = \pder{f}{y}(x_0, \eta) \cdot k
+    \]
+\end{enumerate}
+Sostituendo queste due espressioni nell'incremento totale e sottraendo il candidato differenziale lineare $\scal{\nabla f(x_0, y_0), \mathbf{h}} = f_x(x_0, y_0) h + f_y(x_0, y_0) k$:
+\begin{align*}
+&f(x_0 + h, y_0 + k) - f(x_0, y_0) - \pder{f}{x}(x_0, y_0) h - \pder{f}{y}(x_0, y_0) k \\
+&= \left[ \pder{f}{x}(\xi, y_0 + k) - \pder{f}{x}(x_0, y_0) \right] h + \left[ \pder{f}{y}(x_0, \eta) - \pder{f}{y}(x_0, y_0) \right] k
+\end{align*}
+Dividiamo entrambi i membri per $\norm{\mathbf{h}} = \sqrt{h^2+k^2}$ e prendiamo il valore assoluto, applicando la disuguaglianza triangolare:
+\begin{align*}
+&\frac{\abs{f(x_0 + h, y_0 + k) - f(x_0, y_0) - \scal{\nabla f(x_0, y_0), \mathbf{h}}}}{\norm{\mathbf{h}}} \\
+&\le \abs{\pder{f}{x}(\xi, y_0 + k) - \pder{f}{x}(x_0, y_0)} \frac{\abs{h}}{\sqrt{h^2+k^2}} + \abs{\pder{f}{y}(x_0, \eta) - \pder{f}{y}(x_0, y_0)} \frac{\abs{k}}{\sqrt{h^2+k^2}}
+\end{align*}
+Poiché $\frac{\abs{h}}{\sqrt{h^2+k^2}} \le 1$ e $\frac{\abs{k}}{\sqrt{h^2+k^2}} \le 1$, possiamo maggiorare:
+\begin{align*}
+&\frac{\abs{f(x_0 + h, y_0 + k) - f(x_0, y_0) - \scal{\nabla f(x_0, y_0), \mathbf{h}}}}{\norm{\mathbf{h}}} \\
+&\le \abs{\pder{f}{x}(\xi, y_0 + k) - \pder{f}{x}(x_0, y_0)} + \abs{\pder{f}{y}(x_0, \eta) - \pder{f}{y}(x_0, y_0)}
+\end{align*}
+Quando $(h, k) \to (0, 0)$, per il Teorema del Confronto i punti intermedi soddisfano $(\xi, y_0+k) \to (x_0, y_0)$ e $(x_0, \eta) \to (x_0, y_0)$.\\
+Poiché per ipotesi le derivate parziali $f_x$ e $f_y$ sono \textbf{continue nel punto $(x_0, y_0)$}, i due addendi a secondo membro tendono entrambi a zero:
+\[
+\lim_{(h,k) \to (0,0)} \frac{\abs{f(x_0 + h, y_0 + k) - f(x_0, y_0) - \scal{\nabla f(x_0, y_0), \mathbf{h}}}}{\sqrt{h^2+k^2}} = 0
+\]
+Questo dimostra formalmente che $f$ è differenziabile in $(x_0, y_0)$.
+\end{dimostrazione}
+
+\begin{esempio}{Funzione Differenziabile ma non di Classe $C^1$}{es_diff_non_c1_completo}
+Si consideri la funzione:
+\[
+f(x,y) = \begin{cases} (x^2 + y^2) \sen\left( \frac{1}{\sqrt{x^2+y^2}} \right) & \text{se } (x,y) \neq (0,0) \\ 0 & \text{se } (x,y) = (0,0) \end{cases}
+\]
+\begin{enumerate}
+    \item \textbf{Derivate parziali nell'origine}:
+    \[
+    f_x(0,0) = \lim_{h \to 0} \frac{f(h,0) - 0}{h} = \lim_{h \to 0} \frac{h^2 \sen(1/\abs{h})}{h} = \lim_{h \to 0} h \sen(1/\abs{h}) = 0
+    \]
+    Per simmetria, $f_y(0,0) = 0 \implies \nabla f(0,0) = (0,0)$.
+    \item \textbf{Differenziabilità nell'origine}:
+    \[
+    \lim_{(h,k) \to (0,0)} \frac{f(h,k) - f(0,0) - 0}{\sqrt{h^2+k^2}} = \lim_{\rho \to 0^+} \frac{\rho^2 \sen(1/\rho)}{\rho} = \lim_{\rho \to 0^+} \rho \sen\left(\frac{1}{\rho}\right) = 0
+    \]
+    Dunque $f$ è \textbf{differenziabile} in $(0,0)$.
+    \item \textbf{Discontinuità delle derivate prime}:
+    Per $(x,y) \neq (0,0)$, la derivata rispetto a $x$ è:
+    \[
+    f_x(x,y) = 2x \sen\left(\frac{1}{\sqrt{x^2+y^2}}\right) - \frac{x}{\sqrt{x^2+y^2}} \cos\left(\frac{1}{\sqrt{x^2+y^2}}\right)
+    \]
+    Restringendoci all'asse $x$ per $x > 0$: $f_x(x,0) = 2x \sen(1/x) - \cos(1/x)$.
+    Per $x \to 0^+$, il termine $\cos(1/x)$ \textbf{oscilla indefinitamente tra $-1$ e $1$}, privando $f_x$ del limite. Pertanto $f_x$ non è continua in $(0,0)$, provando che la condizione $C^1$ è sufficiente ma non necessaria per la differenziabilità.
+\end{enumerate}
+\end{esempio}
+
+\section{Regola della Catena (Chain Rule)}
+
+\begin{teorema}{Regola della Catena per Curve Parametriche}{thm_chain_rule_curva}
+Sia $\gamma: I \subseteq \R \to \Rn$, $t \mapsto \gamma(t) = (x_1(t), \dots, x_n(t))$ una curva derivabile in $t_0 \in I$, e sia $f: A \subseteq \Rn \to \R$ differenziabile nel punto $\bx_0 = \gamma(t_0) \in A$.
+Allora la funzione composta $g = f \circ \gamma: I \to \R$, definita da $g(t) = f(\gamma(t))$, è derivabile in $t_0$ e la sua derivata vale:
+\[
+g'(t_0) = \scal{\nabla f(\gamma(t_0)), \gamma'(t_0)} = \sum_{i=1}^n \pder{f}{x_i}(\gamma(t_0)) \, x_i'(t_0)
+\]
+\end{teorema}
+
+\begin{dimostrazione}
+Sia $t \in I$ e poniamo $\Delta t = t - t_0 \neq 0$. L'incremento del vettore posizione sulla curva è $\Delta \gamma = \gamma(t_0 + \Delta t) - \gamma(t_0)$.
+Poiché $\gamma$ è derivabile in $t_0$, per $\Delta t \to 0$ abbiamo $\Delta \gamma \to \bzero$ e $\frac{\Delta \gamma}{\Delta t} \to \gamma'(t_0)$.
+Essendo $f$ differenziabile in $\bx_0 = \gamma(t_0)$, possiamo scrivere:
+\[
+f(\gamma(t_0) + \Delta \gamma) - f(\gamma(t_0)) = \scal{\nabla f(\gamma(t_0)), \Delta \gamma} + \omega(\Delta \gamma) \norm{\Delta \gamma}
+\]
+dove la funzione resto $\omega(\Delta \gamma) \to 0$ per $\Delta \gamma \to \bzero$ (e poniamo $\omega(\bzero) = 0$).
+Dividendo per l'incremento scalare $\Delta t$:
+\[
+\frac{g(t_0 + \Delta t) - g(t_0)}{\Delta t} = \scal{\nabla f(\gamma(t_0)), \frac{\Delta \gamma}{\Delta t}} + \omega(\Delta \gamma) \frac{\norm{\Delta \gamma}}{\Delta t}
+\]
+Passando al limite per $\Delta t \to 0$:
+\begin{align*}
+\lim_{\Delta t \to 0} \scal{\nabla f(\gamma(t_0)), \frac{\Delta \gamma}{\Delta t}} &= \scal{\nabla f(\gamma(t_0)), \gamma'(t_0)} \\
+\lim_{\Delta t \to 0} \abs{\omega(\Delta \gamma) \frac{\norm{\Delta \gamma}}{\Delta t}} &= \lim_{\Delta t \to 0} \abs{\omega(\Delta \gamma)} \cdot \norm{\frac{\Delta \gamma}{\Delta t}} = 0 \cdot \norm{\gamma'(t_0)} = 0
+\end{align*}
+Ne deduciamo che il limite del rapporto incrementale esiste ed è:
+\[
+g'(t_0) = \lim_{\Delta t \to 0} \frac{g(t_0 + \Delta t) - g(t_0)}{\Delta t} = \scal{\nabla f(\gamma(t_0)), \gamma'(t_0)}
+\]
+\end{dimostrazione}
+
+\begin{osservazione}[Generalizzazione a Campi Vettoriali e Matrici Jacobiane]
+Se $\boldsymbol{\Phi}: \R^m \to \Rn$ è differenziabile in $\mathbf{u}_0$ e $\mathbf{F}: \Rn \to \R^k$ è differenziabile in $\bx_0 = \boldsymbol{\Phi}(\mathbf{u}_0)$, allora la funzione composta $\mathbf{H} = \mathbf{F} \circ \boldsymbol{\Phi}: \R^m \to \R^k$ è differenziabile in $\mathbf{u}_0$ e la sua matrice Jacobiana soddisfa la moltiplicazione tra matrici:
+\[
+\Jac_{\mathbf{F} \circ \boldsymbol{\Phi}}(\mathbf{u}_0) = \Jac_{\mathbf{F}}(\boldsymbol{\Phi}(\mathbf{u}_0)) \cdot \Jac_{\boldsymbol{\Phi}}(\mathbf{u}_0)
+\]
+\end{osservazione}
+
+\section{Proprietà Geometriche e Fisiche del Gradiente}
+
+Il vettore gradiente racchiude informazioni geometriche di primaria importanza per l'analisi locale di una funzione.
+
+\begin{teorema}{Direzione di Massima Crescita e Massima Discesa}{thm_direzione_max_pendenza}
+Sia $f: A \subseteq \Rn \to \R$ differenziabile in $\bx_0 \in A$, con $\nabla f(\bx_0) \neq \bzero$.
+Al variare del versore di direzione $\bv \in \Rn$ ($\norm{\bv} = 1$):
+\begin{enumerate}
+    \item La derivata direzionale $D_\bv f(\bx_0)$ assume il valore \textbf{massimo assoluto} quando $\bv$ è concorde al gradiente:
+    \[
+    \bv_{\max} = \frac{\nabla f(\bx_0)}{\norm{\nabla f(\bx_0)}} \implies D_{\bv_{\max}} f(\bx_0) = \norm{\nabla f(\bx_0)}
+    \]
+    \item Assume il valore \textbf{minimo assoluto} (massima discesa / pendenza negativa) quando $\bv$ è discorde al gradiente:
+    \[
+    \bv_{\min} = -\frac{\nabla f(\bx_0)}{\norm{\nabla f(\bx_0)}} \implies D_{\bv_{\min}} f(\bx_0) = -\norm{\nabla f(\bx_0)}
+    \]
+    \item Si annulla ($D_\bv f(\bx_0) = 0$) lungo tutte le direzioni ortogonali al gradiente $\nabla f(\bx_0)$.
+\end{enumerate}
+\end{teorema}
+
+\begin{dimostrazione}
+Poiché $f$ è differenziabile, per la formula del gradiente abbiamo $D_\bv f(\bx_0) = \scal{\nabla f(\bx_0), \bv}$.
+Applicando la disuguaglianza di Cauchy-Schwarz:
+\[
+-\norm{\nabla f(\bx_0)} \norm{\bv} \le \scal{\nabla f(\bx_0), \bv} \le \norm{\nabla f(\bx_0)} \norm{\bv}
+\]
+Poiché $\norm{\bv} = 1$:
+\[
+-\norm{\nabla f(\bx_0)} \le D_\bv f(\bx_0) \le \norm{\nabla f(\bx_0)}
+\]
+Il massimo $\norm{\nabla f(\bx_0)}$ è raggiunto se e solo se $\bv$ è parallelo e concorde a $\nabla f(\bx_0)$ ($\theta = 0 \implies \cos\theta = 1$). Il minimo $-\norm{\nabla f(\bx_0)}$ è raggiunto per $\theta = \pi \implies \cos\theta = -1$. Infine $D_\bv f(\bx_0) = 0 \iff \theta = \pi/2 \iff \bv \perp \nabla f(\bx_0)$.
+\end{dimostrazione}
+
+\begin{teorema}{Ortogonalità del Gradiente agli Insiemi di Livello}{thm_gradiente_ortogonale_livello}
+Sia $f: A \subseteq \Rn \to \R$ differenziabile in $\bx_0 \in A$ con $\nabla f(\bx_0) \neq \bzero$.
+Il vettore gradiente $\nabla f(\bx_0)$ è \textbf{ortogonale} all'iper-superficie di livello $L_c(f) = \graffe{\bx \in A : f(\bx) = f(\bx_0)}$ nel punto $\bx_0$.
+\end{teorema}
+
+\begin{dimostrazione}
+Sia $\gamma: (-\eps, \eps) \to L_c(f)$ una curva regolare qualsiasi tracciata interamente sull'insieme di livello, tale che $\gamma(0) = \bx_0$ e con vettore tangente $\gamma'(0) = \mathbf{t} \neq \bzero$.
+Poiché la quota di $f$ è costante lungo la curva, $f(\gamma(t)) = c$ per ogni $t \in (-\eps, \eps)$.
+Derivando rispetto a $t$ ambo i membri in $t = 0$ mediante la Chain Rule:
+\[
+0 = \der{}{t}\Big[ f(\gamma(t)) \Big]_{t=0} = \scal{\nabla f(\gamma(0)), \gamma'(0)} = \scal{\nabla f(\bx_0), \mathbf{t}}
+\]
+Poiché l'ortogonalità $\scal{\nabla f(\bx_0), \mathbf{t}} = 0$ sussiste per qualsiasi vettore tangente $\mathbf{t}$ all'insieme di livello, il gradiente $\nabla f(\bx_0)$ è perpendicolare allo spazio tangente dell'insieme di livello in $\bx_0$.
+\end{dimostrazione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Curve di livello concentriche
+    \draw[thick, coolblue] (0,0) ellipse (3.2 and 2.0);
+    \draw[thick, coolblue] (0,0) ellipse (2.2 and 1.35);
+    \draw[thick, coolblue] (0,0) ellipse (1.2 and 0.7);
+
+    \node[coolblue] at (3.3,1.8) {$f(x,y) = c_3$};
+    \node[coolblue] at (2.3,1.2) {$f(x,y) = c_2$};
+    \node[coolblue] at (1.3,0.6) {$f(x,y) = c_1$};
+
+    % Punto P0 sulla curva intermedia
+    \coordinate (P0) at (1.55, 0.95);
+    \filldraw[navyblue] (P0) circle (2pt) node[below=2pt] {$P_0$};
+
+    % Retta tangente alla curva di livello
+    \draw[thick, forestgreen, dashed] (P0) -- ++(-1.2, 0.85);
+    \draw[thick, forestgreen, dashed] (P0) -- ++(1.2, -0.85) node[below right] {Tangente alla curva di livello};
+
+    % Vettore gradiente ortogonale
+    \draw[ultra thick, crimsonred, ->] (P0) -- ++(0.9, 1.25) node[above right] {$\nabla f(P_0)$ (Ortogonale e massima crescita)};
+\end{tikzpicture}
+\end{center}
+
+\section{Derivate di Ordine Superiore, Teorema di Schwarz e Formula di Taylor}
+
+\begin{definizione}{Derivate Parziali Seconde e Matrice Hessiana}{def_hessiana_rn}
+Sia $f: A \subseteq \Rn \to \R$. Se le derivate parziali prime $\pder{f}{x_i}$ sono a loro volta derivabili parzialmente rispetto a $x_j$, si definiscono le \textbf{derivate parziali seconde}:
+\[
+\pmder{f}{x_j}{x_i}(\bx_0) = \pder{}{x_j} \left( \pder{f}{x_i} \right)(\bx_0) = f_{x_i x_j}(\bx_0)
+\]
+La matrice quadrata $n \times n$ di tutte le derivate seconde si chiama \textbf{matrice Hessiana}:
+\[
+\Hess f(\bx_0) = \begin{pmatrix}
+f_{x_1 x_1}(\bx_0) & f_{x_1 x_2}(\bx_0) & \dots & f_{x_1 x_n}(\bx_0) \\
+f_{x_2 x_1}(\bx_0) & f_{x_2 x_2}(\bx_0) & \dots & f_{x_2 x_n}(\bx_0) \\
+\vdots & \vdots & \ddots & \vdots \\
+f_{x_n x_1}(\bx_0) & f_{x_n x_2}(\bx_0) & \dots & f_{x_n x_n}(\bx_0)
+\end{pmatrix}
+\]
+\end{definizione}
+
+\begin{teorema}{Teorema di Schwarz sull'Invertibilità dell'Ordine di Derivazione}{thm_schwarz_dimostrazione}
+Sia $f: A \subseteq \Rn \to \R$ con $A$ aperto. Se le derivate parziali seconde miste $f_{x_i x_j}$ e $f_{x_j x_i}$ esistono in $A$ e sono \textbf{continue} nel punto $\bx_0 \in A$, allora esse coincidono:
+\[
+\pmder{f}{x_j}{x_i}(\bx_0) = \pmder{f}{x_i}{x_j}(\bx_0)
+\]
+In particolare, per funzioni $f \in C^2(A)$, la matrice Hessiana $\Hess f(\bx)$ è una \textbf{matrice reale simmetrica} ($\Hess f = (\Hess f)^T$).
+\end{teorema}
+
+\begin{teorema}{Formula di Taylor al Secondo Ordine con Resto di Peano}{taylor_secondo_ordine_peano}
+Sia $f: A \subseteq \Rn \to \R$ una funzione di classe $C^2(A)$ con $A$ aperto e sia $\bx_0 \in A$. Per ogni incremento $\mathbf{h} \in \Rn$ tale che $\bx_0 + \mathbf{h} \in A$:
+\[
+f(\bx_0 + \mathbf{h}) = f(\bx_0) + \scal{\nabla f(\bx_0), \mathbf{h}} + \frac{1}{2} \scal{\Hess f(\bx_0) \mathbf{h}, \mathbf{h}} + \smallo(\norm{\mathbf{h}}^2) \quad \text{per } \mathbf{h} \to \bzero
+\]
+dove la quantità:
+\[
+q(\mathbf{h}) = \scal{\Hess f(\bx_0) \mathbf{h}, \mathbf{h}} = \mathbf{h}^T \Hess f(\bx_0) \, \mathbf{h} = \sum_{i=1}^n \sum_{j=1}^n \pmder{f}{x_i}{x_j}(\bx_0) h_i h_j
+\]
+rappresenta la \textbf{forma quadratica associata alla matrice Hessiana}.
+\end{teorema}

@@ -1,0 +1,653 @@
+% ==============================================================================
+% CAPITOLO 5: CURVE PARAMETRICHE E INTEGRALI CURVILINEI
+% ==============================================================================
+
+\chapter{Curve Parametriche e Integrali Curvilinei}
+\label{chap:curve_e_integrali_curvilinei}
+
+Nel calcolo infinitesimale a una variabile, l'integrazione è tradizionalmente introdotta su intervalli compatti dell'asse reale $[a,b] \subset \R$. Tuttavia, la modellizzazione geometrica, fisica ed ingegneristica richiede frequentemente di misurare grandezze distribuite lungo traiettorie curvilinee arbitrarie nello spazio euclideo $\Rdue$ o $\Rtre$. Si pensi, ad esempio, al calcolo della massa o del baricentro di un filo metallico a densità variabile, alla determinazione del lavoro compiuto da un campo di forze su una particella in movimento, oppure alla quantificazione della circolazione di un fluido lungo un profilo alare.
+
+Per estendere l'analisi a questi contesti, è necessario sviluppare una solida comprensione della \textbf{geometria differenziale locale delle curve} e costruire due distinte nozioni di integrale curvilineo: gli \textbf{integrali di prima specie} (relativi a campi scalari e invarianti rispetto al verso di percorrenza) e gli \textbf{integrali di seconda specie} (relativi a campi vettoriali e forme differenziali, sensibili all'orientazione del cammino).
+
+% ==============================================================================
+\section{Geometria Differenziale delle Curve Parametriche}
+% ==============================================================================
+
+Dal punto di vista intuitivo, una curva nello spazio è l'oggetto unidimensionale tracciato dal moto continuo di un punto materiale al variare del tempo. Tuttavia, in matematica è essenziale distinguere formalmente tra la legge oraria del moto (la \emph{curva parametrica} vera e propria) e la traccia geometrica lasciata nello spazio (il suo \emph{sostegno}).
+
+\begin{definizione}{Curva Parametrica e Proprietà Topologiche}{def_curva_estesa}
+Sia $I = [a,b] \subset \R$ un intervallo chiuso e limitato. Si definisce \textbf{curva parametrica} (o semplicemente \emph{curva}) in $\Rn$ ($n=2,3$) un'applicazione continua:
+\[
+\gamma: [a,b] \longrightarrow \Rn, \quad t \longmapsto \gamma(t) = \begin{pmatrix} x_1(t) \\ \vdots \\ x_n(t) \end{pmatrix}
+\]
+La variabile $t \in [a,b]$ è detta \textbf{parametro} (spesso interpretata fisicamente come il tempo).
+\begin{itemize}
+    \item L'insieme immagine $\Gamma = \gamma([a,b]) \subset \Rn$ è detto \textbf{sostegno} (o traiettoria) della curva.
+    \item La curva si dice \textbf{chiusa} se il punto iniziale coincide con il punto finale: $\gamma(a) = \gamma(b)$.
+    \item La curva si dice \textbf{semplice} se non ammette autointersezioni, ossia se l'applicazione $\gamma$ è iniettiva sull'intervallo semiaperto $[a,b)$. In particolare, se la curva è chiusa, l'unica coincidenza ammessa è $\gamma(a) = \gamma(b)$.
+    \item La curva si dice di classe \textbf{$C^1([a,b])$} se ciascuna funzione componente $x_i: [a,b] \to \R$ è derivabile con continuità su tutto $[a,b]$ (intendendo le derivate negli estremi $a$ e $b$ come derivate unilaterali destra e sinistra).
+    \item Una curva $C^1([a,b])$ si dice \textbf{regolare} se il suo vettore velocità non si annulla mai:
+    \[
+    \gamma'(t) = \begin{pmatrix} x_1'(t) \\ \vdots \\ x_n'(t) \end{pmatrix} \neq \bzero, \quad \forall t \in [a,b]
+    \]
+    \item La curva si dice \textbf{regolare a tratti} se l'intervallo $[a,b]$ può essere suddiviso in un numero finito di sottointervalli $[t_{k-1}, t_k]$ su ciascuno dei quali la restrizione di $\gamma$ è regolare.
+\end{itemize}
+\end{definizione}
+
+\begin{osservazione}[Distinzione tra Curva e Sostegno]
+È di fondamentale importanza non confondere la curva $\gamma$ (che è una funzione vettoriale dotata di verso e velocità di percorrenza) con il suo sostegno $\Gamma$ (che è un sottoinsieme geometrico di $\Rn$). 
+
+Ad esempio, le due applicazioni:
+\[
+\gamma_1(t) = (\cos t, \sen t), \quad t \in [0, 2\pi]
+\]
+\[
+\gamma_2(u) = (\cos(2u), \sen(2u)), \quad u \in [0, \pi]
+\]
+rappresentano due curve parametriche distinte (hanno domini diversi e velocità istantanea differente, poiché $\norm{\gamma_1'(t)} = 1$ mentre $\norm{\gamma_2'(u)} = 2$), ma condividono esattamente lo stesso sostegno geometrico, ossia la circonferenza unitaria $S^1 = \graffe{(x,y) \in \Rdue : x^2 + y^2 = 1}$.
+\end{osservazione}
+
+\subsection{Cinematica Locale: Velocità, Retta Tangente e Singolarità}
+
+Se interpretiamo il parametro $t$ come il tempo e $\gamma(t)$ come il vettore posizione di un punto materiale nello spazio, la derivata prima $\gamma'(t)$ rappresenta il \textbf{vettore velocità istantanea}. La condizione di regolarità $\gamma'(t) \neq \bzero$ garantisce che il moto non subisca arresti istantanei; geometricamente, ciò assicura che in ogni punto della curva esista una e una sola \textbf{retta tangente ben definita}.
+
+\begin{definizione}{Retta Tangente e Versore Tangente Unitario}{def_retta_tangente}
+Sia $\gamma: [a,b] \to \Rn$ una curva regolare. Per ogni $t_0 \in [a,b]$, la \textbf{retta tangente} al sostegno della curva nel punto $P_0 = \gamma(t_0)$ è la retta passante per $P_0$ e parallela al vettore velocità $\gamma'(t_0)$, avente equazione parametrica:
+\[
+\mathbf{r}(u) = \gamma(t_0) + u \, \gamma'(t_0), \quad u \in \R
+\]
+Il \textbf{versore tangente unitario} $\bT(t)$ è il vettore di norma unitaria concorde con il verso del moto:
+\[
+\bT(t) = \frac{\gamma'(t)}{\norm{\gamma'(t)}} = \frac{1}{\sqrt{\sum_{i=1}^n [x_i'(t)]^2}} \begin{pmatrix} x_1'(t) \\ \vdots \\ x_n'(t) \end{pmatrix}
+\]
+\end{definizione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15, >=Stealth]
+    % Assi cartesiani 3D
+    \draw[->, thick, gray!80] (0,0,0) -- (5.5,0,0) node[below left, black] {$x$};
+    \draw[->, thick, gray!80] (0,0,0) -- (0,4.2,0) node[above, black] {$z$};
+    \draw[->, thick, gray!80] (0,0,0) -- (0,0,5) node[below right, black] {$y$};
+
+    % Elica cilindrica nello spazio
+    \draw[ultra thick, navyblue, domain=0:3.8*pi, samples=120, variable=\t] 
+        plot ({2.0*cos(\t r)}, {0.28*\t}, {2.0*sin(\t r)});
+
+    % Punto su elica a t0 = 1.8*pi
+    \coordinate (P0) at ({2.0*cos(1.8*pi r)}, {0.28*1.8*pi}, {2.0*sin(1.8*pi r)});
+    \filldraw[crimsonred] (P0) circle (2.2pt) node[left=3pt, black] {$P_0 = \gamma(t_0)$};
+
+    % Vettore velocità gamma'(t0)
+    \draw[thick, crimsonred, ->, line width=1.3pt] (P0) -- ++({-2.0*sin(1.8*pi r)*0.9}, {0.28*0.9}, {2.0*cos(1.8*pi r)*0.9}) 
+        node[above right=2pt, crimsonred] {$\gamma'(t_0)$ (Vettore Velocità)};
+
+    % Versore tangente T(t0)
+    \draw[thick, forestgreen, ->, line width=1.5pt] (P0) -- ++({-2.0*sin(1.8*pi r)*0.45}, {0.28*0.45}, {2.0*cos(1.8*pi r)*0.45}) 
+        node[below left=2pt, forestgreen] {$\bT(t_0)$};
+
+    % Vettore posizione r(t0) dall'origine
+    \draw[thick, coolblue!80!black, ->, dashed] (0,0,0) -- (P0) node[midway, below] {$\gamma(t_0)$};
+
+    % Retta tangente tratteggiata
+    \draw[densely dotted, warmamber!90!black, thick] 
+        ($(P0) - 1.2*({-2.0*sin(1.8*pi r)*0.9}, {0.28*0.9}, {2.0*cos(1.8*pi r)*0.9})$) -- 
+        ($(P0) + 1.5*({-2.0*sin(1.8*pi r)*0.9}, {0.28*0.9}, {2.0*cos(1.8*pi r)*0.9})$) 
+        node[right] {\small Retta tangente};
+
+    \node[draw=navyblue, fill=subtlegray, rounded corners, align=center] at (2.8,4.0) 
+        {\small Elica cilindrica: $\gamma(t) = (R\cos t, R\sen t, c t)$};
+\end{tikzpicture}
+\end{center}
+
+Cosa accade se la condizione di regolarità viene a mancare? Quando $\gamma'(t_0) = \bzero$, la curva può presentare un arresto con repentino cambio di direzione, originando un \textbf{punto di cuspide} o un punto angoloso sul sostegno geometrico.
+
+\begin{esempio}{Curva Cuspidale e Perdita di Regolarità}{es_cuspide_neil}
+Si consideri la \emph{parabola semicubica} (o cuspidale di Neil) definita da:
+\[
+\gamma: [-1, 1] \longrightarrow \Rdue, \quad \gamma(t) = \begin{pmatrix} t^2 \\ t^3 \end{pmatrix}
+\]
+Calcolando il vettore derivata prima otteniamo:
+\[
+\gamma'(t) = \begin{pmatrix} 2t \\ 3t^2 \end{pmatrix} \implies \gamma'(0) = \begin{pmatrix} 0 \\ 0 \end{pmatrix}
+\]
+Nel punto $t=0$, corrispondente all'origine $(0,0)$, la velocità si annulla. Eliminando il parametro $t$ dalle equazioni cartesiane ($x = t^2 \ge 0 \implies t = \pm\sqrt{x}$, da cui $y = \pm x^{3/2}$ ovvero $y^2 = x^3$), si constata che il sostegno forma una punta acuta nell'origine con tangente orizzontale ma derivata seconda discontinua nel cambio di ramo. La curva è differenziabile dappertutto come funzione parametrica, ma non è regolare in $t=0$.
+\end{esempio}
+
+\subsection{Riparametrizzazioni e Concetto di Ascissa Curvilinea}
+
+Dato che una medesima traiettoria può essere percorsa a velocità arbitrarie, sorge spontanea la necessità di studiare come si trasformano le grandezze geometriche al variare della parametrizzazione adottata.
+
+\begin{definizione}{Riparametrizzazione Ammissibile}{def_riparametrizzazione}
+Sia $\gamma: [a,b] \to \Rn$ una curva regolare di classe $C^1$. Si dice \textbf{cambio di parametro ammissibile} un diffeomorfismo di classe $C^1$:
+\[
+\phi: [c,d] \longrightarrow [a,b], \quad s \longmapsto t = \phi(s)
+\]
+tale che $\phi'(s) \neq 0$ per ogni $s \in [c,d]$. La curva composta:
+\[
+\tilde{\gamma}: [c,d] \longrightarrow \Rn, \quad \tilde{\gamma}(s) = (\gamma \circ \phi)(s) = \gamma(\phi(s))
+\]
+è detta \textbf{riparametrizzazione} di $\gamma$.
+\begin{itemize}
+    \item Se $\phi'(s) > 0$ per ogni $s \in [c,d]$, $\phi$ è strettamente crescente; in tal caso $\phi(c)=a$, $\phi(d)=b$ e la riparametrizzazione si dice \textbf{concorde} (preserva l'orientazione e il verso di percorrenza).
+    \item Se $\phi'(s) < 0$ per ogni $s \in [c,d]$, $\phi$ è strettamente decrescente; in tal caso $\phi(c)=b$, $\phi(d)=a$ e la riparametrizzazione si dice \textbf{discorde} (inverte l'orientazione del percorso).
+\end{itemize}
+\end{definizione}
+
+Applicando la regola di derivazione a catena (Chain Rule), il vettore velocità della curva riparametrizzata è proporzionale al vettore velocità originario:
+\[
+\tilde{\gamma}'(s) = \der{}{s}\left[ \gamma(\phi(s)) \right] = \gamma'(\phi(s)) \, \phi'(s)
+\]
+Di conseguenza, il versore tangente soddisfa:
+\[
+\tilde{\bT}(s) = \frac{\tilde{\gamma}'(s)}{\norm{\tilde{\gamma}'(s)}} = \frac{\gamma'(\phi(s)) \, \phi'(s)}{\norm{\gamma'(\phi(s))} \, \abs{\phi'(s)}} = \sgn(\phi'(s)) \, \bT(\phi(s))
+\]
+Ciò dimostra formalmente che la direzione della retta tangente è un'invariante geometrica intrinseca del sostegno, mentre il verso del versore tangente concorda o discorda a seconda del segno di $\phi'$.
+
+\subsection{Ascissa Curvilinea come Parametro Intrinseco Naturale}
+
+Tra tutte le possibili parametrizzazioni di una curva regolare, ne esiste una canonica e privilegiata dal punto di vista geometrico e cinematico: la parametrizzazione tramite la \textbf{lunghezza d'arco} (o \textbf{ascissa curvilinea}).
+
+\begin{definizione}{Ascissa Curvilinea}{def_ascissa_curvilinea}
+Sia $\gamma: [a,b] \to \Rn$ una curva regolare. Si definisce \textbf{ascissa curvilinea} la funzione scalare $s: [a,b] \to [0, L]$ che misura la distanza percorsa lungo la curva a partire dall'istante iniziale $a$ fino al tempo generico $t$:
+\[
+s(t) = \int_{a}^{t} \norm{\gamma'(u)} \du = \int_{a}^{t} \sqrt{\sum_{i=1}^n [x_i'(u)]^2} \du
+\]
+\end{definizione}
+
+Per il Teorema Fondamentale del Calcolo Integrale, la funzione $s(t)$ è di classe $C^1([a,b])$ e la sua derivata temporale è:
+\[
+s'(t) = \der{s}{t} = \norm{\gamma'(t)} = v(t) > 0, \quad \forall t \in [a,b]
+\]
+Poiché la derivata $s'(t)$ è strettamente positiva su tutto l'intervallo, la funzione $s(t)$ è strettamente crescente e quindi invertibile. La sua funzione inversa $t = t(s) = s^{-1}(s)$, definita sull'intervallo $[0, L]$, è anch'essa di classe $C^1$ con derivata:
+\[
+\der{t}{s} = \frac{1}{s'(t(s))} = \frac{1}{\norm{\gamma'(t(s))}}
+\]
+Riparametrizzando la curva rispetto all'ascissa curvilinea $s$, otteniamo la curva naturale $\gamma(s) = \gamma(t(s))$. La velocità istantanea rispetto a $s$ vale:
+\[
+\der{\gamma}{s} = \gamma'(t(s)) \der{t}{s} = \frac{\gamma'(t(s))}{\norm{\gamma'(t(s))}} = \bT(s) \implies \norm{\der{\gamma}{s}} = \norm{\bT(s)} = 1
+\]
+
+\begin{osservazione}[Significato Fisico dell'Ascissa Curvilinea]
+L'ascissa curvilinea $s$ rappresenta il \textbf{tempo proprio} registrato da un osservatore che viaggia lungo la traiettoria con velocità scalare costante e unitaria ($v = 1\text{ m/s}$). In questo sistema di riferimento naturale, la derivata rispetto a $s$ fornisce istantaneamente il versore tangente $\bT(s)$ senza necessità di normalizzazione.
+\end{osservazione}
+
+\subsection{Curvatura Geometrica e Cerchio Osculatore}
+
+Come varia la direzione del versore tangente $\bT(s)$ man mano che ci si muove lungo la curva? La rapidità con cui la traiettoria devia da una linea retta è quantificata dalla \textbf{curvatura}.
+
+\begin{definizione}{Curvatura e Raggio di Curvatura}{def_curvatura}
+Sia $\gamma(s)$ una curva parametrizzata mediante l'ascissa curvilinea $s$, di classe $C^2$. Si definisce \textbf{curvatura scalare} $\kappa(s)$ la norma della derivata del versore tangente rispetto all'arco:
+\[
+\kappa(s) = \norm{\der{\bT}{s}}
+\]
+Se $\kappa(s) > 0$, si definiscono:
+\begin{itemize}
+    \item Il \textbf{versore normale principale}: $\bN(s) = \frac{1}{\kappa(s)} \der{\bT}{s}$;
+    \item Il \textbf{raggio di curvatura}: $R(s) = \frac{1}{\kappa(s)}$;
+    \item Il \textbf{cerchio osculatore}: la circonferenza giacente nel piano osculatore (spazio generato da $\bT$ e $\bN$), di raggio $R(s)$ e tangente alla curva nel punto $\gamma(s)$, con centro nel punto $C(s) = \gamma(s) + R(s) \bN(s)$.
+\end{itemize}
+\end{definizione}
+
+Poiché $\norm{\bT(s)}^2 = \scal{\bT(s), \bT(s)} = 1$, derivando rispetto a $s$ si ottiene:
+\[
+\der{}{s} \scal{\bT(s), \bT(s)} = 2 \scal{\der{\bT}{s}, \bT(s)} = 0 \implies \der{\bT}{s} \perp \bT(s)
+\]
+Il vettore $\der{\bT}{s}$ è dunque sempre \textbf{ortogonale} al versore tangente, confermando che $\bN(s)$ è ortogonale a $\bT(s)$.
+
+Per una generica parametrizzazione $t$ non naturale, la formula della curvatura in $\Rtre$ si esprime mediante il prodotto vettoriale:
+\[
+\kappa(t) = \frac{\norm{\gamma'(t) \times \gamma''(t)}}{\norm{\gamma'(t)}^3}
+\]
+Mentre per una curva piana $\gamma(t) = (x(t), y(t))$ in $\Rdue$, la formula assume la celebre espressione cartesiana:
+\[
+\kappa(t) = \frac{\abs{x'(t) y''(t) - y'(t) x''(t)}}{\left( [x'(t)]^2 + [y'(t)]^2 \right)^{3/2}}
+\]
+
+% ==============================================================================
+\section{Rettificazione e Lunghezza delle Curve}
+% ==============================================================================
+
+Il problema classico della \emph{rettificazione di una curva} consiste nell'associare una lunghezza finita a un arco curvilineo continuo mediante l'approssimazione con spezzate poligonali inscritte.
+
+\begin{definizione}{Poligonale Inscritta e Curva Rettificabile}{def_rettificabile}
+Sia $\gamma: [a,b] \to \Rn$ una curva continua. Sia $\mathcal{P} = \graffe{a = t_0 < t_1 < \dots < t_N = b}$ una generica partizione dell'intervallo $[a,b]$. La lunghezza della poligonale inscritta associata alla partizione $\mathcal{P}$ è definita come la somma delle lunghezze euclidee delle corde:
+\[
+L(\mathcal{P}, \gamma) = \sum_{k=1}^N \norm{\gamma(t_k) - \gamma(t_{k-1})}
+\]
+La curva $\gamma$ si dice \textbf{rettificabile} se l'insieme delle lunghezze poligonali è superiormente limitato. In tal caso, la \textbf{lunghezza} di $\gamma$ è l'estremo superiore:
+\[
+L(\gamma) = \sup_{\mathcal{P}} L(\mathcal{P}, \gamma)
+\]
+\end{definizione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Curva continua
+    \draw[ultra thick, navyblue] plot [smooth, tension=0.8] coordinates {(0,0.5) (1.5,2.2) (3.5,2.0) (5.5,3.2) (7,1.8)};
+    \node[navyblue, above] at (3.5,2.2) {Curva $\gamma(t)$};
+
+    % Nodi della partizione
+    \coordinate (P0) at (0,0.5);
+    \coordinate (P1) at (1.2,1.9);
+    \coordinate (P2) at (2.4,2.3);
+    \coordinate (P3) at (3.8,1.95);
+    \coordinate (P4) at (5.2,3.1);
+    \coordinate (P5) at (7,1.8);
+
+    % Poligonale inscritta
+    \draw[thick, crimsonred, dashed] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5);
+
+    \filldraw[black] (P0) circle (2pt) node[below left] {$\gamma(t_0) = \gamma(a)$};
+    \filldraw[black] (P1) circle (1.8pt) node[above left] {$\gamma(t_1)$};
+    \filldraw[black] (P2) circle (1.8pt) node[above] {$\gamma(t_2)$};
+    \filldraw[black] (P3) circle (1.8pt) node[below] {$\gamma(t_3)$};
+    \filldraw[black] (P4) circle (1.8pt) node[above left] {$\gamma(t_4)$};
+    \filldraw[black] (P5) circle (2pt) node[right] {$\gamma(t_5) = \gamma(b)$};
+
+    \draw[crimsonred, <->] (P2) -- node[above, sloped] {\small Corda $\norm{\gamma(t_3)-\gamma(t_2)}$} (P3);
+
+    \node[draw=crimsonred, fill=subtlegray, rounded corners, align=center] at (3.5,-0.3) 
+        {\small Approssimazione poligonale: $L(\gamma) = \lim_{\abs{\mathcal{P}}\to 0} \sum \norm{\gamma(t_k) - \gamma(t_{k-1})} = \int_a^b \norm{\gamma'(t)}\dt$};
+\end{tikzpicture}
+\end{center}
+
+\begin{teorema}{Rettificabilità e Formula Integrale della Lunghezza}{thm_lunghezza_integrale}
+Ogni curva $\gamma: [a,b] \to \Rn$ di classe $C^1([a,b])$ (oppure regolare a tratti) è \textbf{rettificabile}, e la sua lunghezza è data dall'integrale di Riemann della norma del vettore velocità:
+\[
+L(\gamma) = \int_{a}^{b} \norm{\gamma'(t)} \dt = \int_{a}^{b} \sqrt{\sum_{i=1}^n [x_i'(t)]^2} \dt
+\]
+L'espressione differenziale scalare $\ds = \norm{\gamma'(t)}\dt$ è detta \textbf{elemento d'arco} (o metrica indotta).
+\end{teorema}
+
+\begin{dimostrazione}
+Dimostriamo il teorema nel caso piano $n=2$ con $\gamma(t) = (x(t), y(t))$ di classe $C^1([a,b])$ (l'estensione a $n=3$ e a $\Rn$ è immediata).
+
+Sia $\mathcal{P} = \graffe{a = t_0 < t_1 < \dots < t_N = b}$ una generica partizione di $[a,b]$. Consideriamo il generico incremento cordale su $[t_{k-1}, t_k]$:
+\[
+\Delta \gamma_k = \gamma(t_k) - \gamma(t_{k-1}) = \begin{pmatrix} x(t_k) - x(t_{k-1}) \\ y(t_k) - y(t_{k-1}) \end{pmatrix}
+\]
+Poiché $x(t)$ e $y(t)$ sono derivabili su ciascun intervallino $[t_{k-1}, t_k]$, per il \textbf{Teorema del Valor Medio di Lagrange} esistono due punti intermedi $\xi_k, \eta_k \in (t_{k-1}, t_k)$ tali che:
+\[
+x(t_k) - x(t_{k-1}) = x'(\xi_k)\Delta t_k, \quad y(t_k) - y(t_{k-1}) = y'(\eta_k)\Delta t_k
+\]
+dove $\Delta t_k = t_k - t_{k-1}$. La lunghezza della corda $k$-esima vale quindi:
+\[
+\norm{\Delta \gamma_k} = \sqrt{[x'(\xi_k)]^2 + [y'(\eta_k)]^2} \, \Delta t_k
+\]
+Sommando su tutti gli $N$ sottointervalli, la lunghezza poligonale è:
+\[
+L(\mathcal{P}, \gamma) = \sum_{k=1}^N \sqrt{[x'(\xi_k)]^2 + [y'(\eta_k)]^2} \, \Delta t_k
+\]
+Questa somma somiglia a una somma di Riemann per la funzione continua $g(t) = \norm{\gamma'(t)} = \sqrt{[x'(t)]^2 + [y'(t)]^2}$, con l'unica differenza che le derivate $x'$ e $y'$ sono valutate in punti generalmente distinti $\xi_k \neq \eta_k$.
+
+Tuttavia, poiché $x'(t)$ e $y'(t)$ sono continue sull'intervallo compatto $[a,b]$, per il \textbf{Teorema di Heine-Cantor} esse sono \emph{uniformemente continue}: per ogni $\eps > 0$ esiste $\delta > 0$ tale che, se $\abs{\mathcal{P}} = \max_k \Delta t_k < \delta$, allora:
+\[
+\abs{\sqrt{[x'(\xi_k)]^2 + [y'(\eta_k)]^2} - \sqrt{[x'(\xi_k)]^2 + [y'(\xi_k)]^2}} < \eps
+\]
+Ne segue che la somma poligonale differisce da una vera somma di Riemann per una quantità infinitesima:
+\[
+\abs{L(\mathcal{P}, \gamma) - \sum_{k=1}^N \norm{\gamma'(\xi_k)}\Delta t_k} \le \sum_{k=1}^N \eps \, \Delta t_k = \eps (b - a)
+\]
+Passando al limite per il diametro della partizione $\abs{\mathcal{P}} \to 0$, la somma di Riemann converge all'integrale di Riemann della funzione continua $\norm{\gamma'(t)}$:
+\[
+\lim_{\abs{\mathcal{P}} \to 0} L(\mathcal{P}, \gamma) = \int_{a}^{b} \sqrt{[x'(t)]^2 + [y'(t)]^2} \dt = \int_{a}^{b} \norm{\gamma'(t)} \dt
+\]
+Poiché l'estremo superiore coincide con il limite dell'approssimazione poligonale, la tesi è pienamente dimostrata.
+\end{dimostrazione}
+
+\subsection{Formule Notevoli per la Lunghezza d'Arco}
+
+A seconda del modo in cui una curva è assegnata, la formula generale $L = \int \norm{\gamma'(t)}\dt$ si specializza in espressioni operative di uso frequente:
+
+\begin{metodo}[Formule Standard per la Lunghezza di Curve Notevoli]
+\begin{enumerate}
+    \item \textbf{Grafico Cartesiano di una Funzione $y = f(x)$ con $x \in [a,b]$}:
+    Parametrizzazione naturale $\gamma(x) = (x, f(x)) \implies \gamma'(x) = (1, f'(x))$.
+    \[
+    \ds = \sqrt{1 + [f'(x)]^2} \dx \implies L = \int_{a}^{b} \sqrt{1 + [f'(x)]^2} \dx
+    \]
+    \item \textbf{Curva Piana in Coordinate Polari $r = \rho(\theta)$ con $\theta \in [\alpha, \beta]$}:
+    Parametrizzazione cartesiana: $\gamma(\theta) = (\rho(\theta)\cos\theta, \rho(\theta)\sen\theta)$.\\
+    Calcolando la derivata: $\gamma'(\theta) = (\rho'\cos\theta - \rho\sen\theta, \; \rho'\sen\theta + \rho\cos\theta)$.\\
+    Quadrando le componenti e sfruttando l'identità $\cos^2\theta + \sen^2\theta = 1$:
+    \[
+    \norm{\gamma'(\theta)}^2 = (\rho'\cos\theta - \rho\sen\theta)^2 + (\rho'\sen\theta + \rho\cos\theta)^2 = [\rho(\theta)]^2 + [\rho'(\theta)]^2
+    \]
+    \[
+    \ds = \sqrt{\rho(\theta)^2 + [\rho'(\theta)]^2} \dtheta \implies L = \int_{\alpha}^{\beta} \sqrt{\rho(\theta)^2 + [\rho'(\theta)]^2} \dtheta
+    \]
+    \item \textbf{Elica Cilindrica Circolare in $\Rtre$}:
+    Parametrizzazione $\gamma(t) = (R\cos t, R\sen t, c t)$ con $t \in [0, 2\pi N]$ (avente passo dell'elica $h = 2\pi c$ e raggio $R$).
+    \begin{align*}
+    \gamma'(t) &= (-R\sen t, R\cos t, c) \\
+    \implies \norm{\gamma'(t)} &= \sqrt{R^2\sen^2 t + R^2\cos^2 t + c^2} = \sqrt{R^2 + c^2}
+    \end{align*}
+    La velocità scalare è \textbf{costante}, per cui la lunghezza per un singolo giro ($t \in [0, 2\pi]$) è semplicemente:
+    \[
+    L = \int_{0}^{2\pi} \sqrt{R^2 + c^2} \dt = 2\pi \sqrt{R^2 + c^2}
+    \]
+\end{enumerate}
+\end{metodo}
+
+\begin{teorema}{La Retta come Curva di Minima Lunghezza (Geodesica Euclidea)}{geodesica_euclidea_completa}
+Siano $P, Q \in \Rn$ due punti distinti. Tra tutte le curve $C^1$ regolari a tratti $\gamma: [a,b] \to \Rn$ che congiungono $P$ e $Q$ (ossia tali che $\gamma(a) = P$ e $\gamma(b) = Q$), il cammino di lunghezza minima è il \textbf{segmento rettilineo} orientato da $P$ a $Q$.
+\end{teorema}
+
+\begin{dimostrazione}
+Sia $\mathbf{u} = \frac{Q - P}{\norm{Q - P}}$ il versore unitario che individua la direzione e il verso da $P$ a $Q$ (dunque $\norm{\mathbf{u}} = 1$).\\
+Poiché $\gamma$ è di classe $C^1$ a tratti con $\gamma(a) = P$ e $\gamma(b) = Q$, per il Teorema Fondamentale del Calcolo Integrale possiamo esprimere il vettore spostamento totale come l'integrale del vettore velocità:
+\[
+Q - P = \gamma(b) - \gamma(a) = \int_{a}^{b} \gamma'(t) \dt
+\]
+Calcoliamo ora il prodotto scalare tra il vettore spostamento $Q - P$ e il versore $\mathbf{u}$:
+\[
+\scal{Q - P, \mathbf{u}} = \scal{\int_{a}^{b} \gamma'(t) \dt, \mathbf{u}} = \int_{a}^{b} \scal{\gamma'(t), \mathbf{u}} \dt
+\]
+D'altra parte, per definizione di $\mathbf{u}$, il membro di sinistra è esattamente la distanza euclidea tra i due punti:
+\[
+\scal{Q - P, \mathbf{u}} = \scal{Q - P, \frac{Q - P}{\norm{Q - P}}} = \frac{\norm{Q - P}^2}{\norm{Q - P}} = \norm{Q - P}
+\]
+Applichiamo la \textbf{disuguaglianza di Cauchy-Schwarz} al prodotto scalare integrando:
+\[
+\scal{\gamma'(t), \mathbf{u}} \le \abs{\scal{\gamma'(t), \mathbf{u}}} \le \norm{\gamma'(t)} \norm{\mathbf{u}} = \norm{\gamma'(t)} \cdot 1 = \norm{\gamma'(t)}
+\]
+Integrando ambo i membri sull'intervallo $[a,b]$:
+\[
+\norm{Q - P} = \int_{a}^{b} \scal{\gamma'(t), \mathbf{u}} \dt \le \int_{a}^{b} \norm{\gamma'(t)} \dt = L(\gamma)
+\]
+Abbiamo così dimostrato che la lunghezza $L(\gamma)$ di una qualsiasi curva congiungente $P$ e $Q$ è sempre maggiore o uguale alla distanza euclidea $\norm{Q - P}$:
+\[
+L(\gamma) \ge \norm{Q - P}
+\]
+L'uguaglianza $L(\gamma) = \norm{Q - P}$ sussiste se e solo se la disuguaglianza di Cauchy-Schwarz è soddisfatta come uguaglianza quasi ovunque su $[a,b]$ con segno positivo:
+\[
+\scal{\gamma'(t), \mathbf{u}} = \norm{\gamma'(t)} \iff \gamma'(t) = \lambda(t) \mathbf{u}, \quad \text{con } \lambda(t) = \norm{\gamma'(t)} > 0
+\]
+Ciò implica che il vettore velocità $\gamma'(t)$ deve mantenere costantemente la stessa direzione e lo stesso verso del versore $\mathbf{u}$. Integrando rispetto al tempo:
+\[
+\gamma(t) = \gamma(a) + \left(\int_a^t \lambda(u)\du\right) \mathbf{u} = P + s(t) \frac{Q - P}{\norm{Q - P}}
+\]
+che è precisamente la parametrizzazione del \textbf{segmento di retta} che unisce $P$ a $Q$.
+\end{dimostrazione}
+
+% ==============================================================================
+\section{Integrali Curvilinei di Prima Specie (di Campi Scalari)}
+% ==============================================================================
+
+Gli integrali curvilinei di prima specie consentono di integrare una funzione scalare $f: \Rn \to \R$ lungo una curva unidimensionale. 
+
+\subsection{Motivazione Fisica e Geometrica}
+\begin{enumerate}
+    \item \textbf{Massa di un filo materiale}: Se immaginiamo che la curva $\Gamma \subset \Rtre$ rappresenti un filo sottile la cui densità lineare di massa varia da punto a punto secondo una legge continua $\rho(x,y,z)$ $[\text{kg/m}]$, la massa totale del filo si ottiene sommando i contributi elementari $\diff M = \rho(\gamma(t))\ds$:
+    \[
+    M = \int_\gamma \rho(x,y,z) \ds
+    \]
+    \item \textbf{Baricentro e Momenti d'Inerzia}: Le coordinate del centro di massa $G = (x_G, y_G, z_G)$ del filo sono le medie ponderate delle coordinate rispetto alla massa:
+    \[
+    x_G = \frac{1}{M} \int_\gamma x \, \rho \ds, \quad y_G = \frac{1}{M} \int_\gamma y \, \rho \ds, \quad z_G = \frac{1}{M} \int_\gamma z \, \rho \ds
+    \]
+    mentre il momento d'inerzia rispetto all'asse $z$ vale $I_z = \int_\gamma (x^2 + y^2) \rho \ds$.
+    \item \textbf{Area di una Cortina/Staccionata Cilindrica}: Se $\gamma$ è una curva piana nel piano $xy$ e $f(x,y) \ge 0$ è una funzione quota, l'integrale $\int_\gamma f \ds$ rappresenta l'area della superficie verticale (la "staccionata") che ha per base il sostegno $\Gamma$ sul piano $z=0$ e altezza variabile pari a $z = f(x,y)$.
+\end{enumerate}
+
+\begin{definizione}{Integrale Curvilineo di I Specie}{def_integrale_I_specie}
+Sia $\gamma: [a,b] \to \Rn$ una curva regolare (o regolare a tratti) con sostegno $\Gamma = \gamma([a,b])$, e sia $f: \Gamma \to \R$ una funzione scalare continua. Si definisce \textbf{integrale curvilineo di prima specie} di $f$ lungo $\gamma$:
+\[
+\int_\gamma f \ds = \int_{\gamma} f(\bx) \ds = \int_{a}^{b} f(\gamma(t)) \, \norm{\gamma'(t)} \dt
+\]
+Nel piano $\Rdue$, se $\gamma(t) = (x(t), y(t))$:
+\[
+\int_\gamma f(x,y) \ds = \int_{a}^{b} f(x(t), y(t)) \sqrt{[x'(t)]^2 + [y'(t)]^2} \dt
+\]
+\end{definizione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Assi 3D per l'interpretazione geometrica della staccionata
+    \draw[->, thick, gray] (0,0) -- (6,0) node[right, black] {$y$};
+    \draw[->, thick, gray] (0,0) -- (-2,-1.5) node[below left, black] {$x$};
+    \draw[->, thick, gray] (0,0) -- (0,4) node[above, black] {$z$};
+
+    % Curva di base nel piano xy
+    \draw[ultra thick, navyblue] (1,-0.5) to[out=20, in=-120] (3.5,-0.2) to[out=60, in=-150] (5,1.2);
+    \node[navyblue, below right] at (5,1.2) {Base $\Gamma = \gamma(t)$};
+
+    % Curva superiore z = f(x,y)
+    \draw[ultra thick, crimsonred] (1,1.8) to[out=20, in=-120] (3.5,2.6) to[out=60, in=-150] (5,3.2);
+    \node[crimsonred, above] at (3.5,2.7) {$z = f(x,y)$};
+
+    % Righe verticali per formare la staccionata
+    \foreach \x/\y/\z in {1/-0.5/1.8, 1.6/-0.42/2.1, 2.2/-0.35/2.35, 2.8/-0.28/2.52, 3.5/-0.2/2.6, 4.1/0.3/2.8, 4.6/0.8/3.05, 5/1.2/3.2} {
+        \draw[thin, coolblue!60] (\x,\y) -- (\x,\z);
+    }
+
+    % Riempimento sfumato staccionata
+    \shade[top color=coolblue!30, bottom color=coolblue!5, opacity=0.7] 
+        (1,-0.5) to[out=20, in=-120] (3.5,-0.2) to[out=60, in=-150] (5,1.2) --
+        (5,3.2) to[out=-150, in=60] (3.5,2.6) to[out=-120, in=20] (1,1.8) -- cycle;
+
+    \node[draw=coolblue!80!black, fill=white, rounded corners, align=center] at (2.2,3.4) 
+        {\small \textbf{Area Staccionata}: $\text{Area} = \int_\gamma f(x,y) \ds$};
+\end{tikzpicture}
+\end{center}
+
+\begin{teorema}{Invarianza per Riparametrizzazione e per Inversione di Verso}{thm_invarianza_I_specie}
+L'integrale curvilineo di prima specie gode delle seguenti proprietà fondamentali:
+\begin{enumerate}
+    \item \textbf{Invarianza rispetto a qualsiasi riparametrizzazione ammissibile}: Se $\tilde{\gamma}(s) = \gamma(\phi(s))$ con $\phi: [c,d] \to [a,b]$ diffeomorfismo $C^1$, allora:
+    \[
+    \int_{\tilde{\gamma}} f \ds = \int_\gamma f \ds
+    \]
+    \item \textbf{Invarianza rispetto al verso di percorrenza}: Se indichiamo con $\gamma^-$ la curva percorsa nel verso opposto, definita da $\gamma^-(t) = \gamma(a + b - t)$ per $t \in [a,b]$, si ha:
+    \[
+    \int_{\gamma^-} f \ds = \int_\gamma f \ds
+    \]
+\end{enumerate}
+\end{teorema}
+
+\begin{dimostrazione}
+Dimostriamo innanzitutto la proprietà generale (1). Sia $t = \phi(s)$ con $\phi: [c,d] \to [a,b]$.
+Calcoliamo l'integrale lungo la curva riparametrizzata $\tilde{\gamma}$:
+\[
+\int_{\tilde{\gamma}} f \ds = \int_{c}^{d} f(\tilde{\gamma}(s)) \norm{\tilde{\gamma}'(s)} \ds = \int_{c}^{d} f(\gamma(\phi(s))) \norm{\gamma'(\phi(s)) \, \phi'(s)} \ds
+\]
+Sfruttando l'omogeneità della norma rispetto agli scalari reali, $\norm{\gamma'(\phi(s)) \, \phi'(s)} = \norm{\gamma'(\phi(s))} \abs{\phi'(s)}$. Dunque:
+\[
+\int_{\tilde{\gamma}} f \ds = \int_{c}^{d} f(\gamma(\phi(s))) \norm{\gamma'(\phi(s))} \abs{\phi'(s)} \ds
+\]
+Distinguiamo i due casi possibili:
+\begin{itemize}
+    \item Se $\phi'(s) > 0$ (riparametrizzazione concorde), allora $\abs{\phi'(s)} = \phi'(s)$, $\phi(c)=a$, $\phi(d)=b$. Effettuando la sostituzione di variabile $t = \phi(s)$ con $\dt = \phi'(s)\ds$:
+    \[
+    \int_{c}^{d} f(\gamma(\phi(s))) \norm{\gamma'(\phi(s))} \phi'(s) \ds = \int_{a}^{b} f(\gamma(t)) \norm{\gamma'(t)} \dt = \int_\gamma f \ds
+    \]
+    \item Se $\phi'(s) < 0$ (riparametrizzazione discorde), allora $\abs{\phi'(s)} = -\phi'(s)$, $\phi(c)=b$, $\phi(d)=a$. Sostituendo $t = \phi(s)$ e invertendo gli estremi di integrazione:
+    \begin{align*}
+    \int_{c}^{d} f(\gamma(\phi(s))) \norm{\gamma'(\phi(s))} (-\phi'(s)) \ds &= -\int_{b}^{a} f(\gamma(t)) \norm{\gamma'(t)} \dt \\
+    &= \int_{a}^{b} f(\gamma(t)) \norm{\gamma'(t)} \dt = \int_\gamma f \ds
+    \end{align*}
+\end{itemize}
+La proprietà (2) è un caso particolare di riparametrizzazione discorde con $\phi(t) = a + b - t$, per cui $\phi'(t) = -1$ e $\abs{\phi'(t)} = 1$. L'integrale non cambia segno.
+\end{dimostrazione}
+
+\begin{esempio}{Calcolo del Baricentro di un Filo Semicircolare}{es_baricentro_semicircolare}
+Calcolare la posizione del baricentro $G = (x_G, y_G)$ di un filo semicircolare omogeneo di raggio $R$ posto nel semipiano superiore:
+\[
+\Gamma = \graffe{(x,y) \in \Rdue : x^2 + y^2 = R^2, \; y \ge 0}
+\]
+avente densità lineare di massa costante $\rho_0 > 0$.
+
+\textbf{Risoluzione passo-passo}:
+\begin{enumerate}
+    \item \textbf{Parametrizzazione della curva}:
+    \[
+    \gamma(t) = \begin{pmatrix} R\cos t \\ R\sen t \end{pmatrix}, \quad t \in [0, \pi]
+    \]
+    Il vettore velocità e l'elemento d'arco scalare sono:
+    \[
+    \gamma'(t) = \begin{pmatrix} -R\sen t \\ R\cos t \end{pmatrix} \implies \norm{\gamma'(t)} = \sqrt{R^2\sen^2 t + R^2\cos^2 t} = R \implies \ds = R\dt
+    \]
+    \item \textbf{Massa totale del filo}:
+    \[
+    M = \int_\gamma \rho_0 \ds = \rho_0 \int_{0}^{\pi} R \dt = \pi R \rho_0
+    \]
+    \item \textbf{Ascissa del baricentro $x_G$}:
+    Per ragioni di simmetria rispetto all'asse $y$ (densità costante e dominio pari in $x$), ci aspettiamo $x_G = 0$. Verifichiamo con il calcolo analitico:
+    \[
+    x_G = \frac{1}{M} \int_\gamma x \, \rho_0 \ds = \frac{\rho_0}{\pi R \rho_0} \int_{0}^{\pi} (R\cos t) R \dt = \frac{R}{\pi} \left[ \sen t \right]_{0}^{\pi} = \frac{R}{\pi} (0 - 0) = 0
+    \]
+    \item \textbf{Ordinata del baricentro $y_G$}:
+    \begin{align*}
+    y_G &= \frac{1}{M} \int_\gamma y \, \rho_0 \ds = \frac{\rho_0}{\pi R \rho_0} \int_{0}^{\pi} (R\sen t) R \dt \\
+    &= \frac{R}{\pi} \int_{0}^{\pi} \sen t \dt = \frac{R}{\pi} \left[ -\cos t \right]_{0}^{\pi} = \frac{R}{\pi} (1 - (-1)) = \frac{2R}{\pi}
+    \end{align*}
+\end{enumerate}
+Il baricentro si trova dunque nel punto $G = \left(0, \frac{2R}{\pi}\right) \approx (0, 0.6366 R)$, che cade rigorosamente all'esterno del sostegno materiale della curva.
+\end{esempio}
+
+% ==============================================================================
+\section{Integrali Curvilinei di Seconda Specie (Lavoro e Circolazione)}
+% ==============================================================================
+
+Mentre gli integrali di prima specie associano a ogni elemento di curva uno scalare positivo $\ds = \norm{\gamma'(t)}\dt$, gli \textbf{integrali di seconda specie} integrano un \textbf{campo vettoriale} lungo il \textbf{vettore spostamento orientato} $\diff\mathbf{r} = \gamma'(t)\dt$.
+
+\subsection{Motivazione Fisica: Il Lavoro di una Forza}
+
+In fisica classica, il lavoro elementare $\diff W$ compiuto da una forza costante $\bF$ per uno spostamento rettilineo $\Delta \br$ è dato dal prodotto scalare $\diff W = \bF \cdot \Delta \br = \norm{\bF} \norm{\Delta \br} \cos\theta$.
+
+Quando una particella si muove lungo una traiettoria curvilinea $\gamma(t)$ soggetta a un campo di forze variabile nello spazio $\bF(\bx) = (F_1(\bx), \dots, F_n(\bx))$, la potenza istantanea erogata dalla forza al tempo $t$ è il prodotto scalare tra la forza e la velocità:
+\[
+P(t) = \scal{\bF(\gamma(t)), \gamma'(t)}
+\]
+Il lavoro complessivo compiuto dal campo lungo l'intero percorso temporale $[a,b]$ è l'integrale della potenza nel tempo:
+\[
+W = \int_{a}^{b} P(t) \dt = \int_{a}^{b} \scal{\bF(\gamma(t)), \gamma'(t)} \dt
+\]
+
+\begin{definizione}{Integrale Curvilineo di II Specie}{def_integrale_II_specie}
+Sia $A \subseteq \Rn$ un aperto, $\bF: A \to \Rn$ un campo vettoriale continuo ($\bF = (F_1, \dots, F_n)$) e sia $\gamma: [a,b] \to A$ una curva orientata regolare a tratti. Si definisce \textbf{integrale curvilineo di seconda specie} (o \textbf{lavoro}) di $\bF$ lungo $\gamma$:
+\[
+\int_\gamma \bF \cdot \diff\mathbf{r} = \int_\gamma \sum_{i=1}^n F_i \dx_i = \int_{a}^{b} \scal{\mathbf{F}(\gamma(t)), \gamma'(t)} \dt = \int_{a}^{b} \left( \sum_{i=1}^n F_i(\gamma(t)) \, x_i'(t) \right) \dt
+\]
+Se la curva $\gamma$ è chiusa ($\gamma(a) = \gamma(b)$), l'integrale è detto \textbf{circolazione} (o \emph{circuitazione}) del campo lungo $\gamma$ e viene indicato con il simbolo:
+\[
+\oint_\gamma \bF \cdot \diff\mathbf{r}
+\]
+\end{definizione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Traiettoria orientata
+    \draw[ultra thick, navyblue, ->] (0,0) to[out=30, in=-140] (3,1.5) to[out=40, in=-160] (6,2.2);
+    \node[navyblue, below right] at (6,2.2) {$\gamma(t)$};
+
+    % Punto generico sulla curva
+    \coordinate (P) at (3,1.5);
+    \filldraw[black] (P) circle (2pt) node[below=3pt] {$\gamma(t)$};
+
+    % Vettore spostamento dr = gamma'(t) dt
+    \draw[thick, crimsonred, ->, line width=1.3pt] (P) -- ++(1.4, 0.7) node[below right] {$\diff\mathbf{r} = \gamma'(t)\dt$};
+
+    % Campo di forze F(gamma(t))
+    \draw[thick, forestgreen, ->, line width=1.4pt] (P) -- ++(0.8, 1.6) node[above right] {$\mathbf{F}(\gamma(t))$};
+
+    % Angolo theta tra F e dr
+    \draw[thin, black] (3.6,1.8) arc (30:63:0.7);
+    \node at (3.8,2.05) {\small $\theta$};
+
+    % Proiezione tratteggiata di F lungo dr
+    \draw[dashed, gray] (3.8, 3.1) -- (4.4, 2.2);
+    \draw[thick, warmamber!90!black, ->] (P) -- (4.4, 2.2) node[midway, below] {\small $F_T = \norm{\bF}\cos\theta$};
+
+    \node[draw=navyblue, fill=subtlegray, rounded corners, align=center] at (3,-0.6) 
+        {\small Lavoro elementare: $\diff W = \scal{\mathbf{F}, \diff\mathbf{r}} = \norm{\mathbf{F}} \norm{\diff\mathbf{r}} \cos\theta = \scal{\mathbf{F}(\gamma(t)), \gamma'(t)}\dt$};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Comportamento Rispetto al Cambio di Verso (Antimetria)}
+
+La differenza più profonda tra gli integrali di I e di II specie risiede nel comportamento rispetto all'inversione del verso di percorrenza.
+
+\begin{teorema}{Antimetria degli Integrali di II Specie}{thm_antimetria_II_specie}
+Sia $\gamma: [a,b] \to A$ una curva regolare a tratti, e sia $\gamma^-(t) = \gamma(a + b - t)$ la curva percorsa in verso opposto. Allora:
+\[
+\int_{\gamma^-} \bF \cdot \diff\mathbf{r} = -\int_{\gamma} \bF \cdot \diff\mathbf{r}
+\]
+\end{teorema}
+
+\begin{dimostrazione}
+Sia $\gamma^-(t) = \gamma(\phi(t))$ con $\phi(t) = a + b - t$ per $t \in [a,b]$.
+La derivata del cambio di variabile è $\phi'(t) = -1$, per cui la velocità della curva invertita è:
+\[
+(\gamma^-)'(t) = \der{}{t}\left[\gamma(a+b-t)\right] = -\gamma'(a+b-t)
+\]
+Applicando la definizione di integrale di seconda specie lungo $\gamma^-$:
+\[
+\int_{\gamma^-} \bF \cdot \diff\mathbf{r} = \int_{a}^{b} \scal{\bF(\gamma^-(t)), (\gamma^-)'(t)} \dt = \int_{a}^{b} \scal{\bF(\gamma(a+b-t)), -\gamma'(a+b-t)} \dt
+\]
+Portando il segno meno fuori dal prodotto scalare ed effettuando il cambio di variabile $\tau = a + b - t$ con $\diff\tau = -\dt$:
+\begin{align*}
+\int_{\gamma^-} \bF \cdot \diff\mathbf{r} &= -\int_{a}^{b} \scal{\bF(\gamma(a+b-t)), \gamma'(a+b-t)} \dt \\
+&= -\int_{b}^{a} \scal{\bF(\gamma(\tau)), \gamma'(\tau)} (-\diff\tau) \\
+&= \int_{b}^{a} \scal{\bF(\gamma(\tau)), \gamma'(\tau)} \diff\tau \\
+&= -\int_{a}^{b} \scal{\bF(\gamma(\tau)), \gamma'(\tau)} \diff\tau = -\int_{\gamma} \bF \cdot \diff\mathbf{r}
+\end{align*}
+Il cambio di segno è dovuto al fatto che il vettore spostamento istantaneo inverte la propria direzione spaziale ($\diff\mathbf{r}^- = -\diff\mathbf{r}$).
+\end{dimostrazione}
+
+\begin{esame}[Confronto Chiave tra Integrali di I Specie e II Specie]
+Per evitare gli errori più gravi nei compiti scritti e nei quesiti orali, si tenga sempre a mente la seguente tavola sinottica:
+\begin{center}
+\begin{tabularx}{\textwidth}{lXX}
+\toprule
+\textbf{Caratteristica} & \textbf{Integrale di I Specie $\int_\gamma f \ds$} & \textbf{Integrale di II Specie $\int_\gamma \bF \cdot \diff\br$} \\
+\midrule
+\textbf{Oggetto integrando} & Campo scalare $f: \Rn \to \R$ & Campo vettoriale $\bF: \Rn \to \Rn$ \\
+\textbf{Elemento differenziale} & Scalare positivo: $\ds = \norm{\gamma'(t)}\dt$ & Vettore orientato: $\diff\br = \gamma'(t)\dt$ \\
+\textbf{Formula di calcolo} & $\int_a^b f(\gamma(t)) \norm{\gamma'(t)}\dt$ & $\int_a^b \scal{\bF(\gamma(t)), \gamma'(t)}\dt$ \\
+\textbf{Inversione di verso} & \textbf{Invariante}: $\int_{\gamma^-} f\ds = +\int_\gamma f\ds$ & \textbf{Antimetrico}: $\int_{\gamma^-} \bF\cdot\diff\br = -\int_\gamma \bF\cdot\diff\br$ \\
+\textbf{Significato fisico tipico} & Massa di un filo, area di una cortina & Lavoro di una forza, circuitazione \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{esame}
+
+\begin{esempio}{Calcolo del Lavoro su Cammini Differenti}{es_lavoro_cammini_diversi}
+Si consideri il campo vettoriale piano $\bF(x,y) = (2xy, \; x^2 - y^2)$ definito su tutto $\Rdue$. Calcolare il lavoro compiuto da $\bF$ per spostare una particella dall'origine $O = (0,0)$ al punto $P = (1,1)$ lungo due percorsi distinti:
+\begin{enumerate}
+    \item Il segmento rettilineo $\gamma_1$ congiungente $(0,0)$ a $(1,1)$;
+    \item L'arco di parabola $\gamma_2$ di equazione $y = x^2$ con $x \in [0,1]$.
+\end{enumerate}
+
+\textbf{Svolgimento}:
+\begin{enumerate}
+    \item \textbf{Lungo il segmento $\gamma_1$}:
+    Parametrizziamo il segmento ponendo $\gamma_1(t) = (t, t)$ con $t \in [0, 1]$.
+    Il vettore velocità è $\gamma_1'(t) = (1, 1)$.
+    Sostituendo le componenti lungo la curva:
+    \[
+    \bF(\gamma_1(t)) = \begin{pmatrix} 2(t)(t) \\ t^2 - t^2 \end{pmatrix} = \begin{pmatrix} 2t^2 \\ 0 \end{pmatrix}
+    \]
+    Il lavoro lungo $\gamma_1$ vale:
+    \[
+    W_1 = \int_{\gamma_1} \bF \cdot \diff\mathbf{r} = \int_{0}^{1} \scal{\begin{pmatrix} 2t^2 \\ 0 \end{pmatrix}, \begin{pmatrix} 1 \\ 1 \end{pmatrix}} \dt = \int_{0}^{1} 2t^2 \dt = \left[ \frac{2}{3} t^3 \right]_{0}^{1} = \frac{2}{3}
+    \]
+
+    \item \textbf{Lungo l'arco di parabola $\gamma_2$}:
+    Parametrizziamo la parabola ponendo $\gamma_2(t) = (t, t^2)$ con $t \in [0, 1]$.
+    Il vettore velocità è $\gamma_2'(t) = (1, 2t)$.
+    Valutando il campo sulla parabola:
+    \[
+    \bF(\gamma_2(t)) = \begin{pmatrix} 2(t)(t^2) \\ t^2 - (t^2)^2 \end{pmatrix} = \begin{pmatrix} 2t^3 \\ t^2 - t^4 \end{pmatrix}
+    \]
+    Il prodotto scalare tra il campo e il vettore velocità è:
+    \[
+    \scal{\bF(\gamma_2(t)), \gamma_2'(t)} = (2t^3)(1) + (t^2 - t^4)(2t) = 2t^3 + 2t^3 - 2t^5 = 4t^3 - 2t^5
+    \]
+    Integrando rispetto a $t \in [0, 1]$:
+    \[
+    W_2 = \int_{\gamma_2} \bF \cdot \diff\mathbf{r} = \int_{0}^{1} (4t^3 - 2t^5) \dt = \left[ t^4 - \frac{t^6}{3} \right]_{0}^{1} = 1 - \frac{1}{3} = \frac{2}{3}
+    \]
+\end{enumerate}
+I due integrali coincidono esattamente ($W_1 = W_2 = 2/3$). È una pura coincidenza numerica o nasconde una proprietà strutturale profonda del campo vettoriale $\bF$? Come scopriremo nel prossimo capitolo, $\bF$ è un \textbf{campo conservativo}, il cui lavoro non dipende dalla forma della traiettoria ma unicamente dai punti di partenza e di arrivo.
+\end{esempio}

@@ -1,0 +1,24 @@
+\begin{tikzpicture}[scale=0.85, >=Stealth]
+    % Asse x
+    \draw[thick, navyblue, ->] (-0.5,0) -- (7.5,0) node[right, font=\footnotesize] {$x$};
+
+    % Blocchi di probabilità (masse)
+    \draw[fill=coolblue!30, draw=navyblue, thick] (1,0) rectangle (1.8,1.2);
+    \node[font=\tiny\bfseries] at (1.4,0.6) {$p(x_1)$};
+    \node[below, font=\footnotesize] at (1.4,0) {$x_1$};
+
+    \draw[fill=coolblue!45, draw=navyblue, thick] (3.2,0) rectangle (4.2,2.0);
+    \node[font=\tiny\bfseries] at (3.7,1.0) {$p(x_2)$};
+    \node[below, font=\footnotesize] at (3.7,0) {$x_2$};
+
+    \draw[fill=coolblue!25, draw=navyblue, thick] (5.5,0) rectangle (6.3,0.8);
+    \node[font=\tiny\bfseries] at (5.9,0.4) {$p(x_3)$};
+    \node[below, font=\footnotesize] at (5.9,0) {$x_3$};
+
+    % Fulcro (Baricentro) a x = E[X] = 3.4
+    \draw[fill=warmamber, draw=warmamber!90!black, thick] (3.4,0) -- (3.15,-0.6) -- (3.65,-0.6) -- cycle;
+    \node[below, font=\bfseries\small, text=warmamber!90!black] at (3.4,-0.65) {$\mathbb{E}[X]$ (Fulcro di Equilibrio)};
+    \draw[dashed, warmamber!90!black, thick] (3.4,0) -- (3.4,2.5);
+
+    \node[above, font=\footnotesize\itshape, text=navyblue] at (3.4,2.6) {$\sum (x_i - \mathbb{E}[X]) p(x_i) = 0$};
+\end{tikzpicture}

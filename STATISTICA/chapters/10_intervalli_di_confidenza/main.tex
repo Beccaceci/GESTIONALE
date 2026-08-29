@@ -1,0 +1,127 @@
+% ==============================================================================
+% CAPITOLO 10: INTERVALLI DI CONFIDENZA E INFERENZA INTERVALLARE
+% ==============================================================================
+\chapter{Intervalli di Confidenza e Inferenza Intervallare}
+\label{cap:intervalli_di_confidenza}
+
+\begin{abstract}
+Il presente capitolo sviluppa la teoria della stima intervallare, lo strumento d'elezione per quantificare esplicitamente il grado di incertezza campionaria associato a una misura statistica. Si chiarisce l'autentico significato epistemologico frequentista del livello di confidenza $1-\alpha$, demistificando i comuni errori interpretativi. Viene formalizzato il metodo universale della quantità pivotale in 4 fasi e presentata la tassonomia esaustiva degli intervalli di confidenza: per la media di popolazioni gaussiane (con varianza nota e incognita), per proporzioni campionarie bernoulliane (con dimensionamento conservativo del campione), per il confronto tra due medie indipendenti (modelli a varianze note, omoschedastiche con pooled variance e modello di Welch) e per la varianza mediante pivot Chi-quadro.
+\end{abstract}
+
+% ==============================================================================
+% SEZIONE 10.1: IL CONCETTO DI INTERVALLO DI CONFIDENZA
+% ==============================================================================
+\section{Il Concetto di Intervallo e l'Interpretazione Frequentista}
+\label{sec:concetto_ic_frequentista}
+
+Una stima puntuale come $\overline{x} = 10.2\text{ mm}$ fornisce un unico valore numerico, ma non comunica al decisore l'affidabilità o l'errore potenziale della misura: un conto è aver calcolato $\overline{x} = 10.2$ su $n=5$ pezzi ad alta variabilità, un altro è averlo ricavato da $n=10000$ provini di precisione. L'\textbf{inferenza intervallare} risolve questa lacuna associando alla stima una regione di valori plausibili accoppiata a un livello di affidabilità probabilistica prefissato $1-\alpha$ (tipicamente $95\%$ o $99\%$).
+
+\begin{definizione}{Intervallo di Confidenza}{def_ic}
+Sia $\mathbf{X} = (X_1, \dots, X_n)$ un campione casuale da una popolazione con parametro incognito $\theta$. Fissato un livello di significatività $\alpha \in (0, 1)$ (con coefficiente di confidenza $1-\alpha$), un \textbf{intervallo di confidenza al $(1-\alpha) \cdot 100\%$} per $\theta$ è una coppia di statistiche campionarie $L(\mathbf{X})$ e $U(\mathbf{X})$, con $L(\mathbf{X}) \le U(\mathbf{X})$, tali che:
+\begin{equation}
+    \mathbb{P}\left(L(\mathbf{X}) \le \theta \le U(\mathbf{X})\right) = 1 - \alpha
+\end{equation}
+\end{definizione}
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_ic_campioni_ripetuti.tex}
+    \caption{Significato frequentista di un intervallo di confidenza al $95\%$. La linea verticale rossa rappresenta il parametro vero $\mu$, fisso ed immutabile. Ciascun segmento orizzontale rappresenta l'intervallo casuale realizzato su un diverso campione estratto. Su un gran numero di repliche, esattamente il $95\%$ degli intervalli (in blu) cattura $\mu$, mentre il restante $5\%$ (in rosso) lo manca.}
+    \label{fig:ic_ripetuti}
+\end{figure}
+
+\begin{esame}[Trappola Epistemologica: Cosa Significa Realmente "Confidenza al 95\%"?]
+Una volta che il campione è stato estratto e l'intervallo numerico realizzato è stato calcolato (ad esempio, $[12.4, \; 15.8]$):
+\begin{itemize}
+    \item \textbf{ERRORE GRAVE:} Affermare che \emph{"la probabilità che $\theta$ sia compreso tra 12.4 e 15.8 è del 95\%"}. Nel paradigma frequentista, $\theta$ non è una variabile aleatoria, ma una costante fisica fissa. Di conseguenza, $\theta$ o appartiene a $[12.4, 15.8]$ (probabilità 1) o non vi appartiene (probabilità 0).
+    \item \textbf{INTERPRETAZIONE CORRETTA:} Il valore $95\%$ misura l'\textbf{affidabilità a lungo termine della procedura statistica di stima}. Significa che se ripetessimo l'esperimento infinite volte estraendo nuovi campioni della medesima taglia, il $95\%$ degli intervalli casuali così costruiti conterrebbe il parametro vero $\theta$.
+\end{itemize}
+\end{esame}
+
+% ==============================================================================
+% SEZIONE 10.2: IL METODO DELLA QUANTITÀ PIVOTALE
+% ==============================================================================
+\section{Il Metodo Generale della Quantità Pivotale}
+\label{sec:metodo_pivotale}
+
+La tecnica universale per costruire intervalli di confidenza esatti e asintotici si basa sulla nozione di quantità pivotale.
+
+\begin{definizione}{Quantità Pivotale}{def_pivot}
+Una funzione $Q(\mathbf{X}, \theta)$ del campione e del parametro $\theta$ si dice \textbf{quantità pivotale} se:
+\begin{enumerate}
+    \item Dipende esplicitamente dai dati $\mathbf{X}$ e dal parametro target $\theta$;
+    \item La sua legge di probabilità è \textbf{completamente nota} e non dipende da $\theta$ né da altri parametri ignoti di disturbo.
+\end{enumerate}
+\end{definizione}
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_ic_distribuzione_pivot.tex}
+    \caption{Costruzione dell'intervallo di confidenza sulla densità della quantità pivotale standardizzata $\mathcal{N}(0,1)$. L'area centrale racchiude la probabilità $1-\alpha$, delimitata dai quantili simmetrici $-z_{\alpha/2}$ e $+z_{\alpha/2}$, lasciando una massa $\alpha/2$ su ciascuna delle due code estreme.}
+    \label{fig:ic_pivot}
+\end{figure}
+
+\begin{metodo}[Procedura Operativa in 4 Fasi per Costruire un Intervallo di Confidenza]
+\begin{enumerate}
+    \item \textbf{Scelta del Pivot:} Individuare la statistica $Q(\mathbf{X}, \theta)$ a distribuzione nota (es. Gaussiana $Z$, Student $T$, Chi-quadro $W$).
+    \item \textbf{Definizione della Probabilità Centrale:} Dalla tavola della distribuzione, individuare i quantili critici $q_1, q_2$ tali che:
+    \begin{equation}
+        \mathbb{P}(q_1 \le Q(\mathbf{X}, \theta) \le q_2) = 1 - \alpha
+    \end{equation}
+    \item \textbf{Inversione Algebrica della Doppia Disuguaglianza:} Isolare il parametro $\theta$ al centro:
+    \begin{equation}
+        q_1 \le Q(\mathbf{X}, \theta) \le q_2 \iff L(\mathbf{X}) \le \theta \le U(\mathbf{X})
+    \end{equation}
+    \item \textbf{Valutazione Numerica:} Sostituire le realizzazioni campionarie $(\overline{x}, s, n)$ ottenendo $[L(\mathbf{x}), U(\mathbf{x})]$.
+\end{enumerate}
+\end{metodo}
+
+% ==============================================================================
+% SEZIONE 10.3: TASSONOMIA DEGLI INTERVALLI DI CONFIDENZA
+% ==============================================================================
+\section{Tassonomia Completa degli Intervalli di Confidenza}
+\label{sec:tassonomia_ic}
+
+\subsection{1. Media di Popolazione con Varianza $\sigma^2$ Nota (Intervallo Z)}
+Se la popolazione è normale (o $n \ge 30$ per il CLT) con $\sigma$ noto, il pivot è $Z = \frac{\overline{X} - \mu}{\sigma / \sqrt{n}} \sim \mathcal{N}(0, 1)$.
+\begin{equation}
+    \operatorname{IC}_{1-\alpha}(\mu) = \left[ \overline{x} - z_{\alpha/2}\frac{\sigma}{\sqrt{n}}, \quad \overline{x} + z_{\alpha/2}\frac{\sigma}{\sqrt{n}} \right]
+\end{equation}
+\paragraph{Dimensionamento Campionario Ottimale:} Per garantire un margine di errore massimo $E = z_{\alpha/2}\frac{\sigma}{\sqrt{n}}$, la numerosità minima richiesta è:
+\begin{equation}
+    n \ge \left( \frac{z_{\alpha/2} \cdot \sigma}{E} \right)^2
+\end{equation}
+
+\subsection{2. Media di Popolazione con Varianza $\sigma^2$ Incognita (Intervallo $t$ di Student)}
+Se la popolazione è normale con $\sigma$ incognito, sostituendo la deviazione standard campionaria $s$, il pivot è $T = \frac{\overline{X} - \mu}{S / \sqrt{n}} \sim t(n-1)$:
+\begin{equation}
+    \operatorname{IC}_{1-\alpha}(\mu) = \left[ \overline{x} - t_{\alpha/2, \, n-1}\frac{s}{\sqrt{n}}, \quad \overline{x} + t_{\alpha/2, \, n-1}\frac{s}{\sqrt{n}} \right]
+\end{equation}
+
+\subsection{3. Proporzione Bernoulliana (Intervallo Asintotico di Wald)}
+Per una proporzione $p \in (0, 1)$ con stimatore $\widehat{p} = \frac{X}{n}$ su $n$ prove ($n\widehat{p} \ge 5, n(1-\widehat{p}) \ge 5$):
+\begin{equation}
+    \operatorname{IC}_{1-\alpha}(p) = \left[ \widehat{p} - z_{\alpha/2}\sqrt{\frac{\widehat{p}(1-\widehat{p})}{n}}, \quad \widehat{p} + z_{\alpha/2}\sqrt{\frac{\widehat{p}(1-\widehat{p})}{n}} \right]
+\end{equation}
+\paragraph{Dimensionamento Conservativo:} Poiché $\max_{p} p(1-p) = 0.25$ in $p=0.5$, il dimensionamento prudenziale che garantisce l'errore $E$ per qualsiasi $p$ è:
+\begin{equation}
+    n \ge \frac{z_{\alpha/2}^2}{4 E^2}
+\end{equation}
+
+\subsection{4. Differenza tra Due Medie Indipendenti $\mu_1 - \mu_2$}
+\begin{itemize}
+    \item \textbf{Varianze note $\sigma_1^2, \sigma_2^2$:}
+    \begin{equation}
+        \operatorname{IC}_{1-\alpha}(\mu_1 - \mu_2) = (\overline{x}_1 - \overline{x}_2) \pm z_{\alpha/2}\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}
+    \end{equation}
+    \item \textbf{Varianze incognite ma uguali ($\sigma_1^2 = \sigma_2^2 = \sigma^2$ - Varianza Congiunta Pooled):}
+    \begin{equation}
+        s_p^2 = \frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2} \implies \operatorname{IC}_{1-\alpha}(\mu_1 - \mu_2) = (\overline{x}_1 - \overline{x}_2) \pm t_{\alpha/2, \, n_1+n_2-2} \, s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}
+    \end{equation}
+\end{itemize}
+
+\subsection{5. Varianza di Popolazione Gaussiana $\sigma^2$}
+Il pivot è $W = \frac{(n-1)S^2}{\sigma^2} \sim \chi^2(n-1)$:
+\begin{equation}
+    \operatorname{IC}_{1-\alpha}(\sigma^2) = \left[ \frac{(n-1)s^2}{\chi^2_{\alpha/2, \, n-1}}, \quad \frac{(n-1)s^2}{\chi^2_{1-\alpha/2, \, n-1}} \right]
+\end{equation}

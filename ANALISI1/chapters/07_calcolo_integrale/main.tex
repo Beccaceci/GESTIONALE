@@ -1,0 +1,196 @@
+\chapter{Calcolo Integrale}
+\label{chap:calcolo_integrale}
+
+Se il calcolo differenziale scompone una funzione nelle sue variazioni locali infinitesime, il **calcolo integrale** compie l'operazione inversa di accumulazione globale. Esso nasce originariamente dal problema geometrico della misurazione di aree delimitate da curve (quadratura) e dal calcolo del lavoro compiuto da forze variabili, per poi rivelarsi il ponte analitico fondamentale che collega la derivata alla primitiva attraverso il celebre **Teorema di Torricelli-Barrow**.
+
+In questo capitolo costruiamo rigorosamente l'integrale secondo Riemann mediante le somme inferiori e superiori di Darboux, dimostriamo il Teorema Fondamentale del Calcolo, sviluppiamo i metodi analitici per il calcolo delle primitive (parti, sostituzione, fratti semplici), applichiamo la teoria al calcolo di aree, volumi di rotazione e lunghezze d'arco, e formalizziamo la convergenza degli integrali impropri.
+
+% ==============================================================================
+\section{La Costruzione dell'Integrale secondo Riemann}
+\label{sec:costruzione_riemann_teoria}
+% ==============================================================================
+
+Sia $f \colon [a, b] \to \R$ una funzione limitata su un intervallo compatto $[a, b]$, tale che esistano $m \le f(x) \le M$ per ogni $x \in [a, b]$.
+
+\begin{definizione}{Partizione e Somme di Darboux}{somme_darboux_def}
+Una \textbf{partizione} (o suddivisione) di $[a, b]$ è un insieme finito di punti ordinati:
+\[
+    \mathcal{P} = \{a = x_0 < x_1 < x_2 < \dots < x_{n-1} < x_n = b\}
+\]
+che suddivide $[a, b]$ in $n$ sottointervalli $I_i = [x_{i-1}, x_i]$ di ampiezza $\Delta x_i = x_i - x_{i-1}$.
+In ciascun sottointervallo definiamo:
+\[
+    m_i = \inf_{x \in I_i} f(x), \qquad M_i = \sup_{x \in I_i} f(x)
+\]
+Si definiscono la **somma inferiore** $s(f, \mathcal{P})$ e la **somma superiore** $S(f, \mathcal{P})$ di Darboux:
+\[
+    s(f, \mathcal{P}) = \sum_{i=1}^n m_i \Delta x_i, \qquad S(f, \mathcal{P}) = \sum_{i=1}^n M_i \Delta x_i
+\]
+\end{definizione}
+
+Geometricamente, $s(f, \mathcal{P})$ rappresenta l'area del plurirettangolo inscritto al sottografico di $f$, mentre $S(f, \mathcal{P})$ è l'area del plurirettangolo circoscritto. Per ogni coppia di partizioni $\mathcal{P}_1, \mathcal{P}_2$ vale la disuguaglianza universale $s(f, \mathcal{P}_1) \le S(f, \mathcal{P}_2)$.
+
+\begin{definizione}{Integrabilità secondo Riemann}{riemann_integrabilita_def}
+La funzione limitata $f$ si dice **integrabile secondo Riemann** su $[a, b]$ se l'estremo superiore delle somme inferiori coincide con l'estremo inferiore delle somme superiori:
+\[
+    \sup_{\mathcal{P}} s(f, \mathcal{P}) = \inf_{\mathcal{P}} S(f, \mathcal{P}) = \int_a^b f(x) \dx
+\]
+Il valore comune prende il nome di **integrale definito di Riemann** di $f$ su $[a, b]$.
+\end{definizione}
+
+\begin{teorema}{Integrabilità delle Funzioni Continue}{integrabilita_continue}
+Ogni funzione $f \colon [a, b] \to \R$ continua sull'intervallo compatto $[a, b]$ è integrabile secondo Riemann.
+\end{teorema}
+
+\begin{dimostrazione}
+Poiché $[a, b]$ è compatto e $f$ è continua, per il **Teorema di Heine-Cantor** $f$ è uniformemente continua su $[a, b]$.
+Fissato $\eps > 0$, esiste $\de > 0$ tale che per ogni $x, y \in [a, b]$ con $|x - y| < \de$ si ha $|f(x) - f(y)| < \frac{\eps}{b - a}$.
+Scegliendo una partizione $\mathcal{P}$ con ampiezza massima $\max \Delta x_i < \de$, per il Teorema di Weierstrass su ciascun $I_i$ si ha $M_i - m_i = f(x_i^+) - f(x_i^-) < \frac{\eps}{b - a}$. Dunque:
+\[
+    S(f, \mathcal{P}) - s(f, \mathcal{P}) = \sum_{i=1}^n (M_i - m_i)\Delta x_i < \frac{\eps}{b - a} \sum_{i=1}^n \Delta x_i = \frac{\eps}{b - a}(b - a) = \eps
+\]
+Per l'arbitrarietà di $\eps > 0$, la funzione è integrabile secondo Riemann.
+\end{dimostrazione}
+
+% ==============================================================================
+\section{I Teoremi Fondamentali del Calcolo Integrale}
+\label{sec:teoremi_fondamentali_integrali}
+% ==============================================================================
+
+\begin{teorema}{Teorema della Media Integrale}{media_integrale_dim}
+Sia $f \colon [a, b] \to \R$ continua. Allora esiste almeno un punto $c \in [a, b]$ in cui la funzione assume il suo valore medio integrale:
+\[
+    \frac{1}{b - a} \int_a^b f(x) \dx = f(c)
+\]
+\end{teorema}
+
+\begin{dimostrazione}
+Poiché $f$ è continua sul compatto $[a, b]$, per il Teorema di Weierstrass ammette minimo assoluto $m$ e massimo assoluto $M$.
+Integrando la disuguaglianza $m \le f(x) \le M$ su $[a, b]$:
+\[
+    m(b - a) \le \int_a^b f(x) \dx \le M(b - a) \iff m \le \frac{1}{b - a}\int_a^b f(x)\dx \le M
+\]
+Per il Teorema dei Valori Intermedi di Darboux, la funzione continua $f$ assume tutti i valori compresi tra $m$ e $M$. Esiste dunque un punto $c \in [a, b]$ tale che $f(c) = \frac{1}{b - a}\int_a^b f(x)\dx$.
+\end{dimostrazione}
+
+\begin{teorema}{Teorema Fondamentale del Calcolo Integrale (di Torricelli-Barrow)}{torricelli_barrow_dim}
+Sia $f \colon [a, b] \to \R$ una funzione continua. Si definisce la **funzione integrale** $F \colon [a, b] \to \R$:
+\[
+    F(x) = \int_a^x f(t) \dt
+\]
+Allora $F$ è derivabile in ogni punto $x \in (a, b)$ e la sua derivata coincide con la funzione integranda:
+\[
+    F'(x) = f(x) \quad \forall x \in (a, b)
+\]
+Ossia, $F(x)$ è una **primitiva** di $f(x)$.
+\end{teorema}
+
+\begin{dimostrazione}
+Calcoliamo la derivata prima di $F(x)$ mediante il limite del rapporto incrementale per $h \neq 0$:
+\[
+    \frac{F(x + h) - F(x)}{h} = \frac{1}{h} \left( \int_a^{x+h} f(t)\dt - \int_a^x f(t)\dt \right) = \frac{1}{h} \int_x^{x+h} f(t) \dt
+\]
+Applicando il Teorema della Media Integrale all'intervallo $[x, x+h]$ (o $[x+h, x]$ se $h < 0$), esiste un punto $c_h$ compreso tra $x$ e $x+h$ tale che:
+\[
+    \frac{1}{h} \int_x^{x+h} f(t) \dt = f(c_h)
+\]
+Poiché $x \le c_h \le x + h$, per $h \to 0$ si ha $c_h \to x$. Essendo $f$ continua in $x$:
+\[
+    F'(x) = \lim_{h \to 0} \frac{F(x+h) - F(x)}{h} = \lim_{h \to 0} f(c_h) = f(x)
+\]
+il che conclude la dimostrazione.
+\end{dimostrazione}
+
+\begin{corollario}{Formula Fondamentale del Calcolo Integrale}{formula_newton_leibniz}
+Se $G(x)$ è una qualunque primitiva di $f(x)$ su $[a, b]$ (ossia $G'(x) = f(x)$), allora:
+\[
+    \int_a^b f(x) \dx = G(b) - G(a) = \Big[ G(x) \Big]_a^b
+\]
+\end{corollario}
+
+% ==============================================================================
+\section{Tecniche di Integrazione e Calcolo delle Primitive}
+\label{sec:tecniche_integrazione_teoria}
+% ==============================================================================
+
+\begin{metodo}[Le Tre Tecniche di Integrazione Fondamentali]
+\begin{enumerate}
+    \item \textbf{Integrazione per Parti}:
+    \[
+        \int f'(x) g(x) \dx = f(x) g(x) - \int f(x) g'(x) \dx
+    \]
+    Formula per integrali definiti: $\int_a^b f'(x) g(x) \dx = [f(x)g(x)]_a^b - \int_a^b f(x)g'(x)\dx$.
+
+    \item \textbf{Integrazione per Sostituzione}:
+    Posto $x = \varphi(t)$ con $\varphi$ invertibile e derivabile con continuità ($\dx = \varphi'(t)\dt$):
+    \[
+        \int_a^b f(x) \dx = \int_{\varphi^{-1}(a)}^{\varphi^{-1}(b)} f(\varphi(t)) \varphi'(t) \dt
+    \]
+
+    \item \textbf{Decomposizione in Fratti Semplici per Funzioni Razionali} $\frac{P(x)}{Q(x)}$:
+    \begin{itemize}
+        \item Se $\deg(P) \ge \deg(Q)$, eseguire la divisione polinomiale $P(x) = Q(x)S(x) + R(x)$ con $\deg(R) < \deg(Q)$.
+        \item Fattorizzare $Q(x)$ in fattori lineari $(x - x_k)^{m_k}$ e quadratici irriducibili $(x^2 + p x + q)^r$ ($\Delta < 0$).
+        \item Decomporre in somma di fratti elementari del tipo $\frac{A}{(x - x_k)^j}$ (integrabili con logaritmi o potenze) e $\frac{B x + C}{(x^2 + p x + q)^j}$ (integrabili con logaritmi ed arcotangenti).
+    \end{itemize}
+\end{enumerate}
+\end{metodo}
+
+% ==============================================================================
+\section{Geometria dell'Integrale: Aree, Volumi e Lunghezze}
+\label{sec:geometria_integrale}
+% ==============================================================================
+
+\begin{metodo}[Applicazioni Geometriche dell'Integrale Definito]
+\begin{itemize}
+    \item \textbf{Area tra due curve}: per $f(x) \ge g(x)$ su $[a, b]$, $\operatorname{Area} = \int_a^b [f(x) - g(x)]\dx$.
+    \item \textbf{Volume di Rotazione attorno all'Asse $x$ (Metodo dei Dischi)}:
+    \[
+        \operatorname{Vol}(V_x) = \pi \int_a^b [f(x)]^2 \dx
+    \]
+    \item \textbf{Volume di Rotazione attorno all'Asse $y$ (Metodo dei Gusci Cilindrici)}:
+    \[
+        \operatorname{Vol}(V_y) = 2\pi \int_a^b x f(x) \dx
+    \]
+    \item \textbf{Primo Teorema di Pappo-Guldino}: Il volume del solido ottenuto ruotando una figura piana di area $A$ attorno a un asse complanare non secante l'interno della figura è uguale al prodotto dell'area $A$ per la lunghezza della circonferenza descritta dal suo baricentro $G$:
+    \[
+        \operatorname{Vol} = 2\pi \cdot d(G, \text{asse}) \cdot \operatorname{Area}(A)
+    \]
+    \item \textbf{Lunghezza d'Arco di una Curva $y = f(x)$}:
+    \[
+        L = \int_a^b \sqrt{1 + [f'(x)]^2} \dx
+    \]
+\end{itemize}
+\end{metodo}
+
+% ==============================================================================
+\section{Integrali Impropri (Generalizzati)}
+\label{sec:integrali_impropri_teoria}
+% ==============================================================================
+
+\begin{definizione}{Integrale Improprio su Intervalli Illimitati}{integrale_improprio_def}
+Sia $f \colon [a, +\infty) \to \R$ localmente integrabile su ogni intervallo compatto $[a, M]$ con $M > a$. Si definisce:
+\[
+    \int_a^{+\infty} f(x) \dx = \lim_{M \to +\infty} \int_a^M f(x) \dx
+\]
+Se il limite esiste finito l'integrale è **convergente**; se vale $\pm \infty$ è **divergente**; se il limite non esiste è **indeterminato**.
+\end{definizione}
+
+\begin{teorema}{Criteri di Convergenza per Integrali di Funzioni Positive}{criteri_impropri}
+Siano $f, g \ge 0$ su $[a, +\infty)$:
+\begin{enumerate}
+    \item \textbf{Criterio del Confronto Diretto}: se $f(x) \le g(x)$, allora:
+    \begin{align*}
+        \int_a^{+\infty} g(x)\dx < +\infty &\implies \int_a^{+\infty} f(x)\dx < +\infty \\
+        \int_a^{+\infty} f(x)\dx = +\infty &\implies \int_a^{+\infty} g(x)\dx = +\infty
+    \end{align*}
+    \item \textbf{Criterio del Confronto Asintotico}: se $f(x) \sim g(x)$ per $x \to +\infty$, allora $\int_a^{+\infty} f(x)\dx$ e $\int_a^{+\infty} g(x)\dx$ hanno lo stesso carattere (entrambi convergono o entrambi divergono).
+    \item \textbf{Integrali Campione Fondamentali}:
+    \[
+        \int_1^{+\infty} \frac{1}{x^\alpha} \dx \quad \text{converge} \iff \alpha > 1
+    \]
+    \[
+        \int_0^1 \frac{1}{x^\alpha} \dx \quad \text{converge} \iff \alpha < 1
+    \]
+\end{enumerate}
+\end{teorema}

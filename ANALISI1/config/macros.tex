@@ -1,0 +1,81 @@
+% ==============================================================================
+% MACRO E SCORCIATOIE MATEMATICHE - ANALISI MATEMATICA 1
+% ==============================================================================
+
+% Insiemi numerici standard
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+
+% Notazioni per intervalli e insiemi
+\newcommand{\Rext}{\overline{\mathbb{R}}} % Retta reale estesa [-inf, +inf]
+\newcommand{\eps}{\varepsilon}
+\newcommand{\de}{\delta}
+\newcommand{\dom}{\operatorname{dom}}
+\newcommand{\codom}{\operatorname{codom}}
+\newcommand{\Imm}{\operatorname{Im}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\sgn}{\operatorname{sgn}}
+
+% Topologia della retta reale ed elementi astratti
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\Cl}{\operatorname{Cl}}
+\newcommand{\Fr}{\operatorname{Fr}}
+\newcommand{\Der}{\operatorname{Der}}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\Borel}{\mathscr{B}}
+
+% Operatori di estremo e limite
+\newcommand{\infinito}{\infty}
+\newcommand{\limn}{\lim_{n \to \infty}}
+\newcommand{\limx}[1]{\lim_{x \to #1}}
+\newcommand{\limsupn}{\limsup_{n \to \infty}}
+\newcommand{\liminfn}{\liminf_{n \to \infty}}
+\newcommand{\supremum}{\sup}
+\newcommand{\infimum}{\inf}
+
+% Simboli asintotici e stime
+\newcommand{\bigO}{\mathcal{O}}
+\newcommand{\smallo}{o}
+\newcommand{\asympSim}{\sim}
+
+% Calcolo differenziale e integrale
+\newcommand{\diff}{\mathop{}\!\mathrm{d}}
+\newcommand{\dx}{\diff x}
+\newcommand{\dy}{\diff y}
+\newcommand{\dt}{\diff t}
+\newcommand{\ds}{\diff s}
+\newcommand{\du}{\diff u}
+\newcommand{\dz}{\diff z}
+\newcommand{\dr}{\diff r}
+\newcommand{\dtheta}{\diff \theta}
+
+\newcommand{\der}[2]{\frac{\diff #1}{\diff #2}}
+\newcommand{\dder}[2]{\frac{\diff^2 #1}{\diff #2^2}}
+\newcommand{\nder}[3]{\frac{\diff^{#3} #1}{\diff #2^{#3}}}
+\newcommand{\pder}[2]{\frac{\partial #1}{\partial #2}}
+
+% Parentesi scalabili e norme
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\scal}{\langle}{\rangle}
+\DeclarePairedDelimiter{\tonde}{(}{)}
+\DeclarePairedDelimiter{\quadre}{[}{]}
+\DeclarePairedDelimiter{\graffe}{\{}{\}}
+
+% Funzioni trigonometriche e iperboliche in italiano
+\DeclareMathOperator{\sen}{sen}
+\DeclareMathOperator{\arcsen}{arcsen}
+\DeclareMathOperator{\tg}{tg}
+\DeclareMathOperator{\arctg}{arctg}
+\DeclareMathOperator{\cotg}{cotg}
+\DeclareMathOperator{\arccotg}{arccotg}
+\DeclareMathOperator{\settsh}{settsh}
+\DeclareMathOperator{\settch}{settch}
+\DeclareMathOperator{\setttgh}{setttgh}

@@ -1,0 +1,119 @@
+\chapter{Sviluppi di Taylor, Parti Principali e Limiti}
+\label{chap:taylor_sviluppi}
+
+Nel calcolo dei limiti e nello studio asintotico locale, l'approssimazione al primo ordine fornita dalla retta tangente ($f(x) \approx f(x_0) + f'(x_0)(x - x_0)$) risulta spesso insufficiente a risolvere le forme indeterminate, a causa di cancellazioni esatte tra i termini lineari. La **Formula di Taylor** estende l'idea dell'approssimazione locale a polinomi di grado $n \ge 2$, detti polinomi osculatori, che condividono con la funzione le derivate fino all'ordine $n$.
+
+In questo capitolo formalizziamo i simboli di Landau ($\smallo$-piccolo, $\bigO$-grande, equivalenza asintotica $\sim$), dimostriamo la formula di Taylor con le varie rappresentazioni del resto (Peano e Lagrange), forniamo la tavola sistematica degli sviluppi di Maclaurin e codifichiamo le strategie ottimali per il calcolo dei limiti e delle parti principali.
+
+% ==============================================================================
+\section{I Simboli di Landau e l'Algebra degli Asintotici}
+\label{sec:simboli_landau_teoria}
+% ==============================================================================
+
+I simboli di Landau consentono di confrontare l'ordine di grandezza di due funzioni in prossimità di un punto di accumulazione $x_0 \in \Rext$.
+
+\begin{definizione}{Simboli di Landau: O-piccolo, O-grande ed Equivalenza}{simboli_landau_def}
+Siano $f, g$ definite in un intorno bucato $I^*(x_0)$ con $g(x) \neq 0$:
+\begin{enumerate}
+    \item \textbf{O-piccolo} ($f(x) = \smallo(g(x))$ per $x \to x_0$):
+    \[
+        \lim_{x \to x_0} \frac{f(x)}{g(x)} = 0
+    \]
+    Significato: $f(x)$ è un infinitesimo di ordine superiore rispetto a $g(x)$ (ossia $f$ è trascurabile rispetto a $g$).
+    \item \textbf{O-grande} ($f(x) = \bigO(g(x))$ per $x \to x_0$):
+    \[
+        \limsup_{x \to x_0} \left|\frac{f(x)}{g(x)}\right| < +\infty \iff \exists M > 0, \de > 0 : |f(x)| \le M |g(x)| \quad \forall x \in I^*_\de(x_0)
+    \]
+    Significato: $f(x)$ ha ordine di grandezza non superiore a $g(x)$.
+    \item \textbf{Asintoticamente Equivalente} ($f(x) \sim g(x)$ per $x \to x_0$):
+    \[
+        \lim_{x \to x_0} \frac{f(x)}{g(x)} = 1 \iff f(x) = g(x) + \smallo(g(x))
+    \]
+\end{enumerate}
+\end{definizione}
+
+\begin{metodo}[Regole di Calcolo per l'Algebra degli $\smallo$-piccolo ($x \to 0$ con $n \le m$)]
+\begin{align*}
+    \smallo(x^n) \pm \smallo(x^n) &= \smallo(x^n) \\
+    c \cdot \smallo(x^n) &= \smallo(x^n) \quad (c \neq 0) \\
+    x^m \cdot \smallo(x^n) &= \smallo(x^{n+m}) \\
+    \smallo(x^n) \cdot \smallo(x^m) &= \smallo(x^{n+m}) \\
+    \smallo(x^n) + \smallo(x^m) &= \smallo(x^n) \quad (\text{per } n \le m, \text{ domina la potenza con esponente minore}) \\
+    \smallo(\smallo(x^n)) &= \smallo(x^n) \\
+    \smallo(x^n + \smallo(x^n)) &= \smallo(x^n)
+\end{align*}
+\end{metodo}
+
+% ==============================================================================
+\section{La Formula di Taylor e le Forme del Resto}
+\label{sec:formula_taylor_teoria}
+% ==============================================================================
+
+\begin{definizione}{Polinomio di Taylor di Ordine $n$}{polinomio_taylor_def}
+Sia $f \colon (a, b) \to \R$ derivabile $n$ volte nel punto $x_0 \in (a, b)$. Si definisce \textbf{polinomio di Taylor di ordine $n$ centrato in $x_0$}:
+\begin{align*}
+    P_n(x) &= \sum_{k=0}^n \frac{f^{(k)}(x_0)}{k!} (x - x_0)^k \\
+    &= f(x_0) + f'(x_0)(x - x_0) + \frac{f''(x_0)}{2!}(x - x_0)^2 + \dots + \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n
+\end{align*}
+Nel caso particolare $x_0 = 0$, il polinomio $P_n(x)$ prende il nome di **polinomio di Maclaurin**.
+\end{definizione}
+
+\begin{teorema}{Formula di Taylor con Resto di Peano}{taylor_peano_dim}
+Sia $f \colon (a, b) \to \R$ derivabile $n$ volte in $x_0 \in (a, b)$. Allora l'errore commesso sostituendo $f(x)$ con $P_n(x)$ è un $\smallo((x - x_0)^n)$:
+\[
+    f(x) = P_n(x) + \smallo((x - x_0)^n) \quad \text{per } x \to x_0
+\]
+\end{teorema}
+
+\begin{dimostrazione}
+Poniamo $R_n(x) = f(x) - P_n(x)$. Dobbiamo dimostrare che $\lim_{x \to x_0} \frac{R_n(x)}{(x - x_0)^n} = 0$.
+Si osserva che $R_n(x_0) = R_n'(x_0) = \dots = R_n^{(n)}(x_0) = 0$.
+Applicando il Teorema di de l'Hôpital $(n-1)$ volte consecutive (forma indeterminata $0/0$):
+\[
+    \lim_{x \to x_0} \frac{R_n(x)}{(x - x_0)^n} = \lim_{x \to x_0} \frac{R_n'(x)}{n(x - x_0)^{n-1}} = \dots = \lim_{x \to x_0} \frac{R_n^{(n-1)}(x)}{n! (x - x_0)}
+\]
+Poiché $R_n^{(n-1)}(x) = f^{(n-1)}(x) - f^{(n-1)}(x_0) - f^{(n)}(x_0)(x - x_0)$, valutando il limite del rapporto incrementale:
+\[
+    \lim_{x \to x_0} \frac{1}{n!} \left( \frac{f^{(n-1)}(x) - f^{(n-1)}(x_0)}{x - x_0} - f^{(n)}(x_0) \right) = \frac{1}{n!} \left( f^{(n)}(x_0) - f^{(n)}(x_0) \right) = 0
+\]
+il che prova il teorema.
+\end{dimostrazione}
+
+\begin{teorema}{Formula di Taylor con Resto di Lagrange}{taylor_lagrange_dim}
+Sia $f \in C^{n+1}(a, b)$. Per ogni $x \in (a, b)$, esiste un punto $\xi$ strettamente compreso tra $x_0$ e $x$ tale che:
+\[
+    f(x) = \sum_{k=0}^n \frac{f^{(k)}(x_0)}{k!} (x - x_0)^k + \frac{f^{(n+1)}(\xi)}{(n+1)!} (x - x_0)^{n+1}
+\]
+\end{teorema}
+
+\begin{osservazione}[Uso del Resto di Lagrange per le Stime Numeriche]
+Mentre il resto di Peano ha carattere qualitativo (fondamentale per i limiti), il resto di Lagrange fornisce stime quantitative esatte dell'errore di troncamento, poiché se $|f^{(n+1)}(\xi)| \le M$ su un intervallo, l'errore è limitato da $|R_n(x)| \le \frac{M}{(n+1)!}|x - x_0|^{n+1}$.
+\end{osservazione}
+
+% ==============================================================================
+\section{Tavola degli Sviluppi di Maclaurin Notevoli}
+\label{sec:tavola_maclaurin_completa}
+% ==============================================================================
+
+\begin{metodo}[Sviluppi di Maclaurin Fondamentali ($x \to 0$)]
+\begin{align*}
+    e^x &= 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \dots + \frac{x^n}{n!} + \smallo(x^n) \\
+    \sen x &= x - \frac{x^3}{3!} + \frac{x^5}{5!} - \dots + (-1)^n \frac{x^{2n+1}}{(2n+1)!} + \smallo(x^{2n+2}) \\
+    \cos x &= 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \dots + (-1)^n \frac{x^{2n}}{(2n)!} + \smallo(x^{2n+1}) \\
+    \ln(1 + x) &= x - \frac{x^2}{2} + \frac{x^3}{3} - \dots + (-1)^{n+1}\frac{x^n}{n} + \smallo(x^n) \\
+    (1 + x)^\alpha &= 1 + \alpha x + \frac{\alpha(\alpha-1)}{2!}x^2 + \dots + \binom{\alpha}{n}x^n + \smallo(x^n) \\
+    \tg x &= x + \frac{x^3}{3} + \frac{2}{15}x^5 + \smallo(x^5) \\
+    \arctg x &= x - \frac{x^3}{3} + \frac{x^5}{5} - \dots + (-1)^n \frac{x^{2n+1}}{2n+1} + \smallo(x^{2n+2}) \\
+    \sinh x &= x + \frac{x^3}{3!} + \frac{x^5}{5!} + \dots + \frac{x^{2n+1}}{(2n+1)!} + \smallo(x^{2n+2}) \\
+    \cosh x &= 1 + \frac{x^2}{2!} + \frac{x^4}{4!} + \dots + \frac{x^{2n}}{(2n)!} + \smallo(x^{2n+1})
+\end{align*}
+\end{metodo}
+
+\begin{esame}[Strategia di Arresto dell'Ordine nei Rapporti di Taylor]
+Per calcolare $\lim_{x \to 0} \frac{N(x)}{D(x)}$:
+\begin{enumerate}
+    \item Identificare l'ordine di infinitesimo del denominatore $D(x) \sim c x^p$.
+    \item Sviluppare il numeratore $N(x)$ **esattamente fino all'ordine $p$**. Se sviluppando fino a $p$ tutti i termini si cancellano (risultando $\smallo(x^p)$), bisogna aumentare l'ordine di sviluppo a $p+1, p+2, \dots$ fino a trovare il primo coefficiente non nullo.
+    \item Nelle composizioni $f(g(x))$, verificare tassativamente che l'argomento interno soddisfi $g(x) \to 0$ per $x \to 0$.
+\end{enumerate}
+\end{esame}

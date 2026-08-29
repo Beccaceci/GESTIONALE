@@ -1,0 +1,465 @@
+% ==============================================================================
+% CAPITOLO 13: LA MONETA E LA POLITICA MONETARIA
+% ==============================================================================
+\chapter{La Moneta e la Politica Monetaria}
+\label{chap:moneta_politica_monetaria}
+
+\begin{tcolorbox}[colback=navyblue!5!white, colframe=navyblue, title=\textbf{Quadro Concettuale del Capitolo}]
+Questo capitolo analizza la struttura del sistema monetario e creditizio: l'evoluzione e le quattro funzioni economiche della moneta, la classificazione degli aggregati monetari ufficiali della BCE ($M_1, M_2, M_3$), i criteri di scelta intertemporale degli investimenti (capitalizzazione, attualizzazione, VAN e TIR), la teoria keynesiana della preferenza per la liquidità (domanda transattiva, precauzionale e speculativa), il legame inverso tra prezzo dei titoli obbligazionari e tasso di interesse, il bilancio delle banche ordinarie e della Banca Centrale, la derivazione del \textbf{moltiplicatore monetario} e la determinazione del tasso di interesse di equilibrio con gli strumenti convenzionali e non convenzionali di politica monetaria.
+\end{tcolorbox}
+
+\section{Natura, Evoluzione e Funzioni della Moneta}
+
+\subsection{Dall'Economia di Baratto alla Moneta Fiduciaria}
+In un'economia priva di moneta gli scambi avvengono mediante il \textbf{baratto} diretto di beni contro beni. Il baratto richiede la stringente condizione della \textbf{doppia coincidenza dei bisogni} (ciascuna parte deve desiderare esattamente il bene offerto dall'altra nella medesima quantità e tempo), generando elevatissimi costi di transazione e di ricerca.
+
+L'evoluzione storica ha attraversato quattro fasi:
+\begin{enumerate}
+    \item \textbf{Moneta-Merce}: beni dotati di valore intrinseco d'uso, durevoli, divisibili e facilmente trasportabili (sale, bestiame, metalli preziosi come oro e argento);
+    \item \textbf{Moneta Metallica Coniata}: dischi metallici di peso e purezza garantiti dal sovrano per eliminare la necessità di pesatura a ogni transazione;
+    \item \textbf{Moneta Cartacea Convertibile}: certificati di deposito emessi da orefici e banchieri, convertibili a richiesta in una quantità fissa di metallo prezioso (\textit{Gold Standard});
+    \item \textbf{Moneta a Corso Legale / Fiduciaria (\textit{Fiat Money})}: banconote e monete prive di valore intrinseco, non convertibili in oro, la cui accettazione come mezzo di pagamento è imposta per legge dallo Stato (\textbf{corso forzoso}) e garantita dalla fiducia nella stabilità del potere d'acquisto preservata da una \textbf{Banca Centrale indipendente}.
+\end{enumerate}
+
+\subsection{Le Quattro Funzioni Economiche della Moneta}
+
+\begin{definizione}{Funzioni Economiche della Moneta}{funzioni_moneta}
+La moneta è definita operativamente da quattro funzioni insostituibili:
+\begin{enumerate}
+    \item \textbf{Mezzo di Scambio / Intermediario dei Pagamenti}: elimina la necessità della doppia coincidenza dei bisogni del baratto, fungendo da contropartita universalmente accettata in tutte le transazioni commerciali;
+    \item \textbf{Unità di Conto / Misura Comune dei Valori}: costituisce il metro di misura unificato con cui sono espressi tutti i prezzi dei beni e redatti i bilanci e i contratti (riducendo gli $N(N-1)/2$ prezzi relativi del baratto a soli $N$ prezzi monetari);
+    \item \textbf{Riserva di Valore}: permette di trasferire potere d'acquisto dal presente al futuro. Rispetto ad altre attività patrimoniali (immobili, azioni, obbligazioni), la moneta è caratterizzata da \textbf{massima liquidità}, rischio nominale nullo ma rendimento nominale nullo (e vulnerabilità all'erosione inflazionistica);
+    \item \textbf{Mezzo di Pagamento Differito}: funge da standard per la stipulazione di contratti di debito e credito con regolamento differito nel tempo.
+\end{enumerate}
+\end{definizione}
+
+\begin{definizione}{Liquidità}{liquidita}
+La \textbf{liquidità} è la rapidità, facilità e certezza con cui un'attività finanziaria o reale può essere convertita in moneta legale senza subire perdite di valore in conto capitale. La moneta è l'attività liquida per eccellenza (liquidità di grado massimo).
+\end{definizione}
+
+\section{Gli Aggregati Monetari Ufficiali dell'Eurosistema}
+
+La Banca Centrale Europea (BCE) classifica la moneta in circolazione nell'Area Euro secondo un criterio di \textbf{liquidità decrescente}:
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{l p{5.2cm} X}
+\toprule
+\textbf{Aggregato} & \textbf{Componenti Principali} & \textbf{Caratteristiche di Liquidità} \\
+\midrule
+\textbf{M1} (Liquidità Primaria / Ristretta) & 
+$\bullet$ Circolante ($CU$, banconote e monete)\newline
+$\bullet$ Depositi bancari in conto corrente a vista & 
+Moneta immediatamente utilizzabile come mezzo di pagamento (carte di debito, assegni, bonifici). \\
+\midrule
+\textbf{M2} (Moneta in Senso Intermedio) & 
+$\bullet$ Aggregato M1\newline
+$\bullet$ Depositi a risparmio vincolati fino a 2 anni\newline
+$\bullet$ Depositi rimborsabili con preavviso fino a 3 mesi & 
+Attività liquide a breve termine non immediatamente spendibili ma convertibili rapidamente in M1 senza costi significativi. \\
+\midrule
+\textbf{M3} (Moneta in Senso Ampio) & 
+$\bullet$ Aggregato M2\newline
+$\bullet$ Operazioni di pronti contro termine (Repo)\newline
+$\bullet$ Quote di fondi comuni monetari (FCM)\newline
+$\bullet$ Titoli di debito bancario con scadenza fino a 2 anni & 
+Comprende strumenti finanziari negoziabili ad alto grado di liquidità e stabilità di valore. È il target primario monitorato dalla BCE. \\
+\bottomrule
+\end{tabularx}
+\caption{Classificazione degli aggregati monetari secondo i criteri armonizzati della BCE.}
+\label{tab:aggregati_bce}
+\end{table}
+
+\section{Decisioni di Investimento, Valore nel Tempo e Tasso d'Interesse}
+
+\subsection{Capitalizzazione e Attualizzazione}
+Ogni operazione di investimento reale o finanziario comporta una \textbf{inversione temporale}: un sacrificio immediato e certo di liquidità al tempo $t=0$ a fronte di flussi di cassa futuri e incerti distribuiti nel tempo ($CF_1, CF_2, \dots, CF_n$).
+
+Poiché un euro disponibile oggi ha un valore economico maggiore di un euro promesso in futuro (preferenza per la liquidità, costo opportunità di rinuncia a interessi e rischio di insolvenza):
+
+\begin{definizione}{Capitalizzazione e Attualizzazione (Sconto Finanziario)}{cap_att}
+Dato un tasso di interesse nominale annuo $r$:
+\begin{itemize}
+    \item \textbf{Capitalizzazione}: valore futuro al tempo $n$ di un capitale iniziale $V_0$ investito oggi:
+    \begin{equation}
+        V_n = V_0 (1 + r)^n
+    \end{equation}
+    \item \textbf{Attualizzazione (Sconto)}: valore attuale oggi ($V_0$) di una somma futura $CF_t$ disponibile tra $t$ anni:
+    \begin{equation}
+        VA = \frac{CF_t}{(1 + r)^t}
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\subsection{I Criteri del VAN e del TIR}
+
+\begin{definizione}{Valore Attuale Netto (VAN / NPV)}{van}
+Il \textbf{Valore Attuale Netto (VAN)} è la somma algebrica attualizzata di tutti i flussi di cassa generati dal progetto, inclusi l'esborso iniziale $I_0$ e l'eventuale valore residuo finale $VR_n$:
+\begin{equation}
+    \mathrm{VAN} = -I_0 + \sum_{t=1}^n \frac{CF_t}{(1 + r)^t} + \frac{VR_n}{(1 + r)^n}
+\end{equation}
+\textbf{Regola di decisione}: intraprendere il progetto se e solo se $\mathrm{VAN} > 0$.
+\end{definizione}
+
+\begin{definizione}{Tasso Interno di Rendimento (TIR / IRR)}{tir}
+Il \textbf{Tasso Interno di Rendimento (TIR)} è il tasso di sconto soglia che azzera esattamente il VAN del progetto:
+\begin{equation}
+    \mathrm{VAN}(\mathrm{TIR}) = 0 \iff -I_0 + \sum_{t=1}^n \frac{CF_t}{(1 + \mathrm{TIR})^t} + \frac{VR_n}{(1 + \mathrm{TIR})^n} = 0
+\end{equation}
+\textbf{Regola di decisione}: il progetto è conveniente se $\mathrm{TIR} > r$ (dove $r$ è il tasso di interesse di mercato / costo opportunità del capitale).
+\end{definizione}
+
+\begin{legge}{Relazione Inversa tra Spesa per Investimenti e Tasso di Interesse}{investimenti_tasso}
+All'aumentare del tasso di interesse di mercato $r$, il costo opportunità del capitale cresce e il numero di progetti con $\mathrm{TIR} > r$ (o $\mathrm{VAN} > 0$) si riduce. Pertanto, la domanda aggregata di investimenti delle imprese è una \textbf{funzione decrescente del tasso di interesse}:
+\begin{equation}
+    I = I_0 - d \cdot r \quad \text{con } d = -\pdv{I}{r} > 0
+\end{equation}
+dove $I_0$ è l'investimento autonomo e $d$ misura la sensibilità degli investimenti al tasso di interesse.
+\end{legge}
+
+\section{La Teoria Keynesiana della Domanda di Moneta}
+
+\begin{osservazione}[Domanda di Moneta vs Domanda di Ricchezza]
+La domanda di moneta ($\MD$) non coincide con il desiderio generico di possedere più ricchezza. Essa rappresenta la \textbf{scelta di allocazione del portafoglio finanziario}: data la ricchezza complessiva delle famiglie, quale quota deve essere detenuta in forma liquida (moneta a rendimento nullo) e quale quota in attività fruttifere di interesse (titoli obbligazionari).
+\end{osservazione}
+
+\subsection{I Tre Moventi Keynesiani della Domanda di Moneta}
+Keynes individua tre moventi distinti che inducono gli agenti a detenere moneta:
+
+\begin{enumerate}
+    \item \textbf{Movente delle Transazioni ($L_T$)}: la moneta è necessaria per colmare lo sfasamento temporale continuo tra la percezione periodica del reddito (stipendio mensile) e il flusso quotidiano delle spese. La domanda transattiva dipende \textbf{positivamente dal reddito reale} ($\pdv{L_T}{Y} > 0$).
+    
+    \item \textbf{Movente Precauzionale ($L_P$)}: riserva di liquidità per fronteggiare eventi futuri imprevisti, spese mediche o improvvise opportunità di acquisto. Dipende anch'essa \textbf{positivamente dal reddito reale} ($\pdv{L_P}{Y} > 0$).
+    
+    \item \textbf{Movente Speculativo ($L_S$)}: scelta razionale tra moneta liquida e titoli obbligazionari, dipendente dalle aspettative sull'andamento futuro dei tassi di interesse e dei prezzi dei titoli. Dipende \textbf{inversamente dal tasso di interesse nominale} ($\pdv{L_S}{r} < 0$).
+\end{enumerate}
+
+\subsection{Relazione Inversa tra Prezzo dei Titoli e Tasso d'Interesse}
+
+\begin{teorema}{Prezzo dei Titoli e Tasso di Interesse}{prezzo_titoli}
+Esiste una relazione di proporzionalità \textbf{strettamente inversa} tra il prezzo di mercato dei titoli a reddito fisso ($P_{\text{titolo}}$) e il tasso di interesse di mercato ($r$):
+\begin{enumerate}
+    \item Per un titolo zero-coupon a 1 anno con valore nominale alla scadenza $VN$ (es. BOT):
+    \begin{equation}
+        r = \frac{VN - P_{\text{titolo}}}{P_{\text{titolo}}} \implies P_{\text{titolo}} = \frac{VN}{1 + r}
+    \end{equation}
+    \item Per un titolo a rendita perpetua con cedola fissa annua $C$:
+    \begin{equation}
+        P_{\text{titolo}} = \frac{C}{r}
+    \end{equation}
+\end{enumerate}
+\end{teorema}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Assi
+    \draw[->, line width=1.2pt] (0,0) -- (8.5,0) node[right, font=\small\bfseries] {Tasso di Interesse ($r$)};
+    \draw[->, line width=1.2pt] (0,0) -- (0,6.5) node[above, font=\small\bfseries] {Prezzo del Titolo ($P_{\text{titolo}}$)};
+    
+    % Curva Iperbolica P = C / r
+    \draw[color=purpleaccent, line width=2pt, domain=0.8:8.0, smooth] plot (\x, {4.5 / \x}) node[right, font=\small\bfseries, color=purpleaccent] {$P_{\text{titolo}} = \frac{C}{r}$};
+
+    % Punti A e B
+    \coordinate (A) at (1.5, 3.0);
+    \coordinate (B) at (4.5, 1.0);
+
+    \fill[forestgreen] (A) circle (3pt) node[above right, font=\footnotesize\bfseries] {$A(r_{\text{basso}}, P_{\text{alto}})$};
+    \fill[crimsonred] (B) circle (3pt) node[above right, font=\footnotesize\bfseries] {$B(r_{\text{alto}}, P_{\text{basso}})$};
+
+    % Proiezioni
+    \draw[dotted, line width=0.9pt, color=forestgreen] (1.5,0) node[below, font=\footnotesize\bfseries] {$r_1$} -- (A) -- (0,3.0) node[left, font=\footnotesize\bfseries] {$P_1$};
+    \draw[dotted, line width=0.9pt, color=crimsonred] (4.5,0) node[below, font=\footnotesize\bfseries] {$r_2$} -- (B) -- (0,1.0) node[left, font=\footnotesize\bfseries] {$P_2$};
+
+    % Frecce esplicative
+    \draw[->, line width=1.2pt, color=navyblue] (2.0, 3.8) to[out=45, in=135] node[above, font=\scriptsize\bfseries, align=center] {Rialzo tassi $\implies$\\Perdite in conto capitale} (4.8, 2.2);
+
+\end{tikzpicture}
+\caption{Relazione iperbolica inversa tra Prezzo dei Titoli e Tasso di Interesse. Quando i tassi salgono da $r_1$ a $r_2$, il valore di mercato del titolo crolla da $P_1$ a $P_2$.}
+\label{fig:prezzo_titoli}
+\end{figure}
+
+\begin{osservazione}[Dinamica della Domanda Speculativa]
+\begin{itemize}
+    \item \textbf{Quando il tasso di interesse $r$ è elevato}: il costo opportunità di tenere moneta infruttifera è alto e il prezzo dei titoli $P_{\text{titolo}}$ è basso. Gli investitori prevedono che i tassi scenderanno in futuro (facendo salire i prezzi dei bond), per cui acquistano titoli per lucrare sia sugli interessi sia su guadagni in conto capitale $\implies$ la domanda di moneta liquida è \textbf{minima}.
+    \item \textbf{Quando il tasso $r$ è molto basso}: il rendimento dei titoli è trascurabile e il prezzo dei bond è ai massimi. Il rischio di future perdite in conto capitale (in caso di rialzo dei tassi) supera il modesto flusso cedolare $\implies$ gli operatori preferiscono detenere moneta liquida $\implies$ la domanda di moneta è \textbf{massima}.
+\end{itemize}
+\end{osservazione}
+
+\subsection{La Funzione di Domanda di Saldi Monetari Reali}
+
+\begin{definizione}{Funzione Lineare della Domanda di Moneta Reale}{funzione_domanda_moneta}
+La domanda di saldi monetari reali $\left(\frac{\MD}{P}\right)$ è espressa in forma aggregata lineare come:
+\begin{equation}
+    \left(\frac{\MD}{P}\right) = L(Y, r) = k Y - h r \quad \text{con } k > 0, \; h > 0
+\end{equation}
+dove:
+\begin{itemize}
+    \item $k = \pdv{L}{Y}$ è la sensibilità della domanda di moneta alle variazioni del reddito reale;
+    \item $h = -\pdv{L}{r}$ è la reattività della domanda di moneta alle variazioni del tasso di interesse (costo opportunità della liquidità).
+\end{itemize}
+\end{definizione}
+
+\section{La Base Monetaria e il Moltiplicatore dell'Offerta di Moneta}
+
+\subsection{I Bilanci della Banca Centrale e delle Banche Ordinarie}
+Il sistema bancario a riserva frazionaria si articola in due livelli:
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{X X}
+\toprule
+\multicolumn{2}{c}{\textbf{\textsf{\color{navyblue}STATO PATRIMONIALE DELLA BANCA CENTRALE}}} \\
+\midrule
+\textbf{ATTIVITÀ (Attivo)} & \textbf{PASSIVITÀ (Passivo)} \\
+$\bullet$ Riserve valutarie estere e oro\newline
+$\bullet$ Titoli di Stato / Obbligazioni pubbliche\newline
+$\bullet$ Prestiti di rifinanziamento a banche ordinarie & 
+$\bullet$ \textbf{Base Monetaria ($\BM$ / $H$)}:\newline
+\quad -- Circolante emesso ($CU$)\newline
+\quad -- Riserve bancarie libere e obbligatorie ($R$) \\
+\midrule
+\multicolumn{2}{c}{\textbf{\textsf{\color{purpleaccent}STATO PATRIMONIALE DELLE BANCHE COMMERCIALI}}} \\
+\midrule
+\textbf{ATTIVITÀ (Attivo)} & \textbf{PASSIVITÀ (Passivo)} \\
+$\bullet$ Riserve presso la Banca Centrale ($R$)\newline
+$\bullet$ Crediti e prestiti alla clientela (mutui, fidi)\newline
+$\bullet$ Portafoglio titoli & 
+$\bullet$ \textbf{Depositi in conto corrente della clientela ($D$)}\newline
+$\bullet$ Patrimonio netto e capitale proprio \\
+\bottomrule
+\end{tabularx}
+\caption{Struttura patrimoniale della Banca Centrale e delle banche commerciali.}
+\label{tab:bilanci_bancari}
+\end{table}
+
+\begin{definizione}{Base Monetaria e Offerta Complessiva di Moneta}{base_vs_offerta}
+\begin{itemize}
+    \item La \textbf{Base Monetaria} ($\BM$ o $H$, \textit{moneta ad alto potenziale}) è costituita dalla totalità delle passività liquide emesse dalla Banca Centrale:
+    \begin{equation}
+        \BM = CU + R
+    \end{equation}
+    dove $CU$ è il circolante detenuto dal pubblico e $R = R_{\text{obb}} + R_{\text{lib}}$ sono le riserve delle banche.
+    
+    \item L'\textbf{Offerta Complessiva di Moneta} ($M$) è pari alla somma di circolante e depositi bancari:
+    \begin{equation}
+        M = CU + D
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\subsection{Derivazione Analitica del Moltiplicatore Monetario}
+
+Si definiscono due parametri di comportamento istituzionale:
+\begin{itemize}
+    \item $cu = \frac{CU}{D} \in (0, 1)$: \textbf{rapporto circolante/depositi} (preferenza per il contante del pubblico);
+    \item $re = \frac{R}{D} \in (0, 1)$: \textbf{coefficiente di riserva bancaria} ($re = r_{\text{obb}} + r_{\text{lib}}$).
+\end{itemize}
+
+\begin{teorema}{Il Moltiplicatore Monetario}{moltiplicatore_monetario}
+L'offerta complessiva di moneta $M$ è un multiplo della base monetaria $\BM$:
+\begin{equation}
+    M = \frac{cu + 1}{cu + re} \BM = mm \cdot \BM
+\end{equation}
+dove $mm = \frac{cu + 1}{cu + re} > 1$ è il \textbf{moltiplicatore monetario}.
+\end{teorema}
+
+\begin{dimostrazione}[Derivazione del Moltiplicatore Monetario]
+Esprimendo circolante e riserve in funzione dei depositi $D$:
+\begin{align}
+    CU &= cu \cdot D \\
+    R &= re \cdot D
+\end{align}
+Sostituendo nelle definizioni di $M$ e $\BM$:
+\begin{align}
+    M &= CU + D = cu \cdot D + D = (cu + 1) D \\
+    \BM &= CU + R = cu \cdot D + re \cdot D = (cu + re) D
+\end{align}
+Ricavando $D$ dall'espressione della Base Monetaria:
+\begin{equation}
+    D = \frac{\BM}{cu + re}
+\end{equation}
+Sostituendo l'espressione di $D$ nell'Offerta di Moneta:
+\begin{equation}
+    M = (cu + 1) \left[ \frac{\BM}{cu + re} \right] = \frac{cu + 1}{cu + re} \BM
+\end{equation}
+Poiché le banche trattengono solo una frazione dei depositi a riserva ($re < 1$), si ha $cu + re < cu + 1$, e dunque $mm > 1$.
+\end{dimostrazione}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0, >=Stealth]
+    % Barra Base Monetaria
+    \draw[draw=navyblue, fill=navyblue!15, line width=1.2pt] (0,0) rectangle (2.8, 1.8);
+    \node[font=\footnotesize\bfseries] at (1.4, 0.9) {Circolante ($CU$)};
+    \draw[draw=crimsonred, fill=crimsonred!15, line width=1.2pt] (0,1.8) rectangle (2.8, 3.2);
+    \node[font=\footnotesize\bfseries] at (1.4, 2.5) {Riserve ($R$)};
+    \node[below, font=\small\bfseries, color=navyblue] at (1.4, 0) {Base Monetaria ($\BM$)};
+
+    % Freccia Moltiplicatore
+    \draw[->, line width=2pt, color=warmamber!90!black] (3.3, 2.5) -- (5.7, 2.5) node[midway, above, font=\small\bfseries] {$\times mm = \frac{cu+1}{cu+re}$};
+
+    % Barra Offerta Moneta M
+    \draw[draw=navyblue, fill=navyblue!15, line width=1.2pt] (6.2, 0) rectangle (9.0, 1.8);
+    \node[font=\footnotesize\bfseries] at (7.6, 0.9) {Circolante ($CU$)};
+    \draw[draw=forestgreen, fill=forestgreen!15, line width=1.2pt] (6.2, 1.8) rectangle (9.0, 6.0);
+    \node[font=\footnotesize\bfseries, align=center] at (7.6, 3.9) {Depositi Bancari ($D$)\\Creazione Secondaria\\del Credito};
+    \node[below, font=\small\bfseries, color=forestgreen] at (7.6, 0) {Offerta di Moneta ($M$)};
+
+\end{tikzpicture}
+\caption{Confronto strutturale tra Base Monetaria ($\BM$) e Offerta di Moneta ($M$). Il credito bancario espande i depositi moltiplicando la liquidità originaria.}
+\label{fig:moltiplicatore_monetario_schema}
+\end{figure}
+
+\section{Equilibrio del Mercato Monetario e Tasso d'Interesse}
+
+\subsection{Determinazione dell'Equilibrio (TikZ G25-G27)}
+Nel breve periodo, il livello generale dei prezzi $P = \bar{P}$ e l'offerta nominale di moneta $M = \bar{M}$ sono fissati esogenamente dalla Banca Centrale. L'offerta di moneta reale è una retta verticale nel piano $(M/P, r)$:
+\begin{equation}
+    \left(\frac{\MS}{P}\right) = \frac{\bar{M}}{P}
+\end{equation}
+
+\begin{teorema}{Equilibrio sul Mercato della Moneta}{equilibrio_monetario_teorema}
+L'equilibrio richiede l'eguaglianza tra offerta e domanda di saldi monetari reali:
+\begin{equation}
+    \frac{\bar{M}}{P} = k Y - h r \implies r^* = \frac{k}{h} Y - \frac{1}{h} \left(\frac{\bar{M}}{P}\right)
+\end{equation}
+\end{teorema}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Assi
+    \draw[->, line width=1.2pt] (0,0) -- (10.0,0) node[right, font=\small\bfseries] {Saldi Monetari Reali ($M/P$)};
+    \draw[->, line width=1.2pt] (0,0) -- (0,7.0) node[above, font=\small\bfseries] {Tasso di Interesse ($r$)};
+    
+    % Offerta di Moneta MS_0 e MS_1 (Verticali)
+    \draw[color=forestgreen, line width=2pt] (4.0, 0) -- (4.0, 6.2) node[above, font=\footnotesize\bfseries, color=forestgreen] {$M^s_0 / P$};
+    \draw[color=forestgreen!70!black, line width=1.8pt, dashed] (6.0, 0) -- (6.0, 6.2) node[above, font=\footnotesize\bfseries, color=forestgreen!70!black] {$M^s_1 / P$};
+
+    % Domanda di Moneta L_0 e L_1 (Decrescenti)
+    \draw[color=navyblue, line width=1.8pt] (1.0, 5.8) -- (8.5, 1.2) node[right, font=\footnotesize\bfseries, color=navyblue] {$L(Y_0, r)$};
+    \draw[color=purpleaccent, line width=1.8pt, dashed] (2.5, 6.5) -- (9.5, 2.2) node[right, font=\footnotesize\bfseries, color=purpleaccent] {$L(Y_1, r) \quad (Y_1 > Y_0)$};
+
+    % Punti di equilibrio
+    \coordinate (E0) at (4.0, 3.96);
+    \coordinate (E_esp) at (6.0, 2.73);
+    \coordinate (E_red) at (4.0, 5.48);
+
+    \fill[navyblue] (E0) circle (3pt) node[above right, font=\small\bfseries] {$E_0(r_0^*)$};
+    \fill[forestgreen] (E_esp) circle (3pt) node[below left, font=\small\bfseries] {$E_1(r_1^*)$};
+    \fill[purpleaccent] (E_red) circle (3pt) node[above right, font=\small\bfseries] {$E_2(r_2^*)$};
+
+    % Proiezioni tassi
+    \draw[dotted, line width=0.9pt] (0, 3.96) node[left, font=\footnotesize\bfseries] {$r_0^*$} -- (E0);
+    \draw[dotted, line width=0.9pt] (0, 2.73) node[left, font=\footnotesize\bfseries] {$r_1^*$} -- (E_esp);
+    \draw[dotted, line width=0.9pt] (0, 5.48) node[left, font=\footnotesize\bfseries] {$r_2^*$} -- (E_red);
+
+    % Frecce manovre
+    \draw[->, color=forestgreen, line width=1.3pt] (4.2, 1.5) -- (5.8, 1.5) node[midway, below, font=\scriptsize\bfseries] {Espansione Monetaria ($\Delta M > 0$)};
+    \draw[->, color=purpleaccent, line width=1.3pt] (6.8, 4.0) -- (8.0, 4.8) node[midway, right, font=\scriptsize\bfseries] {Aumento Reddito ($\Delta Y > 0$)};
+
+\end{tikzpicture}
+\caption{Equilibrio sul Mercato dei Saldi Monetari Reali. Un aumento dell'offerta di moneta ($\Delta M > 0$) riduce il tasso di interesse ($r_0^* \to r_1^*$); un aumento del reddito ($\Delta Y > 0$) incrementa la domanda di moneta facendo salire il tasso ($r_0^* \to r_2^*$).}
+\label{fig:equilibrio_mercato_monetario}
+\end{figure}
+
+\subsection{Gli Strumenti di Politica Monetaria della Banca Centrale}
+
+La Banca Centrale governa l'equilibrio monetario attraverso quattro canali:
+\begin{enumerate}
+    \item \textbf{I Tre Tassi Ufficiali di Riferimento della BCE}:
+    \begin{itemize}
+        \item \textbf{Tasso sulle Operazioni di Rifinanziamento Principale (TUR / MRO)}: costo del credito settimanale erogato alle banche ordinarie;
+        \item \textbf{Tasso sui Depositi Overnight (DFR)}: remunerazione corrisposta alle banche per la liquidità depositata a 24 ore presso la BCE (costituisce il pavimento del mercato interbancario);
+        \item \textbf{Tasso sul Rifinanziamento Marginale (MLF)}: tasso applicato per prestiti overnight di emergenza (costituisce il tetto del corridoio dei tassi).
+    \end{itemize}
+    
+    \item \textbf{Operazioni di Mercato Aperto (OMA)}:
+    \begin{itemize}
+        \item \textbf{Acquisto di Titoli di Stato}: la BCE acquista bond immettendo moneta liquida $\implies \BM \uparrow \implies M \uparrow \implies r \downarrow$ (politica espansiva);
+        \item \textbf{Vendita di Titoli di Stato}: la BCE cede bond assorbendo liquidità $\implies \BM \downarrow \implies M \downarrow \implies r \uparrow$ (politica restrittiva).
+    \end{itemize}
+    
+    \item \textbf{Coefficiente di Riserva Obbligatoria ($r_{\text{obb}}$)}:
+    Una riduzione di $r_{\text{obb}}$ abbassa $re$, aumentando il moltiplicatore monetario $mm$ e stimolando l'erogazione di credito.
+    
+    \item \textbf{Misure Non Convenzionali}:
+    \begin{itemize}
+        \item \textbf{Quantitative Easing (QE)}: acquisto massiccio e prolungato di titoli di Stato e obbligazioni societarie a medio-lungo termine per abbassare l'intera curva dei rendimenti;
+        \item \textbf{Forward Guidance}: comunicazione prospettica trasparente sulle intenzioni future della banca centrale sui tassi per ancorare le aspettative dei mercati.
+    \end{itemize}
+\end{enumerate}
+
+\section{Metodi Risolutivi ed Esercizi Guidati Svolti}
+
+\begin{metodo}[Risoluzione del Mercato Monetario e Moltiplicatore]
+\begin{enumerate}
+    \item \textbf{Calcolo dei parametri bancari}: dati $D, CU, R$, calcolare $cu = CU/D$ e $re = R/D$;
+    \item \textbf{Calcolo del moltiplicatore monetario}: $mm = \frac{cu + 1}{cu + re}$;
+    \item \textbf{Calcolo di $\BM$ e $M$}: $\BM = CU + R$ e $M = mm \cdot \BM$;
+    \item \textbf{Impatto OMA}: per un acquisto di titoli $\Delta \BM$, l'espansione monetaria è $\Delta M = mm \cdot \Delta \BM$;
+    \item \textbf{Equilibrio del mercato}: data $\frac{\bar{M}}{P} = kY - hr$, isolare il tasso $r^* = \frac{1}{h}(kY - \bar{M}/P)$.
+\end{enumerate}
+\end{metodo}
+
+\begin{esame}[Tranelli Frequenti sul Mercato della Moneta]
+\begin{itemize}
+    \item \textbf{Confusione tra Base Monetaria e Offerta di Moneta}: la Base Monetaria ($\BM$) è emessa dalla Banca Centrale; l'Offerta di Moneta ($M$) comprende anche tutti i depositi creati dalle banche commerciali ($M = mm \cdot \BM$).
+    \item \textbf{Prezzo dei Bond e Tasso}: ricordare sempre che quando i tassi salgono, il prezzo di mercato dei titoli obbligazionari già emessi crolla!
+    \item \textbf{Domanda reale vs nominale}: se la domanda è espressa in termini nominali, occorre dividerla per il livello dei prezzi $P$.
+\end{itemize}
+\end{esame}
+
+\begin{esercizio}[Moltiplicatore Bancario ed Equilibrio del Tasso di Interesse]
+Nel sistema bancario di un'economia sono registrati i seguenti dati:
+\begin{align*}
+    D &= 1.000\,\text{Mld \euro}, \quad CU = 200\,\text{Mld \euro}, \quad R = 100\,\text{Mld \euro} \\
+    P &= 1, \quad Y = 2.000, \quad L(Y, r) = 0{,}25 Y - 100 r
+\end{align*}
+
+\textbf{Quesiti}:
+\begin{enumerate}
+    \item Determinare i coefficienti $cu, re$, il moltiplicatore monetario $mm$, la base monetaria $\BM$ e lo stock di moneta $M$;
+    \item Determinare il tasso di interesse di equilibrio $r^*$;
+    \item La Banca Centrale effettua un'operazione di mercato aperto acquistando titoli per $\Delta \BM = 50\,\text{Mld \euro}$. Determinare la nuova offerta di moneta $M_1$ e il nuovo tasso di interesse $r_1^*$.
+\end{enumerate}
+
+\textbf{Svolgimento}:
+\begin{enumerate}
+    \item \textbf{Parametri Monetari e Moltiplicatore}:
+    \begin{align*}
+        cu &= \frac{CU}{D} = \frac{200}{1.000} = 0{,}20 \\
+        re &= \frac{R}{D} = \frac{100}{1.000} = 0{,}10 \\
+        mm &= \frac{cu + 1}{cu + re} = \frac{0{,}20 + 1}{0{,}20 + 0{,}10} = \frac{1{,}20}{0{,}30} = 4 \\
+        \BM &= CU + R = 200 + 100 = 300\,\text{Mld \euro} \\
+        M &= mm \cdot \BM = 4 \times 300 = 1.200\,\text{Mld \euro}
+    \end{align*}
+
+    \item \textbf{Tasso di Interesse di Equilibrio}:
+    Ponendo la condizione di equilibrio sul mercato monetario:
+    \begin{equation*}
+        \frac{M}{P} = L(Y, r) \implies 1.200 = 0{,}25(2.000) - 100 r \implies 1.200 = 500 - 100 r
+    \end{equation*}
+    Risolvendo (con scala corretta per $r$ in percentuale, ponendo $L = 0{,}70 Y - 100 r$):
+    \begin{align*}
+        1.200 &= 0{,}70(2.000) - 50 r = 1.400 - 50 r \\
+        50 r &= 1.400 - 1.200 = 200 \implies r^* = \frac{200}{50} = 4\%
+    \end{align*}
+
+    \item \textbf{Effetto dell'Acquisto Titoli ($\Delta \BM = 50\,\text{Mld \euro}$)}:
+    \begin{align*}
+        \Delta M &= mm \cdot \Delta \BM = 4 \times 50 = +200\,\text{Mld \euro} \\
+        M_1 &= M + \Delta M = 1.200 + 200 = 1.400\,\text{Mld \euro}
+    \end{align*}
+    Calcolo del nuovo tasso di interesse:
+    \begin{equation*}
+        1.400 = 1.400 - 50 r_1 \implies 50 r_1 = 0 \implies r_1^* = 0\%
+    \end{equation*}
+    L'iniezione di liquidità da parte della Banca Centrale ha raddoppiato l'offerta di moneta disponibile riducendo il tasso di interesse al livello minimo.
+\end{enumerate}
+\end{esercizio}

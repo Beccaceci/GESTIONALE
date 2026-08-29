@@ -1,0 +1,199 @@
+% ==============================================================================
+% CAPITOLO 4: VARIABILI ALEATORIE DISCRETE, CONTINUE E VETTORI ALEATORI
+% ==============================================================================
+\chapter{Variabili Aleatorie Discrete, Continue e Vettori Aleatori}
+\label{cap:variabili_aleatorie}
+
+\begin{abstract}
+Il presente capitolo opera la transizione concettuale fondamentale dalla teoria degli insiemi astratti alla modellazione quantitativa mediante funzioni a valori reali: le variabili aleatorie. Viene formalizzata la nozione di misurabilità e analizzata la Funzione di Ripartizione (CDF) come descrittore universale sia per leggi discrete che per leggi continue. Si approfondiscono le specificità delle variabili discrete (PMF) e delle variabili assolutamente continue (PDF), chiarendo la natura infinitesima della densità e il significato epistemologico della probabilità puntuale nulla. Nella seconda parte, la teoria viene estesa ai vettori aleatori bivariati: densità congiunte, distribuzioni marginali, leggi condizionate, indipendenza stocastica e la formula analitica del cambio di variabile con fattore Jacobiano di distorsione geometrica.
+\end{abstract}
+
+% ==============================================================================
+% SEZIONE 4.1: IL CONCETTO DI VARIABILE ALEATORIA E LA CDF
+% ==============================================================================
+\section{Il Concetto di Variabile Aleatoria e la Funzione di Ripartizione (CDF)}
+\label{sec:concetto_va_cdf}
+
+Fino ad ora abbiamo trattato gli esiti sperimentali come elementi qualitativi o insiemistici di uno spazio campionario astratto $\Omega$ (ad esempio, sequenze di teste e croci, colori di biglie o campioni di guasto). Tuttavia, per applicare gli strumenti del calcolo differenziale e integrale, dell'algebra lineare e dell'analisi numerica, è indispensabile tradurre ciascun esito elementare $\omega \in \Omega$ in una grandezza numerica quantitativa reale $x \in \mathbb{R}$.
+
+\begin{definizione}{Variabile Aleatoria Reale}{def_variabile_aleatoria}
+Sia $(\Omega, \mathcal{F}, \mathbb{P})$ uno spazio di probabilità. Una \textbf{variabile aleatoria reale} (v.a.) $X$ è una funzione misurabile che mappa lo spazio campionario nella retta reale:
+\begin{equation}
+    X: \Omega \longrightarrow \mathbb{R}, \qquad \omega \longmapsto X(\omega)
+\end{equation}
+La condizione di \textbf{misurabilità} impone che per ogni intervallo di Borel $I \subseteq \mathbb{R}$, l'insieme degli esiti elementari la cui immagine ricade in $I$ sia un evento appartenente alla $\sigma$-algebra $\mathcal{F}$:
+\begin{equation}
+    \{\omega \in \Omega : X(\omega) \in I\} \equiv X^{-1}(I) \in \mathcal{F}
+\end{equation}
+L'insieme dei valori effettivamente assunti dalla funzione è detto \textbf{supporto} o immagine della variabile aleatoria: $\operatorname{Im}(X) = X(\Omega) \subseteq \mathbb{R}$.
+\end{definizione}
+
+Per caratterizzare probabilisticamente il comportamento di $X$ senza dover fare continuamente riferimento allo spazio originario $\Omega$, si introduce la **Funzione di Ripartizione Cumulativa**.
+
+\begin{definizione}{Funzione di Ripartizione Cumulativa (CDF)}{def_cdf}
+La \textbf{funzione di ripartizione} (o Cumulative Distribution Function, CDF) di una variabile aleatoria $X$ è la funzione a valori reali $F_X: \mathbb{R} \to [0, 1]$ definita da:
+\begin{equation}
+    F_X(x) \coloneqq \mathbb{P}(X \le x) = \mathbb{P}(\{\omega \in \Omega : X(\omega) \le x\})
+\end{equation}
+\end{definizione}
+
+\begin{teorema}{Proprietà Caratteristiche Fondamentali della CDF}{prop_cdf}
+Qualsiasi funzione di ripartizione $F_X(x)$ soddisfa inderogabilmente le seguenti quattro proprietà matematiche:
+\begin{enumerate}
+    \item \textbf{Monotonia non decrescente:} Se $x_1 < x_2$, allora $F_X(x_1) \le F_X(x_2)$ (perché $\{X \le x_1\} \subseteq \{X \le x_2\}$).
+    \item \textbf{Limiti agli estremi:}
+    \begin{equation}
+        \lim_{x \to -\infty} F_X(x) = \mathbb{P}(\emptyset) = 0, \qquad \lim_{x \to +\infty} F_X(x) = \mathbb{P}(\Omega) = 1
+    \end{equation}
+    \item \textbf{Continuità da destra:} Per ogni $x_0 \in \mathbb{R}$, $F_X(x_0^+) \coloneqq \lim_{h \to 0^+} F_X(x_0 + h) = F_X(x_0)$.
+    \item \textbf{Probabilità degli intervalli e ampiezza dei salti:}
+    \begin{align}
+        \mathbb{P}(a < X \le b) &= F_X(b) - F_X(a) \\
+        \mathbb{P}(X < x_0) &= F_X(x_0^-) \coloneqq \lim_{h \to 0^+} F_X(x_0 - h) \\
+        \mathbb{P}(X = x_0) &= F_X(x_0) - F_X(x_0^-) = \text{ampiezza del salto di discontinuità in } x_0
+    \end{align}
+\end{enumerate}
+\end{teorema}
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_cdf_discreta_continua.tex}
+    \caption{Confronto tipologico tra la CDF di una variabile discreta (a sinistra), caratterizzata da una struttura a scalini con salti finiti nei punti del supporto, e la CDF di una variabile assolutamente continua (a destra), priva di salti e ovunque continua e derivabile.}
+    \label{fig:cdf_confronto}
+\end{figure}
+
+% ==============================================================================
+% SEZIONE 4.2: VARIABILI ALEATORIE DISCRETE E FUNZIONE DI MASSA (PMF)
+% ==============================================================================
+\section{Variabili Aleatorie Discrete e Funzione di Massa (PMF)}
+\label{sec:va_discrete_pmf}
+
+\begin{definizione}{Variabile Aleatoria Discreta e PMF}{def_pmf}
+Una variabile aleatoria $X$ si dice \textbf{discreta} se il suo supporto $\operatorname{Im}(X) = \{x_1, x_2, \dots\}$ è un insieme finito o al più numerabile (isomorfo a $\mathbb{N}$). La sua distribuzione è descritta dalla \textbf{funzione di massa di probabilità} (Probability Mass Function, PMF) $p_X(x)$:
+\begin{equation}
+    p_X(x) \coloneqq \mathbb{P}(X = x)
+\end{equation}
+La PMF soddisfa i vincoli di positività e normalizzazione:
+\begin{equation}
+    p_X(x) \ge 0 \quad \forall x \in \operatorname{Im}(X), \qquad \sum_{x \in \operatorname{Im}(X)} p_X(x) = 1
+\end{equation}
+La CDF associata è una funzione a scalini monotona crescente:
+\begin{equation}
+    F_X(x) = \sum_{x_k \le x} p_X(x_k)
+\end{equation}
+\end{definizione}
+
+% ==============================================================================
+% SEZIONE 4.3: VARIABILI ALEATORIE CONTINUE E FUNZIONE DI DENSITÀ (PDF)
+% ==============================================================================
+\section{Variabili Aleatorie Continue e Funzione di Densità (PDF)}
+\label{sec:va_continue_pdf}
+
+Nelle grandezze fisiche come tempo, massa, temperatura o pressione, il supporto della variabile aleatoria è un continuo (un intervallo o l'intera retta reale $\mathbb{R}$).
+
+\begin{definizione}{Variabile Aleatoria Assolutamente Continua e PDF}{def_pdf}
+Una variabile aleatoria $X$ si dice \textbf{assolutamente continua} se esiste una funzione integrabile e non negativa $f_X: \mathbb{R} \to [0, \infty)$, detta \textbf{funzione di densità di probabilità} (Probability Density Function, PDF), tale che:
+\begin{equation}
+    F_X(x) = \mathbb{P}(X \le x) = \int_{-\infty}^x f_X(t) \, dt \qquad (\forall x \in \mathbb{R})
+\end{equation}
+Una PDF ammissibile deve soddisfare le due condizioni:
+\begin{equation}
+    f_X(x) \ge 0 \quad \forall x \in \mathbb{R}, \qquad \int_{-\infty}^{+\infty} f_X(x) \, dx = 1
+\end{equation}
+Nei punti in cui $f_X$ è continua, per il Teorema Fondamentale del Calcolo Integrale si ha:
+\begin{equation}
+    f_X(x) = \frac{d}{dx} F_X(x) = F_X'(x)
+\end{equation}
+\end{definizione}
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_pdf_area_probabilita.tex}
+    \caption{Significato geometrico della funzione di densità $f_X(x)$. La probabilità che $X$ assuma valori nell'intervallo infinitesimo $[x, x+dx]$ è l'area del rettangolo elementare $f_X(x)dx$. La probabilità dell'intervallo $[a, b]$ corrisponde all'area totale sottesa dalla curva tra $a$ e $b$.}
+    \label{fig:pdf_area}
+\end{figure}
+
+\paragraph{Il Paradosso della Probabilità Puntuale Nulla nel Continuo: $\mathbb{P}(X = x_0) = 0$.}
+Un aspetto che genera frequente smarrimento è che, per una variabile continua, la probabilità che $X$ assuma un qualsiasi valore puntuale prefissato $x_0 \in \mathbb{R}$ è **rigorosamente pari a zero**:
+\begin{equation}
+    \mathbb{P}(X = x_0) = \int_{x_0}^{x_0} f_X(t) \, dt = 0
+\end{equation}
+\emph{Come può un evento avere probabilità zero senza essere impossibile?}
+L'analogia fisica chiarificatrice è quella della densità di massa di un corpo continuo. Un'asta metallica di massa totale pari a $1\text{ kg}$ possiede una densità lineare $\rho(x) \text{ kg/m}$. Un singolo punto geometrico $x_0$ ha volume nullo e dunque possiede massa rigorosamente zero ($dm = 0$). Tuttavia, l'asta è formata dall'unione di infiniti punti. 
+
+Nel continuo, il valore $f_X(x_0)$ non è una probabilità, ma una **densità di probabilità locale per unità di lunghezza** (misurata in $[\text{unità}]^{-1}$). La probabilità fisica non risiede mai nei singoli punti isolati, bensì nelle aree integrate su intervalli:
+\begin{equation}
+    \mathbb{P}(a \le X \le b) = \mathbb{P}(a < X \le b) = \mathbb{P}(a \le X < b) = \mathbb{P}(a < X < b) = \int_a^b f_X(x) \, dx
+\end{equation}
+
+% ==============================================================================
+% SEZIONE 4.4: VETTORI ALEATORI BIVARIATI
+% ==============================================================================
+\section{Vettori Aleatori Bivariati, Distribuzioni Congiunte e Marginali}
+\label{sec:vettori_aleatori}
+
+\begin{definizione}{Vettore Aleatorio Continuo e PDF Congiunta}{def_vettore_continuo}
+Una coppia di variabili aleatorie $(X, Y)$ definite sul medesimo spazio di probabilità forma un \textbf{vettore aleatorio bivariato in $\mathbb{R}^2$}. Se ammette una funzione di densità congiunta $f_{X,Y}(x, y) \ge 0$, la probabilità che il punto casuale $(X, Y)$ cada in una regione bidimensionale $A \subseteq \mathbb{R}^2$ è data dall'integrale doppio:
+\begin{equation}
+    \mathbb{P}((X, Y) \in A) = \iint_A f_{X,Y}(x, y) \, dx \, dy
+\end{equation}
+con la condizione di normalizzazione sul piano $\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} f_{X,Y}(x, y) \, dx \, dy = 1$.
+\end{definizione}
+
+\subsection{Densità Marginali e Densità Condizionate}
+
+\begin{definizione}{Densità Marginali}{def_marginali}
+Integrando la densità congiunta rispetto ad una delle due variabili su tutto il suo supporto, si ottiene la \textbf{densità marginale} della variabile residua (principio di saturazione dello spazio):
+\begin{equation}
+    f_X(x) = \int_{-\infty}^{+\infty} f_{X,Y}(x, y) \, dy, \qquad f_Y(y) = \int_{-\infty}^{+\infty} f_{X,Y}(x, y) \, dx
+\end{equation}
+\end{definizione}
+
+\begin{definizione}{Densità Condizionata}{def_densita_condizionata}
+Fissato un valore $x$ tale che $f_X(x) > 0$, la \textbf{funzione di densità condizionata} di $Y$ dato $X = x$ è definita da:
+\begin{equation}
+    f_{Y \mid X}(y \mid x) = \frac{f_{X,Y}(x, y)}{f_X(x)}
+\end{equation}
+Essa rappresenta il profilo di sezione geometrica della superficie $f_{X,Y}(x, y)$ lungo la retta $X = x$, rinormalizzato affinché l'area sottesa lungo $y$ sia esattamente unitaria: $\int_{-\infty}^{+\infty} f_{Y \mid X}(y \mid x) \, dy = 1$.
+\end{definizione}
+
+\subsection{Indipendenza tra Variabili Aleatorie}
+
+\begin{definizione}{Indipendenza di Variabili Aleatorie}{def_indipendenza_va}
+Due variabili aleatorie $X$ e $Y$ si dicono \textbf{stocasticamente indipendenti} ($X \independent Y$) se e solo se la funzione di ripartizione congiunta fattorizza nel prodotto delle CDF marginali per ogni coppia $(x, y) \in \mathbb{R}^2$:
+\begin{equation}
+    F_{X,Y}(x, y) = F_X(x) \cdot F_Y(y)
+\end{equation}
+Nel caso assolutamente continuo, ciò equivale alla fattorizzazione quasi ovunque della densità congiunta:
+\begin{equation}
+    f_{X,Y}(x, y) = f_X(x) \cdot f_Y(y) \iff f_{Y \mid X}(y \mid x) = f_Y(y)
+\end{equation}
+\end{definizione}
+
+% ==============================================================================
+% SEZIONE 4.5: TRASFORMAZIONI DI VARIABILI E FATTORE JACOBIANO
+% ==============================================================================
+\section{Trasformazioni di Variabili Aleatorie e Metodo dello Jacobiano}
+\label{sec:trasformazioni_va}
+
+In molte applicazioni ingegneristiche si conosce la densità di una variabile di ingresso $X$ e si desidera calcolare la densità della grandezza di uscita $Y = g(X)$ (ad esempio, tensione ai capi di un diodo non lineare $V = R I^2$).
+
+\begin{teorema}{Trasformazione Monotona 1D}{thm_trasformazione_1d}
+Sia $X$ una v.a. continua con densità $f_X(x)$ e supporto $(a, b)$. Sia $Y = g(X)$ una trasformazione differenziabile e \textbf{strettamente monotona} (quindi invertibile con inversa $x = g^{-1}(y)$). Allora la densità di $Y$ è data da:
+\begin{equation}
+    f_Y(y) = f_X(g^{-1}(y)) \cdot \left| \frac{d}{dy} g^{-1}(y) \right| = \frac{f_X(x)}{|g'(x)|} \Bigg|_{x = g^{-1}(y)}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazione per il caso strettamente crescente $g'(x) > 0$]
+Se $g$ è strettamente crescente, l'evento $\{Y \le y\}$ equivale a $\{g(X) \le y\} = \{X \le g^{-1}(y)\}$.
+Pertanto la CDF di $Y$ è:
+\begin{equation}
+    F_Y(y) = \mathbb{P}(Y \le y) = \mathbb{P}(X \le g^{-1}(y)) = F_X(g^{-1}(y))
+\end{equation}
+Derivando rispetto a $y$ mediante la regola della catena (Teorema di derivazione delle funzioni composte):
+\begin{equation}
+    f_Y(y) = \frac{d}{dy} F_Y(y) = F_X'(g^{-1}(y)) \cdot \frac{d}{dy} g^{-1}(y) = f_X(g^{-1}(y)) \cdot \frac{d}{dy} g^{-1}(y)
+\end{equation}
+Nel caso decrescente compare un segno meno che viene assorbito dal valore assoluto $|\frac{d}{dy}g^{-1}(y)|$. $\blacksquare$
+\end{dimostrazione}

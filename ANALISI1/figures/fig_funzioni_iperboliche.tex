@@ -1,0 +1,46 @@
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    grid=both,
+    grid style={line width=.1pt, draw=gray!20},
+    major grid style={line width=.2pt,draw=gray!40},
+    xlabel={$x$},
+    ylabel={$y$},
+    xmin=-3.2, xmax=3.2,
+    ymin=-3.5, ymax=4.2,
+    domain=-3:3,
+    samples=150,
+    axis line style={thick, navyblue},
+    legend style={at={(0.03,0.97)}, anchor=north west, font=\small, fill=white, fill opacity=0.9, draw=gray!50},
+    legend cell align={left},
+    width=11cm,
+    height=8.5cm
+]
+    % Asintoti orizzontali per tanh(x)
+    \addplot[dashed, crimsonred!80, thick, domain=-3.2:3.2] {1};
+    \addplot[dashed, crimsonred!80, thick, domain=-3.2:3.2] {-1};
+    \node[crimsonred, font=\footnotesize, anchor=south east] at (axis cs:3.1,1) {$y = 1$};
+    \node[crimsonred, font=\footnotesize, anchor=north east] at (axis cs:3.1,-1) {$y = -1$};
+
+    % Funzione esponenziale e^x / 2 asintoto per cosh e sinh
+    \addplot[loosely dotted, gray!80, thick, domain=-0.5:2.2] {0.5*exp(x)};
+    \node[gray!80, font=\footnotesize, anchor=west] at (axis cs:2.1, 4.0) {$y = \frac{1}{2}e^x$};
+
+    % Cosh(x)
+    \addplot[very thick, coolblue] {cosh(x)};
+    \addlegendentry{$\cosh(x) = \frac{e^x + e^{-x}}{2}$}
+
+    % Sinh(x)
+    \addplot[very thick, forestgreen] {sinh(x)};
+    \addlegendentry{$\sinh(x) = \frac{e^x - e^{-x}}{2}$}
+
+    % Tanh(x)
+    \addplot[very thick, warmamber] {tanh(x)};
+    \addlegendentry{$\tanh(x) = \frac{\sinh(x)}{\cosh(x)}$}
+
+    % Punti notevoli
+    \fill[coolblue] (axis cs:0,1) circle (2pt) node[above left, font=\footnotesize] {$(0,1)$};
+    \fill[forestgreen] (axis cs:0,0) circle (2pt) node[below right, font=\footnotesize] {$(0,0)$};
+
+\end{axis}
+\end{tikzpicture}

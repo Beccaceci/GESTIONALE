@@ -1,0 +1,1183 @@
+% ==============================================================================
+% CAPITOLO 8: RACCOLTA TEMI D'ESAME E PROVE SCRITTE RISOLTE
+% Con prove ufficiali del Prof. Marco Franciosi (Università di Pisa)
+% ==============================================================================
+
+\chapter{Temi d'Esame Ufficiali e Prove Scritte Risolte}
+\label{chap:esercizi_esami}
+
+\section{Guida Metodologica alla Prova Scritta}
+
+La prova scritta di \textbf{Algebra Lineare} (Corso di Laurea in Ingegneria Gestionale / Chimica, Prof.~Marco Franciosi) è progettata per verificare sia la prontezza nel calcolo sintetico sia la padronanza delle dimostrazioni e dei procedimenti algoritmici formali.
+
+\subsection{Struttura Tipica dell'Esame (120 minuti)}
+La prova è divisa in due sezioni distinte:
+\begin{enumerate}
+    \item \textbf{Prima Parte (Quesiti a Risposta Sintetica)}:
+    \begin{itemize}
+        \item 8 quesiti a risposta rapida (senza richiesta di svolgimento sul foglio delle risposte).
+        \item Criterio di punteggio: \textbf{Risposta esatta $= +1$}, \textbf{Risposta mancante $= 0$}, \textbf{Risposta errata $= -1$}.
+        \item Argomenti standard: forma trigonometrica/esponenziale di $z \in \C$, potenze e radici $n$-esime $z^n, \sqrt[n]{z}$, determinazione di basi e dimensioni per somma e intersezione di sottospazi ($\dim(W+Z), \dim(W \cap Z)$), rango e nullità di matrici a gradini, determinanti $4 \times 4$, verifica rapida di diagonalizzabilità, prodotti scalari e proiezioni ortogonali.
+    \end{itemize}
+    \item \textbf{Seconda Parte (Problemi Strutturati a Svolgimento Esteso)}:
+    \begin{itemize}
+        \item 3 o 4 problemi complessi (punteggio per esercizio: $0 - 6$ punti).
+        \item È richiesto lo svolgimento formale, rigoroso e motivato di ogni singolo passaggio, enunciando i teoremi cardine impiegati.
+        \item Tipologie ricorrenti:
+        \begin{itemize}
+            \item \textbf{Problema 1 (Numeri Complessi)}: Sistemi di equazioni nel campo complesso coinvolgenti moduli $|z|$, coniugati $\conj{z}$, potenze $z^n$, esponenziali complessi $e^z$ e condizioni geometriche sul piano di Gauss.
+            \item \textbf{Problema 2 (Sistemi Lineari e Rango Parametrico)}: Studio dell'applicazione lineare $L_{A_t}: \R^n \to \R^m$ al variare di un parametro reale $t \in \R$, calcolo di $\dim(\ker)$ e $\dim(\Imm)$, discussione della compatibilità del sistema $A_t \vv{x} = \vv{b}$ mediante il \textbf{Teorema di Rouché-Capelli} e verifica di somme dirette $\R^n = \Imm(L_{A_t}) \oplus W$ con la \textbf{Formula di Grassmann}.
+            \item \textbf{Problema 3 (Applicazioni Lineari e Matrici Rappresentative)}: Determinazione di un'applicazione lineare $f$ o della matrice associata rispetto a basi non canoniche, studio del nucleo, dell'immagine, della controimmagine $f\inv(\vv{w})$ e decomposizioni in somma diretta.
+            \item \textbf{Problema 4 (Autovalori, Autovettori, Teorema Spettrale e Diagonalizzazione)}: Calcolo del polinomio caratteristico $p(\lambda)$, autovalori con molteplicità algebrica $\ma$ e geometrica $\mg$, discussione della diagonalizzabilità su $\R$ e $\C$, determinazione della base di autovettori e della matrice diagonalizzante $P$ (eventualmente ortogonale $P \in \SO(n)$ per matrici simmetriche via \textbf{Teorema Spettrale}).
+        \end{itemize}
+    \end{itemize}
+\end{enumerate}
+
+\begin{esame}[Strategia di Gestione del Tempo e Penalità]
+Poiché ogni risposta errata nella prima parte comporta una penalità di $-1$ punto, è fondamentale applicare il principio di \emph{prudenza selettiva}:
+\begin{itemize}
+    \item Rispondere solo ai quesiti sui quali si ha certezza algoritmica assoluta. Lasciare in bianco se il dubbio persiste, evitando risposte tirate a indovinare.
+    \item Dedicare i primi 25--30 minuti ai quesiti rapidi e i restanti 90 minuti ai 3 problemi a svolgimento esteso.
+    \item Nei problemi a svolgimento esteso, esplicitare sempre le ipotesi dei teoremi applicati (es. matrice simmetrica per il Teorema Spettrale, confronto dei ranghi per Rouché-Capelli, uguaglianza delle molteplicità $\mg(\lambda) = \ma(\lambda)$ per la diagonalizzabilità).
+\end{itemize}
+\end{esame}
+
+\begin{center}
+\begin{tikzpicture}[
+    box/.style={rectangle, rounded corners=4pt, draw=navyblue, fill=blue!4!white, thick, text width=6.2cm, minimum height=2.2cm, align=left, inner sep=6pt},
+    headerbox/.style={rectangle, rounded corners=3pt, draw=navyblue, fill=navyblue, text=white, font=\bfseries\sffamily, align=center, minimum height=0.6cm},
+    arrow/.style={-{Stealth[scale=1.1]}, thick, navyblue}
+]
+    \node[headerbox, text width=13.5cm] at (0, 1.6) {\textsf{STRUTTURA DELLA PROVA SCRITTA (120 MINUTI)}};
+    
+    % Node Parte 1
+    \node[box] (p1) at (-3.7, 0) {
+        \textbf{\textcolor{navyblue}{Parte 1: Quesiti Sintetici}}\\
+        \footnotesize
+        $\bullet$ \textbf{8 quesiti} a risposta rapida\\
+        $\bullet$ Punteggio: $+1$ esatta, $0$ vuota, \textcolor{crimsonred}{$-1$ errata}\\
+        $\bullet$ Target tempo: \textbf{25--30 min}\\
+        $\bullet$ Focus: forme polari $\C$, $\dim(W\cap Z)$, Laplace, $\rk(A)$, diagonalizzabilità
+    };
+    
+    % Node Parte 2
+    \node[box] (p2) at (3.7, 0) {
+        \textbf{\textcolor{navyblue}{Parte 2: Problemi Strutturati}}\\
+        \footnotesize
+        $\bullet$ \textbf{3--4 problemi} a svolgimento esteso\\
+        $\bullet$ Punteggio: $0 - 6$ punti per esercizio\\
+        $\bullet$ Target tempo: \textbf{90--95 min}\\
+        $\bullet$ Focus: Rouché-Capelli $A_t \vv{x}=\vv{b}$, cambio base $f$, Teorema Spettrale $P\T S P = D$
+    };
+
+    \draw[arrow] (-0.3, 0) -- (0.3, 0);
+\end{tikzpicture}
+\end{center}
+
+---
+
+\section{Parte 1: Raccolta Quesiti Rapidi d'Esame Risolti}
+
+\subsection{Modulo 1: Numeri Complessi (Forme, Potenze e Radici)}
+
+\begin{esempio}{Calcolo di forma esponenziale e potenze complesse}{es_rapido_c1}
+\textbf{Quesito d'esame}: Sia $z = -2 + \iu 2\sqrt{3}$.
+\begin{enumerate}[label=(\alph*)]
+    \item Scrivere $z$ nella rappresentazione trigonometrica/esponenziale $z = \rho e^{\iu\theta}$.
+    \item Calcolare $z^3$ in forma cartesiana.
+\end{enumerate}
+
+\begin{dimostrazione}[Risoluzione]
+\begin{enumerate}[label=(\alph*)]
+    \item Calcoliamo il modulo $\rho$:
+    \begin{equation}
+        \rho = |z| = \sqrt{(-2)^2 + (2\sqrt{3})^2} = \sqrt{4 + 12} = \sqrt{16} = 4.
+    \end{equation}
+    Per l'argomento principale $\theta \in [0, 2\pi)$: essendo $\Reale(z) = -2 < 0$ e $\Immag(z) = 2\sqrt{3} > 0$, l'affisso di $z$ appartiene al \textbf{II quadrante}:
+    \begin{equation}
+        \cos\theta = \frac{-2}{4} = -\frac{1}{2}, \quad \sen\theta = \frac{2\sqrt{3}}{4} = \frac{\sqrt{3}}{2} \implies \theta = \pi - \frac{\pi}{3} = \frac{2\pi}{3}.
+    \end{equation}
+    Quindi la forma esponenziale è $z = 4 e^{\iu \frac{2\pi}{3}}$.
+    \item Calcoliamo la potenza mediante la formula di De Moivre:
+    \begin{equation}
+        z^3 = \left(4 e^{\iu \frac{2\pi}{3}}\right)^3 = 4^3 \cdot e^{\iu \cdot 3 \cdot \frac{2\pi}{3}} = 64 \cdot e^{\iu 2\pi} = 64(\cos 2\pi + \iu\sen 2\pi) = 64.
+    \end{equation}
+    Pertanto $z^3 = 64 + 0\iu = 64 \in \R$.
+\end{enumerate}
+\end{dimostrazione}
+\end{esempio}
+
+\begin{esempio}{Prodotto e parte reale nel campo complesso}{es_rapido_c2}
+\textbf{Quesito d'esame}: Dati $z = 2 + \iu$ e $w = 3 - 2\iu$, calcolare $\Reale(z \cdot w)$.
+
+\begin{dimostrazione}[Risoluzione]
+Eseguiamo il prodotto algebrico ricordando che $\iu^2 = -1$:
+\begin{equation}
+    z \cdot w = (2 + \iu)(3 - 2\iu) = 6 - 4\iu + 3\iu - 2\iu^2 = 6 - \iu - 2(-1) = 8 - \iu.
+\end{equation}
+Pertanto:
+\begin{equation}
+    \Reale(z \cdot w) = 8.
+\end{equation}
+\end{dimostrazione}
+\end{esempio}
+
+\begin{esempio}{Calcolo delle radici $n$-esime nel piano complesso}{es_rapido_c3}
+\textbf{Quesito d'esame}: Determinare tutte le soluzioni complesse dell'equazione $z^3 = -8\iu$.
+
+\begin{dimostrazione}[Risoluzione]
+Scriviamo il termine noto $w = -8\iu$ in forma esponenziale:
+\begin{equation}
+    |w| = 8, \quad \Arg(w) = \frac{3\pi}{2} \quad (\text{oppure } -\frac{\pi}{2}) \implies w = 8 e^{\iu \frac{3\pi}{2}}.
+\end{equation}
+Per la formula delle radici terze $z_k = \sqrt[3]{8} e^{\iu \frac{\frac{3\pi}{2} + 2k\pi}{3}} = 2 e^{\iu \left(\frac{\pi}{2} + \frac{2k\pi}{3}\right)}$ con $k \in \{0, 1, 2\}$:
+\begin{itemize}
+    \item Per $k = 0$: $\theta_0 = \frac{\pi}{2} \implies z_0 = 2 e^{\iu \frac{\pi}{2}} = 2\iu$.
+    \item Per $k = 1$: $\theta_1 = \frac{\pi}{2} + \frac{2\pi}{3} = \frac{7\pi}{6} \implies z_1 = 2\left(-\frac{\sqrt{3}}{2} - \iu\frac{1}{2}\right) = -\sqrt{3} - \iu$.
+    \item Per $k = 2$: $\theta_2 = \frac{\pi}{2} + \frac{4\pi}{3} = \frac{11\pi}{6} \implies z_2 = 2\left(\frac{\sqrt{3}}{2} - \iu\frac{1}{2}\right) = \sqrt{3} - \iu$.
+\end{itemize}
+Le tre radici formano i vertici di un triangolo equilatero inscritto nella circonferenza centrata nell'origine di raggio $R = 2$:
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    \draw[->, thick, gray!70] (-2.5,0) -- (2.5,0) node[right, black] {\small $\Reale(z)$};
+    \draw[->, thick, gray!70] (0,-2.3) -- (0,2.6) node[above, black] {\small $\Immag(z)$};
+    \draw[dashed, coolblue!70, thick] (0,0) circle (2);
+    
+    % Vertici triangolo
+    \coordinate (Z0) at (0,2);
+    \coordinate (Z1) at ({-sqrt(3)}, -1);
+    \coordinate (Z2) at ({sqrt(3)}, -1);
+    
+    % Poligono
+    \draw[thick, navyblue, fill=navyblue!10] (Z0) -- (Z1) -- (Z2) -- cycle;
+    
+    % Punti e label
+    \filldraw[navyblue] (Z0) circle (2pt) node[above right] {\small $z_0 = 2\iu$};
+    \filldraw[navyblue] (Z1) circle (2pt) node[below left] {\small $z_1 = -\sqrt{3}-\iu$};
+    \filldraw[navyblue] (Z2) circle (2pt) node[below right] {\small $z_2 = \sqrt{3}-\iu$};
+    
+    % Raggio e centro
+    \draw[<->, forestgreen, thick] (0,0) -- node[above, sloped] {\scriptsize $R=2$} (Z0);
+    \filldraw[black] (0,0) circle (1pt) node[below left] {\scriptsize $0$};
+\end{tikzpicture}
+\end{center}
+\end{dimostrazione}
+\end{esempio}
+
+\begin{esame}[Trabocchetti sui Numeri Complessi]
+\begin{itemize}
+    \item \textbf{Modulo e Coniugato}: Ricordare che $|z|^2 = z \conj{z}$ e che $|z| \ge 0$ è \textbf{sempre un numero reale non negativo}. Non trattare mai $|z|$ come una variabile complessa con parte immaginaria.
+    \item \textbf{Modulo dell'Esponenziale Complesso}: Per ogni $z = x + \iu y$, si ha $|e^z| = |e^x \cdot e^{\iu y}| = e^x = e^{\Reale(z)}$, mentre $\Arg(e^z) = y = \Immag(z) \pmod{2\pi}$. In particolare, $e^z \neq 0$ per ogni $z \in \C$.
+\end{itemize}
+\end{esame}
+
+---
+
+\subsection{Modulo 2: Sottospazi, Somma, Intersezione e Grassmann}
+
+\begin{esempio}{Base e Dimensione dell'Intersezione e Somma Diretta}{es_rapido_sottospazi1}
+\textbf{Quesito d'esame}: Siano $W, Z \le \R^3$ definiti da:
+\begin{equation}
+    W = \left\{ \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} \in \R^3 \;\middle|\; x_1 + 2x_2 - x_3 = 0 \right\}, \quad Z = \Span\left( \begin{pmatrix} 0 \\ 1 \\ 3 \end{pmatrix} \right).
+\end{equation}
+Determinare se $\R^3 = W \oplus Z$ e trovare una base di $W \cap Z$.
+
+\begin{dimostrazione}[Risoluzione]
+\begin{enumerate}
+    \item $W$ è il nucleo della forma lineare non nulla $\phi(x_1, x_2, x_3) = x_1 + 2x_2 - x_3$, dunque per il Teorema della Dimensione $\dim(W) = 3 - 1 = 2$.
+    \item Il vettore generatore di $Z$, $\vv{v} = (0, 1, 3)\T$, è non nullo, quindi $\dim(Z) = 1$.
+    \item Verifichiamo se $\vv{v} \in W$ sostituendo le sue coordinate nell'equazione cartesiana di $W$:
+    \begin{equation}
+        1 \cdot (0) + 2(1) - 1 \cdot (3) = 2 - 3 = -1 \neq 0 \implies \vv{v} \notin W.
+    \end{equation}
+    \item Poiché il generatore di $Z$ non appartiene a $W$, l'intersezione contiene solo il vettore nullo:
+    \begin{equation}
+        W \cap Z = \{\vzero\} \implies \dim(W \cap Z) = 0.
+    \end{equation}
+    \item Per la \textbf{Formula di Grassmann}:
+    \begin{equation}
+        \dim(W + Z) = \dim(W) + \dim(Z) - \dim(W \cap Z) = 2 + 1 - 0 = 3 = \dim(\R^3).
+    \end{equation}
+    Essendo l'intersezione banale e la somma pari all'intero spazio ambiente, si conclude che $\R^3 = W \oplus Z$ (\textbf{Somma Diretta}).
+    La base dell'intersezione $W \cap Z = \{\vzero\}$ è l'insieme vuoto $\emptyset$.
+\end{enumerate}
+\end{dimostrazione}
+\end{esempio}
+
+\begin{esempio}{Intersezione con sottospazio generato da due vettori}{es_rapido_sottospazi2}
+\textbf{Quesito d'esame}: Dati $W = \{ (x_1, x_2, x_3)\T \in \R^3 \mid x_1 - 2x_2 + x_3 = 0 \}$ e $Z = \Span\left( \begin{pmatrix} 1 \\ 5 \\ 1 \end{pmatrix}, \begin{pmatrix} 1 \\ 3 \\ 2 \end{pmatrix} \right)$. Determinare una base e la dimensione di $W \cap Z$.
+
+\begin{dimostrazione}[Risoluzione]
+Un generico vettore $\vv{z} \in Z$ è combinazione lineare dei generatori:
+\begin{equation}
+    \vv{z} = \al \begin{pmatrix} 1 \\ 5 \\ 1 \end{pmatrix} + \be \begin{pmatrix} 1 \\ 3 \\ 2 \end{pmatrix} = \begin{pmatrix} \al + \be \\ 5\al + 3\be \\ \al + 2\be \end{pmatrix}.
+\end{equation}
+Imponiamo l'appartenenza a $W$ sostituendo le componenti nell'equazione cartesiana $x_1 - 2x_2 + x_3 = 0$:
+\begin{align}
+    (\al + \be) - 2(5\al + 3\be) + (\al + 2\be) &= 0 \notag \\
+    \al + \be - 10\al - 6\be + \al + 2\be &= 0 \notag \\
+    -8\al - 3\be &= 0 \implies \be = -\frac{8}{3}\al.
+\end{align}
+Ponendo il parametro libero $\al = 3 \implies \be = -8$, otteniamo il vettore generatore:
+\begin{equation}
+    \vv{w}_0 = 3 \begin{pmatrix} 1 \\ 5 \\ 1 \end{pmatrix} - 8 \begin{pmatrix} 1 \\ 3 \\ 2 \end{pmatrix} = \begin{pmatrix} 3 - 8 \\ 15 - 24 \\ 3 - 16 \end{pmatrix} = \begin{pmatrix} -5 \\ -9 \\ -13 \end{pmatrix}.
+\end{equation}
+Scegliendo il vettore proporzionale $\vv{w}_1 = -\vv{w}_0 = (5, 9, 13)\T$, una base di $W \cap Z$ è:
+\begin{equation}
+    \mathcal{B}_{W \cap Z} = \left\{ \begin{pmatrix} 5 \\ 9 \\ 13 \end{pmatrix} \right\}, \quad \text{e} \quad \dim(W \cap Z) = 1.
+\end{equation}
+\end{dimostrazione}
+\end{esempio}
+
+\begin{metodo}[Calcolo Rapido di $W \cap Z$]
+Per trovare una base di $W \cap Z$:
+\begin{enumerate}
+    \item Se $W$ è in forma \textbf{cartesiana} e $Z$ in forma \textbf{parametrica/generatori}, sostituire il generico vettore di $Z$ nelle equazioni di $W$ (metodo più rapido).
+    \item Se entrambi sono in forma \textbf{cartesiana}, unire le equazioni formando un unico sistema lineare omogeneo.
+    \item Se entrambi sono in forma di \textbf{generatori}, convertire uno dei due in forma cartesiana oppure imporre l'uguaglianza $\sum \al_i \vv{w}_i = \sum \be_j \vv{z}_j$ e risolvere rispetto ai coefficienti.
+\end{enumerate}
+\end{metodo}
+
+---
+
+\subsection{Modulo 3: Rango, Nullità, Determinanti e Sistemi Lineari}
+
+\begin{esempio}{Rango e Dimensione del Nucleo di Matrici a Gradini}{es_rapido_rango}
+\textbf{Quesito d'esame}: Sia $A \in \Mat_{4 \times 5}(\R)$ la matrice:
+\begin{equation}
+    A = \begin{pmatrix}
+        1 & 2 & 0 & 4 & 5 \\
+        0 & 2 & 9 & 4 & 5 \\
+        0 & 0 & 9 & 4 & 5 \\
+        0 & 0 & 9 & 4 & 5
+    \end{pmatrix}.
+\end{equation}
+Determinare $\rk(A)$ e $\dim(\ker(L_A))$.
+
+\begin{dimostrazione}[Risoluzione]
+Eseguiamo l'operazione elementare per riga $R_4 \leftarrow R_4 - R_3$:
+\begin{equation}
+    A \sim \begin{pmatrix}
+        \mathbf{1} & 2 & 0 & 4 & 5 \\
+        0 & \mathbf{2} & 9 & 4 & 5 \\
+        0 & 0 & \mathbf{9} & 4 & 5 \\
+        0 & 0 & 0 & 0 & 0
+    \end{pmatrix}.
+\end{equation}
+La matrice a scala presenta $3$ pivot non nulli sulle prime tre righe, pertanto:
+\begin{equation}
+    \rk(A) = 3.
+\end{equation}
+Per il \textbf{Teorema della Dimensione} (Nullità più Rango) applicato all'applicazione lineare $L_A: \R^5 \to \R^4$:
+\begin{equation}
+    \dim(\ker(L_A)) = n - \rk(A) = 5 - 3 = 2.
+\end{equation}
+\end{dimostrazione}
+\end{esempio}
+
+\begin{esempio}{Calcolo Rapido di Determinante $4 \times 4$ mediante Laplace}{es_rapido_det}
+\textbf{Quesito d'esame}: Calcolare il determinante della matrice:
+\begin{equation}
+    M = \begin{pmatrix}
+        0 & 2 & 0 & 2 \\
+        1 & 1 & 1 & 1 \\
+        0 & 1 & 1 & 1 \\
+        1 & 3 & 0 & 0
+    \end{pmatrix}.
+\end{equation}
+
+\begin{dimostrazione}[Risoluzione]
+Sviluppiamo il determinante lungo la prima colonna, che contiene due soli elementi non nulli ($M_{2,1} = 1$ e $M_{4,1} = 1$):
+\begin{equation}
+    \det(M) = 1 \cdot (-1)^{2+1} \det \begin{pmatrix} 2 & 0 & 2 \\ 1 & 1 & 1 \\ 3 & 0 & 0 \end{pmatrix} + 1 \cdot (-1)^{4+1} \det \begin{pmatrix} 2 & 0 & 2 \\ 1 & 1 & 1 \\ 1 & 1 & 1 \end{pmatrix}.
+\end{equation}
+Analizziamo i due determinanti $3 \times 3$:
+\begin{itemize}
+    \item La seconda sottomatrice ha due righe identiche ($R_2 = R_3 = (1, 1, 1)$), dunque il suo determinante è nullo:
+    \begin{equation}
+        \det \begin{pmatrix} 2 & 0 & 2 \\ 1 & 1 & 1 \\ 1 & 1 & 1 \end{pmatrix} = 0.
+    \end{equation}
+    \item Per la prima sottomatrice, sviluppiamo lungo la terza riga $(3, 0, 0)$:
+    \begin{equation}
+        \det \begin{pmatrix} 2 & 0 & 2 \\ 1 & 1 & 1 \\ 3 & 0 & 0 \end{pmatrix} = 3 \cdot (-1)^{3+1} \det \begin{pmatrix} 0 & 2 \\ 1 & 1 \end{pmatrix} = 3 \cdot (0 - 2) = -6.
+    \end{equation}
+\end{itemize}
+Sostituendo nell'espressione iniziale:
+\begin{equation}
+    \det(M) = (-1) \cdot (-6) + (-1) \cdot 0 = 6.
+\end{equation}
+\end{dimostrazione}
+\end{esempio}
+
+\begin{esempio}{Determinante parametrico e singolarità}{es_rapido_det_param}
+\textbf{Quesito d'esame}: Determinare per quali valori di $k \in \R$ la matrice $M_k \in \Mat_3(\R)$ non è invertibile:
+\begin{equation}
+    M_k = \begin{pmatrix} 1 & k & 1 \\ 2 & 1 & k \\ k & 1 & 1 \end{pmatrix}.
+\end{equation}
+
+\begin{dimostrazione}[Risoluzione]
+Calcoliamo $\det(M_k)$ con lo sviluppo lungo la prima riga:
+\begin{align}
+    \det(M_k) &= 1 \cdot \det \begin{pmatrix} 1 & k \\ 1 & 1 \end{pmatrix} - k \cdot \det \begin{pmatrix} 2 & k \\ k & 1 \end{pmatrix} + 1 \cdot \det \begin{pmatrix} 2 & 1 \\ k & 1 \end{pmatrix} \notag \\
+    &= (1 - k) - k(2 - k^2) + (2 - k) \notag \\
+    &= 1 - k - 2k + k^3 + 2 - k = k^3 - 4k + 3.
+\end{align}
+Notiamo che la somma dei coefficienti è $1 - 4 + 3 = 0$, quindi $k = 1$ è una radice. Fattorizziamo tramite la regola di Ruffini:
+\begin{equation}
+    k^3 - 4k + 3 = (k - 1)(k^2 + k - 3).
+\end{equation}
+Le radici del polinomio di secondo grado sono:
+\begin{equation}
+    k = \frac{-1 \pm \sqrt{1 - 4(1)(-3)}}{2} = \frac{-1 \pm \sqrt{13}}{2}.
+\end{equation}
+$M_k$ non è invertibile $\iff \det(M_k) = 0 \iff k \in \left\{ 1, \; \frac{-1 - \sqrt{13}}{2}, \; \frac{-1 + \sqrt{13}}{2} \right\}$.
+\end{dimostrazione}
+\end{esempio}
+
+---
+
+\subsection{Modulo 4: Autovalori, Traccia, Determinante e Diagonalizzazione}
+
+\begin{esempio}{Verifica Rapida di Diagonalizzabilità}{es_rapido_diag}
+\textbf{Quesito d'esame}: Sia $B = \begin{pmatrix} 3 & 0 & 0 \\ 1 & 2 & 0 \\ 4 & -1 & 3 \end{pmatrix} \in \Mat_3(\R)$.
+Determinare gli autovalori di $B$, le loro molteplicità algebriche e geometriche, e stabilire se $B$ è diagonalizzabile su $\R$.
+
+\begin{dimostrazione}[Risoluzione]
+Poiché $B$ è una matrice triangolare inferiore, i suoi autovalori coincidono con gli elementi posti sulla diagonale principale:
+\begin{equation}
+    \Spettro(B) = \{2, 3\}, \quad \ma(2) = 1, \quad \ma(3) = 2.
+\end{equation}
+Per l'autovalore semplice $\lambda = 2$, la molteplicità geometrica è vincolata da $1 \le \mg(2) \le \ma(2) = 1 \implies \mg(2) = 1$.
+Per l'autovalore doppio $\lambda = 3$, calcoliamo $\mg(3) = 3 - \rk(B - 3 I_3)$:
+\begin{equation}
+    B - 3 I_3 = \begin{pmatrix}
+        0 & 0 & 0 \\
+        1 & -1 & 0 \\
+        4 & -1 & 0
+    \end{pmatrix}.
+\end{equation}
+Le colonne 1 e 2 sono linearmente indipendenti (il minore $2 \times 2$ inferiore ha determinante $-1 - (-4) = 3 \neq 0$). Dunque $\rk(B - 3 I_3) = 2$.
+La molteplicità geometrica è:
+\begin{equation}
+    \mg(3) = 3 - 2 = 1 < 2 = \ma(3).
+\end{equation}
+Poiché $\mg(3) \neq \ma(3)$, la matrice $B$ \textbf{non è diagonalizzabile} (né su $\R$ né su $\C$).
+\end{dimostrazione}
+\end{esempio}
+
+---
+
+\subsection{Modulo 5: Prodotti Scalari, Proiezioni Ortogonali e Spettrale}
+
+\begin{esempio}{Proiezione Ortogonale su un Sottospazio}{es_rapido_proj}
+\textbf{Quesito d'esame}: Sia $U = \{ (x_1, x_2, x_3)\T \in \R^3 \mid x_1 - x_2 + x_3 = 0 \}$ un sottospazio di $\R^3$ con il prodotto scalare standard. Si determini la proiezione ortogonale del vettore $\vv{v} = (1, 2, 3)\T$ su $U$.
+
+\begin{dimostrazione}[Risoluzione]
+Il complemento ortogonale $U^\perp$ è generato dal vettore normale ai coefficienti dell'equazione cartesiana:
+\begin{equation}
+    \vv{n} = \begin{pmatrix} 1 \\ -1 \\ 1 \end{pmatrix}, \quad U^\perp = \Span(\vv{n}).
+\end{equation}
+La proiezione ortogonale di $\vv{v}$ sulla retta ortogonale $U^\perp$ è data dalla formula:
+\begin{equation}
+    \proj_{U^\perp}(\vv{v}) = \frac{\scal{\vv{v}, \vv{n}}}{\norm{\vv{n}}^2} \vv{n} = \frac{1(1) + 2(-1) + 3(1)}{1^2 + (-1)^2 + 1^2} \begin{pmatrix} 1 \\ -1 \\ 1 \end{pmatrix} = \frac{2}{3} \begin{pmatrix} 1 \\ -1 \\ 1 \end{pmatrix}.
+\end{equation}
+Poiché $\R^3 = U \oplus U^\perp$, la proiezione ortogonale su $U$ è la componente complementare:
+\begin{equation}
+    \proj_U(\vv{v}) = \vv{v} - \proj_{U^\perp}(\vv{v}) = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} - \begin{pmatrix} 2/3 \\ -2/3 \\ 2/3 \end{pmatrix} = \begin{pmatrix} 1/3 \\ 8/3 \\ 7/3 \end{pmatrix}.
+\end{equation}
+\textbf{Verifica}: $\frac{1}{3} - \frac{8}{3} + \frac{7}{3} = \frac{0}{3} = 0 \implies \proj_U(\vv{v}) \in U$.
+\end{dimostrazione}
+\end{esempio}
+
+---
+
+\section{Parte 2: Temi d'Esame Completi Svolti Passo-Passo}
+
+% ==============================================================================
+% TEMA D'ESAME 1: PROVA SCRITTA DEL 09/01/2026
+% ==============================================================================
+\subsection{Tema d'Esame 1 — Appello Ufficiale del 09 Gennaio 2026}
+
+\begin{tcolorbox}[colback=white, colframe=navyblue, title={\textbf{Testo del Problema 1 — Campo Complesso}}]
+Si determinino tutte le soluzioni complesse $z \in \C$ del seguente sistema:
+\begin{equation}
+    \begin{cases}
+        (z - 3)^4 = 4(z - 3)^2 \\
+        |e^z| = e^2
+    \end{cases}
+\end{equation}
+\end{tcolorbox}
+
+\begin{dimostrazione}[Svolgimento Completo del Problema 1]
+\textbf{Passo 1: Risoluzione della prima equazione algebrica}.
+
+Introduciamo il cambio di variabile $w = z - 3 \in \C$. L'equazione diventa:
+\begin{equation}
+    w^4 = 4 w^2 \iff w^4 - 4w^2 = 0 \iff w^2(w^2 - 4) = 0.
+\end{equation}
+Dalla legge di annullamento del prodotto nel campo $\C$, distinguiamo due rami:
+\begin{enumerate}
+    \item $w^2 = 0 \implies w = 0 \implies z - 3 = 0 \implies z_0 = 3$.
+    \item $w^2 - 4 = 0 \implies w^2 = 4 \implies w = \pm 2$:
+    \begin{itemize}
+        \item Se $w = 2 \implies z_1 = 3 + 2 = 5$.
+        \item Se $w = -2 \implies z_2 = 3 - 2 = 1$.
+    \end{itemize}
+\end{enumerate}
+Dunque l'insieme delle soluzioni della prima equazione è costituito da tre numeri reali:
+\begin{equation}
+    S_1 = \{1, 3, 5\} \subset \R \subset \C.
+\end{equation}
+
+\textbf{Passo 2: Analisi della seconda equazione esponenziale}.
+
+Scrivendo $z = x + \iu y$ con $x = \Reale(z)$ e $y = \Immag(z)$, il modulo dell'esponenziale complesso è:
+\begin{equation}
+    |e^z| = |e^{x + \iu y}| = |e^x| \cdot |e^{\iu y}| = e^x \cdot 1 = e^{\Reale(z)}.
+\end{equation}
+Pertanto la condizione $|e^z| = e^2$ equivale a:
+\begin{equation}
+    e^{\Reale(z)} = e^2 \iff \Reale(z) = 2.
+\end{equation}
+Geometricamente, questa equazione descrive la retta verticale $x = 2$ nel piano di Gauss.
+
+\textbf{Passo 3: Intersezione delle soluzioni}.
+
+Verifichiamo se alcuno degli elementi di $S_1$ soddisfa la condizione $\Reale(z) = 2$:
+\begin{itemize}
+    \item Per $z = 1$: $\Reale(1) = 1 \neq 2$ (Non compatibile).
+    \item Per $z = 3$: $\Reale(3) = 3 \neq 2$ (Non compatibile).
+    \item Per $z = 5$: $\Reale(5) = 5 \neq 2$ (Non compatibile).
+\end{itemize}
+
+\textbf{Conclusione}: Il sistema è impossibile e non ammette alcuna soluzione complessa:
+\begin{equation}
+    \operatorname{Sol} = \emptyset.
+\end{equation}
+\end{dimostrazione}
+
+\begin{tcolorbox}[colback=white, colframe=navyblue, title={\textbf{Testo del Problema 2 — Applicazione Lineare Parametrica}}]
+Al variare del parametro reale $t \in \R$, sia $L_{A_t}: \R^3 \to \R^3$ l'applicazione lineare associata alla matrice:
+\begin{equation}
+    A_t = \begin{pmatrix}
+        t & 1 & 2 \\
+        t & t & 2 \\
+        0 & 5 & t
+    \end{pmatrix}.
+\end{equation}
+\begin{enumerate}[label=(\roman*)]
+    \item Determinare, al variare di $t \in \R$, $\dim(\ker(L_{A_t}))$ e $\dim(\Imm(L_{A_t}))$.
+    \item Determinare i valori di $t \in \R$ per cui il sistema lineare $A_t \vv{x} = \begin{pmatrix} 1 \\ 3 \\ 0 \end{pmatrix}$ ammette almeno una soluzione.
+    \item Dato il sottospazio $W = \Span\left( \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix} \right)$, determinare per quali valori di $t$ si ha $\R^3 = \Imm(L_{A_t}) \oplus W$.
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{dimostrazione}[Svolgimento Completo del Problema 2]
+\textbf{Punto (i): Calcolo del determinante e discussione del rango}.
+
+Calcoliamo $\det(A_t)$ mediante lo sviluppo di Laplace lungo la prima colonna:
+\begin{align}
+    \det(A_t) &= t \det \begin{pmatrix} t & 2 \\ 5 & t \end{pmatrix} - t \det \begin{pmatrix} 1 & 2 \\ 5 & t \end{pmatrix} + 0 \notag \\
+    &= t(t^2 - 10) - t(t - 10) \notag \\
+    &= t^3 - 10t - t^2 + 10t \notag \\
+    &= t^3 - t^2 = t^2(t - 1).
+\end{align}
+Il determinante si annulla se e solo se:
+\begin{equation}
+    \det(A_t) = 0 \iff t^2(t - 1) = 0 \iff t = 0 \quad \text{oppure} \quad t = 1.
+\end{equation}
+
+Distinguiamo i casi per il rango e le dimensioni:
+\begin{itemize}
+    \item \textbf{Caso $t \in \R \setminus \{0, 1\}$}: $\det(A_t) \neq 0 \implies \rk(A_t) = 3$.
+    Per il Teorema della Dimensione:
+    \begin{equation}
+        \dim(\Imm(L_{A_t})) = \rk(A_t) = 3, \quad \dim(\ker(L_{A_t})) = 3 - 3 = 0.
+    \end{equation}
+    L'applicazione $L_{A_t}$ è un isomorfismo (iniettiva e suriettiva).
+
+    \item \textbf{Caso $t = 0$}: La matrice diventa:
+    \begin{equation}
+        A_0 = \begin{pmatrix} 0 & 1 & 2 \\ 0 & 0 & 2 \\ 0 & 5 & 0 \end{pmatrix}.
+    \end{equation}
+    La prima colonna è nulla. Il minore $2 \times 2$ formato dalle righe 1,2 e colonne 2,3 ha determinante $\det \begin{pmatrix} 1 & 2 \\ 0 & 2 \end{pmatrix} = 2 \neq 0$.
+    Quindi $\rk(A_0) = 2$.
+    \begin{equation}
+        \dim(\Imm(L_{A_0})) = 2, \quad \dim(\ker(L_{A_0})) = 3 - 2 = 1.
+    \end{equation}
+
+    \item \textbf{Caso $t = 1$}: La matrice diventa:
+    \begin{equation}
+        A_1 = \begin{pmatrix} 1 & 1 & 2 \\ 1 & 1 & 2 \\ 0 & 5 & 1 \end{pmatrix}.
+    \end{equation}
+    Le prime due righe sono identiche ($R_1 = R_2$). Il minore $2 \times 2$ formato dalle righe 2,3 e colonne 2,3 ha determinante $\det \begin{pmatrix} 1 & 2 \\ 5 & 1 \end{pmatrix} = 1 - 10 = -9 \neq 0$.
+    Quindi $\rk(A_1) = 2$.
+    \begin{equation}
+        \dim(\Imm(L_{A_1})) = 2, \quad \dim(\ker(L_{A_1})) = 3 - 2 = 1.
+    \end{equation}
+\end{itemize}
+
+\textbf{Punto (ii): Risolubilità del sistema lineare $A_t \vv{x} = \vv{b}$ con $\vv{b} = (1, 3, 0)\T$}.
+
+Per il \textbf{Teorema di Rouché-Capelli}, il sistema lineare ammette soluzioni se e solo se $\rk(A_t) = \rk(A_t \mid \vv{b})$.
+\begin{itemize}
+    \item Per $t \neq 0, 1$: $\rk(A_t) = 3$. Poiché la matrice completa $(A_t \mid \vv{b})$ ha 3 righe, il suo rango massimo è 3, quindi $\rk(A_t \mid \vv{b}) = 3 = \rk(A_t)$. Il sistema ammette un'\textbf{unica soluzione} (compatibile determinato).
+    \item Per $t = 0$: consideriamo la matrice completa:
+    \begin{equation}
+        (A_0 \mid \vv{b}) = \begin{pmatrix} 0 & 1 & 2 & 1 \\ 0 & 0 & 2 & 3 \\ 0 & 5 & 0 & 0 \end{pmatrix}.
+    \end{equation}
+    Estraiamo il minore $3 \times 3$ formato dalle colonne 2, 3 e 4:
+    \begin{equation}
+        \det \begin{pmatrix} 1 & 2 & 1 \\ 0 & 2 & 3 \\ 5 & 0 & 0 \end{pmatrix} = 5 \cdot (-1)^{3+1} \det \begin{pmatrix} 2 & 1 \\ 2 & 3 \end{pmatrix} = 5(6 - 2) = 20 \neq 0.
+    \end{equation}
+    Dunque $\rk(A_0 \mid \vv{b}) = 3 \neq \rk(A_0) = 2$. Il sistema è \textbf{incompatibile}.
+    \item Per $t = 1$: consideriamo la matrice completa $(A_1 \mid \vv{b})$:
+    \begin{equation}
+        \begin{pmatrix} 1 & 1 & 2 & 1 \\ 1 & 1 & 2 & 3 \\ 0 & 5 & 1 & 0 \end{pmatrix} \xrightarrow{R_2 \leftarrow R_2 - R_1} \begin{pmatrix} 1 & 1 & 2 & 1 \\ 0 & 0 & 0 & 2 \\ 0 & 5 & 1 & 0 \end{pmatrix}.
+    \end{equation}
+    La seconda riga fornisce l'equazione impossibile $0 = 2$, quindi $\rk(A_1 \mid \vv{b}) = 3 \neq \rk(A_1) = 2$. Il sistema è \textbf{incompatibile}.
+\end{itemize}
+\textbf{Risposta}: Il sistema ammette soluzione se e solo se $t \in \R \setminus \{0, 1\}$.
+
+\textbf{Punto (iii): Somma diretta $\R^3 = \Imm(L_{A_t}) \oplus W$}.
+
+Affinché $\R^3 = \Imm(L_{A_t}) \oplus W$, devono sussistere due condizioni dimensionali e geometriche:
+\begin{enumerate}
+    \item $\dim(\Imm(L_{A_t})) + \dim(W) = \dim(\R^3) = 3$. Poiché $\dim(W) = 1$, dobbiamo avere necessariamente $\dim(\Imm(L_{A_t})) = 2$, il che restringe l'analisi ai soli casi $t = 0$ e $t = 1$.
+    \item $\Imm(L_{A_t}) \cap W = \{\vzero\}$, che equivale a verificare che il vettore generatore di $W$, $\vv{w} = (0, 1, 1)\T$, sia linearmente indipendente da una base di $\Imm(L_{A_t})$.
+\end{enumerate}
+Verifichiamo i due valori candidati:
+\begin{itemize}
+    \item \textbf{Per $t = 0$}: una base di $\Imm(L_{A_0})$ è formata dalle colonne 2 e 3 di $A_0$:
+    \begin{equation}
+        \Imm(L_{A_0}) = \Span\left( \begin{pmatrix} 1 \\ 0 \\ 5 \end{pmatrix}, \begin{pmatrix} 2 \\ 2 \\ 0 \end{pmatrix} \right).
+    \end{equation}
+    Calcoliamo il determinante della matrice formata dalla base di $\Imm(L_{A_0})$ e da $\vv{w}$:
+    \begin{equation}
+        \det \begin{pmatrix} 1 & 2 & 0 \\ 0 & 2 & 1 \\ 5 & 0 & 1 \end{pmatrix} = 1(2 - 0) - 2(0 - 5) + 0 = 2 + 10 = 12 \neq 0.
+    \end{equation}
+    Poiché il determinante è non nullo, i 3 vettori sono linearmente indipendenti $\implies \vv{w} \notin \Imm(L_{A_0}) \implies \Imm(L_{A_0}) \cap W = \{\vzero\}$.
+    Quindi per $t = 0$ si ha $\R^3 = \Imm(L_{A_0}) \oplus W$.
+
+    \item \textbf{Per $t = 1$}: una base di $\Imm(L_{A_1})$ è formata dalle colonne 1 e 2 di $A_1$:
+    \begin{equation}
+        \Imm(L_{A_1}) = \Span\left( \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 1 \\ 1 \\ 5 \end{pmatrix} \right).
+    \end{equation}
+    Calcoliamo il determinante:
+    \begin{equation}
+        \det \begin{pmatrix} 1 & 1 & 0 \\ 1 & 1 & 1 \\ 0 & 5 & 1 \end{pmatrix} = 1(1 - 5) - 1(1 - 0) = -4 - 1 = -5 \neq 0.
+    \end{equation}
+    I vettori sono indipendenti $\implies \vv{w} \notin \Imm(L_{A_1}) \implies \Imm(L_{A_1}) \cap W = \{\vzero\}$.
+    Quindi per $t = 1$ si ha $\R^3 = \Imm(L_{A_1}) \oplus W$.
+\end{itemize}
+\textbf{Risposta}: La condizione di somma diretta $\R^3 = \Imm(L_{A_t}) \oplus W$ è verificata se e solo se $t \in \{0, 1\}$.
+\end{dimostrazione}
+
+\begin{tcolorbox}[colback=white, colframe=navyblue, title={\textbf{Testo del Problema 3 — Autovalori, Autospazi e Diagonalizzabilità}}]
+Si consideri la matrice $A \in \Mat_4(\R)$:
+\begin{equation}
+    A = \begin{pmatrix}
+        2 & 1 & -1 & 0 \\
+        0 & 1 & 0 & 0 \\
+        4 & 2 & -2 & 0 \\
+        2 & 1 & -1 & 1
+    \end{pmatrix}.
+\end{equation}
+\begin{enumerate}[label=(\roman*)]
+    \item Si determinino gli autovalori di $A$ specificandone la molteplicità algebrica $\ma$ e geometrica $\mg$.
+    \item Si determinino le basi dei relativi autospazi.
+    \item Si dica se $A$ è triangolarizzabile e/o diagonalizzabile su $\R$.
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{dimostrazione}[Svolgimento Completo del Problema 3]
+\textbf{Passo 1: Calcolo del Polinomio Caratteristico $p_A(\lambda)$}.
+
+Calcoliamo il determinante della matrice caratteristica $A - \lambda I_4$:
+\begin{equation}
+    A - \lambda I_4 = \begin{pmatrix}
+        2 - \lambda & 1 & -1 & 0 \\
+        0 & 1 - \lambda & 0 & 0 \\
+        4 & 2 & -2 - \lambda & 0 \\
+        2 & 1 & -1 & 1 - \lambda
+    \end{pmatrix}.
+\end{equation}
+Sviluppiamo lungo la seconda riga che presenta un solo elemento non nullo in posizione $(2,2)$:
+\begin{equation}
+    p_A(\lambda) = (1 - \lambda) \det \begin{pmatrix}
+        2 - \lambda & -1 & 0 \\
+        4 & -2 - \lambda & 0 \\
+        2 & -1 & 1 - \lambda
+    \end{pmatrix}.
+\end{equation}
+Sviluppiamo il determinante $3 \times 3$ lungo la terza colonna:
+\begin{equation}
+    \det \begin{pmatrix} 2 - \lambda & -1 & 0 \\ 4 & -2 - \lambda & 0 \\ 2 & -1 & 1 - \lambda \end{pmatrix} = (1 - \lambda) \det \begin{pmatrix} 2 - \lambda & -1 \\ 4 & -2 - \lambda \end{pmatrix}.
+\end{equation}
+Calcoliamo il minore $2 \times 2$:
+\begin{equation}
+    (2 - \lambda)(-2 - \lambda) - (-1)(4) = - (4 - \lambda^2) + 4 = \lambda^2 - 4 + 4 = \lambda^2.
+\end{equation}
+Pertanto il polinomio caratteristico complessivo è:
+\begin{equation}
+    p_A(\lambda) = (1 - \lambda)^2 \lambda^2 = \lambda^2 (\lambda - 1)^2.
+\end{equation}
+
+\textbf{Passo 2: Spettro e Molteplicità Algebriche}.
+
+Le radici di $p_A(\lambda) = 0$ definiscono lo spettro di $A$:
+\begin{itemize}
+    \item $\lambda_1 = 0$ con molteplicità algebrica $\ma(0) = 2$.
+    \item $\lambda_2 = 1$ con molteplicità algebrica $\ma(1) = 2$.
+\end{itemize}
+
+\textbf{Passo 3: Calcolo delle Molteplicità Geometriche e Basi degli Autospazi}.
+
+\begin{enumerate}
+    \item \textbf{Autospazio $V_0 = \ker(A)$ per $\lambda_1 = 0$}:
+    Riduciamo la matrice $A$ a gradini:
+    \begin{equation}
+        A = \begin{pmatrix}
+            2 & 1 & -1 & 0 \\
+            0 & 1 & 0 & 0 \\
+            4 & 2 & -2 & 0 \\
+            2 & 1 & -1 & 1
+        \end{pmatrix}
+        \xrightarrow{\substack{R_3 \leftarrow R_3 - 2R_1 \\ R_4 \leftarrow R_4 - R_1}}
+        \begin{pmatrix}
+            2 & 1 & -1 & 0 \\
+            0 & 1 & 0 & 0 \\
+            0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 1
+        \end{pmatrix}
+        \xrightarrow{R_3 \leftrightarrow R_4}
+        \begin{pmatrix}
+            \mathbf{2} & 1 & -1 & 0 \\
+            0 & \mathbf{1} & 0 & 0 \\
+            0 & 0 & 0 & \mathbf{1} \\
+            0 & 0 & 0 & 0
+        \end{pmatrix}.
+    \end{equation}
+    La matrice ha 3 pivot non nulli, quindi $\rk(A) = 3$.
+    La molteplicità geometrica è:
+    \begin{equation}
+        \mg(0) = 4 - \rk(A) = 4 - 3 = 1.
+    \end{equation}
+    Risolvendo il sistema lineare omogeneo associato:
+    \begin{equation}
+        \begin{cases}
+            x_4 = 0 \\
+            x_2 = 0 \\
+            2x_1 + x_2 - x_3 = 0 \implies x_3 = 2x_1
+        \end{cases}
+        \implies \vv{v} = \begin{pmatrix} x_1 \\ 0 \\ 2x_1 \\ 0 \end{pmatrix} = x_1 \begin{pmatrix} 1 \\ 0 \\ 2 \\ 0 \end{pmatrix}.
+    \end{equation}
+    Una base dell'autospazio $V_0$ è $\mathcal{B}_{V_0} = \left\{ \begin{pmatrix} 1 \\ 0 \\ 2 \\ 0 \end{pmatrix} \right\}$.
+
+    \item \textbf{Autospazio $V_1 = \ker(A - I_4)$ per $\lambda_2 = 1$}:
+    \begin{equation}
+        A - I_4 = \begin{pmatrix}
+            1 & 1 & -1 & 0 \\
+            0 & 0 & 0 & 0 \\
+            4 & 2 & -3 & 0 \\
+            2 & 1 & -1 & 0
+        \end{pmatrix}
+        \xrightarrow{\substack{R_3 \leftarrow R_3 - 4R_1 \\ R_4 \leftarrow R_4 - 2R_1}}
+        \begin{pmatrix}
+            1 & 1 & -1 & 0 \\
+            0 & 0 & 0 & 0 \\
+            0 & -2 & 1 & 0 \\
+            0 & -1 & 1 & 0
+        \end{pmatrix}.
+    \end{equation}
+    Le righe 3 e 4 non sono proporzionali, quindi $\rk(A - I_4) = 3$.
+    La molteplicità geometrica è:
+    \begin{equation}
+        \mg(1) = 4 - \rk(A - I_4) = 4 - 3 = 1.
+    \end{equation}
+    Risolvendo il sistema:
+    \begin{equation}
+        \begin{cases}
+            -2x_2 + x_3 = 0 \implies x_3 = 2x_2 \\
+            -x_2 + x_3 = 0 \implies -x_2 + 2x_2 = 0 \implies x_2 = 0 \implies x_3 = 0 \\
+            x_1 + x_2 - x_3 = 0 \implies x_1 = 0 \\
+            x_4 \in \R \text{ (variabile libera)}
+        \end{cases}
+    \end{equation}
+    Una base dell'autospazio $V_1$ è $\mathcal{B}_{V_1} = \left\{ \begin{pmatrix} 0 \\ 0 \\ 0 \\ 1 \end{pmatrix} \right\}$.
+\end{enumerate}
+
+\textbf{Passo 4: Triangolarizzabilità e Diagonalizzabilità}.
+
+\begin{itemize}
+    \item \textbf{Triangolarizzabilità}: Tutte le 4 radici del polinomio caratteristico $p_A(\lambda)$ appartengono al campo di riferimento $\R$. Dunque $A$ è \textbf{triangolarizzabile} su $\R$.
+    \item \textbf{Diagonalizzabilità}: Affinché $A$ sia diagonalizzabile, la molteplicità geometrica deve coincidere con quella algebrica per ciascun autovalore. Nel nostro caso:
+    \begin{equation}
+        \mg(0) = 1 < 2 = \ma(0) \quad \text{e} \quad \mg(1) = 1 < 2 = \ma(1).
+    \end{equation}
+    La somma delle molteplicità geometriche è $\mg(0) + \mg(1) = 2 < 4$.
+    Pertanto $A$ \textbf{non è diagonalizzabile} né su $\R$ né su $\C$.
+\end{itemize}
+\end{dimostrazione}
+
+---
+
+% ==============================================================================
+% TEMA D'ESAME 2: PROVA SCRITTA DEL 26/01/2024
+% ==============================================================================
+\subsection{Tema d'Esame 2 — Appello Ufficiale del 26 Gennaio 2024}
+
+\begin{tcolorbox}[colback=white, colframe=navyblue, title={\textbf{Testo del Problema 1 — Campo Complesso}}]
+Si determinino tutte le soluzioni complesse $z \in \C$ del seguente sistema:
+\begin{equation}
+    \begin{cases}
+        z^6 = 16 |z|^2 \\
+        |z - 2\iu| = |z|
+    \end{cases}
+\end{equation}
+\end{tcolorbox}
+
+\begin{dimostrazione}[Svolgimento Completo del Problema 1]
+\textbf{Passo 1: Analisi geometrica della seconda equazione}.
+
+L'equazione $|z - 2\iu| = |z|$ esprime il luogo dei punti $z \in \C$ equidistanti dal punto fisso $z_1 = 2\iu \equiv (0, 2)$ e dall'origine $z_0 = 0 \equiv (0,0)$.
+Tale luogo è l'asse del segmento $[0, 2\iu]$, ossia la retta orizzontale:
+\begin{equation}
+    \Immag(z) = y = 1.
+\end{equation}
+Verifica algebrica: ponendo $z = x + \iu y$:
+\begin{align}
+    |x + \iu(y - 2)|^2 = |x + \iu y|^2 &\iff x^2 + (y - 2)^2 = x^2 + y^2 \notag \\
+    &\iff y^2 - 4y + 4 = y^2 \iff 4y = 4 \iff y = 1.
+\end{align}
+Dunque ogni soluzione ammissibile deve avere forma $z = x + \iu$ con $x \in \R$. In particolare, $z \neq 0$.
+
+\textbf{Passo 2: Risoluzione della prima equazione $z^6 = 16|z|^2$}.
+
+Esprimiamo $z$ in forma esponenziale $z = r e^{\iu\theta}$ con $r = |z| > 0$ e $\theta \in [0, 2\pi)$:
+\begin{equation}
+    (r e^{\iu\theta})^6 = 16 r^2 \iff r^6 e^{\iu 6\theta} = 16 r^2.
+\end{equation}
+Uguagliando modulo e argomento:
+\begin{enumerate}
+    \item \textbf{Modulo}:
+    \begin{equation}
+        r^6 = 16 r^2 \iff r^4 = 16 \iff r = \sqrt[4]{16} = 2.
+    \end{equation}
+    \item \textbf{Argomento}:
+    \begin{equation}
+        e^{\iu 6\theta} = 1 = e^{\iu 2k\pi} \iff 6\theta = 2k\pi \iff \theta_k = \frac{k\pi}{3}, \quad k \in \{0, 1, 2, 3, 4, 5\}.
+    \end{equation}
+\end{enumerate}
+Le 6 radici della prima equazione sono:
+\begin{align}
+    z_0 &= 2 e^{\iu 0} = 2, \\
+    z_1 &= 2 e^{\iu \frac{\pi}{3}} = 2\left(\frac{1}{2} + \iu\frac{\sqrt{3}}{2}\right) = 1 + \iu\sqrt{3}, \\
+    z_2 &= 2 e^{\iu \frac{2\pi}{3}} = 2\left(-\frac{1}{2} + \iu\frac{\sqrt{3}}{2}\right) = -1 + \iu\sqrt{3}, \\
+    z_3 &= 2 e^{\iu \pi} = -2, \\
+    z_4 &= 2 e^{\iu \frac{4\pi}{3}} = -1 - \iu\sqrt{3}, \\
+    z_5 &= 2 e^{\iu \frac{5\pi}{3}} = 1 - \iu\sqrt{3}.
+\end{align}
+
+\textbf{Passo 3: Confronto con il vincolo $\Immag(z) = 1$}.
+
+Valutiamo la parte immaginaria di ciascuna radice:
+\begin{itemize}
+    \item $\Immag(z_0) = 0 \neq 1$.
+    \item $\Immag(z_1) = \sqrt{3} \approx 1.732 \neq 1$.
+    \item $\Immag(z_2) = \sqrt{3} \neq 1$.
+    \item $\Immag(z_3) = 0 \neq 1$.
+    \item $\Immag(z_4) = -\sqrt{3} \neq 1$.
+    \item $\Immag(z_5) = -\sqrt{3} \neq 1$.
+\end{itemize}
+
+\textbf{Conclusione}: Nessuna radice appartiene alla retta $y = 1$. Il sistema non ammette alcuna soluzione complessa:
+\begin{equation}
+    \operatorname{Sol} = \emptyset.
+\end{equation}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15, >=Stealth]
+    \draw[->, thick, gray!70] (-2.7,0) -- (2.7,0) node[right, black] {\small $\Reale(z)$};
+    \draw[->, thick, gray!70] (0,-2.5) -- (0,2.5) node[above, black] {\small $\Immag(z)$};
+    \draw[dashed, coolblue!70, thick] (0,0) circle (2);
+    
+    % Retta Im(z) = 1
+    \draw[thick, crimsonred, dash dot] (-2.6, 1) -- (2.6, 1) node[right] {\small $\Immag(z) = 1$};
+    
+    % Radici
+    \coordinate (Z0) at (2, 0);
+    \coordinate (Z1) at (1, {sqrt(3)});
+    \coordinate (Z2) at (-1, {sqrt(3)});
+    \coordinate (Z3) at (-2, 0);
+    \coordinate (Z4) at (-1, {-sqrt(3)});
+    \coordinate (Z5) at (1, {-sqrt(3)});
+    
+    \draw[thick, navyblue, fill=navyblue!6] (Z0) -- (Z1) -- (Z2) -- (Z3) -- (Z4) -- (Z5) -- cycle;
+    
+    \filldraw[navyblue] (Z0) circle (2pt) node[above right] {\scriptsize $z_0=2$};
+    \filldraw[navyblue] (Z1) circle (2pt) node[above right] {\scriptsize $z_1=1+\iu\sqrt{3}$};
+    \filldraw[navyblue] (Z2) circle (2pt) node[above left] {\scriptsize $z_2=-1+\iu\sqrt{3}$};
+    \filldraw[navyblue] (Z3) circle (2pt) node[above left] {\scriptsize $z_3=-2$};
+    \filldraw[navyblue] (Z4) circle (2pt) node[below left] {\scriptsize $z_4=-1-\iu\sqrt{3}$};
+    \filldraw[navyblue] (Z5) circle (2pt) node[below right] {\scriptsize $z_5=1-\iu\sqrt{3}$};
+    
+    \node[crimsonred, font=\footnotesize, fill=white, inner sep=2pt, rounded corners=2pt] at (0, 0.45) {$\Immag(z_{1,2}) = \sqrt{3} \approx 1.732 \neq 1 \implies \operatorname{Sol} = \emptyset$};
+\end{tikzpicture}
+\end{center}
+\end{dimostrazione}
+
+\begin{tcolorbox}[colback=white, colframe=navyblue, title={\textbf{Testo del Problema 2 — Matrice Parametrica $4 \times 3$ e Compatibilità}}]
+Al variare del parametro reale $t \in \R$, sia $L_{A_t}: \R^3 \to \R^4$ l'applicazione lineare associata alla matrice:
+\begin{equation}
+    A_t = \begin{pmatrix}
+        1 & 1 & 0 \\
+        t & 1 & -1 \\
+        0 & 1 & -1 \\
+        1 & 1 & 0
+    \end{pmatrix}.
+\end{equation}
+\begin{enumerate}[label=(\roman*)]
+    \item Determinare, al variare di $t \in \R$, $\dim(\ker(L_{A_t}))$ e $\dim(\Imm(L_{A_t}))$.
+    \item Determinare i valori di $t$ per cui esiste almeno una soluzione del sistema $A_t \vv{x} = \begin{pmatrix} 1 \\ 0 \\ 0 \\ 1 \end{pmatrix}$.
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{dimostrazione}[Svolgimento Completo del Problema 2]
+\textbf{Passo 1: Riduzione a scala e calcolo del rango di $A_t$}.
+
+Notiamo che la prima e la quarta riga sono identiche ($R_4 = R_1$). Applichiamo l'eliminazione gaussiana:
+\begin{equation}
+    \begin{pmatrix}
+        1 & 1 & 0 \\
+        t & 1 & -1 \\
+        0 & 1 & -1 \\
+        1 & 1 & 0
+    \end{pmatrix}
+    \xrightarrow{R_4 \leftarrow R_4 - R_1}
+    \begin{pmatrix}
+        1 & 1 & 0 \\
+        t & 1 & -1 \\
+        0 & 1 & -1 \\
+        0 & 0 & 0
+    \end{pmatrix}
+    \xrightarrow{R_2 \leftarrow R_2 - t R_1}
+    \begin{pmatrix}
+        1 & 1 & 0 \\
+        0 & 1 - t & -1 \\
+        0 & 1 & -1 \\
+        0 & 0 & 0
+    \end{pmatrix}.
+\end{equation}
+Scambiamo le righe 2 e 3 ($R_2 \leftrightarrow R_3$):
+\begin{equation}
+    \begin{pmatrix}
+        1 & 1 & 0 \\
+        0 & 1 & -1 \\
+        0 & 1 - t & -1 \\
+        0 & 0 & 0
+    \end{pmatrix}
+    \xrightarrow{R_3 \leftarrow R_3 - (1-t)R_2}
+    \begin{pmatrix}
+        \mathbf{1} & 1 & 0 \\
+        0 & \mathbf{1} & -1 \\
+        0 & 0 & -t \\
+        0 & 0 & 0
+    \end{pmatrix}.
+\end{equation}
+Dall'analisi dei pivot sulle prime 3 righe:
+\begin{itemize}
+    \item \textbf{Se $t \neq 0$}: sono presenti 3 pivot non nulli ($1, 1, -t$). Quindi $\rk(A_t) = 3$.
+    \begin{equation}
+        \dim(\Imm(L_{A_t})) = 3, \quad \dim(\ker(L_{A_t})) = 3 - 3 = 0 \quad (\text{$L_{A_t}$ è iniettiva}).
+    \end{equation}
+    \item \textbf{Se $t = 0$}: il terzo pivot si annulla. Quindi $\rk(A_0) = 2$.
+    \begin{equation}
+        \dim(\Imm(L_{A_0})) = 2, \quad \dim(\ker(L_{A_0})) = 3 - 2 = 1.
+    \end{equation}
+\end{itemize}
+
+\textbf{Passo 2: Risolubilità del sistema con $\vv{b} = (1, 0, 0, 1)\T$}.
+
+Costruiamo la matrice aumentata $(A_t \mid \vv{b})$ e applichiamo la medesima sequenza di operazioni elementari per riga:
+\begin{equation}
+    \begin{pmatrix}
+        1 & 1 & 0 & 1 \\
+        t & 1 & -1 & 0 \\
+        0 & 1 & -1 & 0 \\
+        1 & 1 & 0 & 1
+    \end{pmatrix}
+    \xrightarrow{R_4 \leftarrow R_4 - R_1}
+    \begin{pmatrix}
+        1 & 1 & 0 & 1 \\
+        t & 1 & -1 & 0 \\
+        0 & 1 & -1 & 0 \\
+        0 & 0 & 0 & 0
+    \end{pmatrix}
+    \xrightarrow{R_2 \leftarrow R_2 - t R_1}
+    \begin{pmatrix}
+        1 & 1 & 0 & 1 \\
+        0 & 1 - t & -1 & -t \\
+        0 & 1 & -1 & 0 \\
+        0 & 0 & 0 & 0
+    \end{pmatrix}.
+\end{equation}
+Scambiando $R_2 \leftrightarrow R_3$ ed eliminando la terza riga:
+\begin{equation}
+    \begin{pmatrix}
+        1 & 1 & 0 & 1 \\
+        0 & 1 & -1 & 0 \\
+        0 & 1 - t & -1 & -t \\
+        0 & 0 & 0 & 0
+    \end{pmatrix}
+    \xrightarrow{R_3 \leftarrow R_3 - (1-t)R_2}
+    \begin{pmatrix}
+        1 & 1 & 0 & 1 \\
+        0 & 1 & -1 & 0 \\
+        0 & 0 & -t & -t \\
+        0 & 0 & 0 & 0
+    \end{pmatrix}.
+\end{equation}
+Analizziamo la compatibilità con il Teorema di Rouché-Capelli:
+\begin{itemize}
+    \item \textbf{Se $t \neq 0$}: $\rk(A_t) = 3 = \rk(A_t \mid \vv{b})$. Il sistema è compatibile e determinato con soluzione unica ricavata per sostituzione all'indietro:
+    \begin{equation}
+        \begin{cases}
+            -t x_3 = -t \implies x_3 = 1 \\
+            x_2 - x_3 = 0 \implies x_2 = 1 \\
+            x_1 + x_2 = 1 \implies x_1 = 0
+        \end{cases}
+        \implies \vv{x} = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}.
+    \end{equation}
+    \item \textbf{Se $t = 0$}: l'ultima riga non nulla è $(0, 0, 0 \mid 0)$. Si ha $\rk(A_0) = 2 = \rk(A_0 \mid \vv{b})$. Il sistema è compatibile ed indeterminato con $\infty^{3-2} = \infty^1$ soluzioni dipendenti dal parametro libero $x_3 = k$:
+    \begin{equation}
+        \begin{cases}
+            x_2 = x_3 = k \\
+            x_1 = 1 - x_2 = 1 - k
+        \end{cases}
+        \implies \vv{x}(k) = \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix} + k \begin{pmatrix} -1 \\ 1 \\ 1 \end{pmatrix}, \quad k \in \R.
+    \end{equation}
+\end{itemize}
+\textbf{Conclusione}: Il sistema ammette almeno una soluzione per \textbf{ogni} valore di $t \in \R$.
+\end{dimostrazione}
+
+---
+
+% ==============================================================================
+% TEMA D'ESAME 3: TEMA COMPLETO CON TEOREMA SPETTRALE ED ENDOMORFISMI
+% ==============================================================================
+\subsection{Tema d'Esame 3 — Appello Ufficiale (Spettrale e Basi Non Canoniche)}
+
+\begin{tcolorbox}[colback=white, colframe=navyblue, title={\textbf{Testo del Problema 1 — Equazione nel Campo Complesso con Coniugato}}]
+Determinare tutte le soluzioni complesse $z \in \C$ del seguente sistema:
+\begin{equation}
+    \begin{cases}
+        z^3 = 8\iu \conj{z} \\
+        |z| \le 3
+    \end{cases}
+\end{equation}
+\end{tcolorbox}
+
+\begin{dimostrazione}[Svolgimento Completo del Problema 1]
+\textbf{Passo 1: Risoluzione della prima equazione algebrica}.
+
+Notiamo immediatamente che $z = 0$ è una soluzione dell'equazione $0^3 = 8\iu \cdot 0$, e soddisfa banalmente il vincolo $|0| = 0 \le 3$.
+Per $z \neq 0$, esprimiamo $z$ in forma esponenziale $z = r e^{\iu\theta}$ con $r = |z| > 0$ e $\theta \in [0, 2\pi)$.
+Ricordando che $\conj{z} = r e^{-\iu\theta}$ e che $8\iu = 8 e^{\iu \frac{\pi}{2}}$, l'equazione diventa:
+\begin{equation}
+    r^3 e^{\iu 3\theta} = 8 e^{\iu \frac{\pi}{2}} \cdot r e^{-\iu\theta} = 8r e^{\iu \left(\frac{\pi}{2} - \theta\right)}.
+\end{equation}
+Separando modulo e argomento:
+\begin{enumerate}
+    \item \textbf{Equazione per i moduli}:
+    \begin{equation}
+        r^3 = 8r \xrightarrow{r > 0} r^2 = 8 \implies r = \sqrt{8} = 2\sqrt{2}.
+    \end{equation}
+    \item \textbf{Equazione per gli argomenti}:
+    \begin{equation}
+        3\theta \equiv \frac{\pi}{2} - \theta \pmod{2\pi} \iff 4\theta = \frac{\pi}{2} + 2k\pi \iff \theta_k = \frac{\pi}{8} + \frac{k\pi}{2}, \quad k \in \{0, 1, 2, 3\}.
+    \end{equation}
+\end{enumerate}
+
+\textbf{Passo 2: Verifica del vincolo di disuguaglianza $|z| \le 3$}.
+
+Il modulo delle radici non nulle è $r = 2\sqrt{2} = \sqrt{8} \approx 2.828 < 3$. Pertanto tutte le 4 radici non nulle soddisfano la disuguaglianza $|z| \le 3$.
+
+\textbf{Conclusione}: Il sistema ammette esattamente 5 soluzioni complesse:
+\begin{equation}
+    \operatorname{Sol} = \left\{ 0, \; 2\sqrt{2} e^{\iu \frac{\pi}{8}}, \; 2\sqrt{2} e^{\iu \frac{5\pi}{8}}, \; 2\sqrt{2} e^{\iu \frac{9\pi}{8}}, \; 2\sqrt{2} e^{\iu \frac{13\pi}{8}} \right\}.
+\end{equation}
+\end{dimostrazione}
+
+\begin{tcolorbox}[colback=white, colframe=navyblue, title={\textbf{Testo del Problema 2 — Applicazione Lineare su Base Non Canonica}}]
+Sia $\mathcal{B} = (\vv{v}_1, \vv{v}_2, \vv{v}_3)$ la base di $\R^3$ formata dai vettori:
+\begin{equation}
+    \vv{v}_1 = \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}, \quad \vv{v}_2 = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}, \quad \vv{v}_3 = \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix}.
+\end{equation}
+Sia $f: \R^3 \to \R^3$ l'applicazione lineare definita dalle relazioni:
+\begin{equation}
+    f(\vv{v}_1) = \begin{pmatrix} 2 \\ 1 \\ 3 \end{pmatrix}, \quad f(\vv{v}_2) = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}, \quad f(\vv{v}_3) = \begin{pmatrix} 3 \\ 3 \\ 6 \end{pmatrix}.
+\end{equation}
+\begin{enumerate}[label=(\roman*)]
+    \item Determinare una base e la dimensione di $\Imm(f)$ e di $\ker(f)$.
+    \item Verificare se $\R^3 = \ker(f) \oplus \Imm(f)$.
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{dimostrazione}[Svolgimento Completo del Problema 2]
+\textbf{Punto (i): Studio dell'Immagine e del Nucleo}.
+
+Lo spazio immagine $\Imm(f)$ è generato dalle immagini dei vettori di base:
+\begin{equation}
+    \Imm(f) = \Span(f(\vv{v}_1), f(\vv{v}_2), f(\vv{v}_3)) = \Span\left( \begin{pmatrix} 2 \\ 1 \\ 3 \end{pmatrix}, \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}, \begin{pmatrix} 3 \\ 3 \\ 6 \end{pmatrix} \right).
+\end{equation}
+Osserviamo che $f(\vv{v}_3) = f(\vv{v}_1) + f(\vv{v}_2)$, poiché:
+\begin{equation}
+    \begin{pmatrix} 2 \\ 1 \\ 3 \end{pmatrix} + \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} = \begin{pmatrix} 3 \\ 3 \\ 6 \end{pmatrix}.
+\end{equation}
+I due vettori $f(\vv{v}_1)$ e $f(\vv{v}_2)$ non sono proporzionali, quindi sono linearmente indipendenti:
+\begin{equation}
+    \dim(\Imm(f)) = 2, \quad \mathcal{B}_{\Imm(f)} = \left\{ \begin{pmatrix} 2 \\ 1 \\ 3 \end{pmatrix}, \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} \right\}.
+\end{equation}
+Per il \textbf{Teorema della Dimensione} (Nullità più Rango):
+\begin{equation}
+    \dim(\ker(f)) = \dim(\R^3) - \dim(\Imm(f)) = 3 - 2 = 1.
+\end{equation}
+Per la linearità di $f$, la relazione $f(\vv{v}_3) = f(\vv{v}_1) + f(\vv{v}_2)$ equivale a:
+\begin{equation}
+    f(\vv{v}_1 + \vv{v}_2 - \vv{v}_3) = f(\vv{v}_1) + f(\vv{v}_2) - f(\vv{v}_3) = \vzero.
+\end{equation}
+Dunque il vettore $\vv{u} = \vv{v}_1 + \vv{v}_2 - \vv{v}_3 \in \ker(f)$. Calcoliamone le componenti esplicite:
+\begin{equation}
+    \vv{u} = \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix} + \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix} - \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 2 \end{pmatrix}.
+\end{equation}
+Normalizzando per scalare $\frac{1}{2}$, una base del nucleo è $\mathcal{B}_{\ker(f)} = \left\{ \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \right\}$.
+
+\textbf{Punto (ii): Verifica della Somma Diretta $\R^3 = \ker(f) \oplus \Imm(f)$}.
+
+Determiniamo l'equazione cartesiana di $\Imm(f)$:
+\begin{equation}
+    \det \begin{pmatrix} x_1 & 2 & 1 \\ x_2 & 1 & 2 \\ x_3 & 3 & 3 \end{pmatrix} = x_1(3 - 6) - x_2(6 - 3) + x_3(4 - 1) = -3x_1 - 3x_2 + 3x_3 = 0 \iff x_1 + x_2 - x_3 = 0.
+\end{equation}
+Sostituiamo il vettore generatore di $\ker(f)$, $\vv{e}_3 = (0, 0, 1)\T$, nell'equazione cartesiana di $\Imm(f)$:
+\begin{equation}
+    0 + 0 - 1 = -1 \neq 0 \implies \vv{e}_3 \notin \Imm(f) \implies \ker(f) \cap \Imm(f) = \{\vzero\}.
+\end{equation}
+Per la formula di Grassmann:
+\begin{align}
+    \dim(\ker(f) + \Imm(f)) &= \dim(\ker(f)) + \dim(\Imm(f)) - \dim(\ker(f) \cap \Imm(f)) \notag \\
+    &= 1 + 2 - 0 = 3 = \dim(\R^3).
+\end{align}
+Pertanto lo spazio si decompone in somma diretta: $\R^3 = \ker(f) \oplus \Imm(f)$ (\textbf{Verificato}).
+\end{dimostrazione}
+
+\begin{tcolorbox}[colback=white, colframe=navyblue, title={\textbf{Testo del Problema 3 — Matrice Simmetrica, Teorema Spettrale e Forme Quadratiche}}]
+Si consideri la matrice simmetrica reale:
+\begin{equation}
+    S = \begin{pmatrix}
+        1 & 0 & 2 \\
+        0 & 2 & 0 \\
+        2 & 0 & 1
+    \end{pmatrix}.
+\end{equation}
+\begin{enumerate}[label=(\roman*)]
+    \item Determinare gli autovalori di $S$ e le rispettive molteplicità algebriche e geometriche.
+    \item Determinare una base ortonormale di autovettori di $\R^3$ e la corrispondente matrice ortogonale diagonalizzante $P \in \SO(3)$.
+    \item Determinare la segnatura della forma quadratica associata $q(\vv{x}) = \vv{x}\T S \vv{x}$ e classificarla.
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{dimostrazione}[Svolgimento Completo del Problema 3]
+\textbf{Punto (i): Polinomio caratteristico e autovalori}.
+
+Calcoliamo $\det(S - \lambda I_3)$ sviluppando lungo la seconda riga:
+\begin{align}
+    p_S(\lambda) &= \det \begin{pmatrix} 1 - \lambda & 0 & 2 \\ 0 & 2 - \lambda & 0 \\ 2 & 0 & 1 - \lambda \end{pmatrix} \notag \\
+    &= (2 - \lambda) \det \begin{pmatrix} 1 - \lambda & 2 \\ 2 & 1 - \lambda \end{pmatrix} \notag \\
+    &= (2 - \lambda) \left[ (1 - \lambda)^2 - 4 \right] = (2 - \lambda)(\lambda^2 - 2\lambda - 3) = (2 - \lambda)(\lambda - 3)(\lambda + 1).
+\end{align}
+Le radici forniscono gli autovalori reali:
+\begin{equation}
+    \lambda_1 = -1, \quad \lambda_2 = 2, \quad \lambda_3 = 3.
+\end{equation}
+Essendo i 3 autovalori reali e distinti in dimensione 3, si ha $\ma(\lambda_i) = \mg(\lambda_i) = 1$ per ogni $i \in \{1, 2, 3\}$. Per il \textbf{Teorema Spettrale}, la matrice è diagonalizzabile mediante una matrice ortogonale.
+
+\textbf{Punto (ii): Calcolo degli autospazi ortonormali e matrice $P$}.
+
+\begin{enumerate}
+    \item \textbf{Autospazio $V_{-1} = \ker(S + I_3)$}:
+    \begin{equation}
+        S + I_3 = \begin{pmatrix} 2 & 0 & 2 \\ 0 & 3 & 0 \\ 2 & 0 & 2 \end{pmatrix} \implies \begin{cases} x_2 = 0 \\ 2x_1 + 2x_3 = 0 \implies x_3 = -x_1 \end{cases} \implies \vv{u}_1 = \begin{pmatrix} 1 \\ 0 \\ -1 \end{pmatrix}.
+    \end{equation}
+    Normalizzando: $\vv{q}_1 = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ 0 \\ -1 \end{pmatrix}$.
+
+    \item \textbf{Autospazio $V_2 = \ker(S - 2I_3)$}:
+    \begin{equation}
+        S - 2I_3 = \begin{pmatrix} -1 & 0 & 2 \\ 0 & 0 & 0 \\ 2 & 0 & -1 \end{pmatrix} \implies \begin{cases} x_1 = 0 \\ x_3 = 0 \\ x_2 \in \R \end{cases} \implies \vv{u}_2 = \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix} = \vv{q}_2.
+    \end{equation}
+
+    \item \textbf{Autospazio $V_3 = \ker(S - 3I_3)$}:
+    \begin{equation}
+        S - 3I_3 = \begin{pmatrix} -2 & 0 & 2 \\ 0 & -1 & 0 \\ 2 & 0 & -2 \end{pmatrix} \implies \begin{cases} x_2 = 0 \\ x_3 = x_1 \end{cases} \implies \vv{u}_3 = \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}.
+    \end{equation}
+    Normalizzando: $\vv{q}_3 = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}$.
+\end{enumerate}
+Verifichiamo l'ortogonalità mutua (garantita dal Teorema Spettrale per autovalori distinti):
+\begin{equation}
+    \scal{\vv{q}_1, \vv{q}_2} = 0, \quad \scal{\vv{q}_1, \vv{q}_3} = \frac{1}{2}(1 \cdot 1 + 0 + (-1) \cdot 1) = 0, \quad \scal{\vv{q}_2, \vv{q}_3} = 0.
+\end{equation}
+La base ortonormale cercata è $\mathcal{B} = (\vv{q}_1, \vv{q}_2, \vv{q}_3)$. Costruiamo la matrice ortogonale $P$:
+\begin{equation}
+    P = \begin{pmatrix}
+        \frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}} \\
+        0 & 1 & 0 \\
+        -\frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}}
+    \end{pmatrix}.
+\end{equation}
+Calcoliamo $\det(P) = 1 \cdot (\frac{1}{2} - (-\frac{1}{2})) = 1$, quindi $P \in \SO(3)$ (rappresenta una rotazione pura nello spazio tridimensionale).
+La relazione di diagonalizzazione spettrale è:
+\begin{equation}
+    P\T S P = D = \begin{pmatrix} -1 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 3 \end{pmatrix}.
+\end{equation}
+
+\begin{center}
+\begin{tikzpicture}[
+    x={(0.866cm,-0.25cm)},
+    y={(0cm,0.95cm)},
+    z={(-0.55cm,-0.45cm)},
+    scale=1.5,
+    >=Stealth
+]
+    % Assi coordinati standard
+    \draw[->, gray!50, thin] (0,0,0) -- (2.2,0,0) node[right, black] {\scriptsize $x$};
+    \draw[->, gray!50, thin] (0,0,0) -- (0,2.0,0) node[above, black] {\scriptsize $y$};
+    \draw[->, gray!50, thin] (0,0,0) -- (0,0,2.2) node[below left, black] {\scriptsize $z$};
+    
+    % Autovettori ortonormali (Base spettrale)
+    % q1 = (1/sqrt2, 0, -1/sqrt2)
+    \draw[->, ultra thick, crimsonred] (0,0,0) -- ({0.707*1.8}, 0, {-0.707*1.8}) node[right] {\small $\vv{q}_1 \; (\lambda_1 = -1)$};
+    % q2 = (0, 1, 0)
+    \draw[->, ultra thick, forestgreen] (0,0,0) -- (0, 1.8, 0) node[above left] {\small $\vv{q}_2 \; (\lambda_2 = 2)$};
+    % q3 = (1/sqrt2, 0, 1/sqrt2)
+    \draw[->, ultra thick, coolblue] (0,0,0) -- ({0.707*1.8}, 0, {0.707*1.8}) node[below] {\small $\vv{q}_3 \; (\lambda_3 = 3)$};
+    
+    % Angolo retto tra q1 e q3 nel piano xz
+    \draw[thick, navyblue!60] ({0.3*0.707}, 0, {-0.3*0.707}) -- ({0.3*1.414}, 0, 0) -- ({0.3*0.707}, 0, {0.3*0.707});
+    
+    % Centro
+    \filldraw[black] (0,0,0) circle (1pt);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Punto (iii): Segnatura e classificazione della forma quadratica}.
+
+Per la \textbf{Legge d'Inerzia di Sylvester}, la segnatura $(i_+, i_-, i_0)$ corrisponde al numero di autovalori strettamente positivi, negativi e nulli:
+\begin{itemize}
+    \item $i_+ = 2$ (autovalori $\lambda = 2, 3$).
+    \item $i_- = 1$ (autovalore $\lambda = -1$).
+    \item $i_0 = 0$ (nessun autovalore nullo, $\det(S) = -6 \neq 0$).
+\end{itemize}
+La segnatura è $(i_+, i_-, i_0) = (2, 1, 0)$.
+Poiché $i_+ > 0$ e $i_- > 0$, la forma quadratica è \textbf{indefinita} e \textbf{non degenere}.
+\end{dimostrazione}

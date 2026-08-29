@@ -1,0 +1,179 @@
+% ==============================================================================
+% CAPITOLO 8: CLASSI DI LEGGI DI PROBABILITÀ CONTINUE
+% ==============================================================================
+\chapter{Classi di Leggi di Probabilità Continue}
+\label{cap:classi_di_leggi_continue}
+
+\begin{abstract}
+Il presente capitolo espone in modo rigoroso ed esaustivo le principali famiglie di variabili aleatorie continue. Partendo dalla legge Uniforme continua (con applicazioni al calcolo delle probabilità geometriche), si analizza l'Esponenziale e la sua proprietà di assenza di memoria nel continuo, nonché la legge del minimo di esponenziali indipendenti per sistemi affidabilistici in serie. Si approfondisce la distribuzione Normale Gaussiana, regina della statistica, esplicitando i metodi operativi di standardizzazione, le proprietà di simmetria e la celebre Regola Empirica. Infine, si deducono e si contestualizzano le tre distribuzioni pivotali cardine dell'inferenza statistica: la Chi-quadro ($\chi^2$), la $t$ di Student e la $F$ di Fisher-Snedecor.
+\end{abstract}
+
+% ==============================================================================
+% SEZIONE 8.1: DISTRIBUZIONE UNIFORME CONTINUA
+% ==============================================================================
+\section{Distribuzione Uniforme Continua e Probabilità Geometrica}
+\label{sec:uniforme_continua}
+
+La legge Uniforme rappresenta la formalizzazione del principio di massima ignoranza o equidistribuzione spaziale nel continuo: ogni intervallo di ampiezza prefissata ha la medesima densità di probabilità.
+
+\begin{definizione}{Distribuzione Uniforme Continua $\operatorname{Unif}(a, b)$}{def_uniforme_continua}
+Siano $a < b$ due numeri reali. Una v.a. $X$ segue una legge uniforme sull'intervallo $[a, b]$ se la sua densità è costante sul supporto:
+\begin{itemize}
+    \item \textbf{PDF:}
+    \begin{equation}
+        f_X(x) = \begin{cases}
+            \dfrac{1}{b - a}, & \text{se } x \in [a, b] \\
+            0, & \text{altrove}
+        \end{cases}
+    \end{equation}
+    \item \textbf{CDF:}
+    \begin{equation}
+        F_X(x) = \begin{cases}
+            0, & x < a \\
+            \dfrac{x - a}{b - a}, & a \le x \le b \\
+            1, & x > b
+        \end{cases}
+    \end{equation}
+    \item \textbf{Momenti Teorici:}
+    \begin{equation}
+        \mathbb{E}[X] = \frac{a + b}{2}, \qquad \operatorname{Var}(X) = \frac{(b - a)^2}{12}, \qquad \operatorname{SD}(X) = \frac{b - a}{\sqrt{12}}
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\begin{proposizione}{Probabilità Geometrica su Domini Bidimensionali}{unif_2d}
+Se un punto aleatorio $(X, Y)$ è distribuito uniformemente su un dominio piano misurabile $A \subset \mathbb{R}^2$ con densità congiunta costante $f_{X,Y}(x,y) = \frac{1}{\operatorname{Area}(A)}$, per qualsiasi sottoinsieme misurabile $B \subseteq A$ la probabilità coincide con il rapporto geometrico delle aree:
+\begin{equation}
+    \mathbb{P}((X, Y) \in B) = \frac{\operatorname{Area}(B)}{\operatorname{Area}(A)}
+\end{equation}
+\end{proposizione}
+
+% ==============================================================================
+% SEZIONE 8.2: DISTRIBUZIONE ESPONENZIALE
+% ==============================================================================
+\section{Distribuzione Esponenziale e Affidabilità nel Continuo}
+\label{sec:esponenziale}
+
+La distribuzione Esponenziale è il modello universale per i tempi di vita di componenti non soggetti a invecchiamento e per gli intertempi di arrivo in processi di Poisson.
+
+\begin{definizione}{Distribuzione Esponenziale $\operatorname{Exp}(\lambda)$}{def_esponenziale}
+Sia $\lambda > 0$ il parametro di intensità (o tasso di guasto costante). Una v.a. continua $X$ ha distribuzione esponenziale se:
+\begin{itemize}
+    \item \textbf{Supporto:} $[0, +\infty)$.
+    \item \textbf{PDF e CDF:}
+    \begin{equation}
+        f_X(x) = \lambda e^{-\lambda x}, \qquad F_X(x) = 1 - e^{-\lambda x} \qquad (x \ge 0)
+    \end{equation}
+    \item \textbf{Funzione di Sopravvivenza (Affidabilità $R(t)$):}
+    \begin{equation}
+        R(t) = \mathbb{P}(X > t) = 1 - F_X(t) = e^{-\lambda t}
+    \end{equation}
+    \item \textbf{Momenti Teorici:}
+    \begin{equation}
+        \mathbb{E}[X] = \frac{1}{\lambda}, \qquad \operatorname{Var}(X) = \frac{1}{\lambda^2}, \qquad \operatorname{SD}(X) = \frac{1}{\lambda}
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_esponenziale_assenza_memoria.tex}
+    \caption{Proprietà di assenza di memoria della legge Esponenziale. Sapendo che il componente è sopravvissuto fino al tempo $s$, la distribuzione del tempo residuo di funzionamento $X - s$ condizionata a $X > s$ ha esattamente la medesima forma esponenziale $e^{-\lambda t}$ di un componente nuovo di fabbrica.}
+    \label{fig:esponenziale_assenza_memoria}
+\end{figure}
+
+\begin{teorema}{Assenza di Memoria nel Continuo}{thm_assenza_memoria_esp}
+La distribuzione Esponenziale è l'\textbf{unica distribuzione continua} a supporto $[0, \infty)$ che soddisfa:
+\begin{equation}
+    \mathbb{P}(X > s + t \mid X > s) = \mathbb{P}(X > t) \qquad (\forall s, t \ge 0)
+\end{equation}
+\end{teorema}
+
+\begin{teorema}{Minimo di Esponenziali Indipendenti (Sistemi in Serie)}{thm_minimo_esponenziali}
+Siano $X_1, \dots, X_n$ variabili aleatorie esponenziali stocasticamente indipendenti con parametri $\lambda_1, \dots, \lambda_n$. Allora il tempo di primo guasto del sistema $T_{\min} = \min(X_1, \dots, X_n)$ è ancora una variabile esponenziale con parametro pari alla somma dei singoli tassi:
+\begin{equation}
+    T_{\min} \sim \operatorname{Exp}\left(\sum_{i=1}^n \lambda_i\right) \implies \mathbb{E}[T_{\min}] = \frac{1}{\sum_{i=1}^n \lambda_i}
+\end{equation}
+\end{teorema}
+
+% ==============================================================================
+% SEZIONE 8.3: DISTRIBUZIONE NORMALE GAUSSIANA
+% ==============================================================================
+\section{Distribuzione Normale Gaussiana}
+\label{sec:gaussiana}
+
+\begin{definizione}{Distribuzione Normale Gaussiana $\mathcal{N}(\mu, \sigma^2)$}{def_gaussiana}
+Una variabile aleatoria continua $X$ ha distribuzione normale con media $\mu \in \mathbb{R}$ e varianza $\sigma^2 > 0$ se la sua PDF è la celebre campana di Gauss:
+\begin{equation}
+    f_X(x) = \frac{1}{\sigma \sqrt{2\pi}} \exp\left( -\frac{(x - \mu)^2}{2\sigma^2} \right), \qquad x \in \mathbb{R}
+\end{equation}
+Se $\mu = 0$ e $\sigma^2 = 1$, si ottiene la \textbf{Normale Standard} $Z \sim \mathcal{N}(0, 1)$ con densità $\phi(z) = \frac{1}{\sqrt{2\pi}} e^{-z^2/2}$ e CDF $\Phi(z) = \int_{-\infty}^z \phi(t) dt$.
+\end{definizione}
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_gaussiana_aree_regola_empirica.tex}
+    \caption{La curva a campana di Gauss $\mathcal{N}(\mu, \sigma^2)$ e la fondamentale \textbf{Regola Empirica (68--95--99.7\%)}: l'intervallo $\mu \pm \sigma$ racchiude il $68.27\%$ dell'area; $\mu \pm 2\sigma$ racchiude il $95.45\%$; $\mu \pm 3\sigma$ racchiude il $99.73\%$ della popolazione.}
+    \label{fig:gaussiana_aree}
+\end{figure}
+
+\begin{metodo}[Standardizzazione e Proprietà di Simmetria per il Calcolo delle Probabilità]
+Per qualsiasi variabile gaussiana $X \sim \mathcal{N}(\mu, \sigma^2)$:
+\begin{enumerate}
+    \item \textbf{Standardizzazione:} Ponendo $Z = \frac{X - \mu}{\sigma} \sim \mathcal{N}(0, 1)$, si ha:
+    \begin{equation}
+        F_X(x) = \mathbb{P}(X \le x) = \Phi\left(\frac{x - \mu}{\sigma}\right)
+    \end{equation}
+    \item \textbf{Simmetria per valori negativi:} Poiché $\phi(z)$ è pari rispetto all'origine:
+    \begin{equation}
+        \Phi(-z) = 1 - \Phi(z) \qquad (\forall z \in \mathbb{R})
+    \end{equation}
+    \item \textbf{Probabilità d'intervallo simmetrico attorno a $\mu$:}
+    \begin{equation}
+        \mathbb{P}(\mu - k\sigma \le X \le \mu + k\sigma) = \Phi(k) - \Phi(-k) = 2\Phi(k) - 1
+    \end{equation}
+\end{enumerate}
+\end{metodo}
+
+% ==============================================================================
+% SEZIONE 8.4: DISTRIBUZIONI CAMPIONARIE PIVOTALI (CHI-QUADRO, STUDENT, FISHER)
+% ==============================================================================
+\section{Distribuzioni Campionarie Pivotali: $\chi^2$, $t$ di Student e $F$}
+\label{sec:distribuzioni_pivotali}
+
+Queste tre distribuzioni costituiscono il fondamento matematico di tutti i test d'ipotesi e degli intervalli di confidenza dell'inferenza parametrica.
+
+\begin{definizione}{Distribuzione Chi-quadro $\chi^2(k)$}{def_chiquadro}
+Siano $Z_1, Z_2, \dots, Z_k \stackrel{\text{i.i.d.}}{\sim} \mathcal{N}(0, 1)$ variabili normali standard indipendenti. La somma dei loro quadrati definisce una variabile \textbf{Chi-quadro a $k$ gradi di libertà}:
+\begin{equation}
+    W = \sum_{i=1}^k Z_i^2 \sim \chi^2(k), \qquad \mathbb{E}[W] = k, \quad \operatorname{Var}(W) = 2k
+\end{equation}
+\end{definizione}
+
+\begin{definizione}{Distribuzione $t$ di Student $t(k)$}{def_student}
+Sia $Z \sim \mathcal{N}(0, 1)$ e $W \sim \chi^2(k)$ stocasticamente indipendenti. Il loro rapporto:
+\begin{equation}
+    T = \frac{Z}{\sqrt{W / k}} \sim t(k)
+\end{equation}
+definisce la distribuzione $t$ di Student a $k$ gradi di libertà.
+\begin{itemize}
+    \item È simmetrica a campana centrata in 0 con media $\mathbb{E}[T] = 0$ (per $k > 1$) e varianza $\operatorname{Var}(T) = \frac{k}{k-2}$ (per $k > 2$).
+    \item Presenta \textbf{code più pesanti} rispetto alla Normale, per compensare l'incertezza dovuta alla stima della deviazione standard $S$.
+    \item Per $k \to \infty$, $t(k) \xrightarrow{d} \mathcal{N}(0, 1)$.
+\end{itemize}
+\end{definizione}
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_confronto_student_gaussiana.tex}
+    \caption{Confronto qualitativo tra la Normale Standard $\mathcal{N}(0,1)$ e le distribuzioni $t$ di Student a diversi gradi di libertà ($k=1, 5$). Si noti come la densità di Student abbia un picco più basso e code nettamente più alte e spesse, convergendo alla Gaussiana all'aumentare di $k$.}
+    \label{fig:confronto_student_gaussiana}
+\end{figure}
+
+\begin{definizione}{Distribuzione $F$ di Fisher-Snedecor $F(d_1, d_2)$}{def_fisher}
+Siano $W_1 \sim \chi^2(d_1)$ e $W_2 \sim \chi^2(d_2)$ due variabili chi-quadro indipendenti. Il rapporto tra le due varianze campionarie normalizzate:
+\begin{equation}
+    F = \frac{W_1 / d_1}{W_2 / d_2} \sim F(d_1, d_2)
+\end{equation}
+definisce la distribuzione $F$ con $d_1$ gradi di libertà al numeratore e $d_2$ al denominatore, impiegata nel test di uguaglianza delle varianze e nell'analisi della varianza (ANOVA).
+\end{definizione}

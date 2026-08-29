@@ -1,0 +1,138 @@
+% ==============================================================================
+% CONFIGURAZIONE DEI PACCHETTI (PACKAGES) - FISICA GENERALE 1
+% ==============================================================================
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% --- Geometria e layout della pagina ---
+\usepackage[
+    a4paper,
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.7cm,
+    right=2.7cm,
+    headheight=26pt,
+    footskip=1.2cm
+]{geometry}
+
+% --- Pacchetti matematici e fisici avanzati ---
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{cancel}
+\usepackage{siunitx}
+\usepackage{esint}
+
+% Configurazione siunitx per italiano
+\sisetup{
+    output-decimal-marker = {,},
+    separate-uncertainty = true,
+    per-mode = symbol,
+    range-phrase = { $\div$ },
+    range-units = single
+}
+\DeclareSIUnit{\ly}{ly}
+\DeclareSIUnit{\parsec}{pc}
+\DeclareSIUnit{\astronomicalunit}{AU}
+\DeclareSIUnit{\tonne}{t}
+\DeclareSIUnit{\calorie}{cal}
+\DeclareSIUnit{\atmosphere}{atm}
+\DeclareSIUnit{\torr}{Torr}
+\DeclareSIUnit{\bar}{bar}
+
+% --- Gestione grafica, TikZ e grafici ---
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{
+    calc,
+    arrows.meta,
+    positioning,
+    patterns,
+    decorations.pathmorphing,
+    decorations.markings,
+    backgrounds,
+    shapes.geometric,
+    angles,
+    quotes
+}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% --- Strutture, tabelle e liste ---
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{enumitem}
+\setlist{itemsep=0.2em, topsep=0.3em}
+
+% --- Box decorati con tcolorbox ---
+\usepackage[most]{tcolorbox}
+
+% --- Intestazioni e piè di pagina ---
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\nouppercase{\leftmark}}
+\fancyhead[LO]{\nouppercase{\rightmark}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Stile per inizio capitoli
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+}
+
+% --- Titoli dei capitoli e sezioni eleganti ---
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\sffamily\huge\bfseries\color{navyblue}}
+  {\flushright\normalsize\scshape\color{gray} CAPITOLO \thechapter}
+  {0.5ex}
+  {\titlerule[1.5pt]\vspace{1ex}}
+  [\vspace{1ex}\titlerule]
+
+\titleformat{\section}
+  {\normalfont\sffamily\Large\bfseries\color{navyblue}}
+  {\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\sffamily\large\bfseries\color{forestgreen}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalfont\sffamily\normalsize\bfseries\color{charcoalgray}}
+  {\thesubsubsection}{1em}{}
+
+% --- Collegamenti ipertestuali e riferimenti intelligenti ---
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=navyblue,
+    citecolor=forestgreen,
+    urlcolor=purpleaccent,
+    filecolor=navyblue,
+    pdfauthor={Nicola Beccaceci},
+    pdftitle={Fisica Generale 1: Appunti Completi, Teoria, Dimostrazioni ed Esercizi},
+    pdfsubject={Fisica Generale 1 - Meccanica, Fluidi, Termodinamica},
+    pdfkeywords={Fisica 1, Meccanica, Dinamica, Gravitazione, Fluidi, Termodinamica, Ingegneria Gestionale}
+}
+\usepackage{cleveref}
+
+% --- Utility aggiuntive ---
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf, labelsep=period}
+\usepackage{subcaption}
+\usepackage{pdfpages}

@@ -1,0 +1,72 @@
+\section{Sessione d'Esame 2023: Testi e Soluzioni Svolte}
+\label{sec:sessione_2023}
+
+\subsection{Appello del 06 Giugno 2023}
+
+\begin{esercizio}{Appello 06.06.2023 -- Esercizio 1: Mazzo di Carte Italiane}{es_23_06_1}
+Un mazzo di 40 carte contiene 4 semi e valori da 1 a 7 più tre figure (F, C, R) ciascuna di valore 10.
+\begin{enumerate}
+    \item[(a)] Due carte estratte senza reinserimento con valori $X_1, X_2$. Sono indipendenti?
+    \item[(b)] Senza reinserimento, qual è la probabilità che la somma sia esattamente 4?
+    \item[(c)] Con reinserimento, qual è la probabilità di pescare almeno 3 carte di coppe in 4 estrazioni?
+    \item[(d)] Con reinserimento, sia $X$ il numero di estrazioni per osservare il primo fante dopo il primo 4. Calcolare $\mathbb{E}[X]$ e $\operatorname{Var}(X)$.
+\end{enumerate}
+\end{esercizio}
+
+\begin{dimostrazione}
+\textbf{(a) Indipendenza:} Senza reinserimento l'estrazione altera la composizione $\implies$ \textbf{No (Opzione b)}.
+
+\textbf{(b) Somma = 4:} I casi favorevoli per ottenere somma 4 sono:
+\begin{itemize}
+    \item Due carte di valore 2: $4 \times 3 = 12$ modi;
+    \item Un Asso (1) e un 3: $4 \times 4 = 16$ modi (Asso poi 3) $+ 16$ modi (3 poi Asso) $= 32$ modi.
+\end{itemize}
+Casi favorevoli totali $= 12 + 32 = 44$. Casi possibili $= 40 \times 39 = 1560$.
+\begin{equation*}
+    \mathbb{P}(\text{Somma} = 4) = \frac{44}{1560} = \frac{11}{390} \approx \bm{0.0282 \approx 0.028} \qquad \text{\textbf{(Opzione d)}}
+\end{equation*}
+
+\textbf{(c) Almeno 3 carte di coppe su 4 estrazioni ($p = 1/4$):}
+\begin{equation*}
+    \mathbb{P}(Y \ge 3) = \binom{4}{3}\left(\frac{1}{4}\right)^3\left(\frac{3}{4}\right) + \left(\frac{1}{4}\right)^4 = 4 \cdot \frac{3}{256} + \frac{1}{256} = \frac{13}{256} \approx \bm{0.0508 \approx 0.051} \qquad \text{\textbf{(Opzione b)}}
+\end{equation*}
+
+\textbf{(d) Primo Fante dopo il primo 4 (Somma di Geometriche indipendenti):}
+Sia $T_1$ il tempo d'attesa per il primo 4 ($p_1 = 4/40 = 1/10$) e $T_2$ il tempo d'attesa per il primo fante successivo ($p_2 = 4/40 = 1/10$).
+Per l'assenza di memoria, $X = T_1 + T_2$ con $T_1, T_2 \stackrel{\text{i.i.d.}}{\sim} \operatorname{Geom}(1/10)$.
+\begin{align*}
+    \mathbb{E}[X] &= \mathbb{E}[T_1] + \mathbb{E}[T_2] = \frac{1}{1/10} + \frac{1}{1/10} = 10 + 10 = \bm{20} \\
+    \operatorname{Var}(X) &= \operatorname{Var}(T_1) + \operatorname{Var}(T_2) = \frac{1 - 1/10}{(1/10)^2} + \frac{1 - 1/10}{(1/10)^2} = 90 + 90 = \bm{180} \qquad \blacksquare
+\end{align*}
+\end{dimostrazione}
+
+\begin{esercizio}{Appello 06.06.2023 -- Esercizio 2: Durata Batterie e Test Z a Due Campioni}{es_23_06_2}
+Marca A ($n_A = 7$): $720, 730, 740, 710, 705, 715, 725$. Varianza nota $\sigma_A^2 = 121$.
+Marca B ($n_B = 6$): $708, 703, 693, 718, 713, 698$. Varianza nota $\sigma_B^2 = 81$.
+\begin{enumerate}
+    \item[(a)] Calcolare l'IC bilaterale al $95\%$ per $\mu_A$.
+    \item[(b)] Definire le ipotesi per verificare una differenza significativa tra le due marche.
+    \item[(c)] Eseguire il test al livello $\alpha = 0.05$ e concludere.
+\end{enumerate}
+\end{esercizio}
+
+\begin{dimostrazione}
+\textbf{(a) Media campionaria Marca A e IC 95\% ($\sigma_A = 11, z_{0.025} = 1.96$):}
+$\overline{x}_A = \frac{5045}{7} = \bm{720.71\text{ h}}$.
+\begin{equation*}
+    d = 1.96 \cdot \frac{11}{\sqrt{7}} = 1.96 \cdot 4.1576 = 8.1489 \implies \operatorname{IC}_{0.95}(\mu_A) = [720.71 \pm 8.15] = \bm{[720.71 - 8.15, \; 720.71 + 8.15]} = \bm{[712.56, \; 728.86]\text{ h}}
+\end{equation*}
+
+\textbf{(b) Ipotesi del Test:} $H_0: \mu_A - \mu_B = 0$ vs $H_1: \mu_A - \mu_B \neq 0$ (bilaterale).
+
+\textbf{(c) Test Z a Due Campioni a livello $\alpha = 0.05$:}
+$\overline{x}_B = \frac{4233}{6} = 705.50\text{ h}$.
+\begin{equation*}
+    \operatorname{SE} = \sqrt{\frac{121}{7} + \frac{81}{6}} = \sqrt{17.2857 + 13.5000} = \sqrt{30.7857} \approx 5.5485
+\end{equation*}
+\begin{equation*}
+    Z_{\text{oss}} = \frac{720.71 - 705.50}{5.5485} = \frac{15.21}{5.5485} \approx \bm{2.741}
+\end{equation*}
+Poiché $|Z_{\text{oss}}| = 2.741 > z_{0.025} = 1.96$, \textbf{si rifiuta $H_0$ al 5\%} ($p$-value $= 2(1-\Phi(2.741)) \approx 0.0061 < 0.05$).
+\textbf{Conclusione:} \emph{Esiste una differenza statisticamente significativa nella durata media delle batterie tra le due marche a favore della Marca A.} $\blacksquare$
+\end{dimostrazione}

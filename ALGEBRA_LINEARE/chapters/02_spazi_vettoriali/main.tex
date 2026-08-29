@@ -1,0 +1,102 @@
+% ==============================================================================
+% CAPITOLO 2: SPAZI E SOTTOSPAZI VETTORIALI
+% ==============================================================================
+
+\chapter{Spazi e Sottospazi Vettoriali}
+\label{chap:spazi_vettoriali}
+
+\section{Definizione Assiomatica di Spazio Vettoriale}
+
+\begin{definizione}{Spazio Vettoriale su un Campo}{spazio_vettoriale}
+Sia $\K$ un campo (tipicamente $\R$ o $\C$). Uno \textbf{spazio vettoriale} su $\K$ è una struttura algebrica $(V, +, \cdot)$ composta da un insieme non vuoto $V$ i cui elementi sono detti \textbf{vettori}, dotato di:
+\begin{itemize}
+    \item un'operazione interna $+: V \times V \to V$ (addizione vettoriale) tale che $(V, +)$ sia un gruppo abeliano;
+    \item un'operazione esterna $\cdot: \K \times V \to V$ (prodotto per scalare) compatibile con le operazioni del campo.
+\end{itemize}
+Per ogni $\vv{u}, \vv{v}, \vv{w} \in V$ e per ogni $\al, \be \in \K$, devono essere soddisfatti gli 8 assiomi fondamentali:
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Associatività della somma}: $(\vv{u} + \vv{v}) + \vv{w} = \vv{u} + (\vv{v} + \vv{w})$;
+    \item \textbf{Commutatività della somma}: $\vv{u} + \vv{v} = \vv{v} + \vv{u}$;
+    \item \textbf{Elemento neutro della somma}: $\exists\, \vzero \in V \text{ tale che } \vv{v} + \vzero = \vv{v}$;
+    \item \textbf{Elemento opposto}: $\forall\, \vv{v} \in V,\, \exists\, (-\vv{v}) \in V \text{ tale che } \vv{v} + (-\vv{v}) = \vzero$;
+    \item \textbf{Distributività rispetto alla somma vettoriale}: $\al \cdot (\vv{u} + \vv{v}) = \al \cdot \vv{u} + \al \cdot \vv{v}$;
+    \item \textbf{Distributività rispetto alla somma scalare}: $(\al + \be) \cdot \vv{v} = \al \cdot \vv{v} + \be \cdot \vv{v}$;
+    \item \textbf{Compatibilità del prodotto}: $(\al \be) \cdot \vv{v} = \al \cdot (\be \cdot \vv{v})$;
+    \item \textbf{Elemento neutro dello scalare}: $1_{\K} \cdot \vv{v} = \vv{v}$.
+\end{enumerate}
+\end{definizione}
+
+\section{Sottospazi Vettoriali e Criterio di Caratterizzazione}
+
+\begin{definizione}{Sottospazio Vettoriale}{sottospazio_vettoriale}
+Sia $V$ uno spazio vettoriale su $\K$. Un sottoinsieme non vuoto $W \subseteq V$ è un \textbf{sottospazio vettoriale} di $V$ (denotato con $W \le V$) se $W$, con le operazioni indotte da $V$, è a sua volta uno spazio vettoriale su $\K$.
+\end{definizione}
+
+\begin{teorema}{Criterio di Caratterizzazione dei Sottospazi}{criterio_sottospazi}
+Un sottoinsieme $W \subseteq V$ è un sottospazio vettoriale di $V$ se e solo se:
+\begin{enumerate}
+    \item $W \neq \emptyset$ (equivalentemente, $\vzero_V \in W$);
+    \item $W$ è chiuso rispetto alla somma: $\forall\, \vv{w}_1, \vv{w}_2 \in W \implies \vv{w}_1 + \vv{w}_2 \in W$;
+    \item $W$ è chiuso rispetto al prodotto per scalare: $\forall\, \al \in \K, \forall\, \vv{w} \in W \implies \al \vv{w} \in W$.
+\end{enumerate}
+In forma compatta, $W \le V \iff W \neq \emptyset \text{ e } \forall\, \al, \be \in \K, \forall\, \vv{u}, \vv{v} \in W \implies \al \vv{u} + \be \vv{v} \in W$.
+\end{teorema}
+
+\section{Combinazioni Lineari, Insiemi di Generatori e Indipendenza Lineare}
+
+\begin{definizione}{Copertura Lineare ($\Span$)}{span}
+Dato un insieme finito di vettori $S = \{\vv{v}_1, \dots, \vv{k}\} \subset V$, il loro \textbf{span lineare} (o copertura lineare) è l'insieme di tutte le combinazioni lineari a coefficienti in $\K$:
+\begin{equation}
+    \Span(S) = \left\{ \sum_{i=1}^k \al_i \vv{v}_i \;\middle|\; \al_1, \dots, \al_k \in \K \right\}.
+\end{equation}
+$\Span(S)$ è il più piccolo sottospazio vettoriale di $V$ contenente $S$. Se $\Span(S) = V$, si dice che $S$ è un \textbf{insieme di generatori} per $V$.
+\end{definizione}
+
+\begin{definizione}{Indipendenza e Dipendenza Lineare}{indipendenza_lineare}
+I vettori $\vv{v}_1, \dots, \vv{k} \in V$ sono detti \textbf{linearmente indipendenti} se l'unica combinazione lineare nulla è quella banale:
+\begin{equation}
+    \al_1 \vv{v}_1 + \dots + \al_k \vv{v}_k = \vzero \implies \al_1 = \dots = \al_k = 0.
+\end{equation}
+Se esistono scalari non tutti nulli per cui la combinazione è $\vzero$, i vettori sono \textbf{linearmente dipendenti} (ovvero almeno un vettore è combinazione lineare dei rimanenti).
+\end{definizione}
+
+\section{Basi, Coordinate e Dimensione}
+
+\begin{definizione}{Base di uno Spazio Vettoriale}{base}
+Un insieme ordinato $\mathcal{B} = (\vv{v}_1, \dots, \vv{n})$ di vettori di $V$ è una \textbf{base} di $V$ se:
+\begin{enumerate}
+    \item I vettori $\vv{v}_1, \dots, \vv{n}$ sono linearmente indipendenti;
+    \item I vettori $\vv{v}_1, \dots, \vv{n}$ generano $V$, ossia $\Span(\vv{v}_1, \dots, \vv{n}) = V$.
+\end{enumerate}
+In tal caso, ogni vettore $\vv{v} \in V$ si esprime in modo \textbf{unico} come:
+\begin{equation}
+    \vv{v} = x_1 \vv{v}_1 + \dots + x_n \vv{v}_n,
+\end{equation}
+e la $n$-upla $[\vv{v}]_{\mathcal{B}} = (x_1, \dots, x_n)\T \in \K^n$ rappresenta il vettore delle \textbf{coordinate} di $\vv{v}$ rispetto alla base $\mathcal{B}$.
+\end{definizione}
+
+\begin{teorema}{Teorema della Dimensione}{dimensione_spazio}
+Se $V$ ammette una base finita costituita da $n$ elementi, allora \textbf{tutte} le basi di $V$ hanno esattamente $n$ elementi. Tale intero $n$ si definisce \textbf{dimensione} di $V$ su $\K$ e si denota con $\dim_{\K}(V) = n$.
+\end{teorema}
+
+\section{Operazioni tra Sottospazi e Somma Diretta}
+Dati due sottospazi $U, W \le V$:
+\begin{itemize}
+    \item L'\textbf{intersezione} $U \cap W$ è sempre un sottospazio vettoriale di $V$.
+    \item L'\textbf{unione} $U \cup W$ in generale \emph{non} è un sottospazio vettoriale.
+    \item La \textbf{somma} $U + W = \{\vv{u} + \vv{w} \mid \vv{u} \in U, \vv{w} \in W\} = \Span(U \cup W)$ è un sottospazio vettoriale.
+    \item La somma è \textbf{diretta} (notazione $U \oplus W$) se $U \cap W = \{\vzero\}$, che equivale all'unicità di scomposizione $\vv{v} = \vv{u} + \vv{w}$.
+\end{itemize}
+
+\section{Formula (Teorema) di Grassmann}
+
+\begin{teorema}{Teorema / Formula di Grassmann}{grassmann}
+Siano $U, W$ due sottospazi vettoriali a dimensione finita di uno spazio vettoriale $V$. Allora:
+\begin{equation}
+    \dim(U + W) = \dim(U) + \dim(W) - \dim(U \cap W).
+\end{equation}
+In particolare, se la somma è diretta ($U \cap W = \{\vzero\}$):
+\begin{equation}
+    \dim(U \oplus W) = \dim(U) + \dim(W).
+\end{equation}
+\end{teorema}

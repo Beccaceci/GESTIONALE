@@ -1,0 +1,72 @@
+% ==============================================================================
+% CAPITOLO 5: DETERMINANTI
+% ==============================================================================
+
+\chapter{Determinanti}
+\label{chap:determinanti}
+
+\section{Definizione e Proprietà Fondamentali}
+
+\begin{definizione}{Determinante}{determinante}
+Sia $A \in \Mat_n(\K)$ una matrice quadrata di ordine $n$. Il \textbf{determinante} è l'unica funzione $\det: \Mat_n(\K) \to \K$ (notazione $\det(A)$ o $|A|$) che soddisfa le seguenti tre proprietà assiomatiche (forma multilineare alternata normalizzata rispetto alle colonne o righe):
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Multilinearità}: è lineare rispetto a ciascuna colonna (o riga) singolarmente;
+    \item \textbf{Alternanza}: se due colonne (o righe) coincidono, il determinante è nullo: $\det(A) = 0$;
+    \item \textbf{Normalizzazione}: per la matrice identica, $\det(I_n) = 1$.
+\end{enumerate}
+\end{definizione}
+
+\subsection{Proprietà Operative Immediate}
+Dagli assiomi derivano proprietà computazionali essenziali:
+\begin{itemize}
+    \item $\det(A\T) = \det(A)$;
+    \item Scambiare due righe (o colonne) moltiplica il determinante per $-1$;
+    \item Moltiplicare una riga (o colonna) per uno scalare $\al \in \K$ moltiplica il determinante per $\al$: $\det(\al A) = \al^n \det(A)$;
+    \item Aggiungere a una riga una combinazione lineare delle altre lascia invariato il determinante;
+    \item $\det(A) = 0 \iff$ le righe (o colonne) di $A$ sono linearmente dipendenti $\iff \rk(A) < n$.
+\end{itemize}
+
+\section{Sviluppi di Laplace per il Calcolo del Determinante}
+
+\begin{teorema}{Teorema di Laplace}{sviluppo_laplace}
+Sia $A = (a_{ij}) \in \Mat_n(\K)$. Denotiamo con $A_{ij}$ la sottomatrice $(n-1) \times (n-1)$ ottenuta eliminando la riga $i$-esima e la colonna $j$-esima, e con $C_{ij} = (-1)^{i+j} \det(A_{ij})$ il relativo \textbf{complemento algebrico} (o cofattore).
+Allora per ogni riga fissata $i \in \{1, \dots, n\}$ (sviluppo per riga):
+\begin{equation}
+    \det(A) = \sum_{j=1}^n a_{ij} C_{ij} = \sum_{j=1}^n (-1)^{i+j} a_{ij} \det(A_{ij})
+\end{equation}
+e per ogni colonna fissata $j \in \{1, \dots, n\}$ (sviluppo per colonna):
+\begin{equation}
+    \det(A) = \sum_{i=1}^n a_{ij} C_{ij} = \sum_{i=1}^n (-1)^{i+j} a_{ij} \det(A_{ij}).
+\end{equation}
+\end{teorema}
+
+\section{Teorema di Binet, Invertibilità e Matrice Inversa}
+
+\begin{teorema}{Teorema di Binet}{teorema_binet}
+Per ogni coppia di matrici quadrate $A, B \in \Mat_n(\K)$:
+\begin{equation}
+    \det(A \cdot B) = \det(A) \cdot \det(B).
+\end{equation}
+Di conseguenza, una matrice $A \in \Mat_n(\K)$ è \textbf{invertibile} se e solo se $\det(A) \neq 0$. In tal caso:
+\begin{equation}
+    \det(A\inv) = \frac{1}{\det(A)}.
+\end{equation}
+\end{teorema}
+
+\begin{teorema}{Formula della Matrice Inversa con i Cofattori}{matrice_inversa}
+Se $\det(A) \neq 0$, la matrice inversa $A\inv$ è data esplicitamente da:
+\begin{equation}
+    A\inv = \frac{1}{\det(A)} \trasposta{(\operatorname{cof}(A))} = \frac{1}{\det(A)} \operatorname{adj}(A),
+\end{equation}
+dove $\operatorname{adj}(A) = (\operatorname{cof}(A))\T$ è la \textbf{matrice aggiunta classica} (trasposta della matrice dei complementi algebrici $C_{ij}$).
+\end{teorema}
+
+\section{Teorema e Regola di Cramer}
+
+\begin{teorema}{Regola di Cramer}{regola_cramer}
+Sia $A \vv{x} = \vv{b}$ un sistema lineare quadrato di $n$ equazioni in $n$ incognite con $\det(A) \neq 0$. Allora il sistema ammette un'unica soluzione $\vv{x} = (x_1, \dots, x_n)\T$, dove ogni componente $x_j$ è fornita dal rapporto:
+\begin{equation}
+    x_j = \frac{\det(A_j)}{\det(A)}, \quad \forall\, j = 1, \dots, n,
+\end{equation}
+essendo $A_j$ la matrice ottenuta sostituendo la $j$-esima colonna di $A$ con il vettore dei termini noti $\vv{b}$.
+\end{teorema}

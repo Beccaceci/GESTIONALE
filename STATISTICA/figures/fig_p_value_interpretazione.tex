@@ -1,0 +1,27 @@
+\begin{tikzpicture}[scale=0.85, >=Stealth]
+    \draw[->, thick, navyblue] (-4.5,0) -- (4.5,0) node[right, font=\footnotesize] {$z$};
+    \draw[->, thick, navyblue] (0,-0.2) -- (0,3.8) node[above, font=\footnotesize] {$f(z \mid H_0)$};
+
+    % Curva H0
+    \draw[domain=-4.0:4.0, smooth, variable=\x, very thick, navyblue]
+        plot ({\x}, {3.5*exp(-\x*\x/2)});
+
+    % Valore osservato z_oss = 2.15
+    \fill[warmamber!60, domain=2.15:4.0, variable=\x]
+        (2.15,0) -- plot ({\x}, {3.5*exp(-\x*\x/2)}) -- (4.0,0) -- cycle;
+    \fill[warmamber!60, domain=-4.0:-2.15, variable=\x]
+        (-4.0,0) -- plot ({\x}, {3.5*exp(-\x*\x/2)}) -- (-2.15,0) -- cycle;
+
+    \draw[ultra thick, dashed, warmamber!90!black] (2.15,0) -- (2.15, {3.5*exp(-2.15*2.15/2)});
+    \draw[ultra thick, dashed, warmamber!90!black] (-2.15,0) -- (-2.15, {3.5*exp(-2.15*2.15/2)});
+
+    \node[below, font=\scriptsize\bfseries, text=warmamber!90!black] at (2.15,0) {$+z_{\text{oss}}$};
+    \node[below, font=\scriptsize\bfseries, text=warmamber!90!black] at (-2.15,0) {$-z_{\text{oss}}$};
+
+    \node[font=\scriptsize\bfseries, text=warmamber!90!black, align=center] at (3.2,1.2) {Area $= \dfrac{p\text{-value}}{2}$};
+    \node[font=\scriptsize\bfseries, text=warmamber!90!black, align=center] at (-3.2,1.2) {Area $= \dfrac{p\text{-value}}{2}$};
+
+    \node[font=\footnotesize\itshape, text=navyblue, align=center] at (0,-1.0) {
+        $p\text{-value} = 2 \cdot (1 - \Phi(|z_{\text{oss}}|))$. Se $p\text{-value} \le \alpha \implies$ Rifiuto $H_0$.
+    };
+\end{tikzpicture}

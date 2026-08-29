@@ -1,0 +1,74 @@
+% ==============================================================================
+% CAPITOLO 3: APPLICAZIONI LINEARI, NUCLEO E IMMAGINE
+% ==============================================================================
+
+\chapter{Applicazioni Lineari, Nucleo e Immagine}
+\label{chap:applicazioni_lineari}
+
+\section{Definizione e Proprietà di Base}
+
+\begin{definizione}{Applicazione Lineare (Omomorfismo)}{applicazione_lineare}
+Siano $V$ e $W$ due spazi vettoriali sullo stesso campo $\K$. Una funzione $f: V \to W$ si dice \textbf{applicazione lineare} (o \textbf{omomorfismo di spazi vettoriali}) se soddisfa:
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Additività}: $\forall\, \vv{u}, \vv{v} \in V \implies f(\vv{u} + \vv{v}) = f(\vv{u}) + f(\vv{v})$;
+    \item \textbf{Omogeneità}: $\forall\, \al \in \K, \forall\, \vv{v} \in V \implies f(\al \vv{v}) = \al f(\vv{v})$.
+\end{enumerate}
+In forma sintetica:
+\begin{equation}
+    f(\al \vv{u} + \be \vv{v}) = \al f(\vv{u}) + \be f(\vv{v}), \quad \forall\, \al, \be \in \K,\; \forall\, \vv{u}, \vv{v} \in V.
+\end{equation}
+\end{definizione}
+
+\begin{proposizione}{Proprietà Immediate}{prop_lineari}
+Se $f: V \to W$ è lineare, allora:
+\begin{itemize}
+    \item $f(\vzero_V) = \vzero_W$;
+    \item $f(-\vv{v}) = -f(\vv{v})$;
+    \item $f\left(\sum_{i=1}^k \al_i \vv{v}_i\right) = \sum_{i=1}^k \al_i f(\vv{v}_i)$.
+\end{itemize}
+\end{proposizione}
+
+\section{Nucleo e Immagine}
+
+\begin{definizione}{Nucleo ($\ker$) e Immagine ($\Imm$)}{nucleo_immagine}
+Sia $f: V \to W$ un'applicazione lineare:
+\begin{itemize}
+    \item Il \textbf{Nucleo} (o Kernel) di $f$ è la controimmagine del vettore nullo:
+    \begin{equation}
+        \ker(f) = \big\{ \vv{v} \in V \;\big|\; f(\vv{v}) = \vzero_W \big\} \le V.
+    \end{equation}
+    \item L'\textbf{Immagine} di $f$ è l'insieme di tutti i valori assunti:
+    \begin{equation}
+        \Imm(f) = \big\{ \vv{w} \in W \;\big|\; \exists\, \vv{v} \in V \text{ t.c. } f(\vv{v}) = \vv{w} \big\} = f(V) \le W.
+    \end{equation}
+\end{itemize}
+Entrambi costituiscono sottospazi vettoriali (rispettivamente del dominio $V$ e del codominio $W$).
+\end{definizione}
+
+\begin{teorema}{Caratterizzazione dell'Iniettività e Suriettività}{iniettivita_suriettivita}
+Sia $f: V \to W$ lineare:
+\begin{enumerate}
+    \item $f$ è \textbf{iniettiva} $\iff \ker(f) = \{\vzero_V\} \iff \dim(\ker(f)) = 0$.
+    \item $f$ è \textbf{suriettiva} $\iff \Imm(f) = W \iff \dim(\Imm(f)) = \dim(W)$ (con $\dim(W) < \infty$).
+    \item $f$ è un \textbf{isomorfismo} (biettiva) se e solo se è sia iniettiva che suriettiva.
+\end{enumerate}
+\end{teorema}
+
+\section{Teorema della Dimensione (Nullità più Rango)}
+
+\begin{teorema}{Teorema della Dimensione / Nullità più Rango}{teorema_dimensione}
+Sia $f: V \to W$ un'applicazione lineare con $V$ di dimensione finita ($\dim(V) = n$). Allora:
+\begin{equation}
+    \dim(V) = \dim(\ker(f)) + \dim(\Imm(f)).
+\end{equation}
+La dimensione $\dim(\Imm(f))$ è detta \textbf{rango} di $f$, mentre $\dim(\ker(f))$ è detta \textbf{nullità} di $f$.
+\end{teorema}
+
+\section{Isomorfismi e Classificazione degli Spazi Vettoriali}
+\begin{teorema}{Isomorfismo con $\K^n$}{isomorfismo_kn}
+Ogni spazio vettoriale $V$ su $\K$ di dimensione finita $n$ è isomorfo a $\K^n$:
+\begin{equation}
+    V \cong \K^n.
+\end{equation}
+Due spazi vettoriali a dimensione finita sullo stesso campo sono isomorfi se e solo se hanno la stessa dimensione: $\dim(V) = \dim(W) \iff V \cong W$.
+\end{teorema}

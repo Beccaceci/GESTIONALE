@@ -1,0 +1,21 @@
+\begin{tikzpicture}[scale=0.85, >=Stealth]
+    \draw[->, thick, navyblue] (-0.5,0) -- (6.5,0) node[right, font=\footnotesize] {$\theta$};
+    \draw[->, thick, navyblue] (0,-0.3) -- (0,3.8) node[above, font=\footnotesize] {$\ell(\theta) = \ln L(\theta)$};
+
+    % Curva log-verosimiglianza (concava)
+    \draw[domain=0.8:5.5, smooth, variable=\x, ultra thick, navyblue]
+        plot ({\x}, {3.2 - 0.7*(\x-3.2)*(\x-3.2)});
+
+    % Massimo a theta = 3.2
+    \draw[dashed, crimsonred, thick] (3.2,0) -- (3.2,3.2);
+    \fill[crimsonred] (3.2,3.2) circle (2.5pt);
+    \node[below, font=\small\bfseries, text=crimsonred] at (3.2,0) {$\widehat{\theta}_{\text{MLE}}$};
+
+    % Tangente orizzontale
+    \draw[thick, forestgreen] (2.0,3.2) -- (4.4,3.2);
+    \node[above, font=\scriptsize\bfseries, text=forestgreen] at (3.2,3.3) {Score $= \dfrac{d\ell}{d\theta} = 0$};
+
+    \node[font=\footnotesize\itshape, text=navyblue, align=center] at (3.2, -0.9) {
+        Curvatura nel massimo $= -J_n(\widehat{\theta}) = \left.\dfrac{d^2\ell}{d\theta^2}\right|_{\widehat{\theta}} < 0$ (\textbf{Informazione di Fisher}).
+    };
+\end{tikzpicture}

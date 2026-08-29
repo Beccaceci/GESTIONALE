@@ -1,0 +1,516 @@
+% ==============================================================================
+% CAPITOLO 7: LA TEORIA DELL'OFFERTA: TECNOLOGIA E COSTI
+% ==============================================================================
+\chapter{La Teoria dell'Offerta: Tecnologia e Costi}
+\label{chap:tecnologia_costi}
+
+\begin{tcolorbox}[colback=navyblue!5!white, colframe=navyblue, title=\textbf{Quadro Concettuale del Capitolo}]
+Il presente capitolo analizza la struttura tecnologica e la dinamica dei costi di produzione dell'impresa. L'indagine si articola lungo la dimensione temporale: nel breve periodo si studiano la funzione di produzione con fattore fisso, la legge dei rendimenti marginali decrescenti e la dualità tra curve di produttività e curve di costo a forma di U; nel lungo periodo si formalizzano la mappa degli isoquanti, il Saggio Marginale di Sostituzione Tecnica ($\SMST$), la minimizzazione vincolata dei costi con le rette di isocosto, i rendimenti di scala (economie, diseconomie, economie di scopo e curve di apprendimento) e la costruzione della curva di costo medio di lungo periodo ($LAC$) come inviluppo inferiore.
+\end{tcolorbox}
+
+\section{La Tecnologia e la Funzione di Produzione}
+
+In microeconomia, la \textbf{teologia} rappresenta l'insieme dei vincoli fisici e ingegneristici che determinano come un insieme di $N$ fattori produttivi primari ($\text{input}$, indicati con il vettore $\bm{x} = (x_1, x_2, \dots, x_n)$) possa essere trasformato in un livello massimo di beni o servizi finali ($\text{output}$, indicato con $Q$).
+
+\subsection{Insieme di Produzione e Piani di Produzione}
+L'attività produttiva è descritta mediante piani di produzione:
+\begin{definizione}{Insieme di Produzione e Piani Efficienti}{insieme_produzione}
+Un \textbf{piano di produzione} è una coppia ordinata $(\bm{x}, Q) = (x_1, \dots, x_n, Q)$.
+\begin{itemize}
+    \item L'\textbf{Insieme di Produzione} $\mathcal{T}$ è l'insieme di tutti i piani di produzione fisicamente realizzabili:
+    \begin{equation}
+        \mathcal{T} = \{ (\bm{x}, Q) \in \R_+^{n+1} \mid \text{l'output } Q \text{ è ottenibile impiegando gli input } \bm{x} \}
+    \end{equation}
+    \item La \textbf{Funzione di Produzione} $Q = F(\bm{x})$ descrive la frontiera superiore dell'insieme di produzione, identificando il \textit{massimo ammontare di output} ottenibile da una data combinazione di input, data la tecnologia disponibile:
+    \begin{equation}
+        Q = F(x_1, x_2, \dots, x_n)
+    \end{equation}
+    \item Un piano $(\bm{x}', Q')$ è \textbf{tecnicamente inefficiente} se $Q' < F(\bm{x}')$ (si produce meno del potenziale massimo per sprechi, difetti di layout o disorganizzazione interna). È \textbf{tecnicamente efficiente} se $Q' = F(\bm{x}')$.
+\end{itemize}
+\end{definizione}
+
+Nelle trattazioni analitiche si considerano due fattori produttivi aggregati fondamentali: il \textbf{Lavoro} ($L$, misurato in ore-uomo o numero di lavoratori) e il \textbf{Capitale} ($K$, misurato in ore-macchina o valore monetario del parco impianti). La produzione è dunque intesa come creazione di \textbf{valore aggiunto} applicato alle materie prime:
+\begin{equation}
+    Q = F(L, K)
+\end{equation}
+
+\subsection{Orizzonte Temporale: Breve vs Lungo Periodo}
+\begin{definizione}{Breve e Lungo Periodo nella Produzione}{breve_lungo_periodo_prod}
+La distinzione tra breve e lungo periodo non si basa su una scansione di calendario prefissata, bensì sulla \textit{flessibilità tecnologica} dei fattori produttivi:
+\begin{itemize}
+    \item \textbf{Breve Periodo}: orizzonte temporale in cui almeno un fattore produttivo è \textbf{fisso} (generalmente il capitale $K = \bar{K}$, ovvero gli impianti, i macchinari e i fabbricati). L'output può variare unicamente modificando l'impiego del fattore \textbf{variabile} ($L$).
+    \item \textbf{Lungo Periodo}: orizzonte temporale sufficientemente esteso affinché l'impresa possa variare liberamente tutti i fattori produttivi ($L$ e $K$), modificando la dimensione e la tecnologia dell'intero impianto.
+\end{itemize}
+\end{definizione}
+
+\section{La Produzione nel Breve Periodo: Rendimenti Decrescenti}
+
+Nel breve periodo, con capitale costante $K = \bar{K}$, la funzione di produzione si riduce a una funzione della sola variabile lavoro: $Q = F(L, \bar{K}) = f(L)$.
+
+\begin{definizione}{Produttività Totale, Media e Marginale}{produttivita_lavoro}
+Data la funzione di produzione di breve periodo $Q = f(L)$:
+\begin{itemize}
+    \item \textbf{Prodotto Totale ($\mathrm{PT}_L$)}: la quantità fisica complessiva di output $Q = f(L)$ realizzata con $L$ unità di lavoro.
+    \item \textbf{Prodotto Medio del Lavoro ($\mathrm{PMe}_L$)}: l'output medio generato da ciascuna unità di lavoro impiegata:
+    \begin{equation}
+        \mathrm{PMe}_L = \frac{Q}{L} = \frac{f(L)}{L}
+    \end{equation}
+    Geometricamente rappresenta la pendenza della retta secante passante per l'origine e per il punto $(L, f(L))$.
+    \item \textbf{Prodotto Marginale del Lavoro ($\mathrm{PMg}_L$)}: la variazione infinitesimale dell'output derivante dall'impiego di un'unità infinitesima addizionale di lavoro:
+    \begin{equation}
+        \mathrm{PMg}_L = \dv{Q}{L} = f'(L)
+    \end{equation}
+    Geometricamente rappresenta la pendenza della retta tangente alla funzione di produzione nel punto $L$.
+\end{itemize}
+\end{definizione}
+
+\begin{legge}{Legge dei Rendimenti Marginali Decrescenti}{rendimenti_marginali_decrescenti}
+Aggiungendo quantità successive di un fattore variabile ($L$) a una quantità fissa di un altro fattore ($\bar{K}$), esiste una soglia oltre la quale gli incrementi addizionali di output diventano via via minori, ovvero la produttività marginale del lavoro è decrescente:
+\begin{equation}
+    \dv{\mathrm{PMg}_L}{L} = \dvtwo{Q}{L} = f''(L) < 0
+\end{equation}
+\end{legge}
+
+\begin{osservazione}[Fondamento Ingegneristico dei Rendimenti Decrescenti]
+La legge dei rendimenti decrescenti non deriva da una minore abilità dei lavoratori aggiunti (i quali sono assunti con identica qualifica), bensì dal fenomeno della \textbf{saturazione e congestione del fattore fisso}. In un impianto industriale (o in un bar, o in un laboratorio informatico), il numero di macchinari, utensili e postazioni di lavoro è limitato. Quando si aumentano i lavoratori, ciascun operatore dispone di una quota via via minore di capitale per svolgere la propria attività; insorgono tempi di attesa per l'uso delle macchine, intralci fisici negli spazi produttivi e colli di bottiglia logistici, riducendo l'apporto marginale di ciascun lavoratore aggiuntivo.
+\end{osservazione}
+
+\begin{teorema}{Relazione Geometrica tra Prodotto Marginale e Prodotto Medio}{relazione_pmg_pme}
+La curva del prodotto marginale $\mathrm{PMg}_L$ interseca la curva del prodotto medio $\mathrm{PMe}_L$ esattamente nel punto di \textbf{massimo} del prodotto medio:
+\begin{equation}
+    \dv{\mathrm{PMe}_L}{L} = 0 \iff \mathrm{PMg}_L = \mathrm{PMe}_L
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Calcoliamo la derivata prima della funzione $\mathrm{PMe}_L = \frac{f(L)}{L}$ rispetto a $L$ applicando la regola del quoziente:
+\begin{equation*}
+    \dv{\mathrm{PMe}_L}{L} = \dv{}{L}\left(\frac{f(L)}{L}\right) = \frac{f'(L) \cdot L - f(L) \cdot 1}{L^2} = \frac{1}{L}\left[ f'(L) - \frac{f(L)}{L} \right] = \frac{\mathrm{PMg}_L - \mathrm{PMe}_L}{L}
+\end{equation*}
+Dalla relazione differenziale si deducono tre proprietà:
+\begin{enumerate}
+    \item Se $\mathrm{PMg}_L > \mathrm{PMe}_L \implies \dv{\mathrm{PMe}_L}{L} > 0$: il prodotto medio è strettamente crescente;
+    \item Se $\mathrm{PMg}_L < \mathrm{PMe}_L \implies \dv{\mathrm{PMe}_L}{L} < 0$: il prodotto medio è strettamente decrescente;
+    \item Se $\mathrm{PMg}_L = \mathrm{PMe}_L \implies \dv{\mathrm{PMe}_L}{L} = 0$: il prodotto medio è stazionario e raggiunge il suo valore massimo.
+\end{enumerate}
+\end{dimostrazione}
+
+\section{La Produzione nel Lungo Periodo: Isoquanti e SMST}
+
+Nel lungo periodo entrambi i fattori $L$ e $K$ sono variabili. L'impresa può produrre un dato volume di output $Q_0$ selezionando diverse combinazioni alternative di capitale e lavoro.
+
+\begin{definizione}{Isoquanto di Produzione}{isoquanto}
+Un \textbf{isoquanto} è il luogo geometrico di tutte le combinazioni di fattori produttivi $(L, K)$ che consentono di realizzare esattamente il medesimo livello prefissato di output $Q_0$:
+\begin{equation}
+    \mathcal{I}(Q_0) = \{ (L, K) \in \R_+^2 \mid F(L, K) = Q_0 \}
+\end{equation}
+Proprietà della mappa degli isoquanti per tecnologie regolari:
+\begin{enumerate}
+    \item \textbf{Monotonicità (Pendenza Negativa)}: per mantenere invariato l'output, la riduzione di un fattore deve essere compensata dall'aumento dell'altro.
+    \item \textbf{Convessità Stretta verso l'Origine}: la sostituibilità marginale del fattore abbondante rispetto al fattore scarso è decrescente.
+    \item \textbf{Non Intersezione}: isoquanti associati a livelli di output differenti non possono intersecarsi (principio di coerenza tecnologica).
+    \item \textbf{Ordinamento Crescente}: allontanandosi dall'origine verso nord-est si raggiungono isoquanti associati a volumi di output via via maggiori.
+\end{enumerate}
+\end{definizione}
+
+\begin{definizione}{Saggio Marginale di Sostituzione Tecnica (SMST)}{smst}
+Il \textbf{Saggio Marginale di Sostituzione Tecnica} ($\SMST$) misura il saggio al quale l'impresa può sostituire il capitale con il lavoro mantenendo costante il livello di output prodotto:
+\begin{equation}
+    \SMST_{L, K} = -\left. \dv{K}{L} \right|_{Q = \bar{Q}} = \frac{\mathrm{PMg}_L}{\mathrm{PMg}_K} = \frac{\pdv{F}{L}}{\pdv{F}{K}}
+\end{equation}
+\end{definizione}
+
+\begin{dimostrazione}
+Consideriamo il differenziale totale della funzione di produzione lungo l'isoquanto $F(L, K) = \bar{Q}$:
+\begin{equation*}
+    \dd Q = \pdv{F}{L} \dd L + \pdv{F}{K} \dd K = \mathrm{PMg}_L \dd L + \mathrm{PMg}_K \dd K = 0
+\end{equation*}
+Riorganizzando i termini:
+\begin{equation*}
+    \mathrm{PMg}_K \dd K = -\mathrm{PMg}_L \dd L \implies \left. \dv{K}{L} \right|_{\bar{Q}} = -\frac{\mathrm{PMg}_L}{\mathrm{PMg}_K}
+\end{equation*}
+Prendendo il valore assoluto della pendenza, si ottiene $\SMST_{L, K} = \frac{\mathrm{PMg}_L}{\mathrm{PMg}_K}$.
+\end{dimostrazione}
+
+\subsection{Tipologie di Funzioni di Produzione}
+\begin{enumerate}
+    \item \textbf{Funzione di Produzione Cobb-Douglas}:
+    \begin{equation}
+        Q = A L^\alpha K^\beta \quad (A > 0, \alpha > 0, \beta > 0)
+    \end{equation}
+    Le produttività marginali sono $\mathrm{PMg}_L = \alpha A L^{\alpha-1} K^\beta$ e $\mathrm{PMg}_K = \beta A L^\alpha K^{\beta-1}$. Il saggio marginale è:
+    \begin{equation}
+        \SMST = \frac{\alpha A L^{\alpha-1} K^\beta}{\beta A L^\alpha K^{\beta-1}} = \frac{\alpha}{\beta} \frac{K}{L}
+    \end{equation}
+    Gli isoquanti sono rami di iperbole asintotici agli assi: non è ammessa la produzione con un solo fattore ($F(0, K) = F(L, 0) = 0$).
+    
+    \item \textbf{Funzione di Produzione Leontief (Proporzioni Fisse / Perfetti Complementi)}:
+    \begin{equation}
+        Q = \min\{aL, bK\} \quad (a, b > 0)
+    \end{equation}
+    I fattori devono essere impiegati nell'esatta proporzione tecnica $aL = bK \iff K = \frac{a}{b} L$. Gli isoquanti sono curve ad angolo retto (a forma di L). Le produttività marginali sono nulle lungo i tratti orizzontali e verticali (violazione della monotonicità rigorosa). Esempi: un autista per camion, una tastiera per computer.
+    
+    \item \textbf{Funzione di Produzione a Perfetti Sostituti (Lineare)}:
+    \begin{equation}
+        Q = aL + bK \quad (a, b > 0)
+    \end{equation}
+    Gli isoquanti sono rette parallele con pendenza costante $\SMST = a/b$. Il tasso di sostituibilità è invariante rispetto alla scala.
+\end{enumerate}
+
+\section{I Rendimenti di Scala e le Fonti delle Economie di Scala}
+
+Mentre la produttività marginale descrive la variazione di output al variare di \textit{un singolo fattore} a parità degli altri (breve periodo), i \textbf{rendimenti di scala} descrivono la risposta dell'output alla variazione \textit{simultanea e proporzionale di tutti i fattori produttivi} (lungo periodo).
+
+\begin{definizione}{Rendimenti di Scala}{rendimenti_scala}
+Moltiplicando tutti gli input per una costante scalare $\lambda > 1$:
+\begin{itemize}
+    \item \textbf{Rendimenti di Scala Costanti (CRS)}: $F(\lambda L, \lambda K) = \lambda F(L, K)$. L'output aumenta nella medesima proporzione degli input. I costi medi di lungo periodo rimangono costanti.
+    \item \textbf{Rendimenti di Scala Crescenti (IRS) / Economie di Scala}: $F(\lambda L, \lambda K) > \lambda F(L, K)$. L'output aumenta più che proporzionalmente rispetto agli input. I costi medi di lungo periodo sono decrescenti rispetto alla dimensione aziendale.
+    \item \textbf{Rendimenti di Scala Decrescenti (DRS) / Diseconomie di Scala}: $F(\lambda L, \lambda K) < \lambda F(L, K)$. L'output aumenta meno che proporzionalmente. I costi medi di lungo periodo sono crescenti.
+\end{itemize}
+Per una funzione Cobb-Douglas $Q = A L^\alpha K^\beta$:
+\begin{equation}
+    F(\lambda L, \lambda K) = A (\lambda L)^\alpha (\lambda K)^\beta = \lambda^{\alpha + \beta} A L^\alpha K^\beta = \lambda^{\alpha + \beta} F(L, K)
+\end{equation}
+I rendimenti sono crescenti se $\alpha + \beta > 1$, costanti se $\alpha + \beta = 1$, decrescenti se $\alpha + \beta < 1$.
+\end{definizione}
+
+\subsection{Fonti Economico-Ingegneristiche delle Economie di Scala}
+Come evidenziato dalle sbobine di lezione, le economie di scala derivano da precise determinanti fisiche, gestionali e tecnologiche:
+\begin{enumerate}
+    \item \textbf{Specializzazione e Divisione del Lavoro} (Teorema di Smith-Young-Stigler): nei processi discreti di montaggio (es. manifattura automobilistica, fabbrica di spilli di Adam Smith), la produzione su larga scala consente la suddivisione delle mansioni complesse in operazioni elementari, con tre vantaggi: aumento della destrezza (\textit{dexterity}), azzeramento dei tempi morti e dei costi di setup per cambio lavorazione, e introduzione di macchinari dedicati e automatizzati.
+    \item \textbf{Relazioni Geometriche Superficie-Volume (Legge dei Due Terzi)}: nelle industrie di processo (chimica, petrolchimica, metallurgia, impianti navali e serbatoi), il costo di costruzione dell'impianto (costo fisso) è proporzionale alla superficie esterna del contenitore ($S \propto r^2$), mentre la capacità produttiva è proporzionale al volume interno ($V \propto r^3$). Poiché $S \propto V^{2/3}$, raddoppiando il volume la superficie (e il relativo costo di fabbricazione) aumenta solo di circa il 58{,}7\%, generando una sensibile riduzione del costo medio per unità di capacità.
+    \item \textbf{Principio delle Riserve Ammassate e Legge dei Grandi Numeri}: gli impianti industriali devono detenere scorte di ricambio e capacità di riserva per fronteggiare eventi stocastici (guasti ai macchinari, manutenzioni straordinarie). In virtù della Legge dei Grandi Numeri, all'aumentare del numero di macchinari la varianza percentuale dei guasti diminuisce; la capacità di riserva necessaria cresce meno che proporzionalmente rispetto alla dimensione complessiva.
+    \item \textbf{Indivisibilità Tecnologiche}: determinati asset fisici non sono frazionabili in dosi piccole a piacere (es. noccioli di reattori nucleari, forni di fusione dell'acciaio). Il progresso tecnologico può tuttavia abbassare la soglia di indivisibilità (es. comparsa delle mini-acciaierie \textit{minimills} o dei microbirrifici artigianali).
+    \item \textbf{Economie di Scala Gestionali e Pecuniarie}: indivisibilità negli investimenti in Ricerca e Sviluppo (R\&S nel settore farmaceutico e aerospaziale, dove una molecola o un velivolo richiedono miliardi di euro indipendentemente dalle unità prodotte), investimenti pubblicitari (soglia di attenzione del consumatore) e maggior potere contrattuale nei confronti di banche (tassi di interesse inferiori per minor rischio di default) e fornitori (sconti su grandi volumi).
+\end{enumerate}
+
+\begin{esame}[Distinzione Fondamentale tra Rendimenti Marginali e Rendimenti di Scala]
+All'esame è essenziale non confondere mai i due concetti:
+\begin{itemize}
+    \item \textbf{Rendimenti Marginali Decrescenti (Breve Periodo)}: descrivono cosa accade all'output variando \textbf{un solo fattore} variabile ($L$) mantenendo fisso il capitale ($K = \bar{K}$). Sono dovuti alla congestione fisica dell'impianto e implicano curve dei costi marginali e medi di breve periodo a forma di U.
+    \item \textbf{Rendimenti di Scala (Lungo Periodo)}: descrivono cosa accade all'output variando \textbf{tutti i fattori} nella stessa proporzione ($\lambda > 1$). Possono essere crescenti (economie di scala) anche se ciascun fattore preso singolarmente presenta produttività marginale decrescente (come nella funzione Cobb-Douglas $Q = L^{0{,}6} K^{0{,}6}$ dove $\alpha + \beta = 1{,}2 > 1$).
+\end{itemize}
+\end{esame}
+
+\subsection{Economie di Scopo (Varietà) ed Economie di Apprendimento}
+\begin{definizione}{Economie di Scopo e Curva di Apprendimento}{economie_scopo_apprendimento}
+\begin{itemize}
+    \item \textbf{Economie di Scopo (Economies of Scope)}: si verificano quando la produzione congiunta di due o più beni distinti ($Q_1, Q_2$) all'interno di un'unica impresa multi-prodotto è meno costosa della loro produzione separata in due imprese specializzate:
+    \begin{equation}
+        \CT(Q_1, Q_2) < \CT(Q_1, 0) + \CT(0, Q_2)
+    \end{equation}
+    Ciò accade grazie alla condivisione di fattori produttivi comuni (es. piattaforme modulari per autovetture, reti di distribuzione comuni, impianti flessibili).
+    \item \textbf{Economie di Apprendimento (Learning Curve)}: descrivono la riduzione del costo unitario del lavoro e del costo medio di prodotto all'aumentare della \textbf{produzione cumulata} nel tempo ($X = \sum_{t=1}^T Q_t$), per effetto dell'esperienza acquisita da operai, ingegneri e manager:
+    \begin{equation}
+        Y(X) = Y_1 X^{-b} \quad (0 < b < 1)
+    \end{equation}
+    dove $Y(X)$ è il fabbisogno di ore-lavoro per la $X$-esima unità, $Y_1$ è il tempo della prima unità e $b$ è il coefficiente di apprendimento.
+\end{itemize}
+\end{definizione}
+
+\section{La Scelta Ottima dei Fattori e la Minimizzazione dei Costi}
+
+Per produrre un dato volume di output $\bar{Q}$ al costo minimo, l'impresa risolve un problema di ottimizzazione vincolata.
+
+\begin{modello}{Minimizzazione Vincolata del Costo di Produzione}{minimizzazione_costo}
+Dati il prezzo unitario del lavoro $w$ (salario) e del capitale $r$ (tasso d'interesse / costo d'uso del capitale):
+\begin{equation}
+    \min_{L, K} \CT = wL + rK \quad \text{sotto il vincolo} \quad F(L, K) = \bar{Q}
+\end{equation}
+La funzione Lagrangiana associata è:
+\begin{equation}
+    \mathcal{L}(L, K, \lambda) = wL + rK + \lambda(\bar{Q} - F(L, K))
+\end{equation}
+Le condizioni del primo ordine forniscono:
+\begin{equation}
+    \begin{cases}
+        \pdv{\mathcal{L}}{L} = w - \lambda \pdv{F}{L} = 0 \implies w = \lambda \, \mathrm{PMg}_L \\[1ex]
+        \pdv{\mathcal{L}}{K} = r - \lambda \pdv{F}{K} = 0 \implies r = \lambda \, \mathrm{PMg}_K \\[1ex]
+        \pdv{\mathcal{L}}{\lambda} = \bar{Q} - F(L, K) = 0
+    \end{cases}
+\end{equation}
+Dividendo membro a membro le prime due equazioni:
+\begin{equation}
+    \frac{\mathrm{PMg}_L}{\mathrm{PMg}_K} = \frac{w}{r} \iff \SMST_{L, K} = \frac{w}{r} \iff \frac{\mathrm{PMg}_L}{w} = \frac{\mathrm{PMg}_K}{r}
+    \label{eq:ottimo_fattori}
+\end{equation}
+\end{modello}
+
+\begin{teorema}{Uguaglianza delle Produttività Marginali Ponderate}{produttivita_ponderata}
+La combinazione ottima dei fattori produttivi richiede la tangenza tra l'isoquanto $F(L, K) = \bar{Q}$ e la retta di isocosto più bassa: il Saggio Marginale di Sostituzione Tecnica deve eguagliare il rapporto tra i prezzi dei fattori ($w/r$). Equivalentemente, l'apporto produttivo generato dall'ultimo euro speso in lavoro deve eguagliare quello generato dall'ultimo euro speso in capitale:
+\begin{equation}
+    \frac{\mathrm{PMg}_L}{w} = \frac{\mathrm{PMg}_K}{r} = \frac{1}{\lambda} = \frac{1}{\CMg}
+\end{equation}
+\end{teorema}
+
+\begin{definizione}{Retta di Isocosto e Sentiero di Espansione}{isocosto_sep}
+\begin{itemize}
+    \item \textbf{Retta di Isocosto}: luogo geometrico delle combinazioni $(L, K)$ associate al medesimo costo totale $\CT_0$:
+    \begin{equation}
+        \CT_0 = wL + rK \iff K = \frac{\CT_0}{r} - \frac{w}{r}L
+    \end{equation}
+    Pendenza pari a $-w/r$, intercetta verticale pari a $\CT_0/r$, intercetta orizzontale pari a $\CT_0/w$.
+    \item \textbf{Sentiero di Espansione della Produzione (SEP)}: luogo geometrico di tutti i punti di tangenza ottimi $(\SMST = w/r)$ al variare del volume di output desiderato $\bar{Q}$.
+\end{itemize}
+\end{definizione}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        width=12cm,
+        height=8cm,
+        axis lines=left,
+        xlabel={Lavoro ($L$)},
+        ylabel={Capitale ($K$)},
+        xmin=0, xmax=10,
+        ymin=0, ymax=10,
+        xtick={2, 4.5, 7.5},
+        xticklabels={$L_1^*$, $L_2^*$, $L_3^*$},
+        ytick={2, 4.5, 7.5},
+        yticklabels={$K_1^*$, $K_2^*$, $K_3^*$},
+        grid=both,
+        grid style={dotted, gray!30}
+    ]
+        % Rette di Isocosto: pendenza -1 (w/r = 1)
+        \addplot[domain=0:4, samples=10, thick, crimsonred!70] {4 - x};
+        \addplot[domain=0:9, samples=10, thick, crimsonred] {9 - x};
+        \addplot[domain=0:10, samples=10, thick, crimsonred!70] {15 - x};
+        
+        % Isoquanti: iperboli K = Q^2 / L (Cobb-Douglas L^0.5 K^0.5 = Q -> K = Q^2/L)
+        % Q1 = 2 -> K = 4/L
+        \addplot[domain=0.5:9, samples=100, ultra thick, navyblue] {4/x};
+        \node[font=\footnotesize, navyblue] at (axis cs:8.5, 0.9) {$Q_1 = 20$};
+        
+        % Q2 = 4.5 -> K = 20.25/L -> tangenza in L=4.5, K=4.5 (4.5+4.5 = 9)
+        \addplot[domain=2.2:9, samples=100, ultra thick, navyblue] {20.25/x};
+        \node[font=\footnotesize, navyblue] at (axis cs:8.5, 2.9) {$Q_2 = 45$};
+        
+        % Q3 = 7.5 -> K = 56.25/L -> tangenza in L=7.5, K=7.5 (7.5+7.5 = 15)
+        \addplot[domain=5.8:9.8, samples=100, ultra thick, navyblue] {56.25/x};
+        \node[font=\footnotesize, navyblue] at (axis cs:9.5, 6.3) {$Q_3 = 75$};
+        
+        % Punti di Ottimo (Tangenza)
+        \node[circle, fill=forestgreen, inner sep=2pt, label={above right:\footnotesize $E_1$}] at (axis cs:2, 2) {};
+        \node[circle, fill=forestgreen, inner sep=2pt, label={above right:\footnotesize $E_2$}] at (axis cs:4.5, 4.5) {};
+        \node[circle, fill=forestgreen, inner sep=2pt, label={above right:\footnotesize $E_3$}] at (axis cs:7.5, 7.5) {};
+        
+        % Sentiero di Espansione della Produzione (SEP)
+        \addplot[domain=0:9, samples=10, ultra thick, forestgreen, dashed] {x};
+        \node[font=\footnotesize, forestgreen, rotate=45] at (axis cs:6, 6.6) {\textbf{Sentiero di Espansione (SEP)}};
+    \end{axis}
+\end{tikzpicture}
+\caption{Minimizzazione dei costi di produzione e Sentiero di Espansione della Produzione (SEP): per ogni livello di output, la combinazione ottima dei fattori $(L^*, K^*)$ è individuata dal punto di tangenza tra l'isoquanto e la retta di isocosto a pendenza $-w/r$.}
+\label{fig:isoquanti_isocosti_sep}
+\end{figure}
+
+\section{La Struttura delle Curve di Costo di Breve e Lungo Periodo}
+
+\subsection{Costi di Breve Periodo: Dualità con la Produzione}
+Nel breve periodo la spesa per i fattori si scinde in costi fissi e variabili:
+\begin{equation}
+    \CT(Q) = \CF + \CV(Q) = r\bar{K} + wL(Q)
+\end{equation}
+\begin{definizione}{Curve di Costo Unitario di Breve Periodo}{costi_unitari_breve}
+\begin{itemize}
+    \item \textbf{Costo Medio Fisso}: $\CMEF(Q) = \frac{\CF}{Q}$ (iperbole equilatera asintotica a entrambi gli assi).
+    \item \textbf{Costo Medio Variabile}: $\CMEV(Q) = \frac{\CV(Q)}{Q} = \frac{wL}{Q} = \frac{w}{\mathrm{PMe}_L}$.
+    \item \textbf{Costo Medio Totale}: $\CME(Q) = \frac{\CT(Q)}{Q} = \CMEF(Q) + \CMEV(Q)$.
+    \item \textbf{Costo Marginale}: $\CMg(Q) = \dv{\CT}{Q} = \dv{\CV}{Q} = w \dv{L}{Q} = \frac{w}{\mathrm{PMg}_L}$.
+\end{itemize}
+\end{definizione}
+
+\begin{teorema}{Dualità Produzione-Costi e Forma a U delle Curve}{dualita_costi}
+In virtù delle relazioni $\CMg = \frac{w}{\mathrm{PMg}_L}$ e $\CMEV = \frac{w}{\mathrm{PMe}_L}$:
+\begin{enumerate}
+    \item Quando la produttività marginale $\mathrm{PMg}_L$ cresce, il costo marginale $\CMg$ decresce;
+    \item Nel punto di massimo di $\mathrm{PMg}_L$, il costo marginale tocca il suo punto di \textbf{minimo};
+    \item Quando interviene la legge dei rendimenti marginali decrescenti ($\mathrm{PMg}_L$ decresce), il costo marginale $\CMg$ cresce monotonicamente;
+    \item Nel punto di massimo di $\mathrm{PMe}_L$, il costo medio variabile $\CMEV$ tocca il suo punto di \textbf{minimo}.
+    \item La curva $\CMg$ taglia sia la curva $\CMEV$ sia la curva $\CME$ nei loro rispettivi punti di minimo ($\dv{\CME}{Q} = \frac{\CMg - \CME}{Q} = 0 \iff \CMg = \CME$).
+\end{enumerate}
+\end{teorema}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        width=13cm,
+        height=7.8cm,
+        axis lines=left,
+        xlabel={Quantità Prodotta ($Q$)},
+        ylabel={Costo Unitario (\euro{}/unità)},
+        xmin=0, xmax=10,
+        ymin=0, ymax=45,
+        xtick={2.5, 4.3, 5.8},
+        xticklabels={$Q_{\text{min, CMg}}$, $Q_{\text{fuga}}$, $Q_{\text{pareggio}}$},
+        grid=both,
+        grid style={dotted, gray!30}
+    ]
+        % Costo Fisso Medio CMEF = 35/Q
+        \addplot[domain=1:9.5, samples=100, thick, gray, dotted] {35/x};
+        \node[font=\scriptsize, gray] at (axis cs:9, 5) {$\CMEF(Q)$};
+        
+        % Costo Medio Variabile CMEV = 10 - 2.5*x + 0.35*x^2
+        \addplot[domain=0.8:9.5, samples=100, thick, tealblue] {10 - 2.5*x + 0.35*x^2};
+        \node[font=\footnotesize, tealblue] at (axis cs:9.2, 17) {$\CMEV(Q)$};
+        
+        % Costo Medio Totale CME = CMEF + CMEV
+        \addplot[domain=1.2:9.5, samples=100, ultra thick, navyblue] {35/x + 10 - 2.5*x + 0.35*x^2};
+        \node[font=\footnotesize, navyblue] at (axis cs:9.2, 28) {$\CME(Q)$};
+        
+        % Costo Marginale CMg = 10 - 5*x + 1.05*x^2
+        \addplot[domain=0.5:8.5, samples=100, ultra thick, crimsonred] {10 - 5*x + 1.05*x^2};
+        \node[font=\footnotesize, crimsonred] at (axis cs:8.2, 42) {$\CMg(Q)$};
+        
+        % Punti di minimo
+        \node[circle, fill=tealblue, inner sep=1.8pt, label={below:\footnotesize Min $\CMEV$}] at (axis cs:3.57, 5.53) {};
+        \node[circle, fill=navyblue, inner sep=1.8pt, label={above:\footnotesize Min $\CME$}] at (axis cs:5.55, 13.2) {};
+    \end{axis}
+\end{tikzpicture}
+\caption{Struttura delle curve di costo unitario di breve periodo a forma di U: la curva del costo marginale $\CMg$ interseca dal basso sia la curva del costo medio variabile $\CMEV$ (punto di fuga) sia la curva del costo medio totale $\CME$ (punto di pareggio) nei loro rispettivi minimi.}
+\label{fig:curve_costo_breve_periodo}
+\end{figure}
+
+\subsection{Modello a Costi Marginali Costanti e Break Even Point (BEP)}
+Nel contesto industriale ingegneristico e nell'economia digitale (software, piattaforme web), la congestione di breve periodo può essere trascurabile entro la capacità produttiva tecnica ($Q_{\max}$), rendendo il costo marginale costante ($\CMg = v = \text{costante}$).
+
+\begin{modello}{Modello Lineare di Break Even Point}{modello_bep}
+Data una struttura di costo lineare $\CT(Q) = \CF + vQ$ e ricavi totali lineari a prezzo dato $\RT(Q) = pQ$:
+\begin{equation}
+    \profit(Q) = pQ - (\CF + vQ) = (p - v)Q - \CF
+\end{equation}
+dove $(p - v)$ rappresenta il \textbf{Margine di Contribuzione Unitario} (l'apporto di ogni unità venduta alla copertura dei costi fissi e alla generazione di profitto).
+\begin{itemize}
+    \item \textbf{Punto di Pareggio (Break Even Point, $Q_{\text{BEP}}$)}: il volume di vendite in corrispondenza del quale i profitti si annullano ($\profit = 0$):
+    \begin{equation}
+        (p - v)Q_{\text{BEP}} = \CF \implies Q_{\text{BEP}} = \frac{\CF}{p - v}
+    \end{equation}
+    \item \textbf{Margine di Sicurezza ($MS$)}: la percentuale di contrazione delle vendite che l'impresa può sopportare prima di entrare nell'area delle perdite:
+    \begin{equation}
+        MS = \frac{Q_{\max} - Q_{\text{BEP}}}{Q_{\max}} \times 100\%
+    \end{equation}
+\end{itemize}
+\end{modello}
+
+\subsection{Costi di Lungo Periodo: La Curva di Inviluppo e la Scala Minima Efficiente}
+Nel lungo periodo, potendo scegliere la dimensione ottimale dell'impianto ($K_1, K_2, K_3, \dots$), l'impresa seleziona per ogni livello di produzione $Q$ l'impianto che minimizza il costo medio totale.
+
+\begin{teorema}{Curva di Costo Medio di Lungo Periodo ($LAC$) come Inviluppo}{teorema_inviluppo_lac}
+La curva del costo medio di lungo periodo ($LAC$) è la \textbf{curva di inviluppo inferiore} di tutte le curve di costo medio di breve periodo ($SAC_1, SAC_2, SAC_3, \dots$):
+\begin{equation}
+    LAC(Q) = \min_{K} SAC(Q; K)
+\end{equation}
+Per ogni livello di output $Q$, la curva $LAC$ è tangente a una e una sola curva $SAC$.
+\begin{itemize}
+    \item Nel tratto delle \textbf{economie di scala} ($LAC$ decrescente), la tangenza avviene sul ramo decrescente delle curve $SAC$ (l'impresa opera con capacità produttiva in eccesso rispetto al minimo di breve periodo dell'impianto);
+    \item Nel punto di \textbf{minimo assoluto di $LAC$}, la tangenza coincide esattamente con il punto di minimo della curva $SAC$;
+    \item Nel tratto delle \textbf{diseconomie di scala} ($LAC$ crescente), la tangenza avviene sul ramo crescente delle curve $SAC$.
+\end{itemize}
+\end{teorema}
+
+\begin{definizione}{Dimensione Ottima Minima (DOM) o Scala Minima Efficiente (SME)}{dom_sme}
+La \textbf{Dimensione Ottima Minima} (DOM / SME) è il livello minimo di produzione in corrispondenza del quale si esauriscono le economie di scala e la curva $LAC$ raggiunge il suo valore minimo. Metodi di stima: stime ingegneristiche dei costi d'impianto, analisi statistica econometrica e metodo del \textit{Survival Test} di George Stigler (osservazione delle quote dimensionali delle imprese che sopravvivono nel lungo periodo).
+\end{definizione}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+        width=13.5cm,
+        height=7.8cm,
+        axis lines=left,
+        xlabel={Volume di Produzione ($Q$)},
+        ylabel={Costo Medio Unitario (\euro{})},
+        xmin=0, xmax=14,
+        ymin=0, ymax=45,
+        xtick={3.5, 7, 10.5},
+        xticklabels={$Q_1$, $\text{DOM} / \text{SME}$, $Q_3$},
+        grid=both,
+        grid style={dotted, gray!30}
+    ]
+        % SAC1 (Impianto piccolo)
+        \addplot[domain=1.5:6.5, samples=60, thick, navyblue!60] {25 + 1.8*(x - 3.5)^2};
+        \node[font=\scriptsize, navyblue] at (axis cs:2.5, 33) {$SAC_1$};
+        
+        % SAC2 (Impianto medio efficiente)
+        \addplot[domain=4.5:9.5, samples=60, thick, forestgreen!70] {12 + 1.2*(x - 7)^2};
+        \node[font=\scriptsize, forestgreen] at (axis cs:6, 22) {$SAC_2$};
+        
+        % SAC3 (Impianto grande)
+        \addplot[domain=8:13, samples=60, thick, crimsonred!60] {20 + 1.5*(x - 10.5)^2};
+        \node[font=\scriptsize, crimsonred] at (axis cs:12, 33) {$SAC_3$};
+        
+        % Curva Inviluppo LAC
+        \addplot[domain=1.8:12.5, samples=100, ultra thick, navyblue] {12 + 0.35*(x - 7)^2};
+        \node[font=\footnotesize, navyblue] at (axis cs:12.5, 23) {\textbf{$LAC$ (Inviluppo)}};
+        
+        % Minimo assoluto DOM
+        \node[circle, fill=forestgreen, inner sep=2.2pt] at (axis cs:7, 12) {};
+        \draw[dotted, thick, black] (axis cs:7, 0) -- (axis cs:7, 12);
+        
+        % Annotazioni zone
+        \draw[<->, thick, navyblue] (axis cs:1.8, 5) -- (axis cs:6.8, 5) node[midway, above, font=\scriptsize] {Economie di Scala};
+        \draw[<->, thick, crimsonred] (axis cs:7.2, 5) -- (axis cs:12.5, 5) node[midway, above, font=\scriptsize] {Diseconomie di Scala};
+    \end{axis}
+\end{tikzpicture}
+\caption{Curva di costo medio di lungo periodo ($LAC$) come inviluppo inferiore delle curve di costo medio di breve periodo ($SAC_1, SAC_2, SAC_3$), con evidenziazione della Dimensione Ottima Minima (DOM/SME).}
+\label{fig:inviluppo_lac}
+\end{figure}
+
+\section{Metodo Operativo ed Esercizi Svolti}
+
+\begin{metodo}[Derivazione della Funzione di Costo Totale da Funzione di Produzione]
+Per determinare la funzione di costo totale di lungo periodo $\CT(Q)$:
+\begin{enumerate}
+    \item Calcolare le produttività marginali $\mathrm{PMg}_L = \pdv{F}{L}$ e $\mathrm{PMg}_K = \pdv{F}{K}$.
+    \item Impostare la condizione di ottima combinazione dei fattori: $\frac{\mathrm{PMg}_L}{\mathrm{PMg}_K} = \frac{w}{r}$.
+    \item Esplicitare una variabile (es. $K$) in funzione dell'altra ($L$): $K = g(L; w, r)$.
+    \item Sostituire l'espressione di $K$ nella funzione di produzione $F(L, g(L)) = Q$ e ricavare le \textbf{domande condizionate dei fattori} $L^*(Q)$ e $K^*(Q)$.
+    \item Sostituire $L^*(Q)$ e $K^*(Q)$ nell'equazione di spesa $\CT(Q) = w L^*(Q) + r K^*(Q)$.
+\end{enumerate}
+\end{metodo}
+
+\begin{esercizio}[Ottima Combinazione dei Fattori con Funzione Cobb-Douglas]
+Un'impresa manifatturiera adotta la tecnologia $Q = 2 L^{1/2} K^{1/2}$. I prezzi unitari dei fattori sono $w = 10\text{ \euro{}}$ per il lavoro e $r = 40\text{ \euro{}}$ per il capitale.
+\textbf{Quesiti}:
+\begin{enumerate}
+    \item Determinare la relazione ottima tra capitale e lavoro lungo il sentiero di espansione.
+    \item Ricavare le funzioni di domanda condizionata dei fattori $L^*(Q)$ e $K^*(Q)$.
+    \item Determinare la funzione di costo totale di lungo periodo $\CT(Q)$, il costo medio $LAC(Q)$ e il costo marginale $LMC(Q)$.
+\end{enumerate}
+
+\tcbline
+\textbf{Svolgimento Dettagliato}:
+\begin{enumerate}
+    \item \textit{Condizione di tangenza $\SMST = w/r$}:
+    \begin{align*}
+        \mathrm{PMg}_L &= \pdv{Q}{L} = 2 \cdot \frac{1}{2} L^{-1/2} K^{1/2} = \sqrt{\frac{K}{L}} \\
+        \mathrm{PMg}_K &= \pdv{Q}{K} = 2 \cdot \frac{1}{2} L^{1/2} K^{-1/2} = \sqrt{\frac{L}{K}} \\
+        \SMST &= \frac{\mathrm{PMg}_L}{\mathrm{PMg}_K} = \frac{\sqrt{K/L}}{\sqrt{L/K}} = \frac{K}{L}
+    \end{align*}
+    Uguagliando al rapporto tra i prezzi dei fattori:
+    \begin{equation*}
+        \frac{K}{L} = \frac{w}{r} = \frac{10}{40} = \frac{1}{4} \implies L = 4K \iff K = \frac{1}{4} L
+    \end{equation*}
+    
+    \item \textit{Domande condizionate dei fattori}:
+    Sostituendo $K = L/4$ nella funzione di produzione:
+    \begin{equation*}
+        Q = 2 L^{1/2} \left(\frac{L}{4}\right)^{1/2} = 2 L^{1/2} \frac{L^{1/2}}{2} = L \implies L^*(Q) = Q
+    \end{equation*}
+    Di conseguenza:
+    \begin{equation*}
+        K^*(Q) = \frac{1}{4} L^*(Q) = \frac{1}{4} Q
+    \end{equation*}
+    
+    \item \textit{Funzione di costo totale, medio e marginale}:
+    \begin{align*}
+        \CT(Q) &= w L^*(Q) + r K^*(Q) = 10(Q) + 40\left(\frac{1}{4} Q\right) = 10Q + 10Q = 20Q \\
+        LAC(Q) &= \frac{\CT(Q)}{Q} = \frac{20Q}{Q} = 20\text{ \euro{}/unità} \\
+        LMC(Q) &= \dv{\CT}{Q} = 20\text{ \euro{}/unità}
+    \end{align*}
+    Poiché $\alpha + \beta = 1/2 + 1/2 = 1$, la tecnologia presenta rendimenti costanti di scala: i costi medi e marginali di lungo periodo sono perfettamente costanti e pari a $20\text{ \euro{}/unità}$.
+\end{enumerate}
+\end{esercizio}

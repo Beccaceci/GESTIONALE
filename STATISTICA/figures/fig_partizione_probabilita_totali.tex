@@ -1,0 +1,27 @@
+\begin{tikzpicture}[scale=0.9]
+    % Rettangolo dello spazio campionario
+    \draw[thick, navyblue, rounded corners=4pt] (-4,-2.5) rectangle (4,2.5);
+    \node[navyblue, font=\bfseries\small, anchor=north east] at (3.8,2.3) {$S$};
+
+    % Linee di partizione verticali e orizzontali
+    \draw[thick, dashed, gray!70] (-1.5,-2.5) -- (-1.5,2.5);
+    \draw[thick, dashed, gray!70] (1.2,-2.5) -- (1.2,2.5);
+    \draw[thick, dashed, gray!70] (-4,0) -- (-1.5,0);
+    \draw[thick, dashed, gray!70] (1.2,0.3) -- (4,0.3);
+
+    % Etichette della partizione
+    \node[font=\bfseries\small, gray!80!black] at (-2.8,1.3) {$F_1$};
+    \node[font=\bfseries\small, gray!80!black] at (-2.8,-1.3) {$F_2$};
+    \node[font=\bfseries\small, gray!80!black] at (-0.15,1.7) {$F_3$};
+    \node[font=\bfseries\small, gray!80!black] at (2.6,1.4) {$F_4$};
+    \node[font=\bfseries\small, gray!80!black] at (2.6,-1.2) {$F_5$};
+
+    % Evento E
+    \def\eventE{(0,-0.2) ellipse (2.6cm and 1.4cm)}
+    \fill[warmamber!30, draw=warmamber!90!black, very thick] \eventE;
+
+    \node[font=\bfseries\large, text=navyblue] at (0,-0.2) {$E$};
+    \node[font=\tiny\bfseries, text=crimsonred!90!black] at (-2.0,-0.4) {$E \cap F_2$};
+    \node[font=\tiny\bfseries, text=crimsonred!90!black] at (-0.3,-1.0) {$E \cap F_3$};
+    \node[font=\tiny\bfseries, text=crimsonred!90!black] at (1.9,-0.3) {$E \cap F_5$};
+\end{tikzpicture}

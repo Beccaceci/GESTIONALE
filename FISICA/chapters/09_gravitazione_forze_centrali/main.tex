@@ -1,0 +1,259 @@
+% ==============================================================================
+% CAPITOLO 09 - GRAVITAZIONE UNIVERSALE E FORZE CENTRALI
+% ==============================================================================
+\chapter{Gravitazione Universale e Dinamica Planetaria}
+\label{chap:gravitazione_forze_centrali}
+
+\begin{tcolorbox}[enhanced, breakable, colback=navyblue!4!white, colframe=navyblue!80!black,
+    coltitle=white, fonttitle=\bfseries\sffamily, title={Quadro Sinottico del Capitolo 09 (Corrispondenza: Lezioni 22, 23 e 24)},
+    sharp corners, rounded corners=south, boxrule=1pt]
+\textbf{Collocazione Modulare:} Parte III -- Gravitazione, Oscillazioni e Meccanica dei Fluidi\\
+\textbf{Trascrizioni di Riferimento:} \texttt{trascrizioni/Lezione\_22\_...md}, \texttt{Lezione\_23\_...md}, \texttt{Lezione\_24\_...md}\\
+\textbf{Manuale di Riferimento:} Focardi, Massa, Ugolini -- \emph{Fisica Generale: Meccanica e Termodinamica} (Capitolo 9)\\
+\textbf{Obiettivi Didattici e Competenze:}\par
+\begin{itemize}
+    \item Formulare la Legge di Gravitazione Universale di Newton, il campo gravitazionale $\vec{g}(\vec{r})$ e l'energia potenziale newtoniana $U(r) = -G\frac{Mm}{r}$.
+    \item Calcolare la velocità di fuga $v_f = \sqrt{\frac{2GM}{R}}$ e la velocità orbitale circolare $v_{\text{orb}} = \sqrt{\frac{GM}{r}}$.
+    \item Analizzare il moto radiale 1D equivalente tramite il Potenziale Efficace $U_{\text{eff}}(r) = \frac{L^2}{2mr^2} - \frac{GMm}{r}$ e classificare le coniche.
+    \item Dimostrare analiticamente le Tre Leggi di Keplero partendo dalle leggi della dinamica newtoniana e della gravitazione.
+    \item Risolvere problemi di meccanica celeste: orbita geostazionaria e manovre orbitali di trasferimento di Hohmann.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5em}
+
+% ------------------------------------------------------------------------------
+\section{La Legge di Gravitazione Universale di Newton}
+\label{sec:legge_gravitazione}
+% ------------------------------------------------------------------------------
+
+\begin{legge}{Legge di Gravitazione Universale}{legge:gravitazione}
+Due punti materiali di masse $m_1$ ed $m_2$, posti a distanza reciproca $r = |\vec{r}|$, si attraggono mutuamente con una forza centrale attrattiva diretta lungo la retta congiungente:
+\begin{equation}
+    \vec{F}_{12} = -G\frac{m_1 m_2}{r^2}\,\ur
+    \label{eq:gravitazione_newton}
+\end{equation}
+dove $G$ è la \textbf{costante di gravitazione universale}:
+\begin{equation}
+    G = \SI{6.67430(15)e-11}{\newton\metre\squared\per\kilogram\squared} = \SI{6.67430e-11}{\metre\cubed\per\kilogram\per\second\squared}
+\end{equation}
+\end{legge}
+
+\begin{teorema}{Teorema del Guscio Sferico (Newton)}{teo:guscio_sferico}
+Per una distribuzione sfericamente simmetrica di massa totale $M$ e raggio $R$:
+\begin{enumerate}
+    \item \textbf{All'esterno ($r \ge R$)}: il campo gravitazionale è identico a quello prodotto da un punto materiale di pari massa $M$ concentrata nel centro geometrico $O$:
+    \begin{equation}
+        \vec{g}(r) = -G\frac{M}{r^2}\ur \quad (r \ge R)
+    \end{equation}
+    \item \textbf{All'interno ($r < R$)}: per un guscio sferico cavo il campo interno è identicamente nullo ($\vec{g} = \vec{0}$). Per una sfera solida omogenea a densità costante $\rho = \frac{M}{\frac{4}{3}\pi R^3}$, il campo cresce linearmente con il raggio:
+    \begin{equation}
+        \vec{g}(r) = -G\frac{M(r)}{r^2}\ur = -G\left(\frac{M r^3/R^3}{r^2}\right)\ur = -\left(G\frac{M}{R^3} r\right)\ur \quad (r < R)
+    \end{equation}
+\end{enumerate}
+\end{teorema}
+
+% ------------------------------------------------------------------------------
+\section{Energia Potenziale Gravitazionale e Velocità di Fuga}
+\label{sec:energia_fuga}
+% ------------------------------------------------------------------------------
+
+\begin{definizione}{Energia Potenziale Newtoniana}{def:u_gravitazionale}
+Poiché la forza gravitazionale è centrale e conservativa, l'energia potenziale associata a due masse $M$ ed $m$ è data da:
+\begin{equation}
+    U(r) = -G\frac{M m}{r}
+    \label{eq:u_newton}
+\end{equation}
+fissando la condizione al contorno convenzionale a distanza infinita: $\lim_{r\to\infty} U(r) = 0$.
+\end{definizione}
+
+\begin{teorema}{Velocità di Fuga}{teo:velocita_fuga}
+La \textbf{velocità di fuga} $v_f$ è la velocità minima che un corpo deve possedere alla superficie di un pianeta sferico di massa $M$ e raggio $R$ per sfuggire indefinitamente alla sua attrazione gravitazionale ($r \to \infty$ con $v_\infty \ge 0$):
+\begin{equation}
+    E_{\text{mec}} = \frac{1}{2}m v_f^2 - G\frac{M m}{R} = 0 \implies \mathbf{v_f = \sqrt{\frac{2 G M}{R}} = \sqrt{2 g R}}
+    \label{eq:velocita_fuga}
+\end{equation}
+dove $g = \frac{GM}{R^2}$ è l'accelerazione gravitazionale alla superficie.
+\end{teorema}
+
+\begin{esempio}[Velocità di Fuga dalla Terra]
+Per la Terra ($M_T = \SI{5.972e24}{\kilogram}$, $R_T = \SI{6.371e6}{\metre}$, $g = \SI{9.81}{\metre\per\second\squared}$):
+\begin{equation}
+    v_f = \sqrt{2 \times 9{,}81 \times 6{,}371\times 10^6}\,\si{\metre\per\second} \approx \mathbf{\SI{11.18}{\kilo\metre\per\second}} \approx \SI{40260}{\kilo\metre\per\hour}
+\end{equation}
+La velocità orbitale circolare radente ($r = R$) vale $v_{\text{orb}} = \sqrt{g R} = \frac{v_f}{\sqrt{2}} \approx \SI{7.91}{\kilo\metre\per\second}$.
+\end{esempio}
+
+% ------------------------------------------------------------------------------
+\section{Il Potenziale Efficace e Classificazione delle Orbite}
+\label{sec:potenziale_efficace}
+% ------------------------------------------------------------------------------
+
+In coordinate polari piane $(r, \theta)$, l'energia meccanica totale di un corpo di massa $m$ orbitante attorno a una massa fissa $M$ ($M \gg m$) vale:
+\begin{equation}
+    E = \frac{1}{2}m v^2 + U(r) = \frac{1}{2}m (\dot{r}^2 + r^2\dot{\theta}^2) - G\frac{Mm}{r}
+\end{equation}
+Poiché il momento angolare $L = m r^2\dot{\theta}$ è rigorosamente costante, sostituendo $\dot{\theta} = \frac{L}{m r^2}$:
+\begin{equation}
+    E = \frac{1}{2}m\dot{r}^2 + \underbrace{\left(\frac{L^2}{2m r^2} - G\frac{Mm}{r}\right)}_{\eqqcolon U_{\text{eff}}(r)}
+    \label{eq:energia_potenziale_efficace}
+\end{equation}
+dove $U_{\text{eff}}(r)$ è il \textbf{Potenziale Efficace}, somma della barriera centrifuga repulsiva ($\propto +1/r^2$) e del potenziale gravitazionale attrattivo ($\propto -1/r$).
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    \draw[->, thick] (0,0) -- (6,0) node[right] {$r$};
+    \draw[->, thick] (0,-3) -- (0,3) node[above] {$U_{\text{eff}}(r), E$};
+    
+    % Asintoti e barriera centrifuga
+    \draw[dashed, gray] plot[domain=0.7:5, samples=50] (\x, {1.2/(\x*\x)});
+    \node[gray] at (1.2, 2.5) {\small $+L^2/(2mr^2)$};
+    
+    % Gravità pura
+    \draw[dashed, gray] plot[domain=0.8:5, samples=50] (\x, {-2.5/\x});
+    \node[gray] at (4.5, -0.8) {\small $-GMm/r$};
+    
+    % Potenziale Efficace
+    \draw[navyblue, very thick, domain=0.65:5.5, samples=100] plot (\x, {1.2/(\x*\x) - 2.5/\x});
+    \node[navyblue] at (5.2, -0.2) {$U_{\text{eff}}(r)$};
+    
+    % Minimo del potenziale efficace
+    \coordinate (Min) at (0.96, -1.30);
+    \filldraw[forestgreen] (Min) circle (2pt);
+    \draw[dashed, forestgreen] (Min) -- (0.96, 0) node[above] {$r_0$ (Orbita Circolare)};
+    \draw[dashed, forestgreen] (Min) -- (0, -1.30) node[left] {$E_{\min}$};
+    
+    % Linee di energia e coniche
+    \draw[crimsonred, thick] (0.7, -0.6) -- (5.5, -0.6) node[right] {$E < 0$ (Ellisse)};
+    \draw[purpleaccent, thick] (0.55, 0) -- (5.5, 0) node[right] {$E = 0$ (Parabola)};
+    \draw[orange!90!black, thick] (0.45, 1.2) -- (5.5, 1.2) node[right] {$E > 0$ (Iperbole)};
+\end{tikzpicture}
+\end{center}
+
+\begin{table}[htbp]
+\centering
+\caption{Classificazione delle orbite coniche gravitazionali.}
+\label{tab:orbite_coniche}
+\begin{tabularx}{\textwidth}{p{4.2cm} c p{2.5cm} X}
+\toprule
+\textbf{Energia Meccanica $E$} & \textbf{Eccentricità $\varepsilon$} & \textbf{Tipo di Conica} & \textbf{Stato Dinamico dell'Orbita} \\
+\midrule
+$E = E_{\min} = -\frac{G^2 M^2 m^3}{2 L^2}$ & $\varepsilon = 0$ & Circonferenza & Orbita legata a raggio costante $r_0 = \frac{L^2}{G M m^2}$. \\
+$E_{\min} < E < 0$ & $0 < \varepsilon < 1$ & Ellisse & Orbita legata periodica tra perielio e afelio. \\
+$E = 0$ & $\varepsilon = 1$ & Parabola & Traiettoria aperta di fuga limite ($v_\infty = 0$). \\
+$E > 0$ & $\varepsilon > 1$ & Iperbole & Traiettoria aperta con eccesso iperbolico. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ------------------------------------------------------------------------------
+\section{Le Tre Leggi di Keplero}
+\label{sec:leggi_keplero}
+% ------------------------------------------------------------------------------
+
+\begin{legge}{Prima Legge di Keplero (Legge delle Orbite)}{legge:keplero_1}
+Le orbite dei pianeti attorno al Sole sono ellissi piane in cui il Sole occupa uno dei due fuochi. L'equazione polare della traiettoria con origine nel fuoco è:
+\begin{equation}
+    r(\theta) = \frac{p}{1 + \varepsilon \cos\theta}
+    \label{eq:orbita_polare}
+\end{equation}
+dove $p = \frac{L^2}{G M m^2} = a(1 - \varepsilon^2)$ è il semilato retto e $a$ è il semiasse maggiore.
+\end{legge}
+
+\begin{legge}{Seconda Legge di Keplero (Legge delle Aree)}{legge:keplero_2}
+Il raggio vettore che congiunge il Sole al pianeta spazza aree uguali in intervalli di tempo uguali:
+\begin{equation}
+    \dot{A} = \dv{A}{t} = \frac{L}{2m} = \text{cost}
+\end{equation}
+Di conseguenza, la velocità è massima al \textbf{perielio} ($r_p = a(1-\varepsilon)$) e minima all'\textbf{afelio} ($r_a = a(1+\varepsilon)$):
+\begin{equation}
+    r_p v_p = r_a v_a
+\end{equation}
+\end{legge}
+
+\begin{legge}{Terza Legge di Keplero (Legge dei Periodi)}{legge:keplero_3}
+Il quadrato del periodo di rivoluzione $T$ di un pianeta è direttamente proporzionale al cubo del semiasse maggiore $a$ dell'orbita:
+\begin{equation}
+    \mathbf{\frac{T^2}{a^3} = \frac{4\pi^2}{G(M + m)} \approx \frac{4\pi^2}{G M_{\odot}} = \text{cost}}
+    \label{eq:keplero_3}
+\end{equation}
+\end{legge}
+
+\begin{dimostrazione}
+Integrando la velocità areale sull'intero periodo $T$, l'area totale spazzata è pari all'area dell'ellisse $\pi a b$ (dove $b = a\sqrt{1-\varepsilon^2}$ è il semiasse minore):
+\begin{equation}
+    \text{Area} = \int_0^T \dot{A}\,\dd t = \left(\frac{L}{2m}\right)T = \pi a b \implies T = \frac{2\pi m a b}{L}
+\end{equation}
+Elevando al quadrato ed esprimendo $b^2 = a^2(1-\varepsilon^2) = a \cdot p = a \frac{L^2}{G M m^2}$:
+\begin{equation}
+    T^2 = \frac{4\pi^2 m^2 a^2 b^2}{L^2} = \frac{4\pi^2 m^2 a^2 \left(a \frac{L^2}{G M m^2}\right)}{L^2} = \frac{4\pi^2}{G M} a^3 \implies \frac{T^2}{a^3} = \frac{4\pi^2}{G M}
+\end{equation}
+\end{dimostrazione}
+
+% ------------------------------------------------------------------------------
+\section{Esercizi Risolti ed Applicativi di Meccanica Celeste con Analisi delle Forze}
+\label{sec:esercizi_gravitazione}
+% ------------------------------------------------------------------------------
+
+\begin{esercizio}[Raggio dell'Orbita Geostazionaria e Analisi Dinamica]
+\textbf{Testo:}
+Un satellite artificiale di massa $m$ orbita attorno alla Terra sul piano equatoriale con un periodo pari al periodo di rotazione siderale terrestre ($T = \SI{86164}{\second}$). Calcolare il raggio dell'orbita $r_{\text{geo}}$, la quota $h_{\text{geo}}$ e analizzare il diagramma delle forze nei sistemi inerziale e solidale.
+\end{esercizio}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Terra al centro
+    \filldraw[fill=blue!30, draw=navyblue, thick] (0,0) circle (1);
+    \node at (0,0) {\small Terra ($M_T$)};
+    
+    % Orbita circolare
+    \draw[dashed, gray] (0,0) circle (3);
+    
+    % Satellite
+    \coordinate (Sat) at (2.121, 2.121);
+    \filldraw[fill=gray!30, draw=black, thick] ($(Sat) + (-0.2, -0.2)$) rectangle ($(Sat) + (0.2, 0.2)$);
+    \filldraw[crimsonred] (Sat) circle (2pt) node[above right=4pt] {Satellite ($m$)};
+    
+    % Vettori forza e velocità
+    \draw[->, ultra thick, forestgreen] (Sat) -- ($(Sat) + (-1.2, -1.2)$) node[midway, above left] {$\vec{F}_g = -G\frac{M_T m}{r^2}\ur$};
+    \draw[->, very thick, purpleaccent] (Sat) -- ($(Sat) + (-1.0, 1.0)$) node[above left] {$\vec{v}_{\text{orb}}$};
+    \draw[->, dashed, crimsonred, thick] (Sat) -- ($(Sat) + (1.2, 1.2)$) node[above right] {$\vec{F}_{\text{cf}}$ (in $S'$)};
+    
+    % Raggio vettore
+    \draw[<->, thick, navyblue] (0,0) -- (Sat) node[midway, below right] {$r_{\text{geo}}$};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[enhanced, breakable, colback=forestgreen!5!white, colframe=forestgreen!80!black,
+    title={\textbf{Analisi delle Forze nei Riferimenti Inerziale e Non Inerziale}}, fonttitle=\bfseries\sffamily]
+\begin{itemize}
+    \item \textbf{Nel Sistema Inerziale Geocentrico ($S$):}
+    \begin{itemize}
+        \item \textbf{Unica Forza Reale Agente:} la forza di attrazione gravitazionale newtoniana $\vec{F}_g = -G\frac{M_T m}{r^2}\ur$ diretta verso il centro della Terra.
+        \item \textbf{Forze Assenti:} nello spazio circumterrestre la densità atmosferica è trascurabile (assenza di resistenza viscosa) e non vi sono vincoli di contatto ($\vec{N} = \vec{0}$).
+        \item La forza gravitazionale funge interamente da \textbf{forza centripeta}: $F_g = m a_n = m \omega^2 r$.
+    \end{itemize}
+    \item \textbf{Nel Sistema Non Inerziale Co-rotante con il Satellite ($S'$):}
+    \begin{itemize}
+        \item Il satellite è in quiete ($\vec{a}' = \vec{0}$). La forza gravitazionale è esattamente bilanciata dalla forza apparente centrifuga:
+        \begin{equation}
+            \sum \vec{F}' = \vec{F}_g + \vec{F}_{\text{cf}} = \vec{0} \implies G\frac{M_T m}{r^2} = m\omega^2 r
+        \end{equation}
+        Questo equilibrio dinamico spiega lo stato di apparente **assenza di peso** (microgravità) percepito a bordo.
+    \end{itemize}
+\end{itemize}
+\end{tcolorbox}
+
+\textbf{Risoluzione Analitica:}
+Uguagliando la forza gravitazionale all'accelerazione centripeta:
+\begin{equation}
+    G\frac{M_T m}{r^2} = m \left(\frac{2\pi}{T}\right)^2 r \implies \mathbf{r_{\text{geo}} = \sqrt[3]{\frac{G M_T T^2}{4\pi^2}}}
+\end{equation}
+Inserendo i valori numerici ($G M_T = \SI{3.986e14}{\metre\cubed\per\second\squared}$):
+\begin{equation}
+    r_{\text{geo}} = \sqrt[3]{\frac{(\SI{3.986e14}{})\times (\SI{86164}{})^2}{4\pi^2}} \approx \mathbf{\SI{4.2164e7}{\metre} = \SI{42164}{\kilo\metre}}
+\end{equation}
+La quota rispetto alla superficie terrestre ($R_T = \SI{6371}{\kilo\metre}$) è:
+\begin{equation}
+    \mathbf{h_{\text{geo}} = r_{\text{geo}} - R_T = 42164 - 6371 \approx \SI{35793}{\kilo\metre}}
+\end{equation}

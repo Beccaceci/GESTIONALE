@@ -1,0 +1,27 @@
+\begin{tikzpicture}[scale=0.9, >=Stealth]
+    \draw[->, thick, navyblue] (-0.3,0) -- (6.5,0) node[right, font=\footnotesize] {$t$};
+    \draw[->, thick, navyblue] (0,-0.2) -- (0,3.8) node[above, font=\footnotesize] {$f(t) = \lambda e^{-\lambda t}$};
+
+    % Curva esponenziale
+    \draw[domain=0:6.0, smooth, variable=\x, very thick, navyblue]
+        plot ({\x}, {3.5 * exp(-0.7*\x)});
+
+    % Istante s = 2
+    \draw[thick, dashed, crimsonred] (2.0,0) -- (2.0, {3.5*exp(-1.4)});
+    \node[below, font=\small\bfseries, text=crimsonred] at (2.0,0) {$s$};
+
+    % Istante s + t = 4
+    \draw[thick, dashed, forestgreen] (4.0,0) -- (4.0, {3.5*exp(-2.8)});
+    \node[below, font=\small\bfseries, text=forestgreen] at (4.0,0) {$s + t$};
+
+    % Area condizionata oltre s
+    \fill[coolblue!25, domain=2:6, variable=\x]
+        (2,0) -- plot ({\x}, {3.5*exp(-0.7*\x)}) -- (6,0) -- cycle;
+
+    \fill[forestgreen!35, domain=4:6, variable=\x]
+        (4,0) -- plot ({\x}, {3.5*exp(-0.7*\x)}) -- (6,0) -- cycle;
+
+    \node[font=\footnotesize\bfseries, text=navyblue, align=center] at (3.5, 2.6) {
+        $\mathbb{P}(X > s + t \mid X > s) = \mathbb{P}(X > t)$
+    };
+\end{tikzpicture}

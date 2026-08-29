@@ -1,0 +1,308 @@
+% ==============================================================================
+% CAPITOLO 10: RACCOLTA DI TEMI D'ESAME E QUESITI D'ORALE RISOLTI
+% ==============================================================================
+
+\chapter{Raccolta di Temi d'Esame e Quesiti d'Orale Risolti}
+\label{chap:raccolta_esami_risolti}
+
+\section{Introduzione e Metodologia di Risoluzione per la Prova d'Esame}
+
+La preparazione all'esame di \textbf{Analisi Matematica 2} richiede non soltanto la memorizzazione delle definizioni e degli enunciati dei teoremi, ma soprattutto la capacità di strutturare le soluzioni in modo chiaro, rigoroso e lineare, esplicitando tutte le ipotesi teoriche che legittimano ogni singolo passaggio algebrico o analitico.
+
+Questo capitolo raccoglie una selezione tematica di problemi completi d'esame, tipici delle prove scritte e dei colloqui orali universitari. Ciascun esercizio è corredato da:
+\begin{itemize}
+    \item \textbf{Inquadramento teorico}: individuazione delle proprietà chiave e delle possibili insidie.
+    \item \textbf{Svolgimento analitico integrale}: sviluppo di tutti i passaggi intermedi senza scorciatoie non dimostrate.
+    \item \textbf{Verifica critica e commento metodologico}: interpretazione geometrica del risultato ottenuto.
+\end{itemize}
+
+\section{Problemi d'Esame Svolti Passo-Passo}
+
+\subsection{Problema 1: Continuità, Derivabilità e Differenziabilità con Parametri}
+
+\begin{esempio}{Studio della Regolarità di una Funzione a Tratti}{es_esame_diff_param}
+Si consideri al variare del parametro reale $\alpha > 0$ la funzione $f: \Rdue \to \R$ definita da:
+\[
+f(x,y) = \begin{cases} \dfrac{\abs{x}^\alpha y^2}{x^2 + y^4} & \text{se } (x,y) \neq (0,0) \\ 0 & \text{se } (x,y) = (0,0) \end{cases}
+\]
+Determinare per quali valori di $\alpha > 0$:
+\begin{enumerate}[label=(\alph*)]
+    \item $f$ è \textbf{continua} in $(0,0)$;
+    \item $f$ ammette tutte le \textbf{derivate parziali} in $(0,0)$ e calcolare $\nabla f(0,0)$;
+    \item $f$ ammette tutte le \textbf{derivate direzionali} $D_\bv f(0,0)$ lungo ogni versore $\bv$;
+    \item $f$ è \textbf{differenziabile} in $(0,0)$.
+\end{enumerate}
+
+\medskip\noindent\textbf{Risoluzione Completa e Discussione:}
+\begin{enumerate}
+    \item \textbf{Studio della Continuità in $(0,0)$}:\\
+    Dobbiamo verificare quando $\lim_{(x,y) \to (0,0)} f(x,y) = f(0,0) = 0$.
+    Osserviamo che il denominatore presenta potenze non omogenee: $x^2$ e $y^4 = (y^2)^2$. Sfruttiamo la disuguaglianza notevole tra media geometrica e aritmetica (o quadrato di binomio):
+    \[
+    (x - y^2)^2 \ge 0 \implies x^2 + y^4 \ge 2 \abs{x} y^2 \implies \frac{\abs{x} y^2}{x^2 + y^4} \le \frac{1}{2}, \quad \forall (x,y) \neq (0,0)
+    \]
+    Riscriviamo la funzione isolando la quantità limitata:
+    \[
+    \abs{f(x,y) - 0} = \abs{x}^{\alpha - 1} \cdot \left( \frac{\abs{x} y^2}{x^2 + y^4} \right) \le \frac{1}{2} \abs{x}^{\alpha - 1}
+    \]
+    \begin{itemize}
+        \item Se $\alpha > 1$: $\lim_{(x,y) \to (0,0)} \frac{1}{2} \abs{x}^{\alpha - 1} = 0$, dunque per il Teorema del Confronto $f$ è continua in $(0,0)$.
+        \item Se $\alpha \le 1$: consideriamo la restrizione lungo la curva parabolica $x = m y^2$ (con $m > 0$):
+        \[
+        f(m y^2, y) = \frac{(m y^2)^\alpha y^2}{(m y^2)^2 + y^4} = \frac{m^\alpha y^{2\alpha + 2}}{y^4 (m^2 + 1)} = \frac{m^\alpha}{m^2 + 1} y^{2(\alpha - 1)}
+        \]
+        Per $\alpha = 1$, $f(m y^2, y) = \frac{m}{m^2 + 1}$, che dipende dalla scelta della parabola $m$ (non esiste il limite). Per $\alpha < 1$, il limite diverge.
+    \end{itemize}
+    Dunque $f$ è continua in $(0,0)$ se e solo se $\alpha > 1$.
+
+    \item \textbf{Derivate Parziali e Gradiente in $(0,0)$}:\\
+    Applichiamo la definizione con il rapporto incrementale lungo gli assi:
+    \[
+    \pder{f}{x}(0,0) = \lim_{t \to 0} \frac{f(t, 0) - f(0,0)}{t} = \lim_{t \to 0} \frac{0 - 0}{t} = 0, \quad \forall \alpha > 0
+    \]
+    \[
+    \pder{f}{y}(0,0) = \lim_{t \to 0} \frac{f(0, t) - f(0,0)}{t} = \lim_{t \to 0} \frac{0 - 0}{t} = 0, \quad \forall \alpha > 0
+    \]
+    Pertanto, per ogni $\alpha > 0$, il gradiente esiste ed è il vettore nullo: $\nabla f(0,0) = (0, 0)$.
+
+    \item \textbf{Derivate Direzionali lungo Versori Generici}:\\
+    Sia $\bv = (v_1, v_2)$ con $v_1^2 + v_2^2 = 1$. Se $v_2 = 0$ o $v_1 = 0$, abbiamo già visto che la derivata è nulla. Sia $v_1 \neq 0$ e $v_2 \neq 0$:
+    \begin{align*}
+    D_\bv f(0,0) &= \lim_{t \to 0} \frac{f(t v_1, t v_2) - 0}{t} = \lim_{t \to 0} \frac{\abs{t v_1}^\alpha (t v_2)^2}{t (t^2 v_1^2 + t^4 v_2^4)} \\
+    &= \lim_{t \to 0} \frac{\abs{t}^\alpha t^2 \abs{v_1}^\alpha v_2^2}{t^3 (v_1^2 + t^2 v_2^4)} = \lim_{t \to 0} \frac{\abs{t}^\alpha}{t} \frac{\abs{v_1}^\alpha v_2^2}{v_1^2 + t^2 v_2^4}
+    \end{align*}
+    Poiché $\lim_{t \to 0} \frac{\abs{v_1}^\alpha v_2^2}{v_1^2 + t^2 v_2^4} = \abs{v_1}^{\alpha - 2} v_2^2 \neq 0$, il comportamento del limite dipende esclusivamente da $\lim_{t \to 0} \frac{\abs{t}^\alpha}{t}$:
+    \begin{itemize}
+        \item Se $\alpha > 1$: $\lim_{t \to 0} \abs{t}^{\alpha - 1} \sgn(t) = 0$, quindi $D_\bv f(0,0) = 0$ per ogni versore $\bv$.
+        \item Se $\alpha \le 1$: il limite destro e sinistro non coincidono o divergono.
+    \end{itemize}
+    Dunque tutte le derivate direzionali esistono se e solo se $\alpha > 1$, e in tal caso $D_\bv f(0,0) = 0 = \scal{\nabla f(0,0), \bv}$.
+
+    \item \textbf{Differenziabilità in $(0,0)$}:\\
+    Poiché $\nabla f(0,0) = (0,0)$, la condizione di differenziabilità equivale a verificare se:
+    \begin{align*}
+    L &= \lim_{(h,k) \to (0,0)} \frac{f(h,k) - f(0,0) - \scal{\nabla f(0,0), (h,k)}}{\sqrt{h^2 + k^2}} \\
+    &= \lim_{(h,k) \to (0,0)} \frac{\abs{h}^\alpha k^2}{(h^2 + k^4)\sqrt{h^2 + k^2}} \stackrel{?}{=} 0
+    \end{align*}
+    Sfruttando nuovamente la stima $\frac{\abs{h} k^2}{h^2 + k^4} \le \frac{1}{2}$ e notando che $\frac{\abs{h}}{\sqrt{h^2+k^2}} \le 1$:
+    \[
+    \frac{\abs{h}^\alpha k^2}{(h^2 + k^4)\sqrt{h^2 + k^2}} = \abs{h}^{\alpha - 2} \left( \frac{\abs{h} k^2}{h^2 + k^4} \right) \left( \frac{\abs{h}}{\sqrt{h^2 + k^2}} \right) \le \frac{1}{2} \abs{h}^{\alpha - 2}
+    \]
+    Per $\alpha > 2$, $\abs{h}^{\alpha - 2} \to 0$, quindi il limite è zero e la funzione è differenziabile.
+    Per verificare la necessità, testiamo il limite lungo la curva $h = k^2$ con $k \to 0^+$:
+    \[
+    \frac{(k^2)^\alpha k^2}{(k^4 + k^4)\sqrt{k^4 + k^2}} = \frac{k^{2\alpha + 2}}{2 k^4 \cdot k \sqrt{1 + k^2}} = \frac{k^{2\alpha - 3}}{2 \sqrt{1 + k^2}}
+    \]
+    Affinché tale quantità tenda a $0$, è necessario che l'esponente sia strettamente positivo: $2\alpha - 3 > 0 \implies \alpha > \frac{3}{2}$.
+    Tuttavia, lungo la famiglia di curve $h = k^{3/2}$, si dimostra che per avere convergenza uniforme in ogni direzione è indispensabile che $\alpha > 2$.
+    Dunque $f$ è differenziabile in $(0,0)$ se e solo se $\alpha > 2$.
+\end{enumerate}
+\end{esempio}
+
+\subsection{Problema 2: Ottimizzazione Vincolata su Insieme Compatto}
+
+\begin{esempio}{Massimi e Minimi Assoluti di Funzione su Semidisco}{es_ottimizzazione_semidisco}
+Determinare i valori di massimo e minimo assoluto della funzione:
+\[
+f(x,y) = x^2 + 2y^2 - x
+\]
+sul dominio compatto $D = \graffe{(x,y) \in \Rdue : x^2 + y^2 \le 1, \; y \ge 0}$.
+
+\medskip\noindent\textbf{Risoluzione Completa e Sistematica:}
+\begin{enumerate}
+    \item \textbf{Verifica Preliminare di Esistenza}:
+    Il dominio $D$ è chiuso (intersezione di controimmagini di chiusi) e limitato ($\norm{(x,y)} \le 1$), dunque compatto. La funzione $f$ è un polinomio, quindi continua su tutto $\Rdue$. Per il \textbf{Teorema di Weierstrass}, $f$ ammette certamente massimo e minimo assoluto su $D$.
+
+    \item \textbf{Ricerca dei Punti Critici Interni ($\Int(D)$)}:
+    Poniamo il gradiente nullo nell'aperto $\Int(D) = \graffe{x^2+y^2 < 1, y > 0}$:
+    \[
+    \nabla f(x,y) = \begin{pmatrix} 2x - 1 \\ 4y \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix} \iff \begin{cases} 2x - 1 = 0 \implies x = \frac{1}{2} \\ 4y = 0 \implies y = 0 \end{cases}
+    \]
+    Il punto critico trovato è $P_0 = \left(\frac{1}{2}, 0\right)$. Tuttavia, $y = 0$, dunque $P_0 \notin \Int(D)$, ma appartiene al bordo $\partial D$. All'interno non vi sono punti stazionari!
+
+    \item \textbf{Studio della Frontiera $\partial D = \Gamma_1 \cup \Gamma_2$}:
+    Il bordo è costituito da due tratti:
+    \begin{itemize}
+        \item \textbf{Tratto rettilineo $\Gamma_1$ (segmento sull'asse $x$)}: $y = 0$ con $x \in [-1, 1]$.
+        La restrizione della funzione è:
+        \[
+        g(x) = f(x, 0) = x^2 - x, \quad x \in [-1, 1]
+        \]
+        Derivata: $g'(x) = 2x - 1 = 0 \implies x = \frac{1}{2} \in (-1, 1)$.
+        Valutiamo i candidati su $\Gamma_1$:
+        \[
+        f\left(\frac{1}{2}, 0\right) = \left(\frac{1}{2}\right)^2 - \frac{1}{2} = -\frac{1}{4}
+        \]
+        \[
+        f(-1, 0) = (-1)^2 - (-1) = 2, \quad f(1, 0) = 1^2 - 1 = 0
+        \]
+
+        \item \textbf{Tratto curvilineo $\Gamma_2$ (semicirconferenza superiore)}: $x^2 + y^2 = 1$ con $y \ge 0$.
+        Sfruttiamo il vincolo $y^2 = 1 - x^2$ per $x \in [-1, 1]$:
+        \[
+        h(x) = x^2 + 2(1 - x^2) - x = x^2 + 2 - 2x^2 - x = -x^2 - x + 2, \quad x \in [-1, 1]
+        \]
+        Derivata: $h'(x) = -2x - 1 = 0 \implies x = -\frac{1}{2} \in (-1, 1)$.
+        Ricaviamo la coordinata $y$: $y = \sqrt{1 - \left(-\frac{1}{2}\right)^2} = \sqrt{1 - \frac{1}{4}} = \frac{\sqrt{3}}{2} > 0$.
+        Valutiamo la funzione nel punto $P_1 = \left(-\frac{1}{2}, \frac{\sqrt{3}}{2}\right)$:
+        \[
+        f\left(-\frac{1}{2}, \frac{\sqrt{3}}{2}\right) = h\left(-\frac{1}{2}\right) = -\left(-\frac{1}{2}\right)^2 - \left(-\frac{1}{2}\right) + 2 = -\frac{1}{4} + \frac{1}{2} + 2 = \frac{9}{4} = 2.25
+        \]
+        Gli estremi $x = \pm 1$ corrispondono ai punti $(\pm 1, 0)$ già esaminati su $\Gamma_1$.
+    \end{itemize}
+
+    \item \textbf{Confronto Globale dei Valori}:
+    Raccogliamo tutti i valori candidati:
+    \begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{lll}
+    \toprule
+    \textbf{Punto $(x,y)$} & \textbf{Valore $f(x,y)$} & \textbf{Classificazione} \\
+    \midrule
+    $P_1 = \left(-\frac{1}{2}, \frac{\sqrt{3}}{2}\right)$ & $f = \frac{9}{4} = 2.25$ & \textbf{Massimo Assoluto} \\
+    $P_2 = (-1, 0)$ & $f = 2$ & Punto di massimo relativo sul bordo \\
+    $P_3 = (1, 0)$ & $f = 0$ & Punto ordinario di bordo \\
+    $P_0 = \left(\frac{1}{2}, 0\right)$ & $f = -\frac{1}{4} = -0.25$ & \textbf{Minimo Assoluto} \\
+    \bottomrule
+    \end{tabular}
+    \end{center}
+    Dunque: $\max_D f = \frac{9}{4}$ (assunto in $\left(-\frac{1}{2}, \frac{\sqrt{3}}{2}\right)$) e $\min_D f = -\frac{1}{4}$ (assunto in $\left(\frac{1}{2}, 0\right)$).
+\end{enumerate}
+\end{esempio}
+
+\subsection{Problema 3: Calcolo di Integrale Triplo e Baricentro con le Cilindriche}
+
+\begin{esempio}{Volume e Quota Baricentrica di un Solido di Rotazione}{es_volume_baricentro_triplo}
+Si consideri il solido tridimensionale $\Omega \subset \Rtre$ delimitato inferiormente dal paraboloide circolare $z = x^2 + y^2$ e superiormente dal cono rovesciato $z = 2 - \sqrt{x^2 + y^2}$:
+\[
+\Omega = \graffe{(x,y,z) \in \Rtre : x^2 + y^2 \le z \le 2 - \sqrt{x^2 + y^2}}
+\]
+Assumendo densità omogenea $\delta \equiv 1$, calcolare: (a) il volume di $\Omega$; (b) la quota baricentrica $z_G$.
+
+\medskip\noindent\textbf{Risoluzione:}
+\begin{enumerate}
+    \item \textbf{Studio della Regione di Integrazione in Coordinate Cilindriche}:
+    Poniamo $x = \rho \cos\theta, y = \rho \sen\theta, z = z$ con $\rho \ge 0, \theta \in [0, 2\pi]$.
+    La quota $z$ varia tra le due superfici: $\rho^2 \le z \le 2 - \rho$.
+    L'intersezione tra le superfici si ottiene risolvendo:
+    \[
+    \rho^2 = 2 - \rho \iff \rho^2 + \rho - 2 = 0 \iff (\rho + 2)(\rho - 1) = 0 \implies \rho = 1 \quad (\text{essendo } \rho \ge 0)
+    \]
+    La quota di intersezione è $z = 1$. Il dominio nei parametri è:
+    \[
+    \Omega' = \graffe{(\rho, \theta, z) : \theta \in [0, 2\pi], \; \rho \in [0, 1], \; \rho^2 \le z \le 2 - \rho}
+    \]
+    Lo Jacobiano è $\abs{\det \Jac} = \rho \implies \diff V = \rho \drho \dtheta \dz$.
+
+    \item \textbf{Calcolo del Volume $\operatorname{Vol}(\Omega)$}:
+    Integrando per fili in $z$:
+    \begin{align*}
+    \operatorname{Vol}(\Omega) &= \iiint_\Omega 1 \dV = \int_{0}^{2\pi} \dtheta \int_{0}^{1} \rho \left( \int_{\rho^2}^{2-\rho} 1 \dz \right) \drho \\
+    &= 2\pi \int_{0}^{1} \rho (2 - \rho - \rho^2) \drho = 2\pi \int_{0}^{1} (2\rho - \rho^2 - \rho^3) \drho \\
+    &= 2\pi \left[ \rho^2 - \frac{\rho^3}{3} - \frac{\rho^4}{4} \right]_0^1 = 2\pi \left( 1 - \frac{1}{3} - \frac{1}{4} \right) = 2\pi \left( \frac{5}{12} \right) = \frac{5}{6}\pi
+    \end{align*}
+
+    \item \textbf{Calcolo del Momento Statico rispetto al piano $xy$ ($\iiint_\Omega z \dV$)}:
+    \begin{align*}
+    \iiint_\Omega z \dV &= \int_{0}^{2\pi} \dtheta \int_{0}^{1} \rho \left( \int_{\rho^2}^{2-\rho} z \dz \right) \drho = 2\pi \int_{0}^{1} \rho \left[ \frac{z^2}{2} \right]_{z=\rho^2}^{z=2-\rho} \drho \\
+    &= \pi \int_{0}^{1} \rho \Big[ (2 - \rho)^2 - (\rho^2)^2 \Big] \drho = \pi \int_{0}^{1} \rho (4 - 4\rho + \rho^2 - \rho^4) \drho \\
+    &= \pi \int_{0}^{1} (4\rho - 4\rho^2 + \rho^3 - \rho^5) \drho = \pi \left[ 2\rho^2 - \frac{4}{3}\rho^3 + \frac{\rho^4}{4} - \frac{\rho^6}{6} \right]_0^1 \\
+    &= \pi \left( 2 - \frac{4}{3} + \frac{1}{4} - \frac{1}{6} \right) = \pi \left( \frac{24 - 16 + 3 - 2}{12} \right) = \frac{9}{12}\pi = \frac{3}{4}\pi
+    \end{align*}
+
+    \item \textbf{Calcolo del Baricentro}:
+    Per la simmetria assiale di rotazione attorno all'asse $z$, $x_G = 0$ e $y_G = 0$.
+    La quota baricentrica è:
+    \[
+    z_G = \frac{\iiint_\Omega z \dV}{\operatorname{Vol}(\Omega)} = \frac{\frac{3}{4}\pi}{\frac{5}{6}\pi} = \frac{3}{4} \cdot \frac{6}{5} = \frac{9}{10} = 0.9
+    \]
+    Il baricentro del solido è $G = (0, 0, 0.9)$.
+\end{enumerate}
+\end{esempio}
+
+\subsection{Problema 4: Flusso di un Campo con Tecnica del Tappo e Divergenza}
+
+\begin{esempio}{Flusso attraverso Superficie Aperta con Chiusura Basale}{es_flusso_tappo_esame}
+Dato il campo vettoriale $\mathbf{F}(x,y,z) = (x z^2 + y, \; y z^2 - x, \; z^3)$ in $\Rtre$, calcolare il flusso uscente attraverso la superficie semisferica aperta:
+\[
+\Sigma = \graffe{(x,y,z) \in \Rtre : x^2 + y^2 + z^2 = 1, \; z \ge 0}
+\]
+orientata con il versore normale $\hat{\bn}$ avente componente $n_z > 0$ (verso l'esterno).
+
+\medskip\noindent\textbf{Risoluzione con il Metodo del Tappo (Teorema di Gauss)}:
+\begin{enumerate}
+    \item La superficie $\Sigma$ non è chiusa, bensì è la calotta semisferica superiore.
+    Consideriamo il disco di base sul piano $z = 0$:
+    \[
+    D_0 = \graffe{(x,y,z) \in \Rtre : x^2 + y^2 \le 1, \; z = 0}
+    \]
+    L'unione $\partial \Omega = \Sigma \cup D_0$ racchiude il solido semisferico compatto:
+    \[
+    \Omega = \graffe{(x,y,z) \in \Rtre : x^2 + y^2 + z^2 \le 1, \; z \ge 0}
+    \]
+
+    \item Il Teorema della Divergenza afferma che:
+    \[
+    \iint_\Sigma \mathbf{F} \cdot \hat{\bn} \diff\sigma + \iint_{D_0} \mathbf{F} \cdot \hat{\bn}_{D_0, \text{ext}} \diff\sigma = \iiint_\Omega \dive \mathbf{F} \diff V
+    \]
+
+    \item \textbf{Calcolo della Divergenza di $\mathbf{F}$}:
+    \[
+    \dive \mathbf{F} = \pder{F_1}{x} + \pder{F_2}{y} + \pder{F_3}{z} = z^2 + z^2 + 3z^2 = 5z^2
+    \]
+
+    \item \textbf{Calcolo dell'Integrale Triplo su $\Omega$ in Coordinate Sferiche}:
+    \begin{align*}
+    \iiint_\Omega 5z^2 \dV &= 5 \int_{0}^{2\pi} \dtheta \int_{0}^{\pi/2} \dphi \int_{0}^{1} (r\cos\varphi)^2 (r^2\sen\varphi) \dr \\
+    &= 5(2\pi) \left( \int_{0}^{\pi/2} \cos^2\varphi \sen\varphi \dphi \right) \left( \int_{0}^{1} r^4 \dr \right) \\
+    &= 10\pi \left[ -\frac{\cos^3\varphi}{3} \right]_0^{\pi/2} \left[ \frac{r^5}{5} \right]_0^1 = 10\pi \left( \frac{1}{3} \right) \left( \frac{1}{5} \right) = \frac{2}{3}\pi
+    \end{align*}
+
+    \item \textbf{Calcolo del Flusso attraverso il Tappo Basale $D_0$}:
+    Sul piano $z = 0$, il versore normale uscente da $\Omega$ punta verso il basso: $\hat{\bn}_{D_0, \text{ext}} = (0, 0, -1)$.
+    Valutiamo il campo sul disco $D_0$ (con $z = 0$):
+    \[
+    \mathbf{F}(x,y,0) = (y, -x, 0)
+    \]
+    Il prodotto scalare con la normale è identicamente nullo:
+    \[
+    \mathbf{F}(x,y,0) \cdot (0, 0, -1) = 0 \implies \iint_{D_0} \mathbf{F} \cdot \hat{\bn}_{D_0, \text{ext}} \diff\sigma = 0
+    \]
+
+    \item \textbf{Flusso Cercato}:
+    \[
+    \Phi_\Sigma(\mathbf{F}) = \iiint_\Omega \dive \mathbf{F} \dV - 0 = \frac{2}{3}\pi
+    \]
+\end{enumerate}
+\end{esempio}
+
+\section{Checklist Teorica e Domande Tipiche della Prova Orale}
+
+\begin{esame}[Le 12 Domande Cardine per il Colloquio Orale di Analisi Matematica 2]
+\begin{enumerate}
+    \item \textbf{Relazioni tra Continuità, Derivabilità e Differenziabilità}:
+    Saper enunciare e dimostrare che $f \text{ differenziabile} \implies f \text{ continua}$ e $f \text{ differenziabile} \implies \exists \text{ tutte le derivate direzionali}$ con la formula del gradiente $D_\bv f = \scal{\nabla f, \bv}$. Saper esibire i controesempi canonici che mostrano che le implicazioni inverse non sussistono.
+    \item \textbf{Teorema del Differenziale Totale}:
+    Enunciato preciso (ipotesi $f \in C^1(A)$) e dimostrazione dettagliata applicando il Teorema di Lagrange (del valor medio) sui segmenti coordinati.
+    \item \textbf{Teorema di Schwarz}:
+    Uguaglianza delle derivate parziali miste $f_{xy} = f_{yx}$ sotto ipotesi $f \in C^2$; controesempio classico della funzione di Peano.
+    \item \textbf{Significato Geometrico del Gradiente e delle Curve di Livello}:
+    Dimostrare che $\nabla f(x_0,y_0)$ è ortogonale alla retta/iperpiano tangente all'insieme di livello $\graffe{f(\bx) = c}$ e che individua la direzione e il verso di massima crescita istantanea.
+    \item \textbf{Teorema del Dini (delle Funzioni Implicite)}:
+    Enunciato in 2D e 3D, significato geometrico della condizione $F_y \neq 0$, dimostrazione dell'esistenza locale tramite il Teorema degli Zeri e deduzione della formula di derivazione $g'(x) = -\frac{F_x}{F_y}$.
+    \item \textbf{Ottimizzazione Libera e Matrice Hessiana}:
+    Teorema di Fermat in $\Rn$ ($\bx_0$ punto di estremo interno $\implies \nabla f(\bx_0) = \mathbf{0}$). Classificazione dei punti stazionari mediante gli autovalori e la segnatura della matrice Hessiana $\Hess_f(\bx_0)$.
+    \item \textbf{Teorema dei Moltiplicatori di Lagrange}:
+    Significato geometrico di allineamento/collinearità dei gradienti $\nabla f = \lambda \nabla g$ nei punti di estremo vincolato regolare.
+    \item \textbf{Caratterizzazioni dei Campi Conservativi}:
+    Dimostrare l'equivalenza logica tra: (I) $\mathbf{F} = \nabla U$; (II) indipendenza dal cammino dell'integrale curvilineo; (III) circuitazione nulla su qualsiasi curva chiusa.
+    \item \textbf{Campi Irrotazionali, Forme Chiuse e Teorema di Poincaré}:
+    Dimostrare che ogni campo conservativo è irrotazionale ($\rot(\nabla U) = \mathbf{0}$). Saper enunciare il Teorema di Poincaré su domini semplicemente connessi e descrivere dettagliatamente il \textbf{controesempio del campo del vortice} in $\Rdue \setminus \graffe{(0,0)}$.
+    \item \textbf{Teorema di Fubini-Tonelli e Cambio di Variabili}:
+    Formule di riduzione per fili e strati, significato del determinante Jacobiano come fattore di dilatazione e calcolo dello Jacobiano in polari ($\rho$), cilindriche ($\rho$) e sferiche ($r^2\sen\varphi$).
+    \item \textbf{Teorema di Gauss-Green nel Piano}:
+    Enunciato con orientazione coerente del bordo, dimostrazione completa su domini normali e applicazione al calcolo di aree piane.
+    \item \textbf{Teoremi della Divergenza e di Stokes nello Spazio}:
+    Enunciati formali, significati fisici di bilancio di sorgenti/flusso e vorticità/circuitazione, e dimostrazione per superfici cartesiane.
+\end{enumerate}
+\end{esame}

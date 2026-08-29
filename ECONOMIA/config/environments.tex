@@ -1,0 +1,243 @@
+% ==============================================================================
+% DEFINIZIONE AMBIENTI TCOLORBOX & TEOREMI - ECONOMIA (MICRO & MACRO)
+% ==============================================================================
+
+% --- Tavolozza Colori Istituzionali ed Eleganti ---
+\definecolor{navyblue}{RGB}{15, 43, 92}       % Blu istituzionale / Titoli / Definizioni
+\definecolor{forestgreen}{RGB}{30, 92, 43}     % Verde mercato / Teoremi / Equilibri
+\definecolor{purpleaccent}{RGB}{90, 32, 112}   % Viola / Modelli e Teorie
+\definecolor{crimsonred}{RGB}{139, 0, 0}       % Rosso / Alert Esame e Tranelli
+\definecolor{warmamber}{RGB}{184, 107, 0}      % Ambra / Metodi operativi ed Esercizi
+\definecolor{charcoalgray}{RGB}{43, 43, 43}    % Grigio scuro / Testo strutturato
+\definecolor{tealblue}{RGB}{0, 102, 119}       % Ottanio / Politiche economiche e Istituzioni
+\definecolor{softgold}{RGB}{197, 155, 39}      % Oro / Risultati notevoli
+\definecolor{darkcyan}{RGB}{0, 139, 139}       % Ciano scuro / Evidenze empiriche e Dati
+
+% Contatore globale per teoremi, definizioni, modelli condiviso per capitolo
+\newcounter{econcounter}[chapter]
+\renewcommand{\theeconcounter}{\thechapter.\arabic{econcounter}}
+\crefname{econcounter}{risultato}{risultati}
+\Crefname{econcounter}{Risultato}{Risultati}
+
+% --- 1. DEFINIZIONE ECONOMICA ---
+\newtcbtheorem[use counter=econcounter, number within=chapter]{definizione}{Definizione}{
+    enhanced,
+    breakable,
+    colback=blue!3!white,
+    colframe=navyblue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    fontupper=\itshape,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={
+        sharp corners,
+        rounded corners=north,
+        colback=navyblue,
+        boxrule=0pt
+    },
+    separator sign={:~},
+    description font=\normalfont\bfseries,
+    sharp corners,
+    rounded corners=south,
+    boxrule=1.2pt,
+    top=4mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}{def}
+
+% --- 2. MODELLO / TEORIA ECONOMICA ---
+\newtcbtheorem[use counter=econcounter, number within=chapter]{modello}{Modello / Teoria}{
+    enhanced,
+    breakable,
+    colback=purpleaccent!3!white,
+    colframe=purpleaccent,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    fontupper=\itshape,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={
+        sharp corners,
+        rounded corners=north,
+        colback=purpleaccent,
+        boxrule=0pt
+    },
+    separator sign={:~},
+    description font=\normalfont\bfseries,
+    sharp corners,
+    rounded corners=south,
+    boxrule=1.2pt,
+    top=4mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}{mod}
+
+% --- 3. LEGGE / PRINCIPIO ECONOMICO ---
+\newtcbtheorem[use counter=econcounter, number within=chapter]{legge}{Legge / Principio}{
+    enhanced,
+    breakable,
+    colback=tealblue!3!white,
+    colframe=tealblue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    fontupper=\itshape,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={
+        sharp corners,
+        rounded corners=north,
+        colback=tealblue,
+        boxrule=0pt
+    },
+    separator sign={:~},
+    description font=\normalfont\bfseries,
+    sharp corners,
+    rounded corners=south,
+    boxrule=1.2pt,
+    top=4mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}{legge}
+
+% --- 4. TEOREMA / PROPOSIZIONE ---
+\newtcbtheorem[use counter=econcounter, number within=chapter]{teorema}{Teorema}{
+    enhanced,
+    breakable,
+    colback=forestgreen!3!white,
+    colframe=forestgreen,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    fontupper=\itshape,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={
+        sharp corners,
+        rounded corners=north,
+        colback=forestgreen,
+        boxrule=0pt
+    },
+    separator sign={:~},
+    description font=\normalfont\bfseries,
+    sharp corners,
+    rounded corners=south,
+    boxrule=1.2pt,
+    top=4mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}{teo}
+
+% --- 5. DIMOSTRAZIONE RIGOROSA ---
+\newtcolorbox{dimostrazione}[1][]{
+    enhanced,
+    breakable,
+    blanker,
+    borderline west={2pt}{0pt}{forestgreen!80!black},
+    left=4mm,
+    top=2mm,
+    bottom=2mm,
+    before upper={\textbf{\textsf{\color{forestgreen!80!black}Dimostrazione#1:}}\par\vspace{1mm}},
+    after upper={\par\hfill\textcolor{forestgreen!80!black}{$\blacksquare$}}
+}
+
+% --- 6. METODO RISOLUTIVO / ALGORITMO OPERATIVO ---
+\newtcolorbox{metodo}[1][]{
+    enhanced,
+    breakable,
+    colback=warmamber!5!white,
+    colframe=warmamber!90!black,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={Metodo Risolutivo Step-by-Step: #1},
+    sharp corners,
+    rounded corners=south,
+    boxrule=1.2pt,
+    top=3mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}
+
+% --- 7. CONSIGLI ESAME, ERRORI FREQUENTI E TRAPPOLE ---
+\newtcolorbox{esame}[1][Consigli per la Prova d'Esame]{
+    enhanced,
+    breakable,
+    colback=crimsonred!4!white,
+    colframe=crimsonred,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={\textbf{Attenzione all'Esame:} #1},
+    sharp corners,
+    rounded corners=south,
+    boxrule=1.2pt,
+    top=3mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}
+
+% --- 8. ESEMPIO APPLICATIVO / CASO ECONOMICO ---
+\newtcolorbox{esempio}[1][]{
+    enhanced,
+    breakable,
+    colback=purpleaccent!3!white,
+    colframe=purpleaccent!70!black,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={Esempio Applicativo: #1},
+    sharp corners,
+    rounded corners=south,
+    boxrule=1pt,
+    top=3mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}
+
+% --- 9. ESERCIZIO GUIDATO SVOLTO ---
+\newtcolorbox{esercizio}[1][]{
+    enhanced,
+    breakable,
+    colback=warmamber!4!white,
+    colframe=warmamber,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={Esercizio Guidato: #1},
+    sharp corners,
+    rounded corners=south,
+    boxrule=1.1pt,
+    top=3mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}
+
+% --- 10. OSSERVAZIONE / INTUIZIONE ECONOMICA ---
+\newtcolorbox{osservazione}[1][Intuizione Economica]{
+    enhanced,
+    breakable,
+    blanker,
+    borderline west={2.5pt}{0pt}{navyblue!70!black},
+    left=4mm,
+    top=2mm,
+    bottom=2mm,
+    before upper={\textbf{\textsf{\color{navyblue!70!black}#1:}}\par\vspace{1mm}}
+}
+
+% --- 11. DATI ED EVIDENZE EMPIRICHE ---
+\newtcolorbox{empirico}[1][Evidenza Empirica / Caso Reale]{
+    enhanced,
+    breakable,
+    colback=darkcyan!4!white,
+    colframe=darkcyan,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={Caso Reale ed Evidenza Empirica: #1},
+    sharp corners,
+    rounded corners=south,
+    boxrule=1pt,
+    top=3mm,
+    bottom=3mm,
+    left=3mm,
+    right=3mm
+}

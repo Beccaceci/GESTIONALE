@@ -1,0 +1,293 @@
+% ==============================================================================
+% CAPITOLO 06 - SISTEMI DI PUNTI MATERIALI, CENTRO DI MASSA E URTI
+% ==============================================================================
+\chapter{Sistemi di Punti Materiali, Centro di Massa e Urti}
+\label{chap:sistemi_punti_urti}
+
+\begin{tcolorbox}[enhanced, breakable, colback=navyblue!4!white, colframe=navyblue!80!black,
+    coltitle=white, fonttitle=\bfseries\sffamily, title={Quadro Sinottico del Capitolo 06 (Corrispondenza: Lezioni 13 e 14)},
+    sharp corners, rounded corners=south, boxrule=1pt]
+\textbf{Collocazione Modulare:} Parte II -- Leggi di Conservazione, Urti e Corpo Rigido\\
+\textbf{Trascrizioni di Riferimento:} \texttt{trascrizioni/Lezione\_13\_...md} e \texttt{trascrizioni/Lezione\_14\_...md}\\
+\textbf{Manuale di Riferimento:} Focardi, Massa, Ugolini -- \emph{Fisica Generale: Meccanica e Termodinamica} (Capitolo 6)\\
+\textbf{Obiettivi Didattici e Competenze:}\par
+\begin{itemize}
+    \item Formalizzare la dinamica di un sistema discreto e continuo di punti materiali: distinzione tra forze interne ed esterne e annullamento della risultante interna ($\sum \vec{f}_{ij} = \vec{0}$).
+    \item Definire il Centro di Massa ($CM$), la sua velocità $\vec{v}_{CM}$ e la quantità di moto totale $\vec{P}_{\text{tot}} = M \vec{v}_{CM}$.
+    \item Dimostrare la Prima Equazione Cardinale della Meccanica ($\vec{F}^{(E)}_{\text{tot}} = M \vec{a}_{CM}$) e la legge di conservazione della quantità di moto.
+    \item Applicare il Teorema dell'Impulso ($\vec{J} = \Delta\vec{p}$) nei processi impulsivi a tempo infinitesimo.
+    \item Risolvere la dinamica degli urti 1D e 2D (elastici, anelastici, totalmente anelastici con coefficiente di restituzione di Newton $e$) e analizzare il pendolo balistico.
+    \item Dimostrare il Primo Teorema di König per l'energia cinetica ($E_k = \frac{1}{2}M v_{CM}^2 + E_k'$).
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5em}
+
+% ------------------------------------------------------------------------------
+\section{Sistemi di Punti Materiali e Centro di Massa}
+\label{sec:centro_massa}
+% ------------------------------------------------------------------------------
+
+Consideriamo un sistema formato da $N$ punti materiali di masse $m_i$ e posizioni $\vec{r}_i$ ($i = 1, \dots, N$). La massa totale del sistema è:
+\begin{equation}
+    M \coloneqq \sum_{i=1}^N m_i
+\end{equation}
+
+\begin{definizione}{Centro di Massa ($CM$)}{def:centro_massa}
+Il \textbf{Centro di Massa} del sistema è il punto geometrico la cui posizione vettoriale è la media pesata delle posizioni di tutte le particelle:
+\begin{equation}
+    \vec{r}_{CM} \coloneqq \frac{1}{M}\sum_{i=1}^N m_i \vec{r}_i = \frac{m_1\vec{r}_1 + m_2\vec{r}_2 + \dots + m_N\vec{r}_N}{M}
+    \label{eq:rcm}
+\end{equation}
+Per un corpo continuo a densità volumica $\rho(\vec{r})$, l'espressione integrale è:
+\begin{equation}
+    \vec{r}_{CM} = \frac{1}{M}\int_V \vec{r}\,\dd m = \frac{1}{M}\int_V \vec{r}\,\rho(\vec{r})\,\dd V
+    \label{eq:rcm_continuo}
+\end{equation}
+\end{definizione}
+
+\begin{definizione}{Velocità e Accelerazione del Centro di Massa}{def:vcm}
+Derivando rispetto al tempo:
+\begin{itemize}
+    \item \textbf{Velocità del $CM$}:
+    \begin{equation}
+        \vec{v}_{CM} \coloneqq \dv{\vec{r}_{CM}}{t} = \frac{1}{M}\sum_{i=1}^N m_i \vec{v}_i = \frac{\vec{P}_{\text{tot}}}{M}
+        \label{eq:vcm}
+    \end{equation}
+    dove $\vec{P}_{\text{tot}} \coloneqq \sum m_i \vec{v}_i$ è la \textbf{quantità di moto totale} del sistema.
+    \item \textbf{Accelerazione del $CM$}:
+    \begin{equation}
+        \vec{a}_{CM} \coloneqq \dv{\vec{v}_{CM}}{t} = \frac{1}{M}\sum_{i=1}^N m_i \vec{a}_i
+        \label{eq:acm}
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+% ------------------------------------------------------------------------------
+\section{La Prima Equazione Cardinale della Meccanica}
+\label{sec:prima_cardinale}
+% ------------------------------------------------------------------------------
+
+Su ciascun punto materiale $i$-esimo agiscono:
+\begin{itemize}
+    \item Forze \textbf{esterne} $\vec{F}_i^{(E)}$: dovute a interazioni con corpi estranei al sistema.
+    \item Forze \textbf{interne} $\vec{f}_{ij}$: esercitate dal generico punto $j$ sul punto $i$.
+\end{itemize}
+Per il terzo principio della dinamica di Newton, le forze interne agiscono a coppie di azione e reazione: $\vec{f}_{ji} = -\vec{f}_{ij} \implies \vec{f}_{ij} + \vec{f}_{ji} = \vec{0}$. Sommando su tutti i punti:
+\begin{equation}
+    \vec{f}_{\text{tot}}^{(I)} = \sum_{i=1}^N \sum_{\substack{j=1 \\ j \neq i}}^N \vec{f}_{ij} = \vec{0}
+    \label{eq:risultante_interna_nulla}
+\end{equation}
+
+\begin{teorema}{Prima Equazione Cardinale (Teorema del Moto del Centro di Massa)}{teo:prima_cardinale}
+La risultante di tutte le sole forze \textbf{esterne} applicate a un sistema è pari alla derivata temporale della quantità di moto totale, ovvero al prodotto della massa totale per l'accelerazione del Centro di Massa:
+\begin{equation}
+    \vec{F}_{\text{tot}}^{(E)} = \dv{\vec{P}_{\text{tot}}}{t} = M\vec{a}_{CM}
+    \label{eq:prima_cardinale}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Scriviamo il secondo principio per il punto $i$-esimo: $\vec{F}_i^{(E)} + \sum_{j \neq i} \vec{f}_{ij} = m_i \vec{a}_i$. Sommando su tutti gli $N$ punti:
+\begin{equation}
+    \sum_{i=1}^N \vec{F}_i^{(E)} + \underbrace{\sum_{i=1}^N \sum_{j \neq i} \vec{f}_{ij}}_{=\vec{0}} = \sum_{i=1}^N m_i \vec{a}_i = M \left(\frac{1}{M}\sum_{i=1}^N m_i \vec{a}_i\right) = M\vec{a}_{CM}
+\end{equation}
+\end{dimostrazione}
+
+\begin{legge}{Conservazione della Quantità di Moto}{legge:cons_quantita_moto}
+Se la risultante delle forze esterne è nulla ($\vec{F}_{\text{tot}}^{(E)} = \vec{0}$), oppure se il sistema è \textbf{isolato}:
+\begin{equation}
+    \vec{P}_{\text{tot}} = \text{cost} \iff \vec{v}_{CM} = \text{cost}
+    \label{eq:cons_P}
+\end{equation}
+Il Centro di Massa si muove di moto rettilineo uniforme (o permane in quiete).
+\end{legge}
+
+% ------------------------------------------------------------------------------
+\section{Teoria Generale degli Urti Meccanici}
+\label{sec:teoria_urti}
+% ------------------------------------------------------------------------------
+
+Un \textbf{urto} è un'interazione tra due o più corpi caratterizzata da forze interne estremamente intense ($\vec{f}_{ij} \gg \vec{F}^{(E)}$) che agiscono in un intervallo di tempo brevissimo ($\Delta t \to 0$).
+
+\begin{teorema}{Teorema dell'Impulso}{teo:impulso}
+L'\textbf{impulso} $\vec{J}$ di una forza nell'intervallo $[t_1, t_2]$ è pari alla variazione della quantità di moto:
+\begin{equation}
+    \vec{J} \coloneqq \int_{t_1}^{t_2} \vec{F}(t)\,\dd t = \Delta\vec{p} = \vec{p}(t_2) - \vec{p}(t_1)
+\end{equation}
+Durante un urto, l'impulso delle forze esterne ordinarie (come la gravità) è trascurabile ($\int_{\Delta t} mg\,\dd t \to 0$); pertanto, in qualsiasi urto la **quantità di moto totale si conserva sempre**:
+\begin{equation}
+    \vec{P}_i = \vec{P}_f \iff m_1\vec{v}_{1i} + m_2\vec{v}_{2i} = m_1\vec{v}_{1f} + m_2\vec{v}_{2f}
+\end{equation}
+\end{teorema}
+
+\subsection{Classificazione degli Urti}
+
+\begin{enumerate}
+    \item \textbf{Urto Completamente Elastico}: si conservano sia la quantità di moto $\vec{P}$ sia l'energia cinetica totale $E_k$ ($\Delta E_k = 0$).\\
+    Nel caso unidimensionale lungo l'asse $x$, il sistema di conservazione di $P$ ed $E_k$:
+    \begin{align}
+        m_1 v_{1i} + m_2 v_{2i} &= m_1 v_{1f} + m_2 v_{2f} \\
+        \frac{1}{2}m_1 v_{1i}^2 + \frac{1}{2}m_2 v_{2i}^2 &= \frac{1}{2}m_1 v_{1f}^2 + \frac{1}{2}m_2 v_{2f}^2
+    \end{align}
+    fornisce le velocità finali esatte:
+    \begin{align}
+        \mathbf{v_{1f}} &= \mathbf{\frac{m_1 - m_2}{m_1 + m_2}v_{1i} + \frac{2 m_2}{m_1 + m_2}v_{2i}} \label{eq:urto_el_1} \\
+        \mathbf{v_{2f}} &= \mathbf{\frac{2 m_1}{m_1 + m_2}v_{1i} + \frac{m_2 - m_1}{m_1 + m_2}v_{2i}} \label{eq:urto_el_2}
+    \end{align}
+    \begin{itemize}
+        \item \emph{Masse uguali ($m_1 = m_2$)}: i corpi si scambiano esattamente le velocità ($v_{1f} = v_{2i}$, $v_{2f} = v_{1i}$).
+        \item \emph{Bersaglio fermo di massa infinita ($m_2 \gg m_1$, $v_{2i} = 0$)}: $v_{1f} = -v_{1i}$ (rimbalzo elastico perfetto con inversione della velocità).
+    \end{itemize}
+
+    \item \textbf{Urto Totalmente Anelastico}: i corpi rimangono attaccati dopo la collisione formando un unico corpo di massa $M = m_1 + m_2$ che avanza con velocità comune $\vec{v}_f = \vec{v}_{CM}$:
+    \begin{equation}
+        \mathbf{\vec{v}_f = \frac{m_1\vec{v}_{1i} + m_2\vec{v}_{2i}}{m_1 + m_2}}
+        \label{eq:urto_anel_vf}
+    \end{equation}
+    La perdita di energia cinetica dissipata in deformazione e calore è massima e vale:
+    \begin{equation}
+        |\Delta E_k| = \frac{1}{2}\mu v_{\text{rel}}^2 = \frac{1}{2}\left(\frac{m_1 m_2}{m_1 + m_2}\right)|\vec{v}_{1i} - \vec{v}_{2i}|^2
+        \label{eq:delta_ek_anelastico}
+    \end{equation}
+    dove $\mu \coloneqq \frac{m_1 m_2}{m_1 + m_2}$ è la \textbf{massa ridotta} del sistema.
+
+    \item \textbf{Coefficiente di Restituzione di Newton $e$}:\\
+    Per un urto generico 1D, il rapporto tra la velocità relativa di allontanamento e quella di avvicinamento definisce il coefficiente $e \in [0, 1]$:
+    \begin{equation}
+        e \coloneqq \frac{v_{2f} - v_{1f}}{v_{1i} - v_{2i}}
+    \end{equation}
+    ($e=1$ urto elastico, $e=0$ urto totalmente anelastico, $0 < e < 1$ urto parzialmente anelastico).
+\end{enumerate}
+
+% ------------------------------------------------------------------------------
+\section{Il Primo Teorema di König per l'Energia Cinetica}
+\label{sec:teorema_konig}
+% ------------------------------------------------------------------------------
+
+\begin{teorema}{Primo Teorema di König}{teo:konig_energia}
+L'energia cinetica totale $E_k$ di un sistema di punti materiali si scompone nella somma dell'energia cinetica di traslazione del Centro di Massa e dell'energia cinetica relativa $E_k'$ misurata nel sistema di riferimento baricentrale (solidale al $CM$):
+\begin{equation}
+    E_k = \frac{1}{2}M v_{CM}^2 + E_k' = \frac{1}{2}M v_{CM}^2 + \sum_{i=1}^N \frac{1}{2}m_i v_i'^2
+    \label{eq:teorema_konig}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Esprimiamo la velocità di ciascun punto rispetto al $CM$: $\vec{v}_i = \vec{v}_{CM} + \vec{v}_i'$. Calcoliamo l'energia cinetica:
+\begin{align*}
+    E_k &= \sum_{i=1}^N \frac{1}{2}m_i (\vec{v}_{CM} + \vec{v}_i')\cdot(\vec{v}_{CM} + \vec{v}_i') \\
+    &= \frac{1}{2}\left(\sum m_i\right)v_{CM}^2 + \sum \frac{1}{2}m_i v_i'^2 + \vec{v}_{CM}\cdot\underbrace{\left(\sum m_i \vec{v}_i'\right)}_{=\vec{P}' = \vec{0}}
+\end{align*}
+Poiché nel sistema del Centro di Massa la quantità di moto totale $\vec{P}'$ è identicamente nulla per definizione ($\sum m_i \vec{r}_i' = \vec{0}$), il termine di doppio prodotto svanisce, dimostrando il teorema.
+\end{dimostrazione}
+
+% ------------------------------------------------------------------------------
+\section{Esercizi Risolti ed Applicativi sui Sistemi di Punti e Urti}
+\label{sec:esercizi_urti}
+% ------------------------------------------------------------------------------
+
+\begin{esercizio}[Il Pendolo Balistico]
+\textbf{Testo:}
+Un proiettile di massa $m$ viaggia orizzontalmente a velocità incognita $v_0$ e si conficca istantaneamente in un blocco di legno di massa $M$ sospeso a due funi inestensibili di lunghezza $L$. A seguito dell'urto, il blocco si solleva raggiungendo un'altezza massima $h$. Determinare la velocità iniziale del proiettile $v_0$ e la frazione di energia cinetica dissipata durante la collisione.
+\end{esercizio}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Supporto
+    \draw[thick] (-1,3) -- (3,3);
+    \fill[pattern=north east lines] (-1,3) rectangle (3,3.2);
+    
+    % Posizione iniziale (urto)
+    \draw[thick] (0,3) -- (0,1);
+    \draw[thick] (0.8,3) -- (0.8,1);
+    \filldraw[fill=brown!40, draw=black, thick] (-0.2,0.4) rectangle (1.0, 1.0);
+    \node at (0.4, 0.7) {$M$};
+    
+    % Proiettile incidente
+    \filldraw[crimsonred] (-1.5, 0.7) circle (2.5pt);
+    \draw[->, ultra thick, crimsonred] (-1.5, 0.7) -- (-0.5, 0.7) node[midway, above] {$m, v_0$};
+    
+    % Posizione sollevata
+    \begin{scope}[shift={(2.5, 0.6)}, rotate=-30]
+        \draw[dashed, gray] (0, 2.4) -- (0,0.4);
+        \draw[dashed, fill=brown!20, draw=gray] (-0.2,-0.2) rectangle (1.0, 0.4);
+    \end{scope}
+    \draw[dashed, gray] (0, 3) -- (1.5, 1.6);
+    \draw[<->, forestgreen, thick] (1.3, 0.7) -- (1.3, 1.3) node[midway, right] {$h$};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[enhanced, breakable, colback=forestgreen!5!white, colframe=forestgreen!80!black,
+    title={\textbf{Analisi delle Forze in Gioco nelle Due Fasi del Pendolo Balistico}}, fonttitle=\bfseries\sffamily]
+\begin{itemize}
+    \item \textbf{Fase 1: Urto Istantaneo ($\Delta t \to 0$):}
+    \begin{itemize}
+        \item \textbf{Forze Impulsive Interne ($\vec{F}_{\text{imp}}$):} tra proiettile e blocco agiscono enormi forze interne di contatto e deformazione ($|\vec{F}_{\text{imp}}| \to \infty$ con $\int \vec{F}_{\text{imp}}\dd t = \vec{J}_{\text{int}}$ finito). Per il terzo principio di Newton $\vec{F}_{12} = -\vec{F}_{21}$, le forze interne si elidono a coppie e non alterano la quantità di moto totale $\vec{P}$.
+        \item \textbf{Forze Esterne Ordinarie ($\vec{P} = (m+M)\vec{g}$, $\vec{T}$):} durante l'intervallo d'urto infinitesimo $\Delta t \approx 0$, l'impulso delle forze esterne ordinarie lungo l'orizzontale è nullo ($\vec{J}_{\text{ext},x} = \int_0^{\Delta t} F_{\text{ext},x}\dd t = 0$). Dunque $P_x$ si conserva rigorosamente.
+    \end{itemize}
+    \item \textbf{Fase 2: Oscillazione Post-Urto (Moto Conservativo):}
+    \begin{itemize}
+        \item Agiscono la forza peso e la tensione del filo $\vec{T}$. La tensione è perpendicolare allo spostamento ($\vec{T}\perp\dd\vec{r} \implies W_T = 0$); il peso è conservativo $\implies E_{\text{mec}}$ si conserva.
+    \end{itemize}
+\end{itemize}
+\end{tcolorbox}
+
+\textbf{Risoluzione Analitica:}
+\begin{enumerate}
+    \item \textbf{Conservazione di $P_x$ durante l'urto anelastico:}
+    \begin{equation}
+        m v_0 = (m + M) v_f \implies v_f = \frac{m}{m + M}v_0
+    \end{equation}
+    \item \textbf{Conservazione dell'energia meccanica nella risalita:}
+    \begin{equation}
+        \frac{1}{2}(m + M) v_f^2 = (m + M)gh \implies v_f = \sqrt{2gh}
+    \end{equation}
+    \item \textbf{Velocità iniziale del proiettile $v_0$:}
+    \begin{equation}
+        \mathbf{v_0 = \left(\frac{m + M}{m}\right)\sqrt{2gh}}
+    \end{equation}
+    \item \textbf{Frazione di energia cinetica dissipata nell'impatto:}
+    \begin{equation}
+        \mathbf{\frac{|\Delta E_k|}{E_{ki}} = 1 - \frac{m}{m+M} = \frac{M}{m + M}}
+    \end{equation}
+\end{enumerate}
+
+\vspace{0.8em}
+
+\begin{esercizio}[Urto Elastico Bidimensionale tra Due Dischi su Piano Liscio]
+\textbf{Testo:}
+Un disco 1 di massa $m$ con velocità $\vec{v}_1 = v_0\ux$ urta elasticamente un secondo disco 2 identico di massa $m$ inizialmente fermo su un tavolo liscio. La linea dei centri all'impatto forma un angolo $\theta = 30^\circ$ con l'asse $x$. Determinare le velocità finali $\vec{v}_1'$ e $\vec{v}_2'$ e analizzare il diagramma delle forze impulsive di contatto.
+\end{esercizio}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Linea d'impatto
+    \draw[dashed, gray] (-2, -1.154) -- (3, 1.732) node[right] {Linea dei centri ($\hat{\bm{n}}$)};
+    
+    % Disco 1
+    \draw[thick, fill=blue!20, draw=navyblue] (-0.866, -0.5) circle (1);
+    \filldraw[black] (-0.866, -0.5) circle (1.5pt) node[left] {$C_1$};
+    
+    % Disco 2
+    \draw[thick, fill=red!20, draw=crimsonred] (0.866, 0.5) circle (1);
+    \filldraw[black] (0.866, 0.5) circle (1.5pt) node[right] {$C_2$};
+    
+    % Forze impulsive di contatto
+    \coordinate (Contatto) at (0,0);
+    \draw[->, ultra thick, crimsonred] (Contatto) -- (-1.2, -0.69) node[below left] {$\vec{F}_{21}$ (su 1)};
+    \draw[->, ultra thick, navyblue] (Contatto) -- (1.2, 0.69) node[above right] {$\vec{F}_{12}$ (su 2)};
+    
+    % Versori n e t
+    \draw[->, thick, purpleaccent] (Contatto) -- (0.866, 0.5) node[midway, above left] {$\hat{\bm{n}}$};
+    \draw[->, thick, purpleaccent] (Contatto) -- (-0.5, 0.866) node[above left] {$\hat{\bm{t}}$};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[enhanced, breakable, colback=forestgreen!5!white, colframe=forestgreen!80!black,
+    title={\textbf{Analisi delle Forze di Contatto nell'Urto 2D}}, fonttitle=\bfseries\sffamily]
+\begin{itemize}
+    \item \textbf{Lungo la normale di contatto $\hat{\bm{n}}$:} si sviluppa la forza impulsiva di repulsione elastica reciproca $\vec{F}_{12} = -\vec{F}_{21}$. Si verifica uno scambio di quantità di moto identico a un urto 1D elastico.
+    \item \textbf{Lungo la tangente di contatto $\hat{\bm{t}}$:} poiché le superfici dei dischi sono lisce (assenza di attrito radente), la forza tangenziale di contatto è rigorosamente nulla ($F_{t} = 0$). Di conseguenza, la componente tangenziale della velocità del disco 1 si conserva inalterata: $v_{1t}' = v_{1t} = v_0\sin\theta$.
+\end{itemize}
+\end{tcolorbox}

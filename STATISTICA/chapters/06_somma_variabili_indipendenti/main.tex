@@ -1,0 +1,161 @@
+% ==============================================================================
+% CAPITOLO 6: SOMMA DI VARIABILI ALEATORIE, CONVOLUZIONE E TEOREMI LIMITE
+% ==============================================================================
+\chapter{Somma di Variabili Aleatorie, Convoluzione e Teoremi Limite}
+\label{cap:somma_variabili_indipendenti}
+
+\begin{abstract}
+Il presente capitolo costituisce il ponte analitico fondamentale che connette la teoria della probabilità alla statistica inferenziale. Si analizza la distribuzione della somma di variabili aleatorie indipendenti attraverso l'operatore matematico di convoluzione continua e discreta, esaminando le proprietà di stabilità e riproduttività delle famiglie parametriche notevoli. Vengono enunciati e dimostrati i grandi teoremi asintotici del calcolo delle probabilità: la Legge Debole dei Grandi Numeri (WLLN di Khinchin) mediante la disuguaglianza di Chebyshev, la Legge Forte (SLLN di Kolmogorov) e il monumentale Teorema del Limite Centrale (CLT di Lindeberg-Lévy). Infine, si approfondisce l'approssimazione normale della Binomiale di De Moivre-Laplace, illustrando la correzione geometrica di continuità di Yates.
+\end{abstract}
+
+% ==============================================================================
+% SEZIONE 6.1: CONVOLUZIONE E DISTRIBUZIONE DELLA SOMMA
+% ==============================================================================
+\section{Distribuzione della Somma e Integrale di Convoluzione}
+\label{sec:convoluzione_somma}
+
+In innumerevoli problemi fisici e ingegneristici, la grandezza osservata è il risultato dell'aggregazione o della sovrapposizione lineare di molteplici contributi aleatori indipendenti: il carico totale che grava su un pilastro portante, il rumore termico su un canale di trasmissione dati o il tempo totale di completamento di una sequenza di attività in un progetto industriale.
+
+Siano $X$ e $Y$ due variabili aleatorie indipendenti. Vogliamo determinare la distribuzione della loro somma $Z = X + Y$.
+
+\begin{teorema}{Convoluzione Discreta e Continua}{teorema_convoluzione}
+Siano $X$ e $Y$ due variabili aleatorie stocasticamente indipendenti e sia $Z = X + Y$:
+\begin{enumerate}
+    \item \textbf{Caso Discreto:} Se $X$ e $Y$ hanno PMF $p_X$ e $p_Y$, la funzione di massa di $Z$ è data dalla \textbf{convoluzione discreta}:
+    \begin{equation}
+        p_Z(z) = \mathbb{P}(X + Y = z) = \sum_{x \in \operatorname{Im}(X)} p_X(x) \cdot p_Y(z - x) = (p_X * p_Y)(z)
+    \end{equation}
+    \item \textbf{Caso Continuo:} Se $X$ e $Y$ hanno PDF $f_X$ e $f_Y$, la funzione di densità di $Z$ è data dall'\textbf{integrale di convoluzione}:
+    \begin{equation}
+        f_Z(z) = \int_{-\infty}^{+\infty} f_X(x) \cdot f_Y(z - x) \, dx = (f_X * f_Y)(z)
+    \end{equation}
+\end{enumerate}
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazione nel caso assolutamente continuo]
+Calcoliamo dapprima la Funzione di Ripartizione (CDF) di $Z = X + Y$:
+\begin{equation}
+    F_Z(z) = \mathbb{P}(X + Y \le z) = \iint_{\{(x,y) \in \mathbb{R}^2 : x + y \le z\}} f_{X,Y}(x, y) \, dx \, dy
+\end{equation}
+Sfruttando l'indipendenza stocastica, la densità congiunta fattorizza in $f_{X,Y}(x, y) = f_X(x) f_Y(y)$. Integrando rispetto a $y$ sulla semiretta $(-\infty, z - x]$:
+\begin{equation}
+    F_Z(z) = \int_{-\infty}^{+\infty} f_X(x) \left[ \int_{-\infty}^{z - x} f_Y(y) \, dy \right] dx = \int_{-\infty}^{+\infty} f_X(x) F_Y(z - x) \, dx
+\end{equation}
+Derivando $F_Z(z)$ rispetto a $z$ sotto il segno di integrale (Teorema di Leibniz per integrali dipendenti da parametro):
+\begin{equation}
+    f_Z(z) = \frac{d}{dz} F_Z(z) = \int_{-\infty}^{+\infty} f_X(x) \left[ \frac{d}{dz} F_Y(z - x) \right] dx = \int_{-\infty}^{+\infty} f_X(x) f_Y(z - x) \, dx \qquad \blacksquare
+\end{equation}
+\end{dimostrazione}
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_convoluzione_somma.tex}
+    \caption{Effetto smussante della convoluzione: la somma di due variabili aleatorie uniformi indipendenti $X, Y \stackrel{\text{i.i.d.}}{\sim} \operatorname{Unif}(0,1)$ genera una distribuzione continua triangolare simmetrica su $[0, 2]$. Convoluzioni successive di uniformi generano distribuzioni a campana progressivamente sempre più lisce ed indistinguibili da una Gaussiana.}
+    \label{fig:convoluzione_somma}
+\end{figure}
+
+\subsection{Famiglie di Distribuzioni Riproduttive (Chiusura per Convoluzione)}
+
+\begin{proprieta}{Proprietà di Riproduzione di Famiglie Notevoli}{chiusura_somma}
+Siano $X_1$ e $X_2$ variabili indipendenti:
+\begin{enumerate}
+    \item \textbf{Binomiali (con uguale probabilità di successo $p$):}
+    \begin{equation}
+        X_1 \sim \operatorname{Bin}(n_1, p), \; X_2 \sim \operatorname{Bin}(n_2, p) \implies X_1 + X_2 \sim \operatorname{Bin}(n_1 + n_2, p)
+    \end{equation}
+    \item \textbf{Poissoniane:}
+    \begin{equation}
+        X_1 \sim \operatorname{Pois}(\lambda_1), \; X_2 \sim \operatorname{Pois}(\lambda_2) \implies X_1 + X_2 \sim \operatorname{Pois}(\lambda_1 + \lambda_2)
+    \end{equation}
+    \item \textbf{Gaussiane (Normali):}
+    \begin{equation}
+        X_1 \sim \mathcal{N}(\mu_1, \sigma_1^2), \; X_2 \sim \mathcal{N}(\mu_2, \sigma_2^2) \implies X_1 + X_2 \sim \mathcal{N}(\mu_1 + \mu_2, \; \sigma_1^2 + \sigma_2^2)
+    \end{equation}
+    \item \textbf{Chi-quadro:}
+    \begin{equation}
+        X_1 \sim \chi^2(k_1), \; X_2 \sim \chi^2(k_2) \implies X_1 + X_2 \sim \chi^2(k_1 + k_2)
+    \end{equation}
+\end{enumerate}
+\end{proprieta}
+
+% ==============================================================================
+% SEZIONE 6.2: LEGGE DEI GRANDI NUMERI
+% ==============================================================================
+\section{La Legge dei Grandi Numeri (LLN)}
+\label{sec:legge_grandi_numeri}
+
+La Legge dei Grandi Numeri stabilisce formalmente che la media aritmetica di $n$ osservazioni campionarie indipendenti converge al valore atteso teorico $\mu$ della popolazione.
+
+Sia $\{X_n\}_{n \ge 1}$ una successione di v.a. indipendenti e identicamente distribuite (\emph{i.i.d.}) con $\mathbb{E}[X_i] = \mu$ e $\operatorname{Var}(X_i) = \sigma^2 < +\infty$.
+La media campionaria è $\overline{X}_n = \frac{1}{n}\sum_{i=1}^n X_i$.
+Per linearità e identità di Bienaymé:
+\begin{equation}
+    \mathbb{E}[\overline{X}_n] = \mu, \qquad \operatorname{Var}(\overline{X}_n) = \frac{\sigma^2}{n}
+\end{equation}
+
+\begin{teorema}{Legge Debole dei Grandi Numeri (WLLN di Khinchin)}{wlln}
+Per ogni soglia prefissata $\varepsilon > 0$, la probabilità che la media campionaria disti dal valore atteso teorico per più di $\varepsilon$ decade a zero al divergere della numerosità campionaria:
+\begin{equation}
+    \lim_{n \to \infty} \mathbb{P}(|\overline{X}_n - \mu| \ge \varepsilon) = 0 \iff \overline{X}_n \xrightarrow{\mathbb{P}} \mu \quad (\text{Convergenza in Probabilità})
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazione mediante la Disuguaglianza di Chebyshev]
+Applichiamo la Disuguaglianza di Chebyshev alla variabile aleatoria $\overline{X}_n$:
+\begin{equation}
+    \mathbb{P}(|\overline{X}_n - \mu| \ge \varepsilon) \le \frac{\operatorname{Var}(\overline{X}_n)}{\varepsilon^2} = \frac{\sigma^2}{n \varepsilon^2}
+\end{equation}
+Passando al limite per $n \to \infty$ con $\varepsilon > 0$ costante:
+\begin{equation}
+    0 \le \lim_{n \to \infty} \mathbb{P}(|\overline{X}_n - \mu| \ge \varepsilon) \le \lim_{n \to \infty} \frac{\sigma^2}{n \varepsilon^2} = 0 \qquad \blacksquare
+\end{equation}
+\end{dimostrazione}
+
+\begin{teorema}{Legge Forte dei Grandi Numeri (SLLN di Kolmogorov)}{slln}
+Nelle medesime ipotesi, la media campionaria converge a $\mu$ con probabilità $1$ (convergenza quasi certa):
+\begin{equation}
+    \mathbb{P}\left(\lim_{n \to \infty} \overline{X}_n = \mu\right) = 1 \iff \overline{X}_n \xrightarrow{\text{q.c.}} \mu
+\end{equation}
+\end{teorema}
+
+% ==============================================================================
+% SEZIONE 6.3: TEOREMA DEL LIMITE CENTRALE (CLT)
+% ==============================================================================
+\section{Il Teorema del Limite Centrale (CLT)}
+\label{sec:teorema_limite_centrale}
+
+Se la Legge dei Grandi Numeri ci assicura che $\overline{X}_n$ collassa puntualmente su $\mu$, il **Teorema del Limite Centrale** descrive la geometria della fluttuazione statistica residua attorno a $\mu$, opportunamente riscalata per il fattore di amplificazione $\sqrt{n}$.
+
+\begin{figure}[htbp]
+    \centering
+    \input{figures/fig_clt_convergenza.tex}
+    \caption{Convergenza universale del Teorema del Limite Centrale: all'aumentare di $n$ ($n=1, 2, 5, 30$), la distribuzione della media campionaria standardizzata $Z_n = \frac{\overline{X}_n - \mu}{\sigma/\sqrt{n}}$ perde memoria della forma originaria (anche se fortemente asimmetrica o discreta) e converge asintoticamente alla densità Gaussiana standard $\mathcal{N}(0,1)$.}
+    \label{fig:clt_convergenza}
+\end{figure}
+
+\begin{teorema}{Teorema del Limite Centrale (Lindeberg-Lévy)}{clt}
+Sia $\{X_i\}_{i=1}^n$ una successione di v.a. indipendenti e identicamente distribuite con valore atteso $\mu$ e varianza finita $\sigma^2 > 0$.
+Definita la variabile standardizzata della somma $S_n = \sum_{i=1}^n X_i$ o della media $\overline{X}_n$:
+\begin{equation}
+    Z_n = \frac{S_n - n\mu}{\sigma \sqrt{n}} = \frac{\overline{X}_n - \mu}{\sigma / \sqrt{n}}
+\end{equation}
+Per ogni $z \in \mathbb{R}$, la CDF di $Z_n$ converge puntualmente alla CDF della Normale Standard:
+\begin{equation}
+    \lim_{n \to \infty} \mathbb{P}(Z_n \le z) = \Phi(z) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^z e^{-t^2/2} \, dt \iff Z_n \xrightarrow{d} \mathcal{N}(0, 1)
+\end{equation}
+\end{teorema}
+
+\subsection{Teorema di De Moivre-Laplace e Correzione di Continuità di Yates}
+
+Quando si approssima una variabile discreta a supporto intero (come $X \sim \operatorname{Bin}(n, p)$ con $np \ge 5$ e $n(1-p) \ge 5$) con una variabile continua $Y \sim \mathcal{N}(np, np(1-p))$, ciascun intero $k$ corrisponde geometricamente all'intervallo continuo $[k - 0.5, \; k + 0.5]$.
+
+\begin{metodo}[Correzione di Continuità di Yates]
+Per calcolare probabilità su variabili discrete a valori interi tramite la normale:
+\begin{align}
+    \mathbb{P}(X = k) &\approx \mathbb{P}(k - 0.5 \le Y \le k + 0.5) \\
+    \mathbb{P}(X \le k) &\approx \mathbb{P}(Y \le k + 0.5) \\
+    \mathbb{P}(X < k) = \mathbb{P}(X \le k - 1) &\approx \mathbb{P}(Y \le k - 0.5) \\
+    \mathbb{P}(X \ge k) &\approx \mathbb{P}(Y \ge k - 0.5) \\
+    \mathbb{P}(X > k) = \mathbb{P}(X \ge k + 1) &\approx \mathbb{P}(Y \ge k + 0.5)
+\end{align}
+\end{metodo}

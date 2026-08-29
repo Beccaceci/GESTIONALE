@@ -1,0 +1,529 @@
+% ==============================================================================
+% CAPITOLO 14: MERCATO MONETARIO E MERCATO REALE: IL MODELLO IS-LM
+% ==============================================================================
+\chapter{Mercato Monetario e Mercato Reale: Il Modello IS-LM}
+\label{chap:mercato_monetario_reale_is_lm}
+
+\begin{tcolorbox}[colback=navyblue!5!white, colframe=navyblue, title=\textbf{Quadro Concettuale del Capitolo}]
+Questo capitolo sviluppa la sintesi neoclassica-keynesiana mediante il \textbf{Modello IS-LM} formulato originariamente da John Hicks e Alvin Hansen. Il modello supera la separazione dicotomica tra settore reale e monetario analizzando l'interazione simultanea tra il mercato dei beni e servizi (\textbf{curva IS}) e il mercato delle attività finanziarie e della moneta (\textbf{curva LM}). Verranno derivate analiticamente e geometricamente le equazioni di equilibrio congiunto del reddito ($Y^*$) e del tasso di interesse ($r^*$), quantificato con rigore l'effetto di \textbf{spiazzamento finanziario (crowding out)} degli investimenti privati generato dalla spesa pubblica, esaminata l'efficacia del \textbf{policy mix}, confrontati i \textbf{casi limite} (trappola della liquidità e caso classico) e formalizzata la moderna \textbf{Regola di Taylor} per la conduzione della politica monetaria.
+\end{tcolorbox}
+
+\section{Fondamenti della Sintesi IS-LM}
+
+Nei capitoli precedenti l'analisi macroeconomica è stata condotta separando i due mercati:
+\begin{enumerate}
+    \item Nel \textbf{Modello Reddito-Spesa (Croce Keynesiana)} il livello del reddito di equilibrio $Y$ è determinato dalla domanda aggregata ipotizzando che la spesa per investimenti $I$ e il tasso di interesse $r$ siano esogeni. Tuttavia, nella realtà il tasso di interesse determina in modo cruciale le decisioni di accumulazione del capitale delle imprese.
+    \item Nel \textbf{Mercato Monetario} il tasso di interesse di equilibrio $r$ è determinato dall'incontro tra domanda e offerta di moneta ipotizzando che il livello del reddito $Y$ sia esogeno. Tuttavia, il volume delle transazioni e la domanda di moneta a scopo transattivo dipendono direttamente dal livello del PIL reale.
+\end{enumerate}
+
+Esiste pertanto una \textbf{interdipendenza circolare}:
+\begin{equation}
+    r \xrightarrow{\quad\text{influenza}\quad} I \xrightarrow{\quad\text{determina}\quad} Y \xrightarrow{\quad\text{influenza}\quad} \MD \xrightarrow{\quad\text{determina}\quad} r
+\end{equation}
+
+Il modello IS-LM risolve simultaneamente questo sistema di equazioni differenziali e algebriche, determinando la coppia di valori $(Y^*, r^*)$ che garantisce l'equilibrio generale su entrambi i mercati in un'economia con livello dei prezzi $P$ temporaneamente fisso.
+
+\section{La Curva IS: Equilibrio nel Mercato dei Beni}
+
+\subsection{La Funzione di Investimento e la Spesa Programmata}
+La spesa aggregata per investimenti $I$ delle imprese private è inversamente correlata al tasso di interesse reale $r$. Formalizziamo la funzione lineare di investimento:
+\begin{equation}
+    I(r) = I_0 - d \cdot r \quad \text{con } d = -\pdv{I}{r} > 0
+\end{equation}
+dove $I_0 > 0$ rappresenta l'investimento autonomo (trainato dalle aspettative e dagli \textit{animal spirits} degli imprenditori) e $d$ è il coefficiente di sensibilità marginale della spesa per investimenti alle variazioni del tasso di interesse.
+
+Considerando un'economia chiusa con settore pubblico:
+\begin{align}
+    C &= C_0 + c Y_{\mathrm{d}} = C_0 + c (Y - T + TR) = C_0 + c TR_0 + c(1-t)Y \\
+    I &= I_0 - d \cdot r \\
+    G &= G_0
+\end{align}
+Definendo la spesa autonoma totale indipendente dal reddito e dal tasso di interesse come $A_0 = C_0 + c TR_0 + I_0 + G_0$, la spesa programmata aggregata diviene:
+\begin{equation}
+    \SA(Y, r) = A_0 + c(1-t)Y - d \cdot r
+\end{equation}
+
+\subsection{Derivazione Analitica ed Equazione della Curva IS}
+
+\begin{modello}{Derivazione Analitica della Curva IS}{curva_is}
+La condizione di equilibrio nel mercato dei beni e servizi impone che la produzione programmata sia pari alla spesa aggregata:
+\begin{equation}
+    Y = \SA(Y, r) \iff Y = A_0 + c(1-t)Y - d \cdot r
+\end{equation}
+Risolvendo rispetto al reddito $Y$ otteniamo la \textbf{forma diretta della curva IS}:
+\begin{equation}
+    Y = \alpha_G \Big( A_0 - d \cdot r \Big) \label{eq:is_diretta}
+\end{equation}
+dove $\alpha_G = \dfrac{1}{1 - c(1-t)}$ è il moltiplicatore keynesiano della spesa pubblica in economia chiusa.
+
+Esplicitando il tasso di interesse $r$ in funzione del reddito $Y$, otteniamo la \textbf{forma inversa della curva IS}:
+\begin{equation}
+    r = \frac{A_0}{d} - \frac{1}{\alpha_G d} Y \label{eq:is_inversa}
+\end{equation}
+\end{modello}
+
+\begin{definizione}{Curva IS}{def_curva_is}
+La \textbf{Curva IS} (\textit{Investment-Saving}) è il luogo geometrico di tutte le infinite combinazioni di reddito reale $Y$ e tasso di interesse $r$ che assicurano l'equilibrio macroeconomico nel mercato dei beni e servizi (uguaglianza tra produzione e spesa aggregata, ovvero tra risparmio programmato e investimenti programmati).
+\end{definizione}
+
+\subsection{Pendenza e Fattori di Spostamento della Curva IS}
+
+\subsubsection{Pendenza della IS}
+La pendenza della curva IS nel piano cartesiano $(Y, r)$ è data dalla derivata prima dell'equazione inversa:
+\begin{equation}
+    \text{Pendenza}_{\IS} = \dv{r}{Y}\bigg|_{\IS} = -\frac{1}{\alpha_G d} = -\frac{1 - c(1-t)}{d} < 0
+\end{equation}
+La pendenza è rigorosamente \textbf{negativa}. L'intuizione economica è lineare:
+\begin{equation}
+    r \downarrow \implies I \uparrow \implies \SA \uparrow \implies (\text{tramite il moltiplicatore } \alpha_G) \implies Y \uparrow
+\end{equation}
+Fattori che determinano l'inclinazione:
+\begin{itemize}
+    \item \textbf{Sensibilità degli investimenti ($d$)}: quanto più $d$ è elevato, tanto più una modesta riduzione di $r$ stimola gli investimenti, rendendo la curva IS più \textbf{piatta} (elastica). Al limite, se $d \to \infty$, la IS diventa orizzontale; se $d \to 0$, la IS diventa verticale.
+    \item \textbf{Moltiplicatore keynesiano ($\alpha_G$)}: un aumento della propensione marginale al consumo $c$ o una riduzione dell'aliquota fiscale $t$ aumentano $\alpha_G$, rendendo la curva IS più \textbf{piatta}.
+\end{itemize}
+
+\subsubsection{Traslazione della Curva IS}
+Qualsiasi variazione di una componente esogena della spesa autonoma ($\Delta G, \Delta C_0, \Delta I_0, \Delta TR$) trasla la curva IS parallelamente:
+\begin{equation}
+    \Delta Y\big|_{r=\text{cost}} = \alpha_G \Delta A_0 = \alpha_G (\Delta G + c \Delta TR + \Delta I_0 + \Delta C_0)
+\end{equation}
+\begin{itemize}
+    \item \textbf{Politica Fiscale Espansiva} ($\Delta G > 0$, $\Delta TR > 0$): la curva IS trasla verso \textbf{destra/alto}.
+    \item \textbf{Politica Fiscale Restrittiva} ($\Delta G < 0$, $\Delta TR < 0$): la curva IS trasla verso \textbf{sinistra/basso}.
+    \item \textbf{Variazione dell'Aliquota Fiscale ($t$)}: un incremento di $t$ riduce il moltiplicatore $\alpha_G$, aumentando il valore assoluto della pendenza; la curva IS \textbf{ruota in senso orario} facendo perno sull'intercetta verticale $\frac{A_0}{d}$.
+\end{itemize}
+
+\section{La Curva LM: Equilibrio nel Mercato della Moneta}
+
+\subsection{Domanda e Offerta di Saldi Monetari Reali}
+Nel mercato delle attività finanziarie gli agenti scelgono la composizione del portafoglio tra moneta legale liquida e titoli a reddito fisso.
+Dato il livello generale dei prezzi $P$ e l'offerta nominale di moneta fissata esogenamente dalla Banca Centrale $\bar{M}$, l'offerta reale di moneta è:
+\begin{equation}
+    \left(\frac{M}{P}\right)^{\mathrm{s}} = \frac{\bar{M}}{P}
+\end{equation}
+La domanda di saldi monetari reali risponde ai tre moventi keynesiani (transattivo, precauzionale e speculativo):
+\begin{equation}
+    \left(\frac{M}{P}\right)^{\mathrm{d}} = L(Y, r) = k Y - h r \quad \text{con } k > 0, \; h > 0
+\end{equation}
+dove $k = \pdv{L}{Y}$ misura la sensibilità transattiva al PIL e $h = -\pdv{L}{r}$ misura la sensibilità speculativa al tasso di interesse.
+
+\subsection{Derivazione Analitica ed Equazione della Curva LM}
+
+\begin{modello}{Derivazione Analitica della Curva LM}{curva_lm}
+La condizione di equilibrio nel mercato della moneta impone l'uguaglianza tra offerta e domanda reale di moneta:
+\begin{equation}
+    \frac{\bar{M}}{P} = k Y - h r
+\end{equation}
+Esplicitando il tasso di interesse $r$ otteniamo la \textbf{forma inversa della curva LM}:
+\begin{equation}
+    r = \frac{k}{h} Y - \frac{1}{h}\frac{\bar{M}}{P} \label{eq:lm_inversa}
+\end{equation}
+Esplicitando il reddito $Y$ otteniamo la \textbf{forma diretta della curva LM}:
+\begin{equation}
+    Y = \frac{1}{k}\frac{\bar{M}}{P} + \frac{h}{k} r \label{eq:lm_diretta}
+\end{equation}
+\end{modello}
+
+\begin{definizione}{Curva LM}{def_curva_lm}
+La \textbf{Curva LM} (\textit{Liquidity-Money}) è il luogo geometrico di tutte le combinazioni di reddito reale $Y$ e tasso di interesse $r$ che assicurano l'equilibrio nel mercato monetario e finanziario, data una certa offerta reale di moneta $\frac{\bar{M}}{P}$.
+\end{definizione}
+
+\subsection{Pendenza e Fattori di Spostamento della Curva LM}
+
+\subsubsection{Pendenza della LM}
+La pendenza della curva LM nel piano $(Y, r)$ è:
+\begin{equation}
+    \text{Pendenza}_{\LM} = \dv{r}{Y}\bigg|_{\LM} = \frac{k}{h} > 0
+\end{equation}
+La pendenza è rigorosamente \textbf{positiva}. Il meccanismo economico alla base dell'inclinazione positiva è fondamentale:
+\begin{equation}
+    Y \uparrow \implies L_T \uparrow \implies \text{A parità di } \frac{\bar{M}}{P}, \text{ deve ridursi } L_S \implies \text{vendita titoli} \implies P_{\text{titolo}} \downarrow \implies r \uparrow
+\end{equation}
+Fattori che determinano l'inclinazione:
+\begin{itemize}
+    \item Se la domanda speculativa è molto reattiva ai tassi ($h$ elevato), la LM è relativamente \textbf{piatta}.
+    \item Se la domanda di moneta è insensibile ai tassi ($h \to 0$), la LM tende a diventare \textbf{verticale} (caso classico).
+\end{itemize}
+
+\subsubsection{Traslazione della Curva LM}
+La curva LM trasla in risposta a variazioni dell'offerta reale di moneta:
+\begin{equation}
+    \Delta r\big|_{Y=\text{cost}} = -\frac{1}{h} \Delta\left(\frac{M}{P}\right), \qquad \Delta Y\big|_{r=\text{cost}} = \frac{1}{k} \Delta\left(\frac{M}{P}\right)
+\end{equation}
+\begin{itemize}
+    \item \textbf{Politica Monetaria Espansiva} ($\Delta M > 0$) o deflazione ($\Delta P < 0$): incremento dei saldi monetari reali, la LM trasla verso il \textbf{basso/destra}.
+    \item \textbf{Politica Monetaria Restrittiva} ($\Delta M < 0$) o inflazione ($\Delta P > 0$): contrazione dei saldi monetari reali, la LM trasla verso l'\textbf{alto/sinistra}.
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05, >=Stealth]
+    % Griglia e Assi
+    \draw[->, line width=1.2pt] (0,0) -- (9.0,0) node[right, font=\small\bfseries] {Reddito Reale / PIL ($Y$)};
+    \draw[->, line width=1.2pt] (0,0) -- (0,6.5) node[above, font=\small\bfseries] {Tasso di Interesse ($r$)};
+
+    % Curve IS e LM
+    \draw[line width=1.8pt, color=navyblue] (1.0, 5.5) -- (8.0, 1.0) node[right, font=\small\bfseries] {$\IS$};
+    \draw[line width=1.8pt, color=purpleaccent] (1.0, 1.0) -- (8.0, 5.5) node[right, font=\small\bfseries] {$\LM$};
+
+    % Punto di Equilibrio E
+    \coordinate (E) at (4.5, 3.25);
+    \fill[crimsonred] (E) circle (3pt) node[above=4pt, font=\small\bfseries] {$E(Y^*, r^*)$};
+    \draw[dashed, line width=0.9pt, color=gray] (4.5, 0) node[below, font=\small\bfseries] {$Y^*$} -- (E) -- (0, 3.25) node[left, font=\small\bfseries] {$r^*$};
+
+    % 4 Quadranti di Disequilibrio con etichette
+    \node[align=center, font=\scriptsize\bfseries, color=navyblue!90!black] at (4.5, 5.3) {
+        \textbf{Zona I: Eccesso Offerta Beni ($ES_G$)}\\
+        \textbf{Eccesso Offerta Moneta ($ES_M$)}
+    };
+    \node[align=center, font=\scriptsize\bfseries, color=forestgreen!90!black] at (7.6, 3.25) {
+        \textbf{Zona II: $ES_G$}\\
+        \textbf{Eccesso Domanda Moneta ($ED_M$)}
+    };
+    \node[align=center, font=\scriptsize\bfseries, color=warmamber!90!black] at (4.5, 1.2) {
+        \textbf{Zona III: Eccesso Domanda Beni ($ED_G$)}\\
+        \textbf{Eccesso Domanda Moneta ($ED_M$)}
+    };
+    \node[align=center, font=\scriptsize\bfseries, color=purpleaccent!90!black] at (1.8, 3.25) {
+        \textbf{Zona IV: $ED_G$}\\
+        \textbf{Eccesso Offerta Moneta ($ES_M$)}
+    };
+
+    % Frecce di Aggiustamento Dinamico nei quadranti
+    \draw[->, line width=1.1pt, color=charcoalgray] (5.2, 5.0) -- (4.7, 4.4);
+    \draw[->, line width=1.1pt, color=charcoalgray] (7.0, 2.7) -- (6.2, 3.0);
+    \draw[->, line width=1.1pt, color=charcoalgray] (3.8, 1.5) -- (4.3, 2.1);
+    \draw[->, line width=1.1pt, color=charcoalgray] (2.0, 3.8) -- (2.8, 3.5);
+
+\end{tikzpicture}
+\caption{Equilibrio macroeconomico generale IS-LM e dinamica dei quattro quadranti di disequilibrio con vettori di aggiustamento verso l'equilibrio congiunto $E(Y^*, r^*)$.}
+\label{fig:is_lm_disequilibrio}
+\end{figure}
+
+\section{Equilibrio Macroeconomico Generale e Disequilibri}
+
+\subsection{Soluzione Analitica del Sistema IS-LM}
+
+\begin{teorema}{Soluzione di Equilibrio Generale IS-LM}{equilibrio_is_lm}
+L'equilibrio simultaneo del mercato reale e del mercato monetario è dato dalla soluzione del sistema lineare a due equazioni e due incognite $(Y, r)$:
+\begin{equation}
+    \begin{cases}
+        \IS: \quad Y = \alpha_G \big( A_0 - d \cdot r \big) \\[0.5em]
+        \LM: \quad r = \dfrac{k}{h} Y - \dfrac{1}{h}\dfrac{\bar{M}}{P}
+    \end{cases}
+\end{equation}
+Sostituendo l'equazione della LM all'interno della IS:
+\begin{equation}
+    Y = \alpha_G \left[ A_0 - d \left( \frac{k}{h} Y - \frac{1}{h}\frac{\bar{M}}{P} \right) \right] = \alpha_G A_0 - \frac{\alpha_G d k}{h} Y + \frac{\alpha_G d}{h}\frac{\bar{M}}{P}
+\end{equation}
+Raggruppando i termini in $Y$:
+\begin{equation}
+    Y \left( 1 + \frac{k \alpha_G d}{h} \right) = \alpha_G A_0 + \frac{\alpha_G d}{h}\frac{\bar{M}}{P}
+\end{equation}
+Definiamo il \textbf{moltiplicatore della politica fiscale con retroazione monetaria} $\gamma$:
+\begin{equation}
+    \gamma = \frac{\alpha_G}{1 + \dfrac{k \alpha_G d}{h}} = \frac{h \alpha_G}{h + k \alpha_G d} < \alpha_G \label{eq:gamma_fiscale}
+\end{equation}
+I valori di equilibrio del reddito $Y^*$ e del tasso di interesse $r^*$ sono:
+\begin{align}
+    Y^* &= \gamma A_0 + \gamma \frac{d}{h}\frac{\bar{M}}{P} \label{eq:y_star} \\[0.6em]
+    r^* &= \frac{k}{h} \gamma A_0 - \frac{1}{h + k \alpha_G d}\frac{\bar{M}}{P} \label{eq:r_star}
+\end{align}
+\end{teorema}
+
+\subsection{Dinamica di Aggiustamento Fuori dall'Equilibrio}
+Qualora il sistema si trovi al di fuori del punto $E(Y^*, r^*)$, entrano in gioco forze di mercato correttive:
+\begin{itemize}
+    \item \textbf{Aggiustamento del Mercato Finanziario (Istantaneo)}: i mercati monetari e obbligazionari si muovono a velocità quasi istantanea. Il tasso di interesse $r$ si aggiusta rapidamente per portare il sistema sulla curva LM.
+    \item \textbf{Aggiustamento del Mercato Reale (Graduale)}: le imprese modificano i livelli produttivi $Y$ e gestiscono le scorte con maggiore lentezza. Se vi è eccesso di domanda di beni ($\SA > Y$), le scorte si riducono e la produzione $Y$ aumenta; viceversa in caso di eccesso di offerta.
+\end{itemize}
+
+\section{Politiche Macroeconomiche e Spiazzamento (Crowding Out)}
+
+\subsection{Politica Fiscale ed Effetto Spiazzamento}
+
+\begin{definizione}{Effetto Spiazzamento (Crowding Out)}{def_crowding_out}
+L'\textbf{Effetto Spiazzamento} (\textit{Crowding Out}) è il fenomeno economico per cui un incremento della spesa pubblica finanziato a debito provoca un aumento del tasso di interesse di equilibrio, riducendo la spesa privata per investimenti sensibili al tasso d'interesse ($I$) e attenuando l'impatto espansivo sul PIL rispetto al modello della croce keynesiana.
+\end{definizione}
+
+\begin{dimostrazione}[ della Quantificazione Analitica dello Spiazzamento]
+Consideriamo un incremento di spesa pubblica $\Delta G > 0$.
+\begin{enumerate}
+    \item Nel modello del moltiplicatore semplice a tasso fisso (Croce Keynesiana), l'incremento di PIL sarebbe:
+    \begin{equation}
+        \Delta Y_{\text{croce}} = \alpha_G \Delta G
+    \end{equation}
+    \item Nel modello congiunto IS-LM, tenendo conto dell'endogeneità del tasso di interesse, l'incremento effettivo di PIL è:
+    \begin{equation}
+        \Delta Y_{\text{IS-LM}} = \gamma \Delta G = \frac{\alpha_G}{1 + \frac{k \alpha_G d}{h}} \Delta G
+    \end{equation}
+    \item Poiché $\frac{k \alpha_G d}{h} > 0$, si ha $\gamma < \alpha_G$, per cui $\Delta Y_{\text{IS-LM}} < \Delta Y_{\text{croce}}$.
+    \item La variazione del tasso di interesse è data da:
+    \begin{equation}
+        \Delta r^* = \frac{k}{h} \Delta Y_{\text{IS-LM}} = \frac{k}{h} \gamma \Delta G > 0
+    \end{equation}
+    \item La conseguente contrazione degli investimenti privati (\textbf{spiazzamento in termini reali}) è pari a:
+    \begin{equation}
+        \Delta I = -d \cdot \Delta r^* = -d \frac{k}{h} \gamma \Delta G < 0
+    \end{equation}
+    \item L'ammontare di reddito spiazzato coincide esattamente con la perdita di spesa per investimenti moltiplicata per $\alpha_G$:
+    \begin{equation}
+        \Delta Y_{\text{croce}} - \Delta Y_{\text{IS-LM}} = (\alpha_G - \gamma) \Delta G = \alpha_G \big( d \Delta r^* \big)
+    \end{equation}
+\end{enumerate}
+\end{dimostrazione}
+
+\subsection{Politica Monetaria ed Efficacia della Trasmissione}
+Una politica monetaria espansiva consiste in un incremento dell'offerta nominale di moneta $\Delta M > 0$ attuato dalla Banca Centrale (es. acquisto titoli sul mercato aperto):
+\begin{equation}
+    \Delta M > 0 \implies \frac{M}{P} \uparrow \implies \LM \text{ trasla in basso} \implies r^* \downarrow \implies I \uparrow \implies Y^* \uparrow
+\end{equation}
+L'incremento del PIL e la riduzione del tasso di interesse sono:
+\begin{align}
+    \Delta Y^* &= \gamma \frac{d}{h} \Delta\left(\frac{M}{P}\right) = \frac{\alpha_G d}{h + k \alpha_G d} \Delta\left(\frac{M}{P}\right) \\
+    \Delta r^* &= -\frac{1}{h + k \alpha_G d} \Delta\left(\frac{M}{P}\right) < 0
+\end{align}
+La trasmissione monetaria è tanto più efficace quanto più gli investimenti sono sensibili al tasso ($d$ elevato) e la domanda speculativa di moneta è rigida ($h$ basso).
+
+\subsection{Il Policy Mix e l'Accomodamento Monetario}
+
+\begin{definizione}{Mix di Politica Economica (Policy Mix)}{policy_mix}
+Il \textbf{Policy Mix} è la combinazione simultanea di manovre di politica fiscale e monetaria attuate congiuntamente dal Governo e dalla Banca Centrale per perseguire specifici obiettivi macroeconomici (controllo dell'output gap, stabilità dei prezzi, stimolo degli investimenti o riduzione del debito pubblico).
+\end{definizione}
+
+\begin{esempio}[Politica Monetaria Accomodante]
+Se il governo attua una manovra fiscale espansiva ($\Delta G > 0$) per colmare un divario recessivo, la Banca Centrale può attuare una \textbf{politica monetaria accomodante} aumentando l'offerta di moneta $\Delta M > 0$ nella misura esatta necessaria a mantenere invariato il tasso di interesse al livello iniziale $r_0^*$:
+\begin{equation}
+    \Delta r^* = 0 \iff \Delta\left(\frac{M}{P}\right) = k \Delta Y_{\text{croce}} = k \alpha_G \Delta G
+\end{equation}
+In questo modo, la curva LM trasla verso il basso parallelamente alla traslazione della IS verso l'alto: lo spiazzamento finanziario viene \textbf{completamente annullato} e il PIL cresce dell'intero moltiplicatore keynesiano $\Delta Y = \alpha_G \Delta G$.
+\end{esempio}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.08, >=Stealth]
+    % Griglia e Assi
+    \draw[->, line width=1.2pt] (0,0) -- (9.5,0) node[right, font=\small\bfseries] {$Y$};
+    \draw[->, line width=1.2pt] (0,0) -- (0,6.5) node[above, font=\small\bfseries] {$r$};
+
+    % Curve IS originali e traslate
+    \draw[line width=1.6pt, color=navyblue] (1.0, 5.0) -- (7.0, 1.0) node[right, font=\small\bfseries] {$\IS_0$};
+    \draw[line width=1.8pt, color=navyblue!60!blue] (2.5, 6.0) -- (8.8, 1.8) node[right, font=\small\bfseries] {$\IS_1 (\Delta G > 0)$};
+
+    % Curve LM
+    \draw[line width=1.6pt, color=purpleaccent] (1.0, 1.2) -- (7.5, 5.5) node[right, font=\small\bfseries] {$\LM_0$};
+    \draw[line width=1.6pt, dashed, color=tealblue] (2.5, 0.8) -- (9.0, 5.1) node[right, font=\small\bfseries] {$\LM_1 (\text{Accomodante})$};
+
+    % Equilibri
+    \coordinate (E0) at (3.5, 3.33);
+    \coordinate (E1) at (5.0, 4.3);
+    \coordinate (E2) at (6.8, 3.33);
+
+    \fill[navyblue] (E0) circle (2.8pt) node[above left=2pt, font=\footnotesize\bfseries] {$E_0(Y_0^*, r_0^*)$};
+    \fill[crimsonred] (E1) circle (2.8pt) node[above=3pt, font=\footnotesize\bfseries] {$E_1(Y_1^*, r_1^*)$};
+    \fill[forestgreen] (E2) circle (2.8pt) node[below right=2pt, font=\footnotesize\bfseries] {$E_2(Y_2^*, r_0^*)$};
+
+    % Proiezioni
+    \draw[dotted, line width=0.9pt, color=navyblue] (3.5,0) node[below, font=\footnotesize\bfseries] {$Y_0^*$} -- (E0) -- (0, 3.33) node[left, font=\footnotesize\bfseries] {$r_0^*$};
+    \draw[dotted, line width=0.9pt, color=crimsonred] (5.0,0) node[below, font=\footnotesize\bfseries] {$Y_1^*$} -- (E1) -- (0, 4.3) node[left, font=\footnotesize\bfseries] {$r_1^*$};
+    \draw[dotted, line width=0.9pt, color=forestgreen] (6.8,0) node[below, font=\footnotesize\bfseries] {$Y_{\text{croce}}$} -- (E2);
+
+    % Frecce e indicazioni
+    \draw[->, line width=1.2pt, color=crimsonred] (E0) -- node[above left, font=\scriptsize\bfseries] {$\Delta G > 0$} (E1);
+    \draw[->, line width=1.2pt, color=tealblue] (E1) -- node[below right, font=\scriptsize\bfseries] {$\Delta M > 0$} (E2);
+    \draw[<->, line width=1.1pt, color=crimsonred] (5.0, 0.4) -- node[above, font=\scriptsize\bfseries] {Spiazzamento} (6.8, 0.4);
+
+\end{tikzpicture}
+\caption{Politica fiscale espansiva, spiazzamento finanziario degli investimenti ($E_0 \to E_1$) e neutralizzazione dello spiazzamento mediante politica monetaria accomodante ($E_1 \to E_2$).}
+\label{fig:is_lm_politiche_spiazzamento}
+\end{figure}
+
+\section{I Casi Limite nel Modello IS-LM}
+
+L'efficacia relativa della politica monetaria e fiscale dipende criticamente dai parametri $h$ e $d$:
+
+\subsection{La Trappola della Liquidità (Keynes)}
+Quando il tasso di interesse è prossimo allo zero ($r \to r_{\min}$), il rendimento dei titoli è nullo e gli operatori si aspettano un futuro rialzo dei tassi con conseguenti perdite in conto capitale. La domanda speculativa di moneta diventa infinitamente elastica ($h \to \infty$):
+\begin{equation}
+    \text{Pendenza}_{\LM} = \frac{k}{h} \to 0 \implies \LM \text{ perfettamente orizzontale}
+\end{equation}
+\begin{itemize}
+    \item \textbf{Politica Monetaria}: \textbf{Totalmente Inefficace}. Qualsiasi immissione di moneta viene assorbita dagli operatori in forma liquida senza ridurre ulteriormente il tasso di interesse ($\Delta r = 0, \Delta Y = 0$).
+    \item \textbf{Politica Fiscale}: \textbf{Massimamente Efficace}. Poiché il tasso di interesse non sale, non vi è alcuno spiazzamento degli investimenti ($\gamma = \alpha_G$); il PIL si espande per l'intero moltiplicatore keynesiano: $\Delta Y = \alpha_G \Delta G$.
+\end{itemize}
+
+\subsection{Il Caso Classico / Monetarista}
+Secondo la teoria quantitativa della moneta classica, la moneta è domandata esclusivamente per transazioni e non per fini speculativi ($h = 0$):
+\begin{equation}
+    \text{Pendenza}_{\LM} = \frac{k}{h} \to \infty \implies \LM \text{ perfettamente verticale al reddito } Y = \frac{\bar{M}}{k P}
+\end{equation}
+\begin{itemize}
+    \item \textbf{Politica Fiscale}: \textbf{Completamente Inefficace ($\Delta Y = 0$)}. Un incremento di spesa pubblica provoca un aumento del tasso di interesse tale da ridurre gli investimenti privati esattamente dello stesso ammontare ($\Delta I = -\Delta G$, \textbf{spiazzamento al 100\%}).
+    \item \textbf{Politica Monetaria}: \textbf{Massimamente Efficace}. Un incremento dell'offerta di moneta sposta a destra la retta LM determinando un incremento pieno del PIL pari a $\Delta Y = \frac{1}{k}\Delta (M/P)$.
+\end{itemize}
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{l p{4.2cm} X X}
+\toprule
+\textbf{Scenario / Caso Limite} & \textbf{Condizione Parametrica} & \textbf{Efficacia Politica Fiscale} & \textbf{Efficacia Politica Monetaria} \\
+\midrule
+\textbf{Caso Generale} & $0 < h < \infty, \; 0 < d < \infty$ & Parzialmente efficace ($\gamma < \alpha_G$, spiazzamento parziale) & Efficace ($\Delta Y > 0, \Delta r < 0$) \\
+\midrule
+\textbf{Trappola della Liquidità} & $h \to \infty$ ($\LM$ orizzontale) & \textbf{Massima efficacia} ($\gamma = \alpha_G$, zero spiazzamento) & \textbf{Nulla} ($\Delta Y = 0, \Delta r = 0$) \\
+\midrule
+\textbf{Caso Classico / Monetarista} & $h = 0$ ($\LM$ verticale) & \textbf{Nulla} ($\Delta Y = 0$, spiazzamento totale) & \textbf{Massima efficacia} ($\Delta Y = \frac{1}{k}\Delta \frac{M}{P}$) \\
+\midrule
+\textbf{Investimenti Insensibili} & $d = 0$ ($\IS$ verticale) & \textbf{Massima efficacia} ($\gamma = \alpha_G$) & \textbf{Nulla} ($\Delta Y = 0$, $r$ scende a vuoto) \\
+\midrule
+\textbf{Investimenti Iper-Reattivi} & $d \to \infty$ ($\IS$ orizzontale) & \textbf{Nulla} ($\Delta Y = 0$) & \textbf{Massima efficacia} \\
+\bottomrule
+\end{tabularx}
+\caption{Quadro sinottico comparativo dell'efficacia delle politiche economiche nel modello IS-LM.}
+\label{tab:casi_limite_is_lm}
+\end{table}
+
+\section{La Regola di Taylor per la Politica Monetaria Moderna}
+
+Nelle moderne economie avanzate, le Banche Centrali (BCE, Federal Reserve) non fissano come obiettivo operativo intermedio la quantità nominale di moneta $\bar{M}$, bensì manovrano direttamente il \textbf{tasso di interesse nominale a breve termine} (tasso sui rifinanziamenti principali o \textit{federal funds rate}).
+
+\begin{definizione}{Regola di Taylor}{def_regola_taylor}
+La \textbf{Regola di Taylor} (formulata da John B. Taylor nel 1993) descrive la funzione di reazione della Banca Centrale per la fissazione del tasso di interesse nominale guida ($i_t$) in risposta alle deviazioni dell'inflazione dal target ($\pi^*$) e del PIL dal livello potenziale ($Y^*$):
+\begin{equation}
+    i_t = r^* + \pi_t + \alpha_\pi (\pi_t - \pi^*) + \alpha_y \left( \frac{Y_t - Y^*}{Y^*} \right) \label{eq:regola_taylor}
+\end{equation}
+dove:
+\begin{itemize}
+    \item $r^*$ è il tasso di interesse reale neutrale di equilibrio di lungo periodo (tipicamente attorno al 2\%);
+    \item $\pi_t$ è il tasso di inflazione corrente e $\pi^*$ è l'obiettivo d'inflazione della Banca Centrale (fissato al 2\% per BCE e Fed);
+    \item $\frac{Y_t - Y^*}{Y^*}$ è l'\textbf{output gap} percentuale;
+    \item $\alpha_\pi$ e $\alpha_y$ sono i pesi attribuiti dalla Banca Centrale rispettivamente alla stabilizzazione dei prezzi e del ciclo economico (nella stima empirica standard di Taylor: $\alpha_\pi = 0{,}5$ e $\alpha_y = 0{,}5$).
+\end{itemize}
+\end{definizione}
+
+\begin{legge}{Principio di Taylor}{principio_taylor}
+Affinché la politica monetaria sia stabilizzante ed eviti derive inflazionistiche o deflazionistiche, la Banca Centrale deve reagire a un aumento dell'inflazione aumentando il tasso di interesse nominale \textbf{più che proporzionalmente}:
+\begin{equation}
+    \dv{i_t}{\pi_t} = 1 + \alpha_\pi > 1 \iff \alpha_\pi > 0
+\end{equation}
+Ciò garantisce che il \textbf{tasso di interesse reale} $r_t = i_t - \pi_t$ aumenti a fronte di shock inflazionistici ($\Delta r_t = \alpha_\pi \Delta \pi_t > 0$), comprimendo la spesa aggregata per investimenti e raffreddando le tensioni sui prezzi.
+\end{legge}
+
+\section{Metodi Risolutivi ed Eserciziario d'Esame}
+
+\begin{metodo}[Algoritmo Generale di Risoluzione del Modello IS-LM]
+Per risolvere un problema analitico IS-LM:
+\begin{enumerate}
+    \item \textbf{Mercato Reale (Curva IS)}:
+    \begin{itemize}
+        \item Calcolare il reddito disponibile: $Y_{\mathrm{d}} = Y - T + TR$;
+        \item Scrivere la spesa aggregata $\SA = C + I + G + NX$;
+        \item Porre la condizione di equilibrio $Y = \SA$ ed esplicitare $Y$ in funzione di $r$ (oppure $r$ in funzione di $Y$).
+    \end{itemize}
+    \item \textbf{Mercato Monetario (Curva LM)}:
+    \begin{itemize}
+        \item Calcolare l'offerta reale di moneta $\frac{M}{P}$;
+        \item Porre la condizione $\frac{M}{P} = L(Y, r) = kY - hr$;
+        \item Esplicitare $r$ in funzione di $Y$.
+    \end{itemize}
+    \item \textbf{Equilibrio Generale}:
+    \begin{itemize}
+        \item Uguagliare $r_{\IS} = r_{\LM}$ e risolvere per il reddito di equilibrio $Y^*$;
+        \item Sostituire $Y^*$ in una delle due equazioni per ottenere il tasso $r^*$;
+        \item Calcolare i valori di consumo $C^*$, investimento $I^*$, saldo del bilancio pubblico $BS^* = T - G - TR$.
+    \end{itemize}
+    \item \textbf{Statica Comparata e Spiazzamento}:
+    \begin{itemize}
+        \item Ricalcolare l'equilibrio con i nuovi parametri ($G', M'$);
+        \item Quantificare lo spiazzamento: $\Delta I = I_1^* - I_0^* = -d (r_1^* - r_0^*)$.
+    \end{itemize}
+\end{enumerate}
+\end{metodo}
+
+\begin{esercizio}[Risoluzione Completa con Spiazzamento e Policy Mix]
+Si consideri un'economia chiusa descritta dalle seguenti equazioni:
+\begin{align*}
+    C &= 120 + 0{,}8 Y_{\mathrm{d}}, \quad T = 0{,}25 Y, \quad TR = 50 \\
+    I &= 300 - 1000 r, \quad G = 240 \\
+    \left(\frac{M}{P}\right)^{\mathrm{d}} &= 0{,}2 Y - 500 r, \quad M = 400, \quad P = 2
+\end{align*}
+\textbf{Richieste}:
+\begin{enumerate}
+    \item Ricavare le equazioni delle curve IS e LM e determinare l'equilibrio $(Y^*, r^*)$, il consumo $C^*$, l'investimento $I^*$ e il saldo di bilancio pubblico $BS^*$.
+    \item Valutare gli effetti di un incremento di spesa pubblica a debito $\Delta G = 60$. Calcolare il nuovo equilibrio, la variazione del PIL, l'ammontare dello spiazzamento degli investimenti privati e confrontare con il moltiplicatore semplice.
+    \item Determinare la variazione dell'offerta nominale di moneta $\Delta M$ necessaria ad attuare una politica monetaria accomodante che mantenga il tasso di interesse al livello iniziale $r_0^*$.
+\end{enumerate}
+
+\textbf{Svolgimento}:
+\begin{enumerate}
+    \item \textbf{Curva IS}:
+    \begin{align*}
+        Y &= C + I + G = 120 + 0{,}8(Y - 0{,}25 Y + 50) + 300 - 1000 r + 240 \\
+        Y &= 120 + 0{,}6 Y + 40 + 540 - 1000 r = 700 + 0{,}6 Y - 1000 r \\
+        0{,}4 Y &= 700 - 1000 r \implies Y = 1750 - 2500 r \quad (\alpha_G = 1/0{,}4 = 2{,}5) \\
+        \text{Inversa IS}: &\quad r = 0{,}70 - 0{,}0004 Y
+    \end{align*}
+    \textbf{Curva LM}:
+    \begin{align*}
+        \frac{M}{P} &= \frac{400}{2} = 200 \implies 200 = 0{,}2 Y - 500 r \\
+        500 r &= 0{,}2 Y - 200 \implies r = -0{,}40 + 0{,}0004 Y
+    \end{align*}
+    \textbf{Equilibrio Generale}:
+    \begin{align*}
+        0{,}70 - 0{,}0004 Y &= -0{,}40 + 0{,}0004 Y \implies 0{,}0008 Y = 1{,}10 \implies Y^* = 1375 \\[0.4em]
+        r^* &= -0{,}40 + 0{,}0004(1375) = -0{,}40 + 0{,}55 = 0{,}15 \implies r^* = 15\%
+    \end{align*}
+    Calcolo delle componenti:
+    \begin{align*}
+        Y_{\mathrm{d}}^* &= 1375 - 0{,}25(1375) + 50 = 1081{,}25 \\
+        C^* &= 120 + 0{,}8(1081{,}25) = 985 \\
+        I^* &= 300 - 1000(0{,}15) = 150 \\
+        BS^* &= T - G - TR = 0{,}25(1375) - 240 - 50 = 343{,}75 - 290 = +53{,}75 \quad (\text{Avanzo})
+    \end{align*}
+    Verifica: $C^* + I^* + G = 985 + 150 + 240 = 1375 = Y^*$.
+
+    \item \textbf{Effetto di $\Delta G = 60$ ($G' = 300$)}:
+    Nuova spesa autonoma: $A_0' = 700 + 60 = 760$.
+    Nuova IS: $Y = 2{,}5(760 - 1000 r) = 1900 - 2500 r \iff r = 0{,}76 - 0{,}0004 Y$.
+    Nuovo equilibrio:
+    \begin{align*}
+        0{,}76 - 0{,}0004 Y &= -0{,}40 + 0{,}0004 Y \implies 0{,}0008 Y = 1{,}16 \implies Y_1^* = 1450 \\
+        r_1^* &= -0{,}40 + 0{,}0004(1450) = 0{,}18 \implies r_1^* = 18\%
+    \end{align*}
+    Variazioni:
+    \begin{align*}
+        \Delta Y^* &= 1450 - 1375 = +75 \\
+        \Delta r^* &= 0{,}18 - 0{,}15 = +0{,}03 = +3\% \\
+        I_1^* &= 300 - 1000(0{,}18) = 120 \implies \Delta I = 120 - 150 = -30 \quad (\textbf{Spiazzamento})
+    \end{align*}
+    Confronto col moltiplicatore semplice:
+    \begin{equation*}
+        \Delta Y_{\text{croce}} = \alpha_G \Delta G = 2{,}5 \times 60 = 150
+    \end{equation*}
+    Il reddito effettivo cresce di soli 75 anziché 150: il mancato guadagno di PIL è $(\alpha_G - \gamma)\Delta G = 150 - 75 = 75 = \alpha_G |\Delta I| = 2{,}5 \times 30 = 75$.
+
+    \item \textbf{Politica Monetaria Accomodante}:
+    Vogliamo raggiungere $Y = Y_{\text{croce}} = 1375 + 150 = 1525$ mantenendo $r = r_0^* = 0{,}15$.
+    Dalla condizione di equilibrio monetario:
+    \begin{equation*}
+        \left(\frac{M'}{P}\right) = 0{,}2(1525) - 500(0{,}15) = 305 - 75 = 230
+    \end{equation*}
+    Poiché $P = 2$, l'offerta nominale di moneta deve diventare $M' = 230 \times 2 = 460$.
+    Pertanto la Banca Centrale deve immettere moneta per:
+    \begin{equation*}
+        \Delta M = 460 - 400 = +60
+    \end{equation*}
+\end{enumerate}
+\end{esercizio}
+
+\begin{esame}[Tranelli Frequenti nel Modello IS-LM]
+\begin{enumerate}
+    \item \textbf{Confusione tra Moltiplicatore Semplice e con Retroazione}: non usare mai $\Delta Y = \alpha_G \Delta G$ in presenza di una LM inclinata positivamente. Il calcolo corretto richiede il moltiplicatore $\gamma = \frac{\alpha_G}{1 + k \alpha_G d / h}$.
+    \item \textbf{Segno del Tasso di Interesse}: ricordare che nell'equazione della domanda di moneta il tasso $r$ compare col segno meno ($kY - hr$), quindi nell'equazione inversa della LM l'intercetta sull'asse $r$ è negativa ($-\frac{1}{h}\frac{M}{P}$).
+    \item \textbf{Traslazioni vs Rotazioni}: shock a $G, I_0, TR, C_0, M, P$ determinano traslazioni parallele; variazioni delle aliquote fiscali $t$, della propensione al consumo $c$, di $d$, $k$ o $h$ modificano l'inclinazione delle curve.
+    \item \textbf{Definizione di Spiazzamento}: lo spiazzamento finanziario è la riduzione degli \textit{investimenti privati} ($\Delta I < 0$) causata dall'incremento del tasso d'interesse, NON la riduzione dei consumi.
+\end{enumerate}
+\end{esame}

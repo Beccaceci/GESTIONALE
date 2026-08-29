@@ -1,0 +1,230 @@
+\section{Limiti, Sviluppi di Taylor, Simboli di Landau e Parti Principali}
+\label{sec:esami_limiti_taylor}
+
+\begin{esame}[Guida Metodologica: Sviluppi di Taylor e Parti Principali]
+Nel programma del Prof. Alberti, il calcolo della \textbf{parte principale} di un infinitesimo o infinito per $x \to x_0$ richiede di determinare una costante reale $c \neq 0$ e un esponente $\alpha > 0$ tali che:
+\[
+    f(x) = c (x - x_0)^\alpha + \smallo\left((x - x_0)^\alpha\right) \quad (\text{ovvero } f(x) \sim c (x - x_0)^\alpha)
+\]
+\textbf{Avvertenze fondamentali per la prova d'esame:}
+\begin{enumerate}
+    \item \textbf{Cancellazione d'ordine inferiore:} Se i termini di ordine più basso si cancellano esattamente (ad esempio i termini di grado 1 o 2), è obbligatorio proseguire lo sviluppo agli ordini successivi fino a trovare il \emph{primo termine a coefficiente non nullo}.
+    \item \textbf{Troncamento corretto nelle composizioni:} Se si calcola $f(g(x))$, occorre sviluppare la funzione interna $g(x)$ fino all'ordine $n$ tale che, una volta sostituita nella funzione esterna, non si perdano potenze rilevanti né si calcolino termini superflui oltre $\smallo(x^n)$.
+    \item \textbf{Dipendenza da parametri:} Se il coefficiente del termine dominante si annulla per valori critici del parametro (es. $a = \sqrt{3}$), è indispensabile distinguere i casi ed estrarre il termine successivo dello sviluppo.
+\end{enumerate}
+\end{esame}
+
+\begin{esempio}{Parte Principale con Parametro e Cancellazione (Compitino 2024/25, II Parte)}{esame_taylor_param1}
+Sia dato il parametro reale $a > 0$. Consideriamo la funzione:
+\[
+    f(x) := \ln(x^3 + a) - \ln(x^3 - a) - \frac{2ax^3}{x^6 + 1}
+\]
+\begin{enumerate}[label=\alph*)]
+    \item Determinare la parte principale di $f(x)$ per $x \to +\infty$ al variare del parametro $a > 0$, rispetto al campione $1/x$.
+    \item Determinare la parte principale di $f(x)$ per $x \to +\infty$ qualora l'ultimo addendo sia sostituito con $-\frac{2ax^3}{x^6 - 1}$.
+\end{enumerate}
+\tcblower
+\textbf{Soluzione Dettagliata:}
+
+\paragraph{Quesito (a):} Raccogliamo il termine dominante $x^3$ all'interno dei logaritmi per ricondurci a sviluppi di Maclaurin centrati nell'origine:
+\begin{align*}
+    f(x) &= \left[ \ln(x^3) + \ln\left(1 + \frac{a}{x^3}\right) \right] - \left[ \ln(x^3) + \ln\left(1 - \frac{a}{x^3}\right) \right] - \frac{2ax^3}{x^6\left(1 + x^{-6}\right)} \\
+    &= \ln\left(1 + ax^{-3}\right) - \ln\left(1 - ax^{-3}\right) - 2ax^{-3}\left(1 + x^{-6}\right)^{-1}
+\end{align*}
+Poniamo le variabili infinitesime $t = ax^{-3} \to 0$ ed $s = x^{-6} \to 0$ per $x \to +\infty$.
+Ricordiamo gli sviluppi di Maclaurin fondamentali:
+\begin{align*}
+    \ln(1 + t) &= t - \frac{t^2}{2} + \frac{t^3}{3} - \frac{t^4}{4} + \frac{t^5}{5} + \bigO(t^6) \\
+    \ln(1 - t) &= -t - \frac{t^2}{2} - \frac{t^3}{3} - \frac{t^4}{4} - \frac{t^5}{5} + \bigO(t^6) \\
+    \implies \ln(1+t) - \ln(1-t) &= 2t + \frac{2}{3}t^3 + \frac{2}{5}t^5 + \bigO(t^7) \\
+    (1 + s)^{-1} &= 1 - s + s^2 + \bigO(s^3)
+\end{align*}
+Sostituendo $t = ax^{-3}$ ed $s = x^{-6}$:
+\begin{align*}
+    \ln(1 + ax^{-3}) - \ln(1 - ax^{-3}) &= 2ax^{-3} + \frac{2}{3}a^3 x^{-9} + \frac{2}{5}a^5 x^{-15} + \bigO(x^{-21}) \\
+    2ax^{-3}(1 + x^{-6})^{-1} &= 2ax^{-3}\left(1 - x^{-6} + x^{-12} + \bigO(x^{-18})\right) \\
+    &= 2ax^{-3} - 2ax^{-9} + 2ax^{-15} + \bigO(x^{-21})
+\end{align*}
+Sottraendo i due contributi, il termine dominante di ordine $x^{-3}$ si cancella esattamente:
+\begin{align*}
+    f(x) &= \left(2ax^{-3} + \frac{2}{3}a^3 x^{-9} + \bigO(x^{-15})\right) - \left(2ax^{-3} - 2ax^{-9} + \bigO(x^{-15})\right) \\
+    &= \left(\frac{2}{3}a^3 + 2a\right)x^{-9} + \bigO(x^{-15}) = 2a\left(\frac{a^2}{3} + 1\right)x^{-9} + \bigO(x^{-15})
+\end{align*}
+Poiché $a > 0$, la quantità $2a\left(\frac{a^2}{3} + 1\right)$ è strettamente positiva per ogni $a > 0$ e non si annulla mai.
+Pertanto, per ogni $a > 0$:
+\[
+    \operatorname{p.p.}(f(x)) = 2a\left(\frac{a^2}{3} + 1\right)\frac{1}{x^9} \quad \text{per } x \to +\infty \quad (\text{ordine di infinitesimo } 9)
+\]
+
+\paragraph{Quesito (b):} Sostituendo con l'addendo $-\frac{2ax^3}{x^6 - 1} = -2ax^{-3}(1 - x^{-6})^{-1}$, utilizziamo lo sviluppo $(1 - s)^{-1} = 1 + s + s^2 + \bigO(s^3)$:
+\begin{align*}
+    2ax^{-3}(1 - x^{-6})^{-1} &= 2ax^{-3}\left(1 + x^{-6} + x^{-12} + \bigO(x^{-18})\right) \\
+    &= 2ax^{-3} + 2ax^{-9} + 2ax^{-15} + \bigO(x^{-21})
+\end{align*}
+L'espansione della funzione modificata $\tilde{f}(x)$ diventa:
+\begin{align*}
+    \tilde{f}(x) &= \left[2ax^{-3} + \frac{2}{3}a^3 x^{-9} + \frac{2}{5}a^5 x^{-15} + \bigO(x^{-21})\right] \\
+    &\quad - \left[2ax^{-3} + 2ax^{-9} + 2ax^{-15} + \bigO(x^{-21})\right] \\
+    &= \left(\frac{2}{3}a^3 - 2a\right)x^{-9} + \left(\frac{2}{5}a^5 - 2a\right)x^{-15} + \bigO(x^{-21}) \\
+    &= 2a\left(\frac{a^2}{3} - 1\right)x^{-9} + 2a\left(\frac{a^4}{5} - 1\right)x^{-15} + \bigO(x^{-21})
+\end{align*}
+Analizziamo l'annullamento del coefficiente di ordine $x^{-9}$:
+\[
+    \frac{a^2}{3} - 1 = 0 \iff a^2 = 3 \iff a = \sqrt{3} \quad (\text{essendo } a > 0)
+\]
+\begin{itemize}
+    \item \textbf{Se $a \neq \sqrt{3}$:} il coefficiente di $x^{-9}$ è non nullo, quindi:
+    \[
+        \operatorname{p.p.}(\tilde{f}(x)) = 2a\left(\frac{a^2}{3} - 1\right)\frac{1}{x^9} \quad (\text{ordine } 9)
+    \]
+    \item \textbf{Se $a = \sqrt{3}$:} il coefficiente di $x^{-9}$ si annulla identicamente. Il termine dominante è quello di ordine $x^{-15}$, il cui coefficiente vale:
+    \[
+        2\sqrt{3}\left(\frac{(\sqrt{3})^4}{5} - 1\right) = 2\sqrt{3}\left(\frac{9}{5} - 1\right) = 2\sqrt{3}\cdot\frac{4}{5} = \frac{8\sqrt{3}}{5} \neq 0
+    \]
+    Quindi per $a = \sqrt{3}$:
+    \[
+        \operatorname{p.p.}(\tilde{f}(x)) = \frac{8\sqrt{3}}{5}\frac{1}{x^{15}} \quad (\text{ordine di infinitesimo } 15)
+    \]
+\end{itemize}
+\end{esempio}
+
+\begin{esempio}{Polinomi di Taylor di Funzioni Composte (Appello 2023/24)}{esame_taylor_comp}
+Calcolare il polinomio di Taylor di ordine 4 centrato in $x_0 = 0$ della funzione:
+\[
+    g(x) := \cos(\ln(1 + 2x)) - e^{-2x^2}
+\]
+\tcblower
+\textbf{Soluzione Dettagliata:}
+
+\paragraph{1. Sviluppo dell'Argomento Interno:}
+Poniamo $u(x) = \ln(1 + 2x)$. Poiché cerchiamo lo sviluppo globale al quarto ordine e $u(0) = 0$ con $u(x) = \bigO(x)$, sviluppiamo il logaritmo fino all'ordine 4:
+\[
+    u(x) = (2x) - \frac{(2x)^2}{2} + \frac{(2x)^3}{3} - \frac{(2x)^4}{4} + \smallo(x^4) = 2x - 2x^2 + \frac{8}{3}x^3 - 4x^4 + \smallo(x^4)
+\]
+
+\paragraph{2. Sviluppo del Coseno:}
+Lo sviluppo notevole di $\cos(u)$ per $u \to 0$ è:
+\[
+    \cos(u) = 1 - \frac{u^2}{2!} + \frac{u^4}{4!} + \smallo(u^4) = 1 - \frac{u^2}{2} + \frac{u^4}{24} + \smallo(u^4)
+\]
+Calcoliamo le potenze di $u(x)$ trascurando tutti i termini di grado superiore a 4:
+\begin{align*}
+    u^2(x) &= \left(2x - 2x^2 + \frac{8}{3}x^3 + \smallo(x^3)\right)^2 \\
+    &= (2x)^2 + (-2x^2)^2 + 2(2x)(-2x^2) + 2(2x)\left(\frac{8}{3}x^3\right) + \smallo(x^4) \\
+    &= 4x^2 + 4x^4 - 8x^3 + \frac{32}{3}x^4 + \smallo(x^4) = 4x^2 - 8x^3 + \frac{44}{3}x^4 + \smallo(x^4)
+\end{align*}
+Per la potenza quarta, poiché $u(x) = 2x + \bigO(x^2)$:
+\[
+    u^4(x) = (2x)^4 + \smallo(x^4) = 16x^4 + \smallo(x^4)
+\]
+Sostituendo nello sviluppo del coseno:
+\begin{align*}
+    \cos(\ln(1 + 2x)) &= 1 - \frac{1}{2}\left(4x^2 - 8x^3 + \frac{44}{3}x^4\right) + \frac{1}{24}(16x^4) + \smallo(x^4) \\
+    &= 1 - 2x^2 + 4x^3 - \frac{22}{3}x^4 + \frac{2}{3}x^4 + \smallo(x^4) \\
+    &= 1 - 2x^2 + 4x^3 - \frac{20}{3}x^4 + \smallo(x^4)
+\end{align*}
+
+\paragraph{3. Sviluppo dell'Esponenziale:}
+Posto $v = -2x^2 \to 0$, si ha:
+\[
+    e^{-2x^2} = 1 + (-2x^2) + \frac{(-2x^2)^2}{2!} + \smallo(x^4) = 1 - 2x^2 + 2x^4 + \smallo(x^4)
+\]
+
+\paragraph{4. Combinazione Lineare e Polinomio di Taylor:}
+Sottraendo i due sviluppi asintotici:
+\begin{align*}
+    g(x) &= \left(1 - 2x^2 + 4x^3 - \frac{20}{3}x^4 + \smallo(x^4)\right) - \left(1 - 2x^2 + 2x^4 + \smallo(x^4)\right) \\
+    &= (1 - 1) + (-2 - (-2))x^2 + 4x^3 + \left(-\frac{20}{3} - 2\right)x^4 + \smallo(x^4) \\
+    &= 4x^3 - \frac{26}{3}x^4 + \smallo(x^4)
+\end{align*}
+Il polinomio di Maclaurin di grado 4 è pertanto:
+\[
+    P_4(x) = 4x^3 - \frac{26}{3}x^4
+\]
+\end{esempio}
+
+\begin{esempio}{Gerarchia Asintotica e Relazione $\ll$ (Compitino 2024/25)}{esame_landau_ord}
+Ordinare le seguenti funzioni rispetto alla relazione di trascurabilità $\ll$ per $x \to +\infty$:
+\[
+    f_1(x) = \frac{x^2 + 1}{x^2 + 3\ln x}, \qquad f_2(x) = \frac{x^{-3} + x^3}{e^{3x} + 1}, \qquad f_3(x) = \frac{1 - 2x^2}{x\ln x}, \qquad f_4(x) = \frac{e^{2x} - 1}{x^4}
+\]
+\tcblower
+\textbf{Soluzione Dettagliata:}
+Ricordiamo che per definizione $f(x) \ll g(x)$ per $x \to +\infty$ se e solo se $\lim_{x \to +\infty} \frac{f(x)}{g(x)} = 0$.
+Determiniamo il comportamento asintotico dominante di ciascuna funzione:
+\begin{enumerate}
+    \item $f_1(x) = \frac{x^2(1 + x^{-2})}{x^2(1 + 3x^{-2}\ln x)} \xrightarrow{x \to +\infty} 1 \implies f_1(x) = \Theta(1)$ (ordine costante finito e non nullo).
+    \item $f_2(x) = \frac{x^3(1 + x^{-6})}{e^{3x}(1 + e^{-3x})} \sim \frac{x^3}{e^{3x}} = x^3 e^{-3x} \xrightarrow{x \to +\infty} 0$ (infinitesimo di tipo esponenziale).
+    \item $f_3(x) = \frac{-2x^2(1 - \frac{1}{2x^2})}{x\ln x} \sim -\frac{2x}{\ln x} \xrightarrow{x \to +\infty} -\infty$, con modulo $|f_3(x)| \sim \frac{2x}{\ln x}$ (infinito sub-lineare).
+    \item $f_4(x) = \frac{e^{2x}(1 - e^{-2x})}{x^4} \sim \frac{e^{2x}}{x^4} \xrightarrow{x \to +\infty} +\infty$ (infinito di tipo esponenziale).
+\end{enumerate}
+Confrontiamo i rapporti a due a due:
+\begin{itemize}
+    \item $\lim_{x \to +\infty} \frac{f_2(x)}{f_1(x)} = \lim_{x \to +\infty} \frac{x^3 e^{-3x}}{1} = 0 \implies f_2(x) \ll f_1(x)$.
+    \item $\lim_{x \to +\infty} \frac{f_1(x)}{f_3(x)} = \lim_{x \to +\infty} \frac{1}{-2x/\ln x} = \lim_{x \to +\infty} \left(-\frac{\ln x}{2x}\right) = 0 \implies f_1(x) \ll f_3(x)$.
+    \item $\lim_{x \to +\infty} \frac{f_3(x)}{f_4(x)} = \lim_{x \to +\infty} \frac{-2x/\ln x}{e^{2x}/x^4} = \lim_{x \to +\infty} \left(-\frac{2x^5}{e^{2x}\ln x}\right) = 0 \implies f_3(x) \ll f_4(x)$.
+\end{itemize}
+Ne deduciamo la catena ordinata completa:
+\[
+    f_2(x) \ll f_1(x) \ll f_3(x) \ll f_4(x) \quad \text{per } x \to +\infty
+\]
+\end{esempio}
+
+\begin{esempio}{Forma Indeterminata con Parametro Reale (Appello 2023/24)}{esame_limite_param_forma_indet}
+Calcolare al variare del parametro $\alpha > 0$ il limite:
+\[
+    L(\alpha) := \lim_{x \to 0^+} \frac{e^{x^2} - \cos(\sqrt{2}x) - 2x^2}{\ln(1 + x^4) + x^\alpha}
+\]
+\tcblower
+\textbf{Soluzione Dettagliata:}
+
+\paragraph{1. Sviluppo del Numeratore $N(x)$:}
+Per $x \to 0$, sviluppiamo $e^{x^2}$ e $\cos(\sqrt{2}x)$ fino all'ordine 4:
+\begin{align*}
+    e^{x^2} &= 1 + x^2 + \frac{(x^2)^2}{2!} + \bigO(x^6) = 1 + x^2 + \frac{x^4}{2} + \bigO(x^6) \\
+    \cos(\sqrt{2}x) &= 1 - \frac{(\sqrt{2}x)^2}{2!} + \frac{(\sqrt{2}x)^4}{4!} + \bigO(x^6) \\
+    &= 1 - x^2 + \frac{4x^4}{24} + \bigO(x^6) = 1 - x^2 + \frac{x^4}{6} + \bigO(x^6)
+\end{align*}
+Sostituendo nel numeratore $N(x)$:
+\begin{align*}
+    N(x) &= \left(1 + x^2 + \frac{x^4}{2} + \bigO(x^6)\right) - \left(1 - x^2 + \frac{x^4}{6} + \bigO(x^6)\right) - 2x^2 \\
+    &= (1 - 1) + (x^2 + x^2 - 2x^2) + \left(\frac{1}{2} - \frac{1}{6}\right)x^4 + \bigO(x^6) \\
+    &= \frac{3 - 1}{6}x^4 + \bigO(x^6) = \frac{1}{3}x^4 + \bigO(x^6)
+\end{align*}
+Dunque $N(x) \sim \frac{1}{3}x^4$ per $x \to 0^+$.
+
+\paragraph{2. Sviluppo del Denominatore $D(x)$ al variare di $\alpha > 0$:}
+Poiché $\ln(1 + x^4) = x^4 + \bigO(x^8)$, il denominatore si scrive:
+\[
+    D(x) = x^4 + \bigO(x^8) + x^\alpha
+\]
+Il comportamento asintotico di $D(x)$ per $x \to 0^+$ è determinato dal confronto tra le potenze $x^4$ e $x^\alpha$:
+\begin{itemize}
+    \item \textbf{Caso $0 < \alpha < 4$:} la potenza $x^\alpha$ è di grado inferiore rispetto a $x^4$, quindi $x^\alpha$ è dominante ($x^4 \ll x^\alpha$).
+    Dunque $D(x) \sim x^\alpha$, da cui:
+    \[
+        \frac{N(x)}{D(x)} \sim \frac{\frac{1}{3}x^4}{x^\alpha} = \frac{1}{3}x^{4 - \alpha} \xrightarrow{x \to 0^+} 0 \quad (\text{essendo } 4 - \alpha > 0)
+    \]
+    \item \textbf{Caso $\alpha = 4$:} i due termini hanno lo stesso ordine di infinitesimo:
+    \[
+        D(x) = x^4 + x^4 + \bigO(x^8) = 2x^4 + \bigO(x^8) \sim 2x^4
+    \]
+    Pertanto:
+    \[
+        L(4) = \lim_{x \to 0^+} \frac{\frac{1}{3}x^4 + \bigO(x^6)}{2x^4 + \bigO(x^8)} = \frac{1/3}{2} = \frac{1}{6}
+    \]
+    \item \textbf{Caso $\alpha > 4$:} la potenza $x^4$ è dominante rispetto a $x^\alpha$ ($x^\alpha \ll x^4$).
+    Dunque $D(x) \sim x^4$, da cui:
+    \[
+        L(\alpha) = \lim_{x \to 0^+} \frac{\frac{1}{3}x^4 + \bigO(x^6)}{x^4 + \bigO(x^\alpha)} = \frac{1}{3}
+    \]
+\end{itemize}
+\paragraph{Sintesi del Risultato:}
+\[
+    L(\alpha) = \begin{cases}
+        0 & \text{se } 0 < \alpha < 4 \\
+        \frac{1}{6} & \text{se } \alpha = 4 \\
+        \frac{1}{3} & \text{se } \alpha > 4
+    \end{cases}
+\]
+\end{esempio}

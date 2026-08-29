@@ -1,0 +1,263 @@
+% ==============================================================================
+% CAPITOLO 11 - MECCANICA DEI FLUIDI: STATICA E DINAMICA
+% ==============================================================================
+\chapter{Meccanica dei Fluidi: Statica e Dinamica}
+\label{chap:meccanica_fluidi}
+
+\begin{tcolorbox}[enhanced, breakable, colback=navyblue!4!white, colframe=navyblue!80!black,
+    coltitle=white, fonttitle=\bfseries\sffamily, title={Quadro Sinottico del Capitolo 11 (Corrispondenza: Lezioni 29, 30 e 31)},
+    sharp corners, rounded corners=south, boxrule=1pt]
+\textbf{Collocazione Modulare:} Parte III -- Gravitazione, Oscillazioni e Meccanica dei Fluidi\\
+\textbf{Trascrizioni di Riferimento:} \texttt{trascrizioni/Lezione\_29\_...md}, \texttt{Lezione\_30\_...md}, \texttt{Lezione\_31\_...md}\\
+\textbf{Manuale di Riferimento:} Focardi, Massa, Ugolini -- \emph{Fisica Generale: Meccanica e Termodinamica} (Capitolo 12)\\
+\textbf{Obiettivi Didattici e Competenze:}\par
+\begin{itemize}
+    \item Definire la densità $\rho$ e la pressione idrostatica isotropa $p$ nei fluidi incomprimibili e comprimibili.
+    \item Enunciare e applicare il Principio di Pascal (torchio idraulico) e la Legge di Stevino ($p = p_0 + \rho g h$).
+    \item Dimostrare analiticamente il Principio di Archimede tramite il bilancio delle forze di superficie ($\vec{F}_A = \rho_f V_{\text{imm}} g\uy$) e studiare le condizioni di galleggiamento.
+    \item Formulare le ipotesi di fluido ideale e dimostrare l'Equazione di Continuità ($S v = \text{cost}$).
+    \item Dimostrare il Teorema di Bernoulli lungo una linea di flusso ($p + \frac{1}{2}\rho v^2 + \rho gy = \text{cost}$) e applicarlo a Legge di Torricelli, Tubo di Venturi, Tubo di Pitot e Sifone.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5em}
+
+% ------------------------------------------------------------------------------
+\section{Statica dei Fluidi: Pressione, Stevino e Pascal}
+\label{sec:statica_fluidi}
+% ------------------------------------------------------------------------------
+
+Un \textbf{fluido} (liquido o gas) è una sostanza che si deforma continuamente sotto l'azione di sforzi di taglio tangenziali, assumendo la forma del contenitore.
+
+\begin{definizione}{Pressione Idrostatica}{def:pressione}
+La \textbf{pressione} $p$ esercitata da un fluido su un elemento infinitesimo di superficie $\dd S$ con normale uscente $\hat{\bm{n}}$ è definita scalaremente da:
+\begin{equation}
+    \dd\vec{F}_\perp = p\,\dd S\,\hat{\bm{n}} \implies p \coloneqq \dv{F_\perp}{S}
+    \label{eq:pressione_def}
+\end{equation}
+In condizioni statiche la pressione è puramente isotropa (identica in tutte le direzioni). L'unità di misura nel SI è il \textbf{Pascal} ($\si{\pascal} = \si{\newton\per\metre\squared}$). Si impiegano inoltre:
+\begin{equation}
+    \SI{1}{\bar} = 10^5\,\si{\pascal}, \qquad \SI{1}{\atmosphere} = \SI{101325}{\pascal} = \SI{760}{\milli\metre Hg} \quad (\si{\torr})
+\end{equation}
+\end{definizione}
+
+\begin{legge}{Principio di Pascal}{legge:pascal}
+La pressione esercitata su una porzione di superficie di un fluido incomprimibile racchiuso in un recipiente si trasmette istantaneamente e inalterata in ogni punto del fluido e sulle pareti del contenitore.
+\end{legge}
+
+\begin{esempio}[Torchio Idraulico]
+In un torchio idraulico a due cilindri comunicanti di sezioni $S_1$ ed $S_2$ ($S_2 \gg S_1$):
+\begin{equation}
+    p_1 = p_2 \implies \frac{F_1}{S_1} = \frac{F_2}{S_2} \implies \mathbf{F_2 = F_1\left(\frac{S_2}{S_1}\right)}
+\end{equation}
+Il dispositivo funge da moltiplicatore idraulico ideale della forza.
+\end{esempio}
+
+\begin{teorema}{Legge di Stevino}{teo:stevino}
+In un fluido incomprimibile a densità costante $\rho$ in quiete soggetto alla gravità $\vec{g} = -g\uy$, la pressione varia linearmente con la profondità $h = y_0 - y$:
+\begin{equation}
+    \mathbf{p(h) = p_0 + \rho g h}
+    \label{eq:legge_stevino}
+\end{equation}
+dove $p_0$ è la pressione alla superficie libera ($h=0$).
+\end{teorema}
+
+\begin{dimostrazione}
+Consideriamo un cilindro verticale infinitesimo di fluido di base $\dd S$ e altezza $\dd y$. Imponendo l'equilibrio delle forze lungo la verticale:
+\begin{equation}
+    p(y)\,\dd S - p(y+\dd y)\,\dd S - \dd m\,g = 0 \implies -\dd p\,\dd S - (\rho\,\dd S\,\dd y)g = 0 \implies \dv{p}{y} = -\rho g
+\end{equation}
+Integrando tra la quota $y$ (pressione $p$) e la superficie libera $y_0$ (pressione $p_0$):
+\begin{equation}
+    \int_{p}^{p_0} \dd p = -\rho g \int_y^{y_0} \dd y \implies p_0 - p = -\rho g (y_0 - y) \implies p = p_0 + \rho g h
+\end{equation}
+\end{dimostrazione}
+
+% ------------------------------------------------------------------------------
+\section{Il Principio di Archimede e la Statica del Galleggiamento}
+\label{sec:principio_archimede}
+% ------------------------------------------------------------------------------
+
+\begin{teorema}{Principio di Archimede}{teo:archimede}
+Ogni corpo immerso (totalmente o parzialmente) in un fluido riceve una spinta verticale ascendente $\vec{F}_A$, detta \textbf{spinta idrostatica (o di Archimede)}, pari al peso del volume di fluido spostato:
+\begin{equation}
+    \mathbf{\vec{F}_A = -\rho_f V_{\text{imm}}\vec{g} = \rho_f g V_{\text{imm}}\,\uy}
+    \label{eq:archimede}
+\end{equation}
+dove $\rho_f$ è la densità del fluido e $V_{\text{imm}}$ è il volume della parte immersa. Il punto di applicazione di $\vec{F}_A$ è il baricentro del fluido spostato, detto \textbf{centro di spinta} (o di carena).
+\end{teorema}
+
+\begin{dimostrazione}
+La forza netta esercitata dalla pressione del fluido sulla superficie chiusa $\partial V$ del corpo immerso è:
+\begin{equation}
+    \vec{F}_A = -\oint_{\partial V} p\,\hat{\bm{n}}\,\dd S
+\end{equation}
+Applicando il Teorema della Divergenza (o gradiente):
+\begin{equation}
+    \vec{F}_A = -\int_V \vec{\nabla}p\,\dd V
+\end{equation}
+Poiché in idrostatica $\vec{\nabla}p = \rho_f \vec{g}$:
+\begin{equation}
+    \vec{F}_A = -\int_V (\rho_f \vec{g})\,\dd V = -\rho_f \vec{g} \int_V \dd V = -\rho_f V_{\text{imm}}\vec{g} = \rho_f g V_{\text{imm}}\uy
+\end{equation}
+\end{dimostrazione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Fluido
+    \fill[blue!10] (-2,-1) rectangle (2, 1.5);
+    \draw[navyblue, thick] (-2,1.5) -- (2,1.5) node[right] {Pelo libero ($p_0$)};
+    
+    % Corpo galleggiante
+    \draw[thick, fill=brown!40] (-0.8, 0.8) rectangle (0.8, 2.2);
+    \node at (0, 1.8) {$V_{\text{emer}}$};
+    \node at (0, 1.1) {$V_{\text{imm}}$};
+    \draw[dashed, crimsonred] (-0.8, 1.5) -- (0.8, 1.5);
+    
+    % Vettori forza
+    \draw[->, ultra thick, forestgreen] (0, 1.15) -- (0, 2.8) node[above] {$\vec{F}_A = \rho_f g V_{\text{imm}}$};
+    \draw[->, ultra thick, crimsonred] (0, 1.5) -- (0, -0.2) node[below] {$\vec{P} = \rho_c g V_{\text{tot}}$};
+\end{tikzpicture}
+\end{center}
+
+\subsection{Condizioni di Equilibrio del Galleggiamento}
+Dato un corpo omogeneo di densità media $\rho_c$ e volume totale $V_{\text{tot}}$ immerso in un fluido di densità $\rho_f$:
+\begin{itemize}
+    \item \textbf{Galleggiamento ($\rho_c < \rho_f$)}: il corpo galleggia all'equilibrio con $P = F_A \implies \rho_c g V_{\text{tot}} = \rho_f g V_{\text{imm}}$, da cui la frazione di volume immerso:
+    \begin{equation}
+        \mathbf{\frac{V_{\text{imm}}}{V_{\text{tot}}} = \frac{\rho_c}{\rho_f}}
+        \label{eq:frazione_immersa}
+    \end{equation}
+    \item \textbf{Sospensione Indifferente ($\rho_c = \rho_f$)}: il corpo rimane in equilibrio a qualsiasi profondità ($V_{\text{imm}} = V_{\text{tot}}$).
+    \item \textbf{Affondamento ($\rho_c > \rho_f$)}: il peso supera la spinta massima ($P > F_{A,\max}$); il corpo affonda con accelerazione iniziale $a = g\left(1 - \frac{\rho_f}{\rho_c}\right)$.
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+\section{Dinamica dei Fluidi Ideali: Continuità e Bernoulli}
+\label{sec:dinamica_fluidi}
+% ------------------------------------------------------------------------------
+
+Un \textbf{fluido ideale} è un mezzo continuo:
+\begin{enumerate}
+    \item \textbf{Incomprimibile}: densità uniforme e costante $\rho = \text{cost}$ ($\divg\vec{v} = 0$).
+    \item \textbf{Non viscoso}: attrito interno nullo ($\eta = 0$).
+    \item \textbf{Stazionario}: il campo di velocità non dipende esplicitamente dal tempo ($\pdv{\vec{v}}{t} = \vec{0}$).
+    \item \textbf{Irrotazionale}: $\rot\vec{v} = \vec{0}$.
+\end{enumerate}
+
+\subsection{Equazione di Continuità (Conservazione della Massa)}
+Lungo un tubo di flusso a regime stazionario, la massa di fluido che attraversa qualsiasi sezione trasversale per unità di tempo è costante:
+\begin{equation}
+    \mathbf{Q \coloneqq S_1 v_1 = S_2 v_2 = \text{cost}}
+    \label{eq:continuita}
+\end{equation}
+dove $Q$ è la \textbf{portata volumica} ($\si{\metre\cubed\per\second}$). Nelle strozzature ($S_2 < S_1$) la velocità del fluido aumenta ($v_2 > v_1$).
+
+\subsection{Il Teorema di Bernoulli}
+
+\begin{teorema}{Teorema di Bernoulli}{teo:bernoulli}
+Lungo qualsiasi linea di flusso di un fluido ideale in moto stazionario, la somma della pressione statica, della pressione dinamica e della pressione gravitazionale è rigorosamente costante:
+\begin{equation}
+    \mathbf{p + \frac{1}{2}\rho v^2 + \rho g y = \text{cost}}
+    \label{eq:bernoulli}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}
+Consideriamo un volume di fluido racchiuso tra due sezioni trasversali $S_1$ (a quota $y_1$) ed $S_2$ (a quota $y_2$) che scorre di un tratto $\dd x_1 = v_1 \dd t$ e $\dd x_2 = v_2 \dd t$ nel tempo $\dd t$. Il volume elementare trasportato è $\dd V = S_1 \dd x_1 = S_2 \dd x_2$ per l'equazione di continuità.
+\begin{enumerate}
+    \item \textbf{Lavoro delle forze di pressione esterne:}
+    \begin{equation}
+        W_p = F_1 \dd x_1 - F_2 \dd x_2 = (p_1 S_1)(v_1 \dd t) - (p_2 S_2)(v_2 \dd t) = (p_1 - p_2)\dd V
+    \end{equation}
+    \item \textbf{Variazione di energia cinetica:}
+    \begin{equation}
+        \Delta E_k = \frac{1}{2}\dd m\,v_2^2 - \frac{1}{2}\dd m\,v_1^2 = \frac{1}{2}\rho\,\dd V\,(v_2^2 - v_1^2)
+    \end{equation}
+    \item \textbf{Variazione di energia potenziale gravitazionale:}
+    \begin{equation}
+        \Delta U_g = \dd m\,g y_2 - \dd m\,g y_1 = \rho g\,\dd V\,(y_2 - y_1)
+    \end{equation}
+\end{enumerate}
+Applicando il teorema dell'energia cinetica $W_p = \Delta E_k + \Delta U_g$ e dividendo per $\dd V$:
+\begin{equation}
+    p_1 - p_2 = \frac{1}{2}\rho (v_2^2 - v_1^2) + \rho g (y_2 - y_1) \implies p_1 + \frac{1}{2}\rho v_1^2 + \rho g y_1 = p_2 + \frac{1}{2}\rho v_2^2 + \rho g y_2
+\end{equation}
+\end{dimostrazione}
+
+% ------------------------------------------------------------------------------
+\section{Applicazioni Fondamentali del Teorema di Bernoulli}
+\label{sec:applicazioni_bernoulli}
+% ------------------------------------------------------------------------------
+
+\subsection{Legge di Torricelli (Efflusso da un Serbatoio)}
+Consideriamo un grande serbatoio aperto a pressione atmosferica $p_0$ avente un piccolo foro di sezione $s$ posto a profondità $h$ sotto il pelo libero di sezione $S \gg s$.
+Applicando Bernoulli tra la superficie libera ($y_1 = h$, $v_1 \approx 0$, $p_1 = p_0$) e il foro di uscita ($y_2 = 0$, $p_2 = p_0$):
+\begin{equation}
+    p_0 + \rho g h = p_0 + \frac{1}{2}\rho v^2 \implies \mathbf{v = \sqrt{2gh}}
+    \label{eq:torricelli_fluidi}
+\end{equation}
+La velocità di efflusso coincide con quella di un corpo in caduta libera nel vuoto dalla stessa altezza $h$.
+
+% ------------------------------------------------------------------------------
+\section{Esercizi Risolti ed Applicativi con Diagrammi delle Forze nei Fluidi}
+\label{sec:esercizi_fluidi}
+% ------------------------------------------------------------------------------
+
+\begin{esercizio}[Galleggiamento di un Iceberg e Diagramma delle Forze Idrostatiche]
+\textbf{Testo:}
+Un iceberg di ghiaccio puro a densità $\rho_g = \SI{917}{\kilogram\per\metre\cubed}$ galleggia nell'acqua di mare a densità $\rho_m = \SI{1025}{\kilogram\per\metre\cubed}$.
+\begin{enumerate}
+    \item Calcolare la percentuale di volume immerso ed emerso.
+    \item Tracciare il diagramma di corpo libero e analizzare le forze agenti e la stabilità dell'equilibrio.
+\end{enumerate}
+\end{esercizio}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Acqua di mare
+    \fill[blue!15] (-3, -2) rectangle (3, 0.5);
+    \draw[navyblue, very thick] (-3, 0.5) -- (3, 0.5) node[right] {Pelo libero dell'acqua ($\rho_m$)};
+    
+    % Iceberg
+    \draw[thick, fill=cyan!10, draw=cyan!60!black] (-1.5, -1.8) -- (-1.8, 0.5) -- (-0.8, 1.6) -- (0.5, 1.8) -- (1.6, 0.5) -- (1.4, -1.8) -- cycle;
+    
+    % Punti notevoli
+    \coordinate (G) at (0, -0.2); % Baricentro
+    \coordinate (B) at (0, -0.7); % Centro di carena (spinta)
+    
+    \filldraw[crimsonred] (G) circle (2.5pt) node[right=4pt] {$G$ (Baricentro)};
+    \filldraw[forestgreen] (B) circle (2.5pt) node[right=4pt] {$B$ (Centro di spinta)};
+    
+    % Forze
+    \draw[->, ultra thick, crimsonred] (G) -- (0, -1.8) node[left] {$\vec{P} = \rho_g V_{\text{tot}} g\,\uy$};
+    \draw[->, ultra thick, forestgreen] (B) -- (0, 0.9) node[left] {$\vec{F}_A = \rho_m V_{\text{imm}} g\,\uy$};
+    
+    % Indicazioni volumi
+    \node at (0, 1.0) {\small $V_{\text{emer}}$ ($10{,}5\%$)};
+    \node at (0, -1.3) {\small $V_{\text{imm}}$ ($89{,}5\%$)};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[enhanced, breakable, colback=forestgreen!5!white, colframe=forestgreen!80!black,
+    title={\textbf{Analisi delle Forze Idrostatiche e Punti di Applicazione}}, fonttitle=\bfseries\sffamily]
+\begin{itemize}
+    \item \textbf{Forza Peso ($\vec{P} = -M g\uy = -\rho_g V_{\text{tot}} g\uy$):} applicata nel baricentro geometrico dell'intero corpo $G$.
+    \item \textbf{Spinta di Archimede ($\vec{F}_A = \rho_m V_{\text{imm}} g\uy$):} risultante di tutte le pressioni idrostatiche infinitesime $\dd\vec{F} = p\,\dd S\,\hat{\bm{n}}$ agenti sulla superficie bagnata sommersa. È applicata nel baricentro del volume immerso, detto \textbf{centro di spinta (o di carena)} $B$.
+    \item \textbf{Condizione di Equilibrio Verticale:} all'equilibrio statico le due forze sono uguali in modulo e opposte in verso ($\vec{P} + \vec{F}_A = \vec{0}$).
+\end{itemize}
+\end{tcolorbox}
+
+\textbf{Risoluzione Analitica:}
+Uguagliando peso e spinta di Archimede:
+\begin{equation}
+    P = F_A \implies \rho_g V_{\text{tot}} g = \rho_m V_{\text{imm}} g \implies \mathbf{\frac{V_{\text{imm}}}{V_{\text{tot}}} = \frac{\rho_g}{\rho_m}}
+\end{equation}
+Inserendo i dati numerici:
+\begin{equation}
+    \frac{V_{\text{imm}}}{V_{\text{tot}}} = \frac{917}{1025} \approx \mathbf{0{,}8946 = 89{,}5\%}
+\end{equation}
+La frazione emersa visibile sopra il livello del mare è appena:
+\begin{equation}
+    \mathbf{\frac{V_{\text{emer}}}{V_{\text{tot}}} = 1 - 0{,}8946 = 0{,}1054 = 10{,}5\%}
+\end{equation}

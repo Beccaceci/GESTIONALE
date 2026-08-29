@@ -1,0 +1,152 @@
+% ==============================================================================
+% DOCUMENTO PRINCIPALE - APPUNTI DI FISICA GENERALE 1
+% ==============================================================================
+\documentclass[11pt,a4paper,twoside,openright]{book}
+
+% --- Importazione delle configurazioni modulari ---
+\input{config/packages.tex}
+\input{config/environments.tex}
+\input{config/macros.tex}
+
+% ==============================================================================
+% COMPILAZIONE SELETTIVA (Scommentare per compilare solo capitoli specifici)
+% ==============================================================================
+% \includeonly{
+%   chapters/01_introduzione_vettori/main,
+%   chapters/02_cinematica_punto/main,
+%   chapters/03_dinamica_punto/main,
+%   chapters/04_sistemi_non_inerziali/main,
+%   chapters/05_lavoro_energia/main,
+%   chapters/06_sistemi_punti_urti/main,
+%   chapters/07_momento_angolare_rotazione/main,
+%   chapters/08_dinamica_statica_corpo_rigido/main,
+%   chapters/09_gravitazione_forze_centrali/main,
+%   chapters/10_oscillazioni_onde/main,
+%   chapters/11_meccanica_fluidi/main,
+%   chapters/12_termodinamica_fondamenti/main,
+%   chapters/13_gas_ideali_teoria_cinetica/main,
+%   chapters/14_primo_principio_trasformazioni/main,
+%   chapters/15_secondo_principio_entropia/main
+% }
+
+% ==============================================================================
+% METADATI DEL DOCUMENTO
+% ==============================================================================
+\title{\Huge\textbf{\textsf{Fisica Generale I}}\\[0.5em]
+\Large\textsf{Appunti Completi, Dimostrazioni, Modelli Fisici ed Esercizi Risolti}}
+\author{\textbf{\textsf{Nicola Beccaceci}}}
+\date{\textsf{Anno Accademico 2025/2026}}
+
+\begin{document}
+
+% --- Frontespizio / Titolo ---
+\frontmatter
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge\bfseries\color{navyblue} FISICA GENERALE 1\par}
+    \vspace{0.8cm}
+    {\Large\scshape Meccanica, Oscillazioni, Fluidi e Termodinamica\par}
+    \vspace{0.5cm}
+    {\large\textsf{Corso di Laurea in Ingegneria Gestionale}\par}
+    \vfill
+    \rule{0.6\textwidth}{1.2pt}\par
+    \vspace{1cm}
+    {\large\textbf{\underline{Nicola Beccaceci}}\par}
+    \vspace{0.5cm}
+    {\small \today\par}
+    \vspace*{2cm}
+\end{titlepage}
+
+% --- Indice generale ---
+\tableofcontents
+\cleardoublepage
+
+% --- Prefazione / Guida alla lettura ---
+\chapter*{Guida alla Consultazione}
+\addcontentsline{toc}{chapter}{Guida alla Consultazione}
+Questo volume raccoglie la trascrizione, la ricostruzione formale, l'integrazione rigorosa e l'approfondimento degli appunti del corso di \textbf{Fisica Generale 1} per il Corso di Laurea in Ingegneria Gestionale.
+
+Il testo è strutturato in modo da guidare lo studente attraverso una trattazione completa e senza omissioni dei fenomeni fisici:
+\begin{enumerate}
+    \item \textbf{Modellizzazione Fisica}: definizione accurata delle ipotesi semplificative, scelta dei sistemi di riferimento e analisi dimensionale.
+    \item \textbf{Derivazioni Matematiche e Dimostrazioni}: esplicitazione di tutti i passaggi algebrici, differenziali e vettoriali intermedi lasciati impliciti a lezione.
+    \item \textbf{Trascrizioni di Riferimento}: sincronizzazione costante con le 40 lezioni registrate e trascritte per recuperare dettagli, commenti qualitativi, analogie ed esempi del docente.
+    \item \textbf{Metodi Risolutivi ed Esercizi d'Esame}: schemi operativi procedurali per affrontare problemi classici delle prove scritte e orali.
+\end{enumerate}
+
+\section*{Codice Visivo dei Box Tematici}
+Per agevolare lo studio visivo e la consultazione rapida, il documento adotta specifici ambienti cromatici:
+\begin{itemize}
+    \item \textbf{\textcolor{navyblue}{Definizioni}}: Grandezze fisiche, coordinate e concetti operativi fondamentali con notazione rigorosa.
+    \item \textbf{\textcolor{purpleaccent}{Principi e Leggi Fondamentali}}: Assiomi e leggi cardine della dinamica e della termodinamica.
+    \item \textbf{\textcolor{forestgreen}{Teoremi e Proposizioni}}: Teoremi di conservazione, teoremi cardinali e dimostrazioni complete passo-passo contrassegnate dal simbolo $\blacksquare$.
+    \item \textbf{\textcolor{warmamber}{Metodi Risolutivi e Algoritmi}}: Procedure operative sequenziali per l'impostazione degli esercizi d'esame.
+    \item \textbf{\textcolor{crimsonred}{Attenzione all'Esame e Trappole Comuni}}: Errori concettuali frequenti, sviste di calcolo e trabocchetti tipici dei quesiti.
+    \item \textbf{\textcolor{purpleaccent}{Esempi ed Esercizi Svolti}}: Casi applicativi completi con commenti fisici e verifiche dimensionali.
+    \item \textbf{\textcolor{darkcyan}{Fenomenologia Sperimentale}}: Evidenze sperimentali, ordini di grandezza ed esperimenti storici notevoli.
+    \item \textbf{\textcolor{navyblue!80}{Osservazioni}}: Note teoriche, approfondimenti geometrici e limiti di validità dei modelli.
+\end{itemize}
+
+\cleardoublepage
+
+% --- Organizzazione del Corso e Macro-Aree ---
+\chapter*{Architettura Didattica del Corso}
+\addcontentsline{toc}{chapter}{Architettura Didattica del Corso}
+
+Il programma di Fisica Generale 1 è organizzato in \textbf{4 Macro-Aree Fondamentali} articolate in 15 capitoli tematici:
+
+\begin{enumerate}[label=\textbf{\Roman*.}]
+    \item \textbf{Cinematica e Dinamica del Punto Materiale} (Capitoli 1--4):
+    Grandezze fisiche, vettori, cinematica unidimensionale, bidimensionale e curvilinea (terna intrinseca e coordinate polari), principi di Newton, forze vincolari, attriti, dinamica del moto circolare e sistemi di riferimento non inerziali (forze apparenti e Coriolis).
+    
+    \item \textbf{Leggi di Conservazione, Urti e Corpo Rigido} (Capitoli 5--8):
+    Lavoro ed energia cinetica, forze conservative e potenziale, conservazione dell'energia meccanica, dinamica dei sistemi di particelle, centro di massa, prima equazione cardinale, quantità di moto, teoria degli urti elastici/anelastici, momento angolare, seconda equazione cardinale, statica del corpo rigido, momento di inerzia (Huygens-Steiner), rotazioni, puro rotolamento e percussioni.
+    
+    \item \textbf{Gravitazione, Oscillazioni e Meccanica dei Fluidi} (Capitoli 9--11):
+    Legge di gravitazione universale, energia potenziale gravitazionale, velocità di fuga, leggi di Keplero, potenziale efficace per forze centrali, oscillatore armonico semplice, oscillazioni smorzate e forzate (risonanza e fattore $Q$), statica dei fluidi (Stevino, Pascal, Archimede), dinamica dei fluidi ideali (equazione di continuità, teorema di Bernoulli e Torricelli).
+    
+    \item \textbf{Termodinamica} (Capitoli 12--15):
+    Sistemi termodinamici, equilibrio, principio zero e temperatura, calore, calorimetria, meccanismi di propagazione del calore, modello della teoria cinetica dei gas ideali, pressione microscopica ed equipartizione dell'energia, lavoro termodinamico e piano di Clapeyron, primo principio della termodinamica ed energia interna, trasformazioni notevoli e adiabatiche di Poisson, macchine termiche e secondo principio (Kelvin-Planck e Clausius), ciclo e teorema di Carnot, disuguaglianza di Clausius, definizione di entropia, principio di aumento dell'entropia universale, terzo principio e statistica di Boltzmann.
+\end{enumerate}
+
+\cleardoublepage
+
+% ==============================================================================
+% CORPO DEL TESTO - CAPITOLI
+% ==============================================================================
+\mainmatter
+
+% --- PARTE I: CINEMATICA E DINAMICA DEL PUNTO MATERIALE ---
+\part{Cinematica e Dinamica del Punto Materiale}
+\include{chapters/01_introduzione_vettori/main}
+\include{chapters/02_cinematica_punto/main}
+\include{chapters/03_dinamica_punto/main}
+\include{chapters/04_sistemi_non_inerziali/main}
+
+% --- PARTE II: LEGGI DI CONSERVAZIONE, URTI E CORPO RIGIDO ---
+\part{Leggi di Conservazione, Urti e Corpo Rigido}
+\include{chapters/05_lavoro_energia/main}
+\include{chapters/06_sistemi_punti_urti/main}
+\include{chapters/07_momento_angolare_rotazione/main}
+\include{chapters/08_dinamica_statica_corpo_rigido/main}
+
+% --- PARTE III: GRAVITAZIONE, OSCILLAZIONI E MECCANICA DEI FLUIDI ---
+\part{Gravitazione, Oscillazioni e Meccanica dei Fluidi}
+\include{chapters/09_gravitazione_forze_centrali/main}
+\include{chapters/10_oscillazioni_onde/main}
+\include{chapters/11_meccanica_fluidi/main}
+
+% --- PARTE IV: TERMODINAMICA ---
+\part{Termodinamica}
+\include{chapters/12_termodinamica_fondamenti/main}
+\include{chapters/13_gas_ideali_teoria_cinetica/main}
+\include{chapters/14_primo_principio_trasformazioni/main}
+\include{chapters/15_secondo_principio_entropia/main}
+
+% ==============================================================================
+% PARTE CONCLUSIVA (APPENDICI E INDICI)
+% ==============================================================================
+\backmatter
+
+\end{document}

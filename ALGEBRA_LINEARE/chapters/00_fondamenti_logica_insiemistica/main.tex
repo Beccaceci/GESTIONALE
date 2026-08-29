@@ -1,0 +1,587 @@
+% ==============================================================================
+% CAPITOLO 0: FONDAMENTI DI LOGICA MATEMATICA E TEORIA DEGLI INSIEMI
+% Appunti integrati e formalizzati - Corso del Prof. Marco Franciosi
+% ==============================================================================
+
+\chapter{Fondamenti di Logica Matematica e Teoria degli Insiemi}
+\label{chap:fondamenti_logica_insiemistica}
+
+\section{Introduzione al Corso e Inquadramento Metodologico}
+
+Il corso di \textbf{Algebra Lineare e Geometria} (tenuto dal Prof.~Marco Franciosi per il Corso di Laurea in Ingegneria Gestionale, modulo dell'insegnamento integrato di \textbf{Algebra Lineare e Statistica}) costituisce uno dei pilastri fondamentali della formazione scientifica e ingegneristica. L'obiettivo primario del corso non è unicamente l'acquisizione di tecniche computazionali (risoluzione di sistemi lineari, diagonalizzazione di matrici, calcolo di determinanti), bensì lo sviluppo del \textbf{pensiero astratto}, della \textbf{rigorosità formale} e del \textbf{metodo deduttivo assiomatico}.
+
+\subsection{Testi di Riferimento Consigliati}
+Per una preparazione completa ed esaustiva, sia a livello teorico che per la risoluzione degli esercizi, si raccomandano i seguenti testi di riferimento:
+\begin{enumerate}
+    \item \textbf{M.~Abate}, \emph{Algebra Lineare}, McGraw-Hill Education. Trattazione teorica rigorosa, moderna e completa della struttura degli spazi vettoriali e delle forme bilineari.
+    \item \textbf{M.~Abate, C.~de Fabritiis}, \emph{Geometria Analitica con Elementi di Algebra Lineare}, McGraw-Hill Education. Testo orientato alla comprensione geometrica ed euclidea delle trasformazioni lineari.
+    \item \textbf{M.~Franciosi}, \emph{Esercizi di Algebra Lineare e Geometria}, Esculapio. Raccolta di problemi d'esame commentati, quesiti teorici e verifiche di comprensione.
+\end{enumerate}
+
+\begin{osservazione}[Linguaggio e Metodo Assiomatico]
+In matematica avanzata, ogni affermazione deve essere definita in modo non ambiguo o dimostrata a partire da un insieme di \textbf{assiomi} (verità primitive non dimostrate) mediante \textbf{regole di inferenza logica}. Nessuna proprietà può essere assunta come vera per pura intuizione empirica.
+\end{osservazione}
+
+---
+
+\section{Elementi di Logica Matematica}
+
+La logica matematica fornisce l'alfabeto, la sintassi e le regole di deduzione necessarie per formulare definizioni rigorose ed elaborare dimostrazioni inattaccabili.
+
+\subsection{Proposizioni Logiche e Valori di Verità}
+
+\begin{definizione}{Proposizione Logica}{proposizione_logica}
+Una \textbf{proposizione logica} (o enunciato dichiarativo) è un'affermazione suscettibile di assumere uno e un solo \textbf{valore di verità}, scelto nell'insieme binario $\{\text{Vero}, \text{Falso}\}$ (indicato con $\{V, F\}$ o $\{1, 0\}$).
+\end{definizione}
+
+\begin{esempio}{Proposizioni logiche e non-proposizioni}{es_proposizioni}
+\begin{itemize}
+    \item $p: \text{«}2 + 3 = 5\text{»}$ è una proposizione vera ($V$).
+    \item $q: \text{«} \pi \in \Q \text{»}$ è una proposizione falsa ($F$), essendo $\pi$ un numero irrazionale trascendente.
+    \item $r: \text{«} x > 0 \text{»}$ \textbf{non} è una proposizione logica in sé, ma un \emph{predicato aperto} (o funzione proposizionale $P(x)$): il suo valore di verità dipende dal valore assegnato alla variabile $x$.
+    \item $s: \text{«Questa frase è falsa»}$ \textbf{non} è una proposizione (paradosso del mentitore, non soddisfa il principio del terzo escluso).
+\end{itemize}
+\end{esempio}
+
+\subsection{Connettivi Logici Fondamentali e Tabelle di Verità}
+
+A partire da proposizioni atomiche, si costruiscono proposizioni composte mediante i \textbf{connettivi logici}:
+
+\begin{enumerate}
+    \item \textbf{Negazione ($\neg p$ oppure $\sim p$)}: inverte il valore di verità di $p$. È vera se $p$ è falsa, è falsa se $p$ è vera.
+    \item \textbf{Congiunzione logica ($p \land q$)}: «$p$ e $q$». È vera se e solo se sia $p$ sia $q$ sono contemporaneamente vere.
+    \item \textbf{Disgiunzione inclusiva ($p \lor q$)}: «$p$ o $q$ (o entrambi)». È falsa se e solo se sia $p$ sia $q$ sono entrambe false; è sufficiente che almeno una sia vera.
+    \item \textbf{Disgiunzione esclusiva ($p \oplus q$ o $p \mathbin{\dot{\lor}} q$)}: «aut $p$ aut $q$». È vera se e solo se una e una sola tra $p$ e $q$ è vera.
+    \item \textbf{Implicazione logica / Condizionale materiale ($p \implies q$)}: «se $p$, allora $q$». È logicamente equivalente all'enunciato $\neg p \lor q$. Pertanto, l'implicazione è \textbf{falsa unicamente nel caso in cui la premessa $p$ sia vera e la conseguenza $q$ sia falsa}. Se $p$ è falsa, l'implicazione $p \implies q$ è \textbf{sempre formalmente vera} (principio dell'\emph{ex falso quodlibet}).
+    \item \textbf{Coimplicazione / Equivalenza logica ($p \iff q$)}: «$p$ se e solo se $q$» (sintetizzato con \emph{ssi} o \emph{iff}). È vera se e solo se $p$ e $q$ posseggono lo stesso valore di verità. Corrisponde a $(p \implies q) \land (q \implies p)$.
+\end{enumerate}
+
+\begin{table}[htbp]
+\centering
+\caption{Tabella di verità completa dei connettivi logici fondamentali}
+\label{tab:verita}
+\begin{tabular}{cc|c|c|c|c|c|c}
+\toprule
+$p$ & $q$ & $\neg p$ & $p \land q$ & $p \lor q$ & $p \oplus q$ & $p \implies q$ & $p \iff q$ \\
+\midrule
+$V$ & $V$ & $F$ & $V$ & $V$ & $F$ & \textbf{V} & \textbf{V} \\
+$V$ & $F$ & $F$ & $F$ & $V$ & $V$ & \textbf{F} & \textbf{F} \\
+$F$ & $V$ & $V$ & $F$ & $V$ & $V$ & \textbf{V} & \textbf{F} \\
+$F$ & $F$ & $V$ & $F$ & $F$ & $F$ & \textbf{V} & \textbf{V} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{esame}[Il significato di Condizione Necessaria e Condizione Sufficiente]
+Nella proposizione condizionale $p \implies q$:
+\begin{itemize}
+    \item $p$ è detta \textbf{condizione sufficiente} per $q$: se $p$ è vera, è garantito che $q$ sia vera.
+    \item $q$ è detta \textbf{condizione necessaria} per $p$: affinché $p$ possa essere vera, è indispensabile che $q$ sia vera (se $q$ è falsa, $p$ non può essere vera).
+    \item Nella coimplicazione $p \iff q$, $p$ è condizione \textbf{necessaria e sufficiente} per $q$ (e viceversa).
+\end{itemize}
+\textbf{Errore classico d'esame}: Scambiare $p \implies q$ con $q \implies p$ (fallacia dell'affermazione del conseguente).
+\emph{Esempio geometrico}: «Se una matrice $A \in \R^{n \times n}$ è invertibile, allora $\det(A) \neq 0$» è un'equivalenza ($\iff$), ma «Se una matrice è simmetrica, allora è diagonalizzabile su $\R$» è un'implicazione solo da sinistra a destra ($\implies$). Esistono matrici diagonalizzabili che non sono affatto simmetriche!
+\end{esame}
+
+\subsection{Proposizione Contronominale, Inversa e Contraria}
+
+Data l'implicazione diretta $p \implies q$:
+\begin{enumerate}
+    \item \textbf{Proposizione Contronominale}: $\neg q \implies \neg p$.
+    \item \textbf{Proposizione Inversa}: $q \implies p$.
+    \item \textbf{Proposizione Contraria}: $\neg p \implies \neg q$.
+\end{enumerate}
+
+\begin{teorema}{Equivalenza della Contronominale}{contronominale}
+L'implicazione diretta $p \implies q$ è logicamente equivalente alla sua proposizione contronominale $\neg q \implies \neg p$:
+\begin{equation}
+    (p \implies q) \iff (\neg q \implies \neg p).
+\end{equation}
+Al contrario, l'implicazione diretta \textbf{non} è equivalente né all'inversa né alla contraria (le quali risultano invece equivalenti tra loro).
+\end{teorema}
+
+\begin{dimostrazione}
+È sufficiente verificare l'uguaglianza delle tabelle di verità:
+\begin{equation}
+    \neg q \implies \neg p \equiv \neg(\neg q) \lor (\neg p) \equiv q \lor \neg p \equiv \neg p \lor q \equiv (p \implies q).
+\end{equation}
+Pertanto, $(p \implies q) \iff (\neg q \implies \neg p)$ è una \textbf{tautologia} (sempre vera per qualsiasi assegnazione di valori).
+\end{dimostrazione}
+
+\subsection{Quantificatori Logici e Negazione di Enunciati Quantificati}
+
+Nei predicati aperti definiti su un dominio (universo) $X$, la trasformazione in proposizioni avviene vincolando le variabili libere tramite i \textbf{quantificatori}:
+
+\begin{definizione}{Quantificatore Universale ed Esistenziale}{quantificatori}
+\begin{itemize}
+    \item \textbf{Quantificatore Universale ($\forall$, «per ogni» / «per ciascun»)}:
+    \begin{equation}
+        \forall x \in X, \; P(x)
+    \end{equation}
+    è vero se e solo se la proprietà $P(x)$ è soddisfatta da \emph{tutti} gli elementi dell'insieme $X$.
+    \item \textbf{Quantificatore Esistenziale ($\exists$, «esiste almeno un»)}:
+    \begin{equation}
+        \exists x \in X : P(x) \quad (\text{oppure } \exists x \in X \text{ t.c. } P(x))
+    \end{equation}
+    è vero se e solo se esiste \emph{almeno un} elemento $x \in X$ per cui la proprietà $P(x)$ è vera.
+    \item \textbf{Quantificatore di Esistenza e Unicità ($\exists!$, «esiste ed è unico»)}:
+    \begin{align}
+        \exists! x \in X : P(x) \iff &\big(\exists x \in X : P(x)\big) \;\land \notag \\
+        &\big(\forall x_1, x_2 \in X, \; (P(x_1) \land P(x_2)) \implies x_1 = x_2\big).
+    \end{align}
+\end{itemize}
+\end{definizione}
+
+\begin{teorema}{Leggi di De Morgan per i Quantificatori}{de_morgan_quantificatori}
+La negazione di un'affermazione quantificata scambia il tipo di quantificatore e nega il predicato interno:
+\begin{align}
+    \neg \Big(\forall x \in X, \; P(x)\Big) &\iff \exists x \in X : \neg P(x), \label{eq:demorgan_univ} \\
+    \neg \Big(\exists x \in X : P(x)\Big) &\iff \forall x \in X, \; \neg P(x). \label{eq:demorgan_esiste}
+\end{align}
+\end{teorema}
+
+\begin{esame}[Negazione di Proposizioni a Più Quantificatori e Commutazione]
+1. \textbf{Attenzione alla negazione a catena}:
+Per negare un'affermazione con quantificatori alternati, si invertono sistematicamente tutti i quantificatori dal primo all'ultimo e si nega l'enunciato terminale:
+\begin{equation}
+    \neg \Big(\forall \eps > 0, \; \exists \delta > 0 : \forall x \in X, \; (|x - x_0| < \delta \implies |f(x) - f(x_0)| < \eps)\Big)
+\end{equation}
+diventa:
+\begin{equation}
+    \exists \eps > 0 : \forall \delta > 0, \; \exists x \in X : \Big(|x - x_0| < \delta \;\land\; |f(x) - f(x_0)| \ge \eps\Big),
+\end{equation}
+in quanto $\neg(p \implies q) \iff (p \land \neg q)$.
+
+2. \textbf{Ordine dei Quantificatori}:
+L'ordine dei quantificatori \textbf{non è commutativo} se essi sono eterogenei:
+\begin{equation}
+    \Big(\exists y \in Y : \forall x \in X, \; P(x, y)\Big) \implies \Big(\forall x \in X, \; \exists y \in Y : P(x, y)\Big),
+\end{equation}
+ma l'implicazione inversa è \textbf{falsa} in generale!
+\emph{Esempio in $\R$}: $\forall x \in \R, \exists y \in \R : x + y = 0$ (Vera: per ogni $x$ il suo opposto è $y = -x$).
+Mentre $\exists y \in \R : \forall x \in \R, x + y = 0$ (Falsa: non esiste un unico numero reale che sommato a qualsiasi altro dia sempre zero).
+\end{esame}
+
+---
+
+\section{Metodologie di Dimostrazione Matematica}
+
+Nella teoria dell'Algebra Lineare si impiegano principalmente tre paradigmi dimostrativi:
+
+\subsection{1. Dimostrazione Diretta}
+Si assume la validità delle ipotesi $p$ e, attraverso una catena ininterrotta di implicazioni logiche basate su assiomi, definizioni o teoremi precedentemente provati, si giunge alla tesi $q$:
+\begin{equation}
+    p \implies r_1 \implies r_2 \implies \dots \implies q.
+\end{equation}
+
+\subsection{2. Dimostrazione per Contronominale}
+Per provare che $p \implies q$, si dimostra l'enunciato equivalente $\neg q \implies \neg p$. Si assume cioè che la tesi sia falsa e si deduce che l'ipotesi deve necessariamente essere falsa.
+
+\begin{esempio}{Dimostrazione per Contronominale}{es_contronominale}
+\textbf{Enunciato}: Sia $n \in \N$. Se $n^2$ è pari, allora $n$ è pari.
+\begin{dimostrazione}
+Procediamo per contronominale. Vogliamo dimostrare che: «Se $n$ è dispari, allora $n^2$ è dispari».
+Se $n$ è dispari, per definizione esiste $k \in \N$ tale che $n = 2k + 1$.
+Calcoliamo il quadrato:
+\begin{equation}
+    n^2 = (2k + 1)^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1.
+\end{equation}
+Posto $m = 2k^2 + 2k \in \N$, abbiamo $n^2 = 2m + 1$, il che prova che $n^2$ è dispari.
+Per il Teorema~\ref{thm:contronominale}, l'enunciato originale è pienamente dimostrato.
+\end{dimostrazione}
+\end{esempio}
+
+\subsection{3. Dimostrazione per Assurdo (\emph{Reductio ad Absurdum})}
+Per dimostrare una proposizione $T$ (oppure $p \implies q$), si assume provvisoriamente la sua negazione $\neg T$ (rispettivamente $p \land \neg q$) e si deducono logicamente conseguenze fino a pervenire a una \textbf{contraddizione logica} del tipo $r \land \neg r$ (oppure alla smentita di un'ipotesi o di un assioma consolidato). Essendo la logica standard non contraddittoria, l'assunzione iniziale deve essere respinta, validando $T$.
+
+\begin{esempio}{Dimostrazione per Assurdo: Irrazionalità di $\sqrt{2}$}{es_assurdo}
+\textbf{Enunciato}: Non esiste alcun numero razionale $x \in \Q$ tale che $x^2 = 2$ (ovvero $\sqrt{2} \notin \Q$).
+\begin{dimostrazione}
+Supponiamo per assurdo che $\sqrt{2} \in \Q$. Allora esistono due interi positivi $a, b \in \N_{>0}$, con frazione $\frac{a}{b}$ ridotta ai minimi termini ($\operatorname{MCD}(a, b) = 1$, ossia $a$ e $b$ sono coprimi), tali che:
+\begin{equation}
+    \left(\frac{a}{b}\right)^2 = 2 \iff a^2 = 2b^2.
+\end{equation}
+Da ciò segue che $a^2$ è pari, e per l'Esempio~\ref{es:es_contronominale}, anche $a$ deve essere pari. Possiamo dunque scrivere $a = 2k$ per qualche $k \in \N$.
+Sostituendo nell'equazione:
+\begin{equation}
+    (2k)^2 = 2b^2 \iff 4k^2 = 2b^2 \iff b^2 = 2k^2.
+\end{equation}
+Ne consegue che anche $b^2$ è pari, da cui $b$ è pari.
+Ma se sia $a$ sia $b$ sono pari, essi ammettono $2$ come fattore comune, contraddicendo l'ipotesi che $\operatorname{MCD}(a, b) = 1$.
+L'assurdo scaturisce dall'aver ipotizzato $\sqrt{2} \in \Q$, che pertanto è falsa: $\sqrt{2} \notin \Q$.
+\end{dimostrazione}
+\end{esempio}
+
+---
+
+\section{Teoria Elementare degli Insiemi}
+
+La teoria degli insiemi fornisce il substrato universale su cui poggiano tutte le strutture algebriche (spazi vettoriali, gruppi, anelli, campi).
+
+\subsection{Concetto Primitivo di Insieme e Notazione di Appartenenza}
+Un \textbf{insieme} è una collezione ben definita di oggetti distinti, detti \textbf{elementi}.
+Se un elemento $x$ appartiene a un insieme $A$, scriviamo $x \in A$. In caso contrario, scriviamo $x \notin A \iff \neg(x \in A)$.
+
+\begin{definizione}{Modalità di Definizione di un Insieme}{def_insiemi_modalita}
+Un insieme può essere definito secondo due modalità principali:
+\begin{enumerate}
+    \item \textbf{Per Elencazione (o Estensiva)}: si elencano esplicitamente tutti gli elementi racchiusi tra parentesi graffe:
+    \begin{equation}
+        A = \{a_1, a_2, \dots, a_n\}.
+    \end{equation}
+    \emph{Nota}: l'ordine degli elementi non conta ($\{1, 2\} = \{2, 1\}$) e le ripetizioni non aggiungono elementi ($\{1, 1, 2\} = \{1, 2\}$).
+    \item \textbf{Per Proprietà Caratteristica (o Intensiva)}: si definisce l'insieme specificando un predicato $P(x)$ soddisfatto da tutti e soli i suoi elementi all'interno di un insieme universo $U$:
+    \begin{equation}
+        A = \{x \in U \mid P(x)\} \quad (\text{oppure } A = \{x \in U : P(x)\}).
+    \end{equation}
+\end{enumerate}
+\end{definizione}
+
+\subsection{Gli Insiemi Numerici Fondamentali}
+Nel corso di Algebra Lineare si opera all'interno della catena fondamentale di inclusioni:
+\begin{equation}
+    \N \subset \Z \subset \Q \subset \R \subset \C
+\end{equation}
+dove:
+\begin{itemize}
+    \item $\N = \{0, 1, 2, 3, \dots\}$: insieme dei \textbf{numeri naturali} (includiamo lo zero; si indica con $\N^* = \N \setminus \{0\}$ l'insieme dei naturali positivi).
+    \item $\Z = \{\dots, -3, -2, -1, 0, 1, 2, 3, \dots\}$: anello dei \textbf{numeri interi relativi}.
+    \item $\Q = \left\{\frac{m}{n} \;\middle|\; m \in \Z, \; n \in \Z \setminus \{0\}, \; \operatorname{MCD}(m, n) = 1\right\}$: campo dei \textbf{numeri razionali}.
+    \item $\R$: campo continuo e completo dei \textbf{numeri reali} (comprensivo degli irrazionali come $\sqrt{2}, \pi, e$).
+    \item $\C = \{a + \iu b \mid a, b \in \R, \; \iu^2 = -1\}$: campo algebricamente chiuso dei \textbf{numeri complessi}.
+\end{itemize}
+
+\subsection{Insieme Vuoto e Concetto di Inclusione}
+
+\begin{definizione}{Insieme Vuoto}{insieme_vuoto}
+L'\textbf{insieme vuoto}, indicato con il simbolo $\emptyset$ oppure $\{\}$, è l'unico insieme privo di elementi:
+\begin{equation}
+    \forall x, \; x \notin \emptyset.
+\end{equation}
+\end{definizione}
+
+\begin{definizione}{Inclusione e Sottoinsiemi}{inclusione}
+Dati due insiemi $A$ e $B$:
+\begin{itemize}
+    \item $A$ è un \textbf{sottoinsieme} di $B$ (o $A$ è \textbf{incluso} in $B$), scritto $A \subseteq B$, se ogni elemento di $A$ appartiene anche a $B$:
+    \begin{equation}
+        A \subseteq B \iff \big(\forall x, \; x \in A \implies x \in B\big).
+    \end{equation}
+    \item $A$ è un \textbf{sottoinsieme proprio} di $B$ (inclusione stretta), indicato con $A \subset B$ o $A \subsetneq B$, se:
+    \begin{equation}
+        A \subsetneq B \iff \big(A \subseteq B \;\land\; A \neq B\big) \iff \big(A \subseteq B \;\land\; \exists y \in B : y \notin A\big).
+    \end{equation}
+\end{itemize}
+\end{definizione}
+
+\begin{proposizione}{Proprietà dell'Inclusione}{prop_inclusione}
+Per ogni insieme $A, B, C$:
+\begin{enumerate}
+    \item $\emptyset \subseteq A$ (\emph{l'insieme vuoto è sottoinsieme di qualunque insieme}).
+    \item $A \subseteq A$ (\emph{riflessività}).
+    \item $(A \subseteq B \land B \subseteq C) \implies A \subseteq C$ (\emph{transitività}).
+\end{enumerate}
+\end{proposizione}
+
+\begin{teorema}{Principio di Doppia Inclusione (Uguaglianza tra Insiemi)}{doppia_inclusione}
+Due insiemi $A$ e $B$ sono uguali ($A = B$) se e solo se contengono esattamente gli stessi elementi:
+\begin{equation}
+    A = B \iff (A \subseteq B \;\land\; B \subseteq A).
+\end{equation}
+\end{teorema}
+\begin{osservazione}[Tecnica standard di dimostrazione insiemistica]
+La stragrande maggioranza delle dimostrazioni di uguaglianza tra spazi o sottospazi vettoriali (es.~$V = W$ o $\ker(f) = \Imm(g)^{\perp}$) si conduce dimostrando le due inclusioni separate: $V \subseteq W$ e $W \subseteq V$.
+\end{osservazione}
+
+\subsection{Insieme delle Parti (Insieme Potenza)}
+
+\begin{definizione}{Insieme delle Parti}{insieme_parti}
+Sia $A$ un insieme. L'\textbf{insieme delle parti} (o insieme potenza) di $A$, denotato con $\mathcal{P}(A)$ o $\mathscr{P}(A)$ o $2^A$, è l'insieme costituito da tutti i possibili sottoinsiemi di $A$:
+\begin{equation}
+    \mathcal{P}(A) = \{X \mid X \subseteq A\}.
+\end{equation}
+Per ogni insieme $A$ vale sempre $\emptyset \in \mathcal{P}(A)$ e $A \in \mathcal{P}(A)$.
+\end{definizione}
+
+\begin{proposizione}{Cardinalità dell'Insieme delle Parti}{card_parti}
+Se $A$ è un insieme finito avente $|A| = n$ elementi ($n \in \N$), allora la cardinalità dell'insieme delle parti è:
+\begin{equation}
+    |\mathcal{P}(A)| = 2^n = 2^{|A|}.
+\end{equation}
+\end{proposizione}
+
+\begin{esempio}{Insieme delle parti per insiemi elementari}{es_parti}
+\begin{itemize}
+    \item Per $A = \emptyset$ ($|A|=0$): $\mathcal{P}(\emptyset) = \{\emptyset\}$, avente $|\mathcal{P}(\emptyset)| = 2^0 = 1$.
+    \item Per $A = \{1\}$ ($|A|=1$): $\mathcal{P}(\{1\}) = \{\emptyset, \{1\}\}$, con $|\mathcal{P}(A)| = 2^1 = 2$.
+    \item Per $A = \{a, b\}$ ($|A|=2$): $\mathcal{P}(\{a, b\}) = \{\emptyset, \{a\}, \{b\}, \{a, b\}\}$, con $|\mathcal{P}(A)| = 2^2 = 4$.
+\end{itemize}
+\end{esempio}
+
+\begin{esame}[Distinzione fondamentale tra Appartenenza ($\in$) e Inclusione ($\subseteq$)]
+Non confondere l'elemento con il sottoinsieme singleton:
+\begin{itemize}
+    \item $x \in A \iff \{x\} \subseteq A \iff \{x\} \in \mathcal{P}(A)$.
+    \item $\emptyset \subseteq A$ è \textbf{sempre vera} per ogni $A$, ma $\emptyset \in A$ è vera \textbf{solo se} l'insieme vuoto è esplicitamente un elemento di $A$ (es.~in $A = \{\emptyset, 1\}$ si ha sia $\emptyset \subseteq A$ che $\emptyset \in A$).
+\end{itemize}
+\end{esame}
+
+---
+
+\section{Operazioni Insiemistiche Fondamentali}
+
+Fissato un insieme universo $U$, su $\mathcal{P}(U)$ sono definite le operazioni binarie e unarie che corrispondono direttamente ai connettivi logici:
+
+\begin{definizione}{Operazioni Insiemistiche}{operazioni_insiemistiche}
+Siano $A, B \subseteq U$:
+\begin{enumerate}
+    \item \textbf{Unione ($A \cup B$)}:
+    \begin{equation}
+        A \cup B = \{x \in U \mid x \in A \lor x \in B\}.
+    \end{equation}
+    \item \textbf{Intersezione ($A \cap B$)}:
+    \begin{equation}
+        A \cap B = \{x \in U \mid x \in A \land x \in B\}.
+    \end{equation}
+    Se $A \cap B = \emptyset$, gli insiemi $A$ e $B$ si dicono \textbf{disgiunti}.
+    \item \textbf{Differenza Insiemistica ($A \setminus B$ oppure $A - B$)}:
+    \begin{equation}
+        A \setminus B = \{x \in U \mid x \in A \land x \notin B\}.
+    \end{equation}
+    \item \textbf{Complementare Assoluto ($A^c$ oppure $\complement_U(A)$ oppure $\overline{A}$)}:
+    \begin{equation}
+        A^c = U \setminus A = \{x \in U \mid x \notin A\}.
+    \end{equation}
+    \item \textbf{Differenza Simmetrica ($A \mathbin{\Delta} B$)}:
+    \begin{equation}
+        A \mathbin{\Delta} B = (A \setminus B) \cup (B \setminus A) = \{x \in U \mid x \in A \oplus x \in B\} = (A \cup B) \setminus (A \cap B).
+    \end{equation}
+\end{enumerate}
+\end{definizione}
+
+\subsection{Proprietà Algebriche delle Operazioni Insiemistiche}
+
+Le operazioni di unione, intersezione e complementazione soddisfano la struttura di un'\textbf{Algebra di Boole}:
+
+\begin{teorema}{Proprietà dell'Algebra degli Insiemi}{algebra_insiemi}
+Per ogni sottoinsieme $A, B, C \subseteq U$:
+\begin{enumerate}
+    \item \textbf{Idempotenza}:
+    \begin{equation}
+        A \cup A = A, \qquad A \cap A = A.
+    \end{equation}
+    \item \textbf{Commutatività}:
+    \begin{equation}
+        A \cup B = B \cup A, \qquad A \cap B = B \cap A.
+    \end{equation}
+    \item \textbf{Associatività}:
+    \begin{equation}
+        (A \cup B) \cup C = A \cup (B \cup C), \qquad (A \cap B) \cap C = A \cap (B \cap C).
+    \end{equation}
+    \item \textbf{Distributività}:
+    \begin{align}
+        A \cap (B \cup C) &= (A \cap B) \cup (A \cap C), \\
+        A \cup (B \cap C) &= (A \cup B) \cap (A \cup C).
+    \end{align}
+    \item \textbf{Elementi Neutri ed Assorbenti}:
+    \begin{align}
+        A \cup \emptyset &= A, \qquad A \cap U = A \quad (\text{Elementi neutri}), \\
+        A \cup U &= U, \qquad A \cap \emptyset = \emptyset \quad (\text{Elementi assorbenti}).
+    \end{align}
+    \item \textbf{Involuzione (Doppio Complementare)}:
+    \begin{equation}
+        (A^c)^c = A.
+    \end{equation}
+    \item \textbf{Leggi di De Morgan Insiemistiche}:
+    \begin{align}
+        (A \cup B)^c &= A^c \cap B^c, \label{eq:demorgan_unione} \\
+        (A \cap B)^c &= A^c \cup B^c. \label{eq:demorgan_intersezione}
+    \end{align}
+\end{enumerate}
+\end{teorema}
+
+\begin{dimostrazione}[Dimostrazione della prima Legge di De Morgan]
+Dimostriamo che $(A \cup B)^c = A^c \cap B^c$ attraverso una catena di equivalenze logiche per un generico elemento $x \in U$:
+\begin{align*}
+    x \in (A \cup B)^c &\iff \neg \big(x \in (A \cup B)\big) \\
+    &\iff \neg \big(x \in A \lor x \in B\big) \\
+    &\iff \big(\neg(x \in A) \land \neg(x \in B)\big) \quad (\text{per la legge di De Morgan logica su } \lor) \\
+    &\iff \big(x \notin A \land x \notin B\big) \\
+    &\iff \big(x \in A^c \land x \in B^c\big) \\
+    &\iff x \in (A^c \cap B^c).
+\end{align*}
+Essendo la catena di coimplicazioni valida per ogni $x \in U$, per il principio di estensionalità si ha $(A \cup B)^c = A^c \cap B^c$.
+\end{dimostrazione}
+
+\subsection{Prodotto Cartesiano}
+
+\begin{definizione}{Prodotto Cartesiano}{prodotto_cartesiano}
+Dati due insiemi $A$ e $B$, il loro \textbf{prodotto cartesiano} $A \times B$ è l'insieme di tutte le \textbf{coppie ordinate} $(a, b)$ con $a \in A$ e $b \in B$:
+\begin{equation}
+    A \times B = \{(a, b) \mid a \in A \land b \in B\}.
+\end{equation}
+Due coppie ordinate sono uguali se e solo se sono uguali le rispettive componenti:
+\begin{equation}
+    (a_1, b_1) = (a_2, b_2) \iff (a_1 = a_2 \;\land\; b_1 = b_2).
+\end{equation}
+\end{definizione}
+
+\begin{proposizione}{Proprietà del Prodotto Cartesiano}{prop_cartesiano}
+\begin{enumerate}
+    \item \textbf{Non commutatività}: In generale, $A \times B \neq B \times A$ (salvo che $A = B$ oppure $A = \emptyset$ o $B = \emptyset$).
+    \item \textbf{Cardinalità finita}: Se $A$ e $B$ sono finiti, $|A \times B| = |A| \cdot |B|$.
+    \item \textbf{Estensione a $n$-uple ordinate}:
+    \begin{equation}
+        A_1 \times A_2 \times \dots \times A_n = \{(x_1, x_2, \dots, x_n) \mid x_i \in A_i, \; \forall i = 1, \dots, n\}.
+    \end{equation}
+    In particolare, per $A_i = \R$ si ottiene lo spazio euclideo $n$-dimensionale $\R^n = \underbrace{\R \times \dots \times \R}_{n \text{ volte}}$, ambiente primario dell'Algebra Lineare.
+\end{enumerate}
+\end{proposizione}
+
+---
+
+\section{Rappresentazione Grafica con Diagrammi di Eulero-Venn in TikZ}
+
+I diagrammi di Eulero-Venn offrono una potente visualizzazione topologico-geometrica delle relazioni e operazioni insiemistiche. Di seguito vengono riportate le costruzioni grafiche formali realizzate tramite il pacchetto \textsf{TikZ}.
+
+\subsection{1. Rappresentazione di un Insieme con Elementi e Confine}
+Un insieme $A$ è rappresentato da una curva chiusa (dominio bidimensionale) immersa nel rettangolo dell'universo $U$, contenente elementi puntiformi interni ed esterni.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.9, >=Stealth]
+    % Rettangolo Universo U
+    \draw[thick, rounded corners=4pt, fill=subtlegray!40] (-3,-2.2) rectangle (4,2.5);
+    \node at (3.5, 2.1) {\large $U$};
+
+    % Insieme A
+    \draw[very thick, navyblue, fill=coolblue!15] (0,0) ellipse (2cm and 1.5cm);
+    \node[navyblue] at (0, 1.1) {\large\textbf{$A$}};
+
+    % Punti / Elementi
+    \filldraw[navyblue] (-0.8, 0.2) circle (2pt) node[anchor=east, xshift=-2pt] {$x_1$};
+    \filldraw[navyblue] (0.5, -0.4) circle (2pt) node[anchor=west, xshift=2pt] {$x_2$};
+    \filldraw[navyblue] (-0.2, -0.6) circle (2pt) node[anchor=north] {$x_3 \in A$};
+
+    % Elementi esterni
+    \filldraw[crimsonred] (2.5, 0.5) circle (2pt) node[anchor=west, xshift=2pt] {$y_1 \notin A$};
+    \filldraw[crimsonred] (-2, -1.4) circle (2pt) node[anchor=north] {$y_2 \in U \setminus A$};
+\end{tikzpicture}
+\caption{Diagramma di Eulero-Venn: appartenenza di elementi $x_i \in A$ e non-appartenenza $y_j \notin A$ nell'universo $U$.}
+\label{fig:venn_insieme}
+\end{figure}
+
+\subsection{2. Relazione di Inclusione (\texorpdfstring{$A \subseteq B$}{A sottoinsieme di B})}
+La relazione $A \subseteq B$ corrisponde alla totale inclusione geometrica della regione $A$ all'interno della regione delimitata da $B$.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.9, >=Stealth]
+    % Rettangolo Universo
+    \draw[thick, rounded corners=4pt, fill=subtlegray!30] (-3.5,-2.5) rectangle (3.5,2.5);
+    \node at (3.1, 2.1) {$U$};
+
+    % Insieme B (Esterno)
+    \draw[very thick, coolblue, fill=coolblue!10] (0,0) ellipse (2.6cm and 1.8cm);
+    \node[coolblue] at (1.6, 1.1) {\large\textbf{$B$}};
+
+    % Insieme A (Interno)
+    \draw[very thick, forestgreen, fill=forestgreen!25] (-0.5,-0.2) ellipse (1.2cm and 0.9cm);
+    \node[forestgreen!80!black] at (-0.5, -0.2) {\large\textbf{$A$}};
+
+    % Punto in A
+    \filldraw[forestgreen!80!black] (-0.7, 0.1) circle (2pt) node[anchor=south] {$x$};
+    \node at (0, -2.1) {\small $\forall x, \; x \in A \implies x \in B \iff A \subseteq B$};
+\end{tikzpicture}
+\caption{Inclusione insiemistica $A \subseteq B$.}
+\label{fig:venn_inclusione}
+\end{figure}
+
+\subsection{3. Operazioni Fondamentali: Unione, Intersezione e Differenza}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.31\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.65]
+    \draw[thick, rounded corners=3pt, fill=subtlegray!20] (-2.5,-2) rectangle (2.5,2.2);
+    % Fill Unione A U B
+    \fill[coolblue!30] (-0.8,0) circle (1.3cm);
+    \fill[coolblue!30] (0.8,0) circle (1.3cm);
+    \draw[thick, coolblue] (-0.8,0) circle (1.3cm) node[above left=0.8cm and 0.2cm] {$A$};
+    \draw[thick, coolblue] (0.8,0) circle (1.3cm) node[above right=0.8cm and 0.2cm] {$B$};
+    \node at (0,-1.6) {\small $\bm{A \cup B}$};
+\end{tikzpicture}
+\par\vspace{0.2cm}
+\textbf{(a) Unione $A \cup B$}
+\end{minipage}
+\hfill
+\begin{minipage}{0.31\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.65]
+    \draw[thick, rounded corners=3pt, fill=subtlegray!20] (-2.5,-2) rectangle (2.5,2.2);
+    % Insiemi base
+    \draw[thick, navyblue] (-0.8,0) circle (1.3cm) node[above left=0.8cm and 0.2cm] {$A$};
+    \draw[thick, navyblue] (0.8,0) circle (1.3cm) node[above right=0.8cm and 0.2cm] {$B$};
+    % Clip per intersezione (Lente centrale)
+    \begin{scope}
+        \clip (-0.8,0) circle (1.3cm);
+        \fill[forestgreen!50] (0.8,0) circle (1.3cm);
+    \end{scope}
+    \draw[thick, forestgreen!80!black] (-0.8,0) circle (1.3cm);
+    \draw[thick, forestgreen!80!black] (0.8,0) circle (1.3cm);
+    \node at (0,-1.6) {\small $\bm{A \cap B}$};
+\end{tikzpicture}
+\par\vspace{0.2cm}
+\textbf{(b) Intersezione $A \cap B$}
+\end{minipage}
+\hfill
+\begin{minipage}{0.31\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.65]
+    \draw[thick, rounded corners=3pt, fill=subtlegray!20] (-2.5,-2) rectangle (2.5,2.2);
+    % Fill differenza A \ B (Semiluna sinistra)
+    \begin{scope}
+        \clip (-0.8,0) circle (1.3cm);
+        \fill[crimsonred!35] (-2.5,-2) rectangle (2.5,2.2);
+    \end{scope}
+    \begin{scope}
+        \clip (0.8,0) circle (1.3cm);
+        \fill[subtlegray!20] (-2.5,-2) rectangle (2.5,2.2);
+    \end{scope}
+    \draw[thick, crimsonred] (-0.8,0) circle (1.3cm) node[above left=0.8cm and 0.2cm] {$A$};
+    \draw[thick, gray] (0.8,0) circle (1.3cm) node[above right=0.8cm and 0.2cm] {$B$};
+    \node at (0,-1.6) {\small $\bm{A \setminus B}$};
+\end{tikzpicture}
+\par\vspace{0.2cm}
+\textbf{(c) Differenza $A \setminus B$}
+\end{minipage}
+\caption{Visualizzazione grafica delle operazioni booleane: (a) Unione con doppia campitura; (b) Intersezione evidenziata dalla lente comune; (c) Differenza insiemistica (semiluna).}
+\label{fig:venn_operazioni}
+\end{figure}
+
+\subsection{4. Dimostrazione Grafica delle Leggi di De Morgan}
+Il diagramma seguente mostra come il complementare dell'unione $(A \cup B)^c$ coincida esattamente con la regione esterna a entrambi i dischi, pari a $A^c \cap B^c$.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.85]
+    % Universo U riempito
+    \draw[thick, rounded corners=4pt, fill=warmamber!25] (-3.2,-2.2) rectangle (3.2,2.2);
+    \node at (2.8, 1.8) {$U$};
+
+    % Dischi A e B 'svuotati' in bianco
+    \fill[white] (-0.9,0) circle (1.3cm);
+    \fill[white] (0.9,0) circle (1.3cm);
+
+    % Bordi
+    \draw[thick, navyblue] (-0.9,0) circle (1.3cm) node at (-1.3,0.3) {$A$};
+    \draw[thick, navyblue] (0.9,0) circle (1.3cm) node at (1.3,0.3) {$B$};
+
+    \node at (0, -1.6) {\textbf{\textcolor{warmamber!90!black}{Regione colorata: $(A \cup B)^c = A^c \cap B^c$}}};
+\end{tikzpicture}
+\caption{Dimostrazione visiva della prima Legge di De Morgan: $(A \cup B)^c = A^c \cap B^c$.}
+\label{fig:venn_demorgan}
+\end{figure}
+
+\newpage

@@ -1,0 +1,129 @@
+% ==============================================================================
+% DOCUMENTO PRINCIPALE - APPUNTI DI STATISTICA E CALCOLO DELLE PROBABILITÀ
+% ==============================================================================
+\documentclass[11pt,a4paper,twoside,openright]{book}
+
+% --- Importazione delle configurazioni modulari ---
+\input{config/packages.tex}
+\input{config/environments.tex}
+\input{config/macros.tex}
+
+% ==============================================================================
+% COMPILAZIONE SELETTIVA (Scommentare per compilare solo capitoli specifici)
+% ==============================================================================
+% \includeonly{
+%   chapters/01_statistica_descrittiva/main,
+%   chapters/02_elementi_di_probabilita/main,
+%   chapters/03_indipendenza_e_probabilita_condizionata/main,
+%   chapters/04_variabili_aleatorie/main,
+%   chapters/05_valore_atteso_e_varianza/main,
+%   chapters/06_somma_variabili_indipendenti/main,
+%   chapters/07_classi_di_leggi_discrete/main,
+%   chapters/08_classi_di_leggi_continue/main,
+%   chapters/09_campione_statistico_e_stimatori/main,
+%   chapters/10_intervalli_di_confidenza/main,
+%   chapters/11_test_statistici/main,
+%   chapters/12_raccolta_esami_risolti/main
+% }
+
+% ==============================================================================
+% METADATI DEL DOCUMENTO
+% ==============================================================================
+\title{\Huge\textbf{\textsf{Statistica e Calcolo delle Probabilità}}\\[0.5em]
+\Large\textsf{Appunti Completi, Dimostrazioni, Modelli Probabilistici ed Inferenza Statistica}}
+\author{\textbf{\textsf{Nicola Beccaceci}}}
+\date{\textsf{Anno Accademico 2025/2026}}
+
+\begin{document}
+
+% --- Frontespizio / Titolo ---
+\frontmatter
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge\bfseries\color{navyblue} STATISTICA E CALCOLO DELLE PROBABILITÀ\par}
+    \vspace{1cm}
+    {\Large\scshape Corso di Laurea in Ingegneria Gestionale\par}
+    \vfill
+    \rule{0.6\textwidth}{1pt}\par
+    \vspace{1cm}
+    {\large\textbf{\underline{Nicola Beccaceci}}\par}
+    \vspace{0.5cm}
+    {\small \today\par}
+    \vspace*{2cm}
+\end{titlepage}
+
+% --- Indice generale ---
+\tableofcontents
+\cleardoublepage
+
+% --- Prefazione / Guida alla lettura ---
+\chapter*{Guida alla Consultazione}
+\addcontentsline{toc}{chapter}{Guida alla Consultazione}
+Questo volume raccoglie la trascrizione rigorosa, la ricostruzione formale e l'approfondimento teorico-applicativo degli appunti del corso di \textbf{Statistica e Calcolo delle Probabilità} per il Corso di Laurea in Ingegneria Gestionale.
+
+Il testo è strutturato in modo altamente modulare per facilitare sia l'apprendimento concettuale sia la rapida consultazione durante la preparazione delle prove d'esame. Ogni capitolo integra:
+\begin{itemize}
+    \item Fondamenti teorici e definizioni formali con quantificatori espliciti.
+    \item Teoremi enunciati con ipotesi minime e dimostrazioni complete step-by-step.
+    \item Grafici vettoriali TikZ/pgfplots per la rappresentazione di densità, istogrammi, funzioni di ripartizione, alberi decisionali e regioni critiche.
+    \item Schemi procedurali ed algoritmi di calcolo per l'inferenza statistica.
+    \item Box dedicati ai tranelli tipici dei temi d'esame e ai controesempi classici.
+\end{itemize}
+
+\section*{Codice Visivo dei Box Tematici}
+Per massimizzare l'efficacia dello studio, i concetti sono racchiusi in appositi blocchi grafici:
+\begin{itemize}
+    \item \textbf{\textcolor{navyblue}{Definizioni}}: Formalizzazione assiomatica, spazi campionari, variabili aleatorie, stimatori e parametri.
+    \item \textbf{\textcolor{forestgreen}{Teoremi, Proposizioni e Corollari}}: Risultati matematici cardine, proprietà di chiusura, leggi limite e dimostrazioni rigorose ($\blacksquare$).
+    \item \textbf{\textcolor{tealaccent}{Proprietà}}: Proprietà algebriche, operative e statistiche di valori attesi, varianze, stimatori e densità.
+    \item \textbf{\textcolor{purpleaccent}{Esempi ed Esercizi Guidati}}: Problemi classici d'esame svolti passo dopo passo con calcoli numerici espliciti.
+    \item \textbf{\textcolor{crimsonred}{Consigli per l'Esame e Trappole Comuni}}: Segnalazione degli errori di interpretazione più frequenti e condizioni di applicabilità dei teoremi.
+    \item \textbf{\textcolor{warmamber}{Metodi Risolutivi Standard}}: Algoritmi sequenziali per la stima puntuale, il calcolo di intervalli di confidenza e la conduzione di test d'ipotesi.
+    \item \textbf{\textcolor{navyblue!80}{Osservazioni}}: Note interpretative, collegamenti tra distribuzioni e approfondimenti asintotici.
+\end{itemize}
+
+\cleardoublepage
+
+% --- Organizzazione del Corso e Macro-Aree ---
+\chapter*{Programma del Corso e Mappa Concettuale}
+\addcontentsline{toc}{chapter}{Programma del Corso e Mappa Concettuale}
+
+Il percorso didattico si articola nelle seguenti macro-aree sequenziali:
+
+\begin{enumerate}
+    \item \textbf{Statistica Descrittiva}: scale di misura, frequenze assolute, relative e cumulate; indici di posizione (media aritmetica, mediana, moda, quantili) e indici di dispersione (varianza, deviazione standard, scarto interquartile, coefficiente di variazione); tabelle a doppia entrata, covarianza, correlazione lineare e retta di regressione dei minimi quadrati.
+    \item \textbf{Elementi di Probabilità}: spazio campionario $\Omega$, $\sigma$-algebra degli eventi $\SigmaAlg$, assiomi di Kolmogorov, probabilità classica, frequentista e soggettiva; calcolo combinatorio (disposizioni, permutazioni, combinazioni).
+    \item \textbf{Indipendenza e Probabilità Condizionata}: definizione di probabilità condizionata, formula delle probabilità totali, Teorema di Bayes (inferenza bayesiana elementare), indipendenza stocastica di eventi a due a due e globale.
+    \item \textbf{Variabili Aleatorie Discrete e Continue}: definizione di variabile aleatoria, funzione di ripartizione (CDF) e sue proprietà; variabili discrete e funzione di probabilità di massa (PMF); variabili continue e funzione di densità di probabilità (PDF); quantili e percentili.
+    \item \textbf{Valore Atteso e Varianza}: definizione assiomatica di speranza matematica $\EE[X]$, Teorema del Trasferimento (LOTUS), momenti semplici e centrati, varianza $\Var(X)$, disuguaglianze notevoli (Markov, Chebyshev, Cauchy-Schwarz, Jensen).
+    \item \textbf{Vettori Aleatori e Somma di Variabili Indipendenti}: distribuzioni congiunte, marginali e condizionate; covarianza e correlazione tra v.a.; indipendenza di variabili aleatorie; convoluzione e legge della somma di v.a. indipendenti; Funzione Generatrice dei Momenti (MGF/FGM) e Funzione Caratteristica; Legge Debole e Forte dei Grandi Numeri (LLN); Teorema del Limite Centrale (TLC / CLT).
+    \item \textbf{Classi di Leggi Discrete Notevoli}: Bernoulli, Binomiale, Poissoniana (legge degli eventi rari e approssimazione binomiale), Geometrica (proprietà di assenza di memoria), Ipergeometrica, Binomiale Negativa.
+    \item \textbf{Classi di Leggi Continue Notevoli}: Gaussiana/Normale standard e generale (proprietà di stabilità per combinazioni lineari), Esponenziale (assenza di memoria), Gamma, Chi-quadro ($\chi^2$), $t$ di Student, Fisher-Snedecor ($F$).
+    \item \textbf{Campione Statistico e Stima Puntuale}: modello statistico parametrico, campione casuale i.i.d., statistica campionaria; media campionaria e varianza campionaria (corretta e non corretta); proprietà degli stimatori (non distorsione/correttezza, consistenza, efficienza, Errore Quadratico Medio MSE); Metodo dei Momenti e Metodo della Massima Verosimiglianza (MLE); Informazione di Fisher e disuguaglianza di Cramér-Rao.
+    \item \textbf{Intervalli di Confidenza}: quantità pivotali, intervalli di confidenza per la media di popolazioni gaussiane (varianza nota e incognita), intervalli per la varianza, intervalli asintotici per grandi campioni e per proporzioni bernoulliane; ampiezza e numerosità campionaria ottimale.
+    \item \textbf{Test delle Ipotesi Statistiche}: ipotesi nulla $H_0$ e alternativa $H_1$, errori di I tipo ($\alpha$) e II tipo ($\beta$), livello di significatività e potenza del test ($1-\beta$); regione critica $W$, statistica test e calcolo del $p$-value; Lemma di Neyman-Pearson; test parametrici a una e due code (Z-test, t-test, test $\chi^2$ sulla varianza, test di confronto tra due medie/proporzioni/varianze).
+\end{enumerate}
+
+\cleardoublepage
+
+\mainmatter
+
+% ==============================================================================
+% INCLUSIONE DEI CAPITOLI MODULARI
+% ==============================================================================
+\include{chapters/01_statistica_descrittiva/main}
+\include{chapters/02_elementi_di_probabilita/main}
+\include{chapters/03_indipendenza_e_probabilita_condizionata/main}
+\include{chapters/04_variabili_aleatorie/main}
+\include{chapters/05_valore_atteso_e_varianza/main}
+\include{chapters/06_somma_variabili_indipendenti/main}
+\include{chapters/07_classi_di_leggi_discrete/main}
+\include{chapters/08_classi_di_leggi_continue/main}
+\include{chapters/09_campione_statistico_e_stimatori/main}
+\include{chapters/10_intervalli_di_confidenza/main}
+\include{chapters/11_test_statistici/main}
+\include{chapters/12_raccolta_esami_risolti/main}
+\include{chapters/13_archivio_esami_risolti/main}
+
+\end{document}

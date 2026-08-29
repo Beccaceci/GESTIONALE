@@ -1,0 +1,190 @@
+% ==============================================================================
+% CAPITOLO 13 - GAS IDEALI E TEORIA CINETICA MOLECOLARE
+% ==============================================================================
+\chapter{Gas Perfetti e Teoria Cinetica Molecolare}
+\label{chap:gas_ideali_teoria_cinetica}
+
+\begin{tcolorbox}[enhanced, breakable, colback=navyblue!4!white, colframe=navyblue!80!black,
+    coltitle=white, fonttitle=\bfseries\sffamily, title={Quadro Sinottico del Capitolo 13 (Corrispondenza: Lezione 35)},
+    sharp corners, rounded corners=south, boxrule=1pt]
+\textbf{Collocazione Modulare:} Parte IV -- Termodinamica\\
+\textbf{Trascrizione di Riferimento:} \texttt{trascrizioni/Lezione\_35\_...md}\\
+\textbf{Manuale di Riferimento:} Focardi, Massa, Ugolini -- \emph{Fisica Generale: Meccanica e Termodinamica} (Capitolo 15)\\
+\textbf{Obiettivi Didattici e Competenze:}\par
+\begin{itemize}
+    \item Padroneggiare l'Equazione di Stato dei Gas Perfetti ($p V = n R T = N k_B T$) e la Legge di Dalton delle pressioni parziali.
+    \item Derivare la pressione microscopica dai principi primi della meccanica newtoniana ($p = \frac{2}{3}\frac{N}{V}\langle E_k^{\text{trasl}}\rangle$).
+    \item Dimostrare il legame tra temperatura assoluta ed energia cinetica traslazionale media molecolare ($\langle E_k^{\text{trasl}}\rangle = \frac{3}{2}k_B T$).
+    \item Applicare il Teorema di Equipartizione dell'Energia per determinare i calori specifici $c_v, c_p$ e il coefficiente adiabatico $\gamma = c_p/c_v$ per gas monoatomici, biatomici e poliatomici.
+    \item Analizzare la distribuzione statistica delle velocità di Maxwell-Boltzmann ($v_p < v_m < v_{\text{rms}}$).
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5em}
+
+% ------------------------------------------------------------------------------
+\section{L'Equazione di Stato dei Gas Perfetti}
+\label{sec:equazione_gas_perfetti}
+% ------------------------------------------------------------------------------
+
+Un \textbf{gas perfetto (o ideale)} è un modello termodinamico limite a cui tutti i gas reali asintoticamente tendono a basse pressioni ($p \to 0$) e ad alte temperature ($T \gg T_{\text{crit}}$).
+
+\begin{legge}{Equazione di Stato dei Gas Perfetti (Clapeyron)}{legge:gas_perfetti}
+Lo stato di equilibrio termodinamico di $n$ moli di gas perfetto è governato dalla relazione:
+\begin{equation}
+    \mathbf{p V = n R T = N k_B T}
+    \label{eq:gas_perfetti}
+\end{equation}
+dove:
+\begin{itemize}
+    \item $R = \SI{8.3144626}{\joule\per\mole\per\kelvin}$ è la \textbf{costante universale dei gas}.
+    \item $N = n N_A$ è il numero totale di molecole, con $N_A = \SI{6.02214076e23}{\per\mole}$ (numero di Avogadro).
+    \item $k_B \coloneqq \frac{R}{N_A} = \SI{1.380649e-23}{\joule\per\kelvin}$ è la \textbf{costante di Boltzmann}.
+\end{itemize}
+\end{legge}
+
+\begin{legge}{Legge di Dalton per Miscele di Gas}{legge:dalton}
+In una miscela di $K$ gas perfetti non reagenti racchiusi nel volume $V$ a temperatura $T$, la pressione totale $p$ è la somma delle \textbf{pressioni parziali} $p_i$ che ciascun componente eserciterebbe se occupasse da solo l'intero volume:
+\begin{equation}
+    p = \sum_{i=1}^K p_i = \sum_{i=1}^K \frac{n_i R T}{V} = \left(\sum_{i=1}^K n_i\right)\frac{RT}{V} = n_{\text{tot}}\frac{RT}{V}
+    \label{eq:dalton}
+\end{equation}
+La frazione molare è definita da $x_i \coloneqq \frac{n_i}{n_{\text{tot}}} \implies p_i = x_i p$.
+\end{legge}
+
+% ------------------------------------------------------------------------------
+\section{Teoria Cinetica Molecolare: Derivazione Meccanica della Pressione}
+\label{sec:teoria_cinetica}
+% ------------------------------------------------------------------------------
+
+Il modello della \textbf{teoria cinetica dei gas} assume le seguenti ipotesi microscopiche:
+\begin{enumerate}
+    \item Il gas è costituito da un numero enorme $N \gg 1$ di molecole identiche di massa $m$, considerate puntiformi a volume proprio nullo ($V_{\text{molecole}} \ll V_{\text{recipiente}}$).
+    \item Le molecole si muovono di moto caotico continuo e isotropo (\textbf{caos molecolare}).
+    \item Le forze intermolecolari a distanza sono nulle; le molecole interagiscono unicamente tramite urti reciproci e contro le pareti perfettamente **elastici** e istantanei.
+\end{enumerate}
+
+\begin{teorema}{Derivazione della Pressione Microscopica}{teo:pressione_cinetica}
+La pressione macroscopica $p$ esercitata dal gas sulle pareti è data da:
+\begin{equation}
+    \mathbf{p = \frac{1}{3}\rho \langle v^2 \rangle = \frac{1}{3}\frac{N m}{V}\langle v^2 \rangle = \frac{2}{3}\frac{N}{V}\langle E_k^{\text{trasl}}\rangle}
+    \label{eq:pressione_micro}
+\end{equation}
+dove $\langle v^2 \rangle$ è la media quadratica delle velocità molecolari e $\langle E_k^{\text{trasl}}\rangle = \frac{1}{2}m\langle v^2\rangle$ è l'energia cinetica traslazionale media per molecola.
+\end{teorema}
+
+\begin{dimostrazione}
+Consideriamo un recipiente cubico di lato $L$ (volume $V = L^3$) con facce perpendicolari agli assi cartesiani.
+\begin{enumerate}
+    \item Una molecola con velocità $\vec{v} = (v_x, v_y, v_z)$ che urta elasticamente la parete perpendicolare all'asse $x$ inverte solo la componente $v_x$:
+    \begin{equation}
+        \Delta p_x = m(-v_x) - m(v_x) = -2m v_x
+    \end{equation}
+    La quantità di moto trasferita alla parete per singolo urto è $2m v_x$.
+    \item La molecola rimbalza tra le pareti opposte percorrendo una distanza $2L$ tra due urti successivi sulla stessa parete, con periodo $\Delta t = \frac{2L}{v_x}$. La forza media impressa dalla singola molecola è:
+    \begin{equation}
+        \overline{F}_{x,1} = \frac{\Delta p_x}{\Delta t} = \frac{2m v_x}{2L/v_x} = \frac{m v_x^2}{L}
+    \end{equation}
+    \item Sommando su tutte le $N$ molecole, la forza totale sulla parete di area $A = L^2$ è:
+    \begin{equation}
+        F_x = \sum_{i=1}^N \frac{m v_{x,i}^2}{L} = \frac{m}{L} N \langle v_x^2 \rangle
+    \end{equation}
+    \item Per l'isotropia del moto nello spazio tridimensionale, non esiste alcuna direzione spaziale privilegiata:
+    \begin{equation}
+        \langle v_x^2 \rangle = \langle v_y^2 \rangle = \langle v_z^2 \rangle = \frac{1}{3}\langle v^2 \rangle
+    \end{equation}
+    \item La pressione sulla parete vale dunque:
+    \begin{equation}
+        p = \frac{F_x}{A} = \frac{N m \langle v_x^2 \rangle}{L \cdot L^2} = \frac{N m \left(\frac{1}{3}\langle v^2 \rangle\right)}{V} = \frac{1}{3}\frac{Nm}{V}\langle v^2 \rangle = \frac{2}{3}\frac{N}{V}\left(\frac{1}{2}m\langle v^2 \rangle\right)
+    \end{equation}
+\end{enumerate}
+\end{dimostrazione}
+
+% ------------------------------------------------------------------------------
+\section{Interpretazione Cinetica della Temperatura e Teorema di Equipartizione}
+\label{sec:temperatura_cinetica}
+% ------------------------------------------------------------------------------
+
+Uguagliando l'espressione cinetica della pressione $p V = \frac{2}{3} N \langle E_k^{\text{trasl}}\rangle$ con l'equazione di stato macroscopica $p V = N k_B T$:
+\begin{equation}
+    \frac{2}{3} N \langle E_k^{\text{trasl}}\rangle = N k_B T \implies \mathbf{\langle E_k^{\text{trasl}}\rangle = \frac{1}{2}m\langle v^2 \rangle = \frac{3}{2}k_B T}
+    \label{eq:temperatura_traslazionale}
+\end{equation}
+
+\begin{definizione}{Temperatura Assoluta come Indice di Agitazione Termica}{def:temperatura_agitazione}
+La **temperatura assoluta** $T$ è la misura macroscopica diretta dell'energia cinetica media disordinata di traslazione delle molecole microscopiche. A $T = \SI{0}{\kelvin}$, l'energia cinetica classica delle molecole si annulla.
+\end{definizione}
+
+\begin{definizione}{Velocità Quadratica Media ($v_{\text{rms}}$)}{def:v_rms}
+La velocità termica efficace (root-mean-square) delle molecole di un gas perfetto vale:
+\begin{equation}
+    \mathbf{v_{\text{rms}} \coloneqq \sqrt{\langle v^2 \rangle} = \sqrt{\frac{3 k_B T}{m}} = \sqrt{\frac{3 R T}{M_{\text{mol}}}}}
+    \label{eq:v_rms}
+\end{equation}
+dove $M_{\text{mol}} = m N_A$ è la massa molare del gas ($\si{\kilogram\per\mole}$).
+\end{definizione}
+
+\subsection{Il Teorema di Equipartizione dell'Energia Classica}
+
+\begin{teorema}{Teorema di Equipartizione dell'Energia}{teo:equipartizione}
+In un sistema termodinamico all'equilibrio termico a temperatura assoluta $T$, a ciascun grado di libertà microscopico quadratico (traslazionale, rotazionale o vibrazionale) compete un'energia cinetica o potenziale media pari a:
+\begin{equation}
+    \langle E_1 \rangle = \frac{1}{2}k_B T
+\end{equation}
+Se una molecola possiede $f$ gradi di libertà attivi, l'energia interna media per molecola e l'energia interna totale di $n$ moli valgono:
+\begin{equation}
+    \langle E_{\text{mol}}\rangle = \frac{f}{2}k_B T, \qquad \mathbf{U = N \langle E_{\text{mol}}\rangle = n N_A \left(\frac{f}{2}k_B T\right) = \frac{f}{2}n R T}
+    \label{eq:energia_interna_f}
+\end{equation}
+\end{teorema}
+
+\begin{table}[htbp]
+\centering
+\caption{Gradi di libertà e calori specifici molari dei gas perfetti.}
+\label{tab:equipartizione_gas}
+\begin{tabularx}{\textwidth}{p{3.2cm} p{1.8cm} cccc X}
+\toprule
+\textbf{Struttura} & \textbf{Gas} & \textbf{Trasl.} & \textbf{Rot.} & \textbf{$f$} & \textbf{$c_v$} & \textbf{$\gamma = c_p/c_v$} \\
+\midrule
+\textbf{Monoatomico} & $\mathrm{He, Ar}$ & 3 & 0 & 3 & $\frac{3}{2}R$ & $5/3 \approx 1{,}67$ \\
+\textbf{Biatomico} & $\mathrm{N_2, O_2}$ & 3 & 2 & 5 & $\frac{5}{2}R$ & $7/5 = 1{,}40$ \\
+\textbf{Poliatomico} & $\mathrm{H_2O, CO_2}$ & 3 & 3 & 6 & $3R$ & $4/3 \approx 1{,}33$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ------------------------------------------------------------------------------
+\section{La Distribuzione delle Velocità di Maxwell-Boltzmann}
+\label{sec:maxwell_boltzmann}
+% ------------------------------------------------------------------------------
+
+La probabilità che una molecola di massa $m$ in un gas perfetto a temperatura $T$ possieda un modulo di velocità compreso nell'intervallo $[v, v+\dd v]$ è descritta dalla densità di probabilità di Maxwell-Boltzmann:
+\begin{equation}
+    f(v)\,\dd v = 4\pi \left(\frac{m}{2\pi k_B T}\right)^{3/2} v^2 \exp\left(-\frac{m v^2}{2 k_B T}\right)\dd v
+    \label{eq:maxwell_boltzmann}
+\end{equation}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    \draw[->, thick] (0,0) -- (6,0) node[right] {Velocità $v$};
+    \draw[->, thick] (0,0) -- (0,3.5) node[above] {$f(v)$};
+    
+    % Curva Maxwell-Boltzmann
+    \draw[navyblue, very thick, domain=0:5.5, samples=100] plot (\x, {4*3.1415*(\x*\x)*exp(-\x*\x)*1.8});
+    
+    % Velocità caratteristiche
+    \draw[dashed, crimsonred, thick] (1.0, 0) -- (1.0, 2.7) node[above] {$v_p = \sqrt{\frac{2k_B T}{m}}$};
+    \draw[dashed, purpleaccent, thick] (1.128, 0) -- (1.128, 2.5) node[above right] {$v_m = \sqrt{\frac{8k_B T}{\pi m}}$};
+    \draw[dashed, forestgreen, thick] (1.225, 0) -- (1.225, 2.2) node[above right=10pt] {$v_{\text{rms}} = \sqrt{\frac{3k_B T}{m}}$};
+    
+    \node[below] at (1.0, 0) {\small $v_p$};
+    \node[below] at (1.128, 0) {\small $v_m$};
+    \node[below] at (1.225, 0) {\small $v_{\text{rms}}$};
+\end{tikzpicture}
+\end{center}
+
+Le tre velocità caratteristiche soddisfano la disuguaglianza universale:
+\begin{equation}
+    \mathbf{v_p < v_m < v_{\text{rms}}} \iff \sqrt{\frac{2 k_B T}{m}} < \sqrt{\frac{8 k_B T}{\pi m}} < \sqrt{\frac{3 k_B T}{m}} \iff 1 < 1{,}128 < 1{,}225
+\end{equation}
+dove $v_p$ è la velocità più probabile (vertice della curva), $v_m = \langle v \rangle$ è la velocità media scalare e $v_{\text{rms}}$ è la velocità quadratica media.

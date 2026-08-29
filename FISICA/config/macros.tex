@@ -1,0 +1,114 @@
+% ==============================================================================
+% DEFINIZIONE MACRO E COMANDI PERSONALIZZATI - FISICA GENERALE 1
+% ==============================================================================
+
+% --- Insiemi numerici fondamentali ---
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+
+% --- Notazione Vettoriale e Versori ---
+\renewcommand{\vec}[1]{\bm{#1}}
+\newcommand{\uvec}[1]{\hat{\bm{#1}}}
+\newcommand{\vers}[1]{\hat{\bm{#1}}}
+
+% Versori cartesiani, polari e intrinseci
+\newcommand{\ux}{\hat{\bm{i}}}
+\newcommand{\uy}{\hat{\bm{j}}}
+\newcommand{\uz}{\hat{\bm{k}}}
+\newcommand{\ur}{\hat{\bm{u}}_r}
+\newcommand{\utheta}{\hat{\bm{u}}_\theta}
+\newcommand{\uphi}{\hat{\bm{u}}_\phi}
+\newcommand{\ut}{\hat{\bm{u}}_t}
+\newcommand{\un}{\hat{\bm{u}}_n}
+\newcommand{\ub}{\hat{\bm{u}}_b}
+
+% --- Operatori Differenziali e Calcolo Infinitesimale ---
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\dv}[2]{\frac{\dd #1}{\dd #2}}
+\newcommand{\dvtwo}[2]{\frac{\dd^2 #1}{\dd #2^2}}
+\newcommand{\pdv}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdvtwo}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+
+% Derivate temporali con notazione puntata
+\newcommand{\rdot}{\dot{\vec{r}}}
+\newcommand{\rddot}{\ddot{\vec{r}}}
+\newcommand{\vdot}{\dot{\vec{v}}}
+\newcommand{\xdot}{\dot{x}}
+\newcommand{\xddot}{\ddot{x}}
+\newcommand{\ydot}{\dot{y}}
+\newcommand{\yddot}{\ddot{y}}
+\newcommand{\zdot}{\dot{z}}
+\newcommand{\zddot}{\ddot{z}}
+\newcommand{\thetadot}{\dot{\theta}}
+\newcommand{\thetaddot}{\ddot{\theta}}
+\newcommand{\phidot}{\dot{\phi}}
+\newcommand{\phiddot}{\ddot{\phi}}
+
+% Operatori vettoriali
+\newcommand{\grad}{\vec{\nabla}}
+\newcommand{\divg}{\vec{\nabla}\cdot}
+\newcommand{\rot}{\vec{\nabla}\times}
+\newcommand{\lapl}{\nabla^2}
+
+% --- Grandezze Fisiche e Costanti Notabili ---
+% Meccanica
+\newcommand{\gacc}{g}
+\newcommand{\Ggrav}{G}
+\newcommand{\Ec}{E_{\mathrm{k}}}
+\newcommand{\Ep}{E_{\mathrm{p}}}
+\newcommand{\Em}{E_{\mathrm{m}}}
+\newcommand{\Ue}{U_{\mathrm{el}}}
+\newcommand{\Ug}{U_{\mathrm{g}}}
+\newcommand{\Wtot}{W_{\mathrm{tot}}}
+\newcommand{\Wnc}{W_{\mathrm{nc}}}
+
+% Centro di Massa e Sistemi
+\newcommand{\Rcm}{\vec{R}_{\mathrm{CM}}}
+\newcommand{\vcm}{\vec{v}_{\mathrm{CM}}}
+\newcommand{\acm}{\vec{a}_{\mathrm{CM}}}
+\newcommand{\Icm}{I_{\mathrm{CM}}}
+\newcommand{\Ptot}{\vec{P}_{\mathrm{tot}}}
+\newcommand{\Ltot}{\vec{L}_{\mathrm{tot}}}
+\newcommand{\Mext}{\vec{M}^{\mathrm{ext}}}
+\newcommand{\Fext}{\vec{F}^{\mathrm{ext}}}
+\newcommand{\Fint}{\vec{F}^{\mathrm{int}}}
+
+% Oscillazioni e Onde
+\newcommand{\omzero}{\omega_0}
+\newcommand{\omsmorz}{\omega_{\mathrm{s}}}
+\newcommand{\omris}{\omega_{\mathrm{R}}}
+\newcommand{\Tper}{T}
+\newcommand{\Qfact}{Q}
+
+% Fluidi
+\newcommand{\rhofl}{\rho_{\mathrm{f}}}
+\newcommand{\Patm}{P_{\mathrm{atm}}}
+\newcommand{\Farch}{\vec{F}_{\mathrm{Arch}}}
+
+% Termodinamica
+\newcommand{\kB}{k_{\mathrm{B}}}
+\newcommand{\NA}{N_{\mathrm{A}}}
+\newcommand{\Rgas}{R}
+\newcommand{\Cv}{C_v}
+\newcommand{\Cp}{C_p}
+\newcommand{\cvm}{c_v}
+\newcommand{\cpm}{c_p}
+\newcommand{\gammaAd}{\gamma}
+\newcommand{\Qass}{Q_{\mathrm{ass}}}
+\newcommand{\Qced}{Q_{\mathrm{ced}}}
+\newcommand{\QH}{Q_{\mathrm{H}}}
+\newcommand{\QC}{Q_{\mathrm{C}}}
+\newcommand{\THot}{T_{\mathrm{H}}}
+\newcommand{\TCold}{T_{\mathrm{C}}}
+\newcommand{\etaCarnot}{\eta_{\mathrm{C}}}
+\newcommand{\Suniv}{\Delta S_{\mathrm{univ}}}
+\newcommand{\Ssis}{\Delta S_{\mathrm{sis}}}
+\newcommand{\Samb}{\Delta S_{\mathrm{amb}}}
+
+% --- Utility di Impaginazione ---
+\newcommand{\eps}{\varepsilon}
+\newcommand{\de}{\delta}
+\newcommand{\implica}{\implies}
+\newcommand{\sse}{\iff}

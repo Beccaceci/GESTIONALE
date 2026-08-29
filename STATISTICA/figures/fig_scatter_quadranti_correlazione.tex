@@ -1,0 +1,89 @@
+\begin{tikzpicture}[scale=0.78, >=Stealth]
+    % --------------------------------------------------------------------------
+    % PANNELLO A: CONCORDANZA/DISCORDANZA
+    % --------------------------------------------------------------------------
+    \begin{scope}[shift={(0,6.6)}]
+        \node[above, font=\bfseries\footnotesize, text=navyblue] at (2.4,5.4) {(a) Quadranti rispetto a $(\overline{x},\overline{y})$};
+
+        \fill[forestgreen!12] (2.4,2.3) rectangle (4.6,4.6); % Q I
+        \fill[crimsonred!12]   (0.0,2.3) rectangle (2.4,4.6); % Q II
+        \fill[forestgreen!12] (0.0,0.0) rectangle (2.4,2.3); % Q III
+        \fill[crimsonred!12]   (2.4,0.0) rectangle (4.6,2.3); % Q IV
+
+        \draw[->, thick, navyblue] (-0.3,0) -- (4.9,0) node[right, font=\footnotesize] {$x$};
+        \draw[->, thick, navyblue] (0,-0.3) -- (0,4.9) node[above, font=\footnotesize] {$y$};
+
+        \draw[thick, dashed, warmamber!90!black] (2.4,-0.1) -- (2.4,4.6) node[above, font=\tiny] {$x = \overline{x}$};
+        \draw[thick, dashed, warmamber!90!black] (-0.1,2.3) -- (4.6,2.3) node[right, font=\tiny] {$y = \overline{y}$};
+
+        \node[font=\tiny\bfseries, text=forestgreen!80!black] at (3.5,4.1) {Q I: $(+)$};
+        \node[font=\tiny\bfseries, text=crimsonred!80!black]   at (1.1,4.1) {Q II: $(-)$};
+        \node[font=\tiny\bfseries, text=forestgreen!80!black] at (1.1,0.5) {Q III: $(+)$};
+        \node[font=\tiny\bfseries, text=crimsonred!80!black]   at (3.5,0.5) {Q IV: $(-)$};
+
+        \foreach \pt in {(0.6,0.8), (1.1,1.5), (1.6,1.2), (1.9,2.0), (0.8,2.8), (2.8,2.7), (3.1,3.6), (3.7,3.1), (4.1,4.3), (4.3,3.9), (3.0,1.7)} {
+            \fill[navyblue] \pt circle (2pt);
+        }
+
+        \fill[warmamber] (2.4,2.3) circle (2.8pt);
+        \draw[navyblue, thick] (2.4,2.3) circle (2.8pt);
+        \node[below right=1pt, font=\tiny\bfseries, text=navyblue, fill=white, inner sep=1pt] at (2.4,2.3) {$(\overline{x},\overline{y})$};
+    \end{scope}
+
+    % --------------------------------------------------------------------------
+    % PANNELLO B: CORRELAZIONE POSITIVA (r > 0)
+    % --------------------------------------------------------------------------
+    \begin{scope}[shift={(7.2,6.6)}]
+        \node[above, font=\bfseries\footnotesize, text=navyblue] at (2.4,5.4) {(b) Correlazione Positiva ($r > 0$)};
+        \draw[step=1cm, gray!15, very thin] (-0.3,-0.3) grid (4.8,4.6);
+
+        \draw[->, thick, navyblue] (-0.3,0) -- (4.9,0) node[right, font=\footnotesize] {$x$};
+        \draw[->, thick, navyblue] (0,-0.3) -- (0,4.9) node[above, font=\footnotesize] {$y$};
+
+        \draw[thick, forestgreen, dashed] (0.5,0.6) -- (4.3,4.2);
+
+        \foreach \pt in {(0.8,0.7), (1.2,1.5), (1.5,1.3), (2.0,2.1), (2.3,1.9), (2.7,2.9), (3.1,2.8), (3.5,3.8), (3.9,3.7), (4.2,4.3)} {
+            \fill[coolblue!80!navyblue] \pt circle (2pt);
+        }
+        \node[draw=forestgreen, fill=forestgreen!10, rounded corners=2pt, font=\scriptsize\bfseries, anchor=south east] at (4.7,0.3) {$r \approx +0.95$};
+    \end{scope}
+
+    % --------------------------------------------------------------------------
+    % PANNELLO C: CORRELAZIONE NEGATIVA (r < 0)
+    % --------------------------------------------------------------------------
+    \begin{scope}[shift={(0,0)}]
+        \node[above, font=\bfseries\footnotesize, text=navyblue] at (2.4,5.4) {(c) Correlazione Negativa ($r < 0$)};
+        \draw[step=1cm, gray!15, very thin] (-0.3,-0.3) grid (4.8,4.6);
+
+        \draw[->, thick, navyblue] (-0.3,0) -- (4.9,0) node[right, font=\footnotesize] {$x$};
+        \draw[->, thick, navyblue] (0,-0.3) -- (0,4.9) node[above, font=\footnotesize] {$y$};
+
+        \draw[thick, crimsonred, dashed] (0.5,4.2) -- (4.3,0.6);
+
+        \foreach \pt in {(0.8,4.0), (1.2,3.6), (1.5,3.7), (2.0,2.8), (2.3,2.5), (2.7,2.3), (3.1,1.7), (3.5,1.4), (3.9,1.1), (4.2,0.6)} {
+            \fill[coolblue!80!navyblue] \pt circle (2pt);
+        }
+        \node[draw=crimsonred, fill=crimsonred!10, rounded corners=2pt, font=\scriptsize\bfseries, anchor=north east] at (4.7,4.4) {$r \approx -0.92$};
+    \end{scope}
+
+    % --------------------------------------------------------------------------
+    % PANNELLO D: NON-LINEARE (Y = X^2 con r = 0)
+    % --------------------------------------------------------------------------
+    \begin{scope}[shift={(7.2,0)}]
+        \node[above, font=\bfseries\footnotesize, text=navyblue] at (2.4,5.4) {(d) Non-Lineare ($Y = X^2$, $r = 0$)};
+        \draw[step=1cm, gray!15, very thin] (-0.3,-0.3) grid (4.8,4.6);
+
+        \draw[->, thick, navyblue] (-0.3,0) -- (4.9,0) node[right, font=\footnotesize] {$x$};
+        \draw[->, thick, navyblue] (2.4,-0.3) -- (2.4,4.9) node[above, font=\footnotesize] {$y$};
+
+        \draw[thick, purpleaccent, domain=0.6:4.2, smooth] plot (\x, {0.9*(\x-2.4)*(\x-2.4) + 0.5});
+
+        \foreach \xval in {-1.6, -1.2, -0.7, -0.3, 0.0, 0.3, 0.7, 1.2, 1.6} {
+            \fill[purpleaccent!80!black] ({2.4 + \xval}, {0.9*\xval*\xval + 0.5}) circle (2pt);
+        }
+
+        \node[draw=purpleaccent, fill=purpleaccent!10, rounded corners=2pt, font=\scriptsize, align=center, anchor=north] at (2.4,4.5) {
+            $Y=X^2 \implies \bm{r = 0}$
+        };
+    \end{scope}
+\end{tikzpicture}

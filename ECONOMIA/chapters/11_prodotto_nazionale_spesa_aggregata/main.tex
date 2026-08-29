@@ -1,0 +1,452 @@
+% ==============================================================================
+% CAPITOLO 11: IL PRODOTTO NAZIONALE E LA SPESA AGGREGATA (MODELLO REDDITO-SPESA)
+% ==============================================================================
+\chapter{Il Prodotto Nazionale e la Spesa Aggregata}
+\label{chap:prodotto_nazionale_spesa_aggregata}
+
+\begin{tcolorbox}[colback=navyblue!5!white, colframe=navyblue, title=\textbf{Quadro Concettuale del Capitolo}]
+Questo capitolo sviluppa il nucleo fondamentale della teoria macroeconomica keynesiana di breve periodo: il \textbf{modello reddito-spesa a due settori} (Famiglie e Imprese). Si formalizzano il principio della domanda effettiva, le funzioni di comportamento del consumo privato e del risparmio, la determinazione analitica e geometrica del reddito di equilibrio tramite la \textbf{Croce Keynesiana}, il meccanismo di aggiustamento basato sulle variazioni involontarie delle scorte, la derivazione del \textbf{moltiplicatore del reddito} mediante serie geometrica infinita e il celebre \textbf{Paradosso della Parsimonia}.
+\end{tcolorbox}
+
+\section{I Fondamenti della Teoria Keynesiana di Breve Periodo}
+
+La macroeconomia moderna di breve periodo trae origine dai contributi di John Maynard Keynes (\textit{The General Theory of Employment, Interest and Money}, 1936), formulati in risposta alla Grande Depressione degli anni '30.
+
+\subsection{Legge di Say vs Principio della Domanda Effettiva}
+La visione classica e quella keynesiana differiscono radicalmente sulla causalità macroeconomica:
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{l X X}
+\toprule
+\textbf{Dimensione} & \textbf{Visione Classica / Neoclassica} & \textbf{Visione Keynesiana (Breve Periodo)} \\
+\midrule
+\textbf{Principio Cardine} & 
+\textbf{Legge di Say}: \textit{"L'offerta crea la propria domanda"}. Ogni produzione genera redditi sufficienti ad acquistare l'output complessivo. & 
+\textbf{Principio della Domanda Effettiva}: \textit{"La domanda determina la produzione"}. È la spesa programmata a determinare il livello del PIL. \\
+\midrule
+\textbf{Flessibilità Prezzi} & 
+Prezzi e salari nominali sono \textbf{perfettamente flessibili} in tempo reale. & 
+Prezzi e salari nominali sono \textbf{vischiosi / rigidi} (\textit{sticky prices}). \\
+\midrule
+\textbf{Equilibrio del Lavoro} & 
+Il mercato del lavoro è sempre in \textbf{pieno impiego}; la disoccupazione è solo volontaria o frizionale. & 
+Possono verificarsi equilibri di \textbf{sotto-occupazione} con disoccupazione involontaria e capacità produttiva in eccesso. \\
+\midrule
+\textbf{Ruolo dello Stato} & 
+Neutralità (\textit{laissez-faire}); il mercato si autoregola spontaneamente. & 
+Intervento attivo di stabilizzazione tramite politiche fiscali e monetarie per sostenere la domanda. \\
+\bottomrule
+\end{tabularx}
+\caption{Confronto paradigmatico tra teoria classica e teoria keynesiana.}
+\label{tab:say_vs_keynes}
+\end{table}
+
+\begin{legge}{Principio Keynesiano della Domanda Effettiva}{domanda_effettiva}
+Nel breve periodo, in presenza di prezzi fissi e capacità produttiva non pienamente utilizzata, il livello di produzione aggregata ($Y$) e di occupazione ($L$) è determinato interamente dal livello della \textbf{Spesa Aggregata programmata} ($\SA$):
+\begin{equation}
+    Y = \SA
+\end{equation}
+Le imprese adeguano i volumi di produzione alla domanda effettivamente manifestata sul mercato, accumulando o decumulando scorte in caso di squilibrio temporaneo.
+\end{legge}
+
+\section{Le Componenti della Spesa Aggregata in un'Economia a Due Settori}
+
+Nel modello base a due settori si assume un'economia chiusa agli scambi con l'estero ($NX = 0$) e senza intervento del settore pubblico ($G = 0, T = 0, TR = 0$).
+
+La \textbf{Spesa Aggregata programmata} ($\SA$) si compone esclusivamente di consumi delle famiglie ($C$) e investimenti delle imprese ($I$):
+\begin{equation}
+    \SA = C + I
+\end{equation}
+
+\subsection{La Funzione del Consumo Keynesiana}
+
+\begin{definizione}{Funzione del Consumo Keynesiana}{funzione_consumo}
+La \textbf{funzione del consumo} descrive la relazione tra la spesa per consumi delle famiglie ($C$) e il reddito nazionale corrente ($Y$):
+\begin{equation}
+    C = C_0 + c Y \quad \text{con } C_0 > 0 \quad \text{e} \quad 0 < c < 1
+\end{equation}
+dove:
+\begin{itemize}
+    \item $C_0$ è il \textbf{Consumo Autonomo di sussistenza}: la spesa minima incomprimibile che le famiglie sosterrebbero anche con reddito nullo ($Y = 0$), finanziata attingendo a risparmi pregressi (\textit{desparmio}) o indebitandosi;
+    \item $c = \PMgC = \dv{C}{Y}$ è la \textbf{Propensione Marginale al Consumo} (\textit{Marginal Propensity to Consume}): la frazione di ciascun euro aggiuntivo di reddito destinata all'acquisto di beni di consumo.
+\end{itemize}
+\end{definizione}
+
+\begin{definizione}{Propensione Media al Consumo (PMeC)}{pmec}
+La \textbf{Propensione Media al Consumo} ($\mathrm{PMeC}$) è il rapporto tra consumo totale e reddito complessivo:
+\begin{equation}
+    \mathrm{PMeC} = \frac{C}{Y} = \frac{C_0 + cY}{Y} = \frac{C_0}{Y} + c
+\end{equation}
+Poiché $C_0 > 0$, la $\mathrm{PMeC}$ è \textbf{strettamente decrescente} al crescere del reddito $Y$, ed è sempre superiore alla propensione marginale ($\mathrm{PMeC} > \PMgC$), convergendo asintoticamente a $c$ per $Y \to \infty$.
+\end{definizione}
+
+\subsection{La Funzione del Risparmio Complementare}
+
+Poiché in assenza di Stato il reddito è integralmente ripartito tra consumi e risparmio ($Y \equiv C + S$), la funzione del risparmio privato ($S$) è data per differenza:
+\begin{equation}
+    S = Y - C = Y - (C_0 + cY) = -C_0 + (1 - c)Y
+\end{equation}
+
+\begin{definizione}{Funzione del Risparmio e Propensione Marginale al Risparmio}{funzione_risparmio}
+\begin{equation}
+    S = -C_0 + s Y \quad \text{con } s = \PMgS = 1 - c \in (0, 1)
+\end{equation}
+dove:
+\begin{itemize}
+    \item $-C_0$ è l'\textbf{intaccamento del risparmio} (risparmio negativo / desparmio) in corrispondenza di $Y = 0$;
+    \item $s = \PMgS = \dv{S}{Y} = 1 - c$ è la \textbf{Propensione Marginale al Risparmio} (\textit{Marginal Propensity to Save}).
+\end{itemize}
+Per identità contabile fondamentale:
+\begin{equation}
+    \PMgC + \PMgS = c + s = 1 \iff \dv{C}{Y} + \dv{S}{Y} = 1
+\end{equation}
+\end{definizione}
+
+\begin{definizione}{Reddito di Pareggio delle Famiglie (Break-Even Income)}{break_even}
+Il \textbf{punto di pareggio} è il livello di reddito in corrispondenza del quale il consumo eguaglia esattamente il reddito ($C = Y$), cosicché il risparmio è nullo ($S = 0$):
+\begin{equation}
+    C = Y \iff C_0 + c Y_{\text{pareggio}} = Y_{\text{pareggio}} \implies Y_{\text{pareggio}} = \frac{C_0}{1 - c} = \frac{C_0}{s}
+\end{equation}
+\begin{itemize}
+    \item Per $Y < Y_{\text{pareggio}}$: $C > Y \implies S < 0$ (le famiglie desparmiano);
+    \item Per $Y > Y_{\text{pareggio}}$: $C < Y \implies S > 0$ (le famiglie accumulano risparmio netto).
+\end{itemize}
+\end{definizione}
+
+\subsection{La Funzione dell'Investimento nel Modello Base}
+Nel modello base a prezzi fissi, le decisioni di investimento delle imprese sono considerate \textbf{esogene}:
+\begin{equation}
+    I = I_0
+\end{equation}
+dove $I_0 > 0$ rappresenta la spesa autonoma per l'acquisto di nuovi beni capitali e impianti, determinata dallo stato delle aspettative a lungo termine degli imprenditori (\textit{animal spirits}).
+
+\section{L'Equilibrio Macroeconomico e la Croce Keynesiana}
+
+\subsection{Determinazione Algebrica del Reddito di Equilibrio}
+La spesa aggregata programmata a due settori è:
+\begin{equation}
+    \SA = C + I = (C_0 + c Y) + I_0 = (C_0 + I_0) + c Y = A_0 + c Y
+\end{equation}
+dove $A_0 = C_0 + I_0$ è la \textbf{spesa autonoma totale} indipendente dal reddito.
+
+\begin{modello}{Equilibrio Reddito-Spesa (Croce Keynesiana)}{croce_keynesiana}
+La condizione di equilibrio macroeconomico richiede che la produzione programmata eguagli la spesa aggregata programmata:
+\begin{equation}
+    Y = \SA \iff Y = A_0 + c Y
+\end{equation}
+Risolvendo algebricamente per $Y$:
+\begin{equation}
+    Y - c Y = A_0 \implies Y(1 - c) = A_0 \implies Y^* = \frac{1}{1 - c} A_0 = \frac{1}{1 - c} (C_0 + I_0)
+\end{equation}
+\end{modello}
+
+\begin{teorema}{Equivalenza tra Equilibrio $Y = \SA$ ed Equilibrio $S = I$}{equivalenza_s_i}
+La condizione di equilibrio reddito-spesa $Y = \SA$ è matematicamente equivalente alla condizione di eguaglianza tra il risparmio programmato e gli investimenti programmati:
+\begin{equation}
+    Y = C + I \iff Y - C = I \iff S(Y^*) = I_0
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}[Equivalenza Risparmio-Investimento]
+Sostituendo la funzione del risparmio $S = -C_0 + (1-c)Y$ nella condizione $S = I_0$:
+\begin{equation}
+    -C_0 + (1 - c)Y = I_0 \implies (1 - c)Y = C_0 + I_0 \implies Y^* = \frac{C_0 + I_0}{1 - c}
+\end{equation}
+che coincide esattamente con la soluzione ricavata da $Y = \SA$.
+\end{dimostrazione}
+
+\subsection{Rappresentazione Geometrica della Croce Keynesiana (TikZ G19)}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Assi cartesiani
+    \draw[->, line width=1.2pt] (0,0) -- (10.5,0) node[right, font=\small\bfseries] {Reddito / Prodotto ($Y$)};
+    \draw[->, line width=1.2pt] (0,0) -- (0,8.0) node[above, font=\small\bfseries] {Spesa Aggregata ($\SA$)};
+    
+    % Bisettrice a 45 gradi (Retta Y = SA)
+    \draw[dashed, color=gray!80, line width=1.2pt] (0,0) -- (7.8,7.8) node[above right, font=\footnotesize\bfseries, color=gray!80] {Bisettrice $45^\circ$ ($Y = \SA$)};
+
+    % Retta della Spesa Aggregata SA = A_0 + c Y
+    \draw[color=navyblue, line width=2pt] (0, 2.4) -- (9.0, 6.9) node[right, font=\small\bfseries, color=navyblue] {$\SA = A_0 + c Y$};
+
+    % Punto di Equilibrio E(Y*, SA*)
+    \coordinate (E) at (4.8, 4.8);
+    \fill[forestgreen] (E) circle (3.5pt) node[above left=3pt, font=\small\bfseries, color=forestgreen] {$E(Y^*, \SA^*)$};
+
+    % Linee di proiezione dell'equilibrio
+    \draw[dotted, line width=1pt, color=forestgreen] (4.8,0) node[below, font=\small\bfseries, color=forestgreen] {$Y^*$} -- (4.8,4.8);
+    \draw[dotted, line width=1pt, color=forestgreen] (0,4.8) node[left, font=\small\bfseries, color=forestgreen] {$\SA^* = Y^*$} -- (4.8,4.8);
+
+    % Intercetta Spesa Autonoma A_0
+    \node[left, font=\small\bfseries, color=navyblue] at (0, 2.4) {$A_0 = C_0 + I_0$};
+
+    % Caso Y_1 > Y* (Eccesso di Offerta / Accumulo Scorte)
+    \coordinate (Y1_x) at (7.5, 0);
+    \draw[dotted, line width=0.9pt, color=crimsonred] (7.5,0) node[below, font=\footnotesize\bfseries] {$Y_1$} -- (7.5, 7.5);
+    \fill[crimsonred] (7.5, 6.15) circle (2.5pt); % punto su SA
+    \fill[gray!80] (7.5, 7.5) circle (2.5pt); % punto su 45°
+    \draw[<->, crimsonred, line width=1.4pt] (7.5, 6.25) -- (7.5, 7.4) node[midway, right, font=\scriptsize\bfseries] {$\Delta\mathrm{Scorte}_{\text{inv}} > 0$ (Accumulo)};
+    \draw[->, crimsonred, line width=1.3pt] (7.2, 0.4) -- (5.4, 0.4) node[midway, above, font=\scriptsize\bfseries] {Taglio Produzione};
+
+    % Caso Y_2 < Y* (Eccesso di Domanda / Decumulo Scorte)
+    \coordinate (Y2_x) at (2.2, 0);
+    \draw[dotted, line width=0.9pt, color=purpleaccent] (2.2,0) node[below, font=\footnotesize\bfseries] {$Y_2$} -- (2.2, 3.5);
+    \fill[purpleaccent] (2.2, 3.5) circle (2.5pt); % punto su SA
+    \fill[gray!80] (2.2, 2.2) circle (2.5pt); % punto su 45°
+    \draw[<->, purpleaccent, line width=1.4pt] (2.2, 2.3) -- (2.2, 3.4) node[midway, left, font=\scriptsize\bfseries] {$\Delta\mathrm{Scorte}_{\text{inv}} < 0$ (Decumulo)};
+    \draw[->, purpleaccent, line width=1.3pt] (2.4, 0.4) -- (4.2, 0.4) node[midway, above, font=\scriptsize\bfseries] {Aumento Produzione};
+
+\end{tikzpicture}
+\caption{La Croce Keynesiana (Diagramma a 45°). Determinazione del reddito di equilibrio $Y^*$ e dinamica di riequilibrio tramite la variazione non programmata delle scorte.}
+\label{fig:croce_keynesiana}
+\end{figure}
+
+\section{Dinamica di Aggiustamento e Ruolo delle Scorte Involontarie}
+
+Il meccanismo di trasmissione che garantisce la convergenza del sistema economico verso il punto di equilibrio $E$ è basato sul comportamento delle scorte aziendali:
+
+\begin{definizione}{Variazione Non Programmata delle Scorte}{scorte_involontarie}
+La \textbf{variazione involontaria delle scorte} ($\Delta \mathrm{Scorte}_{\text{inv}}$) è la differenza contabile tra la produzione corrente realizzata dalle imprese ($Y$) e la spesa programmata dagli acquirenti ($\SA$):
+\begin{equation}
+    \Delta \mathrm{Scorte}_{\text{inv}} = Y - \SA
+\end{equation}
+\end{definizione}
+
+L'analisi dei tre regimi di mercato rivela:
+\begin{enumerate}
+    \item \textbf{Eccesso di Offerta ($Y > \SA$)}:
+    \begin{itemize}
+        \item La produzione realizzata eccede le vendite programmate;
+        \item I beni invenduti rimangono nei magazzini $\implies \Delta \mathrm{Scorte}_{\text{inv}} > 0$ (\textbf{accumulo involontario di scorte});
+        \item Segnale operativo: le imprese riducono gli ordini di produzione e l'impiego di fattori nel periodo successivo $\implies Y \downarrow$ fino a quando $Y = Y^*$.
+    \end{itemize}
+    
+    \item \textbf{Eccesso di Domanda ($Y < \SA$)}:
+    \begin{itemize}
+        \item La domanda dei consumatori e delle imprese supera la produzione corrente;
+        \item Le imprese evadono gli ordini intaccando le giacenze di magazzino $\implies \Delta \mathrm{Scorte}_{\text{inv}} < 0$ (\textbf{decumulo involontario di scorte});
+        \item Segnale operativo: le imprese incrementano la produzione e assumono lavoratori $\implies Y \uparrow$ fino a raggiungere $Y^*$.
+    \end{itemize}
+    
+    \item \textbf{Equilibrio Macroeconomico ($Y = \SA$)}:
+    \begin{itemize}
+        \item La produzione coincide esattamente con la spesa programmata;
+        \item La variazione non programmata delle scorte è nulla ($\Delta \mathrm{Scorte}_{\text{inv}} = 0$);
+        \item Il sistema è in stato stazionario di breve periodo.
+    \end{itemize}
+\end{enumerate}
+
+\section{Il Moltiplicatore Keynesiano del Reddito}
+
+\begin{teorema}{Il Moltiplicatore del Reddito}{moltiplicatore_teorema}
+Dato il modello reddito-spesa $Y = \frac{1}{1 - c} A_0$, una variazione esogena della spesa autonoma ($\Delta A_0 = \Delta C_0 + \Delta I_0$) genera una variazione del reddito di equilibrio \textbf{più che proporzionale}:
+\begin{equation}
+    \Delta Y^* = \alpha_K \cdot \Delta A_0 \quad \text{con } \alpha_K = \frac{1}{1 - c} = \frac{1}{s} > 1
+\end{equation}
+dove $\alpha_K$ è il \textbf{moltiplicatore keynesiano}.
+\end{teorema}
+
+\begin{dimostrazione}[Derivazione del Moltiplicatore tramite Serie Geometrica Infinita]
+Si consideri un incremento iniziale autonomo degli investimenti pari a $\Delta I_0$. L'impatto sul sistema economico si propaga attraverso una sequenza infinita di cicli di spesa e reddito:
+\begin{enumerate}
+    \item \textbf{Ciclo 1}: l'aumento degli investimenti genera una spesa immediata $\implies \Delta Y_1 = \Delta I_0$;
+    \item \textbf{Ciclo 2}: l'aumento di produzione distribuisce un nuovo reddito di pari entità alle famiglie ($\Delta Y_1$), che ne consumano una quota $c$ $\implies \Delta C_1 = c \Delta I_0 \implies \Delta Y_2 = c \Delta I_0$;
+    \item \textbf{Ciclo 3}: il nuovo consumo stimola ulteriore produzione e reddito, generando nuovi consumi $\implies \Delta C_2 = c \Delta Y_2 = c(c \Delta I_0) = c^2 \Delta I_0$;
+    \item \textbf{Ciclo $k+1$}: al generico passo $k$, l'incremento di reddito indotto è $\Delta Y_{k+1} = c^k \Delta I_0$.
+\end{enumerate}
+La variazione complessiva cumulata del reddito è la somma di tutti gli infiniti incrementi:
+\begin{equation}
+    \Delta Y = \sum_{k=0}^{\infty} \Delta Y_{k+1} = \Delta I_0 + c \Delta I_0 + c^2 \Delta I_0 + c^3 \Delta I_0 + \dots = \Delta I_0 \sum_{k=0}^{\infty} c^k
+\end{equation}
+Poiché la propensione marginale al consumo è strettamente compresa tra 0 e 1 ($0 < c < 1$), la serie geometrica converge alla somma finita:
+\begin{equation}
+    \sum_{k=0}^{\infty} c^k = \frac{1}{1 - c}
+\end{equation}
+Pertanto:
+\begin{equation}
+    \Delta Y^* = \frac{1}{1 - c} \Delta I_0 = \alpha_K \Delta I_0
+\end{equation}
+\end{dimostrazione}
+
+\subsection{Rappresentazione Grafica del Moltiplicatore (TikZ G20-G21)}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Assi
+    \draw[->, line width=1.2pt] (0,0) -- (10.5,0) node[right, font=\small\bfseries] {Reddito ($Y$)};
+    \draw[->, line width=1.2pt] (0,0) -- (0,8.0) node[above, font=\small\bfseries] {Spesa Aggregata ($\SA$)};
+    
+    % Bisettrice
+    \draw[dashed, color=gray!80, line width=1.1pt] (0,0) -- (7.8,7.8) node[above right, font=\footnotesize\bfseries, color=gray!80] {$Y = \SA$};
+
+    % Curva iniziale SA_0
+    \draw[color=navyblue, line width=1.6pt] (0, 2.0) -- (8.5, 6.25) node[right, font=\footnotesize\bfseries, color=navyblue] {$\SA_0 = A_0 + c Y$};
+    % Curva traslata SA_1 per aumento investimenti Delta I
+    \draw[color=forestgreen, line width=2pt] (0, 3.4) -- (8.5, 7.65) node[right, font=\footnotesize\bfseries, color=forestgreen] {$\SA_1 = (A_0 + \Delta I) + c Y$};
+
+    % Punti di equilibrio
+    \coordinate (E0) at (4.0, 4.0);
+    \coordinate (E1) at (6.8, 6.8);
+
+    \fill[navyblue] (E0) circle (3pt) node[below right=2pt, font=\small\bfseries, color=navyblue] {$E_0(Y_0^*)$};
+    \fill[forestgreen] (E1) circle (3.5pt) node[above left=2pt, font=\small\bfseries, color=forestgreen] {$E_1(Y_1^*)$};
+
+    % Proiezioni
+    \draw[dotted, line width=1pt, color=navyblue] (4.0,0) node[below, font=\small\bfseries] {$Y_0^*$} -- (E0);
+    \draw[dotted, line width=1pt, color=forestgreen] (6.8,0) node[below, font=\small\bfseries] {$Y_1^*$} -- (E1);
+
+    % Evidenziazione shift spesa Delta I
+    \draw[<->, color=crimsonred, line width=1.5pt] (0.8, 2.4) -- (0.8, 3.8) node[midway, left, font=\footnotesize\bfseries] {$\Delta I_0$};
+
+    % Evidenziazione variazione finale reddito Delta Y*
+    \draw[<->, color=forestgreen, line width=1.5pt] (4.0, 0.5) -- (6.8, 0.5) node[midway, above, font=\footnotesize\bfseries] {$\Delta Y^* = \alpha_K \Delta I_0$};
+
+\end{tikzpicture}
+\caption{Rappresentazione geometrica del Moltiplicatore del Reddito. L'incremento verticale della spesa autonoma $\Delta I_0$ genera un incremento orizzontale del PIL $\Delta Y^*$ strettamente maggiore ($\Delta Y^* > \Delta I_0$).}
+\label{fig:moltiplicatore_keynesiano}
+\end{figure}
+
+\section{Il Paradosso della Parsimonia}
+
+\begin{modello}{Il Paradosso della Parsimonia}{paradosso_parsimonia}
+Il \textbf{Paradosso della Parsimonia} (\textit{Paradox of Thrift}) afferma che il tentativo collettivo della società di aumentare il risparmio aggregato (attraverso un incremento della propensione marginale al risparmio $s$ o una riduzione del consumo autonomo $C_0$) produce una contrazione del reddito nazionale di equilibrio, lasciando \textbf{completamente inalterato il livello aggregato finale di risparmio effettivo}:
+\begin{equation}
+    S^* = I_0 = \text{costante}
+\end{equation}
+\end{modello}
+
+\begin{dimostrazione}[Dimostrazione Analitica del Paradosso della Parsimonia]
+Si consideri il livello di risparmio privato all'equilibrio macroeconomico:
+\begin{equation}
+    S(Y^*) = -C_0 + s Y^*
+\end{equation}
+Sostituendo il valore di equilibrio del reddito $Y^* = \frac{C_0 + I_0}{s}$:
+\begin{equation}
+    S^* = -C_0 + s \left[ \frac{C_0 + I_0}{s} \right] = -C_0 + (C_0 + I_0) = I_0
+\end{equation}
+Poiché gli investimenti $I_0$ sono costanti ed esogeni, il risparmio finale $S^*$ dipende unicamente da $I_0$.
+
+Calcolando la derivata del reddito di equilibrio rispetto alla propensione al risparmio $s$:
+\begin{equation}
+    \dv{Y^*}{s} = -\frac{C_0 + I_0}{s^2} < 0
+\end{equation}
+Un aumento della virtù del risparmio da parte delle famiglie riduce la spesa complessiva, provocando una recessione che distrugge esattamente la base di reddito da cui il risparmio doveva essere generato.
+\end{dimostrazione}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+    % Assi
+    \draw[->, line width=1.2pt] (0,0) -- (10.5,0) node[right, font=\small\bfseries] {Reddito ($Y$)};
+    \draw[->, line width=1.2pt] (0,-2.5) -- (0,5.5) node[above, font=\small\bfseries] {Risparmio ($S$), Investimenti ($I$)};
+    
+    % Retta Investimenti costante I = I_0
+    \draw[color=forestgreen, line width=1.8pt] (0, 2.5) -- (9.5, 2.5) node[right, font=\small\bfseries, color=forestgreen] {$I = I_0$};
+
+    % Curva del risparmio iniziale S_0 = -C_0 + s_0 Y
+    \draw[color=navyblue, line width=1.6pt] (0, -1.8) -- (9.0, 4.2) node[right, font=\small\bfseries, color=navyblue] {$S_0 = -C_0 + s_0 Y$};
+    % Curva del risparmio con maggiore propensione al risparmio S_1 (ruotata verso l'alto)
+    \draw[color=crimsonred, line width=2pt] (0, -1.8) -- (7.5, 5.0) node[above right, font=\small\bfseries, color=crimsonred] {$S_1 = -C_0 + s_1 Y \quad (s_1 > s_0)$};
+
+    % Intercetta -C_0
+    \node[left, font=\footnotesize\bfseries, color=navyblue] at (0, -1.8) {$-C_0$};
+
+    % Punti di equilibrio
+    \coordinate (E0) at (6.45, 2.5);
+    \coordinate (E1) at (4.75, 2.5);
+
+    \fill[navyblue] (E0) circle (3pt) node[above right, font=\small\bfseries, color=navyblue] {$E_0$};
+    \fill[crimsonred] (E1) circle (3.5pt) node[above left, font=\small\bfseries, color=crimsonred] {$E_1$};
+
+    % Proiezioni del reddito
+    \draw[dotted, line width=1pt, color=navyblue] (6.45, 0) node[below, font=\small\bfseries] {$Y_0^*$} -- (E0);
+    \draw[dotted, line width=1pt, color=crimsonred] (4.75, 0) node[below, font=\small\bfseries] {$Y_1^*$} -- (E1);
+
+    % Freccia contrazione del reddito
+    \draw[->, crimsonred, line width=1.5pt] (6.3, 0.4) -- (4.9, 0.4) node[midway, above, font=\footnotesize\bfseries] {$\Delta Y^* < 0$};
+
+\end{tikzpicture}
+\caption{Rappresentazione geometrica del Paradosso della Parsimonia. L'aumento della propensione al risparmio ($s_1 > s_0$) ruota la curva del risparmio verso l'alto, riducendo il PIL di equilibrio da $Y_0^*$ a $Y_1^*$, mentre il livello finale del risparmio rimane invariato a $I_0$.}
+\label{fig:paradosso_parsimonia}
+\end{figure}
+
+\section{Metodi Risolutivi ed Esercizi Guidati Svolti}
+
+\begin{metodo}[Algoritmo per la Risoluzione del Modello Reddito-Spesa a 2 Settori]
+Per determinare l'equilibrio macroeconomico e quantificare l'effetto di shock esogeni:
+\begin{enumerate}
+    \item Identificare i parametri della funzione del consumo ($C_0, c$) e degli investimenti ($I_0$);
+    \item Calcolare la spesa autonoma totale: $A_0 = C_0 + I_0$;
+    \item Calcolare il moltiplicatore keynesiano: $\alpha_K = \frac{1}{1 - c}$;
+    \item Calcolare il reddito di equilibrio: $Y^* = \alpha_K A_0$;
+    \item Calcolare il consumo di equilibrio $C^* = C_0 + c Y^*$ e verificare che $S^* = Y^* - C^* = I_0$;
+    \item In presenza di uno shock $\Delta I_0$, calcolare la variazione del PIL: $\Delta Y^* = \alpha_K \Delta I_0$ e il nuovo reddito $Y_1^* = Y_0^* + \Delta Y^*$.
+\end{enumerate}
+\end{metodo}
+
+\begin{esame}[Tranelli Frequenti sul Modello Reddito-Spesa]
+\begin{itemize}
+    \item \textbf{Confusione tra Propensione Marginale e Media}: ricordare che $\PMgC = c$ è la pendenza della retta del consumo (costante nel modello lineare), mentre $\mathrm{PMeC} = C_0/Y + c$ decresce con il reddito.
+    \item \textbf{Scorte non programmate fuori equilibrio}: se all'esame viene chiesto cosa accade per un dato livello di produzione $Y_a \neq Y^*$, calcolare $\SA(Y_a) = A_0 + c Y_a$ e determinare $\Delta \mathrm{Scorte} = Y_a - \SA(Y_a)$. Se $\Delta \mathrm{Scorte} > 0 \implies$ accumulo involontario; se $\Delta \mathrm{Scorte} < 0 \implies$ decumulo.
+    \item \textbf{Variazione percentuale vs Variazione assoluta}: se l'investimento aumenta del $10\%$, la variazione assoluta è $\Delta I = 0,10 \times I_0$, e la variazione del PIL è $\Delta Y^* = \alpha_K \Delta I$.
+\end{itemize}
+\end{esame}
+
+\begin{esercizio}[Calcolo Completo dell'Equilibrio, Scorte e Moltiplicatore]
+In un'economia a due settori sono note le seguenti equazioni di comportamento:
+\begin{align*}
+    C &= 100 + 0{,}80 Y \\
+    I &= 60
+\end{align*}
+
+\textbf{Quesiti}:
+\begin{enumerate}
+    \item Determinare la propensione marginale al risparmio, il moltiplicatore keynesiano e il reddito di equilibrio $Y^*$;
+    \item Calcolare il consumo $C^*$, il risparmio $S^*$ e verificare la coerenza con gli investimenti;
+    \item Valutare cosa accade nel sistema se la produzione corrente è $Y = 900$;
+    \item Determinare la variazione del reddito di equilibrio se le imprese aumentano gli investimenti di $\Delta I = 25\,\text{\euro}$.
+\end{enumerate}
+
+\textbf{Svolgimento}:
+\begin{enumerate}
+    \item \textbf{Propensioni e Moltiplicatore}:
+    \begin{align*}
+        c &= \PMgC = 0{,}80 \implies s = \PMgS = 1 - 0{,}80 = 0{,}20 \\
+        \alpha_K &= \frac{1}{1 - c} = \frac{1}{1 - 0{,}80} = \frac{1}{0{,}20} = 5
+    \end{align*}
+    La spesa autonoma totale è $A_0 = C_0 + I_0 = 100 + 60 = 160\,\text{\euro}$.\\
+    Il reddito di equilibrio è:
+    \begin{equation*}
+        Y^* = \alpha_K \cdot A_0 = 5 \times 160 = 800\,\text{\euro}
+    \end{equation*}
+    
+    \item \textbf{Consumo e Risparmio di Equilibrio}:
+    \begin{align*}
+        C^* &= 100 + 0{,}80 \times 800 = 100 + 640 = 740\,\text{\euro} \\
+        S^* &= Y^* - C^* = 800 - 740 = 60\,\text{\euro}
+    \end{align*}
+    Si riscontra l'uguaglianza $S^* = I_0 = 60\,\text{\euro}$.
+    
+    \item \textbf{Analisi Fuori Equilibrio per $Y = 900$}:
+    La spesa programmata per $Y = 900$ è:
+    \begin{equation*}
+        \SA(900) = 160 + 0{,}80 \times 900 = 160 + 720 = 880\,\text{\euro}
+    \end{equation*}
+    La variazione non programmata delle scorte è:
+    \begin{equation*}
+        \Delta \mathrm{Scorte}_{\text{inv}} = Y - \SA = 900 - 880 = +20\,\text{\euro}
+    \end{equation*}
+    Poiché $\Delta \mathrm{Scorte} > 0$, si verifica un \textbf{accumulo involontario di scorte}; le imprese riducono la produzione finché il PIL non torna al livello di equilibrio $Y^* = 800$.
+    
+    \item \textbf{Effetto dello Shock $\Delta I = 25\,\text{\euro}$}:
+    \begin{align*}
+        \Delta Y^* &= \alpha_K \cdot \Delta I = 5 \times 25 = +125\,\text{\euro} \\
+        Y_1^* &= Y_0^* + \Delta Y^* = 800 + 125 = 925\,\text{\euro}
+    \end{align*}
+\end{enumerate}
+\end{esercizio}

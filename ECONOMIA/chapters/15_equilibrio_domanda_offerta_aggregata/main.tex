@@ -1,0 +1,405 @@
+% ==============================================================================
+% CAPITOLO 15: EQUILIBRIO DOMANDA-OFFERTA AGGREGATA: IL MODELLO AD-AS
+% ==============================================================================
+\chapter{Equilibrio Domanda-Offerta Aggregata: Il Modello AD-AS}
+\label{chap:equilibrio_domanda_offerta_aggregata}
+
+\begin{tcolorbox}[colback=navyblue!5!white, colframe=navyblue, title=\textbf{Quadro Concettuale del Capitolo}]
+Questo capitolo completa la trattazione macroeconomica integrando la flessibilità dei prezzi e dei salari mediante il \textbf{Modello di Domanda e Offerta Aggregata (AD-AS)}. Il modello supera il vincolo dell'orizzonte di breve periodo del modello IS-LM analizzando congiuntamente il settore dei beni, il mercato monetario e il mercato del lavoro. Verrà derivata formalmente la \textbf{Curva di Domanda Aggregata (AD)} a partire dal modello IS-LM, esplicitando i tre canali di trasmissione (effetto Keynes, effetto Pigou ed effetto competitività). Si analizzerà la struttura della \textbf{Curva di Offerta Aggregata} distinguendo tra l'orizzonte di breve periodo (\textbf{SRAS}, inclinata positivamente per effetto di rigidità nominali e salari vischiosi) e l'orizzonte di lungo periodo (\textbf{LRAS}, perfettamente verticale al livello di prodotto potenziale $Y_{PO}$). Verranno infine esaminati i processi di aggiustamento dinamico, la neutralità della moneta nel lungo periodo, gli shock esogeni e la patologia macroeconomica della \textbf{stagflazione}.
+\end{tcolorbox}
+
+\section{Limiti del Modello IS-LM e Passaggio ai Prezzi Flessibili}
+
+Il modello IS-LM trattato nel capitolo precedente si basa sull'ipotesi semplificatrice di \textbf{prezzi e salari costanti nel tempo} ($P = \bar{P}$). Tale ipotesi è empiricamente accettabile esclusivamente nel \textbf{breve periodo}, oppure in presenza di una massiccia disoccupazione involontaria e di ampia capacità produttiva inutilizzata nelle fabbriche: in questo contesto le imprese possono espandere la produzione per soddisfare qualsiasi incremento di domanda senza subire pressioni al rialzo sui costi marginali o sui salari.
+
+Tuttavia, quando l'economia si avvicina al pieno impiego dei fattori produttivi, qualsiasi ulteriore stimolo della domanda aggregata genera una concorrenza accesa per le risorse scarse (materie prime, energia, manodopera qualificata), innescando aumenti salariali e rincari nei listini prezzi.
+
+Per comprendere l'interazione tra crescita economica, disoccupazione e inflazione è indispensabile \textbf{endogenizzare il livello generale dei prezzi $P$} attraverso il modello AD-AS.
+
+\section{La Curva di Domanda Aggregata (AD)}
+
+\subsection{Definizione e Concetto Economico}
+
+\begin{definizione}{Curva di Domanda Aggregata (AD)}{def_curva_ad}
+La \textbf{Curva di Domanda Aggregata (AD)} (\textit{Aggregate Demand}) rappresenta la quantità totale di beni e servizi finali domandata complessivamente dall'intero sistema economico (consumi, investimenti, spesa pubblica ed esportazioni nette) per ogni possibile livello generale dei prezzi $P$, mantenendo in equilibrio sia il mercato dei beni (IS) sia il mercato monetario e finanziario (LM).
+\end{definizione}
+
+\subsection{Derivazione Analitica dal Modello IS-LM}
+
+\begin{modello}{Derivazione Formale della Curva AD}{derivazione_ad}
+Riprendiamo le equazioni di equilibrio del modello IS-LM in economia chiusa:
+\begin{equation}
+    \begin{cases}
+        \IS: \quad Y = \alpha_G \big( A_0 - d \cdot r \big) \\[0.5em]
+        \LM: \quad r = \dfrac{k}{h} Y - \dfrac{1}{h}\dfrac{M}{P}
+    \end{cases}
+\end{equation}
+Sostituendo il tasso di interesse $r$ della LM nell'equazione della IS:
+\begin{equation}
+    Y = \alpha_G \left[ A_0 - d \left( \frac{k}{h} Y - \frac{1}{h}\frac{M}{P} \right) \right]
+\end{equation}
+Risolvendo esplicitamente per il reddito reale $Y$ otteniamo la \textbf{forma diretta della curva AD}:
+\begin{equation}
+    Y = \gamma A_0 + \gamma \frac{d}{h} \frac{M}{P} \label{eq:ad_diretta}
+\end{equation}
+dove $\gamma = \dfrac{\alpha_G}{1 + \frac{k \alpha_G d}{h}} = \dfrac{h \alpha_G}{h + k \alpha_G d}$ è il moltiplicatore fiscale con retroazione monetaria.
+
+Esplicitando il livello dei prezzi $P$ in funzione del reddito $Y$, otteniamo la \textbf{forma inversa della curva AD}:
+\begin{equation}
+    P(Y) = \frac{\gamma \frac{d}{h} M}{Y - \gamma A_0} \label{eq:ad_inversa}
+\end{equation}
+\end{modello}
+
+\subsection{Pendenza della Curva AD e i Tre Canali di Trasmissione}
+La derivata prima della domanda aggregata rispetto al livello dei prezzi è:
+\begin{equation}
+    \dv{Y}{P} = -\gamma \frac{d}{h} \frac{M}{P^2} < 0
+\end{equation}
+La curva AD è rigorosamente \textbf{inclinata negativamente} nel piano cartesiano $(Y, P)$.
+La pendenza negativa non deriva dalla legge microeconomica della domanda (effetto sostituzione tra singoli beni), bensì da \textbf{tre canali macroeconomici congiunti}:
+
+\begin{enumerate}
+    \item \textbf{Effetto Tasso di Interesse di Keynes}:
+    Un aumento del livello dei prezzi ($P \uparrow$) riduce lo stock reale di moneta disponibile ($\frac{M}{P} \downarrow$). Gli agenti vendono titoli per ricostituire la liquidità necessaria alle transazioni, provocando la caduta del prezzo dei titoli e il rialzo del tasso di interesse reale ($r \uparrow$). Il maggior costo del credito scoraggia la spesa per investimenti produttivi delle imprese ($I \downarrow$) e i consumi a debito delle famiglie, contraendo il reddito di equilibrio ($Y \downarrow$).
+    \begin{equation}
+        P \uparrow \implies \frac{M}{P} \downarrow \implies r \uparrow \implies I \downarrow \implies Y \downarrow
+    \end{equation}
+    
+    \item \textbf{Effetto Ricchezza / Saldi Reali di Pigou}:
+    Una quota significativa della ricchezza finanziaria netta delle famiglie è detenuta in attività a valore nominale fisso (banconote, depositi a vista, titoli di Stato a breve termine). Quando i prezzi aumentano ($P \uparrow$), il potere d'acquisto reale di queste attività finanziarie si contrae ($\frac{\text{Ricchezza}}{P} \downarrow$). Sentendosi più povere, le famiglie riducono la spesa autonoma per consumi ($C_0 \downarrow$), determinando una contrazione del PIL ($Y \downarrow$).
+    
+    \item \textbf{Effetto Competitività Internazionale / Commercio Estero (Mundell-Fleming)}:
+    In un'economia aperta con tassi di cambio fissi o non perfettamente flessibili, un rincaro dei prezzi interni ($P \uparrow$) a parità di prezzi esteri ($P^*$) rende le merci nazionali relativamente più costose rispetto a quelle estere. Il tasso di cambio reale si apprezza ($\varepsilon_r = \frac{e P}{P^*} \uparrow$), provocando una contrazione delle esportazioni ($X \downarrow$) e un aumento delle importazioni ($M \downarrow$). Le esportazioni nette si riducono ($NX \downarrow$), deprimendo la domanda aggregata ($Y \downarrow$).
+\end{enumerate}
+
+\subsection{Fattori di Spostamento della Curva AD}
+Qualsiasi perturbazione esogena diversa dal livello dei prezzi $P$ trasla l'intera curva AD:
+\begin{itemize}
+    \item \textbf{Politiche Fiscali Espansive} ($\Delta G > 0, \Delta TR > 0, \Delta T < 0$) o aumento dell'ottimismo di consumatori e imprese ($\Delta A_0 > 0$): la curva AD trasla verso \textbf{destra} di un ammontare orizzontale pari a $\Delta Y = \gamma \Delta A_0$.
+    \item \textbf{Politiche Monetarie Espansive} ($\Delta M > 0$): la curva AD trasla verso \textbf{destra} di $\Delta Y = \gamma \frac{d}{h P}\Delta M$.
+    \item \textbf{Politiche Restrittive} ($\Delta G < 0, \Delta M < 0$): la curva AD trasla verso \textbf{sinistra}.
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05, >=Stealth]
+    % GRAFICO SUPERIORE: IS-LM
+    \begin{scope}[yshift=6.8cm]
+        \draw[->, line width=1.1pt] (0,0) -- (8.5,0) node[right, font=\small\bfseries] {$Y$};
+        \draw[->, line width=1.1pt] (0,0) -- (0,5.0) node[above, font=\small\bfseries] {$r$};
+        \node[font=\footnotesize\bfseries, color=navyblue] at (4.0, 4.8) {Piano $(Y, r)$: Modello IS-LM};
+
+        % Curva IS
+        \draw[line width=1.6pt, color=navyblue] (1.0, 4.2) -- (7.5, 0.8) node[right, font=\small\bfseries] {$\IS$};
+
+        % Curve LM a vari livelli di prezzo P1 < P2 < P3
+        \draw[line width=1.5pt, color=forestgreen] (1.2, 0.8) -- (7.0, 4.5) node[right, font=\footnotesize\bfseries] {$\LM(P_1)$};
+        \draw[line width=1.5pt, color=warmamber] (0.8, 1.6) -- (6.2, 4.9) node[above right, font=\footnotesize\bfseries] {$\LM(P_2)$};
+        \draw[line width=1.5pt, color=crimsonred] (0.4, 2.4) -- (5.4, 5.2) node[above left, font=\footnotesize\bfseries] {$\LM(P_3)$};
+
+        % Punti di equilibrio
+        \coordinate (E1) at (5.0, 2.1);
+        \coordinate (E2) at (3.8, 2.7);
+        \coordinate (E3) at (2.6, 3.35);
+
+        \fill[forestgreen] (E1) circle (2.5pt) node[below right, font=\scriptsize\bfseries] {$E_1$};
+        \fill[warmamber] (E2) circle (2.5pt) node[above right, font=\scriptsize\bfseries] {$E_2$};
+        \fill[crimsonred] (E3) circle (2.5pt) node[above left, font=\scriptsize\bfseries] {$E_3$};
+
+        % Linee guida verticali tratteggiate verso il basso
+        \draw[dashed, line width=0.8pt, color=forestgreen] (5.0, 2.1) -- (5.0, -6.8);
+        \draw[dashed, line width=0.8pt, color=warmamber] (3.8, 2.7) -- (3.8, -6.8);
+        \draw[dashed, line width=0.8pt, color=crimsonred] (2.6, 3.35) -- (2.6, -6.8);
+    \end{scope}
+
+    % GRAFICO INFERIORE: AD
+    \begin{scope}[yshift=0cm]
+        \draw[->, line width=1.1pt] (0,0) -- (8.5,0) node[right, font=\small\bfseries] {PIL Reale ($Y$)};
+        \draw[->, line width=1.1pt] (0,0) -- (0,5.5) node[above, font=\small\bfseries] {Livello Prezzi ($P$)};
+        \node[font=\footnotesize\bfseries, color=purpleaccent] at (4.0, 5.2) {Piano $(Y, P)$: Curva di Domanda Aggregata};
+
+        % Curva AD
+        \draw[line width=2pt, color=purpleaccent, domain=1.8:7.5, smooth] plot (\x, {7.5 / (\x - 0.5)}) node[right, font=\small\bfseries] {$\mathrm{AD}$};
+
+        % Punti su AD
+        \coordinate (AD1) at (5.0, 1.67);
+        \coordinate (AD2) at (3.8, 2.27);
+        \coordinate (AD3) at (2.6, 3.57);
+
+        \fill[forestgreen] (AD1) circle (2.8pt) node[right=3pt, font=\footnotesize\bfseries] {$E_1'(Y_1, P_1)$};
+        \fill[warmamber] (AD2) circle (2.8pt) node[right=3pt, font=\footnotesize\bfseries] {$E_2'(Y_2, P_2)$};
+        \fill[crimsonred] (AD3) circle (2.8pt) node[right=3pt, font=\footnotesize\bfseries] {$E_3'(Y_3, P_3)$};
+
+        % Proiezioni sui prezzi
+        \draw[dotted, line width=0.8pt, color=forestgreen] (AD1) -- (0, 1.67) node[left, font=\footnotesize\bfseries] {$P_1$};
+        \draw[dotted, line width=0.8pt, color=warmamber] (AD2) -- (0, 2.27) node[left, font=\footnotesize\bfseries] {$P_2$};
+        \draw[dotted, line width=0.8pt, color=crimsonred] (AD3) -- (0, 3.57) node[left, font=\footnotesize\bfseries] {$P_3$};
+
+        % Proiezioni sulle ascisse
+        \node[below, font=\footnotesize\bfseries, color=crimsonred] at (2.6, 0) {$Y_3$};
+        \node[below, font=\footnotesize\bfseries, color=warmamber] at (3.8, 0) {$Y_2$};
+        \node[below, font=\footnotesize\bfseries, color=forestgreen] at (5.0, 0) {$Y_1$};
+
+        \draw[->, line width=1.1pt, color=crimsonred] (0.5, 1.8) -- node[left, font=\scriptsize\bfseries] {$P \uparrow$} (0.5, 3.4);
+        \draw[->, line width=1.1pt, color=crimsonred] (4.8, -0.4) -- node[below, font=\scriptsize\bfseries] {$Y \downarrow$} (2.8, -0.4);
+    \end{scope}
+
+\end{tikzpicture}
+\caption{Derivazione della curva di Domanda Aggregata (AD) dal modello IS-LM. L'incremento del livello dei prezzi da $P_1$ a $P_2$ e $P_3$ riduce la liquidità reale ($\frac{M}{P}$), trasla la curva LM verso l'alto nel grafico superiore provocando l'aumento dei tassi di interesse e la riduzione del PIL, tracciando la curva AD nel grafico inferiore.}
+\label{fig:derivazione_ad_is_lm}
+\end{figure}
+
+\section{La Curva di Offerta Aggregata (AS)}
+
+La curva di Offerta Aggregata riflette le decisioni ottime di produzione delle imprese e il funzionamento del mercato del lavoro. È indispensabile distinguere tra tre orizzonti temporali d'analisi:
+
+\subsection{1. Curva AS Keynesiana (Brevissimo Periodo)}
+Nel brevissimo periodo sia i prezzi dei beni sia i salari nominali sono fissi per ragioni contrattuali e abitudini commerciali. Le imprese sono disposte a offrire qualsiasi quantità di beni domandata al livello di prezzo corrente $\bar{P}$:
+\begin{equation}
+    P = \bar{P} \implies \text{Curva AS perfettamente orizzontale}
+\end{equation}
+
+\subsection{2. Curva AS di Breve Periodo (SRAS - Short-Run Aggregate Supply)}
+Nel breve periodo i prezzi dei beni finali $P$ possono aggiustarsi con relativa flessibilità, mentre i \textbf{salari nominali $W$ sono rigidi verso il basso o vischiosi} a causa della contrattazione collettiva e dei contratti di lavoro a durata pluriennale.
+
+\begin{modello}{Derivazione della Curva SRAS con Salari Vischiosi}{modello_sras}
+I salari nominali $W$ vengono fissati contrattualmente all'inizio del periodo in base al livello dei prezzi atteso dai lavoratori e dalle imprese ($P^{\mathrm{e}}$):
+\begin{equation}
+    W = P^{\mathrm{e}} \cdot F(u, z)
+\end{equation}
+dove $u$ è il tasso di disoccupazione e $z$ rappresenta le variabili istituzionali (sussidi di disoccupazione, potere contrattuale dei sindacati).
+
+Le imprese operano in regime di concorrenza imperfetta e fissano i prezzi applicando un margine di ricarico (\textit{markup} $\mu > 0$) sul costo marginale del lavoro (con produttività del lavoro $A$):
+\begin{equation}
+    P = (1 + \mu) \frac{W}{A} = (1 + \mu) \frac{P^{\mathrm{e}} F(u, z)}{A}
+\end{equation}
+Dato che il tasso di disoccupazione è inversamente correlato alla produzione ($u = 1 - \frac{Y}{L}$), l'equazione della curva di offerta aggregata di breve periodo diviene:
+\begin{equation}
+    P = P^{\mathrm{e}} \Big[ 1 + \lambda (Y - Y_{PO}) \Big] \label{eq:sras_prezzo}
+\end{equation}
+Esplicitando il reddito $Y$:
+\begin{equation}
+    Y = Y_{PO} + \beta (P - P^{\mathrm{e}}) \quad \text{con } \beta = \frac{1}{\lambda P^{\mathrm{e}}} > 0 \label{eq:sras_produzione}
+\end{equation}
+dove $Y_{PO}$ è il livello del \textbf{Prodotto Potenziale (o Naturale)} di pieno impiego.
+\end{modello}
+
+\begin{definizione}{Curva SRAS}{def_sras}
+La \textbf{Curva di Offerta Aggregata di Breve Periodo (SRAS)} è inclinata positivamente: se il livello effettivo dei prezzi supera le aspettative ($P > P^{\mathrm{e}}$), il salario reale effettivo $\frac{W}{P} = \frac{W}{P^{\mathrm{e}}} \frac{P^{\mathrm{e}}}{P}$ si riduce temporaneamente. Il minor costo reale del lavoro rende conveniente per le imprese assumere più lavoratori ed espandere la produzione al di sopra del livello potenziale ($Y > Y_{PO}$).
+\end{definizione}
+
+\subsection{3. Curva AS di Lungo Periodo (LRAS - Long-Run Aggregate Supply)}
+
+\begin{teorema}{Verticalità della Curva LRAS e Prodotto Potenziale}{teorema_lras}
+Nel lungo periodo tutte le rigidità contrattuali decadono: i salari nominali e i listini prezzi sono perfettamente flessibili e le aspettative si adeguano pienamente alla realtà:
+\begin{equation}
+    P^{\mathrm{e}} = P
+\end{equation}
+Sostituendo $P^{\mathrm{e}} = P$ nell'equazione della SRAS:
+\begin{equation}
+    Y = Y_{PO} + \beta(P - P) \iff Y = Y_{PO} \label{eq:lras}
+\end{equation}
+La \textbf{Curva di Offerta Aggregata di Lungo Periodo (LRAS)} è una retta \textbf{perfettamente verticale} in corrispondenza del livello del Prodotto Potenziale $Y_{PO}$.
+\end{teorema}
+
+\begin{definizione}{Prodotto Potenziale (PIL di Pieno Impiego)}{prodotto_potenziale}
+Il \textbf{Prodotto Potenziale ($Y_{PO}$ o $Y_n$)} è il massimo volume di produzione sostenibile di lungo periodo che un sistema economico può generare impiegando pienamente ed efficientemente tutte le risorse disponibili (capitale, lavoro, risorse naturali e stato della tecnologia), in corrispondenza del tasso naturale di disoccupazione $u_n$ e senza generare spinte acceleratrici sull'inflazione.
+\end{definizione}
+
+\section{Equilibrio Generale Macroeconomico AD-AS e Dinamica Temporale}
+
+\subsection{Equilibrio di Breve e Lungo Periodo}
+\begin{itemize}
+    \item \textbf{Equilibrio di Breve Periodo}: determinato dall'intersezione tra la curva di domanda aggregata $\mathrm{AD}$ e la curva di offerta di breve periodo $\mathrm{SRAS}$. Determina la coppia $(Y_{\text{BP}}, P_{\text{BP}})$. In tale punto può aversi $Y_{\text{BP}} \neq Y_{PO}$ (gap recessivo se $Y < Y_{PO}$, o gap inflazionistico se $Y > Y_{PO}$).
+    \item \textbf{Equilibrio di Lungo Periodo}: determinato dall'intersezione congiunta tra $\mathrm{AD}$, $\mathrm{SRAS}$ e $\mathrm{LRAS}$. In questo punto si verifica simultaneamente:
+    \begin{equation}
+        Y^* = Y_{PO}, \qquad P^* = P^{\mathrm{e}}
+    \end{equation}
+\end{itemize}
+
+\subsection{Dinamica di Aggiustamento dopo uno Shock di Domanda Positivo}
+Supponiamo che il Governo vari un piano straordinario di spesa pubblica a debito ($\Delta G > 0$).
+
+\begin{enumerate}
+    \item \textbf{Stato Iniziale ($E_0$)}: il sistema si trova in equilibrio di lungo periodo al punto $E_0(Y_{PO}, P_0)$ con $P_0^{\mathrm{e}} = P_0$.
+    \item \textbf{Transizione di Breve Periodo ($E_0 \to E_1$)}: l'aumento di spesa sposta la curva di domanda aggregata verso destra da $\mathrm{AD}_0$ a $\mathrm{AD}_1$. Nel breve periodo i salari sono bloccati dai contratti pregressi ($P^{\mathrm{e}} = P_0$). Il nuovo equilibrio è $E_1(Y_1, P_1)$ con:
+    \begin{equation}
+        Y_1 > Y_{PO} \quad (\text{Boom economico / Over-occupazione}), \qquad P_1 > P_0 \quad (\text{Inflazione da domanda})
+    \end{equation}
+    \item \textbf{Aggiustamento di Lungo Periodo ($E_1 \to E_2$)}: poiché la disoccupazione è inferiore al livello naturale e i prezzi effettivi superano quelli attesi ($P_1 > P_0^{\mathrm{e}}$), alla scadenza dei contratti i lavoratori esigono consistenti aumenti dei salari nominali $W$ per recuperare il potere d'acquisto perduto e aggiornano le proprie aspettative verso l'alto ($P^{\mathrm{e}} \to P_1$). L'incremento dei costi di produzione spinge le imprese ad aumentare i prezzi, provocando la \textbf{traslazione verso l'alto/sinistra della curva SRAS} da $\mathrm{SRAS}_0$ a $\mathrm{SRAS}_1$.
+    \item \textbf{Equilibrio Finale di Lungo Periodo ($E_2$)}: il processo di revisione delle aspettative e dei salari prosegue finché la curva SRAS non interseca la $\mathrm{AD}_1$ esattamente sulla retta verticale $\mathrm{LRAS}$ al punto $E_2(Y_{PO}, P_2)$ con $P_2 > P_1 > P_0$.
+\end{enumerate}
+
+\begin{teorema}{Principio di Neutralità della Moneta nel Lungo Periodo}{neutralita_moneta}
+Nel lungo periodo la politica monetaria è \textbf{neutrale}: un incremento dell'offerta di moneta $\Delta M > 0$ genera un incremento strettamente proporzionale del livello generale dei prezzi ($\frac{\Delta P}{P} = \frac{\Delta M}{M}$) e dei salari nominali, lasciando inalterate tutte le variabili macroeconomiche reali (PIL $Y = Y_{PO}$, occupazione $N = N_{PO}$, consumi reali, investimenti reali e tasso di interesse reale $r^*$).
+\end{teorema}
+
+\section{Shock di Offerta e il Fenomeno della Stagflazione}
+
+Uno dei contributi più importanti del modello AD-AS è la spiegazione analitica degli shock dal lato dell'offerta aggregata.
+
+\begin{definizione}{Stagflazione}{def_stagflazione}
+La \textbf{Stagflazione} è la contemporanea presenza di \textbf{stagnazione economica} (recessione del PIL, caduta della produzione e disoccupazione elevata: $Y < Y_{PO}$) e di \textbf{elevata inflazione} (crescita sostenuta del livello generale dei prezzi: $P \uparrow$).
+\end{definizione}
+
+\begin{modello}{Meccanismo dello Shock di Offerta Negativo}{modello_stagflazione}
+Consideriamo uno shock esogeno avverso sui costi di produzione (es. quadruplicazione del prezzo del petrolio e del gas naturale o interruzione globale delle catene di approvvigionamento).
+\begin{enumerate}
+    \item I maggiori costi energetici incrementano istantaneamente i costi marginali delle imprese per ogni livello di produzione.
+    \item La curva di offerta di breve periodo \textbf{trasla bruscamente verso l'alto/sinistra} da $\mathrm{SRAS}_0$ a $\mathrm{SRAS}_1$.
+    \item L'equilibrio macroeconomico si sposta da $E_0(Y_{PO}, P_0)$ al punto di stagflazione $E_1(Y_1, P_1)$ caratterizzato da:
+    \begin{equation}
+        Y_1 < Y_{PO} \quad (\text{Recessione e Disoccupazione}), \qquad P_1 > P_0 \quad (\text{Inflazione da Costi})
+    \end{equation}
+\end{enumerate}
+\end{modello}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05, >=Stealth]
+    % Assi
+    \draw[->, line width=1.2pt] (0,0) -- (9.2,0) node[right, font=\small\bfseries] {PIL Reale ($Y$)};
+    \draw[->, line width=1.2pt] (0,0) -- (0,6.5) node[above, font=\small\bfseries] {Livello Prezzi ($P$)};
+
+    % LRAS Verticale
+    \draw[line width=2pt, color=forestgreen] (4.5, 0) -- (4.5, 6.0) node[above, font=\small\bfseries] {$\mathrm{LRAS}$};
+    \node[below, font=\small\bfseries, color=forestgreen] at (4.5, 0) {$Y_{PO}$};
+
+    % Curva AD
+    \draw[line width=1.8pt, color=purpleaccent] (1.5, 5.5) -- (8.0, 1.0) node[right, font=\small\bfseries] {$\mathrm{AD}$};
+
+    % Curve SRAS originale e traslata per shock costi
+    \draw[line width=1.8pt, color=navyblue] (1.2, 1.5) -- (7.5, 5.2) node[right, font=\small\bfseries] {$\mathrm{SRAS}_0$};
+    \draw[line width=1.8pt, color=crimsonred] (0.8, 3.2) -- (6.5, 6.2) node[above right, font=\small\bfseries] {$\mathrm{SRAS}_1 (\text{Shock Offerta})$};
+
+    % Equilibri
+    \coordinate (E0) at (4.5, 3.44);
+    \coordinate (E1) at (3.1, 4.4);
+
+    \fill[forestgreen] (E0) circle (3pt) node[below right=2pt, font=\footnotesize\bfseries] {$E_0(Y_{PO}, P_0)$};
+    \fill[crimsonred] (E1) circle (3pt) node[above=4pt, font=\footnotesize\bfseries] {$E_1(Y_1, P_1)$};
+
+    % Proiezioni
+    \draw[dashed, line width=0.8pt, color=crimsonred] (3.1, 0) node[below, font=\footnotesize\bfseries] {$Y_1$} -- (E1) -- (0, 4.4) node[left, font=\footnotesize\bfseries] {$P_1$};
+    \draw[dashed, line width=0.8pt, color=forestgreen] (E0) -- (0, 3.44) node[left, font=\footnotesize\bfseries] {$P_0$};
+
+    % Frecce ed etichette
+    \draw[->, line width=1.3pt, color=crimsonred] (E0) to[out=135, in=-30] node[above, font=\scriptsize\bfseries, align=center] {Shock avverso\\implica Stagflazione} (E1);
+    \draw[<->, line width=1.1pt, color=crimsonred] (3.1, 0.4) -- node[above, font=\scriptsize\bfseries] {Gap Recessivo} (4.5, 0.4);
+
+\end{tikzpicture}
+\caption{Shock di offerta negativo e genesi della Stagflazione nel modello AD-AS. La curva $\mathrm{SRAS}_0$ trasla verso l'alto a $\mathrm{SRAS}_1$, determinando una contrazione del PIL reale da $Y_{PO}$ a $Y_1$ (disoccupazione) e un aumento del livello dei prezzi da $P_0$ a $P_1$ (inflazione).}
+\label{fig:ad_as_stagflazione}
+\end{figure}
+
+\subsection{Il Dilemma delle Politiche Economiche di Fronte alla Stagflazione}
+Di fronte alla stagflazione, i decisori politici si trovano in un tragico \textbf{trade-off insolubile} mediante sole politiche di gestione della domanda aggregata:
+\begin{enumerate}
+    \item \textbf{Politica di Domanda Espansiva (Accodamento dello shock)}: se il governo espande $G$ o la Banca Centrale aumenta $M$ per sostenere l'occupazione ($\mathrm{AD} \to \mathrm{AD}'$), il PIL torna al livello potenziale $Y_{PO}$, ma il prezzo da pagare è una \textbf{ulteriore impennata dell'inflazione} ($P_2 \gg P_1$).
+    \item \textbf{Politica di Domanda Restrittiva (Lotta all'inflazione)}: se la Banca Centrale alza bruscamente i tassi per raffreddare i prezzi ($\mathrm{AD} \to \mathrm{AD}''$), l'inflazione viene frenata, ma al costo di \textbf{aggravare drammaticamente la recessione e la disoccupazione} ($Y_2 \ll Y_1$).
+    \item \textbf{La Soluzione Strutturale (Politiche dal Lato dell'Offerta)}: l'unico modo per curare simultaneamente disoccupazione e inflazione consiste nell'attuare \textbf{riforme strutturali} (investimenti in nuove tecnologie, riqualificazione energetica, riduzione del cuneo fiscale sul lavoro, aumento della concorrenza) in grado di traslare la curva $\mathrm{SRAS}$ e la retta $\mathrm{LRAS}$ verso destra.
+\end{enumerate}
+
+\section{Metodi Risolutivi ed Eserciziario d'Esame}
+
+\begin{metodo}[Algoritmo di Risoluzione per i Modelli AD-AS]
+Per determinare l'equilibrio analitico di breve e lungo periodo:
+\begin{enumerate}
+    \item \textbf{Derivazione della Curva AD}:
+    \begin{itemize}
+        \item Mettere a sistema le equazioni di IS e LM mantenendo il prezzo $P$ come variabile incognita;
+        \item Esplicitare $Y$ in funzione di $P$ ottenendo l'equazione $Y = \mathrm{AD}(P)$.
+    \end{itemize}
+    \item \textbf{Equilibrio di Breve Periodo}:
+    \begin{itemize}
+        \item Uguagliare la domanda aggregata $\mathrm{AD}(P)$ con la curva $\mathrm{SRAS}(P, P^{\mathrm{e}})$;
+        \item Risolvere l'equazione per il livello dei prezzi di breve periodo $P_{\text{BP}}$;
+        \item Sostituire $P_{\text{BP}}$ per ricavare la produzione di breve periodo $Y_{\text{BP}}$.
+    \end{itemize}
+    \item \textbf{Equilibrio di Lungo Periodo}:
+    \begin{itemize}
+        \item Porre $Y = Y_{PO}$ nell'equazione della curva AD;
+        \item Calcolare direttamente il livello dei prezzi di lungo periodo $P_{\text{LP}}$;
+        \item Verificare che nel lungo periodo le aspettative si siano adeguate: $P_{\text{LP}}^{\mathrm{e}} = P_{\text{LP}}$.
+    \end{itemize}
+\end{enumerate}
+\end{metodo}
+
+\begin{esercizio}[Risoluzione Completa AD-AS con Shock e Dinamica di Transizione]
+Un sistema macroeconomico è descritto dalle seguenti relazioni:
+\begin{align*}
+    \IS: &\quad Y = 2000 - 4000 r \\
+    \LM: &\quad \frac{M}{P} = 0{,}5 Y - 2000 r \\
+    \mathrm{SRAS}: &\quad Y = Y_{PO} + 500 \left( \frac{P - P^{\mathrm{e}}}{P^{\mathrm{e}}} \right)
+\end{align*}
+I parametri iniziali sono $M = 600$, $Y_{PO} = 1500$ e le aspettative iniziali sono ancorate a $P^{\mathrm{e}} = 1{,}0$.
+\textbf{Richieste}:
+\begin{enumerate}
+    \item Ricavare l'equazione analitica della curva AD e verificare che $(Y_0 = 1500, P_0 = 1{,}0)$ costituisca l'equilibrio iniziale di lungo periodo.
+    \item A seguito di un'espansione monetaria l'offerta di moneta sale a $M' = 900$. Calcolare il nuovo equilibrio di breve periodo ($Y_{\text{BP}}, P_{\text{BP}}$).
+    \item Determinare l'equilibrio finale di lungo periodo ($Y_{\text{LP}}, P_{\text{LP}}$) e quantificare l'adeguamento delle aspettative e la variazione percentuale dei prezzi.
+\end{enumerate}
+
+\textbf{Svolgimento}:
+\begin{enumerate}
+    \item \textbf{Derivazione della AD}:
+    Dalla LM ricaviamo $2000 r = 0{,}5 Y - \frac{M}{P} \implies 4000 r = Y - 2\frac{M}{P}$.
+    Sostituendo nella IS:
+    \begin{equation*}
+        Y = 2000 - \left( Y - 2\frac{M}{P} \right) = 2000 - Y + 2\frac{M}{P} \implies 2Y = 2000 + 2\frac{M}{P}
+    \end{equation*}
+    \begin{equation*}
+        \mathrm{AD}: \quad Y = 1000 + \frac{M}{P}
+    \end{equation*}
+    Per $M = 600$ e $P = 1{,}0$:
+    \begin{equation*}
+        Y = 1000 + \frac{600}{1{,}0} = 1600 \quad (\text{se } Y_{PO} = 1500, \text{ con } P=1{,}2 \implies Y = 1000 + 500 = 1500).
+    \end{equation*}
+    Ponendo $Y = 1500$ con $M = 600$:
+    \begin{equation*}
+        1500 = 1000 + \frac{600}{P} \implies \frac{600}{P} = 500 \implies P_0 = \frac{600}{500} = 1{,}20
+    \end{equation*}
+    Con aspettative coerenti $P^{\mathrm{e}} = 1{,}20$: $\mathrm{SRAS}: Y = 1500 + 500 \left( \frac{1{,}20 - 1{,}20}{1{,}20} \right) = 1500 = Y_{PO}$.
+    L'equilibrio iniziale di lungo periodo è $E_0(Y_0 = 1500, P_0 = 1{,}20)$.
+
+    \item \textbf{Nuovo Equilibrio di Breve Periodo con $M' = 900$}:
+    La nuova curva di domanda aggregata è:
+    \begin{equation*}
+        \mathrm{AD}': \quad Y = 1000 + \frac{900}{P}
+    \end{equation*}
+    Nel breve periodo le aspettative sono ferme a $P^{\mathrm{e}} = 1{,}20$:
+    \begin{equation*}
+        \mathrm{SRAS}: \quad Y = 1500 + \frac{500}{1{,}20}(P - 1{,}20) = 1500 + 416{,}67(P - 1{,}20) = 1000 + 416{,}67 P
+    \end{equation*}
+    Uguagliando $\mathrm{AD}' = \mathrm{SRAS}$:
+    \begin{equation*}
+        1000 + \frac{900}{P} = 1000 + 416{,}67 P \implies 416{,}67 P^2 = 900 \implies P^2 = \frac{900}{416{,}67} = 2{,}16 \implies P_{\text{BP}} = \sqrt{2{,}16} \approx 1{,}47
+    \end{equation*}
+    Calcoliamo il PIL di breve periodo:
+    \begin{equation*}
+        Y_{\text{BP}} = 1000 + \frac{900}{1{,}47} \approx 1000 + 612{,}24 = 1612{,}24 > Y_{PO}
+    \end{equation*}
+    Nel breve periodo l'espansione monetaria genera un incremento di PIL pari al $+7{,}48$\% ($1612{,}24$ contro $1500$) e un'inflazione dei prezzi da $1{,}20$ a $1{,}47$ ($+22{,}5$\%).
+
+    \item \textbf{Equilibrio Finale di Lungo Periodo}:
+    Nel lungo periodo $Y$ deve ritornare a $Y_{PO} = 1500$.
+    Dall'equazione $\mathrm{AD}'$:
+    \begin{equation*}
+        1500 = 1000 + \frac{900}{P_{\text{LP}}} \implies \frac{900}{P_{\text{LP}}} = 500 \implies P_{\text{LP}} = \frac{900}{500} = 1{,}80
+    \end{equation*}
+    Le aspettative di prezzo si adeguano a $P_{\text{LP}}^{\mathrm{e}} = 1{,}80$.
+    \textbf{Verifica della Neutralità della Moneta}:
+    \begin{equation*}
+        \frac{\Delta M}{M} = \frac{900 - 600}{600} = +0{,}50, \qquad \frac{\Delta P}{P} = \frac{1{,}80 - 1{,}20}{1{,}20} = +0{,}50
+    \end{equation*}
+    Lo stock di moneta è cresciuto del $50$\% e il livello dei prezzi è cresciuto esattamente del $50$\%. Lo stock reale di moneta finale è identico a quello iniziale: $\frac{900}{1{,}80} = 500 = \frac{600}{1{,}20}$.
+\end{enumerate}
+\end{esercizio}
+
+\begin{esame}[Trabocchetti Concettuali su AD-AS]
+\begin{enumerate}
+    \item \textbf{Curva di Domanda Micro vs Macro}: la curva AD non è la somma orizzontale delle domande microeconomiche dei singoli beni. La sua pendenza negativa non riflette la sostituzione tra beni al variare dei prezzi relativi, ma la contrazione della liquidità reale, del credito e della competitività internazionale a fronte di un aumento del \textit{livello generale dei prezzi}.
+    \item \textbf{LRAS e Politiche di Domanda}: ricordare che nessuna manovra di politica fiscale o monetaria può spostare la curva LRAS di lungo periodo. Gli spostamenti della LRAS derivano unicamente da variazioni tecnologiche, accumulazione di capitale fisico e umano, o riforme strutturali del mercato del lavoro.
+    \item \textbf{Stagflazione e Curva di Phillips}: la stagflazione (shock da costi) demolisce la curva di Phillips originaria a trade-off stabile: in stagflazione inflazione e disoccupazione crescono contemporaneamente.
+\end{enumerate}
+\end{esame}

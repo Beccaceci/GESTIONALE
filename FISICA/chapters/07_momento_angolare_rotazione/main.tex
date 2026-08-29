@@ -1,0 +1,230 @@
+% ==============================================================================
+% CAPITOLO 07 - MOMENTO ANGOLARE, MOMENTO DELLA FORZA E ROTAZIONI
+% ==============================================================================
+\chapter{Momento Angolare, Momento Meccanico e Rotazioni}
+\label{chap:momento_angolare_rotazione}
+
+\begin{tcolorbox}[enhanced, breakable, colback=navyblue!4!white, colframe=navyblue!80!black,
+    coltitle=white, fonttitle=\bfseries\sffamily, title={Quadro Sinottico del Capitolo 07 (Corrispondenza: Lezione 15 e parte di 23)},
+    sharp corners, rounded corners=south, boxrule=1pt]
+\textbf{Collocazione Modulare:} Parte II -- Leggi di Conservazione, Urti e Corpo Rigido\\
+\textbf{Trascrizione di Riferimento:} \texttt{trascrizioni/Lezione\_15\_...md} e \texttt{trascrizioni/Lezione\_23\_...md}\\
+\textbf{Manuale di Riferimento:} Focardi, Massa, Ugolini -- \emph{Fisica Generale: Meccanica e Termodinamica} (Capitolo 7)\\
+\textbf{Obiettivi Didattici e Competenze:}\par
+\begin{itemize}
+    \item Definire il momento di una forza $\vec{M}_O = \vec{r}\times\vec{F}$, il braccio della forza $b$ e analizzare la legge di trasposizione del polo.
+    \item Definire il momento angolare $\vec{L}_O = \vec{r}\times\vec{p}$ per particelle e sistemi e dimostrare il Secondo Teorema di König per $\vec{L}$.
+    \item Dimostrare la Seconda Equazione Cardinale della Meccanica ($\dv{\vec{L}_O}{t} = \vec{M}_O^{(E)}$) e analizzare i criteri di scelta del polo (polo fisso o Centro di Massa).
+    \item Applicare la legge di conservazione del momento angolare ai sistemi chiusi.
+    \item Dimostrare le proprietà dei campi di forze centrali: planarità del moto, costanza di $\vec{L}$ e Seconda Legge di Keplero (costanza della velocità areale).
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5em}
+
+% ------------------------------------------------------------------------------
+\section{Momento Meccanico di una Forza}
+\label{sec:momento_forza}
+% ------------------------------------------------------------------------------
+
+\begin{definizione}{Momento della Forza rispetto a un Polo}{def:momento_forza}
+Data una forza $\vec{F}$ applicata nel punto $P$ individuato dal vettore posizione $\vec{r} = \vec{OP}$ rispetto a un polo $O$, il \textbf{momento della forza} (detto anche momento meccanico o \emph{torque}) è il vettore:
+\begin{equation}
+    \vec{M}_O \coloneqq \vec{r} \times \vec{F}
+    \label{eq:momento_forza}
+\end{equation}
+\end{definizione}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    \coordinate (O) at (0,0);
+    \coordinate (P) at (3, 1.5);
+    \coordinate (F) at (4.5, 3.0);
+    
+    % Vettore posizione
+    \draw[->, very thick, navyblue] (O) -- (P) node[midway, below right] {$\vec{r}$};
+    \filldraw[black] (O) circle (2pt) node[below left] {$O$ (Polo)};
+    \filldraw[black] (P) circle (2pt) node[below=2pt] {$P$};
+    
+    % Forza applicata
+    \draw[->, ultra thick, crimsonred] (P) -- (F) node[above right] {$\vec{F}$};
+    
+    % Retta d'azione e braccio
+    \draw[dashed, gray] ($(P) - 1.5*(1.5, 1.5)$) -- ($(F) + 0.8*(1.5, 1.5)$) node[right] {Retta d'azione};
+    \draw[dashed, forestgreen, thick] (O) -- (1.06, -1.06);
+    \draw[<->, forestgreen, ultra thick] (O) -- (0.75, -0.75) node[midway, left] {$b = r\sin\theta$};
+    
+    % Momento uscente
+    \filldraw[purpleaccent] (O) circle (3pt);
+    \node[purpleaccent] at (0, 0.4) {$\odot\,\vec{M}_O$};
+\end{tikzpicture}
+\end{center}
+
+Il modulo del momento è:
+\begin{equation}
+    |\vec{M}_O| = |\vec{r}| |\vec{F}| \sin\theta = F \cdot b
+    \label{eq:modulo_momento}
+\end{equation}
+dove $b \coloneqq r\sin\theta$ è il \textbf{braccio della forza}, ovvero la distanza geometrica tra il polo $O$ e la retta d'azione della forza $\vec{F}$. L'unità di misura nel SI è $\si{\newton\metre}$.
+
+\subsection{Legge di Trasposizione del Polo}
+Se si cambia il polo di riduzione da $O$ a $O'$:
+\begin{equation}
+    \vec{M}_{O'} = \vec{r}' \times \vec{F} = (\vec{r} - \vec{r}_{O'O}) \times \vec{F} = \vec{M}_O + \vec{r}_{OO'} \times \vec{F}
+    \label{eq:trasposizione_polo}
+\end{equation}
+Se la risultante delle forze applicate è nulla ($\vec{F}_{\text{tot}} = \vec{0}$, come in una \textbf{coppia di forze}), il momento totale è \textbf{invariante rispetto alla scelta del polo}: $\vec{M}_{O'} = \vec{M}_O$.
+
+% ------------------------------------------------------------------------------
+\section{Momento Angolare e Secondo Teorema di König}
+\label{sec:momento_angolare}
+% ------------------------------------------------------------------------------
+
+\begin{definizione}{Momento Angolare}{def:momento_angolare}
+Il \textbf{momento angolare} (o momento della quantità di moto) di un punto materiale di massa $m$ e velocità $\vec{v}$ rispetto al polo $O$ è il vettore:
+\begin{equation}
+    \vec{L}_O \coloneqq \vec{r} \times \vec{p} = \vec{r} \times (m\vec{v})
+    \label{eq:momento_angolare_punto}
+\end{equation}
+Per un sistema di $N$ particelle:
+\begin{equation}
+    \vec{L}_O \coloneqq \sum_{i=1}^N \vec{r}_i \times (m_i\vec{v}_i)
+    \label{eq:momento_angolare_sistema}
+\end{equation}
+L'unità di misura nel SI è $\si{\kilogram\metre\squared\per\second} = \si{\joule\second}$.
+\end{definizione}
+
+\begin{teorema}{Secondo Teorema di König per il Momento Angolare}{teo:konig_momento_angolare}
+Il momento angolare totale $\vec{L}_O$ di un sistema si scompone nella somma del momento angolare del moto del Centro di Massa concentrato in $CM$ e del momento angolare intrinseco relativo $\vec{L}_{CM}'$ (spin baricentrale):
+\begin{equation}
+    \vec{L}_O = \vec{r}_{CM} \times (M\vec{v}_{CM}) + \vec{L}_{CM}' = \vec{r}_{CM} \times \vec{P}_{\text{tot}} + \sum_{i=1}^N \vec{r}_i' \times (m_i\vec{v}_i')
+    \label{eq:konig_L}
+\end{equation}
+\end{teorema}
+
+% ------------------------------------------------------------------------------
+\section{La Seconda Equazione Cardinale della Meccanica}
+\label{sec:seconda_cardinale}
+% ------------------------------------------------------------------------------
+
+Deriviamo rispetto al tempo il momento angolare $\vec{L}_O$ rispetto a un polo mobile generico $O'$ avente velocità $\vec{v}_{O'} = \dv{\vec{r}_{O'}}{t}$:
+\begin{equation}
+    \dv{\vec{L}_{O'}}{t} = \dv{}{t}\sum_{i=1}^N (\vec{r}_i - \vec{r}_{O'}) \times (m_i\vec{v}_i) = \sum_{i=1}^N (\vec{v}_i - \vec{v}_{O'}) \times (m_i\vec{v}_i) + \sum_{i=1}^N (\vec{r}_i - \vec{r}_{O'}) \times (m_i\vec{a}_i)
+\end{equation}
+Poiché $\vec{v}_i \times m_i\vec{v}_i = \vec{0}$, il primo termine si riduce a $-\vec{v}_{O'} \times \vec{P}_{\text{tot}}$, mentre il secondo, per il terzo principio (momento totale delle forze interne identicamente nullo $\vec{M}^{(I)} = \vec{0}$), è pari al momento delle forze esterne $\vec{M}_{O'}^{(E)}$.
+
+\begin{teorema}{Seconda Equazione Cardinale della Dinamica}{teo:seconda_cardinale}
+Per un polo mobile $O'$ generico:
+\begin{equation}
+    \dv{\vec{L}_{O'}}{t} = \vec{M}_{O'}^{(E)} - \vec{v}_{O'} \times \vec{P}_{\text{tot}}
+    \label{eq:seconda_cardinale_gen}
+\end{equation}
+L'equazione assume la forma canonica semplificata:
+\begin{equation}
+    \mathbf{\dv{\vec{L}_{O'}}{t} = \vec{M}_{O'}^{(E)}}
+    \label{eq:seconda_cardinale_canonica}
+\end{equation}
+se e solo se si verifica una delle seguenti tre condizioni fisiche:
+\begin{enumerate}
+    \item Il polo $O'$ è \textbf{fisso} nel sistema inerziale ($\vec{v}_{O'} = \vec{0}$).
+    \item Il polo $O'$ coincide istante per istante con il \textbf{Centro di Massa} ($O' = CM$).
+    \item La velocità del polo è parallela alla quantità di moto totale ($\vec{v}_{O'} \parallel \vec{v}_{CM}$).
+\end{enumerate}
+\end{teorema}
+
+\begin{legge}{Conservazione del Momento Angolare}{legge:cons_momento_angolare}
+Se il momento risultante delle forze esterne rispetto a un polo fisso o al $CM$ è nullo ($\vec{M}_O^{(E)} = \vec{0}$):
+\begin{equation}
+    \vec{L}_O = \text{cost}
+    \label{eq:cons_L}
+\end{equation}
+\end{legge}
+
+% ------------------------------------------------------------------------------
+\section{Dinamica nei Campi di Forze Centrali e Legge delle Aree}
+\label{sec:forze_centrali}
+% ------------------------------------------------------------------------------
+
+\begin{definizione}{Forza Centrale}{def:forza_centrale}
+Un campo di forze $\vec{F}(\vec{r})$ è \textbf{centrale} se la forza è in ogni punto diretta lungo la retta congiungente con un centro fisso $O$, con modulo dipendente unicamente dalla distanza radiale $r = |\vec{r}|$:
+\begin{equation}
+    \vec{F}(\vec{r}) = f(r)\,\ur = f(r)\,\frac{\vec{r}}{r}
+    \label{eq:campo_centrale}
+\end{equation}
+\end{definizione}
+
+\begin{teorema}{Proprietà Fondamentali del Moto in un Campo Centrale}{teo:proprieta_forze_centrali}
+\begin{enumerate}
+    \item \textbf{Conservazione Rigorosa di $\vec{L}_O$}: Poiché $\vec{r} \parallel \vec{F}$, il momento meccanico rispetto al centro $O$ è identicamente nullo:
+    \begin{equation}
+        \vec{M}_O = \vec{r} \times \vec{F} = \vec{r} \times [f(r)\ur] = \vec{0} \implies \mathbf{\vec{L}_O = \vec{r}\times(m\vec{v}) = \text{cost}}
+    \end{equation}
+    \item \textbf{Planarità del Moto}: Poiché $\vec{r}(t)\cdot\vec{L}_O = 0$ in ogni istante, il vettore posizione giace permanentemente nel piano perpendicolare al vettore costante $\vec{L}_O$.
+    \item \textbf{Seconda Legge di Keplero (Costanza della Velocità Areale)}: In coordinate polari $(r, \theta)$, il momento angolare vale $L_z = m r^2 \dot{\theta} = \text{cost}$. L'area infinitesima spazzata dal raggio vettore nel tempo $\dd t$ è $\dd A = \frac{1}{2}r (r\,\dd\theta) = \frac{1}{2}r^2\dot{\theta}\,\dd t$, da cui la velocità areale:
+    \begin{equation}
+        \mathbf{\dot{A} \coloneqq \dv{A}{t} = \frac{1}{2}r^2\dot{\theta} = \frac{L_z}{2m} = \text{cost}}
+        \label{eq:velocita_areale}
+    \end{equation}
+    Il raggio vettore spazza aree uguali in intervalli di tempo uguali.
+\end{enumerate}
+\end{teorema}
+
+% ------------------------------------------------------------------------------
+\section{Esercizi Risolti ed Applicativi con Analisi dei Momenti e Forze}
+\label{sec:esercizi_momento_angolare}
+% ------------------------------------------------------------------------------
+
+\begin{esercizio}[Massa su Tavolo Liscio Tirata dal Foro Centrale]
+\textbf{Testo:}
+Una massa $m$ ruota su un tavolo orizzontale privo di attrito collegata a una fune inestensibile che passa attraverso un foro centrale $O$. Inizialmente ruota a distanza $r_1$ con velocità $v_1$. La fune viene tirata lentamente dal basso fino a ridurre il raggio a $r_2 < r_1$. Determinare la nuova velocità $v_2$, analizzare il diagramma delle forze e calcolare il lavoro compiuto dalla tensione.
+\end{esercizio}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.2, >=Stealth]
+    % Tavolo orizzontale in prospettiva
+    \draw[thick, fill=gray!10] (-3, -1.5) -- (3, -1.5) -- (4, 1.5) -- (-2, 1.5) -- cycle;
+    \filldraw[black] (0.5, 0) circle (2.5pt) node[below left] {Foro $O$};
+    
+    % Orbite circolare e ridotta
+    \draw[dashed, gray] (0.5, 0) ellipse (2.2 and 1.0);
+    \draw[dashed, purpleaccent] (0.5, 0) ellipse (1.2 and 0.55);
+    
+    % Fune e massa m
+    \draw[very thick, brown!80!black] (0.5, 0) -- (2.7, 0);
+    \filldraw[fill=blue!20, draw=navyblue, thick] (2.4, -0.2) rectangle (3.0, 0.2);
+    \coordinate (M) at (2.7, 0);
+    \filldraw[black] (M) circle (1.5pt) node[below right] {$m$};
+    
+    % Forze sulla massa m
+    \draw[->, ultra thick, crimsonred] (M) -- (1.3, 0) node[above] {$\vec{T} = -T\ur$};
+    \draw[->, ultra thick, forestgreen] (M) -- (2.7, 1.3) node[right] {$\vec{N} = mg\uz$};
+    \draw[->, ultra thick, navyblue] (M) -- (2.7, -1.3) node[right] {$\vec{P} = -mg\uz$};
+    \draw[->, very thick, purpleaccent] (M) -- (2.7, 0.8) node[right] {$\vec{v}_1$};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[enhanced, breakable, colback=forestgreen!5!white, colframe=forestgreen!80!black,
+    title={\textbf{Analisi delle Forze e dei Momenti Meccanici}}, fonttitle=\bfseries\sffamily]
+\begin{itemize}
+    \item \textbf{Lungo la verticale $\uz$:} la reazione normale $\vec{N}$ bilancia esattamente il peso gravitazionale ($\vec{N} + \vec{P} = \vec{0}$). Il momento risultante rispetto a $O$ delle forze verticali è nullo: $\vec{M}_{O,z} = \vec{r}\times(\vec{N}+\vec{P}) = \vec{0}$.
+    \item \textbf{Sul piano orizzontale del moto:} l'unica forza agente è la tensione della fune $\vec{T} = -T\ur$, diretta verso il foro centrale $O$.
+    \item \textbf{Perché il momento meccanico è nullo ($\vec{M}_O = \vec{0}$):} la linea d'azione della tensione coincide con il raggio vettore $\vec{r}$ ($\vec{r} \parallel \vec{T}$). Il braccio della forza rispetto a $O$ è nullo ($b = r\sin(180^\circ) = 0$):
+    \begin{equation}
+        \vec{M}_O = \vec{r}\times\vec{T} = \vec{0} \implies \mathbf{\dv{\vec{L}_O}{t} = \vec{0} \implies \vec{L}_O = \text{cost}}
+    \end{equation}
+\end{itemize}
+\end{tcolorbox}
+
+\textbf{Risoluzione Analitica:}
+\begin{enumerate}
+    \item \textbf{Conservazione di $\vec{L}_O$:}
+    \begin{equation}
+        L_1 = m r_1 v_1 = L_2 = m r_2 v_2 \implies \mathbf{v_2 = v_1\left(\frac{r_1}{r_2}\right)}
+    \end{equation}
+    \item \textbf{Lavoro compiuto dalla tensione e variazione di $E_k$:}
+    Poiché la fune viene accorciata, la tensione $\vec{T} = -T\ur$ e lo spostamento radiale $\dd\vec{r} = \dd r\,\ur$ (con $\dd r < 0$) sono concordi:
+    \begin{equation}
+        W = \int_{r_1}^{r_2} (-T)\,\dd r = \int_{r_1}^{r_2} \left(-\frac{L^2}{m r^3}\right)\dd r = \frac{L^2}{2m}\left(\frac{1}{r_2^2} - \frac{1}{r_1^2}\right) = \mathbf{\Delta E_k > 0}
+    \end{equation}
+    L'energia cinetica aumenta a spese del lavoro esterno positivo compiuto da chi tira la fune.
+\end{enumerate}

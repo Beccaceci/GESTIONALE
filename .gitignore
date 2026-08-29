@@ -1,0 +1,38 @@
+# LaTeX Auxiliary & Compilation Files
+*.aux
+*.log
+*.toc
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.nav
+*.snm
+*.vrb
+*.bcf
+*.run.xml
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+
+# Raw Scans, Textbooks and Recordings (Excluded from GitHub due to file size > 50-100MB)
+**/scans/
+**/scans_esami/
+**/sources/
+**/source/
+**/esami_online/
+
+# Agent / AI local workspace caches & logs
+.agents/
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/

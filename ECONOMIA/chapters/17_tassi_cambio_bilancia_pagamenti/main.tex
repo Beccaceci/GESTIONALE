@@ -1,0 +1,435 @@
+% ==============================================================================
+% CAPITOLO 17: I TASSI DI CAMBIO E LA BILANCIA DEI PAGAMENTI
+% ==============================================================================
+\chapter{I Tassi di Cambio e la Bilancia dei Pagamenti}
+\label{chap:tassi_cambio_bilancia_pagamenti}
+
+\begin{tcolorbox}[colback=navyblue!5!white, colframe=navyblue, title=\textbf{Quadro Concettuale del Capitolo}]
+Questo capitolo estende l'analisi macroeconomica alle relazioni economiche, commerciali e finanziarie internazionali. Si esamina la struttura del \textbf{Mercato Valutario Internazionale (Forex)}, definendo il tasso di cambio nominale secondo la convenzione europea (\textit{incerto per certo}) e il \textbf{tasso di cambio reale} come misura fondamentale della competitività di prezzo delle merci. Vengono dimostrate le condizioni teoriche di non arbitraggio internazionale: la \textbf{Parità dei Poteri d'Acquisto (PPP)} e la \textbf{Parità Scoperta dei Tassi di Interesse (UIP)}. Si illustra l'architettura contabile ed economica della \textbf{Bilancia dei Pagamenti} articolata in Conto Corrente ($\mathrm{CA}$), Conto Capitale ($\mathrm{KA}$) e Conto Finanziario ($\mathrm{FA}$). Si analizzano i regimi di cambio fissi e flessibili, le conseguenze economiche delle svalutazioni, la \textbf{Condizione di Marshall-Lerner} e la dinamica temporale della \textbf{Curva a J}.
+\end{tcolorbox}
+
+\section{Il Mercato Valutario (Forex) e il Tasso di Cambio Nominale}
+
+Nelle moderne economie globalizzate le transazioni commerciali e i movimenti di capitali tra soggetti residenti in Paesi diversi richiedono l'utilizzo di valute monetarie distinte (Euro, Dollaro USA, Sterlina Britannica, Yen Giapponese, Renminbi Cinese).
+
+\begin{definizione}{Mercato Valutario (Forex)}{def_forex}
+Il \textbf{Mercato Valutario Internazionale} (\textit{Foreign Exchange Market} o \textbf{Forex}) è il mercato finanziario globale, continuo e decentralizzato in cui le valute nazionali vengono scambiate reciprocamente e si formano i relativi prezzi di conversione.
+\end{definizione}
+
+\subsection{Convenzioni di Quotazione del Tasso di Cambio Nominale}
+Esistono due convenzioni formali per esprimere il tasso di cambio nominale tra due valute:
+
+\begin{definizione}{Tasso di Cambio Nominale (Convenzione Incerto per Certo)}{def_cambio_nominale}
+Nell'Eurosistema si adotta la convenzione \textbf{Incerto per Certo} (quotazione indiretta o euro-quotazione): il tasso di cambio nominale ($\cambionom$) rappresenta la \textbf{quantità di valuta estera necessaria per acquistare $1$ unità di valuta nazionale (euro)}:
+\begin{equation}
+    \cambionom = \frac{\text{Unità di Valuta Estera (es. USD)}}{\text{1 Euro}}
+\end{equation}
+Sotto questa convenzione:
+\begin{itemize}
+    \item \textbf{Apprezzamento dell'Euro ($\cambionom \uparrow$)}: l'euro si rafforza; occorrono più dollari per acquistare $1$ euro (es. da $1{,}10$ a $1{,}20$ USD/EUR). I beni esteri diventano più convenienti per gli europei, mentre le merci europee diventano più care per gli acquirenti esteri.
+    \item \textbf{Deprezzamento dell'Euro ($\cambionom \downarrow$)}: l'euro perde valore sui mercati internazionali; occorrono meno dollari per acquistare $1$ euro (es. da $1{,}10$ a $1{,}05$ USD/EUR).
+\end{itemize}
+\end{definizione}
+
+\begin{osservazione}[Quotazione Alternativa: Certo per Incerto]
+Nei Paesi anglosassoni è diffusa la convenzione opposta \textbf{Certo per Incerto} (quotazione diretta: $\frac{1}{\cambionom} = \frac{\text{EUR}}{\text{1 USD}}$), in cui un aumento del numero indice indica un deprezzamento della valuta interna. In tutto il presente testo si adotterà rigorosamente la convenzione ufficiale BCE \textbf{Incerto per Certo} ($\cambionom = \text{USD/EUR}$).
+\end{osservazione}
+
+\subsection{Equilibrio sul Mercato dei Cambi}
+Il tasso di cambio nominale di mercato si determina dall'incontro tra:
+\begin{itemize}
+    \item \textbf{Domanda di Euro ($DD$)}: generata da soggetti esteri (americani) che desiderano acquistare beni, servizi o attività finanziarie europee.
+    \item \textbf{Offerta di Euro ($SS$)}: generata da soggetti residenti in Europa che desiderano acquistare beni, servizi o titoli denominati in valuta estera.
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05, >=Stealth]
+    % Assi cartesiani
+    \draw[->, line width=1.2pt] (0,0) -- (8.5,0) node[right, font=\small\bfseries] {Quantità di Euro Scambiati ($Q_{\text{EUR}}$)};
+    \draw[->, line width=1.2pt] (0,0) -- (0,6.0) node[above, font=\small\bfseries] {Tasso di Cambio Nominale ($e = \text{USD/EUR}$)};
+
+    % Curve di Offerta SS
+    \draw[line width=1.8pt, color=navyblue] (1.2, 1.2) -- (7.2, 5.2) node[right, font=\small\bfseries] {$SS_{\text{EUR}}$};
+
+    % Curve di Domanda DD0 e DD1
+    \draw[line width=1.8pt, color=purpleaccent] (1.2, 5.0) -- (7.2, 1.0) node[right, font=\small\bfseries] {$DD_0$};
+    \draw[line width=1.8pt, dashed, color=forestgreen] (2.6, 5.8) -- (8.2, 2.1) node[right, font=\small\bfseries] {$DD_1 \; (i_{\text{EUR}} \uparrow)$};
+
+    % Punti di equilibrio
+    \coordinate (E0) at (4.2, 3.2);
+    \coordinate (E1) at (5.3, 3.93);
+
+    \fill[purpleaccent] (E0) circle (2.8pt) node[below=4pt, font=\footnotesize\bfseries] {$E_0(Q_0, e_0)$};
+    \fill[forestgreen] (E1) circle (2.8pt) node[above=4pt, font=\footnotesize\bfseries] {$E_1(Q_1, e_1)$};
+
+    % Proiezioni tratteggiate
+    \draw[dashed, line width=0.8pt, color=purpleaccent] (4.2, 0) node[below, font=\footnotesize\bfseries] {$Q_0$} -- (E0) -- (0, 3.2) node[left, font=\footnotesize\bfseries] {$e_0 = 1{,}10$};
+    \draw[dashed, line width=0.8pt, color=forestgreen] (5.3, 0) node[below, font=\footnotesize\bfseries] {$Q_1$} -- (E1) -- (0, 3.93) node[left, font=\footnotesize\bfseries] {$e_1 = 1{,}22$};
+
+    % Freccia di spostamento
+    \draw[->, line width=1.3pt, color=forestgreen] (4.2, 3.2) -- node[above left, font=\scriptsize\bfseries] {Afflusso capitali $\implies e \uparrow$} (5.3, 3.93);
+
+\end{tikzpicture}
+\caption{Determinazione dell'equilibrio sul mercato valutario Forex. Un aumento del tasso di interesse europeo rende i titoli in euro più attrattivi per gli investitori esteri, traslando la curva di domanda verso destra da $DD_0$ a $DD_1$ e provocando l'apprezzamento nominale dell'euro da $e_0$ a $e_1$.}
+\label{fig:mercato_forex_equilibrio}
+\end{figure}
+
+\section{Il Tasso di Cambio Reale e la Competitività di Prezzo}
+
+\subsection{Definizione e Formula del Tasso di Cambio Reale}
+
+\begin{definizione}{Tasso di Cambio Reale ($\cambioreal$)}{def_cambio_reale}
+Il \textbf{Tasso di Cambio Reale ($\cambioreal$ o $E$)} misura il prezzo relativo dei beni e servizi nazionali rispetto ai beni e servizi esteri, convertiti nella stessa valuta:
+\begin{equation}
+    \cambioreal = \frac{\cambionom \cdot P}{P^*} \label{eq:cambio_reale}
+\end{equation}
+dove $\cambionom$ è il tasso di cambio nominale ($\text{USD/EUR}$), $P$ è il livello generale dei prezzi interni (nell'Area Euro) e $P^*$ è il livello generale dei prezzi esteri (negli Stati Uniti).
+\end{definizione}
+
+\subsection{Interpretazione Economica della Competitività}
+Il tasso di cambio reale è un numero indice adimensionale che funge da indicatore primario della \textbf{competitività internazionale di prezzo}:
+\begin{itemize}
+    \item \textbf{Apprezzamento Reale ($\cambioreal \uparrow$)}: si verifica se il cambio nominale si apprezza ($\cambionom \uparrow$) o se l'inflazione interna supera quella estera ($P/P^* \uparrow$). Le merci nazionali diventano relativamente più costose di quelle estere: la competitività di prezzo del Paese si deteriora, riducendo le esportazioni ($X \downarrow$) e aumentando le importazioni ($M \uparrow$), con conseguente contrazione del saldo commerciale ($NX \downarrow$).
+    \item \textbf{Deprezzamento Reale ($\cambioreal \downarrow$)}: si verifica in caso di svalutazione nominale ($\cambionom \downarrow$) o di inflazione interna inferiore a quella dei concorrenti esteri. Le merci nazionali diventano più a buon mercato: la competitività migliora, stimolando l'export ($X \uparrow$) e disincentivando l'import ($M \downarrow$), con conseguente miglioramento del saldo commerciale ($NX \uparrow$).
+\end{itemize}
+
+\section{Condizioni di Arbitraggio Internazionale}
+
+\subsection{1. La Parità dei Poteri d'Acquisto (PPP - Purchasing Power Parity)}
+
+\begin{teorema}{Parità dei Poteri d'Acquisto Assoluta}{ppp_assoluta}
+In base alla \textbf{Legge del Prezzo Unico}, in un mercato internazionale integrato e concorrenziale, in assenza di costi di trasporto, dazi doganali e barriere tariffarie, un medesimo paniere omogeneo di beni deve avere lo stesso prezzo di vendita in tutti i Paesi se espresso nella medesima valuta:
+\begin{equation}
+    P = \frac{P^*}{\cambionom} \iff \cambionom_{\text{PPP}} = \frac{P^*}{P} \label{eq:ppp_assoluta}
+\end{equation}
+Sotto l'ipotesi di PPP assoluta, il tasso di cambio reale è costantemente unitario: $\cambioreal = 1$.
+\end{teorema}
+
+\begin{teorema}{Parità dei Poteri d'Acquisto Relativa}{ppp_relativa}
+Differenziando logaritmicamente la PPP assoluta rispetto al tempo otteniamo la forma in tassi di variazione percentuale:
+\begin{equation}
+    \frac{\Delta \cambionom}{\cambionom} \approx \infl^* - \infl \label{eq:ppp_relativa}
+\end{equation}
+dove $\infl$ è il tasso di inflazione interno e $\infl^*$ il tasso di inflazione estero.
+Se un Paese sperimenta un tasso di inflazione strutturalmente superiore a quello dei propri partner commerciali ($\infl > \infl^*$), la sua valuta deve subire un \textbf{deprezzamento nominale} continuo esattamente pari al differenziale di inflazione per mantenere invariata la competitività reale ($\frac{\Delta \cambionom}{\cambionom} = \infl^* - \infl < 0$).
+\end{teorema}
+
+\subsection{2. La Parità Scoperta dei Tassi di Interesse (UIP)}
+
+\begin{modello}{Parità Scoperta dei Tassi di Interesse (UIP)}{modello_uip}
+In condizioni di \textbf{perfetta mobilità internazionale dei capitali}, perfetta sostituibilità tra attività finanziarie e assenza di costi di transazione e premi per il rischio, un investitore neutrale al rischio deve ottenere lo stesso rendimento atteso investendo in titoli nazionali oppure in titoli esteri.
+
+Un capitale di $1$ euro investito in titoli nazionali a $1$ anno genera a scadenza:
+\begin{equation}
+    M_{\text{EUR}} = 1 + i_t
+\end{equation}
+Se convertito in valuta estera al tasso spot corrente $\cambionom_t$, investito in titoli esteri al tasso $i_t^*$ e riconvertito in euro al tasso di cambio spot atteso per il periodo successivo ($\cambionom_{t+1}^{\mathrm{e}}$), genera un montante atteso pari a:
+\begin{equation}
+    M_{\text{estero}}^{\mathrm{e}} = \cambionom_t \big( 1 + i_t^* \big) \frac{1}{\cambionom_{t+1}^{\mathrm{e}}} = \big( 1 + i_t^* \big) \frac{\cambionom_t}{\cambionom_{t+1}^{\mathrm{e}}}
+\end{equation}
+L'assenza di opportunità di arbitraggio impone l'eguaglianza dei due montanti attesi:
+\begin{equation}
+    1 + i_t = \big( 1 + i_t^* \big) \frac{\cambionom_t}{\cambionom_{t+1}^{\mathrm{e}}} \label{eq:uip_esatta}
+\end{equation}
+Riscrivendo $\frac{\cambionom_t}{\cambionom_{t+1}^{\mathrm{e}}} = \frac{1}{1 + \frac{\cambionom_{t+1}^{\mathrm{e}} - \cambionom_t}{\cambionom_t}} \approx 1 - \frac{\Delta \cambionom^{\mathrm{e}}}{\cambionom}$, otteniamo l'\textbf{approssimazione lineare standard della UIP}:
+\begin{equation}
+    i_t \approx i_t^* - \frac{\cambionom_{t+1}^{\mathrm{e}} - \cambionom_t}{\cambionom_t} \label{eq:uip_lineare}
+\end{equation}
+\end{modello}
+
+\begin{legge}{Significato Economico della Condizione UIP}{legge_uip}
+La condizione UIP stabilisce che se i titoli nazionali offrono un tasso di interesse superiore a quelli esteri ($i_t > i_t^*$), gli operatori di mercato si aspettano concordemente un \textbf{deprezzamento futuro della valuta nazionale} pari al differenziale di rendimento:
+\begin{equation}
+    i_t - i_t^* = -\frac{\Delta \cambionom^{\mathrm{e}}}{\cambionom} > 0 \implies \cambionom_{t+1}^{\mathrm{e}} < \cambionom_t
+\end{equation}
+Il maggior flusso di interessi incassato sul titolo nazionale compensa esattamente la prevista perdita in conto capitale da cambio al momento della riconversione.
+\end{legge}
+
+\section{La Struttura Contabile della Bilancia dei Pagamenti}
+
+\begin{definizione}{Bilancia dei Pagamenti (BP)}{def_bilancia_pagamenti}
+La \textbf{Bilancia dei Pagamenti (BP)} è il prospetto contabile statistico redatto sistematicamente dalla Banca Centrale che registra tutte le transazioni economiche e finanziarie intercorse in un dato intervallo temporale tra i soggetti residenti in un Paese e il resto del mondo.
+\end{definizione}
+
+\subsection{L'Identità Fondamentale e i Tre Conti Principali}
+In ossequio al principio contabile della \textbf{partita doppia}, la somma algebrica di tutte le registrazioni a credito (+) e a debito (-) è identicamente nulla:
+\begin{equation}
+    \mathrm{BP} \equiv \mathrm{CA} + \mathrm{KA} + \mathrm{FA} \equiv 0 \label{eq:bp_identita}
+\end{equation}
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\textwidth}{l p{4.5cm} X}
+\toprule
+\textbf{Sezione della Bilancia} & \textbf{Componenti Principali} & \textbf{Natura Economica dei Flussi} \\
+\midrule
+\textbf{1. Conto Corrente ($\mathrm{CA}$)} & 
+$\bullet$ Merci (Bilancia Commerciale)\newline
+$\bullet$ Servizi (turismo, noli, royalties)\newline
+$\bullet$ Redditi primari (lavoro e capitale)\newline
+$\bullet$ Redditi secondari (rimesse emigrati) & 
+Registra i flussi reali di scambio di beni, servizi e i trasferimenti unilaterali correnti. Un saldo $\mathrm{CA} > 0$ indica che il Paese è un \textbf{creditore netto} verso l'estero. \\
+\midrule
+\textbf{2. Conto Capitale ($\mathrm{KA}$)} & 
+$\bullet$ Trasferimenti unilaterali in c/capitale\newline
+$\bullet$ Cessione/acquisizione di attività non prodotte non finanziarie (brevetti) & 
+Trasferimenti a fondo perduto di risorse destinate a investimenti fissi e transazioni su diritti immateriali. \\
+\midrule
+\textbf{3. Conto Finanziario ($\mathrm{FA}$)} & 
+$\bullet$ Investimenti Diretti Esteri (IDE)\newline
+$\bullet$ Investimenti di Portafoglio\newline
+$\bullet$ Derivati e altri investimenti bancari\newline
+$\bullet$ Variazione Riserve Ufficiali ($\Delta RU$) & 
+Registra i flussi di acquisto e vendita di attività e passività finanziarie. Un saldo positivo indica un afflusso netto di capitali (aumento dell'indebitamento netto verso l'estero). \\
+\bottomrule
+\end{tabularx}
+\caption{Architettura e articolazione contabile delle tre sezioni della Bilancia dei Pagamenti.}
+\label{tab:struttura_bp}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.95, >=Stealth,
+    box/.style={rectangle, draw=navyblue, fill=navyblue!6!white, rounded corners=3pt, line width=1.1pt, align=center, font=\small\bfseries, minimum height=1.3cm},
+    subbox/.style={rectangle, draw=charcoalgray, fill=white, rounded corners=2pt, line width=0.8pt, align=left, font=\scriptsize, minimum height=1.6cm}]
+
+    % Titolo Principale
+    \node[box, fill=navyblue, text=white, minimum width=13cm] (BP) at (6, 6.2) {BILANCIA DEI PAGAMENTI ($\mathrm{BP} \equiv \mathrm{CA} + \mathrm{KA} + \mathrm{FA} \equiv 0$)};
+
+    % Tre Colonne Principali
+    \node[box, minimum width=3.8cm] (CA) at (1.8, 4.3) {1. Conto Corrente ($\mathrm{CA}$)};
+    \node[box, minimum width=3.8cm] (KA) at (6.0, 4.3) {2. Conto Capitale ($\mathrm{KA}$)};
+    \node[box, minimum width=3.8cm] (FA) at (10.2, 4.3) {3. Conto Finanziario ($\mathrm{FA}$)};
+
+    % Frecce verticali
+    \draw[->, line width=1.2pt, color=navyblue] (BP.south -| CA.north) -- (CA.north);
+    \draw[->, line width=1.2pt, color=navyblue] (BP.south -| KA.north) -- (KA.north);
+    \draw[->, line width=1.2pt, color=navyblue] (BP.south -| FA.north) -- (FA.north);
+
+    % Sottoblocchi descrittivi
+    \node[subbox, minimum width=3.8cm] (CAdet) at (1.8, 2.2) {
+        $\bullet$ Merci (Export - Import)\\
+        $\bullet$ Servizi e Turismo\\
+        $\bullet$ Redditi da Lavoro e Capitale\\
+        $\bullet$ Trasferimenti e Rimesse
+    };
+
+    \node[subbox, minimum width=3.8cm] (KAdet) at (6.0, 2.2) {
+        $\bullet$ Trasferimenti in c/capitale\\
+        $\bullet$ Condoni di debiti\\
+        $\bullet$ Attività non prodotte\\
+        (Brevetti, marchi, terreni)
+    };
+
+    \node[subbox, minimum width=3.8cm] (FAdet) at (10.2, 2.2) {
+        $\bullet$ Investimenti Diretti (IDE)\\
+        $\bullet$ Portafoglio (Azioni/Bond)\\
+        $\bullet$ Crediti e Prestiti bancari\\
+        $\bullet$ \textbf{Riserve Ufficiali ($\Delta RU$)}
+    };
+
+    \draw[line width=0.8pt, color=charcoalgray] (CA.south) -- (CAdet.north);
+    \draw[line width=0.8pt, color=charcoalgray] (KA.south) -- (KAdet.north);
+    \draw[line width=0.8pt, color=charcoalgray] (FA.south) -- (FAdet.north);
+
+    % Blocco Saldo Economico Finale
+    \node[rectangle, draw=forestgreen, fill=forestgreen!10!white, line width=1.2pt, rounded corners=4pt, minimum width=13cm, align=center, font=\small\bfseries] at (6, 0.4) {
+        Saldo di Equilibrio Economico: $\text{Saldo BP} = \mathrm{CA} + \mathrm{KA} + \mathrm{FA}_{\text{privato}} = \Delta RU$
+    };
+
+\end{tikzpicture}
+\caption{Schema contabile a blocchi della Bilancia dei Pagamenti e relazione con le riserve valutarie.}
+\label{fig:schema_bilancia_pagamenti}
+\end{figure}
+
+\section{Regimi di Cambio, Svalutazioni ed Effetti Reali}
+
+\subsection{Cambi Fissi vs Cambi Flessibili}
+\begin{itemize}
+    \item \textbf{Regime di Cambi Flessibili (Fluttuanti)}: il tasso di cambio è libero di oscillare istante per istante sul Forex in base alle forze di mercato. La Banca Centrale non interviene ($\Delta RU = 0$). Eventuali deficit commerciali provocano automaticamente un deprezzamento della valuta che ripristina l'equilibrio.
+    \item \textbf{Regime di Cambi Fissi}: il governo fissa una parità ufficiale $\bar{\cambionom}$. La Banca Centrale è obbligata a intervenire acquistando o vendendo valuta estera per colmare eccessi di domanda o di offerta ($\Delta RU \neq 0$).
+\end{itemize}
+
+\subsection{La Condizione di Marshall-Lerner}
+
+\begin{teorema}{Condizione di Marshall-Lerner}{marshall_lerner}
+Consideriamo il saldo delle esportazioni nette espresso in valuta nazionale:
+\begin{equation}
+    NX(\cambioreal) = X(\cambioreal) - \frac{1}{\cambioreal} M(\cambioreal)
+\end{equation}
+dove $X$ è il volume fisico delle esportazioni, $M$ è il volume fisico delle importazioni e $\cambioreal = \frac{\cambionom P}{P^*}$ è il tasso di cambio reale.
+Affinché un \textbf{deprezzamento reale} ($\cambioreal \downarrow$) produca un effettivo \textbf{miglioramento del saldo commerciale} ($\dv{NX}{\cambioreal} < 0$), è necessario e sufficiente che la somma delle elasticità in valore assoluto della domanda di esportazioni ($\eta_x$) e della domanda di importazioni ($\eta_m$) rispetto al prezzo sia superiore all'unità:
+\begin{equation}
+    |\eta_x| + |\eta_m| > 1 \label{eq:marshall_lerner}
+\end{equation}
+\end{teorema}
+
+\begin{dimostrazione}[ della Condizione di Marshall-Lerner]
+Calcoliamo la derivata prima di $NX$ rispetto a $\cambioreal$:
+\begin{equation}
+    \dv{NX}{\cambioreal} = \dv{X}{\cambioreal} - \left( -\frac{1}{\cambioreal^2} M + \frac{1}{\cambioreal} \dv{M}{\cambioreal} \right) = \dv{X}{\cambioreal} + \frac{M}{\cambioreal^2} - \frac{1}{\cambioreal} \dv{M}{\cambioreal}
+\end{equation}
+Definiamo le elasticità rispetto al tasso di cambio reale (ricordando che $\dv{X}{\cambioreal} < 0$ e $\dv{M}{\cambioreal} > 0$):
+\begin{equation}
+    \eta_x = \frac{\cambioreal}{X} \dv{X}{\cambioreal} < 0 \implies |\eta_x| = -\frac{\cambioreal}{X} \dv{X}{\cambioreal}, \qquad \eta_m = \frac{\cambioreal}{M} \dv{M}{\cambioreal} > 0
+\end{equation}
+Sostituendo nella derivata:
+\begin{equation}
+    \dv{NX}{\cambioreal} = -|\eta_x| \frac{X}{\cambioreal} + \frac{M}{\cambioreal^2} - \eta_m \frac{M}{\cambioreal^2}
+\end{equation}
+Ipotizzando una situazione iniziale di commercio in pareggio ($NX = 0 \implies X = \frac{M}{\cambioreal} \implies M = \cambioreal X$):
+\begin{equation}
+    \dv{NX}{\cambioreal} = -|\eta_x| \frac{X}{\cambioreal} + \frac{\cambioreal X}{\cambioreal^2} - \eta_m \frac{\cambioreal X}{\cambioreal^2} = \frac{X}{\cambioreal} \Big( 1 - |\eta_x| - |\eta_m| \Big)
+\end{equation}
+Affinché un deprezzamento reale ($\dd \cambioreal < 0$) migliori il saldo commerciale ($\dd NX > 0$), la derivata deve essere negativa:
+\begin{equation}
+    \dv{NX}{\cambioreal} < 0 \iff 1 - |\eta_x| - |\eta_m| < 0 \iff |\eta_x| + |\eta_m| > 1
+\end{equation}
+\end{dimostrazione}
+
+\subsection{La Dinamica della Curva a J}
+
+\begin{definizione}{Curva a J}{def_curva_j}
+La \textbf{Curva a J} descrive il tipico profilo temporale con cui il saldo della bilancia commerciale $NX$ reagisce a una svalutazione nominale o a un deprezzamento reale del tasso di cambio nel corso del tempo.
+\end{definizione}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.08, >=Stealth]
+    % Assi cartesiani
+    \draw[->, line width=1.2pt] (0, 0) -- (9.0, 0) node[right, font=\small\bfseries] {Tempo ($t$)};
+    \draw[->, line width=1.2pt] (0, -2.5) -- (0, 3.5) node[above, font=\small\bfseries] {Esportazioni Nette ($NX$)};
+
+    % Linea zero orizzontale tratteggiata
+    \draw[dashed, line width=0.8pt, color=gray] (0, 0) -- (8.5, 0);
+
+    % Curva a J
+    \draw[line width=2.2pt, color=crimsonred, domain=1.0:8.0, smooth] plot (\x, {
+        -2.0*exp(-(\x-1.0)*1.2) + 2.2*(1 - exp(-(\x-1.0)*0.5)) - 0.5
+    });
+
+    % Momento della Svalutazione t0
+    \coordinate (T0) at (1.0, 0);
+    \fill[navyblue] (T0) circle (2.8pt) node[above=3pt, font=\footnotesize\bfseries] {$t_0$ (Svalutazione)};
+    \draw[dotted, line width=0.9pt, color=navyblue] (1.0, -2.2) -- (1.0, 3.0);
+
+    % Punti caratteristici
+    \coordinate (MinJ) at (2.2, -1.8);
+    \coordinate (Pareggio) at (4.5, 0);
+    \coordinate (Surplus) at (7.5, 1.6);
+
+    \fill[crimsonred] (MinJ) circle (2.5pt) node[below=2pt, font=\scriptsize\bfseries] {Minimo: Effetto Prezzo};
+    \fill[warmamber] (Pareggio) circle (2.5pt) node[below right=2pt, font=\scriptsize\bfseries] {Pareggio ($|\eta_x| + |\eta_m| = 1$)};
+    \fill[forestgreen] (Surplus) circle (2.5pt) node[above left=2pt, font=\scriptsize\bfseries] {Surplus: Effetto Quantità};
+
+    % Fasi
+    \node[align=center, font=\scriptsize\bfseries, color=crimsonred] at (2.2, -0.6) {
+        \textbf{Breve Periodo:}\\
+        $|\eta_x| + |\eta_m| < 1$\\
+        $\implies NX \downarrow$ (Deficit)
+    };
+
+    \node[align=center, font=\scriptsize\bfseries, color=forestgreen] at (6.5, 2.5) {
+        \textbf{Medio-Lungo Periodo:}\\
+        $|\eta_x| + |\eta_m| > 1$\\
+        $\implies NX \uparrow$ (Surplus)
+    };
+
+\end{tikzpicture}
+\caption{Dinamica temporale della Curva a J. Nel breve periodo prevale l'effetto prezzo sfavorevole e il deficit peggiora; nel medio-lungo periodo l'elasticità di sostituzione dei beni aumenta, prevale l'effetto quantità e la bilancia commerciale volge in ampio avanzo.}
+\label{fig:curva_j}
+\end{figure}
+
+\begin{osservazione}[Spiegazione delle Due Fasi della Curva a J]
+\begin{enumerate}
+    \item \textbf{Fase Discendente (Breve Periodo)}: i contratti commerciali sono già stipulati a prezzi e quantità prefissate e le abitudini di consumo sono rigide ($|\eta_x| + |\eta_m| < 1$). Le merci importate diventano istantaneamente più care in moneta nazionale, mentre le quantità esportate non aumentano ancora in misura sufficiente: il disavanzo commerciale si aggrava.
+    \item \textbf{Fase Ascendente (Medio-Lungo Periodo)}: i consumatori e le imprese estere rimpiazzano i prodotti concorrenti con le merci nazionali divenute competitive, e i residenti interni sostituiscono le importazioni con prodotti locali ($|\eta_x| + |\eta_m| > 1$). I volumi fisici di export superano nettamente i rincari di import, portando il saldo in marcato surplus.
+\end{enumerate}
+\end{osservazione}
+
+\section{Metodi Risolutivi ed Eserciziario d'Esame}
+
+\begin{metodo}[Algoritmo di Calcolo per Arbitraggi Valutari e Bilancia Pagamenti]
+Per risolvere esercizi di economia aperta:
+\begin{enumerate}
+    \item \textbf{Calcolo del Cambio Reale e PPP}:
+    \begin{itemize}
+        \item Calcolare $\cambioreal = \frac{\cambionom P}{P^*}$; se $\cambioreal > 1$, la valuta nazionale è sopravvalutata;
+        \item Calcolare la variazione percentuale attesa del cambio nominale: $\frac{\Delta \cambionom}{\cambionom} = \infl^* - \infl$.
+    \end{itemize}
+    \item \textbf{Condizione UIP e Tassi di Rendimento}:
+    \begin{itemize}
+        \item Impostare l'equazione $1 + i_t = (1 + i_t^*) \frac{\cambionom_t}{\cambionom_{t+1}^{\mathrm{e}}}$;
+        \item Esplicitare il tasso di cambio atteso: $\cambionom_{t+1}^{\mathrm{e}} = \cambionom_t \frac{1 + i_t^*}{1 + i_t}$.
+    \end{itemize}
+    \item \textbf{Verifica Marshall-Lerner e Saldo BP}:
+    \begin{itemize}
+        \item Sommare le elasticità: se $|\eta_x| + |\eta_m| > 1$, la svalutazione è efficace;
+        \item Determinare la variazione delle riserve ufficiali: $\Delta RU = \mathrm{CA} + \mathrm{KA} + \mathrm{FA}_{\text{privato}}$.
+    \end{itemize}
+\end{enumerate}
+\end{metodo}
+
+\begin{esercizio}[Calcolo del Cambio Reale, UIP e Dinamica della Bilancia Pagamenti]
+Si considerino i seguenti dati relativi a Eurozona e Stati Uniti:
+\begin{itemize}
+    \item Livello prezzi Eurozona $P = 120$, Livello prezzi USA $P^* = 132$, Tasso di cambio nominale spot $\cambionom_t = 1{,}10$ USD/EUR.
+    \item Tasso di interesse nominale europeo $i_{\text{EUR}} = 4$\%, Tasso di interesse nominale USA $i_{\text{USD}}^* = 6$\%.
+    \item Elasticità delle esportazioni $\eta_x = -0{,}70$ ed elasticità delle importazioni $\eta_m = 0{,}50$.
+    \item Saldo del Conto Corrente $\mathrm{CA} = -30\text{ miliardi}$, Conto Capitale $\mathrm{KA} = +5\text{ miliardi}$, Conto Finanziario privato $\mathrm{FA}_{\text{priv}} = +40\text{ miliardi}$.
+\end{itemize}
+\textbf{Richieste}:
+\begin{enumerate}
+    \item Calcolare il tasso di cambio reale $\cambioreal$ e commentare la competitività dell'Eurozona rispetto alla PPP assoluta.
+    \item Applicare la Parità Scoperta dei Tassi di Interesse (UIP) per determinare il tasso di cambio spot atteso $\cambionom_{t+1}^{\mathrm{e}}$ tra un anno.
+    \item Verificare se è soddisfatta la condizione di Marshall-Lerner per una svalutazione dell'euro.
+    \item Calcolare la variazione delle riserve ufficiali della BCE ($\Delta RU$) e specificare se il regime è a cambi fissi o flessibili.
+\end{enumerate}
+
+\textbf{Svolgimento}:
+\begin{enumerate}
+    \item \textbf{Tasso di Cambio Reale}:
+    \begin{equation*}
+        \cambioreal = \frac{\cambionom \cdot P}{P^*} = \frac{1{,}10 \times 120}{132} = \frac{132}{132} = 1{,}00
+    \end{equation*}
+    Poiché $\cambioreal = 1{,}00$, la Parità dei Poteri d'Acquisto assoluta è esattamente verificata e i beni europei e americani hanno il medesimo prezzo medio relativo.
+
+    \item \textbf{Calcolo del Cambio Atteso via UIP}:
+    Dalla formula esatta della UIP:
+    \begin{equation*}
+        1 + i_{\text{EUR}} = (1 + i_{\text{USD}}^*) \frac{\cambionom_t}{\cambionom_{t+1}^{\mathrm{e}}} \implies 1{,}04 = 1{,}06 \times \frac{1{,}10}{\cambionom_{t+1}^{\mathrm{e}}}
+    \end{equation*}
+    \begin{equation*}
+        \cambionom_{t+1}^{\mathrm{e}} = 1{,}10 \times \frac{1{,}06}{1{,}04} = 1{,}10 \times 1{,}01923 \approx 1{,}1212 \text{ USD/EUR}
+    \end{equation*}
+    Gli operatori si attendono un \textbf{apprezzamento dell'euro} di circa il $+1{,}92$\% per compensare il minor rendimento cedolare dei titoli europei ($4$\% contro $6$\%).
+
+    \item \textbf{Verifica della Condizione di Marshall-Lerner}:
+    \begin{equation*}
+        |\eta_x| + |\eta_m| = |-0{,}70| + 0{,}50 = 0{,}70 + 0{,}50 = 1{,}20 > 1
+    \end{equation*}
+    La condizione è ampiamente verificata ($1{,}20 > 1$). Un deprezzamento dell'euro provocherà nel medio periodo un incremento delle esportazioni nette.
+
+    \item \textbf{Saldo e Variazione delle Riserve Ufficiali}:
+    \begin{equation*}
+        \text{Saldo BP} = \mathrm{CA} + \mathrm{KA} + \mathrm{FA}_{\text{priv}} = -30 + 5 + 40 = +15\text{ miliardi di euro}
+    \end{equation*}
+    Poiché il saldo economico è positivo ($\text{Saldo BP} = +15\text{ mld}$), vi è un eccesso di offerta di valuta estera (eccesso di domanda di euro).
+    In regime di \textbf{cambi fissi}, la BCE deve intervenire acquistando $15$ miliardi di dollari di riserve valutarie:
+    \begin{equation*}
+        \Delta RU = +15\text{ miliardi}
+    \end{equation*}
+    Se il regime fosse a \textbf{cambi flessibili}, $\Delta RU = 0$ e l'euro si apprezzerebbe istantaneamente fino ad azzerare il surplus.
+\end{enumerate}
+\end{esercizio}
+
+\begin{esame}[Tranelli Ricorrenti su Tassi di Cambio e Bilancia Pagamenti]
+\begin{enumerate}
+    \item \textbf{Quotazione del Cambio}: ricordare che se $e = 1{,}10$ USD/EUR sale a $1{,}20$, l'euro si sta \textbf{apprezzando} (occorrono più dollari per un euro), mentre se scende a $1{,}00$ l'euro si sta \textbf{deprezzando}. Non invertire il numeratore col denominatore.
+    \item \textbf{Competitività e Inflazione}: un Paese con inflazione più alta dei partner commerciali perde competitività se il cambio nominale resta fisso ($\cambioreal \uparrow$). Per mantenere la competitività costante ($\Delta \cambioreal = 0$), il cambio nominale deve svalutarsi esattamente del differenziale di inflazione ($\Delta e / e = \pi^* - \pi < 0$).
+    \item \textbf{Marshall-Lerner e Orizzonte Temporale}: una svalutazione non migliora istantaneamente la bilancia commerciale. Nel brevissimo periodo peggiora i conti con l'estero a causa della Curva a J.
+\end{enumerate}
+\end{esame}
