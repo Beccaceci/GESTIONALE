@@ -18,18 +18,18 @@ jobs:
     strategy:
       matrix:
         include:
-          - folder: ALGEBRA_LINEARE
-            target_name: Algebra_Lineare
-          - folder: ANALISI1
-            target_name: Analisi_1
-          - folder: ANALISI2
-            target_name: Analisi_2
-          - folder: ECONOMIA
-            target_name: Economia
-          - folder: FISICA
-            target_name: Fisica
-          - folder: STATISTICA
-            target_name: Statistica
+          - folder: courses/ALGEBRA_LINEARE
+            target_name: Linear_Algebra
+          - folder: courses/ANALISI1
+            target_name: Calculus_1
+          - folder: courses/ANALISI2
+            target_name: Calculus_2
+          - folder: courses/ECONOMIA
+            target_name: Economics
+          - folder: courses/FISICA
+            target_name: Physics
+          - folder: courses/STATISTICA
+            target_name: Probability_and_Statistics
       fail-fast: false
 
     steps:
@@ -56,7 +56,7 @@ jobs:
           retention-days: 7
 
   release:
-    name: Publish PDFs to GitHub Release
+    name: Publish Notes Archive & PDFs to GitHub Release
     needs: build-course
     runs-on: ubuntu-latest
     steps:
@@ -69,6 +69,12 @@ jobs:
           path: release_pdfs
           merge-multiple: true
 
+      - name: Create All-In-One ZIP Bundle
+        run: |
+          cd release_pdfs
+          zip -9 All_Courses_Notes.zip *.pdf
+          cd ..
+
       - name: List Release Files
         run: |
           ls -la release_pdfs/
@@ -77,24 +83,29 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
-          name: "Dispense di Studio (PDF Aggiornati)"
+          name: "University Lecture Notes (Compiled PDFs & Bundle)"
           body: |
-            ## 📚 Ultima Versione Compilata delle Dispense
+            ## 📚 Latest Compiled University Lecture Notes
 
-            Tutti i file PDF sono stati compilati automaticamente tramite GitHub Actions.
-            
-            ### 📥 Download Rapido:
-            - [Algebra Lineare e Geometria](https://github.com/${{ github.repository }}/releases/latest/download/Algebra_Lineare.pdf)
-            - [Analisi Matematica 1](https://github.com/${{ github.repository }}/releases/latest/download/Analisi_1.pdf)
-            - [Analisi Matematica 2](https://github.com/${{ github.repository }}/releases/latest/download/Analisi_2.pdf)
-            - [Economia](https://github.com/${{ github.repository }}/releases/latest/download/Economia.pdf)
-            - [Fisica Generale](https://github.com/${{ github.repository }}/releases/latest/download/Fisica.pdf)
-            - [Calcolo delle Probabilità e Statistica](https://github.com/${{ github.repository }}/releases/latest/download/Statistica.pdf)
-            
-            _Aggiornato al commit:_ ${{ github.sha }}
+            All documents have been compiled automatically with TeX Live via GitHub Actions.
+
+            ### 📦 Complete Bundle:
+            - [**Download All Notes (ZIP)**](https://github.com/${{ github.repository }}/releases/latest/download/All_Courses_Notes.zip)
+
+            ### 📄 Individual Courses:
+            - [Linear Algebra and Geometry](https://github.com/${{ github.repository }}/releases/latest/download/Linear_Algebra.pdf)
+            - [Calculus 1](https://github.com/${{ github.repository }}/releases/latest/download/Calculus_1.pdf)
+            - [Calculus 2](https://github.com/${{ github.repository }}/releases/latest/download/Calculus_2.pdf)
+            - [Economics & Business Organization](https://github.com/${{ github.repository }}/releases/latest/download/Economics.pdf)
+            - [General Physics](https://github.com/${{ github.repository }}/releases/latest/download/Physics.pdf)
+            - [Probability and Statistics](https://github.com/${{ github.repository }}/releases/latest/download/Probability_and_Statistics.pdf)
+
+            _Updated at commit:_ `${{ github.sha }}`
           draft: false
           prerelease: false
           make_latest: true
-          files: release_pdfs/*.pdf
+          files: |
+            release_pdfs/*.pdf
+            release_pdfs/*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
