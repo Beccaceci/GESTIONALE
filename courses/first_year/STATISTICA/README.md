@@ -1,6 +1,7 @@
-# Statistica e Calcolo delle Probabilità - Appunti di Studio
+# Statistica e Calcolo delle Probabilità - Appunti di Studio e Archivio Esami
+**Corso di Laurea in Ingegneria Gestionale — Università di Pisa**
 
-Raccolta modulare, formalizzata e digitalizzata degli appunti del corso di **Statistica e Calcolo delle Probabilità** (Ingegneria Gestionale).
+Raccolta modulare, formalizzata e digitalizzata degli appunti completi e dell'archivio storico delle prove d'esame del corso di **Statistica e Calcolo delle Probabilità** (Prof. Andrea Agazzi).
 
 ---
 
@@ -12,8 +13,16 @@ STATISTICA/
 │   ├── packages.tex          # Pacchetti tipografici, matematici e grafici
 │   ├── environments.tex      # Box tematici tcolorbox (Definizioni, Teoremi, Esame, Metodi, ecc.)
 │   └── macros.tex            # Notazioni e operatori per Statistica e Probabilità
-├── figures/                  # Grafici TikZ, diagrammi e illustrazioni
-├── sources/                  # Scansioni PDF originali e appunti manoscritti
+├── figures/                  # Grafici vettoriali TikZ, diagrammi e illustrazioni
+├── sources/                  # Scansioni PDF originali, appunti manoscritti e materiale docente
+├── exams/                    # Archivio storico completo delle prove scritte ed eserciziari
+│   ├── 2024/                 # Appelli 2024 con soluzioni analitiche e codice R
+│   ├── 2023/                 # Appelli 2023 con soluzioni ufficiali
+│   ├── 2022/                 # Appelli 2022, pre-test e straordinari con soluzioni
+│   ├── 2021/                 # Appelli 2021 con soluzioni analitiche
+│   ├── 2020/                 # Appelli 2020 con soluzioni analitiche
+│   ├── fogli_esercizi/       # Fogli di esercizi settimanali 1–10 con soluzioni del docente
+│   └── README.md             # Indice dettagliato con collegamenti ai PDF
 ├── chapters/
 │   ├── 01_statistica_descrittiva/
 │   ├── 02_elementi_di_probabilita/
@@ -26,8 +35,10 @@ STATISTICA/
 │   ├── 09_campione_statistico_e_stimatori/
 │   ├── 10_intervalli_di_confidenza/
 │   ├── 11_test_statistici/
-│   └── 12_raccolta_esami_risolti/
+│   ├── 12_raccolta_temi_esame/
+│   └── 13_archivio_esami_risolti/
 ├── main.tex                  # File master (Frontespizio, ToC, \include dei capitoli)
+├── main.pdf                  # Trattato completo compilato (101 pagine)
 └── README.md                 # Questo documento
 ```
 
@@ -35,30 +46,11 @@ STATISTICA/
 
 ## 🛠️ Compilazione
 
-### Compilazione completa
+### Compilazione completa del volume
 Per generare il documento PDF completo con indice e riferimenti incrociati:
 ```bash
 pdflatex -interaction=nonstopmode main.tex && pdflatex -interaction=nonstopmode main.tex
 ```
-oppure con `latexmk`:
-```bash
-latexmk -pdf main.tex
-```
-
-### Compilazione selettiva di singoli capitoli
-Nel file `main.tex`, de-commentare il comando `\includeonly{...}` specificando solo i capitoli su cui si sta lavorando per velocizzare la compilazione:
-```latex
-\includeonly{
-  chapters/01_statistica_descrittiva/main
-}
-```
-
----
-
-## 🔄 Flessibilità nell'aggiunta / riorganizzazione dei capitoli
-Per aggiungere un nuovo capitolo (ad esempio `chapters/13_processi_stocastici`):
-1. Creare la cartella `chapters/13_processi_stocastici/` e il file `main.tex` al suo interno.
-2. Inserire `\include{chapters/13_processi_stocastici/main}` nel file `main.tex`.
 
 ---
 
@@ -68,7 +60,7 @@ Gli appunti utilizzano ambienti stilizzati dedicati:
 - `\begin{definizione}{Titolo}{label}`: Definizioni formali rigorose con quantificatori.
 - `\begin{teorema}{Titolo}{label}`: Teoremi, proposizioni e lemmi con dimostrazione.
 - `\begin{proprieta}{Titolo}{label}`: Proprietà operative e caratteristiche notevoli.
-- `\begin{esempio}{Titolo}{label}` / `\begin{esercizio}{Titolo}{label}`: Esempi numerici ed esercizi guidati.
+- `\begin{esercizio}{Titolo}{label}`: Esempi numerici ed esercizi guidati.
 - `\begin{dimostrazione}`: Dimostrazioni step-by-step con simbolo di chiusura $\blacksquare$.
 - `\begin{metodo}[Titolo]`: Algoritmi operativi e schemi di risoluzione standard.
 - `\begin{esame}[Attenzione / Consiglio Esame]`: Segnalazione di tranelli e controesempi frequenti.
