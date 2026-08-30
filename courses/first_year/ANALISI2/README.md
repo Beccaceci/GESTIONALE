@@ -39,7 +39,15 @@ ANALISI2/
 │   └── 10_raccolta_esami_risolti/                    # Temi d'esame e quesiti d'orale svolti passo-passo
 │       └── main.tex
 │
+├── exams/                                            # Archivio temi d'esame ufficiali con soluzioni per anno (2020-2023)
+│   ├── 2020/
+│   ├── 2021/
+│   ├── 2022/
+│   ├── 2023/
+│   └── README.md
+│
 ├── figures/                                          # Grafici TikZ, immagini vettoriali o plot 3D PGFPlots
+├── sources/                                          # Materiale sorgente e dispense
 └── scans/                                            # Scansioni PDF degli appunti cartacei
 ```
 
