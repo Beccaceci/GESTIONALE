@@ -36,6 +36,7 @@ ANALISI1/
 │       └── main.tex
 │
 ├── figures/                         # Grafici TikZ, immagini vettoriali o plot PGFPlots
+├── esami/                           # Archivio completo temi d'esame e soluzioni ufficiali (2011-2025)
 └── scans/                           # Scansioni PDF degli appunti cartacei
 ```
 

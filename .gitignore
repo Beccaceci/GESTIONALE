@@ -29,6 +29,11 @@
 # Agent / AI local workspace caches & logs
 .agents/
 
+# Python & Test Caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
 # OS / Editor files
 .DS_Store
 Thumbs.db
