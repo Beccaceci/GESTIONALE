@@ -19,17 +19,17 @@ jobs:
       matrix:
         include:
           - folder: courses/first_year/ALGEBRA_LINEARE/notes
-            target_name: Linear_Algebra
+            target_name: appuntiAlgebraLineare
           - folder: courses/first_year/ANALISI1/notes
-            target_name: Calculus_1
+            target_name: appuntiAnalisi1
           - folder: courses/first_year/ANALISI2/notes
-            target_name: Calculus_2
+            target_name: appuntiAnalisi2
           - folder: courses/first_year/ECONOMIA/notes
-            target_name: Economics
+            target_name: appuntiEconomia
           - folder: courses/first_year/FISICA/notes
-            target_name: Physics
+            target_name: appuntiFisica
           - folder: courses/first_year/STATISTICA/notes
-            target_name: Probability_and_Statistics
+            target_name: appuntiStatistica
       fail-fast: false
 
     steps:
@@ -93,12 +93,12 @@ jobs:
             - [**Download All Notes (ZIP)**](https://github.com/${{ github.repository }}/releases/latest/download/All_Courses_Notes.zip)
 
             ### 📄 First-Year Courses:
-            - [Linear Algebra and Geometry](https://github.com/${{ github.repository }}/releases/latest/download/Linear_Algebra.pdf)
-            - [Calculus 1](https://github.com/${{ github.repository }}/releases/latest/download/Calculus_1.pdf)
-            - [Calculus 2](https://github.com/${{ github.repository }}/releases/latest/download/Calculus_2.pdf)
-            - [Economics & Business Organization](https://github.com/${{ github.repository }}/releases/latest/download/Economics.pdf)
-            - [General Physics](https://github.com/${{ github.repository }}/releases/latest/download/Physics.pdf)
-            - [Probability and Statistics](https://github.com/${{ github.repository }}/releases/latest/download/Probability_and_Statistics.pdf)
+            - [Linear Algebra and Geometry](https://github.com/${{ github.repository }}/releases/latest/download/appuntiAlgebraLineare.pdf)
+            - [Calculus 1](https://github.com/${{ github.repository }}/releases/latest/download/appuntiAnalisi1.pdf)
+            - [Calculus 2](https://github.com/${{ github.repository }}/releases/latest/download/appuntiAnalisi2.pdf)
+            - [Economics & Business Organization](https://github.com/${{ github.repository }}/releases/latest/download/appuntiEconomia.pdf)
+            - [General Physics](https://github.com/${{ github.repository }}/releases/latest/download/appuntiFisica.pdf)
+            - [Probability and Statistics](https://github.com/${{ github.repository }}/releases/latest/download/appuntiStatistica.pdf)
 
             _Updated at commit:_ `${{ github.sha }}`
           draft: false

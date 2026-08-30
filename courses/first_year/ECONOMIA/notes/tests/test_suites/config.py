@@ -7,7 +7,7 @@ from typing import Dict, List, Any
 # Root project paths
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 MAIN_TEX = PROJECT_ROOT / "main.tex"
-MAIN_PDF = PROJECT_ROOT / "main.pdf"
+MAIN_PDF = PROJECT_ROOT / "appuntiEconomia.pdf" if (PROJECT_ROOT / "appuntiEconomia.pdf").exists() else PROJECT_ROOT / "main.pdf"
 MAIN_LOG = PROJECT_ROOT / "main.log"
 MAIN_TOC = PROJECT_ROOT / "main.toc"
 CONFIG_DIR = PROJECT_ROOT / "config"

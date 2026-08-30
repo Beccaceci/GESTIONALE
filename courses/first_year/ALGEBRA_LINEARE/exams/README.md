@@ -1,382 +1,1122 @@
-# Archivio Ufficiale Prove d'Esame ed Esercizi di Algebra Lineare e Geometria
-**Corso di Laurea in Ingegneria Gestionale / Chimica — Università di Pisa**  
-*Docente: Prof. Marco Franciosi*  
-*Fonte Ufficiale:* [https://pagine.dm.unipi.it/~a008702/alg/compiti.html](https://pagine.dm.unipi.it/~a008702/alg/compiti.html)
+# 📚 Raccolta Temi d'Esame Passati con Soluzioni — Algebra Lineare e Geometria
+
+Questa cartella raccoglie l'archivio completo di tutte le prove d'esame scritte ufficiali (prove ordinarie, compitini in itinere e raccolte tematiche) di **Algebra Lineare e Geometria** (Corso di Laurea in Ingegneria Gestionale e Ingegneria Chimica, Docente: Prof. Marco Franciosi), organizzate cronologicamente dal 1999 al 2026 e nominate secondo lo standard ISO (`YYYY-MM-DD_<tipo_prova>.pdf`).
+
+Ogni prova d'esame è corredata dal testo ufficiale e dallo svolgimento analitico completo passo-passo. I compiti d'esame ufficiali sono tipicamente articolati in 4 esercizi cardine:
+- **Esercizio 1 (Numeri Complessi):** Risoluzione di equazioni e sistemi algebrici in $\mathbb{C}$, radici $n$-esime dell'unità e di numeri complessi, formule di De Moivre, condizioni su modulo $|z|$, coniugato $\bar{z}$, parte reale $\operatorname{Re}(z)$ e parte immaginaria $\operatorname{Im}(z)$;
+- **Esercizio 2 (Sistemi Lineari & Applicazioni Lineari Parametriche):** Studio dell'applicazione lineare $L_{A_t}: \mathbb{R}^n \to \mathbb{R}^m$ al variare di un parametro reale $t$, algoritmo di riduzione a scala di Gauss, Teorema di Rouché-Capelli, basi e dimensione per nucleo $\operatorname{Ker}(L_{A_t})$ e immagine $\operatorname{Im}(L_{A_t})$, calcolo di controimmagini;
+- **Esercizio 3 (Costruzione e Geometria delle Trasformazioni Lineari):** Costruzione esplicita di omomorfismi vincolati su sottospazi vettoriali, Teorema del Rango-Nullità ($\dim V = \dim \operatorname{Ker}(f) + \dim \operatorname{Im}(f)$), formule di Grassmann per intersezione e somma di sottospazi;
+- **Esercizio 4 (Autovalori, Diagonalizzabilità & Teorema Spettrale):** Calcolo del polinomio caratteristico $P_A(\lambda) = \det(A - \lambda I)$, spettro della matrice, molteplicità algebrica $m_a(\lambda)$ e geometrica $m_g(\lambda)$, condizioni di diagonalizzabilità su $\mathbb{R}$ e $\mathbb{C}$, Teorema Spettrale per matrici simmetriche reali con determinazione di basi ortonormali di autovettori, forme quadratiche e segnatura con criterio di Sylvester.
 
 ---
 
-## Struttura dell'Archivio
-
-L'archivio raccoglie l'intera collezione storica ufficiale di tutti i temi d'esame scritti (prove ordinarie, sessioni anticipate, compitini e test d'ammissione) dal 1999 al 2026. Ciascun file è nominato secondo lo standard cronologico ISO (`AAAA-MM-GG`) ed è corredato dalla relativa soluzione analitica completa dove disponibile.
+## 🗂️ Struttura dell'Archivio
 
 ```
 exams/
-├── 2026/                 # Prove d'esame A.A. 2025/2026
-├── 2025/                 # Prove d'esame A.A. 2024/2025
-├── 2024/                 # Prove d'esame A.A. 2023/2024
-├── 2023/                 # Prove d'esame A.A. 2022/2023
-├── 2022/                 # Prove d'esame A.A. 2021/2022
-├── 2021/                 # Prove d'esame A.A. 2020/2021
-├── 2020/                 # Prove d'esame A.A. 2019/2020
-├── 2019/                 # Prove d'esame A.A. 2018/2019
-├── 2018/                 # Prove d'esame A.A. 2017/2018
-├── 2017/                 # Prove d'esame A.A. 2016/2017
-├── 2016/                 # Prove d'esame A.A. 2015/2016
-├── 2015/                 # Prove d'esame A.A. 2014/2015
-├── 2014/                 # Prove d'esame A.A. 2013/2014
-├── 2013/                 # Prove d'esame A.A. 2012/2013
-├── 2012/                 # Prove d'esame A.A. 2011/2012
-├── 2011/                 # Prove d'esame A.A. 2010/2011
-├── 2010/                 # Prove d'esame A.A. 2009/2010
-├── 2009/                 # Prove d'esame A.A. 2008/2009
-├── 2008/                 # Prove d'esame A.A. 2007/2008
-├── 2006/                 # Prove d'esame A.A. 2005/2006
-├── 2005/                 # Prove d'esame A.A. 2004/2005
-├── 2004/                 # Prove d'esame A.A. 2003/2004
-├── 2003/                 # Prove d'esame A.A. 2002/2003
-├── 2002/                 # Prove d'esame A.A. 2001/2002
-├── 2001/                 # Prove d'esame A.A. 2000/2001
-├── 2000/                 # Prove d'esame A.A. 1999/2000
-├── 1999/                 # Prove d'esame A.A. 1998/1999
-├── compitini/            # Prove in itinere e test intermedi storici
-└── raccolte/             # Raccolte complete di compiti e soluzioni (All-in-One)
+├── 2026/
+│   ├── 2025-12-18_prova_scritta_soluzione.pdf
+│   ├── 2025-12-18_prova_scritta_testo.pdf
+│   ├── 2026-01-09_prova_scritta_soluzione.pdf
+│   └── 2026-01-09_prova_scritta_testo.pdf
+├── 2025/
+│   ├── 2024-12-18_prova_scritta_soluzione.pdf
+│   ├── 2024-12-18_prova_scritta_testo.pdf
+│   ├── 2025-01-08_prova_scritta_soluzione.pdf
+│   ├── 2025-01-08_prova_scritta_testo.pdf
+│   ├── 2025-01-24_prova_scritta_soluzione.pdf
+│   └── 2025-01-24_prova_scritta_testo.pdf
+├── 2024/
+│   ├── 2023-12-19_prova_scritta_soluzione.pdf
+│   ├── 2023-12-19_prova_scritta_testo.pdf
+│   ├── 2024-01-09_prova_scritta_soluzione.pdf
+│   ├── 2024-01-09_prova_scritta_testo.pdf
+│   ├── 2024-01-26_prova_scritta_soluzione.pdf
+│   ├── 2024-01-26_prova_scritta_testo.pdf
+│   ├── 2024-02-13_prova_scritta_soluzione.pdf
+│   └── 2024-02-13_prova_scritta_testo.pdf
+├── 2023/
+│   ├── 2022-12-20_prova_scritta_soluzione.pdf
+│   ├── 2022-12-20_prova_scritta_testo.pdf
+│   ├── 2023-01-10_prova_scritta_soluzione.pdf
+│   ├── 2023-01-10_prova_scritta_testo.pdf
+│   ├── 2023-01-21_prova_scritta_soluzione.pdf
+│   └── 2023-01-21_prova_scritta_testo.pdf
+├── 2022/
+│   ├── 2021-12-20_prova_scritta_soluzione.pdf
+│   ├── 2021-12-20_prova_scritta_testo.pdf
+│   ├── 2022-01-10_prova_scritta_soluzione.pdf
+│   ├── 2022-01-10_prova_scritta_testo.pdf
+│   ├── 2022-01-25_prova_scritta_soluzione.pdf
+│   ├── 2022-01-25_prova_scritta_testo.pdf
+│   ├── 2022-02-15_prova_scritta_soluzione.pdf
+│   └── 2022-02-15_prova_scritta_testo.pdf
+├── 2021/
+│   └── README.md
+├── 2020/
+│   ├── 2019-12-19_prova_scritta_soluzione.pdf
+│   ├── 2019-12-19_prova_scritta_testo.pdf
+│   ├── 2020-01-08_prova_scritta_soluzione.pdf
+│   ├── 2020-01-08_prova_scritta_testo.pdf
+│   ├── 2020-01-28_prova_scritta_soluzione.pdf
+│   └── 2020-01-28_prova_scritta_testo.pdf
+├── 2019/
+│   ├── 2018-12-20_prova_scritta_soluzione.pdf
+│   ├── 2018-12-20_prova_scritta_testo.pdf
+│   ├── 2019-01-08_prova_scritta_soluzione.pdf
+│   ├── 2019-01-08_prova_scritta_testo.pdf
+│   ├── 2019-01-29_prova_scritta_soluzione.pdf
+│   ├── 2019-01-29_prova_scritta_testo.pdf
+│   ├── 2019-02-14_prova_scritta_soluzione.pdf
+│   └── 2019-02-14_prova_scritta_testo.pdf
+├── 2018/
+│   ├── 2017-12-20_prova_scritta_soluzione.pdf
+│   ├── 2017-12-20_prova_scritta_testo.pdf
+│   ├── 2018-01-09_prova_scritta_soluzione.pdf
+│   ├── 2018-01-09_prova_scritta_testo.pdf
+│   ├── 2018-01-30_prova_scritta_testo.pdf
+│   ├── 2018-02-15_prova_scritta_soluzione.pdf
+│   └── 2018-02-15_prova_scritta_testo.pdf
+├── 2017/
+│   ├── 2016-12-21_prova_scritta_soluzione.pdf
+│   ├── 2016-12-21_prova_scritta_testo.pdf
+│   ├── 2017-01-18_prova_scritta_soluzione.pdf
+│   ├── 2017-01-18_prova_scritta_testo.pdf
+│   ├── 2017-02-07_prova_scritta_testo.pdf
+│   └── 2017-02-24_prova_scritta_testo.pdf
+├── 2016/
+│   ├── 2015-12-21_prova_scritta_soluzione.pdf
+│   ├── 2015-12-21_prova_scritta_testo.pdf
+│   ├── 2016-01-20_prova_scritta_soluzione.pdf
+│   ├── 2016-01-20_prova_scritta_testo.pdf
+│   ├── 2016-02-09_prova_scritta_soluzione.pdf
+│   ├── 2016-02-09_prova_scritta_testo.pdf
+│   ├── 2016-02-24_prova_scritta_testo.pdf
+│   ├── 2016-06-15_prova_scritta_soluzione.pdf
+│   └── 2016-06-15_prova_scritta_testo.pdf
+├── 2015/
+│   ├── 2014-12-18_prova_scritta_soluzione.pdf
+│   ├── 2014-12-18_prova_scritta_testo.pdf
+│   ├── 2015-01-13_prova_scritta_soluzione.pdf
+│   ├── 2015-01-13_prova_scritta_testo.pdf
+│   ├── 2015-01-29_prova_scritta_soluzione.pdf
+│   ├── 2015-01-29_prova_scritta_testo.pdf
+│   ├── 2015-02-18_prova_scritta_testo.pdf
+│   ├── 2015-06-11_prova_scritta_testo.pdf
+│   ├── 2015-07-02_prova_scritta_testo.pdf
+│   ├── 2015-07-23_prova_scritta_testo.pdf
+│   ├── 2015-09-16_prova_scritta_soluzione.pdf
+│   └── 2015-09-16_prova_scritta_testo.pdf
+├── 2014/
+│   ├── 2013-12-20_prova_scritta_soluzione.pdf
+│   ├── 2013-12-20_prova_scritta_testo.pdf
+│   ├── 2014-01-13_prova_scritta_soluzione.pdf
+│   ├── 2014-01-13_prova_scritta_testo.pdf
+│   ├── 2014-01-30_prova_scritta_soluzione.pdf
+│   ├── 2014-01-30_prova_scritta_testo.pdf
+│   ├── 2014-02-19_prova_scritta_testo.pdf
+│   ├── 2014-06-11_prova_scritta_testo.pdf
+│   ├── 2014-07-08_prova_scritta_testo.pdf
+│   ├── 2014-07-23_prova_scritta_testo.pdf
+│   └── 2014-09-17_prova_scritta_testo.pdf
+├── 2013/
+│   ├── 2011-12-19_prova_scritta_soluzione.pdf
+│   ├── 2011-12-19_prova_scritta_testo.pdf
+│   ├── 2013-01-10_prova_scritta_testo.pdf
+│   ├── 2013-01-13_prova_scritta_soluzione.pdf
+│   ├── 2013-01-30_prova_scritta_testo.pdf
+│   ├── 2013-02-20_prova_scritta_testo.pdf
+│   ├── 2013-06-12_prova_scritta_soluzione.pdf
+│   ├── 2013-06-12_prova_scritta_testo.pdf
+│   ├── 2013-07-01_prova_scritta_testo.pdf
+│   ├── 2013-07-23_prova_scritta_testo.pdf
+│   └── 2013-09-13_prova_scritta_testo.pdf
+├── 2012/
+│   ├── 2012-01-18_prova_scritta_soluzione.pdf
+│   ├── 2012-01-18_prova_scritta_testo.pdf
+│   ├── 2012-02-07_prova_scritta_soluzione.pdf
+│   ├── 2012-02-07_prova_scritta_testo.pdf
+│   ├── 2012-02-21_prova_scritta_soluzione.pdf
+│   ├── 2012-02-21_prova_scritta_testo.pdf
+│   ├── 2012-06-13_prova_scritta_soluzione.pdf
+│   ├── 2012-06-13_prova_scritta_testo.pdf
+│   ├── 2012-06-27_prova_scritta_soluzione.pdf
+│   ├── 2012-06-27_prova_scritta_testo.pdf
+│   ├── 2012-07-18_prova_scritta_soluzione.pdf
+│   ├── 2012-07-18_prova_scritta_testo.pdf
+│   └── 2012-09-13_prova_scritta_testo.pdf
+├── 2011/
+│   ├── 2011-02-09_prova_scritta_testo.pdf
+│   ├── 2011-02-23_prova_scritta_soluzione.pdf
+│   ├── 2011-02-23_prova_scritta_testo.pdf
+│   ├── 2011-06-22_test_testo.pdf
+│   ├── 2011-07-11_prova_scritta_soluzione.pdf
+│   ├── 2011-07-11_test_testo.pdf
+│   ├── 2011-07-20_test_testo.pdf
+│   ├── 2011-12-19_prova_scritta_soluzione.pdf
+│   └── 2011-12-19_prova_scritta_testo.pdf
+├── 2010/
+│   ├── 2010-01-11_prova_scritta_testo.pdf
+│   └── 2010-01-27_prova_scritta_testo.pdf
+├── 2009/
+│   ├── 2009-06-13_prova_scritta_testo.pdf
+│   ├── 2009-06-30_prova_scritta_testo.pdf
+│   ├── 2009-07-21_prova_scritta_testo.pdf
+│   └── 2009-09-15_prova_scritta_testo.pdf
+├── 2008/
+│   ├── 2008-01-16_prova_scritta_testo.pdf
+│   ├── 2008-01-28_prova_scritta_testo.pdf
+│   ├── 2008-02-12_prova_scritta_testo.pdf
+│   ├── 2008-06-04_prova_scritta_testo.pdf
+│   ├── 2008-06-24_prova_scritta_testo.pdf
+│   ├── 2008-07-15_prova_scritta_testo.pdf
+│   └── 2008-09-16_prova_scritta_testo.pdf
+├── 2006/
+│   ├── 2006-01-18_prova_scritta_soluzione.pdf
+│   ├── 2006-01-18_prova_scritta_testo.pdf
+│   ├── 2006-02-01_prova_scritta_testo.pdf
+│   └── 2006-02-14_prova_scritta_testo.pdf
+├── 2005/
+│   ├── 2005-01-18_prova_scritta_soluzione.pdf
+│   ├── 2005-01-18_prova_scritta_testo.pdf
+│   ├── 2005-02-03_prova_scritta_soluzione.pdf
+│   ├── 2005-02-03_prova_scritta_testo.pdf
+│   ├── 2005-02-22_prova_scritta_soluzione.pdf
+│   ├── 2005-02-22_prova_scritta_testo.pdf
+│   ├── 2005-06-16_prova_scritta_soluzione.pdf
+│   ├── 2005-06-16_prova_scritta_testo.pdf
+│   ├── 2005-07-05_prova_scritta_testo.pdf
+│   ├── 2005-07-19_prova_scritta_testo.pdf
+│   └── 2005-09-21_prova_scritta_testo.pdf
+├── 2004/
+│   ├── 2004-01-16_prova_scritta_soluzione.pdf
+│   ├── 2004-01-16_prova_scritta_testo.pdf
+│   ├── 2004-02-04_prova_scritta_soluzione.pdf
+│   ├── 2004-02-04_prova_scritta_testo.pdf
+│   ├── 2004-02-18_prova_scritta_soluzione.pdf
+│   ├── 2004-02-18_prova_scritta_testo.pdf
+│   ├── 2004-06-09_prova_scritta_soluzione.pdf
+│   ├── 2004-06-09_prova_scritta_testo.pdf
+│   ├── 2004-06-29_prova_scritta_soluzione.pdf
+│   ├── 2004-06-29_prova_scritta_testo.pdf
+│   ├── 2004-07-20_prova_scritta_testo.pdf
+│   └── 2004-09-22_prova_scritta_testo.pdf
+├── 2003/
+│   ├── 2003-01-15_prova_scritta_testo.pdf
+│   ├── 2003-02-05_prova_scritta_testo.pdf
+│   ├── 2003-02-18_prova_scritta_testo.pdf
+│   ├── 2003-06-13_prova_scritta_testo.pdf
+│   ├── 2003-07-01_prova_scritta_testo.pdf
+│   ├── 2003-07-22_prova_scritta_testo.pdf
+│   ├── 2003-09-23_prova_scritta_testo.pdf
+│   └── 2003_soluzioni_raccolta.pdf
+├── 2002/
+│   ├── 2002-01-16_prova_scritta_testo.pdf
+│   ├── 2002-01-18_test_testo.pdf
+│   ├── 2002-02-05_prova_scritta_testo.pdf
+│   ├── 2002-02-07_test_testo.pdf
+│   ├── 2002-02-19_prova_scritta_testo.pdf
+│   ├── 2002-02-21_test_testo.pdf
+│   ├── 2002-06-04_prova_scritta_testo.pdf
+│   ├── 2002-06-04_test_testo.pdf
+│   ├── 2002-06-26_prova_scritta_testo.pdf
+│   ├── 2002-06-26_test_testo.pdf
+│   ├── 2002-07-16_prova_scritta_testo.pdf
+│   ├── 2002-07-16_test_testo.pdf
+│   ├── 2002-10-01_prova_scritta_testo.pdf
+│   ├── 2002-10-01_test_testo.pdf
+│   └── 2002_soluzioni_raccolta.pdf
+├── 2001/
+│   ├── 2001-01-17_prova_scritta_testo.pdf
+│   ├── 2001-01-17_test_testo.pdf
+│   ├── 2001-02-06_prova_scritta_testo.pdf
+│   ├── 2001-02-06_test_testo.pdf
+│   ├── 2001-02-20_prova_scritta_testo.pdf
+│   ├── 2001-02-20_test_testo.pdf
+│   ├── 2001-06-06_prova_scritta_testo.pdf
+│   ├── 2001-06-06_test_testo.pdf
+│   ├── 2001-06-26_prova_scritta_testo.pdf
+│   ├── 2001-06-26_test_testo.pdf
+│   ├── 2001-07-17_prova_scritta_testo.pdf
+│   ├── 2001-07-17_test_testo.pdf
+│   ├── 2001-09-18_prova_scritta_testo.pdf
+│   ├── 2001-09-18_test_testo.pdf
+│   ├── 2001-10-02_prova_scritta_testo.pdf
+│   ├── 2001-10-02_test_testo.pdf
+│   └── 2001_soluzioni_raccolta.pdf
+├── 2000/
+│   ├── 2000-01-11_prova_scritta_testo.pdf
+│   ├── 2000-02-01_prova_scritta_testo.pdf
+│   ├── 2000-02-15_prova_scritta_testo.pdf
+│   ├── 2000-07-11_prova_scritta_testo.pdf
+│   ├── 2000-09-05_prova_scritta_testo.pdf
+│   ├── 2000-09-18_prova_scritta_testo.pdf
+│   └── 2000_soluzioni_raccolta.pdf
+├── 1999/
+│   ├── 1999-01-12_prova_scritta_testo.pdf
+│   ├── 1999-02-02_prova_scritta_testo.pdf
+│   ├── 1999-02-16_prova_scritta_testo.pdf
+│   ├── 1999-06-01_prova_scritta_testo.pdf
+│   └── 1999-09-20_prova_scritta_testo.pdf
+├── compitini/
+│   ├── 2002-11-16_compitino_1_testo.pdf
+│   ├── 2002-12-21_compitino_2_testo.pdf
+│   ├── 2003-11-07_compitino_1_testo.pdf
+│   ├── 2003-12-19_compitino_2_testo.pdf
+│   ├── 2004-11-13_compitino_1_testo.pdf
+│   ├── 2004-12-18_compitino_2_testo.pdf
+│   ├── 2005-11-07_compitino_1_testo.pdf
+│   ├── 2005-12-19_compitino_2_testo.pdf
+│   ├── 2007-11-12_compitino_1_testo.pdf
+│   ├── 2007-12-17_compitino_2_testo.pdf
+│   ├── 2008-12-01_compitino_1_testo.pdf
+│   ├── 2009-02-09_compitino_2_testo.pdf
+│   ├── 2009-02-09_compitino_3_testo.pdf
+│   ├── 2009-05-28_compitino_4_testo.pdf
+│   ├── 2009-11-13_compitino_1_testo.pdf
+│   ├── 2010-02-08_compitino_2_testo.pdf
+│   ├── 2010-04-26_compitino_3_testo.pdf
+│   └── 2010-05-27_compitino_4_testo.pdf
+└── raccolte/
+    ├── 2000_soluzioni_raccolta.pdf
+    ├── 2001_soluzioni_raccolta.pdf
+    ├── 2002_soluzioni_raccolta.pdf
+    ├── 2003_soluzioni_raccolta.pdf
+    ├── esercizi_algebra_lineare.pdf
+    ├── esercizi_numeri_complessi.pdf
+    ├── raccolta_spazi_vettoriali_applicazioni_matrici.pdf
+    ├── raccolta_testi_esame_2009-2010.pdf
+    └── test_esercizi_autovalori.pdf
 ```
 
 ---
 
-## Indice Dettagliato delle Prove e delle Soluzioni
+## 📋 Dettaglio degli Appelli Disponibili
 
-### Anno Accademico 2025/2026 (`2026/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **09/01/2026** | Prova Scritta | [`Testo PDF`](2026/2026-01-09_prova_scritta_testo.pdf) | [`Soluzione PDF`](2026/2026-01-09_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **18/12/2025** | Prova Scritta | [`Testo PDF`](2026/2025-12-18_prova_scritta_testo.pdf) | [`Soluzione PDF`](2026/2025-12-18_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
+### 📅 Anno 2026 (A.A. 2025/2026)
+* [2026-01-09_prova_scritta_soluzione.pdf](2026/2026-01-09_prova_scritta_soluzione.pdf) (8 pagine - Soluzione completa) | [Testo PDF](2026/2026-01-09_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2025-12-18_prova_scritta_soluzione.pdf](2026/2025-12-18_prova_scritta_soluzione.pdf) (9 pagine - Soluzione completa) | [Testo PDF](2026/2025-12-18_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
----
+### 📅 Anno 2025 (A.A. 2024/2025)
+* [2025-01-24_prova_scritta_soluzione.pdf](2025/2025-01-24_prova_scritta_soluzione.pdf) (5 pagine - Soluzione completa) | [Testo PDF](2025/2025-01-24_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2025-01-08_prova_scritta_soluzione.pdf](2025/2025-01-08_prova_scritta_soluzione.pdf) (8 pagine - Soluzione completa) | [Testo PDF](2025/2025-01-08_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2024-12-18_prova_scritta_soluzione.pdf](2025/2024-12-18_prova_scritta_soluzione.pdf) (9 pagine - Soluzione completa) | [Testo PDF](2025/2024-12-18_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
-### Anno Accademico 2024/2025 (`2025/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **24/01/2025** | Prova Scritta | [`Testo PDF`](2025/2025-01-24_prova_scritta_testo.pdf) | [`Soluzione PDF`](2025/2025-01-24_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **08/01/2025** | Prova Scritta | [`Testo PDF`](2025/2025-01-08_prova_scritta_testo.pdf) | [`Soluzione PDF`](2025/2025-01-08_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **18/12/2024** | Prova Scritta | [`Testo PDF`](2025/2024-12-18_prova_scritta_testo.pdf) | [`Soluzione PDF`](2025/2024-12-18_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
+### 📅 Anno 2024 (A.A. 2023/2024)
+* [2024-02-13_prova_scritta_soluzione.pdf](2024/2024-02-13_prova_scritta_soluzione.pdf) (8 pagine - Soluzione completa) | [Testo PDF](2024/2024-02-13_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2024-01-26_prova_scritta_soluzione.pdf](2024/2024-01-26_prova_scritta_soluzione.pdf) (9 pagine - Soluzione completa) | [Testo PDF](2024/2024-01-26_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2024-01-09_prova_scritta_soluzione.pdf](2024/2024-01-09_prova_scritta_soluzione.pdf) (9 pagine - Soluzione completa) | [Testo PDF](2024/2024-01-09_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2023-12-19_prova_scritta_soluzione.pdf](2024/2023-12-19_prova_scritta_soluzione.pdf) (14 pagine - Soluzione completa) | [Testo PDF](2024/2023-12-19_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
----
+### 📅 Anno 2023 (A.A. 2022/2023)
+* [2023-01-21_prova_scritta_soluzione.pdf](2023/2023-01-21_prova_scritta_soluzione.pdf) (11 pagine - Soluzione completa) | [Testo PDF](2023/2023-01-21_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2023-01-10_prova_scritta_soluzione.pdf](2023/2023-01-10_prova_scritta_soluzione.pdf) (8 pagine - Soluzione completa) | [Testo PDF](2023/2023-01-10_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2022-12-20_prova_scritta_soluzione.pdf](2023/2022-12-20_prova_scritta_soluzione.pdf) (9 pagine - Soluzione completa) | [Testo PDF](2023/2022-12-20_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
-### Anno Accademico 2023/2024 (`2024/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **13/02/2024** | Prova Scritta | [`Testo PDF`](2024/2024-02-13_prova_scritta_testo.pdf) | [`Soluzione PDF`](2024/2024-02-13_prova_scritta_soluzione.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **26/01/2024** | Prova Scritta | [`Testo PDF`](2024/2024-01-26_prova_scritta_testo.pdf) | [`Soluzione PDF`](2024/2024-01-26_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **09/01/2024** | Prova Scritta | [`Testo PDF`](2024/2024-01-09_prova_scritta_testo.pdf) | [`Soluzione PDF`](2024/2024-01-09_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **19/12/2023** | Prova Scritta | [`Testo PDF`](2024/2023-12-19_prova_scritta_testo.pdf) | [`Soluzione PDF`](2024/2023-12-19_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
+### 📅 Anno 2022 (A.A. 2021/2022)
+* [2022-02-15_prova_scritta_soluzione.pdf](2022/2022-02-15_prova_scritta_soluzione.pdf) (7 pagine - Soluzione completa) | [Testo PDF](2022/2022-02-15_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2022-01-25_prova_scritta_soluzione.pdf](2022/2022-01-25_prova_scritta_soluzione.pdf) (5 pagine - Soluzione completa) | [Testo PDF](2022/2022-01-25_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2022-01-10_prova_scritta_soluzione.pdf](2022/2022-01-10_prova_scritta_soluzione.pdf) (7 pagine - Soluzione completa) | [Testo PDF](2022/2022-01-10_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2021-12-20_prova_scritta_soluzione.pdf](2022/2021-12-20_prova_scritta_soluzione.pdf) (8 pagine - Soluzione completa) | [Testo PDF](2022/2021-12-20_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
----
+### 📅 Anno 2021 (Sessione Telematica COVID-19)
+> **Nota Sessione COVID-19 (A.A. 2020/2021):** Le prove scritte si sono svolte in modalità telematica tramite Google Forms con compiti personalizzati per ciascuno studente. I moduli ufficiali archiviati sono consultabili tramite i seguenti link diretti:
+> - [Modulo Compito del 08/01/2021](https://forms.gle/A6jE6N7AdfM7Kznu6) | [Test Preliminare 08/01/2021](https://forms.gle/4fYpu6LnYjh1CgXg7)
+> - [Modulo Compito del 26/01/2021](https://forms.gle/P3vUMuKqMogPRUYv7) | [Test Preliminare 26/01/2021](https://forms.gle/nbKWvr8NR4t7Codw8)
+> - [Modulo Compito del 16/02/2021](https://forms.gle/Mxxyw76HoqsGHCUSA) | [Test Preliminare 16/02/2021](https://forms.gle/3pRdCrGCjdqTABnK7)
 
-### Anno Accademico 2022/2023 (`2023/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **21/01/2023** | Prova Scritta | [`Testo PDF`](2023/2023-01-21_prova_scritta_testo.pdf) | [`Soluzione PDF`](2023/2023-01-21_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **10/01/2023** | Prova Scritta | [`Testo PDF`](2023/2023-01-10_prova_scritta_testo.pdf) | [`Soluzione PDF`](2023/2023-01-10_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **20/12/2022** | Prova Scritta | [`Testo PDF`](2023/2022-12-20_prova_scritta_testo.pdf) | [`Soluzione PDF`](2023/2022-12-20_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
+### 📅 Anno 2020 (A.A. 2019/2020)
+* [2020-01-28_prova_scritta_soluzione.pdf](2020/2020-01-28_prova_scritta_soluzione.pdf) (8 pagine - Soluzione completa) | [Testo PDF](2020/2020-01-28_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2020-01-08_prova_scritta_soluzione.pdf](2020/2020-01-08_prova_scritta_soluzione.pdf) (8 pagine - Soluzione completa) | [Testo PDF](2020/2020-01-08_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2019-12-19_prova_scritta_soluzione.pdf](2020/2019-12-19_prova_scritta_soluzione.pdf) (7 pagine - Soluzione completa) | [Testo PDF](2020/2019-12-19_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
----
+### 📅 Anno 2019 (A.A. 2018/2019)
+* [2019-02-14_prova_scritta_soluzione.pdf](2019/2019-02-14_prova_scritta_soluzione.pdf) (5 pagine - Soluzione completa) | [Testo PDF](2019/2019-02-14_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2019-01-29_prova_scritta_soluzione.pdf](2019/2019-01-29_prova_scritta_soluzione.pdf) (9 pagine - Soluzione completa) | [Testo PDF](2019/2019-01-29_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2019-01-08_prova_scritta_soluzione.pdf](2019/2019-01-08_prova_scritta_soluzione.pdf) (6 pagine - Soluzione completa) | [Testo PDF](2019/2019-01-08_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2018-12-20_prova_scritta_soluzione.pdf](2019/2018-12-20_prova_scritta_soluzione.pdf) (9 pagine - Soluzione completa) | [Testo PDF](2019/2018-12-20_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
-### Anno Accademico 2021/2022 (`2022/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **15/02/2022** | Prova Scritta | [`Testo PDF`](2022/2022-02-15_prova_scritta_testo.pdf) | [`Soluzione PDF`](2022/2022-02-15_prova_scritta_soluzione.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **25/01/2022** | Prova Scritta | [`Testo PDF`](2022/2022-01-25_prova_scritta_testo.pdf) | [`Soluzione PDF`](2022/2022-01-25_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **10/01/2022** | Prova Scritta | [`Testo PDF`](2022/2022-01-10_prova_scritta_testo.pdf) | [`Soluzione PDF`](2022/2022-01-10_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **20/12/2021** | Prova Scritta | [`Testo PDF`](2022/2021-12-20_prova_scritta_testo.pdf) | [`Soluzione PDF`](2022/2021-12-20_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
+### 📅 Anno 2018 (A.A. 2017/2018)
+* [2018-02-15_prova_scritta_soluzione.pdf](2018/2018-02-15_prova_scritta_soluzione.pdf) (7 pagine - Soluzione completa) | [Testo PDF](2018/2018-02-15_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2018-01-30_prova_scritta_testo.pdf](2018/2018-01-30_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2018-01-09_prova_scritta_soluzione.pdf](2018/2018-01-09_prova_scritta_soluzione.pdf) (8 pagine - Soluzione completa) | [Testo PDF](2018/2018-01-09_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2017-12-20_prova_scritta_soluzione.pdf](2018/2017-12-20_prova_scritta_soluzione.pdf) (11 pagine - Soluzione completa) | [Testo PDF](2018/2017-12-20_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
----
+### 📅 Anno 2017 (A.A. 2016/2017)
+* [2017-02-24_prova_scritta_testo.pdf](2017/2017-02-24_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2017-02-07_prova_scritta_testo.pdf](2017/2017-02-07_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2017-01-18_prova_scritta_soluzione.pdf](2017/2017-01-18_prova_scritta_soluzione.pdf) (5 pagine - Soluzione completa) | [Testo PDF](2017/2017-01-18_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2016-12-21_prova_scritta_soluzione.pdf](2017/2016-12-21_prova_scritta_soluzione.pdf) (7 pagine - Soluzione completa) | [Testo PDF](2017/2016-12-21_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
-### Anno Accademico 2020/2021 (`2021/`)
-> **Nota Sessione COVID-19 (2020/2021):** Le prove scritte si sono svolte in modalità telematica tramite Google Forms con compiti personalizzati per ciascuno studente. Per consultare i testi e le soluzioni è possibile accedere ai moduli ufficiali archiviati:
-> - [Modulo Compito 1 (18/01/2021)](https://forms.gle/j5zL2r57WqgW3n3U8)
-> - [Modulo Compito 2 (08/02/2021)](https://forms.gle/99tqR8b9zWqgW3n3U8)
-> - [Modulo Compito 3 (24/02/2021)](https://forms.gle/44tqR8b9zWqgW3n3U8)
+### 📅 Anno 2016 (A.A. 2015/2016)
+* [2016-06-15_prova_scritta_soluzione.pdf](2016/2016-06-15_prova_scritta_soluzione.pdf) (9 pagine - Soluzione completa) | [Testo PDF](2016/2016-06-15_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2016-02-24_prova_scritta_testo.pdf](2016/2016-02-24_prova_scritta_testo.pdf) (4 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2016-02-09_prova_scritta_soluzione.pdf](2016/2016-02-09_prova_scritta_soluzione.pdf) (10 pagine - Soluzione completa) | [Testo PDF](2016/2016-02-09_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2016-01-20_prova_scritta_soluzione.pdf](2016/2016-01-20_prova_scritta_soluzione.pdf) (10 pagine - Soluzione completa) | [Testo PDF](2016/2016-01-20_prova_scritta_testo.pdf) (8 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2015-12-21_prova_scritta_soluzione.pdf](2016/2015-12-21_prova_scritta_soluzione.pdf) (9 pagine - Soluzione completa) | [Testo PDF](2016/2015-12-21_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
-### Anno Accademico 2019/2020 (`2020/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **28/01/2020** | Prova Scritta | [`Testo PDF`](2020/2020-01-28_prova_scritta_testo.pdf) | [`Soluzione PDF`](2020/2020-01-28_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **08/01/2020** | Prova Scritta | [`Testo PDF`](2020/2020-01-08_prova_scritta_testo.pdf) | [`Soluzione PDF`](2020/2020-01-08_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **19/12/2019** | Prova Scritta | [`Testo PDF`](2020/2019-12-19_prova_scritta_testo.pdf) | [`Soluzione PDF`](2020/2019-12-19_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
+### 📅 Anno 2015 (A.A. 2014/2015)
+* [2015-09-16_prova_scritta_soluzione.pdf](2015/2015-09-16_prova_scritta_soluzione.pdf) (3 pagine - Soluzione completa) | [Testo PDF](2015/2015-09-16_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2015-07-23_prova_scritta_testo.pdf](2015/2015-07-23_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2015-07-02_prova_scritta_testo.pdf](2015/2015-07-02_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2015-06-11_prova_scritta_testo.pdf](2015/2015-06-11_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2015-02-18_prova_scritta_testo.pdf](2015/2015-02-18_prova_scritta_testo.pdf) (4 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2015-01-29_prova_scritta_soluzione.pdf](2015/2015-01-29_prova_scritta_soluzione.pdf) (7 pagine - Soluzione completa) | [Testo PDF](2015/2015-01-29_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2015-01-13_prova_scritta_soluzione.pdf](2015/2015-01-13_prova_scritta_soluzione.pdf) (5 pagine - Soluzione completa) | [Testo PDF](2015/2015-01-13_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2014-12-18_prova_scritta_soluzione.pdf](2015/2014-12-18_prova_scritta_soluzione.pdf) (7 pagine - Soluzione completa) | [Testo PDF](2015/2014-12-18_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
----
+### 📅 Anno 2014 (A.A. 2013/2014)
+* [2014-09-17_prova_scritta_testo.pdf](2014/2014-09-17_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2014-07-23_prova_scritta_testo.pdf](2014/2014-07-23_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2014-07-08_prova_scritta_testo.pdf](2014/2014-07-08_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2014-06-11_prova_scritta_testo.pdf](2014/2014-06-11_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2014-02-19_prova_scritta_testo.pdf](2014/2014-02-19_prova_scritta_testo.pdf) (8 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2014-01-30_prova_scritta_soluzione.pdf](2014/2014-01-30_prova_scritta_soluzione.pdf) (7 pagine - Soluzione completa) | [Testo PDF](2014/2014-01-30_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2014-01-13_prova_scritta_soluzione.pdf](2014/2014-01-13_prova_scritta_soluzione.pdf) (9 pagine - Soluzione completa) | [Testo PDF](2014/2014-01-13_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2013-12-20_prova_scritta_soluzione.pdf](2014/2013-12-20_prova_scritta_soluzione.pdf) (10 pagine - Soluzione completa) | [Testo PDF](2014/2013-12-20_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
-### Anno Accademico 2018/2019 (`2019/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **14/02/2019** | Prova Scritta | [`Testo PDF`](2019/2019-02-14_prova_scritta_testo.pdf) | [`Soluzione PDF`](2019/2019-02-14_prova_scritta_soluzione.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **29/01/2019** | Prova Scritta | [`Testo PDF`](2019/2019-01-29_prova_scritta_testo.pdf) | [`Soluzione PDF`](2019/2019-01-29_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **08/01/2019** | Prova Scritta | [`Testo PDF`](2019/2019-01-08_prova_scritta_testo.pdf) | [`Soluzione PDF`](2019/2019-01-08_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **20/12/2018** | Prova Scritta | [`Testo PDF`](2019/2018-12-20_prova_scritta_testo.pdf) | [`Soluzione PDF`](2019/2018-12-20_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
+### 📅 Anno 2013 (A.A. 2012/2013)
+* [2013-09-13_prova_scritta_testo.pdf](2013/2013-09-13_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2013-07-23_prova_scritta_testo.pdf](2013/2013-07-23_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2013-07-01_prova_scritta_testo.pdf](2013/2013-07-01_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2013-06-12_prova_scritta_soluzione.pdf](2013/2013-06-12_prova_scritta_soluzione.pdf) (6 pagine - Soluzione completa) | [Testo PDF](2013/2013-06-12_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2013-02-20_prova_scritta_testo.pdf](2013/2013-02-20_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2013-01-30_prova_scritta_testo.pdf](2013/2013-01-30_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2013-01-13_prova_scritta_soluzione.pdf](2013/2013-01-13_prova_scritta_soluzione.pdf) (10 pagine - Soluzione completa)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2013-01-10_prova_scritta_testo.pdf](2013/2013-01-10_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2011-12-19_prova_scritta_soluzione.pdf](2013/2011-12-19_prova_scritta_soluzione.pdf) (8 pagine - Soluzione completa) | [Testo PDF](2013/2011-12-19_prova_scritta_testo.pdf) (16 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
----
+### 📅 Anno 2012 (A.A. 2011/2012)
+* [2012-09-13_prova_scritta_testo.pdf](2012/2012-09-13_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2012-07-18_prova_scritta_soluzione.pdf](2012/2012-07-18_prova_scritta_soluzione.pdf) (1 pagine - Soluzione completa) | [Testo PDF](2012/2012-07-18_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2012-06-27_prova_scritta_soluzione.pdf](2012/2012-06-27_prova_scritta_soluzione.pdf) (6 pagine - Soluzione completa) | [Testo PDF](2012/2012-06-27_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2012-06-13_prova_scritta_soluzione.pdf](2012/2012-06-13_prova_scritta_soluzione.pdf) (8 pagine - Soluzione completa) | [Testo PDF](2012/2012-06-13_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2012-02-21_prova_scritta_soluzione.pdf](2012/2012-02-21_prova_scritta_soluzione.pdf) (11 pagine - Soluzione completa) | [Testo PDF](2012/2012-02-21_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2012-02-07_prova_scritta_soluzione.pdf](2012/2012-02-07_prova_scritta_soluzione.pdf) (9 pagine - Soluzione completa) | [Testo PDF](2012/2012-02-07_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2012-01-18_prova_scritta_soluzione.pdf](2012/2012-01-18_prova_scritta_soluzione.pdf) (10 pagine - Soluzione completa) | [Testo PDF](2012/2012-01-18_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
-### Anno Accademico 2017/2018 (`2018/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **15/02/2018** | Prova Scritta | [`Testo PDF`](2018/2018-02-15_prova_scritta_testo.pdf) | [`Soluzione PDF`](2018/2018-02-15_prova_scritta_soluzione.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **30/01/2018** | Prova Scritta | [`Testo PDF`](2018/2018-01-30_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **09/01/2018** | Prova Scritta | [`Testo PDF`](2018/2018-01-09_prova_scritta_testo.pdf) | [`Soluzione PDF`](2018/2018-01-09_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **20/12/2017** | Prova Scritta | [`Testo PDF`](2018/2017-12-20_prova_scritta_testo.pdf) | [`Soluzione PDF`](2018/2017-12-20_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
+### 📅 Anno 2011 (A.A. 2010/2011)
+* [2011-12-19_prova_scritta_soluzione.pdf](2011/2011-12-19_prova_scritta_soluzione.pdf) (10 pagine - Soluzione completa) | [Testo PDF](2011/2011-12-19_prova_scritta_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2011-07-20_test_testo.pdf](2011/2011-07-20_test_testo.pdf) (2 pagine - Test Preliminare)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2011-07-11_prova_scritta_soluzione.pdf](2011/2011-07-11_prova_scritta_soluzione.pdf) (8 pagine - Soluzione completa) | [Test Preliminare PDF](2011/2011-07-11_test_testo.pdf) (2 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2011-06-22_test_testo.pdf](2011/2011-06-22_test_testo.pdf) (2 pagine - Test Preliminare)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2011-02-23_prova_scritta_soluzione.pdf](2011/2011-02-23_prova_scritta_soluzione.pdf) (11 pagine - Soluzione completa) | [Testo PDF](2011/2011-02-23_prova_scritta_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2011-02-09_prova_scritta_testo.pdf](2011/2011-02-09_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
----
+### 📅 Anno 2010 (A.A. 2009/2010)
+* [2010-01-27_prova_scritta_testo.pdf](2010/2010-01-27_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2010-01-11_prova_scritta_testo.pdf](2010/2010-01-11_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
-### Anno Accademico 2016/2017 (`2017/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **24/02/2017** | Prova Scritta | [`Testo PDF`](2017/2017-02-24_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **07/02/2017** | Prova Scritta | [`Testo PDF`](2017/2017-02-07_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **18/01/2017** | Prova Scritta | [`Testo PDF`](2017/2017-01-18_prova_scritta_testo.pdf) | [`Soluzione PDF`](2017/2017-01-18_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **21/12/2016** | Prova Scritta | [`Testo PDF`](2017/2016-12-21_prova_scritta_testo.pdf) | [`Soluzione PDF`](2017/2016-12-21_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
+### 📅 Anno 2009 (A.A. 2008/2009)
+* [2009-09-15_prova_scritta_testo.pdf](2009/2009-09-15_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2009-07-21_prova_scritta_testo.pdf](2009/2009-07-21_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2009-06-30_prova_scritta_testo.pdf](2009/2009-06-30_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2009-06-13_prova_scritta_testo.pdf](2009/2009-06-13_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
----
+### 📅 Anno 2008 (A.A. 2007/2008)
+* [2008-09-16_prova_scritta_testo.pdf](2008/2008-09-16_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2008-07-15_prova_scritta_testo.pdf](2008/2008-07-15_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2008-06-24_prova_scritta_testo.pdf](2008/2008-06-24_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2008-06-04_prova_scritta_testo.pdf](2008/2008-06-04_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2008-02-12_prova_scritta_testo.pdf](2008/2008-02-12_prova_scritta_testo.pdf) (8 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2008-01-28_prova_scritta_testo.pdf](2008/2008-01-28_prova_scritta_testo.pdf) (4 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2008-01-16_prova_scritta_testo.pdf](2008/2008-01-16_prova_scritta_testo.pdf) (8 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
-### Anno Accademico 2015/2016 (`2016/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **15/06/2016** | Prova Scritta | [`Testo PDF`](2016/2016-06-15_prova_scritta_testo.pdf) | [`Soluzione PDF`](2016/2016-06-15_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **24/02/2016** | Prova Scritta | [`Testo PDF`](2016/2016-02-24_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **09/02/2016** | Prova Scritta | [`Testo PDF`](2016/2016-02-09_prova_scritta_testo.pdf) | [`Soluzione PDF`](2016/2016-02-09_prova_scritta_soluzione.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **20/01/2016** | Prova Scritta | [`Testo PDF`](2016/2016-01-20_prova_scritta_testo.pdf) | [`Soluzione PDF`](2016/2016-01-20_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **21/12/2015** | Prova Scritta | [`Testo PDF`](2016/2015-12-21_prova_scritta_testo.pdf) | [`Soluzione PDF`](2016/2015-12-21_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
+### 📅 Anno 2006 (A.A. 2005/2006)
+* [2006-02-14_prova_scritta_testo.pdf](2006/2006-02-14_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2006-02-01_prova_scritta_testo.pdf](2006/2006-02-01_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2006-01-18_prova_scritta_soluzione.pdf](2006/2006-01-18_prova_scritta_soluzione.pdf) (5 pagine - Soluzione completa) | [Testo PDF](2006/2006-01-18_prova_scritta_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
----
+### 📅 Anno 2005 (A.A. 2004/2005)
+* [2005-09-21_prova_scritta_testo.pdf](2005/2005-09-21_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2005-07-19_prova_scritta_testo.pdf](2005/2005-07-19_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2005-07-05_prova_scritta_testo.pdf](2005/2005-07-05_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2005-06-16_prova_scritta_soluzione.pdf](2005/2005-06-16_prova_scritta_soluzione.pdf) (6 pagine - Soluzione completa) | [Testo PDF](2005/2005-06-16_prova_scritta_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2005-02-22_prova_scritta_soluzione.pdf](2005/2005-02-22_prova_scritta_soluzione.pdf) (5 pagine - Soluzione completa) | [Testo PDF](2005/2005-02-22_prova_scritta_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2005-02-03_prova_scritta_soluzione.pdf](2005/2005-02-03_prova_scritta_soluzione.pdf) (6 pagine - Soluzione completa) | [Testo PDF](2005/2005-02-03_prova_scritta_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2005-01-18_prova_scritta_soluzione.pdf](2005/2005-01-18_prova_scritta_soluzione.pdf) (5 pagine - Soluzione completa) | [Testo PDF](2005/2005-01-18_prova_scritta_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
-### Anno Accademico 2014/2015 (`2015/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **16/09/2015** | Prova Scritta | [`Testo PDF`](2015/2015-09-16_prova_scritta_testo.pdf) | [`Soluzione PDF`](2015/2015-09-16_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **23/07/2015** | Prova Scritta | [`Testo PDF`](2015/2015-07-23_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **02/07/2015** | Prova Scritta | [`Testo PDF`](2015/2015-07-02_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **11/06/2015** | Prova Scritta | [`Testo PDF`](2015/2015-06-11_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **18/02/2015** | Prova Scritta | [`Testo PDF`](2015/2015-02-18_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **29/01/2015** | Prova Scritta | [`Testo PDF`](2015/2015-01-29_prova_scritta_testo.pdf) | [`Soluzione PDF`](2015/2015-01-29_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **13/01/2015** | Prova Scritta | [`Testo PDF`](2015/2015-01-13_prova_scritta_testo.pdf) | [`Soluzione PDF`](2015/2015-01-13_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **18/12/2014** | Prova Scritta | [`Testo PDF`](2015/2014-12-18_prova_scritta_testo.pdf) | [`Soluzione PDF`](2015/2014-12-18_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
+### 📅 Anno 2004 (A.A. 2003/2004)
+* [2004-09-22_prova_scritta_testo.pdf](2004/2004-09-22_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2004-07-20_prova_scritta_testo.pdf](2004/2004-07-20_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2004-06-29_prova_scritta_soluzione.pdf](2004/2004-06-29_prova_scritta_soluzione.pdf) (6 pagine - Soluzione completa) | [Testo PDF](2004/2004-06-29_prova_scritta_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2004-06-09_prova_scritta_soluzione.pdf](2004/2004-06-09_prova_scritta_soluzione.pdf) (6 pagine - Soluzione completa) | [Testo PDF](2004/2004-06-09_prova_scritta_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2004-02-18_prova_scritta_soluzione.pdf](2004/2004-02-18_prova_scritta_soluzione.pdf) (5 pagine - Soluzione completa) | [Testo PDF](2004/2004-02-18_prova_scritta_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2004-02-04_prova_scritta_soluzione.pdf](2004/2004-02-04_prova_scritta_soluzione.pdf) (7 pagine - Soluzione completa) | [Testo PDF](2004/2004-02-04_prova_scritta_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2004-01-16_prova_scritta_soluzione.pdf](2004/2004-01-16_prova_scritta_soluzione.pdf) (6 pagine - Soluzione completa) | [Testo PDF](2004/2004-01-16_prova_scritta_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
----
+### 📅 Anno 2003 (A.A. 2002/2003)
+* [2003_soluzioni_raccolta.pdf](2003/2003_soluzioni_raccolta.pdf) (20 pagine - Raccolta Completa Soluzioni Svolte)
+  * Soluzioni analitiche svolte passaggio per passaggio di tutti gli appelli d'esame dell'anno;
+* [2003-09-23_prova_scritta_testo.pdf](2003/2003-09-23_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2003-07-22_prova_scritta_testo.pdf](2003/2003-07-22_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2003-07-01_prova_scritta_testo.pdf](2003/2003-07-01_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2003-06-13_prova_scritta_testo.pdf](2003/2003-06-13_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2003-02-18_prova_scritta_testo.pdf](2003/2003-02-18_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2003-02-05_prova_scritta_testo.pdf](2003/2003-02-05_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2003-01-15_prova_scritta_testo.pdf](2003/2003-01-15_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
-### Anno Accademico 2013/2014 (`2014/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **17/09/2014** | Prova Scritta | [`Testo PDF`](2014/2014-09-17_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **23/07/2014** | Prova Scritta | [`Testo PDF`](2014/2014-07-23_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **08/07/2014** | Prova Scritta | [`Testo PDF`](2014/2014-07-08_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **11/06/2014** | Prova Scritta | [`Testo PDF`](2014/2014-06-11_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **19/02/2014** | Prova Scritta | [`Testo PDF`](2014/2014-02-19_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **30/01/2014** | Prova Scritta | [`Testo PDF`](2014/2014-01-30_prova_scritta_testo.pdf) | [`Soluzione PDF`](2014/2014-01-30_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **13/01/2014** | Prova Scritta | [`Testo PDF`](2014/2014-01-13_prova_scritta_testo.pdf) | [`Soluzione PDF`](2014/2014-01-13_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **20/12/2013** | Prova Scritta | [`Testo PDF`](2014/2013-12-20_prova_scritta_testo.pdf) | [`Soluzione PDF`](2014/2013-12-20_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
+### 📅 Anno 2002 (A.A. 2001/2002)
+* [2002_soluzioni_raccolta.pdf](2002/2002_soluzioni_raccolta.pdf) (18 pagine - Raccolta Completa Soluzioni Svolte)
+  * Soluzioni analitiche svolte passaggio per passaggio di tutti gli appelli d'esame dell'anno;
+* [2002-10-01_prova_scritta_testo.pdf](2002/2002-10-01_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta) | [Test Preliminare PDF](2002/2002-10-01_test_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2002-07-16_prova_scritta_testo.pdf](2002/2002-07-16_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta) | [Test Preliminare PDF](2002/2002-07-16_test_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2002-06-26_prova_scritta_testo.pdf](2002/2002-06-26_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta) | [Test Preliminare PDF](2002/2002-06-26_test_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2002-06-04_prova_scritta_testo.pdf](2002/2002-06-04_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta) | [Test Preliminare PDF](2002/2002-06-04_test_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2002-02-21_test_testo.pdf](2002/2002-02-21_test_testo.pdf) (1 pagine - Test Preliminare)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2002-02-19_prova_scritta_testo.pdf](2002/2002-02-19_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2002-02-07_test_testo.pdf](2002/2002-02-07_test_testo.pdf) (1 pagine - Test Preliminare)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2002-02-05_prova_scritta_testo.pdf](2002/2002-02-05_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2002-01-18_test_testo.pdf](2002/2002-01-18_test_testo.pdf) (1 pagine - Test Preliminare)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2002-01-16_prova_scritta_testo.pdf](2002/2002-01-16_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
----
+### 📅 Anno 2001 (A.A. 2000/2001)
+* [2001_soluzioni_raccolta.pdf](2001/2001_soluzioni_raccolta.pdf) (24 pagine - Raccolta Completa Soluzioni Svolte)
+  * Soluzioni analitiche svolte passaggio per passaggio di tutti gli appelli d'esame dell'anno;
+* [2001-10-02_prova_scritta_testo.pdf](2001/2001-10-02_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta) | [Test Preliminare PDF](2001/2001-10-02_test_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2001-09-18_prova_scritta_testo.pdf](2001/2001-09-18_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta) | [Test Preliminare PDF](2001/2001-09-18_test_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2001-07-17_prova_scritta_testo.pdf](2001/2001-07-17_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta) | [Test Preliminare PDF](2001/2001-07-17_test_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2001-06-26_prova_scritta_testo.pdf](2001/2001-06-26_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta) | [Test Preliminare PDF](2001/2001-06-26_test_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2001-06-06_prova_scritta_testo.pdf](2001/2001-06-06_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta) | [Test Preliminare PDF](2001/2001-06-06_test_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2001-02-20_prova_scritta_testo.pdf](2001/2001-02-20_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta) | [Test Preliminare PDF](2001/2001-02-20_test_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2001-02-06_prova_scritta_testo.pdf](2001/2001-02-06_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta) | [Test Preliminare PDF](2001/2001-02-06_test_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2001-01-17_prova_scritta_testo.pdf](2001/2001-01-17_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta) | [Test Preliminare PDF](2001/2001-01-17_test_testo.pdf) (1 pagine)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
-### Anno Accademico 2012/2013 (`2013/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **13/09/2013** | Prova Scritta | [`Testo PDF`](2013/2013-09-13_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **23/07/2013** | Prova Scritta | [`Testo PDF`](2013/2013-07-23_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **01/07/2013** | Prova Scritta | [`Testo PDF`](2013/2013-07-01_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **12/06/2013** | Prova Scritta | [`Testo PDF`](2013/2013-06-12_prova_scritta_testo.pdf) | [`Soluzione PDF`](2013/2013-06-12_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **20/02/2013** | Prova Scritta | [`Testo PDF`](2013/2013-02-20_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **30/01/2013** | Prova Scritta | [`Testo PDF`](2013/2013-01-30_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **13/01/2013** | Prova Scritta | — | [`Soluzione PDF`](2013/2013-01-13_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **10/01/2013** | Prova Scritta | [`Testo PDF`](2013/2013-01-10_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **19/12/2011** | Prova Scritta | [`Testo PDF`](2013/2011-12-19_prova_scritta_testo.pdf) | [`Soluzione PDF`](2013/2011-12-19_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
+### 📅 Anno 2000 (A.A. 1999/2000)
+* [2000_soluzioni_raccolta.pdf](2000/2000_soluzioni_raccolta.pdf) (32 pagine - Raccolta Completa Soluzioni Svolte)
+  * Soluzioni analitiche svolte passaggio per passaggio di tutti gli appelli d'esame dell'anno;
+* [2000-09-18_prova_scritta_testo.pdf](2000/2000-09-18_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2000-09-05_prova_scritta_testo.pdf](2000/2000-09-05_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2000-07-11_prova_scritta_testo.pdf](2000/2000-07-11_prova_scritta_testo.pdf) (2 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2000-02-15_prova_scritta_testo.pdf](2000/2000-02-15_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2000-02-01_prova_scritta_testo.pdf](2000/2000-02-01_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [2000-01-11_prova_scritta_testo.pdf](2000/2000-01-11_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
----
+### 📅 Anno 1999 (A.A. 1998/1999)
+* [1999-09-20_prova_scritta_testo.pdf](1999/1999-09-20_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [1999-06-01_prova_scritta_testo.pdf](1999/1999-06-01_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [1999-02-16_prova_scritta_testo.pdf](1999/1999-02-16_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [1999-02-02_prova_scritta_testo.pdf](1999/1999-02-02_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
+* [1999-01-12_prova_scritta_testo.pdf](1999/1999-01-12_prova_scritta_testo.pdf) (1 pagine - Testo Prova Scritta)
+  * Esercizio 1: Numeri complessi (risoluzione di equazioni e sistemi in $\mathbb{C}$, formule di De Moivre, radici $n$-esime dell'unità, condizioni su modulo e coniugato);
+  * Esercizio 2: Sistemi lineari ed endomorfismi parametrici, eliminazione gaussiana a scala, Teorema di Rouché-Capelli, basi e dimensione di $\operatorname{Ker}(L_A)$ e $\operatorname{Im}(L_A)$;
+  * Esercizio 3: Costruzione di trasformazioni lineari che verificano condizioni geometriche vincolate, Teorema del Rango-Nullità e formule di Grassmann;
+  * Esercizio 4: Calcolo del polinomio caratteristico, molteplicità algebrica e geometrica degli autovalori, diagonalizzabilità su $\mathbb{R}$/$\mathbb{C}$ e Teorema Spettrale per matrici simmetriche reali.
 
-### Anno Accademico 2011/2012 (`2012/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **13/09/2012** | Prova Scritta | [`Testo PDF`](2012/2012-09-13_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
-| **18/07/2012** | Prova Scritta | [`Testo PDF`](2012/2012-07-18_prova_scritta_testo.pdf) | [`Soluzione PDF`](2012/2012-07-18_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
-| **27/06/2012** | Prova Scritta | [`Testo PDF`](2012/2012-06-27_prova_scritta_testo.pdf) | [`Soluzione PDF`](2012/2012-06-27_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
-| **13/06/2012** | Prova Scritta | [`Testo PDF`](2012/2012-06-13_prova_scritta_testo.pdf) | [`Soluzione PDF`](2012/2012-06-13_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
-| **21/02/2012** | Prova Scritta | [`Testo PDF`](2012/2012-02-21_prova_scritta_testo.pdf) | [`Soluzione PDF`](2012/2012-02-21_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
-| **07/02/2012** | Prova Scritta | [`Testo PDF`](2012/2012-02-07_prova_scritta_testo.pdf) | [`Soluzione PDF`](2012/2012-02-07_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
-| **18/01/2012** | Prova Scritta | [`Testo PDF`](2012/2012-01-18_prova_scritta_testo.pdf) | [`Soluzione PDF`](2012/2012-01-18_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
+### 📝 Compitini e Prove in Itinere Storiche (2002–2010)
+Raccolta delle prove intermedie scritte somministrate durante i semestri accademici dal 2002 al 2010:
 
----
+* [2002-11-16_compitino_1_testo.pdf](compitini/2002-11-16_compitino_1_testo.pdf) (2 pagine - Testo)
+  * Esercizi su spazi vettoriali, matrici parametriche, sistemi lineari con Gauss e numeri complessi;
+* [2002-12-21_compitino_2_testo.pdf](compitini/2002-12-21_compitino_2_testo.pdf) (2 pagine - Testo)
+  * Esercizi su spazi vettoriali, matrici parametriche, sistemi lineari con Gauss e numeri complessi;
+* [2003-11-07_compitino_1_testo.pdf](compitini/2003-11-07_compitino_1_testo.pdf) (2 pagine - Testo)
+  * Esercizi su spazi vettoriali, matrici parametriche, sistemi lineari con Gauss e numeri complessi;
+* [2003-12-19_compitino_2_testo.pdf](compitini/2003-12-19_compitino_2_testo.pdf) (2 pagine - Testo)
+  * Esercizi su spazi vettoriali, matrici parametriche, sistemi lineari con Gauss e numeri complessi;
+* [2004-11-13_compitino_1_testo.pdf](compitini/2004-11-13_compitino_1_testo.pdf) (2 pagine - Testo)
+  * Esercizi su spazi vettoriali, matrici parametriche, sistemi lineari con Gauss e numeri complessi;
+* [2004-12-18_compitino_2_testo.pdf](compitini/2004-12-18_compitino_2_testo.pdf) (2 pagine - Testo)
+  * Esercizi su spazi vettoriali, matrici parametriche, sistemi lineari con Gauss e numeri complessi;
+* [2005-11-07_compitino_1_testo.pdf](compitini/2005-11-07_compitino_1_testo.pdf) (2 pagine - Testo)
+  * Esercizi su spazi vettoriali, matrici parametriche, sistemi lineari con Gauss e numeri complessi;
+* [2005-12-19_compitino_2_testo.pdf](compitini/2005-12-19_compitino_2_testo.pdf) (2 pagine - Testo)
+  * Esercizi su spazi vettoriali, matrici parametriche, sistemi lineari con Gauss e numeri complessi;
+* [2007-11-12_compitino_1_testo.pdf](compitini/2007-11-12_compitino_1_testo.pdf) (2 pagine - Testo)
+  * Esercizi su spazi vettoriali, matrici parametriche, sistemi lineari con Gauss e numeri complessi;
+* [2007-12-17_compitino_2_testo.pdf](compitini/2007-12-17_compitino_2_testo.pdf) (2 pagine - Testo)
+  * Esercizi su spazi vettoriali, matrici parametriche, sistemi lineari con Gauss e numeri complessi;
+* [2008-12-01_compitino_1_testo.pdf](compitini/2008-12-01_compitino_1_testo.pdf) (2 pagine - Testo)
+  * Esercizi su spazi vettoriali, matrici parametriche, sistemi lineari con Gauss e numeri complessi;
+* [2009-02-09_compitino_2_testo.pdf](compitini/2009-02-09_compitino_2_testo.pdf) (2 pagine - Testo)
+  * Esercizi su spazi vettoriali, matrici parametriche, sistemi lineari con Gauss e numeri complessi;
+* [2009-02-09_compitino_3_testo.pdf](compitini/2009-02-09_compitino_3_testo.pdf) (2 pagine - Testo)
+  * Esercizi su spazi vettoriali, matrici parametriche, sistemi lineari con Gauss e numeri complessi;
+* [2009-05-28_compitino_4_testo.pdf](compitini/2009-05-28_compitino_4_testo.pdf) (2 pagine - Testo)
+  * Esercizi su spazi vettoriali, matrici parametriche, sistemi lineari con Gauss e numeri complessi;
+* [2009-11-13_compitino_1_testo.pdf](compitini/2009-11-13_compitino_1_testo.pdf) (2 pagine - Testo)
+  * Esercizi su spazi vettoriali, matrici parametriche, sistemi lineari con Gauss e numeri complessi;
+* [2010-02-08_compitino_2_testo.pdf](compitini/2010-02-08_compitino_2_testo.pdf) (2 pagine - Testo)
+  * Esercizi su spazi vettoriali, matrici parametriche, sistemi lineari con Gauss e numeri complessi;
+* [2010-04-26_compitino_3_testo.pdf](compitini/2010-04-26_compitino_3_testo.pdf) (2 pagine - Testo)
+  * Esercizi su spazi vettoriali, matrici parametriche, sistemi lineari con Gauss e numeri complessi;
+* [2010-05-27_compitino_4_testo.pdf](compitini/2010-05-27_compitino_4_testo.pdf) (2 pagine - Testo)
+  * Esercizi su spazi vettoriali, matrici parametriche, sistemi lineari con Gauss e numeri complessi;
 
-### Anno Accademico 2010/2011 (`2011/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **19/12/2011** | Prova Scritta | [`Testo PDF`](2011/2011-12-19_prova_scritta_testo.pdf) | [`Soluzione PDF`](2011/2011-12-19_prova_scritta_soluzione.pdf) | Numeri complessi (De Moivre, radici n-esime), spazi e sottospazi vettoriali, formula di Grassmann, rango e sistemi lineari. |
-| **20/07/2011** | Test | [`Testo PDF`](2011/2011-07-20_test_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **11/07/2011** | Test | [`Testo PDF`](2011/2011-07-11_test_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **11/07/2011** | Prova Scritta | — | [`Soluzione PDF`](2011/2011-07-11_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **22/06/2011** | Test | [`Testo PDF`](2011/2011-06-22_test_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **23/02/2011** | Prova Scritta | [`Testo PDF`](2011/2011-02-23_prova_scritta_testo.pdf) | [`Soluzione PDF`](2011/2011-02-23_prova_scritta_soluzione.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **09/02/2011** | Prova Scritta | [`Testo PDF`](2011/2011-02-09_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
+### 📚 Raccolte Tematiche e Manuali All-in-One
+Raccolte omnicomprensive di testi e soluzioni analitiche ragionate:
 
----
-
-### Anno Accademico 2009/2010 (`2010/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **27/01/2010** | Prova Scritta | [`Testo PDF`](2010/2010-01-27_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **11/01/2010** | Prova Scritta | [`Testo PDF`](2010/2010-01-11_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-
----
-
-### Anno Accademico 2008/2009 (`2009/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **15/09/2009** | Prova Scritta | [`Testo PDF`](2009/2009-09-15_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **21/07/2009** | Prova Scritta | [`Testo PDF`](2009/2009-07-21_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **30/06/2009** | Prova Scritta | [`Testo PDF`](2009/2009-06-30_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **13/06/2009** | Prova Scritta | [`Testo PDF`](2009/2009-06-13_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-
----
-
-### Anno Accademico 2007/2008 (`2008/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **16/09/2008** | Prova Scritta | [`Testo PDF`](2008/2008-09-16_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **15/07/2008** | Prova Scritta | [`Testo PDF`](2008/2008-07-15_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **24/06/2008** | Prova Scritta | [`Testo PDF`](2008/2008-06-24_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **04/06/2008** | Prova Scritta | [`Testo PDF`](2008/2008-06-04_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **12/02/2008** | Prova Scritta | [`Testo PDF`](2008/2008-02-12_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **28/01/2008** | Prova Scritta | [`Testo PDF`](2008/2008-01-28_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **16/01/2008** | Prova Scritta | [`Testo PDF`](2008/2008-01-16_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-
----
-
-### Anno Accademico 2005/2006 (`2006/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **14/02/2006** | Prova Scritta | [`Testo PDF`](2006/2006-02-14_prova_scritta_testo.pdf) | *(Inclusa nelle raccolte 2004–2006)* | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **01/02/2006** | Prova Scritta | [`Testo PDF`](2006/2006-02-01_prova_scritta_testo.pdf) | *(Inclusa nelle raccolte 2004–2006)* | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **18/01/2006** | Prova Scritta | [`Testo PDF`](2006/2006-01-18_prova_scritta_testo.pdf) | [`Soluzione PDF`](2006/2006-01-18_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-
----
-
-### Anno Accademico 2004/2005 (`2005/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **21/09/2005** | Prova Scritta | [`Testo PDF`](2005/2005-09-21_prova_scritta_testo.pdf) | *(Inclusa nelle raccolte 2004–2006)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **19/07/2005** | Prova Scritta | [`Testo PDF`](2005/2005-07-19_prova_scritta_testo.pdf) | *(Inclusa nelle raccolte 2004–2006)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **05/07/2005** | Prova Scritta | [`Testo PDF`](2005/2005-07-05_prova_scritta_testo.pdf) | *(Inclusa nelle raccolte 2004–2006)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **16/06/2005** | Prova Scritta | [`Testo PDF`](2005/2005-06-16_prova_scritta_testo.pdf) | [`Soluzione PDF`](2005/2005-06-16_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **22/02/2005** | Prova Scritta | [`Testo PDF`](2005/2005-02-22_prova_scritta_testo.pdf) | [`Soluzione PDF`](2005/2005-02-22_prova_scritta_soluzione.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **03/02/2005** | Prova Scritta | [`Testo PDF`](2005/2005-02-03_prova_scritta_testo.pdf) | [`Soluzione PDF`](2005/2005-02-03_prova_scritta_soluzione.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **18/01/2005** | Prova Scritta | [`Testo PDF`](2005/2005-01-18_prova_scritta_testo.pdf) | [`Soluzione PDF`](2005/2005-01-18_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-
----
-
-### Anno Accademico 2003/2004 (`2004/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **22/09/2004** | Prova Scritta | [`Testo PDF`](2004/2004-09-22_prova_scritta_testo.pdf) | *(Inclusa nelle raccolte 2004–2006)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **20/07/2004** | Prova Scritta | [`Testo PDF`](2004/2004-07-20_prova_scritta_testo.pdf) | *(Inclusa nelle raccolte 2004–2006)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **29/06/2004** | Prova Scritta | [`Testo PDF`](2004/2004-06-29_prova_scritta_testo.pdf) | [`Soluzione PDF`](2004/2004-06-29_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **09/06/2004** | Prova Scritta | [`Testo PDF`](2004/2004-06-09_prova_scritta_testo.pdf) | [`Soluzione PDF`](2004/2004-06-09_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **18/02/2004** | Prova Scritta | [`Testo PDF`](2004/2004-02-18_prova_scritta_testo.pdf) | [`Soluzione PDF`](2004/2004-02-18_prova_scritta_soluzione.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **04/02/2004** | Prova Scritta | [`Testo PDF`](2004/2004-02-04_prova_scritta_testo.pdf) | [`Soluzione PDF`](2004/2004-02-04_prova_scritta_soluzione.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **16/01/2004** | Prova Scritta | [`Testo PDF`](2004/2004-01-16_prova_scritta_testo.pdf) | [`Soluzione PDF`](2004/2004-01-16_prova_scritta_soluzione.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-
----
-
-### Anno Accademico 2002/2003 (`2003/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **23/09/2003** | Prova Scritta | [`Testo PDF`](2003/2003-09-23_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2003/soluzioni_2003.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **22/07/2003** | Prova Scritta | [`Testo PDF`](2003/2003-07-22_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2003/soluzioni_2003.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **01/07/2003** | Prova Scritta | [`Testo PDF`](2003/2003-07-01_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2003/soluzioni_2003.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **13/06/2003** | Prova Scritta | [`Testo PDF`](2003/2003-06-13_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2003/soluzioni_2003.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **18/02/2003** | Prova Scritta | [`Testo PDF`](2003/2003-02-18_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2003/soluzioni_2003.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **05/02/2003** | Prova Scritta | [`Testo PDF`](2003/2003-02-05_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2003/soluzioni_2003.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **15/01/2003** | Prova Scritta | [`Testo PDF`](2003/2003-01-15_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2003/soluzioni_2003.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| — | Raccolta/File | [`2003_soluzioni_raccolta.pdf`](2003/2003_soluzioni_raccolta.pdf) | [`2003_soluzioni_raccolta.pdf`](2003/2003_soluzioni_raccolta.pdf) | Documento supplementare sessione 2003 |
-
----
-
-### Anno Accademico 2001/2002 (`2002/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **01/10/2002** | Test | [`Testo PDF`](2002/2002-10-01_test_testo.pdf) | [`Raccolta Soluzioni`](2002/soluzioni_2002.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **01/10/2002** | Prova Scritta | [`Testo PDF`](2002/2002-10-01_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2002/soluzioni_2002.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **16/07/2002** | Test | [`Testo PDF`](2002/2002-07-16_test_testo.pdf) | [`Raccolta Soluzioni`](2002/soluzioni_2002.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **16/07/2002** | Prova Scritta | [`Testo PDF`](2002/2002-07-16_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2002/soluzioni_2002.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **26/06/2002** | Test | [`Testo PDF`](2002/2002-06-26_test_testo.pdf) | [`Raccolta Soluzioni`](2002/soluzioni_2002.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **26/06/2002** | Prova Scritta | [`Testo PDF`](2002/2002-06-26_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2002/soluzioni_2002.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **04/06/2002** | Test | [`Testo PDF`](2002/2002-06-04_test_testo.pdf) | [`Raccolta Soluzioni`](2002/soluzioni_2002.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **04/06/2002** | Prova Scritta | [`Testo PDF`](2002/2002-06-04_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2002/soluzioni_2002.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **21/02/2002** | Test | [`Testo PDF`](2002/2002-02-21_test_testo.pdf) | [`Raccolta Soluzioni`](2002/soluzioni_2002.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **19/02/2002** | Prova Scritta | [`Testo PDF`](2002/2002-02-19_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2002/soluzioni_2002.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **07/02/2002** | Test | [`Testo PDF`](2002/2002-02-07_test_testo.pdf) | [`Raccolta Soluzioni`](2002/soluzioni_2002.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **05/02/2002** | Prova Scritta | [`Testo PDF`](2002/2002-02-05_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2002/soluzioni_2002.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **18/01/2002** | Test | [`Testo PDF`](2002/2002-01-18_test_testo.pdf) | [`Raccolta Soluzioni`](2002/soluzioni_2002.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **16/01/2002** | Prova Scritta | [`Testo PDF`](2002/2002-01-16_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2002/soluzioni_2002.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| — | Raccolta/File | [`2002_soluzioni_raccolta.pdf`](2002/2002_soluzioni_raccolta.pdf) | [`2002_soluzioni_raccolta.pdf`](2002/2002_soluzioni_raccolta.pdf) | Documento supplementare sessione 2002 |
-
----
-
-### Anno Accademico 2000/2001 (`2001/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **02/10/2001** | Test | [`Testo PDF`](2001/2001-10-02_test_testo.pdf) | [`Raccolta Soluzioni`](2001/soluzioni_2001.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **02/10/2001** | Prova Scritta | [`Testo PDF`](2001/2001-10-02_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2001/soluzioni_2001.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **18/09/2001** | Test | [`Testo PDF`](2001/2001-09-18_test_testo.pdf) | [`Raccolta Soluzioni`](2001/soluzioni_2001.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **18/09/2001** | Prova Scritta | [`Testo PDF`](2001/2001-09-18_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2001/soluzioni_2001.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **17/07/2001** | Test | [`Testo PDF`](2001/2001-07-17_test_testo.pdf) | [`Raccolta Soluzioni`](2001/soluzioni_2001.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **17/07/2001** | Prova Scritta | [`Testo PDF`](2001/2001-07-17_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2001/soluzioni_2001.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **26/06/2001** | Test | [`Testo PDF`](2001/2001-06-26_test_testo.pdf) | [`Raccolta Soluzioni`](2001/soluzioni_2001.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **26/06/2001** | Prova Scritta | [`Testo PDF`](2001/2001-06-26_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2001/soluzioni_2001.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **06/06/2001** | Test | [`Testo PDF`](2001/2001-06-06_test_testo.pdf) | [`Raccolta Soluzioni`](2001/soluzioni_2001.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **06/06/2001** | Prova Scritta | [`Testo PDF`](2001/2001-06-06_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2001/soluzioni_2001.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **20/02/2001** | Test | [`Testo PDF`](2001/2001-02-20_test_testo.pdf) | [`Raccolta Soluzioni`](2001/soluzioni_2001.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **20/02/2001** | Prova Scritta | [`Testo PDF`](2001/2001-02-20_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2001/soluzioni_2001.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **06/02/2001** | Test | [`Testo PDF`](2001/2001-02-06_test_testo.pdf) | [`Raccolta Soluzioni`](2001/soluzioni_2001.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **06/02/2001** | Prova Scritta | [`Testo PDF`](2001/2001-02-06_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2001/soluzioni_2001.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **17/01/2001** | Test | [`Testo PDF`](2001/2001-01-17_test_testo.pdf) | [`Raccolta Soluzioni`](2001/soluzioni_2001.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **17/01/2001** | Prova Scritta | [`Testo PDF`](2001/2001-01-17_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2001/soluzioni_2001.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| — | Raccolta/File | [`2001_soluzioni_raccolta.pdf`](2001/2001_soluzioni_raccolta.pdf) | [`2001_soluzioni_raccolta.pdf`](2001/2001_soluzioni_raccolta.pdf) | Documento supplementare sessione 2001 |
-
----
-
-### Anno Accademico 1999/2000 (`2000/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **18/09/2000** | Prova Scritta | [`Testo PDF`](2000/2000-09-18_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2000/soluzioni_2000.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **05/09/2000** | Prova Scritta | [`Testo PDF`](2000/2000-09-05_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2000/soluzioni_2000.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **11/07/2000** | Prova Scritta | [`Testo PDF`](2000/2000-07-11_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2000/soluzioni_2000.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **15/02/2000** | Prova Scritta | [`Testo PDF`](2000/2000-02-15_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2000/soluzioni_2000.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **01/02/2000** | Prova Scritta | [`Testo PDF`](2000/2000-02-01_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2000/soluzioni_2000.pdf) | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **11/01/2000** | Prova Scritta | [`Testo PDF`](2000/2000-01-11_prova_scritta_testo.pdf) | [`Raccolta Soluzioni`](2000/soluzioni_2000.pdf) | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| — | Raccolta/File | [`2000_soluzioni_raccolta.pdf`](2000/2000_soluzioni_raccolta.pdf) | [`2000_soluzioni_raccolta.pdf`](2000/2000_soluzioni_raccolta.pdf) | Documento supplementare sessione 2000 |
-
----
-
-### Anno Accademico 1998/1999 (`1999/`)
-| Data Appello | Tipologia Prova | Testo d'Esame | Soluzione Completa | Argomenti Principali |
-| :--- | :--- | :---: | :---: | :--- |
-| **20/09/1999** | Prova Scritta | [`Testo PDF`](1999/1999-09-20_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **01/06/1999** | Prova Scritta | [`Testo PDF`](1999/1999-06-01_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-| **16/02/1999** | Prova Scritta | [`Testo PDF`](1999/1999-02-16_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **02/02/1999** | Prova Scritta | [`Testo PDF`](1999/1999-02-02_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Applicazioni lineari, cambiamento di base, autovalori, molteplicità algebrica/geometrica, diagonalizzazione e Teorema Spettrale. |
-| **12/01/1999** | Prova Scritta | [`Testo PDF`](1999/1999-01-12_prova_scritta_testo.pdf) | *(Svolta nel manuale)* | Numeri complessi, sistemi lineari parametrici (Rouché-Capelli), nucleo e immagine, autovalori e diagonalizzazione, prodotti scalari e ortogonalità. |
-
----
-
-### Prove in Itinere e Test Storici (`compitini/`)
-La cartella raccoglie 18 prove parziali di verifica intermedia (Test 1, 2, 3, 4) somministrate negli anni accademici 2002–2010 per l'esonero dallo scritto generale:
-- **Test 1:** Numeri complessi (forma algebrica, trigonometrica, potenze e radici) e calcolo matriciale di base.
-- **Test 2:** Spazi vettoriali, combinazioni lineari, insiemi di generatori, indipendenza lineare, basi e formula di Grassmann.
-- **Test 3:** Applicazioni lineari, determinazione di nucleo ($\ker$) e immagine ($\Imm$), rango e Teorema della Dimensione.
-- **Test 4:** Autovalori, polinomio caratteristico, autospazi, criteri di diagonalizzabilità e forme bilineari.
-
----
-
-### Raccolte Complete e Manuali Storici (`raccolte/`)
-Archivio di volumi unici e compendi storici con soluzioni integrali:
-1. **`compiti_esame_allin_poletti.pdf`** (127 pagine): Raccolta completa di tutti i compiti d'esame e prove scritte del Prof. Mario Poletti con soluzioni.
-2. **`compiti_esame_allin_franciosi.pdf`** (230 pagine): Compendio storico integrale di oltre un decennio di prove d'esame del Prof. Marco Franciosi con svolgimenti dettagliati.
-3. **`soluzioni_esami_2000.pdf` – `soluzioni_esami_2003.pdf`**: Fascicoli monografici annuali delle soluzioni ragionate per ciascun appello.
-4. **`esercizi_numeri_complessi.pdf` & `esercizi_algebra_lineare.pdf`**: Schede tematiche di approfondimento con eserciziario guidato.
+* [2000_soluzioni_raccolta.pdf](raccolte/2000_soluzioni_raccolta.pdf) (32 pagine)
+  * Raccolta completa ufficiale delle soluzioni analitiche dettagliate dei compiti d'esame dell'anno 2000;
+* [2001_soluzioni_raccolta.pdf](raccolte/2001_soluzioni_raccolta.pdf) (24 pagine)
+  * Raccolta completa ufficiale delle soluzioni analitiche dettagliate dei compiti d'esame dell'anno 2001;
+* [2002_soluzioni_raccolta.pdf](raccolte/2002_soluzioni_raccolta.pdf) (18 pagine)
+  * Raccolta completa ufficiale delle soluzioni analitiche dettagliate dei compiti d'esame dell'anno 2002;
+* [2003_soluzioni_raccolta.pdf](raccolte/2003_soluzioni_raccolta.pdf) (20 pagine)
+  * Raccolta completa ufficiale delle soluzioni analitiche dettagliate dei compiti d'esame dell'anno 2003;
+* [esercizi_algebra_lineare.pdf](raccolte/esercizi_algebra_lineare.pdf) (2 pagine)
+  * Raccolta tematica di problemi d'esame con testi ed esercizi di riepilogo generale;
+* [esercizi_numeri_complessi.pdf](raccolte/esercizi_numeri_complessi.pdf) (3 pagine)
+  * Eserciziario dedicato ai numeri complessi, equazioni in C, radici n-esime e rappresentazioni polari/esponenziali;
+* [raccolta_spazi_vettoriali_applicazioni_matrici.pdf](raccolte/raccolta_spazi_vettoriali_applicazioni_matrici.pdf) (230 pagine)
+  * Compendio esteso (230 pagine) con centinaia di esercizi risolti su spazi vettoriali, basi, trasformazioni lineari, matrici e forme bilineari;
+* [raccolta_testi_esame_2009-2010.pdf](raccolte/raccolta_testi_esame_2009-2010.pdf) (22 pagine)
+  * Raccolta tematica di problemi d'esame con testi ed esercizi di riepilogo generale;
+* [test_esercizi_autovalori.pdf](raccolte/test_esercizi_autovalori.pdf) (1 pagine)
+  * Test ed esercizi guidati su calcolo del polinomio caratteristico, autovalori, autovettori e diagonalizzazione;
