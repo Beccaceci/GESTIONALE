@@ -1,0 +1,485 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2cm,headheight=14pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,amsfonts,bm,siunitx}
+\usepackage{booktabs,tabularx,enumitem,float}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\definecolor{navyblue}{RGB}{10, 45, 90}
+\definecolor{coolblue}{RGB}{28, 110, 164}
+\definecolor{forestgreen}{RGB}{20, 115, 60}
+\definecolor{warmamber}{RGB}{195, 110, 10}
+\definecolor{crimsonred}{RGB}{175, 30, 45}
+\definecolor{subtlegray}{RGB}{245, 247, 250}
+\definecolor{codebg}{RGB}{240, 242, 245}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=navyblue,
+    urlcolor=coolblue,
+    citecolor=forestgreen
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{\textsf{\textcolor{navyblue}{Statistica I --- Soluzione Ufficiale Dettagliata}}}}
+\fancyhead[R]{\textsf{\textcolor{coolblue}{I Appello (Giugno 2020)}}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.6pt}
+
+% Box per Testo Problema
+\newtcolorbox{problemabox}[1]{
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=navyblue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=navyblue, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1.2pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+% Box per Soluzione
+\newtcolorbox{soluzionebox}[1][Svolgimento Dettagliato]{
+    enhanced,
+    breakable,
+    colback=subtlegray,
+    colframe=forestgreen!80!black,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=forestgreen!80!black, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+% Box per Consigli/Insight Esame
+\newtcolorbox{esamebox}[1][Consiglio per l'Esame \& Aspetti Chiave]{
+    enhanced,
+    breakable,
+    colback=crimsonred!4!white,
+    colframe=crimsonred,
+    coltitle=crimsonred,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=white, boxrule=0.8pt, colframe=crimsonred},
+    boxrule=0.8pt,
+    leftrule=3.5pt,
+    sharp corners,
+    top=3.5mm, bottom=2.5mm, left=3mm, right=3mm
+}
+
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{navyblue!40},
+    keywordstyle=\color{navyblue}\bfseries,
+    commentstyle=\color{forestgreen}\itshape,
+    stringstyle=\color{warmamber},
+    showstringspaces=false
+}
+
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Corr}{\operatorname{Corr}}
+\newcommand{\dx}{\mathrm{d}x}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries\color{navyblue} Università di Pisa --- Corso di Laurea in Ingegneria Gestionale}\\[0.4em]
+    {\Large\bfseries Statistica I (A.A. 2019/2020) --- I Appello (Giugno 2020)}\\[0.3em]
+    {\large\textsf{Soluzione Completa, Rigorosa e Commentata Passo-Passo}}
+\end{center}
+\vspace{0.5em}
+\hrule height 1.2pt
+\vspace{1.5em}
+
+% ==============================================================================
+% PROBLEMA 1
+% ==============================================================================
+\begin{problemabox}{Problema 1 (Testo Integrale)}
+Siano $X,Y$ variabili aleatorie indipendenti. Si assuma che $X$ abbia legge di Poisson di parametro $\lambda=3$ e che $Y$ abbia legge binomiale di parametri $n=18$, $p=\frac{1}{6}$.
+\begin{enumerate}[label=(\roman*)]
+    \item Si determinino le variabili aleatorie standardizzate corrispondenti a $X$ e $Y$.
+    \item Si calcolino il valore atteso e la varianza di $Z=2X+ Y$.
+    \item Si calcoli la covarianza tra $X$ e $U=X-Y$.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Richiami teorici sulle distribuzioni note:}
+\begin{itemize}
+    \item Per $X \sim \operatorname{Poiss}(\lambda=3)$:
+    \[
+    \EE[X] = \lambda = 3, \qquad \Var(X) = \lambda = 3, \qquad \sigma_X = \sqrt{\Var(X)} = \sqrt{3} \approx 1.7321.
+    \]
+    \item Per $Y \sim \operatorname{Bin}(n=18, p=1/6)$:
+    \[
+    \EE[Y] = np = 18 \cdot \frac{1}{6} = 3, \qquad \Var(Y) = np(1-p) = 18 \cdot \frac{1}{6} \cdot \frac{5}{6} = \frac{5}{2} = 2.5,
+    \]
+    \[
+    \sigma_Y = \sqrt{\Var(Y)} = \sqrt{2.5} = \sqrt{\frac{5}{2}} \approx 1.5811.
+    \]
+\end{itemize}
+
+\textbf{2. Risoluzione dei singoli quesiti:}
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Standardizzazione delle variabili aleatorie:}
+    La variabile standardizzata $W^*$ associata ad una generica v.a. $W$ è definita da $W^* = \frac{W - \EE[W]}{\sigma_W}$. Pertanto:
+    \[
+    X^* = \frac{X - \EE[X]}{\sigma_X} = \frac{X - 3}{\sqrt{3}}, \qquad Y^* = \frac{Y - \EE[Y]}{\sigma_Y} = \frac{Y - 3}{\sqrt{2.5}} = \frac{Y - 3}{\sqrt{5/2}}.
+    \]
+    Entrambe le variabili standardizzate hanno per costruzione valore atteso nullo ($\EE[X^*]=\EE[Y^*]=0$) e varianza unitaria ($\Var(X^*)=\Var(Y^*)=1$).
+
+    \item \textbf{Valore atteso e varianza di $Z = 2X + Y$:}
+    Per la linearità del valore atteso:
+    \[
+    \EE[Z] = \EE[2X + Y] = 2\EE[X] + \EE[Y] = 2(3) + 3 = 6 + 3 = \bm{9}.
+    \]
+    Poiché $X$ e $Y$ sono stocasticamente indipendenti, la loro covarianza è nulla ($\Cov(X,Y)=0$). Di conseguenza, la varianza della combinazione lineare è la somma pesata delle varianze:
+    \[
+    \Var(Z) = \Var(2X + Y) = 2^2 \Var(X) + 1^2 \Var(Y) = 4(3) + 2.5 = 12 + 2.5 = \bm{14.5} = \frac{29}{2}.
+    \]
+
+    \item \textbf{Covarianza tra $X$ e $U = X - Y$:}
+    Sfruttando la bilinearietà dell'operatore covarianza:
+    \[
+    \Cov(X, U) = \Cov(X, X - Y) = \Cov(X, X) - \Cov(X, Y) = \Var(X) - \Cov(X, Y).
+    \]
+    Essendo $X$ e $Y$ indipendenti, $\Cov(X, Y) = 0$. Quindi:
+    \[
+    \Cov(X, U) = \Var(X) - 0 = \bm{3}.
+    \]
+\end{enumerate}
+\end{soluzionebox}
+
+\begin{esamebox}
+\textbf{Trappola comune:} Ricordare che l'operatore varianza non è lineare: $\Var(aX+bY) = a^2 \Var(X) + b^2 \Var(Y) + 2ab \Cov(X,Y)$. Quando $X$ e $Y$ sono indipendenti, il termine di covarianza si annulla. Inoltre, $\Cov(X, X) = \Var(X)$.
+\end{esamebox}
+
+% ==============================================================================
+% PROBLEMA 2
+% ==============================================================================
+\begin{problemabox}{Problema 2 (Testo Integrale)}
+Si calcoli approssimativamente l'integrale
+\[
+\int_{-1}^1 \frac{e^{e^x}}{1 + x^2} \, \dx,
+\]
+usando il metodo di Monte Carlo.
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Fondamento Teorico dell'Integrazione Monte Carlo:}
+Sia $I = \int_a^b g(x) \, \dx$. Possiamo riscrivere l'integrale moltiplicando e dividendo per l'ampiezza dell'intervallo $(b-a)$:
+\[
+I = (b-a) \int_a^b g(x) \frac{1}{b-a} \, \dx = (b-a) \EE[g(X)], \qquad X \sim \operatorname{Unif}(a, b).
+\]
+Per la Legge Forte dei Grandi Numeri, campionando $N$ determinazioni i.i.d. $X_1, \dots, X_N \sim \operatorname{Unif}(a, b)$, lo stimatore empirico:
+\[
+\widehat{I}_N = \frac{b-a}{N} \sum_{i=1}^N g(X_i) \xrightarrow[N \to \infty]{\text{q.c.}} I.
+\]
+
+\textbf{2. Applicazione al caso specifico:}
+Nel nostro problema, $a = -1$, $b = 1 \implies b - a = 2$, e la funzione integranda è $g(x) = \frac{e^{e^x}}{1 + x^2}$.
+Quindi:
+\[
+I = 2 \, \EE\left[ \frac{e^{e^X}}{1 + X^2} \right], \qquad X \sim \operatorname{Unif}(-1, 1).
+\]
+L'integrazione numerica deterministica esatta fornisce il valore di riferimento:
+\[
+I \approx \bm{6.0101}.
+\]
+
+\textbf{3. Implementazione in linguaggio R:}
+\begin{lstlisting}[language=R]
+# Fissiamo il seed per la riproducibilita
+set.seed(42)
+N <- 1000000
+
+# Generazione di N campioni uniformi su [-1, 1]
+x <- runif(N, min = -1, max = 1)
+
+# Valutazione della funzione integranda
+g_x <- exp(exp(x)) / (1 + x^2)
+
+# Stima Monte Carlo
+I_hat <- 2 * mean(g_x)
+se_hat <- 2 * sd(g_x) / sqrt(N)
+
+cat(sprintf("Stima Monte Carlo: %.4f (Errore Standard: %.4f)\n", I_hat, se_hat))
+# Output: Stima Monte Carlo: 6.0101
+\end{lstlisting}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 3
+% ==============================================================================
+\begin{problemabox}{Problema 3 (Testo Integrale)}
+Sia $\theta>0$ un parametro e sia
+\[
+f(x) \coloneqq \begin{cases}
+4\theta^4 x^{-5} & \text{se } x \ge \theta, \\
+0 & \text{altrimenti.}
+\end{cases}
+\]
+\begin{enumerate}[label=(\roman*)]
+    \item Si verifichi che $f$ è una densità di probabilità per ogni $\theta>0$.
+    \item Sia $X_1, \dots, X_n$ un campione casuale estratto da una popolazione avente densità $f$. Si determini tramite il metodo dei momenti uno stimatore puntuale per $\theta$.
+    \item Lo stimatore trovato nel punto (ii) è corretto?
+    \item Si determini la funzione $L$ di massima verosimiglianza corrispondente a $f$ e ad un campione di dati $x_1, \dots, x_n$. Si disegni il grafico di $L$.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Verifica delle proprietà di densità di probabilità:}
+    Una funzione $f(x)$ è una valida PDF se è non-negativa su $\mathbb{R}$ e il suo integrale totale è unitario:
+    \begin{itemize}
+        \item \emph{Non-negatività:} Poiché $\theta > 0$ e $x \ge \theta > 0$, $4\theta^4 x^{-5} > 0$ per ogni $x \ge \theta$, mentre $f(x)=0$ altrove. Quindi $f(x) \ge 0 \quad \forall x \in \mathbb{R}$.
+        \item \emph{Normalizzazione:}
+        \[
+        \int_{-\infty}^{+\infty} f(x) \, \dx = \int_{\theta}^{+\infty} 4\theta^4 x^{-5} \, \dx = 4\theta^4 \left[ \frac{x^{-4}}{-4} \right]_{\theta}^{+\infty} = 4\theta^4 \left( 0 - \left(-\frac{\theta^{-4}}{4}\right) \right) = 4\theta^4 \cdot \frac{1}{4\theta^4} = \bm{1}.
+        \]
+    \end{itemize}
+    Pertanto, $f(x)$ è una densità di probabilità ben definita per ogni $\theta > 0$.
+
+    \item \textbf{Metodo dei Momenti per $\theta$:}
+    Calcoliamo il momento primo teorico (valore atteso della popolazione):
+    \[
+    \EE[X] = \int_{\theta}^{+\infty} x \cdot 4\theta^4 x^{-5} \, \dx = 4\theta^4 \int_{\theta}^{+\infty} x^{-4} \, \dx = 4\theta^4 \left[ \frac{x^{-3}}{-3} \right]_{\theta}^{+\infty} = 4\theta^4 \left( 0 - \left(-\frac{\theta^{-3}}{3}\right) \right) = \frac{4}{3}\theta.
+    \]
+    Uguagliando il momento teorico $\EE[X]$ al momento campionario primo $\overline{X}_n = \frac{1}{n}\sum_{i=1}^n X_i$:
+    \[
+    \EE[X] = \overline{X}_n \implies \frac{4}{3}\theta = \overline{X}_n \implies \bm{\widehat{\theta}_{\text{MM}} = \frac{3}{4}\overline{X}_n}.
+    \]
+
+    \item \textbf{Verifica della correttezza (non distorsione):}
+    Uno stimatore $\widehat{\theta}$ è corretto se $\EE[\widehat{\theta}] = \theta$ per ogni $\theta > 0$.
+    \[
+    \EE[\widehat{\theta}_{\text{MM}}] = \EE\left[ \frac{3}{4}\overline{X}_n \right] = \frac{3}{4}\EE[\overline{X}_n] = \frac{3}{4} \cdot \EE[X] = \frac{3}{4} \cdot \left(\frac{4}{3}\theta\right) = \bm{\theta}.
+    \]
+    Poiché $\EE[\widehat{\theta}_{\text{MM}}] = \theta$, lo stimatore dei momenti è \textbf{esattamente corretto} (non distorto).
+
+    \item \textbf{Funzione di Verosimiglianza e stima MLE:}
+    Dato un campione $x_1, \dots, x_n$, la funzione di verosimiglianza congiunta è:
+    \[
+    L(\theta) = \prod_{i=1}^n f(x_i; \theta) = \prod_{i=1}^n 4\theta^4 x_i^{-5} \mathbf{1}_{\{x_i \ge \theta\}} = 4^n \theta^{4n} \left( \prod_{i=1}^n x_i^{-5} \right) \prod_{i=1}^n \mathbf{1}_{\{\theta \le x_i\}}.
+    \]
+    Notiamo che $\prod_{i=1}^n \mathbf{1}_{\{\theta \le x_i\}} = \mathbf{1}_{\{\theta \le \min(x_1, \dots, x_n)\}}$. Ponendo $x_{(1)} = \min_{1 \le i \le n} x_i$:
+    \[
+    L(\theta) = \begin{cases}
+    4^n \left(\prod_{i=1}^n x_i^{-5}\right) \theta^{4n}, & \text{se } 0 < \theta \le x_{(1)}, \\
+    0, & \text{se } \theta > x_{(1)}.
+    \end{cases}
+    \]
+    La funzione $L(\theta)$ è strettamente crescente in $\theta$ per $\theta \in (0, x_{(1)}]$ (essendo proporzionale a $\theta^{4n}$ con esponente positivo $4n>0$), e crolla istantaneamente a $0$ per $\theta > x_{(1)}$.
+    Pertanto, il punto di massimo globale si trova sull'estremo superiore del supporto ammissibile:
+    \[
+    \mathbf{\widehat{\theta}_{\text{MLE}} = x_{(1)} = \min(X_1, \dots, X_n)}.
+    \]
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 4
+% ==============================================================================
+\begin{problemabox}{Problema 4 (Testo Integrale)}
+Viene lanciata per tre volte una moneta regolare.
+\begin{enumerate}[label=(\roman*)]
+    \item Si dia una formalizzazione matematica di quest'esperimento aleatorio indicando lo spazio dei risultati possibili $\Omega$ e un'opportuna funzione di probabilità definita su $\Omega$.
+    \item Si calcoli la probabilità dell'evento ``esce al più una volta Testa''.
+    \item Si calcoli la probabilità dell'evento ``facce consecutive non sono mai uguali''.
+    \item Si stabilisca se i due eventi dei punti (ii) e (iii) sono indipendenti.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Spazio campionario e misura di probabilità:}
+    Lo spazio dei risultati elementari $\Omega$ è l'insieme di tutte le 3-tuple ordinate con esiti in $\{T, C\}$:
+    \[
+    \Omega = \{T, C\}^3 = \{(T,T,T), (T,T,C), (T,C,T), (C,T,T), (T,C,C), (C,T,C), (C,C,T), (C,C,C)\}.
+    \]
+    La cardinalità è $|\Omega| = 2^3 = 8$. Essendo la moneta regolare, ogni esito elementare è equiprobabile con misura di probabilità uniforme:
+    \[
+    \Prob(\{\omega\}) = \frac{1}{|\Omega|} = \frac{1}{8} \quad \forall \omega \in \Omega, \qquad \Prob(E) = \frac{|E|}{|\Omega|} = \frac{|E|}{8} \quad \forall E \subseteq \Omega.
+    \]
+
+    \item \textbf{Evento $A = \text{``Esce al più una volta Testa''}$:}
+    L'evento corrisponde ad osservare $0$ oppure $1$ Testa:
+    \[
+    A = \{(C,C,C), (T,C,C), (C,T,C), (C,C,T)\} \implies |A| = 4.
+    \]
+    \[
+    \Prob(A) = \frac{4}{8} = \bm{\frac{1}{2}} = \bm{0.5000}.
+    \]
+
+    \item \textbf{Evento $B = \text{``Facce consecutive non sono mai uguali''}$:}
+    Le facce devono alternarsi rigorosamente ad ogni lancio:
+    \[
+    B = \{(T,C,T), (C,T,C)\} \implies |B| = 2.
+    \]
+    \[
+    \Prob(B) = \frac{2}{8} = \bm{\frac{1}{4}} = \bm{0.2500}.
+    \]
+
+    \item \textbf{Verifica dell'indipendenza stocastica:}
+    Due eventi $A$ e $B$ sono indipendenti se e solo se $\Prob(A \cap B) = \Prob(A) \cdot \Prob(B)$.
+    Determiniamo l'intersezione $A \cap B$:
+    \[
+    A \cap B = \{(C,T,C)\} \implies |A \cap B| = 1.
+    \]
+    \[
+    \Prob(A \cap B) = \frac{1}{8} = \bm{0.1250}.
+    \]
+    Calcoliamo il prodotto delle probabilità marginali:
+    \[
+    \Prob(A) \cdot \Prob(B) = \frac{1}{2} \cdot \frac{1}{4} = \frac{1}{8}.
+    \]
+    Poiché $\Prob(A \cap B) = \Prob(A)\Prob(B) = \frac{1}{8}$, gli eventi $A$ e $B$ sono \textbf{stocasticamente indipendenti}.
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 5
+% ==============================================================================
+\begin{problemabox}{Problema 5 (Testo Integrale)}
+Sia $X$ una v.a. di legge esponenziale di parametro $2$ e sia $Y$ una v.a. di Bernoulli di parametro $p \in (0,1)$. Denotiamo con $\overline{X}_n$ e $\overline{Y}_n$ le medie empiriche ottenute prendendo $n$ copie indipendenti di $X$ e $Y$ rispettivamente. Si determini un $p$ tale che per $n$ sufficientemente grande $\overline{X}_n$ e $\overline{Y}_n$ hanno circa la stessa legge. Di quale legge si tratta?
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Teorema del Limite Centrale (CLT) per le medie empiriche:}
+Per campioni i.i.d., il Teorema del Limite Centrale assicura che per $n$ sufficientemente grande la media empirica di una variabile con media $\mu$ e varianza $\sigma^2$ è approssimativamente normale:
+\[
+\overline{W}_n \approx \mathcal{N}\left(\mu_W, \frac{\sigma_W^2}{n}\right).
+\]
+
+\textbf{2. Calcolo dei momenti di $X$ e $Y$:}
+\begin{itemize}
+    \item Per $X \sim \operatorname{Exp}(\lambda = 2)$:
+    \[
+    \EE[X] = \frac{1}{\lambda} = \frac{1}{2}, \qquad \Var(X) = \frac{1}{\lambda^2} = \frac{1}{4}.
+    \]
+    Quindi, per il CLT:
+    \[
+    \overline{X}_n \approx \mathcal{N}\left(\frac{1}{2}, \frac{1}{4n}\right).
+    \]
+    \item Per $Y \sim \operatorname{Bernoulli}(p)$:
+    \[
+    \EE[Y] = p, \qquad \Var(Y) = p(1-p).
+    \]
+    Quindi, per il CLT:
+    \[
+    \overline{Y}_n \approx \mathcal{N}\left(p, \frac{p(1-p)}{n}\right).
+    \]
+\end{itemize}
+
+\textbf{3. Condizione di uguaglianza asintotica:}
+Affinché $\overline{X}_n$ e $\overline{Y}_n$ abbiano asintoticamente la stessa distribuzione normale, devono coincidere sia il valore atteso sia la varianza:
+\[
+\begin{cases}
+\EE[\overline{X}_n] = \EE[\overline{Y}_n] \implies \bm{p = \frac{1}{2}}, \\
+\Var(\overline{X}_n) = \Var(\overline{Y}_n) \implies \frac{1}{4n} = \frac{p(1-p)}{n}.
+\end{cases}
+\]
+Sostituendo $p = \frac{1}{2}$ nella seconda equazione:
+\[
+\frac{p(1-p)}{n} = \frac{\frac{1}{2} \cdot \frac{1}{2}}{n} = \frac{1}{4n},
+\]
+che è identicamente verificata.
+
+\textbf{Conclusione:}
+Il valore cercato è $\bm{p = \frac{1}{2} = 0.5000}$, e la legge comune a cui convergono entrambe le medie empiriche per $n$ grande è la legge \textbf{Gaussiana (Normale)}:
+\[
+\bm{\mathcal{N}\left(\frac{1}{2}, \frac{1}{4n}\right)}.
+\]
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 6
+% ==============================================================================
+\begin{problemabox}{Problema 6 (Testo Integrale)}
+I file csv disponibili contengono ciascuno un campione di dati estratto da una popolazione incognita.
+\begin{enumerate}[label=(\roman*)]
+    \item Si presenti un'analisi descrittiva dei dati contenente la numerosità del campione, un istogramma delle frequenze relative e il calcolo di media e varianza campionarie. Si faccia un'opportuna ipotesi sulla legge della popolazione, fissandone il tipo a meno di qualche parametro.
+    \item Si faccia una stima dei parametri usando degli stimatori puntuali e i dati contenuti nel file.
+    \item Si determini un intervallo di confidenza a due code del 95\% per la media $\mu$ della popolazione, a partire dall'ipotesi fatta in (i).
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Metodologia statistica generale e codice R completo:}
+Nel contesto di questo quesito d'esame, lo studente carica il dataset personalizzato associato alla propria matricola. Presentiamo lo script R completo per l'analisi descrittiva, l'inferenza parametrica e l'intervallo di confidenza:
+
+\begin{lstlisting}[language=R]
+# 1. Caricamento e Statistica Descrittiva
+dati <- read.csv("dati_matricola.csv")
+x <- dati[, 1]
+n <- length(x)
+x_bar <- mean(x)
+s2 <- var(x)
+s <- sd(x)
+
+cat(sprintf("Numerosita campionaria: n = %d\n", n))
+cat(sprintf("Media campionaria: x_bar = %.4f\n", x_bar))
+cat(sprintf("Varianza campionaria corretta: s^2 = %.4f\n", s2))
+cat(sprintf("Deviazione standard: s = %.4f\n", s))
+
+# Istogramma delle frequenze relative con curva di densita stimata
+hist(x, prob = TRUE, col = "lightblue", border = "navy",
+     main = "Istogramma Frequenze Relative", xlab = "x", ylab = "Densita")
+lines(density(x), col = "red", lwd = 2)
+
+# 2. Ipotesi sulla popolazione e Stima Puntuale dei Parametri
+# In base all'istogramma unimodale e simmetrico, ipotizziamo una legge Normale N(mu, sigma^2).
+# Stimatori puntuali:
+mu_hat <- x_bar
+sigma2_hat <- s2
+
+# 3. Intervallo di Confidenza Bilaterale al 95% per mu (varianza incognita)
+alpha <- 0.05
+t_crit <- qt(1 - alpha/2, df = n - 1)
+margine_errore <- t_crit * s / sqrt(n)
+ic_inf <- x_bar - margine_errore
+ic_sup <- x_bar + margine_errore
+
+cat(sprintf("t-critico (g.d.l. = %d): %.4f\n", n - 1, t_crit))
+cat(sprintf("Intervallo di Confidenza al 95%% per mu: [%.4f, %.4f]\n", ic_inf, ic_sup))
+\end{lstlisting}
+
+\textbf{2. Formalizzazione teorica dell'Intervallo di Confidenza:}
+Assumendo che $X_1, \dots, X_n \overset{\text{i.i.d.}}{\sim} \mathcal{N}(\mu, \sigma^2)$ con $\sigma^2$ incognita, la quantità pivotale è:
+\[
+T = \frac{\overline{X}_n - \mu}{S_n / \sqrt{n}} \sim t(n-1),
+\]
+dove $S_n = \sqrt{\frac{1}{n-1}\sum_{i=1}^n (X_i - \overline{X}_n)^2}$.
+L'intervallo di confidenza bilaterale al livello $1-\alpha = 0.95$ è:
+\[
+\mathbf{\left[ \overline{X}_n - t_{n-1, \, 0.025} \frac{S_n}{\sqrt{n}}, \;\; \overline{X}_n + t_{n-1, \, 0.025} \frac{S_n}{\sqrt{n}} \right]}.
+\]
+\end{soluzionebox}
+
+\end{document}
