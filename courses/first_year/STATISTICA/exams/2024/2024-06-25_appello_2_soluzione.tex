@@ -1,0 +1,357 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2cm,headheight=14pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,amsfonts,bm,siunitx}
+\usepackage{booktabs,tabularx,enumitem,float}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\definecolor{navyblue}{RGB}{10, 45, 90}
+\definecolor{coolblue}{RGB}{28, 110, 164}
+\definecolor{forestgreen}{RGB}{20, 115, 60}
+\definecolor{warmamber}{RGB}{195, 110, 10}
+\definecolor{crimsonred}{RGB}{175, 30, 45}
+\definecolor{subtlegray}{RGB}{245, 247, 250}
+\definecolor{codebg}{RGB}{240, 242, 245}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=navyblue,
+    urlcolor=coolblue,
+    citecolor=forestgreen
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{\textsf{\textcolor{navyblue}{Statistica I --- Soluzione Ufficiale Dettagliata}}}}
+\fancyhead[R]{\textsf{\textcolor{coolblue}{II Appello (25/06/2024)}}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.6pt}
+
+\newtcolorbox{problemabox}[1]{
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=navyblue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=navyblue, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1.2pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{soluzionebox}[1][Svolgimento Dettagliato]{
+    enhanced,
+    breakable,
+    colback=subtlegray,
+    colframe=forestgreen!80!black,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=forestgreen!80!black, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{esamebox}[1][Consiglio per l'Esame \& Aspetti Chiave]{
+    enhanced,
+    breakable,
+    colback=crimsonred!4!white,
+    colframe=crimsonred,
+    coltitle=crimsonred,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=white, boxrule=0.8pt, colframe=crimsonred},
+    boxrule=0.8pt,
+    leftrule=3.5pt,
+    sharp corners,
+    top=3.5mm, bottom=2.5mm, left=3mm, right=3mm
+}
+
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{navyblue!40},
+    keywordstyle=\color{navyblue}\bfseries,
+    commentstyle=\color{forestgreen}\itshape,
+    stringstyle=\color{warmamber},
+    showstringspaces=false
+}
+
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\dx}{\mathrm{d}x}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries\color{navyblue} Università di Pisa --- Corso di Laurea in Ingegneria Gestionale}\\[0.4em]
+    {\Large\bfseries Statistica I (A.A. 2023/2024) --- II Appello del 25/06/2024}\\[0.3em]
+    {\large\textsf{Soluzione Completa, Rigorosa e Commentata Passo-Passo}}
+\end{center}
+\vspace{0.5em}
+\hrule height 1.2pt
+\vspace{1.5em}
+
+% ==============================================================================
+% PROBLEMA 1
+% ==============================================================================
+\begin{problemabox}{Problema 1 (Testo Integrale)}
+Un'urna contiene 30 biglie numerate da 1 a 10 in tre colori distinti (10 rosse, 10 blu, 10 verdi).
+\begin{enumerate}[label=(\alph*)]
+    \item Peschiamo due biglie senza reinserimento. Siano $X_1, X_2$ i numeri impressi sulla prima e seconda biglia. Sono indipendenti?\\
+    \emph{a) sì \quad b) no \quad c) dati insuff. \quad d) correlazione positiva \quad e) Altro}
+    \item Peschiamo due biglie senza reinserimento. Probabilità che la somma sia esattamente 18?\\
+    \emph{a) 0.010 \quad b) 0.018 \quad c) 0.020 \quad d) 0.028 \quad e) Altro}
+    \item Pescando con reinserimento, qual è la probabilità di estrarre almeno 4 biglie rosse nei primi 5 tentativi?\\
+    \emph{a) 0.010 \quad b) 0.051 \quad c) 0.045 \quad d) 0.090 \quad e) Altro}
+    \item Pescando con reinserimento, calcolare $\EE[X_1 + 3X_2]$ e $\Var(2X_1 + 9)$.
+    \item Pescando 100 volte con reinserimento, sia $S_{100} = \sum_{i=1}^{100} X_i$. Approssimare $\Prob(S_{100} < 500)$.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\alph*)]
+    \item Senza reinserimento, l'estrazione della prima biglia modifica la distribuzione residua della seconda. Pertanto $X_1$ e $X_2$ \textbf{NON sono indipendenti}.\\
+    \textbf{Risposta corretta: b) no}.
+
+    \item Il numero totale di coppie ordinate estraibili senza reinserimento è $|\Omega| = 30 \times 29 = 870$.
+    Le coppie di valori che sommano a $18$ con cifre tra $1$ e $10$ sono $(8, 10)$, $(9, 9)$, $(10, 8)$:
+    \begin{itemize}
+        \item $(8, 10)$: $3 \text{ biglie con cifra 8} \times 3 \text{ biglie con cifra 10} = 9$ coppie ordinate.
+        \item $(9, 9)$: $3 \text{ biglie con cifra 9} \times 2 \text{ biglie con cifra 9 rimaste} = 6$ coppie ordinate.
+        \item $(10, 8)$: $3 \text{ biglie con cifra 10} \times 3 \text{ biglie con cifra 8} = 9$ coppie ordinate.
+    \end{itemize}
+    Casi favorevoli totali: $9 + 6 + 9 = 24$.
+    \[
+    \Prob(X_1 + X_2 = 18) = \frac{24}{870} = \frac{4}{145} \approx \mathbf{0.027586} \quad (\mathbf{2.76\%}).
+    \]
+    \textbf{Risposta corretta: d) 0.028}.
+
+    \item Con reinserimento, la probabilità di estrarre una biglia rossa è costante: $p = 10/30 = 1/3$.
+    Il numero di biglie rosse estratte in 5 tentativi $Y \sim \operatorname{Bin}(5, 1/3)$:
+    \begin{align*}
+    \Prob(Y \ge 4) &= \Prob(Y = 4) + \Prob(Y = 5) = \binom{5}{4}\left(\frac{1}{3}\right)^4\left(\frac{2}{3}\right)^1 + \binom{5}{5}\left(\frac{1}{3}\right)^5 \\
+    &= 5 \cdot \frac{2}{243} + \frac{1}{243} = \frac{11}{243} \approx \mathbf{0.045267} \quad (\mathbf{4.53\%}).
+    \end{align*}
+    \textbf{Risposta corretta: c) 0.045}.
+
+    \item Per la singola estrazione uniforme discreta $X_i \sim \operatorname{Unif}\{1, 2, \dots, 10\}$:
+    \[
+    \EE[X_i] = \frac{1 + 10}{2} = 5.5, \qquad \Var(X_i) = \frac{10^2 - 1}{12} = \frac{99}{12} = 8.25.
+    \]
+    Per linearità e indipendenza:
+    \[
+    \mathbf{\EE[X_1 + 3X_2] = \EE[X_1] + 3\EE[X_2] = 5.5 + 3(5.5) = 22},
+    \]
+    \[
+    \mathbf{\Var(2X_1 + 9) = 2^2 \Var(X_1) = 4(8.25) = 33}.
+    \]
+
+    \item Per $S_{100} = \sum_{i=1}^{100} X_i$:
+    \[
+    \EE[S_{100}] = 100(5.5) = 550, \qquad \Var(S_{100}) = 100(8.25) = 825 \implies \sigma = \sqrt{825} \approx 28.7228.
+    \]
+    Applicando il Teorema del Limite Centrale ($S_{100} \approx \mathcal{N}(550, 825)$):
+    \[
+    \Prob(S_{100} < 500) \approx \Phi\left( \frac{500 - 550}{\sqrt{825}} \right) = \Phi\left( \frac{-50}{28.7228} \right) = \Phi(-1.7408) = 1 - \Phi(1.7408).
+    \]
+    Dalle tavole della normale standard ($\Phi(1.74) \approx 0.95907$):
+    \[
+    \Prob(S_{100} < 500) \approx 1 - 0.9591 = \mathbf{0.0409} \quad (\mathbf{4.09\%}).
+    \]
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 2
+% ==============================================================================
+\begin{problemabox}{Problema 2 (Testo Integrale)}
+Un brand di moda monitora le vendite giornaliere (in \euro) in due boutique a Parigi (1) e Londra (2):
+\begin{itemize}
+    \item Negozio 1 (Parigi, $n_1 = 6$): $2385, \quad 2330, \quad 2180, \quad 2225, \quad 2550, \quad 1490$.
+    \item Negozio 2 (Londra, $n_2 = 6$): $2700, \quad 2815, \quad 3055, \quad 1895, \quad 2400, \quad 2505$.
+\end{itemize}
+\begin{enumerate}[label=(\alph*)]
+    \item Calcola l'intervallo di confidenza bilaterale al 90\% per $\mu_1$.
+    \item Definire le ipotesi $H_0$ e $H_1$ per mostrare che a Londra si vende mediamente di più che a Parigi.
+    \item Assumendo $\sigma_1 = 300\text{ \euro}$ e $\sigma_2 = 400\text{ \euro}$, condurre il test a $\alpha = 0.05$.
+    \item Calcolare approssimativamente il valore $p$.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Statistiche campionarie ($n_1 = n_2 = 6$):}
+\[
+\overline{x}_1 = \frac{2385 + 2330 + 2180 + 2225 + 2550 + 1490}{6} = \frac{13160}{6} \approx \mathbf{2193.33\text{ \euro}}, \qquad s_1 \approx 369.35\text{ \euro}.
+\]
+\[
+\overline{x}_2 = \frac{2700 + 2815 + 3055 + 1895 + 2400 + 2505}{6} = \frac{15370}{6} \approx \mathbf{2561.67\text{ \euro}}, \qquad s_2 \approx 391.88\text{ \euro}.
+\]
+
+\textbf{2. Risoluzione Quesito (a) --- Intervallo di Confidenza al 90\% per $\mu_1$ ($\nu = 5$ g.d.l.):}
+Il valore critico della $t$ di Student a $5$ g.d.l. al $90\%$ ($\alpha = 0.10$) è $t_{5, \, 0.05} = 2.0150$:
+\[
+ME_1 = 2.0150 \cdot \frac{369.35}{\sqrt{6}} = 2.0150 \cdot 150.787 \approx \mathbf{303.84\text{ \euro}}.
+\]
+\[
+\mathbf{\operatorname{IC}_{90\%}(\mu_1) = [2193.33 - 303.84, \;\; 2193.33 + 303.84] = [1889.49, \;\; 2497.17]\text{ \euro}}.
+\]
+
+\textbf{3. Risoluzione Quesito (b) --- Ipotesi statistiche:}
+\[
+\mathbf{H_0: \mu_2 \le \mu_1} \qquad \text{vs} \qquad \mathbf{H_1: \mu_2 > \mu_1}.
+\]
+
+\textbf{4. Risoluzione Quesito (c) --- Test a due campioni con varianze note ($\alpha = 0.05$):}
+L'errore standard combinato della differenza è:
+\[
+\operatorname{SE}(\overline{X}_2 - \overline{X}_1) = \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}} = \sqrt{\frac{300^2}{6} + \frac{400^2}{6}} = \sqrt{\frac{90000 + 160000}{6}} = \sqrt{\frac{250000}{6}} = \frac{500}{\sqrt{6}} \approx 204.1241.
+\]
+Calcoliamo la statistica test $Z$:
+\[
+Z_{\text{oss}} = \frac{\overline{x}_2 - \overline{x}_1}{\operatorname{SE}(\overline{X}_2 - \overline{X}_1)} = \frac{2561.6667 - 2193.3333}{204.1241} = \frac{368.3333}{204.1241} = \mathbf{1.8045}.
+\]
+Il valore critico per un test unilaterale destro a $\alpha = 0.05$ è $z_{0.05} = 1.6449$.
+Poiché $Z_{\text{oss}} = 1.8045 > 1.6449$, la statistica cade in regione di rifiuto.
+\textbf{Conclusione:} \textbf{Rifiutiamo l'ipotesi nulla $H_0$}. Le vendite medie a Londra sono significativamente superiori a quelle di Parigi al livello del $5\%$.
+
+\textbf{5. Risoluzione Quesito (d) --- Calcolo del $p$-value:}
+\[
+p\text{-value} = 1 - \Phi(1.8045) \approx 1 - 0.9644 = \mathbf{0.0356} \quad (\mathbf{3.56\%} < 5\%).
+\]
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 3
+% ==============================================================================
+\begin{problemabox}{Problema 3 (Testo Integrale)}
+Un test diagnostico per una patologia rara ha specificità e sensibilità:
+\begin{itemize}
+    \item Prevalenza della malattia: $\Prob(M) = 0.02, \quad \Prob(S) = 0.98$.
+    \item Sensibilità: $\Prob(+ \mid M) = 0.99$.
+    \item Falsi positivi: $\Prob(+ \mid S) = 0.03$.
+\end{itemize}
+\begin{enumerate}[label=(\alph*)]
+    \item Calcolare la probabilità che un individuo scelto a caso risulti positivo al test.
+    \item Calcolare la probabilità che un individuo sano risulti positivo ad almeno 2 test su 3 indipendenti.
+    \item Se un individuo risulta positivo ad almeno 2 test su 3, qual è la probabilità che sia effettivamente malato?
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\alph*)]
+    \item Per il Teorema delle Probabilità Totali:
+    \begin{align*}
+    \Prob(+) &= \Prob(+ \mid M)\Prob(M) + \Prob(+ \mid S)\Prob(S) \\
+    &= (0.99)(0.02) + (0.03)(0.98) = 0.0198 + 0.0294 = \mathbf{0.0492} \quad (\mathbf{4.92\%}).
+    \end{align*}
+
+    \item Per un soggetto sano, la probabilità di positività è $p_S = 0.03$. Su $n = 3$ test indipendenti:
+    \begin{align*}
+    \Prob(\ge 2 + \mid S) &= \binom{3}{2}(0.03)^2(0.97)^1 + \binom{3}{3}(0.03)^3 \\
+    &= 3(0.0009)(0.97) + 0.000027 = 0.002619 + 0.000027 = \mathbf{0.002646} \quad (\mathbf{0.2646\%}).
+    \end{align*}
+
+    \item Per un soggetto malato, la probabilità di positività è $p_M = 0.99$:
+    \begin{align*}
+    \Prob(\ge 2 + \mid M) &= \binom{3}{2}(0.99)^2(0.01)^1 + \binom{3}{3}(0.99)^3 \\
+    &= 3(0.9801)(0.01) + 0.970299 = 0.029403 + 0.970299 = \mathbf{0.999702}.
+    \end{align*}
+    Applicando la Formula di Bayes:
+    \begin{align*}
+    \Prob(M \mid \ge 2 +) &= \frac{\Prob(\ge 2 + \mid M)\Prob(M)}{\Prob(\ge 2 + \mid M)\Prob(M) + \Prob(\ge 2 + \mid S)\Prob(S)} \\
+    &= \frac{(0.999702)(0.02)}{(0.999702)(0.02) + (0.002646)(0.98)} = \frac{0.01999404}{0.01999404 + 0.00259308} \\
+    &= \frac{0.01999404}{0.02258712} \approx \mathbf{0.885196} \quad (\mathbf{88.52\%}).
+    \end{align*}
+    \emph{Conclusione:} Ripetere il test 3 volte porta l'accuratezza diagnostica dal $40.2\%$ (con un solo test) all'$\mathbf{88.52\%}$.
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 4
+% ==============================================================================
+\begin{problemabox}{Problema 4 (Testo Integrale)}
+Sia $X_1,\dots,X_n$ un campione estratto da una distribuzione di Bernoulli di parametro $\theta \in (0,1)$.
+\begin{enumerate}[label=(\alph*)]
+    \item Calcolare lo stimatore di massima verosimiglianza per $\theta$.
+    \item Discutere correttezza e consistenza dello stimatore ottenuto.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\alph*)]
+    \item La funzione di verosimiglianza per un campione di Bernoulli $x_1, \dots, x_n \in \{0, 1\}$ è:
+    \[
+    L(\theta) = \prod_{i=1}^n \theta^{x_i}(1-\theta)^{1-x_i} = \theta^{\sum x_i} (1-\theta)^{n - \sum x_i}.
+    \]
+    La log-verosimiglianza è:
+    \[
+    \ell(\theta) = \left(\sum_{i=1}^n x_i\right) \log \theta + \left(n - \sum_{i=1}^n x_i\right) \log(1-\theta).
+    \]
+    Derivando rispetto a $\theta$:
+    \[
+    \frac{\partial \ell}{\partial \theta} = \frac{\sum x_i}{\theta} - \frac{n - \sum x_i}{1-\theta} = 0 \implies (1-\theta)\sum x_i = \theta\left(n - \sum x_i\right) \implies \mathbf{\widehat{\theta}_{\text{MLE}} = \frac{1}{n}\sum_{i=1}^n X_i = \overline{X}_n}.
+    \]
+
+    \item \textbf{Proprietà asintotiche e finite dello stimatore:}
+    \begin{itemize}
+        \item \emph{Correttezza:} $\EE[\widehat{\theta}_{\text{MLE}}] = \EE[\overline{X}_n] = \frac{1}{n}\sum_{i=1}^n \EE[X_i] = \frac{1}{n}(n\theta) = \mathbf{\theta}$. Lo stimatore è \textbf{esattamente non distorto} ($\operatorname{Bias} = 0$).
+        \item \emph{Consistenza:} Per la Legge Debole dei Grandi Numeri, $\overline{X}_n \xrightarrow{\Prob} \EE[X] = \theta$. Pertanto $\widehat{\theta}_{\text{MLE}}$ è \textbf{fortemente e debolmente consistente}.
+    \end{itemize}
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 5
+% ==============================================================================
+\begin{problemabox}{Problema 5 (Testo Integrale)}
+Consideriamo l'integrale
+\[
+\int_{-7}^{10} \frac{\sin(7 + \log(x^2 + 1))}{2 + e^x} \, \dx.
+\]
+\begin{enumerate}[label=(\alph*)]
+    \item Discutere il metodo di Monte Carlo per approssimare questo integrale.
+    \item Scrivere i comandi in linguaggio R.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Fondamento teorico:}
+L'integrale è definito su $[a, b] = [-7, 10]$ con ampiezza $b - a = 17$:
+\[
+I = 17 \int_{-7}^{10} \frac{\sin(7 + \log(x^2 + 1))}{2 + e^x} \frac{1}{17} \, \dx = 17 \, \EE[g(X)], \qquad X \sim \operatorname{Unif}(-7, 10).
+\]
+Valore di riferimento: $I \approx \mathbf{0.004899}$.
+
+\textbf{2. Implementazione in linguaggio R:}
+\begin{lstlisting}[language=R]
+set.seed(42)
+N <- 1000000
+x_samples <- runif(N, min = -7, max = 10)
+g_val <- sin(7 + log(x_samples^2 + 1)) / (2 + exp(x_samples))
+I_hat <- 17 * mean(g_val)
+cat(sprintf("Stima Monte Carlo: %.6f\n", I_hat)) # ~ 0.0049
+\end{lstlisting}
+\end{soluzionebox}
+
+\end{document}

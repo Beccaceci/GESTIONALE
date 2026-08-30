@@ -1,0 +1,356 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2cm,headheight=14pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,amsfonts,bm,siunitx}
+\usepackage{booktabs,tabularx,enumitem,float}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\definecolor{navyblue}{RGB}{10, 45, 90}
+\definecolor{coolblue}{RGB}{28, 110, 164}
+\definecolor{forestgreen}{RGB}{20, 115, 60}
+\definecolor{warmamber}{RGB}{195, 110, 10}
+\definecolor{crimsonred}{RGB}{175, 30, 45}
+\definecolor{subtlegray}{RGB}{245, 247, 250}
+\definecolor{codebg}{RGB}{240, 242, 245}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=navyblue,
+    urlcolor=coolblue,
+    citecolor=forestgreen
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{\textsf{\textcolor{navyblue}{Statistica I --- Soluzione Ufficiale Dettagliata}}}}
+\fancyhead[R]{\textsf{\textcolor{coolblue}{Appello Straordinario (11/01/2022)}}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.6pt}
+
+\newtcolorbox{problemabox}[1]{
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=navyblue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=navyblue, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1.2pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{soluzionebox}[1][Svolgimento Dettagliato]{
+    enhanced,
+    breakable,
+    colback=subtlegray,
+    colframe=forestgreen!80!black,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=forestgreen!80!black, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{esamebox}[1][Consiglio per l'Esame \& Aspetti Chiave]{
+    enhanced,
+    breakable,
+    colback=crimsonred!4!white,
+    colframe=crimsonred,
+    coltitle=crimsonred,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=white, boxrule=0.8pt, colframe=crimsonred},
+    boxrule=0.8pt,
+    leftrule=3.5pt,
+    sharp corners,
+    top=3.5mm, bottom=2.5mm, left=3mm, right=3mm
+}
+
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{navyblue!40},
+    keywordstyle=\color{navyblue}\bfseries,
+    commentstyle=\color{forestgreen}\itshape,
+    stringstyle=\color{warmamber},
+    showstringspaces=false
+}
+
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\dx}{\mathrm{d}x}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries\color{navyblue} Università di Pisa --- Corso di Laurea in Ingegneria Gestionale}\\[0.4em]
+    {\Large\bfseries Statistica I (A.A. 2021/2022) --- Appello Straordinario dell'11/01/2022}\\[0.3em]
+    {\large\textsf{Soluzione Completa, Rigorosa e Commentata Passo-Passo}}
+\end{center}
+\vspace{0.5em}
+\hrule height 1.2pt
+\vspace{1.5em}
+
+% ==============================================================================
+% PROBLEMA 1
+% ==============================================================================
+\begin{problemabox}{Problema 1 (Testo Integrale)}
+Si effettua il seguente esperimento: due scatole all'apparenza identiche contengono una $2$ palline, di cui una rossa (R) e una blu (B), e l'altra $3$ palline, di cui $2$ rosse e $1$ blu. Si sceglie a caso una scatola e si effettuano ripetutamente estrazioni da essa, rimettendo all'interno ogni volta la pallina estratta.
+\begin{enumerate}
+    \item Calcolare la probabilità di osservare, nelle prime 6 estrazioni, la sequenza ordinata di colori RBRBRB.
+    \item Si supponga di aver osservato nelle prime 6 estrazioni la sequenza ordinata di colori RBRBRB. Calcolare la probabilità di aver scelto la scatola contenente 3 palline.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Modellizzazione probabilistica e probabilità totali:}
+Siano $S_1$ l'evento ``scelta della prima scatola (1R, 1B)'' e $S_2$ l'evento ``scelta della seconda scatola (2R, 1B)''.
+Poiché la scelta è casuale ed equiprobabile:
+\[
+\Prob(S_1) = \Prob(S_2) = \frac{1}{2}.
+\]
+Le probabilità di estrarre Rossa (R) o Blu (B) condizionate alla scatola prescelta sono:
+\begin{itemize}
+    \item In $S_1$: $\Prob(R \mid S_1) = \frac{1}{2}, \quad \Prob(B \mid S_1) = \frac{1}{2}$.
+    \item In $S_2$: $\Prob(R \mid S_2) = \frac{2}{3}, \quad \Prob(B \mid S_2) = \frac{1}{3}$.
+\end{itemize}
+Sia $E$ l'evento osservare la sequenza ordinata di 6 estrazioni $E = (R, B, R, B, R, B)$.
+Essendo le estrazioni effettuate con reinserimento, sono condizionatamente indipendenti:
+\begin{align*}
+\Prob(E \mid S_1) &= \left(\frac{1}{2}\right)^3 \left(\frac{1}{2}\right)^3 = \left(\frac{1}{2}\right)^6 = \frac{1}{64} = 0.015625, \\
+\Prob(E \mid S_2) &= \left(\frac{2}{3}\right)^3 \left(\frac{1}{3}\right)^3 = \frac{8}{27} \cdot \frac{1}{27} = \frac{8}{729} \approx 0.010974.
+\end{align*}
+
+\textbf{2. Risoluzione Quesito 1:}
+Applicando il Teorema delle Probabilità Totali:
+\[
+\Prob(E) = \Prob(E \mid S_1)\Prob(S_1) + \Prob(E \mid S_2)\Prob(S_2) = \frac{1}{2}\left(\frac{1}{64}\right) + \frac{1}{2}\left(\frac{8}{729}\right) = \frac{1}{128} + \frac{4}{729}.
+\]
+Calcoliamo la frazione esatta:
+\[
+\Prob(E) = \frac{729 + 512}{93312} = \frac{1241}{93312} \approx \bm{0.01330} \quad (\bm{1.330\%}).
+\]
+
+\textbf{3. Risoluzione Quesito 2 (Formula di Bayes per $S_2$):}
+\[
+\Prob(S_2 \mid E) = \frac{\Prob(E \mid S_2)\Prob(S_2)}{\Prob(E)} = \frac{\frac{4}{729}}{\frac{1241}{93312}} = \frac{4}{729} \cdot \frac{93312}{1241} = \frac{4 \cdot 128}{1241} = \bm{\frac{512}{1241}} \approx \bm{0.4126} \quad (\bm{41.26\%}).
+\]
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 2
+% ==============================================================================
+\begin{problemabox}{Problema 2 (Testo Integrale)}
+Siano $X,Y,Z$ variabili aleatorie discrete a valori in $\{0,1\}$ e indipendenti. Si supponga che $\Prob(X = 0) = \frac{1}{2}$, $\Prob(X+Y = 0) = \frac{1}{4}$ e $\Prob(X+Y+Z = 0) = \frac{1}{12}$.
+\begin{enumerate}
+    \item Calcolare valor medio e deviazione standard di $X+Y+Z$.
+    \item Sia $S$ la somma di $81$ copie indipendenti di $X+Y+Z$. Usando il teorema limite centrale approssimare la probabilità $\Prob(S \le 127)$.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Determinazione delle distribuzioni marginali di $X, Y, Z$:}
+Poiché le variabili sono a valori in $\{0, 1\}$, l'evento somma nulla equivale all'annullamento simultaneo di tutti gli addendi:
+\begin{itemize}
+    \item $\Prob(X = 0) = 1/2 \implies \Prob(X = 1) = 1/2 \implies \EE[X] = 1/2, \quad \Var(X) = 1/4$.
+    \item Per indipendenza: $\Prob(X+Y = 0) = \Prob(X=0, Y=0) = \Prob(X=0)\Prob(Y=0) = \frac{1}{2}\Prob(Y=0) = \frac{1}{4} \implies \Prob(Y=0) = \frac{1}{2}$.
+    Quindi $Y \sim \operatorname{Bernoulli}(1/2) \implies \EE[Y] = 1/2, \quad \Var(Y) = 1/4$.
+    \item $\Prob(X+Y+Z = 0) = \Prob(X=0)\Prob(Y=0)\Prob(Z=0) = \frac{1}{4}\Prob(Z=0) = \frac{1}{12} \implies \Prob(Z=0) = \frac{1}{3}$.
+    Quindi $\Prob(Z=1) = 1 - 1/3 = 2/3 \implies \EE[Z] = 2/3, \quad \Var(Z) = \frac{2}{3} \cdot \frac{1}{3} = \frac{2}{9}$.
+\end{itemize}
+
+\textbf{2. Media e deviazione standard di $W = X+Y+Z$:}
+Per linearità e indipendenza:
+\[
+\EE[W] = \EE[X] + \EE[Y] + \EE[Z] = \frac{1}{2} + \frac{1}{2} + \frac{2}{3} = \bm{\frac{5}{3}} \approx \bm{1.6667},
+\]
+\[
+\Var(W) = \Var(X) + \Var(Y) + \Var(Z) = \frac{1}{4} + \frac{1}{4} + \frac{2}{9} = \frac{1}{2} + \frac{2}{9} = \frac{13}{18} \approx 0.7222,
+\]
+\[
+\bm{\sigma_W = \sqrt{\frac{13}{18}} \approx 0.8498}.
+\]
+
+\textbf{3. Approssimazione normale di $S = \sum_{i=1}^{81} W_i$ (TLC):}
+Per la somma di $n = 81$ copie indipendenti di $W$:
+\[
+\EE[S] = 81 \cdot \EE[W] = 81 \cdot \frac{5}{3} = \bm{135},
+\]
+\[
+\Var(S) = 81 \cdot \Var(W) = 81 \cdot \frac{13}{18} = \frac{9 \cdot 13}{2} = \frac{117}{2} = \bm{58.5} \implies \sigma_S = \sqrt{58.5} \approx 7.6485.
+\]
+Applicando il Teorema del Limite Centrale, $S \approx \mathcal{N}(135, 58.5)$:
+\[
+\Prob(S \le 127) \approx \Phi\left( \frac{127 - 135}{\sqrt{58.5}} \right) = \Phi\left( \frac{-8}{7.6485} \right) = \Phi(-1.0460) = 1 - \Phi(1.0460).
+\]
+Dalle tavole della normale standard ($\Phi(1.05) \approx 0.8531$):
+\[
+\Prob(S \le 127) \approx 1 - 0.8522 = \bm{0.1478} \quad (\bm{14.78\%}).
+\]
+Comando R: \texttt{pnorm(127, mean = 135, sd = sqrt(58.5))} restituisce $0.1478$.
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 3
+% ==============================================================================
+\begin{problemabox}{Problema 3 (Testo Integrale)}
+Un sondaggio riguardante la distanza del proprio domicilio dal luogo di lavoro ha ottenuto le seguenti risposte (in km) tra i 5 dipendenti di una start-up:
+\[
+12, \quad 16, \quad 18, \quad 29, \quad 18.
+\]
+Assumendo che siano un campione di variabili gaussiane $\mathcal{N}(\mu, \sigma^2)$:
+\begin{enumerate}
+    \item supponendo $\sigma^2$ non nota, determinare un intervallo di confidenza di livello 95\% per la distanza media $\mu$;
+    \item assumendo $\sigma = 6$, decidere se rigettare l'ipotesi nulla $H_0: \mu = 22$ al livello del 5\%.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Statistiche descrittive campionarie ($n = 5$):}
+\[
+\overline{x} = \frac{12 + 16 + 18 + 29 + 18}{5} = \frac{93}{5} = \mathbf{18.6\text{ km}}.
+\]
+\begin{align*}
+s^2 &= \frac{1}{4} \sum_{i=1}^5 (x_i - 18.6)^2 \\
+&= \frac{(-6.6)^2 + (-2.6)^2 + (-0.6)^2 + (10.4)^2 + (-0.6)^2}{4} \\
+&= \frac{43.56 + 6.76 + 0.36 + 108.16 + 0.36}{4} = \frac{159.2}{4} = \mathbf{39.80},
+\end{align*}
+\[
+s = \sqrt{39.80} \approx \mathbf{6.3087\text{ km}}.
+\]
+
+\textbf{2. Intervallo di Confidenza al 95\% con $\sigma^2$ non nota ($t$-Student a 4 g.d.l.):}
+Il valore critico per $\nu = n-1 = 4$ e $\alpha = 0.05$ è $t_{4, \, 0.025} = 2.7764$.
+Il margine di errore è:
+\[
+ME = t_{4, \, 0.025} \frac{s}{\sqrt{n}} = 2.7764 \cdot \frac{6.3087}{\sqrt{5}} = 2.7764 \cdot 2.8213 = \mathbf{7.8333\text{ km}}.
+\]
+L'intervallo di confidenza è:
+\[
+\mathbf{\operatorname{IC}_{95\%}(\mu) = [18.6 - 7.8333, \;\; 18.6 + 7.8333] = [10.7667, \;\; 26.4333]\text{ km}}.
+\]
+
+\textbf{3. Test d'ipotesi con varianza nota $\sigma = 6$ ($Z$-test):}
+Test bilaterale: $H_0: \mu = 22$ vs $H_1: \mu \neq 22$ con $\alpha = 0.05$.
+Calcoliamo la statistica test $Z$:
+\[
+Z_{\text{oss}} = \frac{\overline{x} - \mu_0}{\sigma/\sqrt{n}} = \frac{18.6 - 22}{6/\sqrt{5}} = \frac{-3.4}{2.6833} = \bm{-1.2671}.
+\]
+Il valore critico bilaterale è $z_{0.025} = 1.960$.
+Poiché $|Z_{\text{oss}}| = 1.2671 < 1.960$, la statistica test cade nella regione di accettazione.
+Il $p$-value è $2 \cdot (1 - \Phi(1.2671)) = 2 \cdot (1 - 0.8974) = \bm{0.2052} \quad (\bm{20.52\%} > 5\%)$.
+
+\textbf{Conclusione:} \textbf{Non rifiutiamo l'ipotesi nulla $H_0$}. I dati raccolti sono pienamente compatibili con una distanza media di $22\text{ km}$.
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 4
+% ==============================================================================
+\begin{problemabox}{Problema 4 (Testo Integrale)}
+Sia $\theta>0$ un parametro e sia $X$ una variabile aleatoria con funzione di densità data da
+\[
+f(x) = \begin{cases}
+\theta^2 x e^{-\theta x}, & \text{se } x \ge 0, \\
+0, & \text{altrimenti.}
+\end{cases}
+\]
+Supponendo di osservare $n=100$ copie indipendenti di $X$:
+\begin{enumerate}
+    \item scrivere uno stimatore $\widehat{\theta}$ usando il metodo dei momenti;
+    \item determinare lo stimatore di massima verosimiglianza per $\theta$.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}
+    \item \textbf{Metodo dei Momenti:}
+    Riconosciamo che $X \sim \operatorname{Gamma}(\alpha=2, \lambda=\theta)$. Il valore atteso è:
+    \[
+    \EE[X] = \int_0^\infty x \cdot \theta^2 x e^{-\theta x} \, \dx = \theta^2 \int_0^\infty x^2 e^{-\theta x} \, \dx = \theta^2 \cdot \frac{2!}{\theta^3} = \frac{2}{\theta}.
+    \]
+    Uguagliando il momento teorico alla media campionaria $\overline{X}_n$:
+    \[
+    \frac{2}{\theta} = \overline{X}_n \implies \mathbf{\widehat{\theta}_{\text{MM}} = \frac{2}{\overline{X}_n}}.
+    \]
+
+    \item \textbf{Stimatore di Massima Verosimiglianza (MLE):}
+    La funzione di verosimiglianza su un campione $x_1, \dots, x_n$ è:
+    \[
+    L(\theta) = \prod_{i=1}^n \left( \theta^2 x_i e^{-\theta x_i} \right) = \theta^{2n} \left( \prod_{i=1}^n x_i \right) \exp\left( -\theta \sum_{i=1}^n x_i \right).
+    \]
+    La log-verosimiglianza è:
+    \[
+    \ell(\theta) = \log L(\theta) = 2n \log \theta + \sum_{i=1}^n \log x_i - \theta \sum_{i=1}^n x_i.
+    \]
+    Derivando rispetto a $\theta$ e ponendo la derivata prima uguale a zero:
+    \[
+    \frac{\partial \ell}{\partial \theta} = \frac{2n}{\theta} - \sum_{i=1}^n x_i = 0 \implies \mathbf{\widehat{\theta}_{\text{MLE}} = \frac{2n}{\sum_{i=1}^n X_i} = \frac{2}{\overline{X}_n}}.
+    \]
+    La derivata seconda $\frac{\partial^2 \ell}{\partial \theta^2} = -\frac{2n}{\theta^2} < 0$ conferma che si tratta di un massimo globale unico.
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 5
+% ==============================================================================
+\begin{problemabox}{Problema 5 (Testo Integrale)}
+Calcolare approssimativamente l'integrale
+\[
+\int_0^\infty \sin(x) e^{-x} \, \dx
+\]
+implementando in R il metodo di Monte Carlo.
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Fondamento teorico e valore esatto:}
+Possiamo interpretare l'integrale come valore atteso rispetto alla distribuzione esponenziale standard $X \sim \operatorname{Exp}(1)$, la cui PDF è $f(x) = e^{-x} \mathbf{1}_{(0, \infty)}(x)$:
+\[
+I = \int_0^\infty \sin(x) e^{-x} \, \dx = \EE[\sin(X)], \qquad X \sim \operatorname{Exp}(1).
+\]
+Per integrazione per parti due volte (oppure usando $\operatorname{Im}\int_0^\infty e^{(-1+i)x} \dx$):
+\[
+I = \frac{1}{1^2 + 1^2} = \bm{\frac{1}{2}} = \bm{0.5000}.
+\]
+
+\textbf{2. Implementazione in linguaggio R:}
+\begin{lstlisting}[language=R]
+set.seed(42)
+N <- 1000000
+
+# Campionamento da Exp(lambda = 1)
+x_exp <- rexp(N, rate = 1)
+
+# Valutazione della funzione trasformata
+g_val <- sin(x_exp)
+
+# Stima Monte Carlo
+I_hat <- mean(g_val)
+se_hat <- sd(g_val) / sqrt(N)
+
+cat(sprintf("Stima Monte Carlo: %.4f (SE: %.4f)\n", I_hat, se_hat))
+# Output: Stima Monte Carlo: 0.5000
+\end{lstlisting}
+\end{soluzionebox}
+
+\end{document}

@@ -1,0 +1,350 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2cm,headheight=14pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,amsfonts,bm,siunitx}
+\usepackage{booktabs,tabularx,enumitem,float}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\definecolor{navyblue}{RGB}{10, 45, 90}
+\definecolor{coolblue}{RGB}{28, 110, 164}
+\definecolor{forestgreen}{RGB}{20, 115, 60}
+\definecolor{warmamber}{RGB}{195, 110, 10}
+\definecolor{crimsonred}{RGB}{175, 30, 45}
+\definecolor{subtlegray}{RGB}{245, 247, 250}
+\definecolor{codebg}{RGB}{240, 242, 245}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=navyblue,
+    urlcolor=coolblue,
+    citecolor=forestgreen
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{\textsf{\textcolor{navyblue}{Statistica I --- Soluzione Ufficiale Dettagliata}}}}
+\fancyhead[R]{\textsf{\textcolor{coolblue}{Pre-test (26/01/2022)}}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.6pt}
+
+\newtcolorbox{problemabox}[1]{
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=navyblue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=navyblue, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1.2pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{soluzionebox}[1][Svolgimento Dettagliato]{
+    enhanced,
+    breakable,
+    colback=subtlegray,
+    colframe=forestgreen!80!black,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=forestgreen!80!black, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{esamebox}[1][Consiglio per l'Esame \& Aspetti Chiave]{
+    enhanced,
+    breakable,
+    colback=crimsonred!4!white,
+    colframe=crimsonred,
+    coltitle=crimsonred,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=white, boxrule=0.8pt, colframe=crimsonred},
+    boxrule=0.8pt,
+    leftrule=3.5pt,
+    sharp corners,
+    top=3.5mm, bottom=2.5mm, left=3mm, right=3mm
+}
+
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{navyblue!40},
+    keywordstyle=\color{navyblue}\bfseries,
+    commentstyle=\color{forestgreen}\itshape,
+    stringstyle=\color{warmamber},
+    showstringspaces=false
+}
+
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\dx}{\mathrm{d}x}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries\color{navyblue} Università di Pisa --- Corso di Laurea in Ingegneria Gestionale}\\[0.4em]
+    {\Large\bfseries Statistica I (A.A. 2021/2022) --- Pre-test del 26/01/2022}\\[0.3em]
+    {\large\textsf{Soluzione Completa, Rigorosa e Commentata Passo-Passo}}
+\end{center}
+\vspace{0.5em}
+\hrule height 1.2pt
+\vspace{1.5em}
+
+% ==============================================================================
+% PROBLEMA 1
+% ==============================================================================
+\begin{problemabox}{Problema 1 (Testo Integrale)}
+Una piccola lotteria organizzata presso il bar di un paesino consiste di $100$ biglietti, ciascuno del costo di $1\text{ €}$, e ha in tutto $3$ premi, del valore rispettivamente di $50$, $25$ e $25\text{ €}$. Il cliente Alfonso non è un grande scommettitore e ha comperato solo due biglietti.
+\begin{enumerate}
+    \item Calcolare la probabilità che Alfonso vinca esattamente $50\text{ €}$.
+    \item Alfonso è particolarmente fortunato: viene avvisato dagli organizzatori che ha vinto in tutto $50\text{ €}$. È più probabile che abbia vinto il singolo premio da $50\text{ €}$ oppure entrambi i premi da $25\text{ €}$?
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Spazio dei campioni e calcolo combinatorio:}
+I $100$ biglietti totali sono composti da:
+\begin{itemize}
+    \item $1$ biglietto con premio da $50\text{ €}$;
+    \item $2$ biglietti con premio da $25\text{ €}$;
+    \item $97$ biglietti non vincenti ($0\text{ €}$).
+\end{itemize}
+Il numero totale di coppie non ordinate di biglietti che Alfonso può acquistare è:
+\[
+\binom{100}{2} = \frac{100 \cdot 99}{2} = 4950.
+\]
+
+\textbf{2. Risoluzione Quesito 1:}
+La vincita complessiva è pari a $50\text{ €}$ in due eventi disgiunti:
+\begin{itemize}
+    \item \emph{Evento $A$ (Vincita del premio da 50):} estrazione del biglietto da $50\text{ €}$ e di un biglietto non vincente ($0\text{ €}$).
+    Numero di casi favorevoli: $\binom{1}{1} \binom{97}{1} = 1 \cdot 97 = 97$.
+    \item \emph{Evento $B$ (Vincita dei due premi da 25):} estrazione di entrambi i biglietti da $25\text{ €}$.
+    Numero di casi favorevoli: $\binom{2}{2} = 1$.
+\end{itemize}
+Il numero totale di casi favorevoli alla vincita di $50\text{ €}$ è $|A \cup B| = 97 + 1 = 98$.
+\[
+\Prob(\text{Vincita } = 50\text{ €}) = \frac{98}{4950} = \frac{49}{2475} \approx \bm{0.01980} \quad (\bm{1.980\%}).
+\]
+
+\textbf{3. Risoluzione Quesito 2 (Probabilità condizionate a posteriori):}
+Sapendo che l'evento $V_{50} = A \cup B$ si è verificato:
+\[
+\Prob(A \mid V_{50}) = \frac{|A|}{|A \cup B|} = \frac{97}{98} \approx \bm{0.9898} \quad (\bm{98.98\%}),
+\]
+\[
+\Prob(B \mid V_{50}) = \frac{|B|}{|A \cup B|} = \frac{1}{98} \approx \bm{0.0102} \quad (\bm{1.02\%}).
+\]
+\textbf{Conclusione:} È \textbf{schiacciantemente più probabile} che Alfonso abbia vinto il singolo premio da $50\text{ €}$ (con una probabilità del $98.98\%$, pari a $97$ volte la probabilità di aver vinto entrambi i premi da $25\text{ €}$).
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 2
+% ==============================================================================
+\begin{problemabox}{Problema 2 (Testo Integrale)}
+Siano $X$ e $Y$ variabili aleatorie a valori in $\{-1,0,1\}$ indipendenti e uniformi (discrete): $\Prob(X = i) = \Prob(Y = i) = 1/3$ per ogni $i \in \{-1,0,1\}$.
+\begin{enumerate}
+    \item Calcolare valor medio e deviazione standard di $X+Y$.
+    \item Sia $S$ la somma di $300$ copie indipendenti di $X+Y$. Usando il teorema limite centrale approssimare la probabilità $\Prob(|S| \le 10)$.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Media e deviazione standard di $X+Y$:}
+Per la simmetria della distribuzione uniforme discreta:
+\[
+\EE[X] = \EE[Y] = \frac{-1 + 0 + 1}{3} = 0,
+\]
+\[
+\Var(X) = \Var(Y) = \frac{(-1)^2 + 0^2 + 1^2}{3} - 0 = \frac{2}{3}.
+\]
+Per la somma $W = X+Y$, grazie all'indipendenza:
+\[
+\EE[X+Y] = \EE[X] + \EE[Y] = \bm{0},
+\]
+\[
+\Var(X+Y) = \Var(X) + \Var(Y) = \frac{2}{3} + \frac{2}{3} = \frac{4}{3} \approx 1.3333,
+\]
+\[
+\bm{\sigma_{X+Y} = \sqrt{\frac{4}{3}} = \frac{2}{\sqrt{3}} \approx 1.1547}.
+\]
+
+\textbf{2. Approssimazione normale di $S = \sum_{i=1}^{300} W_i$ (TLC):}
+Per la somma di $n = 300$ copie i.i.d.:
+\[
+\EE[S] = 300(0) = \bm{0}, \qquad \Var(S) = 300 \cdot \frac{4}{3} = \bm{400} \implies \sigma_S = \sqrt{400} = \bm{20}.
+\]
+Per il TLC, $S \approx \mathcal{N}(0, 20^2)$.
+Standardizzando la disuguaglianza:
+\[
+\Prob(|S| \le 10) = \Prob(-10 \le S \le 10) \approx \Phi\left(\frac{10 - 0}{20}\right) - \Phi\left(\frac{-10 - 0}{20}\right) = \Phi(0.5) - \Phi(-0.5) = 2\Phi(0.5) - 1.
+\]
+Dalle tavole della normale standard ($\Phi(0.5) = 0.69146$):
+\[
+\Prob(|S| \le 10) \approx 2(0.69146) - 1 = 1.3829 - 1 = \bm{0.3829} \quad (\bm{38.29\%}).
+\]
+Comando R: \texttt{pnorm(10, mean = 0, sd = 20) - pnorm(-10, mean = 0, sd = 20)} restituisce $0.3829$.
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 3
+% ==============================================================================
+\begin{problemabox}{Problema 3 (Testo Integrale)}
+Si osserva il prezzo dello stesso modello di smart TV (in €) presso 7 diversi siti di e-commerce, ottenendo i valori:
+\[
+252, \quad 251, \quad 264, \quad 266, \quad 245, \quad 242, \quad 234.
+\]
+Assumendo che siano un campione di variabili gaussiane $\mathcal{N}(\mu, \sigma^2)$:
+\begin{enumerate}
+    \item supponendo $\sigma^2$ non nota, determinare un intervallo di confidenza di livello 95\% per la media $\mu$ del prezzo;
+    \item assumendo $\sigma = 10$, decidere se rigettare l'ipotesi nulla $H_0: \mu = 240$ al livello del 5\%.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Statistiche descrittive campionarie ($n = 7$):}
+\[
+\overline{x} = \frac{252 + 251 + 264 + 266 + 245 + 242 + 234}{7} = \frac{1754}{7} \approx \bm{250.5714\text{ €}}.
+\]
+\[
+s^2 = \frac{1}{6} \sum_{i=1}^7 (x_i - \overline{x})^2 = \frac{801.7143}{6} \approx 133.6190 \implies s = \sqrt{133.6190} \approx \bm{11.5594\text{ €}}.
+\]
+
+\textbf{2. Intervallo di Confidenza al 95\% con $\sigma^2$ non nota ($t$-Student a 6 g.d.l.):}
+Il valore critico per $\nu = n-1 = 6$ e $\alpha = 0.05$ è $t_{6, \, 0.025} = 2.4469$.
+L'errore standard è $\operatorname{SE} = \frac{s}{\sqrt{7}} = \frac{11.5594}{2.6458} \approx 4.3690\text{ €}$.
+Il margine d'errore è $ME = 2.4469 \cdot 4.3690 \approx 10.6905\text{ €}$. L'intervallo di confidenza è:
+\[
+\mathbf{\operatorname{IC}_{95\%}(\mu) = [250.5714 - 10.6905, \;\; 250.5714 + 10.6905] = [239.8809, \;\; 261.2619]\text{ €}}.
+\]
+
+\textbf{3. Test d'ipotesi con deviazione standard nota $\sigma = 10$ ($Z$-test):}
+Test bilaterale: $H_0: \mu = 240$ vs $H_1: \mu \neq 240$ al livello $\alpha = 0.05$.
+Calcoliamo la statistica test $Z$:
+\[
+Z_{\text{oss}} = \frac{\overline{x} - \mu_0}{\sigma/\sqrt{n}} = \frac{250.5714 - 240}{10/\sqrt{7}} = \frac{10.5714}{3.7796} = \bm{2.7970}.
+\]
+Il valore critico bilaterale è $z_{0.025} = 1.960$.
+Poiché $Z_{\text{oss}} = 2.7970 > 1.960$, la statistica cade nella regione di rifiuto.
+Il $p$-value è $2 \cdot (1 - \Phi(2.7970)) \approx 2(1 - 0.99742) = \bm{0.0052} \quad (\bm{0.52\%} < 5\%)$.
+
+\textbf{Conclusione:} \textbf{Rifiutiamo l'ipotesi nulla $H_0$}. Il prezzo medio della smart TV è significativamente superiore a $240\text{ €}$.
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 4
+% ==============================================================================
+\begin{problemabox}{Problema 4 (Testo Integrale)}
+Sia $\theta>0$ un parametro e sia $X$ una variabile aleatoria con funzione di ripartizione data da
+\[
+F(x) = \begin{cases}
+x^\theta, & \text{se } 0 \le x \le 1, \\
+0, & \text{altrimenti.}
+\end{cases}
+\]
+\begin{enumerate}
+    \item Calcolare la funzione di densità e la funzione quantile di $X$.
+    \item Supponendo di osservare $100$ copie indipendenti di $X$, scrivere uno stimatore $\widehat{\theta}$ usando il metodo dei momenti.
+    \item Valutare lo stimatore con il dataset del file csv.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}
+    \item \textbf{Funzione di densità e Funzione quantile:}
+    Derivando la CDF su $(0, 1)$:
+    \[
+    f(x) = \frac{\mathrm{d}}{\dx} F(x) = \mathbf{\theta x^{\theta-1} \mathbf{1}_{[0, 1]}(x)}.
+    \]
+    La funzione quantile $Q(p) = F^{-1}(p)$ per $p \in (0, 1)$ si ottiene risolvendo $F(x) = p$:
+    \[
+    x^\theta = p \implies \mathbf{Q(p) = p^{1/\theta}}.
+    \]
+
+    \item \textbf{Stimatore dei Momenti per $\theta$:}
+    Calcoliamo il valore atteso teorico:
+    \[
+    \EE[X] = \int_0^1 x \cdot \theta x^{\theta-1} \, \dx = \theta \int_0^1 x^\theta \, \dx = \theta \left[ \frac{x^{\theta+1}}{\theta+1} \right]_0^1 = \frac{\theta}{\theta+1}.
+    \]
+    Uguagliando il momento teorico alla media campionaria $\overline{X}_n$:
+    \[
+    \frac{\theta}{\theta+1} = \overline{X}_n \implies \theta = \overline{X}_n(\theta + 1) \implies \theta(1 - \overline{X}_n) = \overline{X}_n \implies \mathbf{\widehat{\theta}_{\text{MM}} = \frac{\overline{X}_n}{1 - \overline{X}_n}}.
+    \]
+
+    \item \textbf{Codice R per la stima empirica:}
+\begin{lstlisting}[language=R]
+dati <- read.csv("campione_pretest.csv")
+x <- dati[, 1]
+x_bar <- mean(x)
+theta_hat <- x_bar / (1 - x_bar)
+cat(sprintf("Media campionaria: %.4f\n", x_bar))
+cat(sprintf("Stima del parametro theta: %.4f\n", theta_hat))
+\end{lstlisting}
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 5
+% ==============================================================================
+\begin{problemabox}{Problema 5 (Testo Integrale)}
+Calcolare approssimativamente l'integrale
+\[
+\int_{-\infty}^\infty e^{\sqrt{|x|}} e^{-x^2/2} \, \dx
+\]
+implementando in R il metodo di Monte Carlo.
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Fondamento teorico:}
+Moltiplichiamo e dividiamo per la costante di normalizzazione della gaussiana standard $\sqrt{2\pi}$:
+\[
+I = \sqrt{2\pi} \int_{-\infty}^\infty e^{\sqrt{|x|}} \frac{1}{\sqrt{2\pi}} e^{-x^2/2} \, \dx = \sqrt{2\pi} \, \EE\left[ e^{\sqrt{|Z|}} \right], \qquad Z \sim \mathcal{N}(0, 1).
+\]
+L'integrazione numerica ad alta precisione restituisce il valore esatto di riferimento:
+\[
+I \approx \bm{6.0639}.
+\]
+
+\textbf{2. Implementazione in linguaggio R:}
+\begin{lstlisting}[language=R]
+set.seed(42)
+N <- 1000000
+
+# Campionamento da N(0, 1)
+z_samples <- rnorm(N, mean = 0, sd = 1)
+
+# Valutazione della funzione trasformata
+g_z <- exp(sqrt(abs(z_samples)))
+
+# Stima Monte Carlo
+I_hat <- sqrt(2 * pi) * mean(g_z)
+se_hat <- sqrt(2 * pi) * sd(g_z) / sqrt(N)
+
+cat(sprintf("Stima Monte Carlo: %.4f (SE: %.4f)\n", I_hat, se_hat))
+# Output: Stima Monte Carlo: 6.0639
+\end{lstlisting}
+\end{soluzionebox}
+
+\end{document}

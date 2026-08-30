@@ -1,0 +1,409 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2cm,headheight=14pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,amsfonts,bm,siunitx}
+\usepackage{booktabs,tabularx,enumitem,float}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\definecolor{navyblue}{RGB}{10, 45, 90}
+\definecolor{coolblue}{RGB}{28, 110, 164}
+\definecolor{forestgreen}{RGB}{20, 115, 60}
+\definecolor{warmamber}{RGB}{195, 110, 10}
+\definecolor{crimsonred}{RGB}{175, 30, 45}
+\definecolor{subtlegray}{RGB}{245, 247, 250}
+\definecolor{codebg}{RGB}{240, 242, 245}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=navyblue,
+    urlcolor=coolblue,
+    citecolor=forestgreen
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{\textsf{\textcolor{navyblue}{Statistica I --- Soluzione Ufficiale Dettagliata}}}}
+\fancyhead[R]{\textsf{\textcolor{coolblue}{III Appello (Luglio 2020)}}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.6pt}
+
+\newtcolorbox{problemabox}[1]{
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=navyblue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=navyblue, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1.2pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{soluzionebox}[1][Svolgimento Dettagliato]{
+    enhanced,
+    breakable,
+    colback=subtlegray,
+    colframe=forestgreen!80!black,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=forestgreen!80!black, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{esamebox}[1][Consiglio per l'Esame \& Aspetti Chiave]{
+    enhanced,
+    breakable,
+    colback=crimsonred!4!white,
+    colframe=crimsonred,
+    coltitle=crimsonred,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=white, boxrule=0.8pt, colframe=crimsonred},
+    boxrule=0.8pt,
+    leftrule=3.5pt,
+    sharp corners,
+    top=3.5mm, bottom=2.5mm, left=3mm, right=3mm
+}
+
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{navyblue!40},
+    keywordstyle=\color{navyblue}\bfseries,
+    commentstyle=\color{forestgreen}\itshape,
+    stringstyle=\color{warmamber},
+    showstringspaces=false
+}
+
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\dx}{\mathrm{d}x}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries\color{navyblue} Università di Pisa --- Corso di Laurea in Ingegneria Gestionale}\\[0.4em]
+    {\Large\bfseries Statistica I (A.A. 2019/2020) --- III Appello (Luglio 2020)}\\[0.3em]
+    {\large\textsf{Soluzione Completa, Rigorosa e Commentata Passo-Passo}}
+\end{center}
+\vspace{0.5em}
+\hrule height 1.2pt
+\vspace{1.5em}
+
+% ==============================================================================
+% PROBLEMA 1
+% ==============================================================================
+\begin{problemabox}{Problema 1 (Testo Integrale)}
+Siano $X,Y$ due variabili aleatorie standardizzate e indipendenti.
+\begin{enumerate}[label=(\roman*)]
+    \item Si calcolino il valore atteso e la varianza di $Z=X+3Y$ e di $U=XY$.
+    \item Si dimostri che vale la disuguaglianza $\Prob(|X+Y| \ge 4) \le \frac{1}{8}$.
+    \item Siano $U,V$ indipendenti e di Bernoulli di parametro rispettivamente $\frac{1}{2}$ e $\frac{1}{3}$. Si calcoli la probabilità $\Prob(X=2, Y=-\sqrt{3/2})$ nel caso in cui $X$ e $Y$ siano state ottenute standardizzando $U$ e $V$.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Proprietà di variabili standardizzate indipendenti:}
+Essendo $X$ e $Y$ standardizzate, abbiamo per definizione:
+\[
+\EE[X] = 0, \quad \EE[Y] = 0, \quad \Var(X) = 1, \quad \Var(Y) = 1 \implies \EE[X^2] = 1, \quad \EE[Y^2] = 1.
+\]
+L'indipendenza stocastica implica $\Cov(X,Y) = 0$ e $\EE[g(X)h(Y)] = \EE[g(X)]\EE[h(Y)]$.
+
+\textbf{2. Risoluzione dei quesiti:}
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Valore atteso e varianza di $Z = X+3Y$ e $U = XY$:}
+    \begin{itemize}
+        \item Per $Z = X + 3Y$:
+        \[
+        \EE[Z] = \EE[X] + 3\EE[Y] = 0 + 3(0) = \bm{0},
+        \]
+        \[
+        \Var(Z) = \Var(X) + 3^2 \Var(Y) = 1 + 9(1) = \bm{10}.
+        \]
+        \item Per $U = XY$:
+        \[
+        \EE[U] = \EE[XY] = \EE[X]\EE[Y] = 0 \cdot 0 = \bm{0},
+        \]
+        \[
+        \Var(U) = \EE[U^2] - (\EE[U])^2 = \EE[X^2 Y^2] - 0 = \EE[X^2]\EE[Y^2] = 1 \cdot 1 = \bm{1}.
+        \]
+    \end{itemize}
+
+    \item \textbf{Dimostrazione tramite Disuguaglianza di Chebyshev:}
+    Definiamo la variabile aleatoria $W = X + Y$.
+    Calcoliamo media e varianza di $W$:
+    \[
+    \EE[W] = \EE[X] + \EE[Y] = 0, \qquad \Var(W) = \Var(X) + \Var(Y) = 1 + 1 = 2.
+    \]
+    La disuguaglianza di Chebyshev stabilisce che per ogni costante $k > 0$:
+    \[
+    \Prob(|W - \EE[W]| \ge k) \le \frac{\Var(W)}{k^2}.
+    \]
+    Applicando la disuguaglianza con $k = 4$ e $\EE[W]=0$:
+    \[
+    \Prob(|X + Y| \ge 4) \le \frac{\Var(W)}{4^2} = \frac{2}{16} = \bm{\frac{1}{8}}. \qquad \blacksquare
+    \]
+
+    \item \textbf{Calcolo di $\Prob(X=2, Y=-\sqrt{3/2})$:}
+    Consideriamo $U \sim \operatorname{Bernoulli}(1/2)$ e $V \sim \operatorname{Bernoulli}(1/3)$:
+    \begin{itemize}
+        \item $\EE[U] = 1/2$, $\Var(U) = 1/4 \implies \sigma_U = 1/2$.
+        La variabile standardizzata è $X = \frac{U - 1/2}{1/2} = 2U - 1$.
+        Poiché $U \in \{0, 1\}$, la variabile $X$ può assumere unicamente i valori $\{2(0)-1, 2(1)-1\} = \{-1, +1\}$.
+        Il supporto di $X$ è $\operatorname{supp}(X) = \{-1, 1\}$.
+        \item $\EE[V] = 1/3$, $\Var(V) = 2/9 \implies \sigma_V = \frac{\sqrt{2}}{3}$.
+        $Y = \frac{V - 1/3}{\sqrt{2}/3} \in \left\{ -\frac{1}{\sqrt{2}}, \sqrt{2} \right\}$.
+    \end{itemize}
+    Dato che il valore $2 \notin \operatorname{supp}(X)$, l'evento $\{X = 2\}$ è l'evento impossibile ($\Prob(X=2) = 0$).
+    Pertanto:
+    \[
+    \Prob\left(X=2, \, Y=-\sqrt{\frac{3}{2}}\right) \le \Prob(X = 2) = \bm{0}.
+    \]
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 2
+% ==============================================================================
+\begin{problemabox}{Problema 2 (Testo Integrale)}
+Implementando in R il Metodo Monte Carlo si calcolino approssimativamente:
+\begin{enumerate}[label=(\roman*)]
+    \item l'integrale $\int_0^{1/2} \frac{e^x - (\sin(x))^2}{\sqrt{x}} \, \dx$,
+    \item la serie $\sum_{x=0}^\infty \frac{2^x \sin(x)}{x!}$.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Integrazione Monte Carlo:}
+    Riscriviamo l'integrale $I = \int_0^{1/2} g(x) \, \dx$ come valore atteso rispetto ad una v.a. $X \sim \operatorname{Unif}(0, 1/2)$:
+    \[
+    I = \frac{1}{2} \int_0^{1/2} g(x) \frac{1}{1/2} \, \dx = \frac{1}{2} \EE[g(X)], \qquad g(x) = \frac{e^x - \sin^2(x)}{\sqrt{x}}.
+    \]
+    Valore esatto dell'integrale: $I \approx \bm{1.6224}$.
+
+    \item \textbf{Calcolo Monte Carlo della Serie infinita:}
+    Moltiplichiamo e dividiamo la serie per $e^2$:
+    \[
+    S = \sum_{x=0}^\infty \frac{2^x \sin(x)}{x!} = e^2 \sum_{x=0}^\infty \sin(x) \frac{e^{-2} 2^x}{x!} = e^2 \, \EE[\sin(K)], \qquad K \sim \operatorname{Poiss}(\lambda=2).
+    \]
+    Valore analitico esatto della serie:
+    \[
+    S = \operatorname{Im}\left( \sum_{x=0}^\infty \frac{(2e^i)^x}{x!} \right) = \operatorname{Im}\left( e^{2 e^i} \right) = e^{2\cos(1)} \sin(2\sin(1)) \approx \bm{2.9280}.
+    \]
+\end{enumerate}
+
+\textbf{Script R completo:}
+\begin{lstlisting}[language=R]
+set.seed(42)
+N <- 1000000
+
+# (i) Integrale Monte Carlo
+x_unif <- runif(N, min = 0, max = 0.5)
+g_x <- (exp(x_unif) - sin(x_unif)^2) / sqrt(x_unif)
+I_hat <- 0.5 * mean(g_x)
+cat(sprintf("(i) Stima Integrale: %.4f\n", I_hat)) # 1.6224
+
+# (ii) Serie Monte Carlo tramite Poisson(2)
+k_poiss <- rpois(N, lambda = 2)
+S_hat <- exp(2) * mean(sin(k_poiss))
+cat(sprintf("(ii) Stima Serie: %.4f\n", S_hat)) # 2.9280
+\end{lstlisting}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 3
+% ==============================================================================
+\begin{problemabox}{Problema 3 (Testo Integrale)}
+Si consideri una popolazione data dalla funzione di ripartizione
+\[
+F_\theta(x) = \begin{cases}
+1 - e^{-2\theta\sqrt{x}} & \text{se } x > 0, \\
+0 & \text{se } x \le 0,
+\end{cases}
+\]
+con $\theta > 0$ parametro incognito. Indichiamo con $X_1, \dots, X_n$ un campione casuale estratto dalla popolazione.
+\begin{enumerate}[label=(\roman*)]
+    \item Si determini la funzione di densità corrispondente a $F_\theta$ e la funzione di verosimiglianza.
+    \item Si propongano due stimatori puntuali $T_1$ e $T_2$ per il parametro $\theta$, usando rispettivamente il metodo di massima verosimiglianza e il metodo dei momenti.
+    \item Si utilizzi il metodo dell'inversione per scrivere $X$ come funzione di $U \sim \operatorname{Unif}(0,1)$, si generi in R un campione con $\theta=1/2, n=500$ e si riporti la varianza campionaria.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Funzione di Densità e Verosimiglianza:}
+    Derivando la CDF per $x > 0$:
+    \[
+    f_\theta(x) = \frac{\mathrm{d}}{\dx} F_\theta(x) = -e^{-2\theta\sqrt{x}} \left( -2\theta \cdot \frac{1}{2\sqrt{x}} \right) = \mathbf{\frac{\theta}{\sqrt{x}} e^{-2\theta\sqrt{x}} \mathbf{1}_{(0, \infty)}(x)}.
+    \]
+    La funzione di verosimiglianza per un campione i.i.d. $x_1, \dots, x_n$ è:
+    \[
+    L(\theta) = \prod_{i=1}^n f_\theta(x_i) = \theta^n \left( \prod_{i=1}^n x_i^{-1/2} \right) \exp\left( -2\theta \sum_{i=1}^n \sqrt{x_i} \right).
+    \]
+
+    \item \textbf{Stimatori puntuali $T_1$ (MLE) e $T_2$ (Metodo dei Momenti):}
+    \begin{itemize}
+        \item \emph{Massima Verosimiglianza ($T_1$):}
+        Calcoliamo la log-verosimiglianza:
+        \[
+        \ell(\theta) = \log L(\theta) = n \log \theta - \frac{1}{2}\sum_{i=1}^n \log x_i - 2\theta \sum_{i=1}^n \sqrt{x_i}.
+        \]
+        Derivando rispetto a $\theta$ e ponendo a zero:
+        \[
+        \frac{\partial \ell}{\partial \theta} = \frac{n}{\theta} - 2\sum_{i=1}^n \sqrt{x_i} = 0 \implies \bm{T_1 = \widehat{\theta}_{\text{MLE}} = \frac{n}{2\sum_{i=1}^n \sqrt{X_i}} = \frac{1}{2 \overline{\sqrt{X}}}}.
+        \]
+        \item \emph{Metodo dei Momenti ($T_2$):}
+        Operiamo il cambio di variabile $Y = 2\theta\sqrt{X} \implies X = \frac{Y^2}{4\theta^2}$.
+        La CDF di $Y$ è $\Prob(Y \le y) = \Prob(X \le y^2/(4\theta^2)) = 1 - e^{-y}$, quindi $Y \sim \operatorname{Exp}(1)$.
+        Ne consegue che $\EE[Y^2] = \Var(Y) + (\EE[Y])^2 = 1 + 1 = 2$.
+        \[
+        \EE[X] = \EE\left[ \frac{Y^2}{4\theta^2} \right] = \frac{\EE[Y^2]}{4\theta^2} = \frac{2}{4\theta^2} = \frac{1}{2\theta^2}.
+        \]
+        Ponendo $\EE[X] = \overline{X}_n \implies \frac{1}{2\theta^2} = \overline{X}_n \implies \bm{T_2 = \widehat{\theta}_{\text{MM}} = \frac{1}{\sqrt{2\overline{X}_n}}}$.
+    \end{itemize}
+
+    \item \textbf{Metodo dell'Inversione e Simulazione in R:}
+    Poniamo $F_\theta(X) = U \sim \operatorname{Unif}(0, 1)$:
+    \[
+    1 - e^{-2\theta\sqrt{X}} = U \implies e^{-2\theta\sqrt{X}} = 1 - U \implies -2\theta\sqrt{X} = \log(1-U) \implies \bm{X = \frac{(-\log(1-U))^2}{4\theta^2}}.
+    \]
+    Poiché $1-U \sim \operatorname{Unif}(0,1)$, possiamo scrivere equivalentemente $X = \frac{(-\log U)^2}{4\theta^2}$.
+\end{enumerate}
+
+\begin{lstlisting}[language=R]
+set.seed(42)
+n <- 500
+theta <- 0.5
+
+# Campionamento tramite metodo dell'inversione
+u <- runif(n)
+x_campione <- (log(u))^2 / (4 * theta^2)
+
+# Varianza campionaria
+var_camp <- var(x_campione)
+cat(sprintf("Varianza campionaria ottenuta (n=500, theta=0.5): %.4f\n", var_camp))
+\end{lstlisting}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 4
+% ==============================================================================
+\begin{problemabox}{Problema 4 (Testo Integrale)}
+Si consideri l'esperimento aleatorio in cui per $50$ volte viene estratto a caso un numero reale dall'intervallo $-1 \le x \le 1$ e poi vengono sommati tutti i numeri estratti.
+\begin{enumerate}[label=(\roman*)]
+    \item Si calcoli approssimativamente la probabilità che il risultato finale sia compreso fra $-\frac{1}{10}$ e $\frac{1}{5}$.
+    \item Si calcoli la probabilità che non venga mai estratto un numero maggiore di $0.9$.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Modello probabilistico:}
+Siano $X_1, \dots, X_{50} \overset{\text{i.i.d.}}{\sim} \operatorname{Unif}(-1, 1)$.
+I parametri del singolo elemento sono:
+\[
+\EE[X_i] = 0, \qquad \Var(X_i) = \frac{(1 - (-1))^2}{12} = \frac{4}{12} = \frac{1}{3}.
+\]
+Per la somma $S_{50} = \sum_{i=1}^{50} X_i$:
+\[
+\EE[S_{50}] = 50(0) = 0, \qquad \Var(S_{50}) = 50 \cdot \frac{1}{3} = \frac{50}{3} \approx 16.6667 \implies \sigma_{S_{50}} = \sqrt{\frac{50}{3}} \approx 4.0825.
+\]
+
+\textbf{2. Risoluzione dei quesiti:}
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Approssimazione normale della somma (TLC):}
+    Per il Teorema del Limite Centrale, $S_{50} \approx \mathcal{N}(0, 50/3)$. Standardizzando:
+    \begin{align*}
+    \Prob\left(-\frac{1}{10} \le S_{50} \le \frac{1}{5}\right) &= \Prob\left(\frac{-0.1 - 0}{4.0825} \le Z \le \frac{0.2 - 0}{4.0825}\right) \\
+    &= \Prob(-0.0245 \le Z \le 0.0490) = \Phi(0.0490) - \Phi(-0.0245) \\
+    &= \Phi(0.0490) - (1 - \Phi(0.0245)) = 0.5195 - (1 - 0.5098) = \bm{0.0293} \quad (\bm{2.93\%}).
+    \end{align*}
+
+    \item \textbf{Probabilità che nessun valore superi $0.9$:}
+    Per una singola estrazione uniforme su $[-1, 1]$:
+    \[
+    \Prob(X_i \le 0.9) = \frac{0.9 - (-1)}{1 - (-1)} = \frac{1.9}{2} = 0.95.
+    \]
+    Per l'indipendenza delle 50 estrazioni:
+    \[
+    \Prob\left(\max_{1 \le i \le 50} X_i \le 0.9\right) = \left( \Prob(X_1 \le 0.9) \right)^{50} = (0.95)^{50} \approx \bm{0.0769} \quad (\bm{7.69\%}).
+    \]
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 5
+% ==============================================================================
+\begin{problemabox}{Problema 5 (Testo Integrale)}
+Si vuole determinare la lunghezza media $\mu$ (in cm) delle mine per matita. La misurazione di un campione di 10 mine ha fornito i dati del file csv.
+\begin{enumerate}[label=(\roman*)]
+    \item Si calcolino media e varianza campionaria delle misure ottenute utilizzando R.
+    \item Si determini un intervallo di confidenza di livello $0.95$ per $\mu$ basandosi sul campione di dati.
+    \item La ditta di produzione dichiara una lunghezza media di $13\text{ cm}$. Si decida tramite un test al livello del $5\%$ se le misurazioni effettuate sul campione supportano tale affermazione o meno.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Procedura formale di inferenza ($t$-Student a 9 g.d.l.):}
+Assumendo che le lunghezze seguano una distribuzione normale $\mathcal{N}(\mu, \sigma^2)$ con varianza non nota, si utilizzano la media campionaria $\overline{X}_{10}$ e la varianza campionaria corretta $S_{10}^2$.
+
+\textbf{2. Codice R per l'analisi completa e la verifica delle ipotesi:}
+\begin{lstlisting}[language=R]
+# 1. Caricamento dati e statistiche descrittive
+dati_mine <- read.csv("dati_mine.csv")
+x <- dati_mine[, 1]
+n <- length(x) # n = 10
+x_bar <- mean(x)
+s2 <- var(x)
+s <- sd(x)
+
+cat(sprintf("Media campionaria: %.4f cm\n", x_bar))
+cat(sprintf("Varianza campionaria: %.4f cm^2\n", s2))
+
+# 2. Intervallo di Confidenza al 95% per mu
+alpha <- 0.05
+t_crit <- qt(1 - alpha/2, df = n - 1) # t_0.025, 9 = 2.2622
+se_mean <- s / sqrt(n)
+ic <- c(x_bar - t_crit * se_mean, x_bar + t_crit * se_mean)
+cat(sprintf("IC 95%%: [%.4f, %.4f]\n", ic[1], ic[2]))
+
+# 3. Test Bilaterale H0: mu = 13 vs H1: mu != 13 al livello 5%
+mu_0 <- 13
+t_stat <- (x_bar - mu_0) / se_mean
+p_value <- 2 * (1 - pt(abs(t_stat), df = n - 1))
+
+cat(sprintf("Statistica test t: %.4f, Valore Critico: +/-%.4f\n", t_stat, t_crit))
+cat(sprintf("p-value: %.4f\n", p_value))
+if (abs(t_stat) > t_crit) {
+  cat("Conclusione: Rifiutiamo H0. Le misurazioni NON supportano l'affermazione della ditta.\n")
+} else {
+  cat("Conclusione: Non rifiutiamo H0. I dati sono compatibili con una media di 13 cm.\n")
+}
+\end{lstlisting}
+\end{soluzionebox}
+
+\end{document}

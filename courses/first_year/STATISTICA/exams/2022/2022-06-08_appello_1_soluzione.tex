@@ -1,0 +1,379 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2cm,headheight=14pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,amsfonts,bm,siunitx}
+\usepackage{booktabs,tabularx,enumitem,float}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\definecolor{navyblue}{RGB}{10, 45, 90}
+\definecolor{coolblue}{RGB}{28, 110, 164}
+\definecolor{forestgreen}{RGB}{20, 115, 60}
+\definecolor{warmamber}{RGB}{195, 110, 10}
+\definecolor{crimsonred}{RGB}{175, 30, 45}
+\definecolor{subtlegray}{RGB}{245, 247, 250}
+\definecolor{codebg}{RGB}{240, 242, 245}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=navyblue,
+    urlcolor=coolblue,
+    citecolor=forestgreen
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{\textsf{\textcolor{navyblue}{Statistica I --- Soluzione Ufficiale Dettagliata}}}}
+\fancyhead[R]{\textsf{\textcolor{coolblue}{I Appello (08/06/2022)}}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.6pt}
+
+\newtcolorbox{problemabox}[1]{
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=navyblue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=navyblue, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1.2pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{soluzionebox}[1][Svolgimento Dettagliato]{
+    enhanced,
+    breakable,
+    colback=subtlegray,
+    colframe=forestgreen!80!black,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=forestgreen!80!black, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{esamebox}[1][Consiglio per l'Esame \& Aspetti Chiave]{
+    enhanced,
+    breakable,
+    colback=crimsonred!4!white,
+    colframe=crimsonred,
+    coltitle=crimsonred,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=white, boxrule=0.8pt, colframe=crimsonred},
+    boxrule=0.8pt,
+    leftrule=3.5pt,
+    sharp corners,
+    top=3.5mm, bottom=2.5mm, left=3mm, right=3mm
+}
+
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{navyblue!40},
+    keywordstyle=\color{navyblue}\bfseries,
+    commentstyle=\color{forestgreen}\itshape,
+    stringstyle=\color{warmamber},
+    showstringspaces=false
+}
+
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\dx}{\mathrm{d}x}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries\color{navyblue} Università di Pisa --- Corso di Laurea in Ingegneria Gestionale}\\[0.4em]
+    {\Large\bfseries Statistica I (A.A. 2021/2022) --- I Appello dell'08/06/2022}\\[0.3em]
+    {\large\textsf{Soluzione Completa, Rigorosa e Commentata Passo-Passo}}
+\end{center}
+\vspace{0.5em}
+\hrule height 1.2pt
+\vspace{1.5em}
+
+% ==============================================================================
+% PROBLEMA 1
+% ==============================================================================
+\begin{problemabox}{Problema 1 (Testo Integrale)}
+Si considerino tre variabili aleatorie di Bernoulli $X,Y,Z$ indipendenti con rispettivi parametri $p_X = 1/3$, $p_Y = 1/5$, $p_Z = 2/3$.
+\begin{enumerate}[label=(\alph*)]
+    \item Calcolare il valore atteso e la varianza di $2X+ Y$ e di $X\cdot Z$.
+    \item Calcolare la probabilità che $X = 0$ se $X+ Y = 1$.
+    \item Calcolare la funzione di massa congiunta di $X+ Y$ e $X\cdot Z$. Verificare se queste variabili aleatorie sono indipendenti.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Momenti marginali delle variabili di Bernoulli:}
+\begin{itemize}
+    \item $\EE[X] = 1/3, \quad \Var(X) = (1/3)(2/3) = 2/9, \quad \EE[X^2] = 1/3$.
+    \item $\EE[Y] = 1/5, \quad \Var(Y) = (1/5)(4/5) = 4/25, \quad \EE[Y^2] = 1/5$.
+    \item $\EE[Z] = 2/3, \quad \Var(Z) = (2/3)(1/3) = 2/9, \quad \EE[Z^2] = 2/3$.
+\end{itemize}
+
+\textbf{2. Risoluzione Quesito (a):}
+\begin{align*}
+\EE[2X+Y] &= 2\EE[X] + \EE[Y] = 2\left(\frac{1}{3}\right) + \frac{1}{5} = \frac{2}{3} + \frac{1}{5} = \mathbf{\frac{13}{15} \approx 0.8667}. \\
+\Var(2X+Y) &= 4\Var(X) + \Var(Y) = 4\left(\frac{2}{9}\right) + \frac{4}{25} = \frac{8}{9} + \frac{4}{25} = \frac{200 + 36}{225} = \mathbf{\frac{236}{225} \approx 1.0489}.
+\end{align*}
+Per il prodotto $X \cdot Z$, essendo $X$ e $Z$ indipendenti:
+\begin{align*}
+\EE[XZ] &= \EE[X]\EE[Z] = \left(\frac{1}{3}\right)\left(\frac{2}{3}\right) = \mathbf{\frac{2}{9} \approx 0.2222}. \\
+\Var(XZ) &= \EE[(XZ)^2] - (\EE[XZ])^2 = \EE[X^2]\EE[Z^2] - \left(\frac{2}{9}\right)^2 = \left(\frac{1}{3}\right)\left(\frac{2}{3}\right) - \frac{4}{81} = \frac{2}{9} - \frac{4}{81} = \mathbf{\frac{14}{81} \approx 0.1728}.
+\end{align*}
+
+\textbf{3. Risoluzione Quesito (b):}
+\[
+\Prob(X=0 \mid X+Y=1) = \frac{\Prob(X=0, X+Y=1)}{\Prob(X+Y=1)} = \frac{\Prob(X=0, Y=1)}{\Prob(X=0, Y=1) + \Prob(X=1, Y=0)}.
+\]
+Sostituendo i valori di probabilità:
+\[
+\Prob(X=0 \mid X+Y=1) = \frac{\frac{2}{3} \cdot \frac{1}{5}}{\left(\frac{2}{3} \cdot \frac{1}{5}\right) + \left(\frac{1}{3} \cdot \frac{4}{5}\right)} = \frac{\frac{2}{15}}{\frac{2}{15} + \frac{4}{15}} = \frac{2}{6} = \mathbf{\frac{1}{3} \approx 0.3333}.
+\]
+
+\textbf{4. Risoluzione Quesito (c):}
+I supporti sono $X+Y \in \{0, 1, 2\}$ e $XZ \in \{0, 1\}$.
+Calcoliamo le probabilità congiunte:
+\begin{itemize}
+    \item Se $X+Y=0 \implies X=0, Y=0$, ne consegue che $XZ = 0 \cdot Z = 0$. Quindi:
+    \[
+    \Prob(X+Y=0, XZ=0) = \Prob(X=0, Y=0) = \frac{2}{3} \cdot \frac{4}{5} = \frac{8}{15} = \frac{24}{45}, \qquad \Prob(X+Y=0, XZ=1) = 0.
+    \]
+    \item Se $X+Y=1$:
+    \begin{itemize}
+        \item $X=0, Y=1 \implies XZ=0$: $\Prob = \frac{2}{3} \cdot \frac{1}{5} = \frac{2}{15} = \frac{6}{45}$.
+        \item $X=1, Y=0 \implies XZ = Z$:
+        $\Prob(XZ=0) = \frac{1}{3} \cdot \frac{4}{5} \cdot \frac{1}{3} = \frac{4}{45}$, \quad $\Prob(XZ=1) = \frac{1}{3} \cdot \frac{4}{5} \cdot \frac{2}{3} = \frac{8}{45}$.
+    \end{itemize}
+    Totale $X+Y=1$: $\Prob(XZ=0) = \frac{6+4}{45} = \frac{10}{45}$, \quad $\Prob(XZ=1) = \frac{8}{45}$.
+    \item Se $X+Y=2 \implies X=1, Y=1 \implies XZ = Z$:
+    \[
+    \Prob(XZ=0) = \frac{1}{3} \cdot \frac{1}{5} \cdot \frac{1}{3} = \frac{1}{45}, \qquad \Prob(XZ=1) = \frac{1}{3} \cdot \frac{1}{5} \cdot \frac{2}{3} = \frac{2}{45}.
+    \]
+\end{itemize}
+\begin{center}
+\begin{tabular}{c|cc|c}
+\toprule
+$p(u, v)$ & $XZ = 0$ & $XZ = 1$ & Marginale $X+Y$ \\
+\midrule
+$X+Y = 0$ & $24/45$ & $0$ & $24/45 = 8/15$ \\
+$X+Y = 1$ & $10/45$ & $8/45$ & $18/45 = 2/5$ \\
+$X+Y = 2$ & $1/45$ & $2/45$ & $3/45 = 1/15$ \\
+\midrule
+Marginale $XZ$ & $35/45 = 7/9$ & $10/45 = 2/9$ & $1$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\emph{Verifica indipendenza:} $\Prob(X+Y=0, XZ=1) = 0 \neq \Prob(X+Y=0)\Prob(XZ=1) = \frac{8}{15} \cdot \frac{2}{9} = \frac{16}{135}$.
+Pertanto, le variabili $X+Y$ e $XZ$ \textbf{NON sono indipendenti}.
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 2
+% ==============================================================================
+\begin{problemabox}{Problema 2 (Testo Integrale)}
+Un produttore di pneumatici dice che i suoi prodotti durano almeno il 20\% in più della media dei pneumatici in commercio ($50000\text{ km}$). Compriamo $10$ pneumatici con risultati (in km):
+\[
+60900, \quad 61500, \quad 64400, \quad 59500, \quad 59580, \quad 64265, \quad 63400, \quad 58500, \quad 58000, \quad 60200.
+\]
+Si assuma distribuzione normale $\mathcal{N}(\mu, \sigma^2)$ con media e varianza incognite.
+\begin{enumerate}[label=(\alph*)]
+    \item Si calcoli l'intervallo di confidenza bilaterale al 95\% per $\mu$.
+    \item Si definiscano le ipotesi $H_0$ e $H_1$ per confermare il messaggio del produttore.
+    \item Si testi l'ipotesi al livello di significatività del 5\%.
+    \item Si calcoli approssimativamente il valore $p$.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Statistiche descrittive ($n = 10$):}
+\[
+\overline{x}_{10} = \mathbf{61024.5\text{ km}}, \qquad s_{10} = \mathbf{2318.78\text{ km}}.
+\]
+
+\textbf{2. Risoluzione Quesito (a) --- Intervallo di Confidenza al 95\% ($\nu = 9$ g.d.l.):}
+Il valore critico della distribuzione $t$ di Student a $9$ g.d.l. è $t_{9, \, 0.025} = 2.2622$.
+\[
+ME = t_{9, \, 0.025} \frac{s}{\sqrt{10}} = 2.2622 \cdot \frac{2318.78}{\sqrt{10}} = 2.2622 \cdot 733.26 \approx \mathbf{1658.75\text{ km}}.
+\]
+\[
+\mathbf{\operatorname{IC}_{95\%}(\mu) = [61024.5 - 1658.75, \;\; 61024.5 + 1658.75] = [59365.75, \;\; 62683.25]\text{ km}}.
+\]
+
+\textbf{3. Risoluzione Quesito (b) --- Formulazione del test d'ipotesi:}
+Il valore soglia dichiarato è $\mu_0 = 1.20 \times 50000 = 60000\text{ km}$.
+Il messaggio del produttore viene confermato se si rigetta l'ipotesi nulla in favore dell'ipotesi alternativa:
+\[
+\mathbf{H_0: \mu \le 60000} \qquad \text{vs} \qquad \mathbf{H_1: \mu > 60000}.
+\]
+
+\textbf{4. Risoluzione Quesito (c) --- Esecuzione del $t$-test unilaterale destro ($\alpha = 0.05$):}
+Calcoliamo la statistica test $T$:
+\[
+T_{\text{oss}} = \frac{\overline{x}_{10} - \mu_0}{s/\sqrt{10}} = \frac{61024.5 - 60000}{733.26} = \mathbf{1.3972}.
+\]
+Il valore critico unilaterale destro a $\alpha = 0.05$ con $9$ g.d.l. è $t_{9, \, 0.05} = 1.8331$.
+Poiché $T_{\text{oss}} = 1.3972 < 1.8331$, il test \textbf{non rigetta $H_0$}.
+\emph{Conclusione:} I dati campionari non forniscono evidenza statistica sufficiente a confermare l'affermazione pubblicitaria del produttore.
+
+\textbf{5. Risoluzione Quesito (d) --- Calcolo del $p$-value:}
+\[
+p\text{-value} = \Prob(t_9 \ge 1.3972) \approx \mathbf{0.0979} \quad (\mathbf{9.79\%} \approx 10\%).
+\]
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 3
+% ==============================================================================
+\begin{problemabox}{Problema 3 (Testo Integrale)}
+Si consideri una serie di variabili aleatorie i.i.d. $X_1,\dots,X_{100}$ uniformi in $[-1,5] \subset \mathbb{R}$.
+\begin{enumerate}[label=(\alph*)]
+    \item Calcolare la probabilità che non ci siano valori negativi tra $X_1,\dots,X_{10}$.
+    \item Calcolare la probabilità che non ci siano valori negativi tra $X_1,\dots,X_{10}$ e non ci siano valori maggiori di $3$ tra $X_6,\dots,X_{13}$.
+    \item Calcolare il valore atteso e la varianza di $Y = \sum_{i=1}^{100} X_i$.
+    \item Calcolare approssimativamente $\Prob(Y < 170)$.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Proprietà della singola variabile $X_i \sim \operatorname{Unif}(-1, 5)$:}
+L'ampiezza dell'intervallo è $5 - (-1) = 6$.
+\[
+\EE[X_i] = \frac{-1 + 5}{2} = 2, \qquad \Var(X_i) = \frac{6^2}{12} = 3.
+\]
+
+\textbf{2. Risoluzione dei quesiti:}
+\begin{enumerate}[label=(\alph*)]
+    \item $\Prob(X_i > 0) = \frac{5 - 0}{6} = \frac{5}{6}$. Per l'indipendenza:
+    \[
+    \Prob(X_1 > 0, \dots, X_{10} > 0) = \left(\frac{5}{6}\right)^{10} \approx \mathbf{0.1615} \quad (\mathbf{16.15\%}).
+    \]
+
+    \item Suddividiamo le variabili in blocchi disgiunti:
+    \begin{itemize}
+        \item $X_1, \dots, X_5$: vincolate a $X_i \in (0, 5] \implies \Prob = 5/6$;
+        \item $X_6, \dots, X_{10}$: vincolate a $X_i \in (0, 3] \implies \Prob = \frac{3 - 0}{6} = \frac{3}{6} = \frac{1}{2}$;
+        \item $X_{11}, \dots, X_{13}$: vincolate a $X_i \in [-1, 3] \implies \Prob = \frac{3 - (-1)}{6} = \frac{4}{6} = \frac{2}{3}$.
+    \end{itemize}
+    Per reciproca indipendenza:
+    \[
+    \Prob(\text{Evento}) = \left(\frac{5}{6}\right)^5 \left(\frac{1}{2}\right)^5 \left(\frac{2}{3}\right)^3 = \frac{3125}{7776} \cdot \frac{1}{32} \cdot \frac{8}{27} = \frac{3125}{839808} \approx \mathbf{0.003721} \quad (\mathbf{0.3721\%}).
+    \]
+
+    \item Per la somma $Y = \sum_{i=1}^{100} X_i$:
+    \[
+    \EE[Y] = 100 \EE[X_i] = 100(2) = \mathbf{200}, \qquad \Var(Y) = 100 \Var(X_i) = 100(3) = \mathbf{300}.
+    \]
+
+    \item Per il TLC, $Y \approx \mathcal{N}(200, 300)$ con $\sigma_Y = \sqrt{300} = 10\sqrt{3} \approx 17.3205$:
+    \[
+    \Prob(Y < 170) \approx \Phi\left(\frac{170 - 200}{\sqrt{300}}\right) = \Phi\left(\frac{-30}{17.3205}\right) = \Phi(-\sqrt{3}) = \Phi(-1.7321).
+    \]
+    Dalle tavole: $\Phi(-1.7321) = 1 - 0.9584 = \mathbf{0.0416} \quad (\mathbf{4.16\%})$.
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 4
+% ==============================================================================
+\begin{problemabox}{Problema 4 (Testo Integrale)}
+Sia $(X_1,\dots,X_n)$ un campione estratto da una popolazione con densità $f_\theta(x) = c_\theta \mathbf{1}_{[\theta,1]}(x)$, con $\theta \in (0,1)$.
+\begin{enumerate}[label=(\alph*)]
+    \item Determinare il valore di $c_\theta$ e di $\EE[X_1]$ per ogni $\theta \in [0,1)$.
+    \item Determinare lo stimatore $\widehat{\theta}_n$ di massima verosimiglianza per $\theta$.
+    \item Verificare se lo stimatore $\widetilde{\theta} = \max\left(-1 + \frac{2}{n}\sum_{i=1}^n X_i, \, 0\right)$ è corretto per $n=1$.
+    \item Verificare se $\widetilde{\theta}$ è consistente.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\alph*)]
+    \item Integrando la densità:
+    \[
+    1 = \int_\theta^1 c_\theta \, \dx = c_\theta (1 - \theta) \implies \mathbf{c_\theta = \frac{1}{1-\theta}}.
+    \]
+    \[
+    \EE[X_1] = \int_\theta^1 x \frac{1}{1-\theta} \, \dx = \frac{1}{1-\theta} \left[ \frac{x^2}{2} \right]_\theta^1 = \frac{1 - \theta^2}{2(1-\theta)} = \mathbf{\frac{1+\theta}{2}}.
+    \]
+
+    \item La funzione di verosimiglianza è:
+    \[
+    L(\theta) = \prod_{i=1}^n \frac{1}{1-\theta} \mathbf{1}_{[\theta, 1]}(x_i) = \frac{1}{(1-\theta)^n} \mathbf{1}_{\{\theta \le \min(x_1,\dots,x_n)\}}.
+    \]
+    Per $\theta \in (0, \min x_i]$, la funzione $\frac{1}{(1-\theta)^n}$ è strettamente crescente rispetto a $\theta$. Il massimo si trova sul confine superiore:
+    \[
+    \mathbf{\widehat{\theta}_{\text{MLE}} = \min(X_1, \dots, X_n) = X_{(1)}}.
+    \]
+
+    \item Per $n=1$, $\widetilde{\theta} = \max(-1 + 2X_1, 0)$.
+    Calcoliamo il valore atteso per $\theta = 1/3$:
+    Poiché $X_1 \ge \theta = 1/3$, per $X_1 \in [1/3, 1/2]$ si ha $-1+2X_1 \le 0 \implies \max = 0$.
+    \[
+    \EE[\widetilde{\theta}] = \int_{1/2}^1 (-1 + 2x) \frac{1}{1 - 1/3} \, \dx = \frac{3}{2} \left[ -x + x^2 \right]_{1/2}^1 = \frac{3}{2} \left( 0 - \left(-\frac{1}{2} + \frac{1}{4}\right) \right) = \frac{3}{2} \cdot \frac{1}{4} = \frac{3}{8} \neq \frac{1}{3}.
+    \]
+    Poiché $\EE[\widetilde{\theta}] = 3/8 \neq \theta = 1/3$, lo stimatore \textbf{NON è corretto}.
+
+    \item Per la Legge Debole dei Grandi Numeri (WLLN), $\overline{X}_n \xrightarrow{\Prob} \EE[X_1] = \frac{1+\theta}{2}$.
+    Per il Teorema di Continuità (Continuous Mapping Theorem), essendo la trasformazione $g(u) = \max(-1 + 2u, 0)$ continua:
+    \[
+    \widetilde{\theta} = g(\overline{X}_n) \xrightarrow{\Prob} g\left(\frac{1+\theta}{2}\right) = \max\left(-1 + 2\left(\frac{1+\theta}{2}\right), \, 0\right) = \max(\theta, 0) = \theta.
+    \]
+    Pertanto, lo stimatore $\widetilde{\theta}$ è \textbf{consistente}.
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 5
+% ==============================================================================
+\begin{problemabox}{Problema 5 (Testo Integrale)}
+Consideriamo l'integrale
+\[
+\int_{-\infty}^\infty \frac{e^{-x^2/2 - 3/2}\log(7 + e^x)}{\sqrt{2\pi}(2 + \sin(x))} \, \dx.
+\]
+\begin{enumerate}[label=(\alph*)]
+    \item Discutere l'integrazione di Monte Carlo per questo integrale.
+    \item Scrivere i comandi R per approssimare l'integrale.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Formulazione Monte Carlo tramite Gaussiana Standard:}
+Riscriviamo l'integrale fattorizzando la densità normale standard $\phi(x) = \frac{1}{\sqrt{2\pi}} e^{-x^2/2}$:
+\[
+I = \int_{-\infty}^\infty \left[ e^{-3/2} \frac{\log(7 + e^x)}{2 + \sin(x)} \right] \frac{1}{\sqrt{2\pi}} e^{-x^2/2} \, \dx = \EE[g(X)], \qquad X \sim \mathcal{N}(0, 1),
+\]
+dove $g(x) = e^{-3/2} \frac{\log(7 + e^x)}{2 + \sin(x)}$. Valore di riferimento: $I \approx \mathbf{0.2644}$.
+
+\textbf{2. Codice R:}
+\begin{lstlisting}[language=R]
+set.seed(42)
+N <- 1000000
+x_norm <- rnorm(N, mean = 0, sd = 1)
+g_val <- exp(-1.5) * log(7 + exp(x_norm)) / (2 + sin(x_norm))
+I_hat <- mean(g_val)
+cat(sprintf("Stima Monte Carlo: %.4f\n", I_hat)) # 0.2644
+\end{lstlisting}
+\end{soluzionebox}
+
+\end{document}

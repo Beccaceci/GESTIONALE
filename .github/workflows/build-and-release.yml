@@ -18,17 +18,17 @@ jobs:
     strategy:
       matrix:
         include:
-          - folder: courses/first_year/ALGEBRA_LINEARE
+          - folder: courses/first_year/ALGEBRA_LINEARE/notes
             target_name: Linear_Algebra
-          - folder: courses/first_year/ANALISI1
+          - folder: courses/first_year/ANALISI1/notes
             target_name: Calculus_1
-          - folder: courses/first_year/ANALISI2
+          - folder: courses/first_year/ANALISI2/notes
             target_name: Calculus_2
-          - folder: courses/first_year/ECONOMIA
+          - folder: courses/first_year/ECONOMIA/notes
             target_name: Economics
-          - folder: courses/first_year/FISICA
+          - folder: courses/first_year/FISICA/notes
             target_name: Physics
-          - folder: courses/first_year/STATISTICA
+          - folder: courses/first_year/STATISTICA/notes
             target_name: Probability_and_Statistics
       fail-fast: false
 

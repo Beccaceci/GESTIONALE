@@ -1,0 +1,356 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2cm,headheight=14pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,amsfonts,bm,siunitx}
+\usepackage{booktabs,tabularx,enumitem,float}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\definecolor{navyblue}{RGB}{10, 45, 90}
+\definecolor{coolblue}{RGB}{28, 110, 164}
+\definecolor{forestgreen}{RGB}{20, 115, 60}
+\definecolor{warmamber}{RGB}{195, 110, 10}
+\definecolor{crimsonred}{RGB}{175, 30, 45}
+\definecolor{subtlegray}{RGB}{245, 247, 250}
+\definecolor{codebg}{RGB}{240, 242, 245}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=navyblue,
+    urlcolor=coolblue,
+    citecolor=forestgreen
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{\textsf{\textcolor{navyblue}{Statistica I --- Soluzione Ufficiale Dettagliata}}}}
+\fancyhead[R]{\textsf{\textcolor{coolblue}{III Appello (20/07/2022)}}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.6pt}
+
+\newtcolorbox{problemabox}[1]{
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=navyblue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=navyblue, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1.2pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{soluzionebox}[1][Svolgimento Dettagliato]{
+    enhanced,
+    breakable,
+    colback=subtlegray,
+    colframe=forestgreen!80!black,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=forestgreen!80!black, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{esamebox}[1][Consiglio per l'Esame \& Aspetti Chiave]{
+    enhanced,
+    breakable,
+    colback=crimsonred!4!white,
+    colframe=crimsonred,
+    coltitle=crimsonred,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=white, boxrule=0.8pt, colframe=crimsonred},
+    boxrule=0.8pt,
+    leftrule=3.5pt,
+    sharp corners,
+    top=3.5mm, bottom=2.5mm, left=3mm, right=3mm
+}
+
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{navyblue!40},
+    keywordstyle=\color{navyblue}\bfseries,
+    commentstyle=\color{forestgreen}\itshape,
+    stringstyle=\color{warmamber},
+    showstringspaces=false
+}
+
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\dx}{\mathrm{d}x}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries\color{navyblue} Università di Pisa --- Corso di Laurea in Ingegneria Gestionale}\\[0.4em]
+    {\Large\bfseries Statistica I (A.A. 2021/2022) --- III Appello del 20/07/2022}\\[0.3em]
+    {\large\textsf{Soluzione Completa, Rigorosa e Commentata Passo-Passo}}
+\end{center}
+\vspace{0.5em}
+\hrule height 1.2pt
+\vspace{1.5em}
+
+% ==============================================================================
+% PROBLEMA 1
+% ==============================================================================
+\begin{problemabox}{Problema 1 (Testo Integrale)}
+Consideriamo l'integrale
+\[
+\int_5^9 \frac{\log(2 + \cos(e^x))}{1 + x^3} \, \dx.
+\]
+\begin{enumerate}[label=(\alph*)]
+    \item Discutere brevemente il metodo di integrazione di Monte Carlo nella sua forma generale e come può essere applicato per l'approssimazione di questo integrale in particolare.
+    \item Scrivere i comandi in R la cui esecuzione restituisce un valore approssimativo dell'integrale.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Metodo Monte Carlo su intervallo limitato $[a, b]$:}
+Sia $I = \int_a^b g(x) \, \dx$. Moltiplicando e dividendo per la lunghezza dell'intervallo $(b - a)$:
+\[
+I = (b - a) \int_a^b g(x) \frac{1}{b - a} \, \dx = (b - a) \, \EE[g(X)], \qquad X \sim \operatorname{Unif}(a, b).
+\]
+Nel caso specifico, $a = 5$, $b = 9 \implies b - a = 4$, con $g(x) = \frac{\log(2 + \cos(e^x))}{1 + x^3}$.
+Pertanto:
+\[
+I = 4 \, \EE\left[ \frac{\log(2 + \cos(e^X))}{1 + X^3} \right], \qquad X \sim \operatorname{Unif}(5, 9).
+\]
+Il valore numerico di riferimento è $I \approx \mathbf{0.008618}$.
+
+\textbf{2. Implementazione in linguaggio R:}
+\begin{lstlisting}[language=R]
+set.seed(42)
+N <- 1000000
+x_samples <- runif(N, min = 5, max = 9)
+g_val <- log(2 + cos(exp(x_samples))) / (1 + x_samples^3)
+I_hat <- 4 * mean(g_val)
+cat(sprintf("Stima Monte Carlo: %.6f\n", I_hat)) # ~ 0.0086
+\end{lstlisting}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 2
+% ==============================================================================
+\begin{problemabox}{Problema 2 (Testo Integrale)}
+Si consideri una variabile aleatoria $X$ che rappresenta la proporzione di elementi attivi in un processore, con densità:
+\[
+f_X(x) = \begin{cases}
+c x^4 (1 - x^2), & x \in (0, 1), \\
+0, & \text{altrimenti.}
+\end{cases}
+\]
+Un processore è Functional (F) se $X \ge 0.7$, Recoverable (R) se $X \in (0.5, 0.7)$, Compromised (C) se $X \le 0.5$.
+\begin{enumerate}[label=(\alph*)]
+    \item Determinare il valore di $c$.
+    \item Calcolare la probabilità che un processore sia Functional.
+    \item Peschiamo 3 processori indipendenti: calcolare la probabilità di osservare i) la sequenza ordinata F, R, C e ii) almeno due processori Functional.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Normalizzazione:}
+    \[
+    1 = \int_0^1 c (x^4 - x^6) \, \dx = c \left[ \frac{x^5}{5} - \frac{x^7}{7} \right]_0^1 = c \left( \frac{1}{5} - \frac{1}{7} \right) = c \cdot \frac{2}{35} \implies \mathbf{c = \frac{35}{2} = 17.5}.
+    \]
+
+    \item \textbf{Probabilità dell'evento Functional ($p_F$):}
+    \begin{align*}
+    p_F = \Prob(X \ge 0.7) &= \frac{35}{2} \int_{0.7}^1 (x^4 - x^6) \, \dx = \frac{35}{2} \left[ \frac{x^5}{5} - \frac{x^7}{7} \right]_{0.7}^1 \\
+    &= \frac{35}{2} \left( \frac{2}{35} - \left(\frac{0.7^5}{5} - \frac{0.7^7}{7}\right) \right) = 1 - \frac{35}{2}(0.033614 - 0.011765) \\
+    &= 1 - \frac{35}{2}(0.021849) = 1 - 0.38236 = \mathbf{0.6176} \quad (\mathbf{61.76\%}).
+    \end{align*}
+
+    \item \textbf{Probabilità sui 3 processori estratti:}
+    Calcoliamo preliminarmente le probabilità delle classi R e C:
+    \begin{itemize}
+        \item $p_C = \Prob(X \le 0.5) = \frac{35}{2} \left( \frac{0.5^5}{5} - \frac{0.5^7}{7} \right) = \frac{35}{2}(0.00625 - 0.001116) = \mathbf{0.0898}$.
+        \item $p_R = \Prob(0.5 < X < 0.7) = 1 - p_F - p_C = 1 - 0.6176 - 0.0898 = \mathbf{0.2926}$.
+    \end{itemize}
+    \begin{enumerate}[label=\roman*)]
+        \item \emph{Sequenza ordinata (F, R, C):}
+        \[
+        \Prob(F, R, C) = p_F \cdot p_R \cdot p_C = 0.6176 \cdot 0.2926 \cdot 0.0898 \approx \mathbf{0.0162} \quad (\mathbf{1.62\%}).
+        \]
+        \item \emph{Almeno due Functional su 3 (Binomiale $\operatorname{Bin}(3, p_F)$):}
+        \[
+        \Prob(\ge 2\text{ F}) = \binom{3}{2} p_F^2 (1 - p_F) + p_F^3 = 3(0.6176)^2(0.3824) + (0.6176)^3 = 0.4377 + 0.2356 = \mathbf{0.6733} \quad (\mathbf{67.33\%}).
+        \]
+    \end{enumerate}
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 3
+% ==============================================================================
+\begin{problemabox}{Problema 3 (Testo Integrale)}
+Il numero di clienti giornalieri di un ristorante ha distribuzione di Poisson con parametro $\lambda_1 = 10$ nei giorni feriali (Mar--Gio, 3 giorni) e parametro $\lambda_2 = 16$ nel weekend (Ven--Dom, 3 giorni). Il ristorante è chiuso il lunedì.
+\begin{enumerate}[label=(\alph*)]
+    \item Se sappiamo che un certo giorno sono arrivati 7 clienti, qual è la probabilità che fosse un giorno del weekend?
+    \item Identificare la distribuzione del numero di clienti in una settimana.
+    \item Approssimare la probabilità che il ristorante abbia almeno 4000 clienti in un anno (52 settimane).
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Aggiornamento Bayesiano per il giorno di arrivo:}
+    I giorni di apertura sono 6 (3 feriali, 3 weekend), con prior equiprobabile: $\Prob(\text{Feriale}) = 3/6 = 1/2, \quad \Prob(\text{Weekend}) = 3/6 = 1/2$.
+    Le verosimiglianze di osservare 7 clienti sono:
+    \[
+    \Prob(X=7 \mid \text{Feriale}) = \frac{e^{-10} 10^7}{7!}, \qquad \Prob(X=7 \mid \text{Weekend}) = \frac{e^{-16} 16^7}{7!}.
+    \]
+    Applicando il Teorema di Bayes:
+    \begin{align*}
+    \Prob(\text{Weekend} \mid X=7) &= \frac{\frac{e^{-16} 16^7}{7!} \cdot \frac{1}{2}}{\frac{e^{-16} 16^7}{7!} \cdot \frac{1}{2} + \frac{e^{-10} 10^7}{7!} \cdot \frac{1}{2}} = \frac{e^{-16} 16^7}{e^{-16} 16^7 + e^{-10} 10^7} \\
+    &= \frac{1}{1 + e^6 \left(\frac{10}{16}\right)^7} = \frac{1}{1 + 403.4288 \cdot 0.03725} \approx \mathbf{0.0624} \quad (\mathbf{6.24\%}).
+    \end{align*}
+
+    \item \textbf{Distribuzione settimanale dei clienti:}
+    La somma di variabili di Poisson indipendenti è ancora una variabile di Poisson con parametro pari alla somma dei parametri:
+    \[
+    \lambda_{\text{sett}} = 3 \lambda_1 + 3 \lambda_2 = 3(10) + 3(16) = 30 + 48 = \mathbf{78}.
+    \]
+    Il numero di clienti settimanali $W \sim \mathbf{\operatorname{Poiss}(\lambda = 78)}$.
+
+    \item \textbf{Clienti annuali e approssimazione con TLC ($N = 52$ settimane):}
+    Il numero totale annuo di clienti $V$ segue una legge $\operatorname{Poiss}(52 \times 78 = 4056)$:
+    \[
+    \EE[V] = 4056, \qquad \Var(V) = 4056 \implies \sigma_V = \sqrt{4056} \approx 63.6867.
+    \]
+    Per il TLC, $V \approx \mathcal{N}(4056, 4056)$. Standardizzando:
+    \[
+    \Prob(V \ge 4000) \approx 1 - \Phi\left(\frac{4000 - 4056}{\sqrt{4056}}\right) = 1 - \Phi\left(\frac{-56}{63.6867}\right) = 1 - \Phi(-0.8793) = \Phi(0.8793).
+    \]
+    Dalle tavole della normale standard ($\Phi(0.88) = 0.81057$):
+    \[
+    \Prob(V \ge 4000) \approx \mathbf{0.8104} \quad (\mathbf{81.04\%}).
+    \]
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 4
+% ==============================================================================
+\begin{problemabox}{Problema 4 (Testo Integrale)}
+La media storica dell'escursione termica a Roma è $13.0^\circ\text{C}$. Nel 2021 vengono effettuate 8 misurazioni:
+\[
+13.7, \quad 13.5, \quad 13.3, \quad 12.9, \quad 13.0, \quad 13.4, \quad 13.2, \quad 12.8.
+\]
+\begin{enumerate}[label=(\alph*)]
+    \item Si calcoli l'intervallo di confidenza bilaterale al 95\% per $\mu$.
+    \item Si formulino le ipotesi $H_0$ e $H_1$ per mostrare che l'escursione termica media è aumentata.
+    \item Su 365 misurazioni si ottengono $\overline{x} = 13.08$ e $s^2 = (0.5)^2$: testare l'ipotesi a $\alpha = 2\%$.
+    \item Quante misurazioni sarebbero necessarie per confermare il claim a $\alpha = 1\%$?
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Statistiche descrittive ($n = 8$):}
+\[
+\overline{x} = \mathbf{13.225^\circ\text{C}}, \qquad s = \mathbf{0.3105^\circ\text{C}}.
+\]
+
+\textbf{2. Risoluzione Quesito (a) --- Intervallo di Confidenza al 95\% ($\nu = 7$ g.d.l.):}
+Il valore critico è $t_{7, \, 0.025} = 2.3646$.
+\[
+ME = 2.3646 \cdot \frac{0.3105}{\sqrt{8}} = 2.3646 \cdot 0.10978 = \mathbf{0.2596^\circ\text{C}}.
+\]
+\[
+\mathbf{\operatorname{IC}_{95\%}(\mu) = [13.225 - 0.2596, \;\; 13.225 + 0.2596] = [12.9654, \;\; 13.4846]^\circ\text{C}}.
+\]
+
+\textbf{3. Risoluzione Quesito (b) --- Ipotesi statistiche:}
+\[
+\mathbf{H_0: \mu \le 13.0^\circ\text{C}} \qquad \text{vs} \qquad \mathbf{H_1: \mu > 13.0^\circ\text{C}}.
+\]
+
+\textbf{4. Risoluzione Quesito (c) --- Test a grandi campioni ($n = 365, \alpha = 0.02$):}
+\[
+Z_{\text{oss}} = \frac{\overline{x} - \mu_0}{s/\sqrt{n}} = \frac{13.08 - 13.00}{0.50/\sqrt{365}} = \frac{0.08}{0.02617} = \mathbf{3.0568}.
+\]
+Il valore critico unilaterale destro a $\alpha = 0.02$ è $z_{0.02} = 2.0537$.
+Poiché $Z_{\text{oss}} = 3.0568 > 2.0537$, \textbf{rifiutiamo l'ipotesi nulla $H_0$} ($p$-value $= 1 - \Phi(3.0568) = \mathbf{0.0011} < 2\%$).
+\emph{Conclusione:} I dati smentiscono fortemente chi nega il cambiamento climatico, fornendo evidenza rigorosa di un aumento della temperatura media.
+
+\textbf{5. Risoluzione Quesito (d) --- Numerosità campionaria necessaria per $\alpha = 1\%$:}
+Il quantile critico a $\alpha = 0.01$ è $z_{0.01} = 2.3263$.
+\[
+\frac{13.08 - 13.00}{0.50 / \sqrt{n}} \ge 2.3263 \implies \sqrt{n} \ge \frac{2.3263 \cdot 0.50}{0.08} = 14.5394 \implies n \ge (14.5394)^2 \approx 211.39.
+\]
+Sono necessarie almeno $\mathbf{n = 212}$ misurazioni.
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 5
+% ==============================================================================
+\begin{problemabox}{Problema 5 (Testo Integrale)}
+Sia dato un campione $X_1,\dots,X_n$ con funzione di massa
+\[
+\Prob_\theta(X = k) = \frac{1}{\theta}\left(1 - \frac{1}{\theta}\right)^{k-1}, \qquad k \in \{1, 2, 3, \dots\}, \quad \theta \in (1, \infty).
+\]
+\begin{enumerate}[label=(\alph*)]
+    \item Verificare che sia una distribuzione di probabilità per ogni $\theta > 1$. Di quale legge si tratta?
+    \item Calcolare lo stimatore di massima verosimiglianza $\widehat{\theta}$.
+    \item Esiste $n$ tale che questo stimatore non è corretto?
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Identificazione e Normalizzazione:}
+    Posto $p = 1/\theta \in (0, 1)$, riconosciamo la legge \textbf{Geometrica} supportata su $\mathbb{N}_{>0}$:
+    \[
+    \sum_{k=1}^\infty \Prob_\theta(X=k) = \frac{1}{\theta} \sum_{k=1}^\infty \left(1 - \frac{1}{\theta}\right)^{k-1} = \frac{1}{\theta} \cdot \frac{1}{1 - (1 - 1/\theta)} = \frac{1}{\theta} \cdot \theta = \mathbf{1}.
+    \]
+
+    \item \textbf{Stimatore di Massima Verosimiglianza (MLE):}
+    La funzione di verosimiglianza su $k_1, \dots, k_n$ è:
+    \[
+    L(\theta) = \prod_{i=1}^n \left[ \frac{1}{\theta}\left(1 - \frac{1}{\theta}\right)^{k_i - 1} \right] = \theta^{-n} \left(1 - \frac{1}{\theta}\right)^{\sum_{i=1}^n k_i - n}.
+    \]
+    Prendendo il logaritmo:
+    \[
+    \ell(\theta) = -n \log \theta + \left(\sum_{i=1}^n k_i - n\right) \log\left(1 - \frac{1}{\theta}\right).
+    \]
+    Derivando rispetto a $\theta$:
+    \[
+    \frac{\partial \ell}{\partial \theta} = -\frac{n}{\theta} + \left(\sum_{i=1}^n k_i - n\right) \frac{1/\theta^2}{1 - 1/\theta} = -\frac{n}{\theta} + \frac{\sum_{i=1}^n k_i - n}{\theta(\theta - 1)} = 0.
+    \]
+    Risolvendo per $\theta$:
+    \[
+    n(\theta - 1) = \sum_{i=1}^n k_i - n \implies n\theta - n = \sum_{i=1}^n k_i - n \implies \mathbf{\widehat{\theta}_{\text{MLE}} = \frac{1}{n}\sum_{i=1}^n X_i = \overline{X}_n}.
+    \]
+
+    \item \textbf{Verifica della correttezza:}
+    Per una variabile geometrica con parametro $p = 1/\theta$, il valore atteso è $\EE[X] = 1/p = \theta$.
+    \[
+    \EE[\widehat{\theta}_{\text{MLE}}] = \EE[\overline{X}_n] = \frac{1}{n}\sum_{i=1}^n \EE[X_i] = \theta.
+    \]
+    Poiché $\EE[\widehat{\theta}] = \theta$ per ogni $\theta > 1$ e per ogni dimensione campionaria $n \ge 1$, lo stimatore è \textbf{sempre corretto} ($\mathbf{\operatorname{Bias} = 0 \quad \forall n}$). Non esiste alcun valore di $n$ per cui sia distorto.
+\end{enumerate}
+\end{soluzionebox}
+
+\end{document}

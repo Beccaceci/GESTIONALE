@@ -1,0 +1,401 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2cm,headheight=14pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,amsfonts,bm,siunitx}
+\usepackage{booktabs,tabularx,enumitem,float}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\definecolor{navyblue}{RGB}{10, 45, 90}
+\definecolor{coolblue}{RGB}{28, 110, 164}
+\definecolor{forestgreen}{RGB}{20, 115, 60}
+\definecolor{warmamber}{RGB}{195, 110, 10}
+\definecolor{crimsonred}{RGB}{175, 30, 45}
+\definecolor{subtlegray}{RGB}{245, 247, 250}
+\definecolor{codebg}{RGB}{240, 242, 245}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=navyblue,
+    urlcolor=coolblue,
+    citecolor=forestgreen
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{\textsf{\textcolor{navyblue}{Statistica I --- Soluzione Ufficiale Dettagliata}}}}
+\fancyhead[R]{\textsf{\textcolor{coolblue}{II Appello (Luglio 2020)}}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.6pt}
+
+\newtcolorbox{problemabox}[1]{
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=navyblue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=navyblue, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1.2pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{soluzionebox}[1][Svolgimento Dettagliato]{
+    enhanced,
+    breakable,
+    colback=subtlegray,
+    colframe=forestgreen!80!black,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=forestgreen!80!black, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{esamebox}[1][Consiglio per l'Esame \& Aspetti Chiave]{
+    enhanced,
+    breakable,
+    colback=crimsonred!4!white,
+    colframe=crimsonred,
+    coltitle=crimsonred,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=white, boxrule=0.8pt, colframe=crimsonred},
+    boxrule=0.8pt,
+    leftrule=3.5pt,
+    sharp corners,
+    top=3.5mm, bottom=2.5mm, left=3mm, right=3mm
+}
+
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{navyblue!40},
+    keywordstyle=\color{navyblue}\bfseries,
+    commentstyle=\color{forestgreen}\itshape,
+    stringstyle=\color{warmamber},
+    showstringspaces=false
+}
+
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\dx}{\mathrm{d}x}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries\color{navyblue} Università di Pisa --- Corso di Laurea in Ingegneria Gestionale}\\[0.4em]
+    {\Large\bfseries Statistica I (A.A. 2019/2020) --- II Appello (Luglio 2020)}\\[0.3em]
+    {\large\textsf{Soluzione Completa, Rigorosa e Commentata Passo-Passo}}
+\end{center}
+\vspace{0.5em}
+\hrule height 1.2pt
+\vspace{1.5em}
+
+% ==============================================================================
+% PROBLEMA 1
+% ==============================================================================
+\begin{problemabox}{Problema 1 (Testo Integrale)}
+Siano $A,B$ due eventi. Si calcolino $\Prob(A)$ e $\Prob(B \mid A)$ sapendo che $\Prob(B)=\frac{3}{10}$, $\Prob(A \mid B)=\frac{9}{10}$ e $\Prob(A \mid B^c)=\frac{1}{10}$.
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Formula delle Probabilità Totali per $\Prob(A)$:}
+Gli eventi $B$ e $B^c$ costituiscono una partizione fondamentale dello spazio campionario $\Omega$.
+Poiché $\Prob(B) = \frac{3}{10} = 0.3$, la probabilità del complementare è $\Prob(B^c) = 1 - \Prob(B) = 1 - \frac{3}{10} = \frac{7}{10} = 0.7$.
+Applicando il Teorema delle Probabilità Totali:
+\begin{align*}
+\Prob(A) &= \Prob(A \mid B)\Prob(B) + \Prob(A \mid B^c)\Prob(B^c) \\
+&= \left(\frac{9}{10}\right)\left(\frac{3}{10}\right) + \left(\frac{1}{10}\right)\left(\frac{7}{10}\right) = \frac{27}{100} + \frac{7}{100} = \frac{34}{100} = \bm{0.3400} = \frac{17}{50}.
+\end{align*}
+
+\textbf{2. Formula di Bayes per la probabilità a posteriori $\Prob(B \mid A)$:}
+Applicando la definizione di probabilità condizionata (Teorema di Bayes):
+\[
+\Prob(B \mid A) = \frac{\Prob(A \cap B)}{\Prob(A)} = \frac{\Prob(A \mid B)\Prob(B)}{\Prob(A)} = \frac{\frac{9}{10} \cdot \frac{3}{10}}{\frac{34}{100}} = \frac{\frac{27}{100}}{\frac{34}{100}} = \frac{27}{34} \approx \bm{0.7941} \quad (\bm{79.41\%}).
+\]
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 2
+% ==============================================================================
+\begin{problemabox}{Problema 2 (Testo Integrale)}
+Si calcoli approssimativamente l'integrale
+\[
+\int_{-5}^2 \frac{\log(2 + \sin(x))}{1 + e^x} \, \dx,
+\]
+implementando in R il metodo di Monte Carlo. Si indichi inoltre il comando R per disegnare il grafico della funzione integranda nell'intervallo di integrazione e si mostri il grafico prodotto esportandone l'immagine in pdf.
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Formulazione Monte Carlo:}
+L'integrale $I = \int_{-5}^2 g(x) \, \dx$ con $g(x) = \frac{\log(2+\sin(x))}{1+e^x}$ ha estremi $a = -5, b = 2$ ($b - a = 7$).
+Possiamo riscriverlo come:
+\[
+I = 7 \int_{-5}^2 g(x) \frac{1}{7} \, \dx = 7 \, \EE[g(X)], \qquad X \sim \operatorname{Unif}(-5, 2).
+\]
+Il valore numerico deterministico dell'integrale è $I \approx \bm{3.0181}$.
+
+\textbf{2. Codice R per calcolo Monte Carlo e generazione PDF del grafico:}
+\begin{lstlisting}[language=R]
+# 1. Definizione della funzione integranda
+g <- function(x) {
+  log(2 + sin(x)) / (1 + exp(x))
+}
+
+# 2. Integrazione Monte Carlo
+set.seed(123)
+N <- 1000000
+x_samples <- runif(N, min = -5, max = 2)
+g_values <- g(x_samples)
+I_hat <- 7 * mean(g_values)
+se_hat <- 7 * sd(g_values) / sqrt(N)
+
+cat(sprintf("Stima Monte Carlo: %.4f (SE: %.4f)\n", I_hat, se_hat))
+# Output atteso: 3.0181
+
+# 3. Tracciamento del grafico ed esportazione in PDF
+pdf("grafico_funzione_integranda.pdf", width = 7, height = 5)
+curve(g(x), from = -5, to = 2, col = "navyblue", lwd = 2,
+      main = expression(paste("Grafico di ", g(x) == frac(log(2+sin(x)), 1+e^x))),
+      xlab = "x", ylab = "g(x)", las = 1)
+grid()
+dev.off()
+\end{lstlisting}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 3
+% ==============================================================================
+\begin{problemabox}{Problema 3 (Testo Integrale)}
+Sia $\overline{X}_n$ la media empirica di $n$ copie indipendenti di una variabile $X$ di Poisson di parametro $\lambda=10$ e sia $Z_n$ la variabile ottenuta standardizzando $\overline{X}_n$. Si disegni a mano il grafico della densità di $Z_n$ per $n$ molto grande. Si calcoli inoltre approssimativamente usando R la probabilità che $Z_n$ sia maggiore di $2$ (sempre assumendo che $n$ sia molto grande).
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Media, varianza e standardizzazione della media empirica:}
+Poiché $X \sim \operatorname{Poiss}(\lambda=10)$, abbiamo $\EE[X] = 10$ e $\Var(X) = 10$.
+Per la media empirica $\overline{X}_n = \frac{1}{n}\sum_{i=1}^n X_i$:
+\[
+\EE[\overline{X}_n] = 10, \qquad \Var(\overline{X}_n) = \frac{\Var(X)}{n} = \frac{10}{n} \implies \sigma_{\overline{X}_n} = \sqrt{\frac{10}{n}}.
+\]
+La variabile aleatoria standardizzata è:
+\[
+Z_n = \frac{\overline{X}_n - \EE[\overline{X}_n]}{\sigma_{\overline{X}_n}} = \frac{\overline{X}_n - 10}{\sqrt{10/n}}.
+\]
+
+\textbf{2. Comportamento asintotico per $n \to \infty$:}
+In virtù del Teorema del Limite Centrale (TLC), per $n \to \infty$:
+\[
+Z_n \xrightarrow{\mathcal{D}} Z \sim \mathcal{N}(0, 1).
+\]
+La densità limite è la curva a campana di Gauss standard:
+\[
+\phi(z) = \frac{1}{\sqrt{2\pi}} e^{-z^2/2}.
+\]
+Il grafico presenta asse di simmetria in $z = 0$, punti di flesso in $z = \pm 1$, e valore massimo pari a $\phi(0) = \frac{1}{\sqrt{2\pi}} \approx 0.3989$.
+
+\textbf{3. Calcolo di $\Prob(Z_n > 2)$ con R:}
+Per $n$ grande:
+\[
+\Prob(Z_n > 2) \approx \Prob(Z > 2) = 1 - \Phi(2) = 1 - 0.97725 = \bm{0.0228} \quad (\bm{2.28\%}).
+\]
+Comando R:
+\begin{lstlisting}[language=R]
+# Probabilita che Zn > 2
+p_val <- 1 - pnorm(2, mean = 0, sd = 1)
+cat(sprintf("P(Zn > 2) = %.4f\n", p_val)) # 0.0228
+\end{lstlisting}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 4
+% ==============================================================================
+\begin{problemabox}{Problema 4 (Testo Integrale)}
+Si consideri una popolazione di legge $\operatorname{Unif}(-\theta, 4\theta)$ e si proponga per $\theta$ uno stimatore puntuale $\widehat{\theta}$ basato su un campione casuale $X_1, \dots, X_{2000}$.
+Si scelga un file a caso e si dia una stima per $\theta$ usando $\widehat{\theta}$ e i dati del file prescelto.
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Metodo dei Momenti per popolazione uniforme:}
+Sia $X \sim \operatorname{Unif}(-\theta, 4\theta)$ con $\theta > 0$.
+L'ampiezza dell'intervallo è $4\theta - (-\theta) = 5\theta$. Il valore atteso è il punto medio:
+\[
+\EE[X] = \frac{-\theta + 4\theta}{2} = \frac{3}{2}\theta.
+\]
+Ponendo il valore atteso teorico uguale alla media campionaria $\overline{X}_n = \frac{1}{n}\sum_{i=1}^n X_i$:
+\[
+\frac{3}{2}\theta = \overline{X}_n \implies \bm{\widehat{\theta}_{\text{MM}} = \frac{2}{3}\overline{X}_n}.
+\]
+Verifica di correttezza: $\EE[\widehat{\theta}_{\text{MM}}] = \frac{2}{3}\EE[\overline{X}_n] = \frac{2}{3} \cdot \frac{3}{2}\theta = \theta$ (stimatore corretto).
+
+\textbf{2. Script R per caricare un dataset casuale e calcolare la stima:}
+\begin{lstlisting}[language=R]
+# Selezione casuale di un file tra i 200 disponibili
+set.seed(42)
+file_id <- sample(1:200, 1)
+file_name <- sprintf("campione_%d.csv", file_id)
+
+# Caricamento dati
+dati <- read.csv(file_name)
+x <- dati[, 1]
+n <- length(x) # n = 2000
+
+# Calcolo media campionaria e stima puntuale
+x_bar <- mean(x)
+theta_hat <- (2/3) * x_bar
+
+cat(sprintf("File selezionato: %s\n", file_name))
+cat(sprintf("Media campionaria: x_bar = %.4f\n", x_bar))
+cat(sprintf("Stima puntuale theta_hat: %.4f\n", theta_hat))
+\end{lstlisting}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 5
+% ==============================================================================
+\begin{problemabox}{Problema 5 (Testo Integrale)}
+Siano $X,Y$ due variabili aleatorie indipendenti entrambe distribuite secondo una legge binomiale di parametri $n=1$ e $p=\frac{1}{3}$. Consideriamo le variabili aleatorie $Z=XY$ e $U=X-Y$.
+\begin{enumerate}[label=(\roman*)]
+    \item Si calcoli la funzione di massa di $Z$. Che valore atteso e che varianza ha $Z$?
+    \item Qual è la probabilità che $Z \le X$?
+    \item Quale variabile aleatoria si ottiene standardizzando $U$?
+    \item Si calcoli la funzione di massa di $U$.
+    \item Si calcoli la funzione di massa congiunta della coppia $(Z,U)$. Le variabili $Z,U$ sono indipendenti? Sono scorrelate?
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Distribuzione congiunta di $(X,Y)$:}
+$X, Y \overset{\text{i.i.d.}}{\sim} \operatorname{Bernoulli}(1/3)$ con supporto $\{0, 1\}$:
+\[
+\Prob(X=1) = \Prob(Y=1) = \frac{1}{3}, \qquad \Prob(X=0) = \Prob(Y=0) = \frac{2}{3}.
+\]
+Le 4 configurazioni congiunte per indipendenza sono:
+\[
+\Prob(X=0, Y=0) = \frac{4}{9}, \quad \Prob(X=0, Y=1) = \frac{2}{9}, \quad \Prob(X=1, Y=0) = \frac{2}{9}, \quad \Prob(X=1, Y=1) = \frac{1}{9}.
+\]
+
+\textbf{2. Risoluzione dei singoli quesiti:}
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Funzione di massa, attesa e varianza di $Z = XY$:}
+    Il prodotto $Z$ assume valore $1$ se e solo se $X=1$ e $Y=1$, altrimenti vale $0$:
+    \[
+    p_Z(1) = \Prob(X=1, Y=1) = \frac{1}{3} \cdot \frac{1}{3} = \bm{\frac{1}{9}}, \qquad p_Z(0) = 1 - \frac{1}{9} = \bm{\frac{8}{9}}.
+    \]
+    Quindi $Z \sim \operatorname{Bernoulli}(1/9)$.
+    \[
+    \EE[Z] = \bm{\frac{1}{9}} \approx \bm{0.1111}, \qquad \Var(Z) = \frac{1}{9} \cdot \frac{8}{9} = \bm{\frac{8}{81}} \approx \bm{0.0988}.
+    \]
+
+    \item \textbf{Probabilità che $Z \le X$:}
+    Poiché $Y \in \{0, 1\}$, abbiamo sempre $XY \le X$ per ogni realizzazione (se $X=0 \implies Z=0 \le 0$; se $X=1 \implies Z=Y \le 1$). L'evento $\{Z \le X\}$ è l'evento certo:
+    \[
+    \Prob(Z \le X) = \bm{1}.
+    \]
+
+    \item \textbf{Standardizzazione di $U = X - Y$:}
+    $\EE[U] = \EE[X] - \EE[Y] = \frac{1}{3} - \frac{1}{3} = 0$.
+    Per indipendenza: $\Var(U) = \Var(X) + \Var(Y) = \frac{2}{9} + \frac{2}{9} = \frac{4}{9} \implies \sigma_U = \frac{2}{3}$.
+    La variabile standardizzata $U^*$ è:
+    \[
+    \bm{U^* = \frac{U - \EE[U]}{\sigma_U} = \frac{U}{2/3} = \frac{3}{2}U = \frac{3}{2}(X - Y)}.
+    \]
+
+    \item \textbf{Funzione di massa di $U = X - Y$:}
+    Il supporto di $U$ è $\{-1, 0, 1\}$:
+    \begin{align*}
+    p_U(-1) &= \Prob(X=0, Y=1) = \bm{\frac{2}{9}}, \\
+    p_U(0) &= \Prob(X=0, Y=0) + \Prob(X=1, Y=1) = \frac{4}{9} + \frac{1}{9} = \bm{\frac{5}{9}}, \\
+    p_U(1) &= \Prob(X=1, Y=0) = \bm{\frac{2}{9}}.
+    \end{align*}
+
+    \item \textbf{Funzione di massa congiunta di $(Z, U)$, Indipendenza e Correlazione:}
+    Costruiamo la tabella della PMF congiunta $p_{Z,U}(z, u)$:
+    \begin{center}
+    \begin{tabular}{c|ccc|c}
+    \toprule
+    $p_{Z,U}(z, u)$ & $u = -1$ & $u = 0$ & $u = 1$ & $p_Z(z)$ \\
+    \midrule
+    $z = 0$ & $2/9$ & $4/9$ & $2/9$ & $8/9$ \\
+    $z = 1$ & $0$ & $1/9$ & $0$ & $1/9$ \\
+    \midrule
+    $p_U(u)$ & $2/9$ & $5/9$ & $2/9$ & $1$ \\
+    \bottomrule
+    \end{tabular}
+    \end{center}
+    \begin{itemize}
+        \item \emph{Indipendenza:} Notiamo che $p_{Z,U}(1, 1) = 0$, mentre $p_Z(1) p_U(1) = \frac{1}{9} \cdot \frac{2}{9} = \frac{2}{81} \neq 0$.
+        Poiché $p_{Z,U}(1,1) \neq p_Z(1)p_U(1)$, le variabili $Z$ e $U$ \textbf{NON sono indipendenti}.
+        \item \emph{Correlazione:} Calcoliamo $\EE[ZU]$:
+        \[
+        \EE[ZU] = 1 \cdot (-1) \cdot 0 + 1 \cdot 0 \cdot \frac{1}{9} + 1 \cdot 1 \cdot 0 = 0.
+        \]
+        Dato che $\EE[U] = 0$, abbiamo:
+        \[
+        \Cov(Z, U) = \EE[ZU] - \EE[Z]\EE[U] = 0 - \left(\frac{1}{9}\right)(0) = \bm{0}.
+        \]
+        Essendo la covarianza nulla, $Z$ e $U$ sono \textbf{scorrelate} ($\rho_{ZU}=0$), fornendo un perfetto esempio di variabili dipendenti ma con indice di correlazione nullo!
+    \end{itemize}
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 6
+% ==============================================================================
+\begin{problemabox}{Problema 6 (Testo Integrale)}
+Per combattere un'influenza viene introdotto un nuovo tipo di vaccino obbligatorio per tutti. Su $340$ individui estratti a caso dopo un anno, si scopre che $293$ non hanno contratto l'influenza, mentre i restanti $47$ hanno contratto l'influenza nonostante la vaccinazione. Si determini un valore $a_0$ tale che con confidenza del $95\%$ si possa affermare che, rispetto a tutta la popolazione vaccinata, la proporzione di individui non colpiti dall'influenza sia almeno $a_0$.
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Modello Bernoulliano e Quantità Pivotale Asintotica:}
+Sia $p$ la reale proporzione (incognita) di individui non colpiti nella popolazione vaccinata.
+Il campione è di dimensione $n = 340$, con numero di successi $k = 293$.
+La proporzione campionaria stimata è:
+\[
+\widehat{p} = \frac{k}{n} = \frac{293}{340} \approx \bm{0.8618} \quad (\bm{86.18\%}).
+\]
+L'errore standard asintotico stimato è:
+\[
+\operatorname{SE}(\widehat{p}) = \sqrt{\frac{\widehat{p}(1-\widehat{p})}{n}} = \sqrt{\frac{0.86176 \cdot 0.13824}{340}} = \sqrt{\frac{0.11913}{340}} \approx \bm{0.01872}.
+\]
+
+\textbf{2. Intervallo di Confidenza Unilaterale Inferiore al 95\%:}
+Cerchiamo una soglia minima $a_0$ tale che:
+\[
+\Prob(p \ge a_0) = 1 - \alpha = 0.95.
+\]
+Sfruttando l'approssimazione normale standard per grandi campioni:
+\[
+\frac{\widehat{p} - p}{\sqrt{\frac{\widehat{p}(1-\widehat{p})}{n}}} \approx \mathcal{N}(0, 1).
+\]
+La condizione unilaterale corrisponde al quantile critico $z_{0.05} = 1.6449$ (dove $\Phi(1.6449) = 0.95$):
+\[
+a_0 = \widehat{p} - z_{0.05} \cdot \operatorname{SE}(\widehat{p}) = 0.86176 - 1.6449 \cdot 0.01872 = 0.86176 - 0.03079 = \bm{0.8310} \quad (\bm{83.10\%}).
+\]
+
+\textbf{Conclusione:}
+Con un livello di confidenza del $95\%$, possiamo affermare che la proporzione di individui protetti dal vaccino nella popolazione complessiva è pari ad \textbf{almeno l'83.10\%} ($a_0 = \bm{0.8310}$).
+\end{soluzionebox}
+
+\end{document}

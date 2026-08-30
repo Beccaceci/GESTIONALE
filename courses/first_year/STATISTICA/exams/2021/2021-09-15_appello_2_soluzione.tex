@@ -1,0 +1,394 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2cm,headheight=14pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,amsfonts,bm,siunitx}
+\usepackage{booktabs,tabularx,enumitem,float}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\definecolor{navyblue}{RGB}{10, 45, 90}
+\definecolor{coolblue}{RGB}{28, 110, 164}
+\definecolor{forestgreen}{RGB}{20, 115, 60}
+\definecolor{warmamber}{RGB}{195, 110, 10}
+\definecolor{crimsonred}{RGB}{175, 30, 45}
+\definecolor{subtlegray}{RGB}{245, 247, 250}
+\definecolor{codebg}{RGB}{240, 242, 245}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=navyblue,
+    urlcolor=coolblue,
+    citecolor=forestgreen
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{\textsf{\textcolor{navyblue}{Statistica I --- Soluzione Ufficiale Dettagliata}}}}
+\fancyhead[R]{\textsf{\textcolor{coolblue}{II Appello (15/09/2021)}}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.6pt}
+
+\newtcolorbox{problemabox}[1]{
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=navyblue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=navyblue, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1.2pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{soluzionebox}[1][Svolgimento Dettagliato]{
+    enhanced,
+    breakable,
+    colback=subtlegray,
+    colframe=forestgreen!80!black,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=forestgreen!80!black, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{esamebox}[1][Consiglio per l'Esame \& Aspetti Chiave]{
+    enhanced,
+    breakable,
+    colback=crimsonred!4!white,
+    colframe=crimsonred,
+    coltitle=crimsonred,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=white, boxrule=0.8pt, colframe=crimsonred},
+    boxrule=0.8pt,
+    leftrule=3.5pt,
+    sharp corners,
+    top=3.5mm, bottom=2.5mm, left=3mm, right=3mm
+}
+
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{navyblue!40},
+    keywordstyle=\color{navyblue}\bfseries,
+    commentstyle=\color{forestgreen}\itshape,
+    stringstyle=\color{warmamber},
+    showstringspaces=false
+}
+
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Corr}{\operatorname{Corr}}
+\newcommand{\dx}{\mathrm{d}x}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries\color{navyblue} Università di Pisa --- Corso di Laurea in Ingegneria Gestionale}\\[0.4em]
+    {\Large\bfseries Statistica I (A.A. 2020/2021) --- Appello del 15/09/2021}\\[0.3em]
+    {\large\textsf{Soluzione Completa, Rigorosa e Commentata Passo-Passo}}
+\end{center}
+\vspace{0.5em}
+\hrule height 1.2pt
+\vspace{1.5em}
+
+% ==============================================================================
+% PROBLEMA 1
+% ==============================================================================
+\begin{problemabox}{Problema 1 (Testo Integrale)}
+Si considerino due variabili aleatorie $X, Y$, entrambe a valori in $\{0,1\}$ e tali che
+\[
+\Prob(X = 0) = \frac{1}{2}, \qquad \Prob(Y = 0 \mid X = 0) = \frac{1}{3}, \qquad \Prob(Y = 1 \mid X = 1) = \frac{1}{4}.
+\]
+\begin{enumerate}
+    \item Scrivere la funzione di massa congiunta di $(X,Y)$. Dire se $Y$ è Bernoulli e calcolare $\Prob(Y = 1)$.
+    \item Calcolare le deviazioni standard $\sigma_X, \sigma_Y$ e il coefficiente di correlazione $\rho_{XY} = \frac{\Cov(X,Y)}{\sigma_X \sigma_Y}$.
+    \item Dire se le variabili $X$ ed $U$ sono correlate, dove si definisce $U = Y - \rho_{XY}\frac{\sigma_Y}{\sigma_X}X$.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Costruzione della PMF congiunta di $(X,Y)$:}
+Poiché $\Prob(X=0) = 1/2$, abbiamo $\Prob(X=1) = 1 - 1/2 = 1/2$.
+Dalle probabilità condizionate:
+\begin{align*}
+\Prob(X=0, Y=0) &= \Prob(Y=0 \mid X=0)\Prob(X=0) = \frac{1}{3} \cdot \frac{1}{2} = \bm{\frac{1}{6}}, \\
+\Prob(X=0, Y=1) &= \Prob(Y=1 \mid X=0)\Prob(X=0) = \left(1 - \frac{1}{3}\right) \frac{1}{2} = \frac{2}{3} \cdot \frac{1}{2} = \bm{\frac{1}{3}} = \frac{2}{6}, \\
+\Prob(X=1, Y=1) &= \Prob(Y=1 \mid X=1)\Prob(X=1) = \frac{1}{4} \cdot \frac{1}{2} = \bm{\frac{1}{8}}, \\
+\Prob(X=1, Y=0) &= \Prob(Y=0 \mid X=1)\Prob(X=1) = \left(1 - \frac{1}{4}\right) \frac{1}{2} = \frac{3}{4} \cdot \frac{1}{2} = \bm{\frac{3}{8}}.
+\end{align*}
+Tabella della funzione di massa congiunta:
+\begin{center}
+\begin{tabular}{c|cc|c}
+\toprule
+$p_{X,Y}(x,y)$ & $y = 0$ & $y = 1$ & $p_X(x)$ \\
+\midrule
+$x = 0$ & $1/6$ & $1/3$ & $1/2$ \\
+$x = 1$ & $3/8$ & $1/8$ & $1/2$ \\
+\midrule
+$p_Y(y)$ & $13/24$ & $11/24$ & $1$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+La variabile $Y$ assume solo i valori $\{0, 1\}$, quindi è una variabile di \textbf{Bernoulli} con parametro:
+\[
+\mathbf{p_Y = \Prob(Y = 1) = \frac{1}{3} + \frac{1}{8} = \frac{11}{24} \approx 0.4583}.
+\]
+
+\textbf{2. Deviazioni standard e Coefficiente di Correlazione:}
+\begin{itemize}
+    \item Per $X \sim \operatorname{Bernoulli}(1/2)$:
+    \[
+    \EE[X] = \frac{1}{2}, \qquad \Var(X) = \frac{1}{2}\left(1 - \frac{1}{2}\right) = \frac{1}{4} \implies \mathbf{\sigma_X = \frac{1}{2} = 0.5000}.
+    \]
+    \item Per $Y \sim \operatorname{Bernoulli}(11/24)$:
+    \[
+    \EE[Y] = \frac{11}{24}, \qquad \Var(Y) = \frac{11}{24} \cdot \frac{13}{24} = \frac{143}{576} \implies \mathbf{\sigma_Y = \frac{\sqrt{143}}{24} \approx 0.4983}.
+    \]
+    \item Valore atteso congiunto e Covarianza:
+    \[
+    \EE[XY] = 1 \cdot 1 \cdot \Prob(X=1, Y=1) = \frac{1}{8}.
+    \]
+    \[
+    \Cov(X,Y) = \EE[XY] - \EE[X]\EE[Y] = \frac{1}{8} - \left(\frac{1}{2}\right)\left(\frac{11}{24}\right) = \frac{1}{8} - \frac{11}{48} = \frac{6 - 11}{48} = -\mathbf{\frac{5}{48}} \approx -\mathbf{0.1042}.
+    \]
+    \item Coefficiente di correlazione lineare $\rho_{XY}$:
+    \[
+    \mathbf{\rho_{XY} = \frac{\Cov(X,Y)}{\sigma_X \sigma_Y} = \frac{-\frac{5}{48}}{\left(\frac{1}{2}\right)\left(\frac{\sqrt{143}}{24}\right)} = \frac{-\frac{5}{48}}{\frac{\sqrt{143}}{48}} = -\frac{5}{\sqrt{143}} \approx -0.4181}.
+    \]
+\end{itemize}
+
+\textbf{3. Correlazione tra $X$ e $U$:}
+Poniamo $\beta = \rho_{XY}\frac{\sigma_Y}{\sigma_X} = \frac{\Cov(X,Y)}{\Var(X)}$. Calcoliamo la covarianza tra $X$ e $U = Y - \beta X$:
+\[
+\Cov(X, U) = \Cov(X, Y - \beta X) = \Cov(X, Y) - \beta \Var(X) = \Cov(X, Y) - \frac{\Cov(X,Y)}{\Var(X)} \Var(X) = \bm{0}.
+\]
+Poiché la covarianza è esattamente nulla, le variabili $X$ ed $U$ sono \textbf{completamente scorrelate} ($\bm{\rho_{XU} = 0}$).
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 2
+% ==============================================================================
+\begin{problemabox}{Problema 2 (Testo Integrale)}
+Siano $X_1, X_2, \dots, X_{42}$ variabili aleatorie indipendenti, ciascuna con legge uniforme $\operatorname{Unif}(0,1)$, e si ponga $Y_i = -\log(X_i)$, per $i=1,\dots,42$.
+\begin{enumerate}
+    \item Determinare la funzione di ripartizione, la densità, media e varianza di $Y_1$.
+    \item Scrivere dei comandi R per simulare 420 realizzazioni indipendenti di variabili con la stessa legge di $Y_1$ e calcolare la media empirica dei dati generati (riportare il risultato).
+    \item Posta $U = (X_1 \cdot X_2 \cdots X_{42})^{1/42}$, cosa possiamo dire della funzione di ripartizione di $U$, ad esempio di $\Prob(U \le 0.3)$?
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Legge di $Y_1 = -\log(X_1)$:}
+Poiché $X_1 \sim \operatorname{Unif}(0,1)$, per ogni $y > 0$:
+\[
+F_{Y_1}(y) = \Prob(-\log(X_1) \le y) = \Prob(\log(X_1) \ge -y) = \Prob(X_1 \ge e^{-y}) = 1 - e^{-y}.
+\]
+Per $y \le 0$, $F_{Y_1}(y) = 0$. Derivando:
+\[
+f_{Y_1}(y) = e^{-y} \mathbf{1}_{(0, \infty)}(y) \implies \mathbf{Y_1 \sim \operatorname{Exp}(\lambda = 1)}.
+\]
+I momenti teorici sono:
+\[
+\mathbf{\EE[Y_1] = 1}, \qquad \mathbf{\Var(Y_1) = 1}.
+\]
+
+\textbf{2. Simulazione in R:}
+\begin{lstlisting}[language=R]
+set.seed(42)
+# Generazione di 420 realizzazioni iid da Exp(1)
+y_samples <- -log(runif(420))
+media_empirica <- mean(y_samples)
+cat(sprintf("Media empirica (420 campioni): %.4f\n", media_empirica)) # ~ 1.0063
+\end{lstlisting}
+
+\textbf{3. Distribuzione di $U$ e calcolo di $\Prob(U \le 0.3)$ tramite TLC:}
+Prendendo il logaritmo naturale di $U$:
+\[
+-\log(U) = -\log\left( \prod_{i=1}^{42} X_i^{1/42} \right) = \frac{1}{42} \sum_{i=1}^{42} (-\log X_i) = \frac{1}{42} \sum_{i=1}^{42} Y_i = \overline{Y}_{42}.
+\]
+La media empirica $\overline{Y}_{42}$ di $42$ esponenziali standard ha media $\EE[\overline{Y}_{42}]=1$ e varianza $\Var(\overline{Y}_{42}) = 1/42$.
+Per il Teorema del Limite Centrale, $\overline{Y}_{42} \approx \mathcal{N}\left(1, \frac{1}{42}\right)$.
+L'evento $\{U \le 0.3\}$ equivale a:
+\[
+-\log(U) \ge -\log(0.3) \approx 1.2040.
+\]
+Standardizzando:
+\[
+\Prob(U \le 0.3) = \Prob(\overline{Y}_{42} \ge 1.2040) \approx 1 - \Phi\left( \frac{1.2040 - 1}{\sqrt{1/42}} \right) = 1 - \Phi(1.2040 \cdot \sqrt{42} - \sqrt{42}) = 1 - \Phi(1.3219).
+\]
+Dalle tavole della normale standard:
+\[
+1 - \Phi(1.3219) \approx 1 - 0.9069 = \bm{0.0931} \quad (\bm{9.31\%}).
+\]
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 3
+% ==============================================================================
+\begin{problemabox}{Problema 3 (Testo Integrale)}
+Un montacarichi ha una portata di $2000\text{ kg}$. Sapendo che il peso medio di una persona adulta è $76.2\text{ kg}$, con deviazione standard $11.4\text{ kg}$, stimare con quale probabilità il peso combinato di $25$ persone può superare la portata del montacarichi.
+Si indichi con $P$ il peso totale delle $25$ persone. Indicare i comandi R per generare $1000$ realizzazioni di $P$ e attraverso di esse valutare numericamente la probabilità richiesta.
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Calcolo analitico tramite Teorema del Limite Centrale:}
+Siano $W_1, \dots, W_{25}$ i pesi delle $25$ persone, con $\EE[W_i] = \mu = 76.2\text{ kg}$ e $\sigma = 11.4\text{ kg}$.
+Il peso complessivo è $P = \sum_{i=1}^{25} W_i$.
+\[
+\EE[P] = 25 \cdot 76.2 = \bm{1905\text{ kg}},
+\]
+\[
+\Var(P) = 25 \cdot (11.4)^2 = 25 \cdot 129.96 = 3249 \implies \sigma_P = \sqrt{3249} = 5 \cdot 11.4 = \bm{57\text{ kg}}.
+\]
+Applicando il TLC, $P \approx \mathcal{N}(1905, 57^2)$. La probabilità di sovraccarico è:
+\[
+\Prob(P > 2000) = \Prob\left( \frac{P - 1905}{57} > \frac{2000 - 1905}{57} \right) = \Prob(Z > 1.6667) = 1 - \Phi(1.6667).
+\]
+Dalle tavole della normale standard $\Phi(1.6667) \approx 0.9522$:
+\[
+\Prob(P > 2000) \approx 1 - 0.9522 = \bm{0.0478} \quad (\bm{4.78\%}).
+\]
+
+\textbf{2. Implementazione della simulazione Monte Carlo in R:}
+\begin{lstlisting}[language=R]
+set.seed(42)
+N_sim <- 1000
+
+# Simulazione di 1000 carichi da 25 persone
+# Assumendo pesi gaussiani N(76.2, 11.4^2)
+pesi_totali <- replicate(N_sim, sum(rnorm(25, mean = 76.2, sd = 11.4)))
+
+# Stima della probabilita di superamento portata
+p_sovraccarico <- mean(pesi_totali > 2000)
+cat(sprintf("Probabilita stimata di sovraccarico: %.4f\n", p_sovraccarico)) # ~ 0.0480
+\end{lstlisting}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 4
+% ==============================================================================
+\begin{problemabox}{Problema 4 (Testo Integrale)}
+Si considerino le variabili aleatorie indipendenti $X_1,\dots,X_n$ con densità
+\[
+f(x) = \begin{cases}
+\frac{a-|x|}{2a-1}, & -1 < x < 1, \\
+0, & \text{altrimenti,}
+\end{cases}
+\]
+dove $a \ge 1$ è un parametro.
+\begin{enumerate}
+    \item Determinare la funzione di ripartizione di $X_1$.
+    \item Determinare uno stimatore di $a$ realizzato con il metodo dei momenti.
+    \item Si valuti lo stimatore trovato con i dati disponibili nel file \texttt{Problema4.csv}.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}
+    \item \textbf{Funzione di ripartizione $F(x)$:}
+    Per $x \in (-1, 0]$:
+    \[
+    F(x) = \int_{-1}^x \frac{a - (-t)}{2a-1} \, \mathrm{d}t = \frac{1}{2a-1} \left[ at + \frac{t^2}{2} \right]_{-1}^x = \mathbf{\frac{ax + \frac{x^2}{2} + a - \frac{1}{2}}{2a-1}}.
+    \]
+    Per $x \in [0, 1)$:
+    \[
+    F(x) = F(0) + \int_0^x \frac{a - t}{2a-1} \, \mathrm{d}t = \frac{a - 1/2}{2a-1} + \frac{ax - x^2/2}{2a-1} = \mathbf{\frac{1}{2} + \frac{ax - \frac{x^2}{2}}{2a-1}}.
+    \]
+    Chiaramente $F(x)=0$ per $x \le -1$ e $F(x)=1$ per $x \ge 1$.
+
+    \item \textbf{Metodo dei Momenti per $a$:}
+    Essendo $f(x)$ pari, il momento primo è identicamente nullo ($\EE[X] = 0$) e non dipende da $a$.
+    Ricorriamo al momento secondo $\EE[X^2]$:
+    \[
+    \EE[X^2] = 2 \int_0^1 x^2 \frac{a - x}{2a-1} \, \dx = \frac{2}{2a-1} \left[ \frac{a x^3}{3} - \frac{x^4}{4} \right]_0^1 = \frac{2}{2a-1} \left(\frac{a}{3} - \frac{1}{4}\right) = \frac{4a - 3}{6(2a-1)}.
+    \]
+    Ponendo $\EE[X^2] = m_2 \coloneqq \frac{1}{n}\sum_{i=1}^n X_i^2$:
+    \[
+    \frac{4a - 3}{12a - 6} = m_2 \implies 4a - 3 = 12 m_2 a - 6 m_2 \implies a(4 - 12m_2) = 3 - 6m_2 \implies \mathbf{\widehat{a}_{\text{MM}} = \frac{3 - 6m_2}{4 - 12m_2}}.
+    \]
+
+    \item \textbf{Valutazione empirica con R:}
+\begin{lstlisting}[language=R]
+dati <- read.csv("Problema4.csv")
+x <- dati[, 1]
+m2 <- mean(x^2)
+a_hat <- (3 - 6 * m2) / (4 - 12 * m2)
+cat(sprintf("Momento secondo campionario m2: %.4f\n", m2))
+cat(sprintf("Stima del parametro a: %.4f\n", a_hat))
+\end{lstlisting}
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 5
+% ==============================================================================
+\begin{problemabox}{Problema 5 (Testo Integrale)}
+Duecento autovetture dello stesso modello circolano su uno stesso percorso cittadino per valutare la percorrenza chilometrica per litro di carburante. Al termine dell'esperimento si trova il valore $\overline{x} = 8.82\text{ km}$ per la media empirica della percorrenza con un litro di carburante, e il valore $s = 0.921\text{ km}$ per la deviazione standard campionaria. Si consideri il modello di $200$ variabili aleatorie gaussiane $\mathcal{N}(\mu, \sigma^2)$.
+\begin{enumerate}
+    \item Determinare un intervallo di confidenza al 95\% per la percorrenza chilometrica media $\mu$.
+    \item La casa produttrice ha dichiarato che l'autovettura percorre $9\text{ km/l}$. Valutare la correttezza di questa affermazione al livello dell'1\%.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Intervallo di Confidenza al 95\% per $\mu$ ($n = 200$):}
+Data la grande numerosità campionaria ($n = 200 > 30$), per il TLC la quantità pivotale $Z = \frac{\overline{X}_n - \mu}{S_n/\sqrt{n}}$ segue una distribuzione normale standard $\mathcal{N}(0,1)$.
+L'errore standard della media è:
+\[
+\operatorname{SE}(\overline{X}_n) = \frac{s}{\sqrt{n}} = \frac{0.921}{\sqrt{200}} = \frac{0.921}{14.1421} \approx \bm{0.06512\text{ km/l}}.
+\]
+Il quantile critico per $\alpha = 0.05$ (bilaterale) è $z_{0.025} = 1.960$.
+Il margine d'errore è:
+\[
+ME = 1.960 \cdot 0.06512 \approx 0.1276\text{ km/l}.
+\]
+L'intervallo di confidenza al $95\%$ è:
+\[
+\mathbf{\operatorname{IC}_{95\%}(\mu) = [8.82 - 0.1276, \;\; 8.82 + 0.1276] = [8.6924, \;\; 8.9476]\text{ km/l}}.
+\]
+
+\textbf{2. Verifica dell'ipotesi al livello $\alpha = 0.01$:}
+Formuliamo il test d'ipotesi bilaterale:
+\[
+H_0: \mu = 9.00 \qquad \text{vs} \qquad H_1: \mu \neq 9.00.
+\]
+Calcoliamo la statistica test $Z$:
+\[
+Z_{\text{oss}} = \frac{\overline{x} - \mu_0}{\operatorname{SE}(\overline{X}_n)} = \frac{8.82 - 9.00}{0.06512} = \frac{-0.18}{0.06512} = \bm{-2.7641}.
+\]
+Per un livello di significatività $\alpha = 0.01$, i quantili critici della normale standard sono $\pm z_{0.005} = \pm 2.5758$.
+La regione di rifiuto è $W = (-\infty, -2.5758] \cup [2.5758, +\infty)$.
+Poiché $|Z_{\text{oss}}| = 2.7641 > 2.5758$, la statistica test cade all'interno della regione critica.
+Il $p$-value associato è:
+\[
+p\text{-value} = 2 \cdot (1 - \Phi(2.7641)) \approx 2 \cdot (1 - 0.99715) = \bm{0.0057} \quad (\bm{0.57\%} < 1\%).
+\]
+
+\textbf{Conclusione del test:}
+Al livello di significatività dell'$1\%$, \textbf{rifiutiamo l'ipotesi nulla $H_0$}. I dati empirici smentiscono l'affermazione del produttore: la percorrenza media reale è significativamente inferiore a $9\text{ km/l}$.
+\end{soluzionebox}
+
+\end{document}

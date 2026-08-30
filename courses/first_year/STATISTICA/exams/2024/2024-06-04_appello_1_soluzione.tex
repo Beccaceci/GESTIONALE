@@ -1,0 +1,340 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2cm,headheight=14pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,amsfonts,bm,siunitx}
+\usepackage{booktabs,tabularx,enumitem,float}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\definecolor{navyblue}{RGB}{10, 45, 90}
+\definecolor{coolblue}{RGB}{28, 110, 164}
+\definecolor{forestgreen}{RGB}{20, 115, 60}
+\definecolor{warmamber}{RGB}{195, 110, 10}
+\definecolor{crimsonred}{RGB}{175, 30, 45}
+\definecolor{subtlegray}{RGB}{245, 247, 250}
+\definecolor{codebg}{RGB}{240, 242, 245}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=navyblue,
+    urlcolor=coolblue,
+    citecolor=forestgreen
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{\textsf{\textcolor{navyblue}{Statistica I --- Soluzione Ufficiale Dettagliata}}}}
+\fancyhead[R]{\textsf{\textcolor{coolblue}{I Appello (04/06/2024)}}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.6pt}
+
+\newtcolorbox{problemabox}[1]{
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=navyblue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=navyblue, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1.2pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{soluzionebox}[1][Svolgimento Dettagliato]{
+    enhanced,
+    breakable,
+    colback=subtlegray,
+    colframe=forestgreen!80!black,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=forestgreen!80!black, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{esamebox}[1][Consiglio per l'Esame \& Aspetti Chiave]{
+    enhanced,
+    breakable,
+    colback=crimsonred!4!white,
+    colframe=crimsonred,
+    coltitle=crimsonred,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=white, boxrule=0.8pt, colframe=crimsonred},
+    boxrule=0.8pt,
+    leftrule=3.5pt,
+    sharp corners,
+    top=3.5mm, bottom=2.5mm, left=3mm, right=3mm
+}
+
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{navyblue!40},
+    keywordstyle=\color{navyblue}\bfseries,
+    commentstyle=\color{forestgreen}\itshape,
+    stringstyle=\color{warmamber},
+    showstringspaces=false
+}
+
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\dx}{\mathrm{d}x}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries\color{navyblue} Università di Pisa --- Corso di Laurea in Ingegneria Gestionale}\\[0.4em]
+    {\Large\bfseries Statistica I (A.A. 2023/2024) --- I Appello del 04/06/2024}\\[0.3em]
+    {\large\textsf{Soluzione Completa, Rigorosa e Commentata Passo-Passo}}
+\end{center}
+\vspace{0.5em}
+\hrule height 1.2pt
+\vspace{1.5em}
+
+% ==============================================================================
+% PROBLEMA 1
+% ==============================================================================
+\begin{problemabox}{Problema 1 (Testo Integrale)}
+La durata delle telefonate a un centralino segue una distribuzione esponenziale con parametro $\lambda = 1/3\text{ min}^{-1}$.
+\begin{enumerate}[label=(\alph*)]
+    \item Qual è la probabilità che una telefonata duri al più 3 minuti?\\
+    \emph{a) 0.632 \quad b) 0.368 \quad c) 0.500 \quad d) 0.450 \quad e) Altro}
+    \item Su 5 telefonate indipendenti, qual è la probabilità che almeno 2 durino 3 minuti o più?\\
+    \emph{a) 0.605 \quad b) 0.395 \quad c) 0.500 \quad d) 0.400 \quad e) Altro}
+    \item L'operatore riceve un bonus alla terza telefonata che dura più di 6 minuti. Calcolare il numero medio di telefonate necessarie per ottenere il bonus.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\alph*)]
+    \item Sia $X \sim \operatorname{Exp}(\lambda = 1/3)$. La funzione di ripartizione è $F(x) = 1 - e^{-\lambda x}$ per $x \ge 0$:
+    \[
+    \Prob(X \le 3) = 1 - e^{-(1/3) \cdot 3} = 1 - e^{-1} \approx 1 - 0.367879 = \mathbf{0.6321} \quad (\mathbf{63.21\%}).
+    \]
+    \textbf{Risposta corretta: a) 0.632}.
+
+    \item La probabilità che una singola telefonata duri almeno 3 minuti è $p = \Prob(X \ge 3) = e^{-1} \approx 0.367879$.
+    Il numero di chiamate $Y$ di durata $\ge 3$ su $n=5$ segue una legge $\operatorname{Bin}(5, p)$:
+    \begin{align*}
+    \Prob(Y \ge 2) &= 1 - \Prob(Y = 0) - \Prob(Y = 1) = 1 - (1-p)^5 - 5p(1-p)^4 \\
+    &= 1 - (1 - e^{-1})^5 - 5e^{-1}(1 - e^{-1})^4 \approx 1 - (0.63212)^5 - 5(0.36788)(0.63212)^4 \\
+    &= 1 - 0.10095 - 0.29385 = \mathbf{0.6052} \quad (\mathbf{60.52\%}).
+    \end{align*}
+    \textbf{Risposta corretta: a) 0.605}.
+
+    \item La probabilità che una telefonata duri più di 6 minuti è:
+    \[
+    p_6 = \Prob(X > 6) = e^{-(1/3) \cdot 6} = e^{-2} \approx 0.135335.
+    \]
+    Sia $N$ il numero di telefonate fino al verificarsi del 3° successo. $N$ segue una distribuzione Binomiale Negativa (equivalente alla somma di 3 variabili Geometriche indipendenti di parametro $p_6$):
+    \[
+    \mathbf{\EE[N] = \frac{3}{p_6} = 3 e^2 \approx 3 \times 7.389056 = 22.1672 \approx 22.17\text{ telefonate}}.
+    \]
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 2
+% ==============================================================================
+\begin{problemabox}{Problema 2 (Testo Integrale)}
+Un'azienda produttrice di valvole (Svalvolati SA) registra un tasso di valvole difettose pari a $\mu = 7/6$ difetti all'ora (processo di Poisson).
+\begin{enumerate}[label=(\alph*)]
+    \item Calcolare la probabilità che in 3 ore si osservino almeno 3 valvole difettose.\\
+    \emph{a) 0.321 \quad b) 0.679 \quad c) 0.500 \quad d) 0.450 \quad e) Altro}
+    \item Le valvole sono vendute in scatole da 400 pezzi. La probabilità che una valvola sia perfetta è $p = 0.95$. Calcolare valore atteso e deviazione standard del numero di pezzi perfetti per scatola.
+    \item Approssimare la probabilità di avere almeno 385 pezzi perfetti in una scatola.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\alph*)]
+    \item In $t = 3$ ore, il numero di difetti $Y \sim \operatorname{Poiss}(\mu t = \frac{7}{6} \times 3 = 3.5)$:
+    \begin{align*}
+    \Prob(Y \ge 3) &= 1 - \sum_{k=0}^2 \frac{e^{-3.5} (3.5)^k}{k!} = 1 - e^{-3.5}\left(1 + 3.5 + \frac{12.25}{2}\right) = 1 - 10.625 e^{-3.5} \\
+    &\approx 1 - 10.625(0.030197) = 1 - 0.32085 = \mathbf{0.6792} \quad (\mathbf{67.92\%}).
+    \end{align*}
+    \textbf{Risposta corretta: b) 0.679}.
+
+    \item Sia $X \sim \operatorname{Bin}(n=400, p=0.95)$ il numero di pezzi perfetti:
+    \[
+    \mathbf{\EE[X] = np = 400 \times 0.95 = 380},
+    \]
+    \[
+    \Var(X) = np(1-p) = 400 \times 0.95 \times 0.05 = 19 \implies \mathbf{\sigma_X = \sqrt{19} \approx 4.3589}.
+    \]
+
+    \item Applicando il Teorema del Limite Centrale con correzione di continuità ($X \ge 384.5$):
+    \[
+    \Prob(X \ge 385) = \Prob(X \ge 384.5) \approx 1 - \Phi\left( \frac{384.5 - 380}{\sqrt{19}} \right) = 1 - \Phi\left( \frac{4.5}{4.3589} \right) = 1 - \Phi(1.0324).
+    \]
+    Dalle tavole della normale standard ($\Phi(1.03) \approx 0.84849$):
+    \[
+    \Prob(X \ge 385) \approx 1 - 0.8491 = \mathbf{0.1509} \quad (\mathbf{15.09\%}).
+    \]
+    \emph{Nota:} Senza correzione di continuità, $1 - \Phi\left(\frac{5}{4.3589}\right) = 1 - \Phi(1.1471) = 0.1257$.
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 3
+% ==============================================================================
+\begin{problemabox}{Problema 3 (Testo Integrale)}
+Un laboratorio chimico misura la quantità di scarti (in mg/kg) generati da un nuovo processo su 8 lotti:
+\[
+7.3, \quad 7.5, \quad 7.1, \quad 7.6, \quad 7.4, \quad 6.9, \quad 7.5, \quad 6.9.
+\]
+Si assuma una popolazione normale $\mathcal{N}(\mu, \sigma^2)$ con parametri incogniti. Il limite massimo di legge è $7.53\text{ mg/kg}$.
+\begin{enumerate}[label=(\alph*)]
+    \item Calcolare l'intervallo di confidenza bilaterale al 95\% per $\mu$.
+    \item Definire le ipotesi $H_0$ e $H_1$ per verificare se il processo rispetta la normativa ($\mu < 7.53$).
+    \item Condurre il test d'ipotesi al livello di significatività dell'1\%.
+    \item Calcolare approssimativamente il valore $p$.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Statistiche descrittive campionarie ($n = 8$):}
+\[
+\overline{x} = \mathbf{7.275\text{ mg/kg}}, \qquad s = \mathbf{0.2493\text{ mg/kg}}.
+\]
+
+\textbf{2. Risoluzione Quesito (a) --- Intervallo di Confidenza al 95\% ($\nu = 7$ g.d.l.):}
+Il valore critico della $t$ di Student a 7 g.d.l. è $t_{7, \, 0.025} = 2.3646$:
+\[
+ME = t_{7, \, 0.025} \frac{s}{\sqrt{8}} = 2.3646 \cdot \frac{0.2493}{\sqrt{8}} = 2.3646 \cdot 0.08814 \approx \mathbf{0.2084\text{ mg/kg}}.
+\]
+\[
+\mathbf{\operatorname{IC}_{95\%}(\mu) = [7.275 - 0.2084, \;\; 7.275 + 0.2084] = [7.0666, \;\; 7.4834]\text{ mg/kg}}.
+\]
+
+\textbf{3. Risoluzione Quesito (b) --- Formulazione delle ipotesi:}
+\[
+\mathbf{H_0: \mu \ge 7.53} \qquad \text{vs} \qquad \mathbf{H_1: \mu < 7.53}.
+\]
+
+\textbf{4. Risoluzione Quesito (c) --- Esecuzione del $t$-test a $\alpha = 0.01$:}
+Calcoliamo la statistica test $T$:
+\[
+T_{\text{oss}} = \frac{\overline{x} - \mu_0}{s/\sqrt{8}} = \frac{7.275 - 7.53}{0.08814} = \frac{-0.255}{0.08814} = \mathbf{-2.8933}.
+\]
+Il valore critico per un test unilaterale sinistro a $\alpha = 0.01$ con 7 g.d.l. è $-t_{7, \, 0.01} = -2.9980$.
+La regione critica di rifiuto è $W = (-\infty, -2.9980]$.
+Poiché $T_{\text{oss}} = -2.8933 > -2.9980$, la statistica non cade nella regione di rifiuto.
+\textbf{Conclusione:} Al livello dell'$1\%$, \textbf{non rifiutiamo $H_0$}. L'evidenza empirica non è sufficientemente forte per certificare a $\alpha=1\%$ la conformità del processo.
+
+\textbf{5. Risoluzione Quesito (d) --- Calcolo del $p$-value:}
+\[
+p\text{-value} = \Prob(t_7 \le -2.8933) \approx \mathbf{0.0116} \quad (\mathbf{1.16\%} > 1\%).
+\]
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 4
+% ==============================================================================
+\begin{problemabox}{Problema 4 (Testo Integrale)}
+Sia $X$ una variabile aleatoria con densità di probabilità:
+\[
+f_\theta(x) = \frac{x}{\theta^2} e^{-x/\theta} \mathbf{1}_{(0,\infty)}(x), \qquad \theta > 0.
+\]
+\begin{enumerate}[label=(\alph*)]
+    \item Calcolare $\EE[2X+3]$.
+    \item Calcolare lo stimatore di massima verosimiglianza per $\theta$.
+    \item Lo stimatore è corretto? È consistente?
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\alph*)]
+    \item Riconosciamo che $X \sim \operatorname{Gamma}(\alpha = 2, \beta = 1/\theta)$.
+    Il valore atteso di $X$ è $\EE[X] = \frac{\alpha}{\beta} = 2\theta$.
+    Per linearità:
+    \[
+    \mathbf{\EE[2X+3] = 2\EE[X] + 3 = 2(2\theta) + 3 = 4\theta + 3}.
+    \]
+
+    \item \textbf{Stimatore di Massima Verosimiglianza (MLE):}
+    Su un campione i.i.d. $x_1, \dots, x_n > 0$:
+    \[
+    L(\theta) = \prod_{i=1}^n \frac{x_i}{\theta^2} e^{-x_i/\theta} = \theta^{-2n} \left(\prod_{i=1}^n x_i\right) \exp\left(-\frac{1}{\theta}\sum_{i=1}^n x_i\right).
+    \]
+    La log-verosimiglianza è:
+    \[
+    \ell(\theta) = -2n \log \theta + \sum_{i=1}^n \log x_i - \frac{1}{\theta}\sum_{i=1}^n x_i.
+    \]
+    Annullando la derivata prima:
+    \[
+    \frac{\partial \ell}{\partial \theta} = -\frac{2n}{\theta} + \frac{1}{\theta^2}\sum_{i=1}^n x_i = 0 \implies 2n\theta = \sum_{i=1}^n x_i \implies \mathbf{\widehat{\theta}_{\text{MLE}} = \frac{1}{2n}\sum_{i=1}^n X_i = \frac{\overline{X}_n}{2}}.
+    \]
+
+    \item \textbf{Verifica della correttezza e consistenza:}
+    \begin{itemize}
+        \item \emph{Correttezza:}
+        \[
+        \EE[\widehat{\theta}_{\text{MLE}}] = \frac{\EE[\overline{X}_n]}{2} = \frac{2\theta}{2} = \mathbf{\theta} \implies \textbf{lo stimatore è corretto} \quad (\operatorname{Bias} = 0).
+        \]
+        \item \emph{Consistenza:}
+        Per la Legge Debole dei Grandi Numeri, $\overline{X}_n \xrightarrow{\Prob} \EE[X] = 2\theta$.
+        Pertanto $\widehat{\theta} = \frac{\overline{X}_n}{2} \xrightarrow{\Prob} \frac{2\theta}{2} = \mathbf{\theta} \implies \textbf{lo stimatore è consistente}$.
+    \end{itemize}
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 5
+% ==============================================================================
+\begin{problemabox}{Problema 5 (Testo Integrale)}
+Consideriamo l'integrale
+\[
+\int_{-\infty}^\infty \frac{1}{\sqrt{8\pi}} e^{-(x-2)^2/8} \frac{\cos(7 + \log(x^2 + 1))}{2 + x^4} \, \dx.
+\]
+\begin{enumerate}[label=(\alph*)]
+    \item Discutere il metodo di Monte Carlo per approssimare questo integrale.
+    \item Scrivere i comandi in linguaggio R.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Fondamento teorico:}
+Riconosciamo nella prima parte dell'integrando la densità di una variabile normale $X \sim \mathcal{N}(\mu = 2, \sigma^2 = 4)$ con deviazione standard $\sigma = 2$:
+\[
+\phi_{\mu=2, \, \sigma=2}(x) = \frac{1}{\sqrt{2\pi \cdot 4}} e^{-(x-2)^2/(2 \cdot 4)} = \frac{1}{\sqrt{8\pi}} e^{-(x-2)^2/8}.
+\]
+Pertanto l'integrale è il valore atteso:
+\[
+I = \EE\left[ \frac{\cos(7 + \log(X^2 + 1))}{2 + X^4} \right], \qquad X \sim \mathcal{N}(2, 4).
+\]
+Valore numerico di riferimento: $I \approx \mathbf{0.007604}$.
+
+\textbf{2. Implementazione in linguaggio R:}
+\begin{lstlisting}[language=R]
+set.seed(42)
+N <- 1000000
+x_norm <- rnorm(N, mean = 2, sd = 2)
+g_val <- cos(7 + log(x_norm^2 + 1)) / (2 + x_norm^4)
+I_hat <- mean(g_val)
+cat(sprintf("Stima Monte Carlo: %.6f\n", I_hat)) # ~ 0.0076
+\end{lstlisting}
+\end{soluzionebox}
+
+\end{document}

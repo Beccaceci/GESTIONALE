@@ -61,12 +61,12 @@ Click any button below to download the latest compiled high-definition **PDF** d
 
 | Course | Key Topics Covered | Direct 1-Click PDF Download |
 | :--- | :--- | :---: |
-| **Linear Algebra and Geometry** (*Algebra Lineare e Geometria*) | Logic & set theory, complex numbers, vector spaces, linear transformations, matrices & linear systems, determinants, eigenvalues & eigenvectors, inner products & spectral theorem, guided exam problems. | [![Download Linear Algebra](https://img.shields.io/badge/Download-Linear__Algebra.pdf-0052cc?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/Beccaceci/GESTIONALE/raw/main/courses/first_year/ALGEBRA_LINEARE/main.pdf) |
-| **Calculus 1** (*Analisi Matematica 1*) | Number sets, trigonometry, limits & continuity, differential calculus, Taylor expansions, abstract analysis, integral calculus, ordinary differential equations (ODEs), past exam walkthroughs. | [![Download Calculus 1](https://img.shields.io/badge/Download-Calculus__1.pdf-d32f2f?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/Beccaceci/GESTIONALE/raw/main/courses/first_year/ANALISI1/main.pdf) |
-| **Calculus 2** (*Analisi Matematica 2*) | Multivariable topology, differential calculus in $\mathbb{R}^n$, implicit functions (Dini's Theorem), unconstrained & constrained optimization, curves & line integrals, vector calculus & differential forms, multiple integrals, surfaces & surface integrals, Gauss-Green and Stokes theorems. | [![Download Calculus 2](https://img.shields.io/badge/Download-Calculus__2.pdf-7b1fa2?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/Beccaceci/GESTIONALE/raw/main/courses/first_year/ANALISI2/main.pdf) |
-| **Economics & Business Organization** (*Economia*) | Economic principles, microeconomics, consumer theory & demand, production & cost theory, market structures, risk & information, macroeconomics, IS-LM and AD-AS models, inflation, unemployment, foreign trade & exchange rates. | [![Download Economics](https://img.shields.io/badge/Download-Economics.pdf-2e7d32?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/Beccaceci/GESTIONALE/raw/main/courses/first_year/ECONOMIA/main.pdf) |
-| **General Physics** (*Fisica Generale*) | Particle kinematics & dynamics, relative motion & non-inertial frames, work & energy, multi-particle systems & collisions, angular momentum & rotation, rigid body dynamics, gravitation & central forces, oscillations & waves, fluid mechanics, thermodynamics & entropy. | [![Download Physics](https://img.shields.io/badge/Download-Physics.pdf-e65100?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/Beccaceci/GESTIONALE/raw/main/courses/first_year/FISICA/main.pdf) |
-| **Probability and Statistics** (*Calcolo delle Probabilità e Statistica*) | Descriptive statistics, probability spaces, conditional probability & independence, discrete & continuous random variables, expected value & variance, sums of random variables & Central Limit Theorem (CLT), point estimation & MLE, confidence intervals, hypothesis testing. | [![Download Statistics](https://img.shields.io/badge/Download-Statistics.pdf-00838f?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/Beccaceci/GESTIONALE/raw/main/courses/first_year/STATISTICA/main.pdf) |
+| **Linear Algebra and Geometry** (*Algebra Lineare e Geometria*) | Logic & set theory, complex numbers, vector spaces, linear transformations, matrices & linear systems, determinants, eigenvalues & eigenvectors, inner products & spectral theorem, guided exam problems. | [![Download Linear Algebra](https://img.shields.io/badge/Download-Linear__Algebra.pdf-0052cc?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/Beccaceci/GESTIONALE/raw/main/courses/first_year/ALGEBRA_LINEARE/notes/main.pdf) |
+| **Calculus 1** (*Analisi Matematica 1*) | Number sets, trigonometry, limits & continuity, differential calculus, Taylor expansions, abstract analysis, integral calculus, ordinary differential equations (ODEs), past exam walkthroughs. | [![Download Calculus 1](https://img.shields.io/badge/Download-Calculus__1.pdf-d32f2f?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/Beccaceci/GESTIONALE/raw/main/courses/first_year/ANALISI1/notes/main.pdf) |
+| **Calculus 2** (*Analisi Matematica 2*) | Multivariable topology, differential calculus in $\mathbb{R}^n$, implicit functions (Dini's Theorem), unconstrained & constrained optimization, curves & line integrals, vector calculus & differential forms, multiple integrals, surfaces & surface integrals, Gauss-Green and Stokes theorems. | [![Download Calculus 2](https://img.shields.io/badge/Download-Calculus__2.pdf-7b1fa2?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/Beccaceci/GESTIONALE/raw/main/courses/first_year/ANALISI2/notes/main.pdf) |
+| **Economics & Business Organization** (*Economia*) | Economic principles, microeconomics, consumer theory & demand, production & cost theory, market structures, risk & information, macroeconomics, IS-LM and AD-AS models, inflation, unemployment, foreign trade & exchange rates. | [![Download Economics](https://img.shields.io/badge/Download-Economics.pdf-2e7d32?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/Beccaceci/GESTIONALE/raw/main/courses/first_year/ECONOMIA/notes/main.pdf) |
+| **General Physics** (*Fisica Generale*) | Particle kinematics & dynamics, relative motion & non-inertial frames, work & energy, multi-particle systems & collisions, angular momentum & rotation, rigid body dynamics, gravitation & central forces, oscillations & waves, fluid mechanics, thermodynamics & entropy. | [![Download Physics](https://img.shields.io/badge/Download-Physics.pdf-e65100?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/Beccaceci/GESTIONALE/raw/main/courses/first_year/FISICA/notes/main.pdf) |
+| **Probability and Statistics** (*Calcolo delle Probabilità e Statistica*) | Descriptive statistics, probability spaces, conditional probability & independence, discrete & continuous random variables, expected value & variance, sums of random variables & Central Limit Theorem (CLT), point estimation & MLE, confidence intervals, hypothesis testing. | [![Download Statistics](https://img.shields.io/badge/Download-Statistics.pdf-00838f?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](https://github.com/Beccaceci/GESTIONALE/raw/main/courses/first_year/STATISTICA/notes/main.pdf) |
 
 > 📌 **Note:** All download links stream the compiled binary files directly from GitHub with zero waiting time or viewer screens.
 
@@ -74,7 +74,7 @@ Click any button below to download the latest compiled high-definition **PDF** d
 
 ## 📂 Repository Structure
 
-All subjects are neatly organized by academic year under [`courses/`](courses/):
+All subjects are neatly organized by academic year and cleanly separated into theoretical lecture notes (`notes/`) and past exams (`exams/`):
 
 ```text
 GESTIONALE/
@@ -84,15 +84,21 @@ GESTIONALE/
 ├── courses/
 │   └── first_year/                  # First-year courses
 │       ├── ALGEBRA_LINEARE/
-│       │   ├── config/              # Packages, environments, and custom math macros
-│       │   ├── chapters/            # Modular chapter files
-│       │   ├── figures/             # Vector graphics (TikZ) and diagrams
-│       │   └── main.tex             # Master LaTeX file
+│       │   ├── notes/               # LaTeX source notes (chapters/, config/, figures/, main.tex)
+│       │   └── exams/               # Past exam papers & archive
 │       ├── ANALISI1/
+│       │   ├── notes/
+│       │   └── exams/
 │       ├── ANALISI2/
+│       │   ├── notes/
+│       │   └── exams/
 │       ├── ECONOMIA/
+│       │   └── notes/
 │       ├── FISICA/
+│       │   └── notes/
 │       └── STATISTICA/
+│           ├── notes/
+│           └── exams/
 ├── .gitignore                       # Build artifacts filter
 └── README.md
 ```

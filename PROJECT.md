@@ -55,11 +55,11 @@ courses/first_year/ANALISI1/esami/
 ## Milestones
 | # | Name | Scope | Dependencies | Status |
 |---|------|-------|-------------|--------|
-| M1 | Download & Directory Setup | Download all 12 yearly compilation PDFs into year subfolders | none | PLANNED |
-| M2 | PDF Splitting & Organization | Split all yearly PDFs into 99 date-based single exam PDFs (problems + solutions) | M1 | PLANNED |
-| M3 | Comprehensive Verification | Run 4-tier verification (file integrity, page accounting, problem/solution content, visual rendering) | M2 | PLANNED |
-| M4 | Documentation & Git Deployment | Generate master `README.md` catalog, stage files, commit, and push to GitHub origin/main | M3 | PLANNED |
-| M5 | E2E Testing & Final Gate | Run complete E2E test harness, verify 100% pass and clean git state | M4 | PLANNED |
+| M1 | Download & Directory Setup | Download all 12 yearly compilation PDFs into year subfolders | none | DONE |
+| M2 | PDF Splitting & Organization | Split all yearly PDFs into 99 date-based single exam PDFs (problems + solutions) | M1 | DONE |
+| M3 | Comprehensive Verification | Run 4-tier verification (file integrity, page accounting, problem/solution content, visual rendering) | M2 | DONE |
+| M4 | Documentation & Git Deployment | Generate master `README.md` catalog, stage files, commit, and push to GitHub origin/main | M3 | DONE |
+| M5 | E2E Testing & Final Gate | Run complete E2E test harness, verify 100% pass and clean git state | M4 | DONE |
 
 ## Interface Contracts
 ### Downloader (M1) ↔ Splitter (M2)
@@ -75,8 +75,8 @@ courses/first_year/ANALISI1/esami/
 - README generator uses verified file metadata (dates, names, page counts) to populate catalog.
 
 ### Documenter & Git Publisher (M4) ↔ E2E Gate (M5)
-- Git commit message: `feat(analisi1): add past exams archive (2011-12 to 2024-25) with solutions and date-based split`
-- Git push to origin/main completes cleanly.
+- Git commit message: `feat(analisi1): add past exams archive (2011-12 to 2024-25) with solutions and date-based split` (commit `b78e934`)
+- Git push to origin/main completed cleanly.
 
 ## Code Layout
 - Target directory: `courses/first_year/ANALISI1/esami/`

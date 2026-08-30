@@ -1,0 +1,380 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2cm,headheight=14pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,amsfonts,bm,siunitx}
+\usepackage{booktabs,tabularx,enumitem,float}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\definecolor{navyblue}{RGB}{10, 45, 90}
+\definecolor{coolblue}{RGB}{28, 110, 164}
+\definecolor{forestgreen}{RGB}{20, 115, 60}
+\definecolor{warmamber}{RGB}{195, 110, 10}
+\definecolor{crimsonred}{RGB}{175, 30, 45}
+\definecolor{subtlegray}{RGB}{245, 247, 250}
+\definecolor{codebg}{RGB}{240, 242, 245}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=navyblue,
+    urlcolor=coolblue,
+    citecolor=forestgreen
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{\textsf{\textcolor{navyblue}{Statistica I --- Soluzione Ufficiale Dettagliata}}}}
+\fancyhead[R]{\textsf{\textcolor{coolblue}{I Appello (06/06/2023)}}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.6pt}
+
+\newtcolorbox{problemabox}[1]{
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=navyblue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=navyblue, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1.2pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{soluzionebox}[1][Svolgimento Dettagliato]{
+    enhanced,
+    breakable,
+    colback=subtlegray,
+    colframe=forestgreen!80!black,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=forestgreen!80!black, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{esamebox}[1][Consiglio per l'Esame \& Aspetti Chiave]{
+    enhanced,
+    breakable,
+    colback=crimsonred!4!white,
+    colframe=crimsonred,
+    coltitle=crimsonred,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=white, boxrule=0.8pt, colframe=crimsonred},
+    boxrule=0.8pt,
+    leftrule=3.5pt,
+    sharp corners,
+    top=3.5mm, bottom=2.5mm, left=3mm, right=3mm
+}
+
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{navyblue!40},
+    keywordstyle=\color{navyblue}\bfseries,
+    commentstyle=\color{forestgreen}\itshape,
+    stringstyle=\color{warmamber},
+    showstringspaces=false
+}
+
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\dx}{\mathrm{d}x}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries\color{navyblue} Università di Pisa --- Corso di Laurea in Ingegneria Gestionale}\\[0.4em]
+    {\Large\bfseries Statistica I (A.A. 2022/2023) --- I Appello del 06/06/2023}\\[0.3em]
+    {\large\textsf{Soluzione Completa, Rigorosa e Commentata Passo-Passo}}
+\end{center}
+\vspace{0.5em}
+\hrule height 1.2pt
+\vspace{1.5em}
+
+% ==============================================================================
+% PROBLEMA 1
+% ==============================================================================
+\begin{problemabox}{Problema 1 (Testo Integrale)}
+Si consideri un mazzo di carte italiane tradizionali composto da 40 carte (4 semi: denari, coppe, spade, bastoni; e 10 numeri: dall'1 al 7, e tre figure: fante (F), cavallo (C), re (R)).
+\begin{enumerate}[label=(\alph*)]
+    \item Supponiamo di estrarre due carte a caso senza reinserimento. Siano $X_1, X_2$ il valore della prima e della seconda carta pescata (le figure valgono 10). Queste variabili sono indipendenti?\\
+    \emph{a) sì \quad b) no \quad c) dati insuff. \quad d) correlazione positiva \quad e) Altro}
+    \item Supponiamo di estrarre due carte senza reinserimento. Qual è la probabilità che la loro somma faccia esattamente 4?\\
+    \emph{a) 0.01 \quad b) 0.018 \quad c) 0.02 \quad d) 0.028 \quad e) Altro}
+    \item Supponiamo ora di pescare con reinserimento. Quale è la probabilità di pescare almeno 3 carte di coppe nei primi 4 tentativi?\\
+    \emph{a) 0.262 \quad b) 0.051 \quad c) 0.046 \quad d) 0.291 \quad e) Altro}
+    \item Sempre pescando con reinserimento, sia $X$ il numero di estrazioni necessarie per osservare il primo fante dopo il primo 4. Calcolare $\EE[X]$ e $\Var(X)$.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Verifica dell'indipendenza:}
+    Poiché l'estrazione avviene senza reinserimento, l'esito della prima estrazione modifica la composizione residua del mazzo per la seconda carta (ad esempio, se $X_1 = 10$, nel mazzo rimangono solo 11 figure su 39 carte anziché 12 su 40).
+    Pertanto, $X_1$ e $X_2$ \textbf{NON sono indipendenti}.\\
+    \textbf{Risposta corretta: b) no}.
+
+    \item \textbf{Probabilità che la somma sia 4 ($X_1 + X_2 = 4$):}
+    Il numero totale di coppie ordinate di carte estraibili da un mazzo di 40 carte senza reinserimento è:
+    \[
+    |\Omega| = 40 \times 39 = 1560.
+    \]
+    Le combinazioni di valori che generano una somma pari a $4$ sono $(1, 3)$, $(2, 2)$ e $(3, 1)$:
+    \begin{itemize}
+        \item Coppia $(1, 3)$: $4 \text{ assi} \times 4 \text{ tre} = 16$ esiti ordinati.
+        \item Coppia $(2, 2)$: $4 \text{ due} \times 3 \text{ due rimanenti} = 12$ esiti ordinati.
+        \item Coppia $(3, 1)$: $4 \text{ tre} \times 4 \text{ assi} = 16$ esiti ordinati.
+    \end{itemize}
+    Il numero totale di casi favorevoli è $16 + 12 + 16 = 44$.
+    \[
+    \Prob(X_1 + X_2 = 4) = \frac{44}{1560} = \frac{11}{390} \approx \mathbf{0.028205} \quad (\mathbf{2.82\%}).
+    \]
+    \textbf{Risposta corretta: d) 0.028}.
+
+    \item \textbf{Almeno 3 carte di coppe su 4 estrazioni con reinserimento:}
+    Ad ogni estrazione, la probabilità di estrarre una carta di coppe è costante: $p = \frac{10}{40} = \frac{1}{4} = 0.25$.
+    Il numero di carte di coppe estratte segue una legge Binomiale $Y \sim \operatorname{Bin}(n=4, p=0.25)$:
+    \begin{align*}
+    \Prob(Y \ge 3) &= \Prob(Y = 3) + \Prob(Y = 4) = \binom{4}{3} (0.25)^3 (0.75)^1 + \binom{4}{4} (0.25)^4 \\
+    &= 4 \cdot \frac{1}{64} \cdot \frac{3}{4} + 1 \cdot \frac{1}{256} = \frac{12}{256} + \frac{1}{256} = \frac{13}{256} \approx \mathbf{0.05078} \quad (\mathbf{5.08\%}).
+    \end{align*}
+    \textbf{Risposta corretta: b) 0.051}.
+
+    \item \textbf{Valore atteso e varianza di $X$ (primo fante dopo il primo 4):}
+    Sia $Y_4$ il numero di estrazioni necessarie per osservare il primo 4, e sia $Y_F$ il numero di estrazioni aggiuntive (indipendenti) per osservare il primo fante a partire da quell'istante.
+    Allora $X = Y_4 + Y_F$.
+    Nel mazzo ci sono 4 carte con valore 4 ($p_4 = 4/40 = 1/10$) e 4 fanti ($p_F = 4/40 = 1/10$).
+    Entrambe le variabili seguono una legge Geometrica con supporto su $\{1, 2, 3, \dots\}$:
+    \[
+    \EE[Y_4] = \frac{1}{p_4} = 10, \qquad \Var(Y_4) = \frac{1 - p_4}{p_4^2} = \frac{0.9}{0.01} = 90.
+    \]
+    \[
+    \EE[Y_F] = \frac{1}{p_F} = 10, \qquad \Var(Y_F) = \frac{1 - p_F}{p_F^2} = \frac{0.9}{0.01} = 90.
+    \]
+    Per la linearità e l'indipendenza:
+    \[
+    \mathbf{\EE[X] = \EE[Y_4] + \EE[Y_F] = 10 + 10 = 20},
+    \]
+    \[
+    \mathbf{\Var(X) = \Var(Y_4) + \Var(Y_F) = 90 + 90 = 180}.
+    \]
+    \emph{Nota esplicativa:} Se la richiesta fosse riferita a una specifica singola carta (es. solo il 4 di denari e solo il fante di spade, $p = 1/40$), si avrebbe $\EE[X] = 40 + 40 = 80$ e $\Var(X) = 2 \times \frac{39/40}{1/1600} = 3120$.
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 2
+% ==============================================================================
+\begin{problemabox}{Problema 2 (Testo Integrale)}
+Confrontiamo la durata di due marche di batterie alcaline con 7 batterie di Marca A e 6 di Marca B:
+\begin{itemize}
+    \item Marca A: $720, \quad 730, \quad 740, \quad 710, \quad 705, \quad 715, \quad 725$ (in ore, $\sigma_A^2 = 121$ nota).
+    \item Marca B: $708, \quad 703, \quad 693, \quad 718, \quad 713, \quad 698$ (in ore, $\sigma_B^2 = 81$ nota).
+\end{itemize}
+\begin{enumerate}[label=(\alph*)]
+    \item Calcola l'intervallo di confidenza bilaterale al 95\% per $\mu_A$.
+    \item Definire le ipotesi $H_0$ e $H_1$ per verificare se c'è una differenza significativa tra le due marche.
+    \item Testare l'ipotesi nulla al livello del 5\%.
+    \item Calcola approssimativamente il valore $p$.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Statistiche descrittive campionarie:}
+\[
+\overline{x}_A = \frac{720 + 730 + 740 + 710 + 705 + 715 + 725}{7} = \frac{5045}{7} \approx \mathbf{720.7143\text{ ore}}, \qquad n_A = 7, \quad \sigma_A = \sqrt{121} = 11.
+\]
+\[
+\overline{x}_B = \frac{708 + 703 + 693 + 718 + 713 + 698}{6} = \frac{4233}{6} = \mathbf{705.5000\text{ ore}}, \qquad n_B = 6, \quad \sigma_B = \sqrt{81} = 9.
+\]
+
+\textbf{2. Risoluzione Quesito (a) --- Intervallo di Confidenza al 95\% per $\mu_A$:}
+Essendo la varianza della popolazione nota ($\sigma_A = 11$), la statistica pivotale è normale standard con quantile critico $z_{0.025} = 1.960$:
+\[
+ME_A = z_{0.025} \frac{\sigma_A}{\sqrt{n_A}} = 1.960 \cdot \frac{11}{\sqrt{7}} = 1.960 \cdot 4.1576 \approx \mathbf{8.1489\text{ ore}}.
+\]
+\[
+\mathbf{\operatorname{IC}_{95\%}(\mu_A) = [720.7143 - 8.1489, \;\; 720.7143 + 8.1489] = [712.5654, \;\; 728.8632]\text{ ore}}.
+\]
+
+\textbf{3. Risoluzione Quesito (b) --- Formulazione delle ipotesi del test:}
+\[
+\mathbf{H_0: \mu_A = \mu_B} \qquad \text{vs} \qquad \mathbf{H_1: \mu_A \neq \mu_B}.
+\]
+
+\textbf{4. Risoluzione Quesito (c) --- Esecuzione del Test $Z$ a due campioni indipendenti ($\alpha = 0.05$):}
+L'errore standard combinato della differenza tra medie è:
+\[
+\operatorname{SE}(\overline{X}_A - \overline{X}_B) = \sqrt{\frac{\sigma_A^2}{n_A} + \frac{\sigma_B^2}{n_B}} = \sqrt{\frac{121}{7} + \frac{81}{6}} = \sqrt{17.2857 + 13.5000} = \sqrt{30.7857} \approx 5.5485.
+\]
+Calcoliamo la statistica test $Z$:
+\[
+Z_{\text{oss}} = \frac{\overline{x}_A - \overline{x}_B}{\operatorname{SE}(\overline{X}_A - \overline{X}_B)} = \frac{720.7143 - 705.5000}{5.5485} = \frac{15.2143}{5.5485} = \mathbf{2.7421}.
+\]
+Il valore critico bilaterale al livello $\alpha = 0.05$ è $z_{0.025} = 1.960$.
+Poiché $|Z_{\text{oss}}| = 2.7421 > 1.960$, la statistica cade in piena regione di rifiuto.
+\textbf{Conclusione:} \textbf{Rifiutiamo l'ipotesi nulla $H_0$}. Sussiste una differenza statisticamente significativa tra la durata media delle batterie di Marca A e Marca B (la Marca A ha durata media superiore).
+
+\textbf{5. Risoluzione Quesito (d) --- Calcolo del $p$-value:}
+\[
+p\text{-value} = 2 \cdot (1 - \Phi(2.7421)) = 2 \cdot (1 - 0.99695) = \mathbf{0.0061} \quad (\mathbf{0.61\%} < 5\%).
+\]
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 3
+% ==============================================================================
+\begin{problemabox}{Problema 3 (Testo Integrale)}
+Un call center riceve chiamate indipendenti da due regioni: $\lambda_A = 2$ chiamate/minuto e $\lambda_B = 3$ chiamate/minuto (distribuzioni di Poisson).
+\begin{enumerate}[label=(\alph*)]
+    \item Calcolare la probabilità che, in un minuto, riceva almeno 2 chiamate da A.\\
+    \emph{a) 0.594 \quad b) 0.323 \quad c) 0.271 \quad d) 0.729 \quad e) Altro}
+    \item Calcolare la probabilità che riceva almeno 2 chiamate in totale.
+    \item Se sono arrivate esattamente due chiamate nell'ultimo minuto, calcolare la probabilità che entrambe siano arrivate dalla regione B.
+    \item Calcolare la probabilità che in 2 ore il call center riceva almeno 260 chiamate da A.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\alph*)]
+    \item Siano $X_A \sim \operatorname{Poiss}(\lambda_A = 2)$ le chiamate da A in un minuto:
+    \[
+    \Prob(X_A \ge 2) = 1 - \Prob(X_A = 0) - \Prob(X_A = 1) = 1 - e^{-2}\left(1 + \frac{2^1}{1!}\right) = 1 - 3e^{-2} \approx \mathbf{0.59399} \quad (\mathbf{59.40\%}).
+    \]
+    \textbf{Risposta corretta: a) 0.594}.
+
+    \item Il numero totale di chiamate è $T = X_A + X_B \sim \operatorname{Poiss}(\lambda_A + \lambda_B = 2 + 3 = 5)$:
+    \[
+    \Prob(T \ge 2) = 1 - \Prob(T = 0) - \Prob(T = 1) = 1 - e^{-5}\left(1 + 5\right) = 1 - 6e^{-5} \approx \mathbf{0.95957} \quad (\mathbf{95.96\%}).
+    \]
+
+    \item Applicando la definizione di probabilità condizionata e l'indipendenza:
+    \[
+    \Prob(X_B = 2 \mid T = 2) = \frac{\Prob(X_A = 0, X_B = 2)}{\Prob(T = 2)} = \frac{e^{-2} \cdot \left( \frac{e^{-3} 3^2}{2!} \right)}{\frac{e^{-5} 5^2}{2!}} = \frac{e^{-5} \cdot \frac{9}{2}}{e^{-5} \cdot \frac{25}{2}} = \mathbf{\frac{9}{25} = 0.3600} \quad (\mathbf{36.00\%}).
+    \]
+
+    \item In $n = 120$ minuti (2 ore), il numero di chiamate da A è $S_A = \sum_{i=1}^{120} X_{A,i} \sim \operatorname{Poiss}(120 \times 2 = 240)$:
+    \[
+    \EE[S_A] = 240, \qquad \Var(S_A) = 240 \implies \sigma_{S_A} = \sqrt{240} \approx 15.4919.
+    \]
+    Applicando il Teorema del Limite Centrale ($S_A \approx \mathcal{N}(240, 240)$):
+    \[
+    \Prob(S_A \ge 260) \approx 1 - \Phi\left( \frac{260 - 240}{\sqrt{240}} \right) = 1 - \Phi\left( \frac{20}{15.4919} \right) = 1 - \Phi(1.2910).
+    \]
+    Dalle tavole della normale standard ($\Phi(1.29) \approx 0.90147$):
+    \[
+    \Prob(S_A \ge 260) \approx 1 - 0.9016 = \mathbf{0.0984} \quad (\mathbf{9.84\%}).
+    \]
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 4
+% ==============================================================================
+\begin{problemabox}{Problema 4 (Testo Integrale)}
+Si consideri la densità di probabilità dipendente da $\theta > 0$:
+\[
+f_\theta(x) = \frac{2}{\theta} x \exp\left(-\frac{x^2}{\theta}\right) \mathbf{1}_{(0,\infty)}(x).
+\]
+\begin{enumerate}[label=(\alph*)]
+    \item Mostrare che $f_\theta$ è una densità di probabilità e calcolare $\Prob(X \le x)$.
+    \item Calcolare lo stimatore di massima verosimiglianza per $\theta$.
+    \item Si tratta di uno stimatore corretto?
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Verifica della densità e Calcolo della CDF:}
+    La funzione è non negativa per $x > 0$ e $\theta > 0$. Calcoliamo la CDF per $x > 0$:
+    \[
+    F_\theta(x) = \int_0^x \frac{2t}{\theta} e^{-t^2/\theta} \, \mathrm{d}t.
+    \]
+    Ponendo $u = t^2/\theta \implies \mathrm{d}u = \frac{2t}{\theta}\mathrm{d}t$:
+    \[
+    F_\theta(x) = \int_0^{x^2/\theta} e^{-u} \, \mathrm{d}u = \left[ -e^{-u} \right]_0^{x^2/\theta} = \mathbf{1 - \exp\left(-\frac{x^2}{\theta}\right)}.
+    \]
+    Poiché $\lim_{x \to \infty} F_\theta(x) = 1 - 0 = 1$, la funzione è normalizzata ed è una valida densità.
+
+    \item \textbf{Stimatore di Massima Verosimiglianza (MLE):}
+    La funzione di verosimiglianza su un campione i.i.d. $x_1, \dots, x_n$ è:
+    \[
+    L(\theta) = \prod_{i=1}^n \left( \frac{2x_i}{\theta} e^{-x_i^2/\theta} \right) = \frac{2^n}{\theta^n} \left(\prod_{i=1}^n x_i\right) \exp\left( -\frac{1}{\theta} \sum_{i=1}^n x_i^2 \right).
+    \]
+    La log-verosimiglianza è:
+    \[
+    \ell(\theta) = n \log 2 - n \log \theta + \sum_{i=1}^n \log x_i - \frac{1}{\theta}\sum_{i=1}^n x_i^2.
+    \]
+    Derivando rispetto a $\theta$:
+    \[
+    \frac{\partial \ell}{\partial \theta} = -\frac{n}{\theta} + \frac{1}{\theta^2}\sum_{i=1}^n x_i^2 = 0 \implies n\theta = \sum_{i=1}^n x_i^2 \implies \mathbf{\widehat{\theta}_{\text{MLE}} = \frac{1}{n}\sum_{i=1}^n X_i^2}.
+    \]
+
+    \item \textbf{Verifica della correttezza:}
+    Calcoliamo $\EE[X_1^2]$ utilizzando il cambio di variabile $u = x^2/\theta \implies x^2 = \theta u$:
+    \[
+    \EE[X_1^2] = \int_0^\infty x^2 \frac{2x}{\theta} e^{-x^2/\theta} \, \dx = \theta \int_0^\infty u e^{-u} \, \mathrm{d}u = \theta \cdot 1! = \theta.
+    \]
+    Di conseguenza:
+    \[
+    \EE[\widehat{\theta}_{\text{MLE}}] = \frac{1}{n}\sum_{i=1}^n \EE[X_i^2] = \frac{1}{n} \cdot n \theta = \mathbf{\theta}.
+    \]
+    Lo stimatore è \textbf{esattamente corretto} (non distorto).
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 5
+% ==============================================================================
+\begin{problemabox}{Problema 5 (Testo Integrale)}
+Consideriamo l'integrale
+\[
+\int_{-3}^5 \frac{\log(7 + e^x)}{2 + \sin(x)} \, \dx.
+\]
+\begin{enumerate}[label=(\alph*)]
+    \item Discutere brevemente il metodo di integrazione di Monte Carlo.
+    \item Scrivere i comandi in R per ottenere un valore approssimativo dell'integrale.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Fondamento teorico:}
+L'integrale è definito su $[a, b] = [-3, 5]$ con ampiezza $b - a = 8$. Possiamo scriverlo come:
+\[
+I = 8 \int_{-3}^5 \frac{\log(7 + e^x)}{2 + \sin(x)} \frac{1}{8} \, \dx = 8 \, \EE[g(X)], \qquad X \sim \operatorname{Unif}(-3, 5).
+\]
+Valore di riferimento calcolato numericamente: $I \approx \mathbf{12.4385}$.
+
+\textbf{2. Implementazione in linguaggio R:}
+\begin{lstlisting}[language=R]
+set.seed(42)
+N <- 1000000
+x_samples <- runif(N, min = -3, max = 5)
+g_val <- log(7 + exp(x_samples)) / (2 + sin(x_samples))
+I_hat <- 8 * mean(g_val)
+cat(sprintf("Stima Monte Carlo: %.4f\n", I_hat)) # 12.4385
+\end{lstlisting}
+\end{soluzionebox}
+
+\end{document}

@@ -1,0 +1,343 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=2cm,headheight=14pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,amsfonts,bm,siunitx}
+\usepackage{booktabs,tabularx,enumitem,float}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{bookmark}
+
+\definecolor{navyblue}{RGB}{10, 45, 90}
+\definecolor{coolblue}{RGB}{28, 110, 164}
+\definecolor{forestgreen}{RGB}{20, 115, 60}
+\definecolor{warmamber}{RGB}{195, 110, 10}
+\definecolor{crimsonred}{RGB}{175, 30, 45}
+\definecolor{subtlegray}{RGB}{245, 247, 250}
+\definecolor{codebg}{RGB}{240, 242, 245}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=navyblue,
+    urlcolor=coolblue,
+    citecolor=forestgreen
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{\textsf{\textcolor{navyblue}{Statistica I --- Soluzione Ufficiale Dettagliata}}}}
+\fancyhead[R]{\textsf{\textcolor{coolblue}{II Appello (27/06/2023)}}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.6pt}
+
+\newtcolorbox{problemabox}[1]{
+    enhanced,
+    breakable,
+    colback=white,
+    colframe=navyblue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=navyblue, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1.2pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{soluzionebox}[1][Svolgimento Dettagliato]{
+    enhanced,
+    breakable,
+    colback=subtlegray,
+    colframe=forestgreen!80!black,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-2mm, xshift=3mm},
+    boxed title style={colback=forestgreen!80!black, boxrule=0pt, sharp corners, rounded corners=north},
+    boxrule=1pt,
+    sharp corners,
+    rounded corners=south,
+    top=4mm, bottom=3mm, left=3mm, right=3mm
+}
+
+\newtcolorbox{esamebox}[1][Consiglio per l'Esame \& Aspetti Chiave]{
+    enhanced,
+    breakable,
+    colback=crimsonred!4!white,
+    colframe=crimsonred,
+    coltitle=crimsonred,
+    fonttitle=\bfseries\sffamily,
+    title={#1},
+    attach boxed title to top left={yshift=-1.5mm, xshift=2mm},
+    boxed title style={colback=white, boxrule=0.8pt, colframe=crimsonred},
+    boxrule=0.8pt,
+    leftrule=3.5pt,
+    sharp corners,
+    top=3.5mm, bottom=2.5mm, left=3mm, right=3mm
+}
+
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{navyblue!40},
+    keywordstyle=\color{navyblue}\bfseries,
+    commentstyle=\color{forestgreen}\itshape,
+    stringstyle=\color{warmamber},
+    showstringspaces=false
+}
+
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\dx}{\mathrm{d}x}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries\color{navyblue} Università di Pisa --- Corso di Laurea in Ingegneria Gestionale}\\[0.4em]
+    {\Large\bfseries Statistica I (A.A. 2022/2023) --- II Appello del 27/06/2023}\\[0.3em]
+    {\large\textsf{Soluzione Completa, Rigorosa e Commentata Passo-Passo}}
+\end{center}
+\vspace{0.5em}
+\hrule height 1.2pt
+\vspace{1.5em}
+
+% ==============================================================================
+% PROBLEMA 1
+% ==============================================================================
+\begin{problemabox}{Problema 1 (Testo Integrale)}
+Un'azienda compra componenti meccaniche da due fornitori. Ogni scatola contiene $10$ pezzi:
+\begin{itemize}
+    \item Scatola 1 (Fornitore 1): $2$ pezzi difettosi e $8$ conformi.
+    \item Scatola 2 (Fornitore 2): $4$ pezzi difettosi e $6$ conformi.
+\end{itemize}
+\begin{enumerate}[label=(\alph*)]
+    \item Estraiamo due pezzi senza reinserimento da una scatola. Siano $X_1, X_2 \in \{0, 1\}$ gli indicatori di difettosità. Sono indipendenti?\\
+    \emph{a) sì \quad b) no \quad c) dati insuff. \quad d) correlazione positiva \quad e) Altro}
+    \item E se l'estrazione fosse con reinserimento?\\
+    \emph{a) sì \quad b) no \quad c) dati insuff. \quad d) correlazione negativa \quad e) Altro}
+    \item Peschiamo $3$ pezzi senza reinserimento dalla Scatola 2. Probabilità che almeno uno sia difettoso?\\
+    \emph{a) 0.667 \quad b) 0.833 \quad c) 0.750 \quad d) 0.900 \quad e) Altro}
+    \item Peschiamo a caso una scatola e da essa estraiamo 3 pezzi senza reinserimento. Se sono tutti conformi, qual è la probabilità che la scatola scelta fosse la Scatola 1?
+    \item Scegliamo a caso una scatola e peschiamo con reinserimento fino a trovare il primo pezzo difettoso. Sia $X$ il numero di estrazioni. Calcolare $\EE[X]$.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\alph*)]
+    \item Senza reinserimento, la composizione residua cambia dopo la prima estrazione:
+    \[
+    \Prob(X_2 = 1 \mid X_1 = 1) \neq \Prob(X_2 = 1 \mid X_1 = 0).
+    \]
+    Pertanto $X_1$ e $X_2$ \textbf{NON sono indipendenti}.\\
+    \textbf{Risposta corretta: b) no}.
+
+    \item Con reinserimento, le estrazioni avvengono in condizioni identiche e non influenzate dalle precedenti: le variabili sono \textbf{indipendenti}.\\
+    \textbf{Risposta corretta: a) sì}.
+
+    \item Nella Scatola 2 ci sono 4 difettosi e 6 conformi su 10 pezzi.
+    La probabilità complementare che tutti i 3 pezzi siano conformi è:
+    \[
+    \Prob(\text{Tutti conformi}) = \frac{\binom{6}{3}}{\binom{10}{3}} = \frac{20}{120} = \frac{1}{6}.
+    \]
+    \[
+    \Prob(\ge 1\text{ difettoso}) = 1 - \frac{1}{6} = \mathbf{\frac{5}{6} \approx 0.8333} \quad (\mathbf{83.33\%}).
+    \]
+    \textbf{Risposta corretta: b) 0.833}.
+
+    \item Sia $C$ l'evento ``osservare 3 pezzi conformi''. Con prior $\Prob(S_1) = \Prob(S_2) = 1/2$:
+    \[
+    \Prob(C \mid S_1) = \frac{\binom{8}{3}}{\binom{10}{3}} = \frac{56}{120} = \frac{7}{15}, \qquad \Prob(C \mid S_2) = \frac{\binom{6}{3}}{\binom{10}{3}} = \frac{20}{120} = \frac{1}{6}.
+    \]
+    Applicando la Formula di Bayes:
+    \[
+    \Prob(S_1 \mid C) = \frac{\frac{56}{120} \cdot \frac{1}{2}}{\frac{56}{120} \cdot \frac{1}{2} + \frac{20}{120} \cdot \frac{1}{2}} = \frac{56}{56 + 20} = \frac{56}{76} = \mathbf{\frac{14}{19} \approx 0.7368} \quad (\mathbf{73.68\%}).
+    \]
+
+    \item Condizionatamente alla scatola scelta, $X$ segue una legge Geometrica con supporto su $\{1, 2, 3, \dots\}$:
+    \begin{itemize}
+        \item In $S_1$, $p_1 = 2/10 = 0.2 \implies \EE[X \mid S_1] = \frac{1}{0.2} = 5$.
+        \item In $S_2$, $p_2 = 4/10 = 0.4 \implies \EE[X \mid S_2] = \frac{1}{0.4} = 2.5$.
+    \end{itemize}
+    Per la legge del valore atteso totale:
+    \[
+    \mathbf{\EE[X] = \EE[X \mid S_1]\Prob(S_1) + \EE[X \mid S_2]\Prob(S_2) = 5\left(\frac{1}{2}\right) + 2.5\left(\frac{1}{2}\right) = 2.5 + 1.25 = 3.75}.
+    \]
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 2
+% ==============================================================================
+\begin{problemabox}{Problema 2 (Testo Integrale)}
+Un'agenzia di controllo ambientale misura la concentrazione di PCB (in mg/kg) in 8 salmoni:
+\[
+7.3, \quad 7.5, \quad 7.1, \quad 7.6, \quad 7.4, \quad 6.9, \quad 7.5, \quad 6.9.
+\]
+Si assuma una popolazione normale $\mathcal{N}(\mu, \sigma^2)$ con parametri incogniti. Il limite di sicurezza è $7.48\text{ mg/kg}$.
+\begin{enumerate}[label=(\alph*)]
+    \item Definire le ipotesi nulle e alternative per testare se i salmoni sono a norma ($\mu < 7.48$).
+    \item Condurre il test al livello di significatività del 2\%.
+    \item Calcolare approssimativamente il valore $p$.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Statistiche campionarie ($n = 8$):}
+\[
+\overline{x} = \frac{7.3 + 7.5 + 7.1 + 7.6 + 7.4 + 6.9 + 7.5 + 6.9}{8} = \frac{58.2}{8} = \mathbf{7.275\text{ mg/kg}}.
+\]
+\[
+s^2 = \frac{1}{7} \sum_{i=1}^8 (x_i - 7.275)^2 = \frac{0.435}{7} \approx 0.06214 \implies s \approx \mathbf{0.2493\text{ mg/kg}}.
+\]
+
+\textbf{2. Risoluzione Quesito (a) --- Formulazione del test d'ipotesi:}
+Si vuole dimostrare che la concentrazione media rispetta le norme di sicurezza ($\mu < 7.48$):
+\[
+\mathbf{H_0: \mu \ge 7.48} \qquad \text{vs} \qquad \mathbf{H_1: \mu < 7.48}.
+\]
+
+\textbf{3. Risoluzione Quesito (b) --- Esecuzione del $t$-test a $\alpha = 0.02$ ($\nu = 7$ g.d.l.):}
+Calcoliamo la statistica test $T$:
+\[
+T_{\text{oss}} = \frac{\overline{x} - \mu_0}{s/\sqrt{8}} = \frac{7.275 - 7.48}{0.2493/\sqrt{8}} = \frac{-0.205}{0.08814} = \mathbf{-2.3260}.
+\]
+Il valore critico unilaterale sinistro per la distribuzione $t_7$ con $\alpha = 0.02$ è $-t_{7, \, 0.02} = -2.5168$.
+La regione di rifiuto è $W = (-\infty, -2.5168]$.
+Poiché $T_{\text{oss}} = -2.3260 > -2.5168$, la statistica test non cade nella regione critica.
+\textbf{Conclusione:} Al livello del $2\%$, \textbf{non rifiutiamo $H_0$}. Non c'è sufficiente evidenza per affermare con certezza che i salmoni siano sotto la soglia di rischio.
+
+\textbf{4. Risoluzione Quesito (c) --- Calcolo del $p$-value:}
+\[
+p\text{-value} = \Prob(t_7 \le -2.3260) \approx \mathbf{0.0265} \quad (\mathbf{2.65\%} > 2\%).
+\]
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 3
+% ==============================================================================
+\begin{problemabox}{Problema 3 (Testo Integrale)}
+Un'azienda produttrice di peluche (Perfect Pandas) riscontra difetti con tasso di Poisson pari a $\lambda = 1.5$ difetti per ora.
+\begin{enumerate}[label=(\alph*)]
+    \item Calcolare la probabilità che in 2 ore si osservino almeno 3 difetti.\\
+    \emph{a) 0.191 \quad b) 0.809 \quad c) 0.423 \quad d) 0.577 \quad e) Altro}
+    \item I peluche sono venduti in scatole da 200 pezzi. La probabilità che un peluche sia perfetto è $p = 0.90$. Calcolare valore atteso e deviazione standard del numero di pezzi perfetti per scatola.
+    \item Approssimare la probabilità di avere almeno 180 pezzi perfetti in una scatola.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\alph*)]
+    \item In $t = 2$ ore, il numero di difetti $Y \sim \operatorname{Poiss}(\lambda t = 1.5 \times 2 = 3)$:
+    \begin{align*}
+    \Prob(Y \ge 3) &= 1 - \sum_{k=0}^2 \frac{e^{-3} 3^k}{k!} = 1 - e^{-3}\left(1 + 3 + \frac{9}{2}\right) = 1 - 8.5 e^{-3} \\
+    &\approx 1 - 8.5(0.049787) = 1 - 0.42319 = \mathbf{0.5768} \quad (\mathbf{57.68\%}).
+    \end{align*}
+    \textbf{Risposta corretta: d) 0.577}.
+
+    \item Sia $X \sim \operatorname{Bin}(n=200, p=0.90)$ il numero di peluche perfetti:
+    \[
+    \mathbf{\EE[X] = np = 200 \times 0.90 = 180},
+    \]
+    \[
+    \Var(X) = np(1-p) = 200 \times 0.90 \times 0.10 = 18 \implies \mathbf{\sigma_X = \sqrt{18} = 3\sqrt{2} \approx 4.2426}.
+    \]
+
+    \item Applicando l'approssimazione normale con correzione di continuità ($X \ge 179.5$):
+    \[
+    \Prob(X \ge 180) = \Prob(X \ge 179.5) \approx 1 - \Phi\left( \frac{179.5 - 180}{\sqrt{18}} \right) = 1 - \Phi\left( \frac{-0.5}{4.2426} \right) = \Phi(0.1179).
+    \]
+    Dalle tavole della normale standard:
+    \[
+    \Phi(0.1179) \approx \mathbf{0.5469} \quad (\mathbf{54.69\%}).
+    \]
+    \emph{Nota:} Senza correzione di continuità, $\Prob(Z \ge 0) = 0.5000$.
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 4
+% ==============================================================================
+\begin{problemabox}{Problema 4 (Testo Integrale)}
+Sia data la densità di probabilità $f_\theta(x) = (1+\theta)x^\theta \mathbf{1}_{(0,1)}(x)$ con $\theta > -1$.
+\begin{enumerate}[label=(\alph*)]
+    \item Calcolare $\EE[2X+3]$.
+    \item Calcolare lo stimatore di massima verosimiglianza $\widehat{\theta}$ per $\theta$.
+    \item $\overline{X}_n$ è uno stimatore corretto per $\theta$?
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\begin{enumerate}[label=(\alph*)]
+    \item Calcoliamo il valore atteso di $X$:
+    \[
+    \EE[X] = \int_0^1 x (1+\theta) x^\theta \, \dx = (1+\theta) \left[ \frac{x^{\theta+2}}{\theta+2} \right]_0^1 = \frac{1+\theta}{2+\theta}.
+    \]
+    Per linearità:
+    \[
+    \mathbf{\EE[2X+3] = 2\EE[X] + 3 = 2\left(\frac{1+\theta}{2+\theta}\right) + 3 = \frac{2 + 2\theta + 6 + 3\theta}{2+\theta} = \frac{8+5\theta}{2+\theta}}.
+    \]
+
+    \item \textbf{Stimatore di Massima Verosimiglianza (MLE):}
+    Su un campione $x_1, \dots, x_n \in (0, 1)$:
+    \[
+    L(\theta) = \prod_{i=1}^n (1+\theta) x_i^\theta = (1+\theta)^n \left( \prod_{i=1}^n x_i \right)^\theta.
+    \]
+    \[
+    \ell(\theta) = n \log(1+\theta) + \theta \sum_{i=1}^n \log x_i.
+    \]
+    Annullando la derivata prima:
+    \[
+    \frac{\partial \ell}{\partial \theta} = \frac{n}{1+\theta} + \sum_{i=1}^n \log x_i = 0 \implies \frac{n}{1+\theta} = -\sum_{i=1}^n \log X_i \implies \mathbf{\widehat{\theta}_{\text{MLE}} = -1 - \frac{n}{\sum_{i=1}^n \log X_i}}.
+    \]
+
+    \item \textbf{Valutazione di $\overline{X}_n$ come stimatore di $\theta$:}
+    Abbiamo $\EE[\overline{X}_n] = \EE[X] = \frac{1+\theta}{2+\theta} \neq \theta$.
+    Pertanto la media campionaria $\overline{X}_n$ \textbf{NON è uno stimatore corretto per $\theta$}.
+\end{enumerate}
+\end{soluzionebox}
+
+% ==============================================================================
+% PROBLEMA 5
+% ==============================================================================
+\begin{problemabox}{Problema 5 (Testo Integrale)}
+Consideriamo l'integrale
+\[
+\int_{-\infty}^\infty \frac{1}{\sqrt{2\pi}} e^{-x^2/2} \frac{\sin(7 + e^x)}{2 + \log(x^2 + 1)} \, \dx.
+\]
+\begin{enumerate}[label=(\alph*)]
+    \item Discutere il metodo di Monte Carlo per stimare questo integrale.
+    \item Scrivere i comandi R corrispondenti.
+\end{enumerate}
+\end{problemabox}
+
+\begin{soluzionebox}
+\textbf{1. Formulazione Monte Carlo:}
+L'integrale è il valore atteso rispetto alla distribuzione normale standard $X \sim \mathcal{N}(0, 1)$:
+\[
+I = \EE\left[ \frac{\sin(7 + e^X)}{2 + \log(X^2 + 1)} \right], \qquad X \sim \mathcal{N}(0, 1).
+\]
+Valore di riferimento esatto: $I \approx \mathbf{0.1449}$.
+
+\textbf{2. Implementazione in linguaggio R:}
+\begin{lstlisting}[language=R]
+set.seed(42)
+N <- 1000000
+x_norm <- rnorm(N, mean = 0, sd = 1)
+g_val <- sin(7 + exp(x_norm)) / (2 + log(x_norm^2 + 1))
+I_hat <- mean(g_val)
+cat(sprintf("Stima Monte Carlo: %.4f\n", I_hat)) # 0.1449
+\end{lstlisting}
+\end{soluzionebox}
+
+\end{document}
