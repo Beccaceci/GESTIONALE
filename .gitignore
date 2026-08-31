@@ -28,11 +28,22 @@
 
 # Agent / AI local workspace caches & logs
 .agents/
+ORIGINAL_REQUEST.md
 
-# Python & Test Caches
-__pycache__/
-*.py[cod]
-.pytest_cache/
+# Internal agent-generated planning & infra files (NEVER commit these)
+PROJECT.md
+TEST_INFRA.md
+BRIEFING.md
+DISPATCH.md
+GATE_STATUS.md
+
+# Internal scripts, test suites and automation (NEVER commit these)
+scripts/
+tests/
+**/tests/
+*.py
+*.json
+*.jsonl
 
 # OS / Editor files
 .DS_Store
@@ -41,3 +52,4 @@ Thumbs.db
 *~
 .idea/
 .vscode/
+CONTRIBUTING_INTERNAL.md
